@@ -2,12 +2,15 @@ project:
   type: website
 
 website:
-  title: "PHC6099_rBiostat"
-  navbar:
-    left:
+  title: "PHC 6099: R Computing for Health Sciences"
+  page-navigation: true
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: about.qmd
 
 format:
   html:
