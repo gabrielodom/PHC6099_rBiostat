@@ -1,0 +1,354 @@
+---
+title: "Skimr Package"
+author: "Shelly Sinclair and Alvonee Penn"
+date: "`r Sys.Date()`"
+format:
+  html:
+    self-contained: true
+    toc: true
+    number-sections: true
+    code-fold: true
+knitr:
+  opts_chunk:      ########## set global options ############
+    collapse: true # keep code from blocks together (if shown)
+    echo: true    # don't show code
+    message: false  # show messages
+    warning: false  # show warnings
+    error: false    # show error messages
+    comment: ""    # don't show ## with printed output
+    R.options:    
+      digits: 3    # round to three digits
+editor: source
+bibliography: [Skimr_Package.bib]
+---
+
+
+
+# Introduction
+
+
+
+`Skimr` is an R package designed to provide summary statistics about variables 
+in data frames, tibbles, data tables and vectors. The function is modifiable 
+where you can add additional variables, which are not a part of default summary 
+function within R. Skimr allows us to quickly assess data quality by feature and 
+type in a quick report. This is a critical step in Data Exploration, where 
+Understanding our data helps us to generate a hypothesis and determine what data 
+analysis are appropriate.
+
+This presentation will cover the simplest and most effective ways to explore 
+data in R.
+
+
+
+##  Packages 
+
+
+
+To begin we will upload the packages necessary for the lesson, this includes 
+the following:
+
+-   `readr()` to import our data file
+-   `knitr()` that houses the `kable()` feature that allows us to construct and 
+customize tables.
+-   `tidyverse` houses the `dyplyr`package that assists with data manipulation 
+and visualization.
+-   The`skimr`package provides a compact summary of the variables in a dataset.
+
+```{r}
+#| label: install-Packages
+
+# install.packages("skimr")
+# install.packages("knitr")
+# install.packages("tidyverse")
+
+# load all the packages we will need to analyze the data and use the skim function
+library(skimr)
+library(knitr)
+library(tidyverse)
+
+```
+
+
+
+## Census Data
+
+For this assignment we will be using the Census_2010 dataset. There is no code 
+book associated with the data, making it difficult to provide an accurate 
+description of the variables. The information recorded shows the 
+United States population estimates from the years 2010-2015, as well as relevant 
+variables like net population change, number of births, number of deaths, 
+international and domestic migration. Within the dataframe, there are 
+3,193 observations and 100 variables.
+
+The data can be imported into R from the following link: 
+<https://fiudit-my.sharepoint.com/:x:/g/personal/ssinc013_fiu_edu/ESK1A13PstVGtf7HUwNNt68Bnh1YPfH8L-hnvMUxjBuCVw?e=CCwQU9>
+
+
+
+
+```{r}
+#| label: import-Data
+
+# import the data
+census_2010 <- read_csv("Data/census_2010.csv")
+
+# what are the variables
+colnames(census_2010) %>% 
+  head(n = 10)
+
+```
+
+
+
+# The Summary() Function
+
+
+
+In R, the most similar function is `summary()`. The `summary()` function in R 
+can be used to quickly summarize the values in a data frame or vector[@Summary].
+
+This syntax shows examples of the summary function using both our data set, and
+a vector:
+
+```{r}
+
+#| label: Summary-syntax-with-data
+
+# Example using summary function with data
+summary(census_2010$CENSUS2010POP)
+
+# Example using summary function with vector
+# Define vector
+x <- c(3, 4, 23, 5, 7, 8, 9, 12, 26, 15, 20, 21, NA)
+
+# Summarize values in vector
+summary(x)
+
+```
+
+The `summary()` function automatically calculates: The minimum value, The value 
+of the 1st quartile (25th percentile), The median value, The value of the 3rd 
+quartile (75th percentile) and The maximum value. Any missing values (NA) in the 
+vector, the `summary()` function will automatically exclude them when 
+calculating the summary statistics [@Summary].
+
+Now, let's see how `skim()` compares.
+
+
+
+# Skimr Package
+
+
+
+The `skim()` function will generate a summary of the variables in your dataset, 
+including their data type, number of non-missing values, minimum and maximum 
+values, median, mean, standard deviation, and more [@Skimr].
+
+The following syntax ensures that the data is compatible with `Skimr` 
+functions.
+
+```{r}
+#| label: skimr-Package
+#| code-fold: show
+
+# is the summary data a skimr dataframe
+skim(census_2010) %>% is_skim_df() # TRUE
+
+```
+
+We can explore the data as a tibble:
+
+```{r}
+#| label: create-Dataframe
+#| code-fold: show
+
+# use skim to get descriptive statistics of the data
+skim(census_2010) %>% 
+  head(n = 10)
+
+```
+
+Using `skimr` functions provides a cleaner and more detailed display of the 
+results compared to the `summary()` function. In this example we are showing the 
+first ten variables in our data set. The data summary tab shows the number of 
+rows and columns, column type frequency and group variables. There is also 
+additional descriptive information like missing values, unique characters. 
+
+This will be relevant for data cleaning as well as understanding the distribution. 
+Both are critical to determine which statistical analysis would be most 
+appropriate to use for a project.
+
+
+
+# Other Skimr Features
+
+
+
+## Separate dataframes by type
+
+
+The data frames produced by `skim()` are wide and sparse, filled with columns 
+that are mostly NA. For that reason, it can be convenient to work with "by type" 
+subsets of the original data frame. These smaller subsets have their NA columns 
+removed.
+
+Features:
+
+* `partition()` - Creates a list of smaller data frames. Each entry in the list 
+is a data type from the original dataframe
+* `bind()` -  Takes the list and rebuilds the original dataframe.
+* `yank()` - Extract a subtable from a dataframe with a particular type.
+
+The following syntax is using `partition()` to separate the large census_df.
+
+```{r}
+#| label: separate-Data
+#| code-fold: show
+
+# split the character and numeric data
+separate_df <- partition(skim(census_2010))
+# check only the character data
+separate_df$character
+
+# create summary statistics for only numeric variables
+numeric_separate_df <- separate_df[2]
+# pull out the desired summary statistics in the nested list
+head(numeric_separate_df$numeric["mean"]) %>% 
+  kable(digits = 1) 
+
+```
+
+The following syntax is using `bind()` to combine the smaller character and 
+numeric lists into the desired df.
+
+```{r}
+#| label: Bind-Data
+#| code-fold: show
+
+# combine the character and numeric data
+head(bind(separate_df))
+
+# confirm that the bound table is the same as the original skimmed table
+identical(bind(separate_df), skim(census_2010)) 
+
+```
+
+The following syntax is using `yank()` to extract a specific table eg.character 
+to examine.
+
+```{r}
+#| label: Yank-Data
+#| code-fold: show
+
+# Extract character data
+yank(skim(census_2010), "character")
+
+```
+
+
+## Skimr with Dplyr
+
+
+`Skimr` functions can be used in combination with `Dplyr` functions to examine 
+specific variables within the census dataset.
+
+The following example used `skim()` with `filter()` to display the variable 
+`CENSUS2010POP`. The dataframe was further customized to display variable name 
+and data type using `select()`.
+
+```{r}
+#| label: using-Dplyr
+#| code-fold: show
+
+# use dplyr functions on the statistics summary table
+census_filter <- skim(census_2010) %>% filter(skim_variable == "CENSUS2010POP")
+census_filter
+
+census_select <- skim(census_2010) %>% select(skim_type, skim_variable)
+head(census_select)
+
+```
+
+You can also customize the output of the `skim()` function by using various 
+arguments. For example, you can use the numeric argument to specify which 
+variables should be treated as numeric variables, or use the ranges argument to 
+specify custom ranges for variables.
+
+Using `skim()` in combination with `mutate()` we will compute a new variable to 
+add to our skim dataframe.
+
+```{r}
+#| code-fold: show
+
+# create a new variable calculate the change in birth rate from 2010 to 2011
+census_2010 %>% 
+  # new variable
+  mutate(net_birth = BIRTHS2011 - BIRTHS2010) %>% 
+  # move the variable to the beginning of the dataset
+  relocate(net_birth, .after = CENSUS2010POP) %>% 
+  # summary statistics table
+  skim() %>% 
+  # only the first fifteen variables
+  head(n = 15) %>% 
+  # change the formatting 
+  kable(digit = 2)
+
+```
+
+
+
+## Adding Variables
+
+
+* base	- An sfl that sets skimmers for all column types.
+* append	- Whether the provided options should be in addition to the defaults 
+already in skim. Default is TRUE.
+
+As mentioned, `skim()` is designed to display default statistics, however you 
+can use this function to change the summary statistics that it returns.
+
+`skim_with()` is type closure: a function that returns adds a new variable to 
+the table. This lets you have several skimming functions in a single R session, 
+but it also means that you need to assign the return of `skim_with()` before 
+you can use it.
+
+You assign values within `skim_with()` by using the `sfl()` helper 
+(skimr function list). It identifies which skimming functions you want to 
+remove, by setting them to NULL. Assign an sfl to each column type that you 
+wish to modify.
+
+For example, we will add the following variables to the dataframe: 
+median, min, max, IQR, length.
+
+
+```{r}
+#| label: add-Variables
+#| code-fold: show
+
+my_skim <- skim_with(numeric = sfl(median, min, max, IQR), character = sfl(length), 
+            append = TRUE)
+
+# add new variables into the summary table
+census_2010 %>% 
+  my_skim() %>% 
+  head(n = 10)
+
+
+```
+
+
+
+# Conclusion
+
+
+
+Overall, `Skimr` is a useful package for quickly summarizing the variables in a 
+dataset and gaining insights into its structure and content.
+
+
+
+# References 
+
+
+
