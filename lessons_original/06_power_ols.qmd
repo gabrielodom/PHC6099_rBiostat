@@ -17,7 +17,7 @@ knitr:
     comment: ""    # don't show ## with printed output
     R.options:    
       digits: 3    # round to three digits
-bibliography: [references.bib, packages.bib]
+bibliography: [06_power_ols_references.bib, 06_power_ols_packages.bib]
 csl: the-new-england-journal-of-medicine.csl
 editor: 
   markdown: 
@@ -71,7 +71,7 @@ probability that we would accept the null hypothesis even if the
 alternative hypothesis is actually true). Then, by decreasing $\beta$
 power increases \[\@(pdf)ef\].
 
-![Visual view of beta](beta.png)
+![Visual view of beta](06_power_ols_beta.png)
 
 Power is mainly influenced by sample size, effect size, and significance
 level.
