@@ -1,0 +1,277 @@
+---
+title: "Chi-Squared Independence"
+subtitle: "What it is and how to run it"
+authors:
+  - "Arturo Barahona"
+  - "Srijana Acharya"
+date: "`r Sys.Date()`"
+format:
+  html:
+    self-contained: true
+    toc: true
+    toc-title: "On this page"
+    code-fold: true
+    # smooth-scroll: TRUE
+knitr:
+  opts_chunk:      ########## set global options ##########
+    collapse: true # keep code from blocks together (if shown)
+    echo: true     # false, if you do not want to show code
+    message: true  # show messages
+    warning: false  # hide warnings
+    error: true    # show error messages
+    comment: ""    # don't show ## with printed output
+    R.options:    
+      digits: 3    # round to three digits
+bibliography: references.bib
+---
+
+## Introduction
+
+The Chi-square test of independence (also known as the Pearson Chi-square test, or simply the Chi-square) is one of the most useful statistics for testing hypotheses when the variables are nominal. It is a non-parametric tool that does not require equality of variances among the study groups or homoscedasticity in the data.[@mchugh2013]
+
+Being a non-parametric test tool, Chi-square test can be used when any one of the following conditions pertains to the data:[@mchugh2013]
+
+1.  Variables are nominal or ordinal.
+
+2.  The frequency count is \>5 for more than 80% of the cells in a contingency table.
+
+3.  The sample sizes of the study groups may be of equal size or unequal size but samples do not have equal variance.
+
+4.  The original data were measured at an interval or ratio level, but violate one of the following assumptions of a parametric test:
+
+    -   *The distribution of the data was seriously skewed or kurtotic.*
+
+    -   *The data violate the assumptions of equal variance or homoscedasticity.*
+
+    -   *For any reasons , the continuous data were collapsed into a small number of categories, and thus the data are no longer interval or ratio.*[@miller1982]
+
+    ## Assumptions[@mchugh2013]
+
+    1.  The data in the cells should be frequencies, or counts of cases rather than % or some other transformation of the data.
+
+    2.  The levels (or categories) of the variables are mutually exclusive.
+
+    3.  Each subject may contribute data to one and only one cell in the χ^2^. If, for example, the same subjects are tested over time such that the comparisons are of the same subjects at Time 1, Time 2, Time 3, etc., then χ^2^ may not be used.
+
+    4.  The study groups must be independent. This means that a different test must be used if the two groups are related. For example, a different test must be used if the researcher's data consists of paired samples, such as in studies in which a parent is paired with his or her child.
+
+## Hypotheses
+
+Null Hypothesis **(*H~0~*):** Outcome variable is independent of type of exposure variables. There is no significant difference in the association of group A/B with outcome variable.
+
+Alternate Hypothesis: **(*H~1~*)** Outcome variable varies significantly depending upon the type of exposure variable. There is a significant difference in the association of group A/B with outcome variable.
+
+## Chi-Squared Independence Test Equation
+
+$\chi^2 = \sum \frac{{(O_{ij} - E_{ij})^2}}{{E_{ij}}}$
+
+Where:
+
+-   $\chi^2$ The Chi-Squared test statistic.
+-   $\sum\chi^2$ Formula instructions to sum all the cell Chi-square values.
+-   $O_{ij}$ Observed (the actual frequency in each cell (i, j) of the contingency table.
+-   $E_{ij}$ Expected frequency in cell (i, j) calculated below.
+-   $\chi^2{i-j}$ i-j is the correct notation to represent all the cells, from the first cell (i) to the last cell(j).
+
+***Calculating Expected Value***
+
+$E = \frac{M{r} * M{c}}n$
+
+Where:
+
+-   $E$ represents the cell expected value,
+-   $M{r}$ represents the row marginal for that cell,
+-   $M{c}$ represents the column marginal for that cell, and
+-   $n$ represents the total sample size.
+
+### Formula Description
+
+-   The first step in calculating a χ2 is to calculate the sum of each row, and the sum of each column. These sums are called the "marginals" and there are row marginal values and column marginal values. 
+
+-   The second step is to calculate the *expected* values for each cell. In the Chi-square statistic, the "expected" values represent an estimate of how the cases would be distributed if there were no effect of exposure variables.
+
+-   Then third step is to compute the $\chi^2$ with above formula.
+
+## Performing Chi-Squared Independence Test in R
+
+The first step is to load the required packages that will allow us to conduct the test statistic.
+
+```{r}
+# install.package("openintro")
+# install.package("gtsummary")
+# install.packages("rstatix")
+# install.packages("vcd")
+# install.package("tidyverse")
+
+```
+
+```{r loading_packages}
+
+library(openintro)  # for data
+library(gtsummary)  # for tables
+library(vcd)        # for mosaic plot
+library(rstatix)    # for post hoc tests
+library(tidyverse)  # for data wrangling and visualization
+
+```
+
+### Data Source
+
+The `openintro` package contains data sets used in open-source textbooks such as *Introduction to Modern Statistics (1st Ed)*. @mineçetinkaya-rundel2023 It is often used for teaching purposes and create examples for how to run various test statistics and functions using R. This package can be installed using the `install.packages("openintro")` feature. You can also find more information about this package [here](http://openintrostat.github.io/openintro/).
+
+For the purposes of this presentations we will be using the *diabetes2* dataset found within this package.
+
+In the data there are 699 diabetes patients. Each of the 699 patients in the experiment were randomized to one of the following treatments: (1) continued treatment with metformin (coded as met), (2) formin combined with rosiglitazone (coded as rosi), or or (3) a lifestyle-intervention program (coded as lifestyle).Three treatments were compared to test their relative efficacy (effectiveness) in treating Type 2 Diabetes in patients aged 10-17 who were being treated with metformin. The primary outcome was lack of glycemic control (or not); lacking glycemic control means the patient still needed insulin, which is not the preferred outcome for a patient.[@todaystudygroup2012]
+
+```{r viewing_data}
+
+str(diabetes2)
+print(diabetes2)
+```
+
+### Contingency Tables
+
+The first step in a Chi-Squared Independence Test involves creating a contingency table that is used to calculate the expected frequencies for each variable. This will help us summarize the data and show the distribution of the variables. This is done using the `table()` function as seen in the code below.
+
+```{r creating-contigency-table}
+
+
+# Create the table
+diabetes_table <- table(
+  diabetes2$outcome,
+  diabetes2$treatment
+)
+
+print(diabetes_table)
+```
+
+### Mosaic Plots
+
+You can also use a mosaic plot to visualize the data better. Our data is in interger format so we first need to reformat it into factor form. This can we done with the code below.
+
+```{r reformating-variables}
+
+#reformat treatment
+diabetes2$treatment <- 
+  as.factor(diabetes2$treatment)
+
+#print
+head(diabetes2$treatment)
+
+
+#recode treatment
+diabetes2$treatment <- 
+  recode_factor(
+    diabetes2$treatment,
+            "lifestyle" = "Lifestyle",
+            "met" = "Metform",
+            "rosi" = "Rosiglitazone Plus Metformin"
+)
+
+#print
+head(diabetes2$treatment)
+
+#reformat outcome
+diabetes2$outcome <- 
+  as.factor(diabetes2$outcome)
+
+#print
+head(diabetes2$outcome)
+
+
+#recode
+diabetes2$outcome <- 
+  recode_factor(
+    diabetes2$outcome,
+            "failure" = "Failure",
+            "success" = "Success"
+)
+
+#print
+head(diabetes2$outcome)
+```
+
+Next, we can create the mosaic plot using the `mosaic()` function.
+
+```{r creating-mosaic-pot}
+
+#Creating the mosaic plot
+mosaic(
+  ~ treatment + outcome, 
+       data = diabetes2,
+          highlighting = "outcome", 
+          highlighting_fill = c("lightgrey", "black"),
+          main = "Outcome of Interventions for Type 2 Diabetes",
+          gp_varnames = gpar(fontsize = 14, fontface = 2),
+          gp_labels = gpar(fontsize = 10)
+)
+
+
+```
+
+### Running the Chi-Squared Test
+
+The next step is to run our actual test statistic. This is done using the `chisq.test()` function as seen in the code below.The `correct` argument is used to indicate whether to apply continuity correction when computing the test. We are setting this to `TRUE` since we are dealing with a 2x2 contingency table where we have two categorical variables, each with two levels.
+
+```{r}
+
+chi_sq_result <- chisq.test(diabetes_table, 
+                           correct = TRUE)
+
+print(chi_sq_result)
+
+```
+
+#### Tabulating the chisq output in a publishable format using gt_summary
+
+```{r}
+
+table1 <-   
+  tbl_summary(
+    diabetes2,
+    by = treatment
+) %>% 
+  add_p() %>%
+  modify_caption("Results of Chi Square Test") %>%
+  bold_labels()
+
+
+table1
+```
+
+
+### Test Options
+
+The Chi-Squared Independence test statistic has various options in R. A brief description of those options is summarized in the table below.
+
+| Option           | Description                                                                                                                                         | Example                                    |
+|------------------|-------------------------------------|------------------|
+| x                | A numeric vector or matrix. `x` and `y` can also both be factors.                                                                                   | `x <- matrix(c(10, 20, 30, 40), nrow = 2)` |
+| correct          | A logical indicating whether to apply continuity correction -- This is done when the expected frequencies in the contingency table are small (\<5). | `correct <- TRUE`                          |
+| p                | A vector of probabilities of the same length as `x`. An error is given if any entry of `p` is negative.                                             | `p <- c(0.4, 0.6)`                         |
+| rescale.p        | A logical scalar; if TRUE then `p` is rescaled (if necessary) to sum to 1. If `rescale.p` is FALSE, and `p` does not sum to 1, an error is given.   | `rescale.p <- FALSE`                       |
+| simulate.p.value | A logical indicating whether to compute p-values by Monte Carlo simulation.                                                                         | `simulate.p.value <- FALSE`                |
+| B                | An integer specifying the number of replicates used in the Monte Carlo test.\*                                                                      | `B <- 1000`                                |
+
+\*The Monte Carlo test is a technique that involves simulation to estimate the p-value or test statistic for hypothesis testing. This is used when using complex models and exact p-values cannot be calculated or when the distribution assumptions are violated. @christianp.robert2010
+
+
+
+
+## Interpretation
+
+Our results give us a chi-squared test statistic of 8.1645 with a `p-value` of 0.017. Since p value is smaller than critical p value (0.05), we have enough evidence to reject the null hypothesis and conclude that there is a strong association between the type of treatment on Type 2 diabetes. However, we dont't know which treatment option is significantly different so we are going to do a post hoc test in below code chunk.
+
+# Post hoc test
+
+```{r}
+post_hoc_test <- pairwise_prop_test(diabetes_table)
+
+post_hoc_test
+```
+
+
+### Conclusion
+
+From our post hoc test result we see that there is a statistically significant difference between Met and Rosi. Given our data, we can conclude that Rosi is the better treatment option for the population tested. 
+
