@@ -1,0 +1,363 @@
+---
+title: "Two-Way ANOVA"
+author: "Patrice Lewis & Julissa Martinez"
+date: "`r Sys.Date()`"
+format:
+  html:
+    theme: united
+    self-contained: true
+    toc: true
+    code-fold: true
+---
+
+## Two-way ANOVA
+
+A two-way ANOVA is used to estimate how the mean of a quantitative variable changes according to the levels of two categorical variables.
+
+-   It is used to determine how independent (grouping) variables, in combination, affect a dependent (response) variable.
+
+-   Grouping variables are also called factors. Levels are the categories of each component.
+
+## How does it work?
+
+The F test is used in ANOVA to determine statistical significance. The F test compares the variance in each group mean to the overall variance in the dependent variable because it is a group-wise comparison test.
+
+When the variance is higher between groups than within the groups, the F test value will be greater, and therefore a higher likelihood that the difference observed is real and not due to chance.
+
+There are three null hypotheses tested while doing a two-way ANOVA:
+
+-   There is no difference between the group means at any level of the first independent variable.
+
+-   There is no difference between the group means at any level of the second independent variable.
+
+-   The effect of one independent variable does not depend on the effect of the other independent variable (also viewed as no interaction effect),
+
+### Assumptions needed
+
+There are certain assumptions that must be considered before using a two-way ANOVA.
+
+-   Homogenuity of variance: The variances for each group should be roughly equal.
+
+-   Independence of observations: The observations in each group are independent of each other and the observations within groups were obtained by a random sample.
+
+-   Normally distributed: The response variable is approximately normally distributed for each group.
+
+Below we will see an example on how to test for these assumptions and how to conduct a two-way ANOVA test once we know they have been met.
+
+## Two-Way ANOVA Table
+
+| Source of Variation | Sum of Squares | Degrees of freedom | Mean Squares                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | F value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|---------------|---------------|---------------|---------------|---------------|
+| Factor A            | SSA            | k-1                | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      MSA = \frac{SSA}{k-1}                           
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     $$                                               | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   F_A = \frac{MSA}{MSE}                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   $$                                       |
+| Factor B            | SSB            | l-1                | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      MSB = \frac{SSB}{l-1}                           
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     $$                                               | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   F_B = \frac{MSB}{MSE}                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   $$                                       |
+| Interaction AB      | SSAB           | (k-1)(l-1)         | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      MSAB = \frac{SSAB}{(k-1)(l-1)}                  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     $$                                               | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   F_AB = \frac{MSAB}{MSE}                  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   $$                                       |
+| Error               | SSE            | kl(m-1)            | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      MSE = \frac{SSE}{kl(m-1)}                       
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     $$                                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Total               | SST            | klm-1              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+
+-   SSA: Factor A main effect sums of squares with associated df (k-1)
+
+-   SSB: Factor B main effect sums of squares, with associated df (l-1)
+
+-   SSAB: interaction sum of squares, with associated df (k-1)(l-1)
+
+-   SSE: error sum of squares with associated df kl(m-1)
+
+-   SST: Total sums of squares, associated with df (klm-1)
+
+### Example
+
+For this example, an agricultural crop yield dataset was sourced from [Scribbr](https://www.scribbr.com/wp-content/uploads//2020/03/crop.data_.anova_.zip).
+
+The dataset contains:
+
+1.  Type of fertilizer (1,2,3)
+2.  Planting density (1 = low, 2 = high)
+3.  Block number in the field (1,2,3,4)
+
+This two-way ANOVA will examine whether the type of fertilizer and planting density (independent variables) have an effect on the average crop yield (dependent variable).
+
+#### Loading Libraries and Data
+
+```{r setup-data-download}
+#| warning: false
+
+
+# needed to create presentation ready table 
+library(gt)
+# needed to create presentation ready table 
+library(tidymodels)
+# needed to create AIC table to compare all three models 
+library(AICcmodavg)
+library(ggplot2)
+library(tidyverse)
+
+crop_data_df <- read_csv("crop.data.csv")
+
+
+```
+
+#### Data Exploration
+
+```{r data-exploring}
+#| warning: false
+#| code-fold: false
+
+# show first six rows of the dataset
+head(crop_data_df)
+
+# overview of summary statistics
+summary(crop_data_df)
+
+```
+
+##### Boxplots
+
+```{r box-plot}
+
+plot_fertilizer <- 
+  ggplot(data = crop_data_df) +
+    aes(
+      x = as.factor(fertilizer),
+      y = yield,
+      color = as.factor(fertilizer) 
+    ) +
+  labs(
+    x = "Fertilizer Type",
+    y = "Crop Yield"
+  ) +
+  geom_boxplot()
+
+plot_fertilizer
+
+plot_density <- 
+  ggplot(data = crop_data_df) +
+    aes(
+      x = as.factor(density),
+      y = yield,
+      color = as.factor(density)
+    ) +
+  labs(
+    x = "Planting Density",
+    y = "Crop Yield"
+  ) +
+  geom_boxplot()
+
+plot_density
+
+```
+
+#### Null
+
+-   H0~1~: *There is no statistical difference in average yield for any fertilizer type*
+
+-   H0~2~: *There is no difference in average yield between either planting density*
+
+-   H0~3~: *The effect of fertilizer type on average yield is not dependent on the effect of planting density - no interaction effect*
+
+#### Alternative
+
+-   H1~1~: *There is a difference in the average yield for fertilizer types*
+
+-   H1~2~: *There is a difference in the average yield based on planting* density
+
+-   H1~3~: *There is an interaction effect between planting density and fertilizer type average yield*
+
+#### Performing the two-way ANOVA
+
+First we want to test without interaction between the two independent variables for our first model. The code below is
+
+```{r two-way}
+
+# converting into a factor for post-hoc assessment 
+crop_data_df$fertilizer <- as.factor(crop_data_df$fertilizer)
+crop_data_df$density <- as.factor(crop_data_df$density)
+
+# performing the two-way ANOVA
+two_way <- 
+  aov(yield ~ fertilizer + density, data = crop_data_df)
+
+# creating a tidy table using gt
+table_1 <- two_way %>% 
+  tidy() %>% 
+  gt()
+
+# customizing table 
+table_1 |>
+   tab_header(
+      title = "ANOVA Results",
+      subtitle = "Two-way ANOVA for yield"
+    )
+
+```
+
+We also want to test a model that shows interaction between the two independent variables.
+
+```{r two-way-interact}
+
+# performing the two-way ANOVA with interaction 
+interaction <- 
+  aov(yield ~ fertilizer * density, data = crop_data_df)
+
+# creating a tidy table using gt
+table_int <- interaction %>% 
+  tidy() %>% 
+  gt()
+
+# customizing table 
+table_int |>
+   tab_header(
+      title = "ANOVA Results",
+      subtitle = "Two-way ANOVA for yield with interaction term"
+    )
+
+```
+
+The p-value for both independent variables are less than 0.05, therefore we reject the null hypotheses (H0~1~ and H0~2~).
+
+The p value for the interaction term is greater than 0.05, hence we fail to reject the null hypothesis (H0~3~). Hence not much variation can be explained by the interaction term.
+
+#### Blocking Variable - 3rd Model
+
+The crops were planted in across various `blocks` that may differ in other factors such as sunlight, moisture etc. This could possibly lead to confounding. Therefore it is important to control for the effect of differences between blocks by adding the third variable to our tests.
+
+```{r}
+
+# performing two-way anova with interaction and blocking
+blocking <- 
+  aov(yield ~ fertilizer * density + block, data = crop_data_df)
+
+# creating a tidy table using gt 
+table_block <- blocking %>% 
+  tidy() %>% 
+  gt()
+
+# customizes gt table
+table_block |>
+   tab_header(
+      title = "Two- way ANOVA Results",
+      subtitle = "with interaction term & blocking variable"
+    )
+
+```
+
+For the block variable the sum of squares is low and the p value is greater than 0.05. Hence not much information is added to the model. The sum of square for both independent variables also remain unchanged.
+
+#### Determining the Best Fit Model
+
+The Akaike information criterion (AIC) can be used to determine the best model. AIC balances the variation explained by the number of parameters used to calculate the information value of each model. The lower the AIC value, the more information explained.
+
+```{r}
+
+model_set <- list(two_way, interaction, blocking)
+model_names <- c("two_way", "interaction", "blocking")
+ 
+gt_fmt <-
+  aictab(model_set, modnames = model_names) 
+
+gt_print <- 
+  gt(gt_fmt)
+
+gt_print
+
+
+```
+
+As shown in this table, the two_way model is the best fit for our crop data analysis.
+
+### Checking for homoscedasticity
+
+```{r homoscedasticity}
+
+par(mfrow=c(2,2))
+plot(two_way)
+par(mfrow=c(1,1))
+```
+
+The output of the residual means shows no large outliers that could possibly skew the data. Hence we can assume equal variances. The Q-Q plot also depicts normality.
+
+## Post-hoc testing (Tukey HSD)
+
+In order to determine how the levels differ from one another the Tukey's Honestly-Significant-difference test can be used.
+
+```{r tukey-test}
+
+
+tukey_crop <- TukeyHSD(two_way)  
+  
+tukey_crop %>% 
+  tidy %>% 
+  gt() %>% 
+  tab_header(
+      title = "Tukey Multiple Comparisons of means",
+      subtitle = "for fertilizer & density"
+  )
+
+```
+
+This table shows of pairwise differences between each level in the independent variables. Comparisons with p values less than 0.05 are termed significant;
+
+-   fertilizer types 1 and 3
+-   fertilizer types 2 and 3
+-   planting density groups (binary)
+
+```{r tukey-plot}
+
+plot(tukey_crop, las = 1)
+```
+
+-   Only the fertilizer comparison of type 1 & 2 confidence interval includes 0; no significant statistical difference
+
+### Summary Chart of Crop yield data
+
+```{r crop-data-plot}
+
+anova_plot <- 
+  ggplot(crop_data_df,
+    aes(
+      x = density, 
+      y = yield, 
+      group = fertilizer, 
+      color = fertilizer
+    )
+  ) +
+  geom_point(
+    cex = 1.5, 
+    pch = 1.0, 
+    position = position_jitter(w = 0.1, h = 0.1)
+  )
+
+anova_plot <- anova_plot + 
+  stat_summary(fun.data = 'mean_se', geom = 'errorbar', width = 0.2, color = "grey50") +
+  stat_summary(fun.data = 'mean_se', geom = 'pointrange') 
+
+anova_plot <- anova_plot +
+  facet_wrap(~ fertilizer)
+
+anova_plot <- anova_plot +
+  theme_classic() +
+  labs(title = "Crop yield averages based on fertilizer types and planting density",
+      x = "Planting density (1 = low density, 2 = high density)",
+      y = "Yield Average")
+
+anova_plot
+```
+
+# Conclusions
+
+There is a statistically-significant difference in average crop yield by both the fertilizer type and planting density variables with F values of 9.018 (p \< 0.001) and 15.316 (p \< 0.001) respectively. The interaction between these two terms was not significant.
+
+The Tukey post-hoc test showed significant pairwise differences between fertilizer types 1 & 3, and 2 & 3. It also depicted significant differences between the two types of planting densities (low & high).

@@ -1,0 +1,1230 @@
+---
+title: "Correlation Matrix, Covariance, and OLS Regression"
+author: "Lea Nehme & Zhayda Reilly"
+date: "July 18, 2023"
+format:
+  html:
+    code-fold: true
+    self-contained: true
+    toc: true
+knitr:
+  opts_chunk:      ########## set global options ############
+    collapse: true # keep code from blocks together (if shown)
+    echo: true    # show code
+    message: true  # show messages
+    warning: false  # don't show warnings
+    error: false    # don't show error messages
+    comment: ""    # don't show ## with printed output
+    R.options:    
+      digits: 3    # round to three digits
+bibliography: [references.bib, packages.bib]
+csl: the-new-england-journal-of-medicine.csl
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+```{r}
+#| label: tidyverse
+#| echo: false
+
+library(conflicted)
+conflict_prefer("filter", "dplyr", quiet = TRUE)
+conflict_prefer("lag", "dplyr", quiet = TRUE)
+
+suppressPackageStartupMessages(library(tidyverse))
+
+# suppress "`summarise()` has grouped output by " messages
+options(dplyr.summarise.inform = FALSE)
+
+```
+
+```{r}
+#| label: Libraries used
+
+#install.packages("skimr")
+library(skimr)
+library(knitr)
+library(dplyr)
+library(ggplot2)
+#install.packages("ggpubr")
+library(ggpubr)
+#install.packages("patchwork")
+library(patchwork)
+library(tidyverse)
+#install.packages("gtsummary")
+library(gtsummary)
+library(Hmisc)
+library(corrplot)
+library(xtable)
+#install.packages("modelsummary")
+library(modelsummary)
+library(psych)
+#install.packages("rstatix")
+library(rstatix)
+#install.packages("PerformanceAnalytics")
+library(PerformanceAnalytics)
+#install.packages("ppcor")
+library(ppcor)
+#install.packages("remotes")
+library(remotes)
+#install.packages("conflicted")
+library(conflicted)
+```
+
+```{r}
+#| label: List-files
+#| include: false
+
+getwd()
+# Set working directory
+#setwd("C:/Users/zhayd/OneDrive/MPH/PHC6099_RHealth/Presentation20230613/")
+#list.files()
+```
+
+# Introduction
+
+One of the general goals of statistics is to understand if there is a
+relationship between two variables.
+
+1.  **Covariance** measures the degree to which the deviation of one
+    variable (X) from its mean is related to the deviation of another
+    variable (Y) from its mean. In other words, covariance measures the
+    joint variability of two random variables or how these increase or
+    decrease in relation with each other.
+
+    a.  For instance, if greater values of one variable tend to
+        correspond with greater values of another variable, this
+        suggests positive covariance.
+
+    b.  Covariance can have both positive and negative values.
+
+2.  A **Covariance Matrix** shows the covariance between different
+    variables of a data set.
+
+3.  **Correlation** tells us both the strength and the direction of this
+    relationship by listing the Correlation Coefficient ("Pearson",
+    "Spearman", or "Kendall") for the pair as measure of association.
+
+4.  **Correlation matrix** allows for the exploration of the correlation
+    among the multiple variables in a data set. It proves this
+    information through a table listing the correlation coefficients
+    (**r**) for each relationship between pair of variables in the data
+    set.
+
+    -   Correlation is best used for multiple variables that express a
+        linear relationship with one another.
+    -   Correlation between two variables highlight how a change in one
+        variable impacts a change in another variable.
+
+> In sum, a covariance and a correlation matrix sound similar because
+> covariance is a measure of correlation, while correlation is a scaled
+> version of covariance. This means correlation is a special case of
+> covariance which can be achieved when the data is in standardized
+> form.
+
+# About Covariance and Correlation
+
+::: {layout-ncol="2"}
+**About the equations, properties, and uses**
+
+**Mathematical equations, properties, and uses**
+
+Remember the equation for the variance for one variable
+
+$$
+var(x) = \frac{1}{n-1}{\sum_{i = 1}^{n}{(x_i - \bar{x})^2}}
+$$
+
+**Covariance: Relation between two variables** where, (***x_i** are the
+values of the X-variable), (***y_i**\* are the values of the
+Y-variable), (***x_bar*** is the mean of the X-variable), (**y_bar**\*
+is the mean of the Y-variable), and (***n*** are the number of data
+points)
+
+$$
+Cov(x,y) = \frac{1}{n-1}{\sum_{i = 1}^{n}{(x_i - \bar{x})(y_i-\bar{y})}}
+$$
+
+**Covariance Properties**
+
+-   **(x, y) \> 0:** the covariance for both variables is positive or
+    moving in the same direction.
+-   **(x, y) \< 0:** the covariance for both variables is negative or
+    moving in the opposite direction.
+-   **(x, y) = 0:** there is no relationship between the variables.
+
+**Covariance Matrix: Covariance between variables in a data set**
+
+$$
+C = \frac{1}{n-1}{\sum_{i = 1}^{n}{(X_i - \bar{X})(X_i-\bar{X})}^T}
+$$
+
+**The general formula to represent a covariance matrix**
+
+$$
+\begin{bmatrix} Var(x_{1}) & ... & Cov(x_{1},x_{n})\\ : &. & :\\ :& \: \: \: \: \: \: \: \: \: \: .& :\\ Cov(x_{n},x_{1}) & ... & Var(x_{n}) \end{bmatrix}.
+$$
+
+**Uses of a covariance matrix**
+
+-   Calculate the Mahalanobis distance.,
+-   Kalman filters.,
+-   Gaussian mixture models.
+-   PCA (principal component analysis)
+
+::: callout-important
+This is of importance and allows us to see the relationship between
+covariance and correlation in this simplified equation for the Pearson
+Correlation Coefficient, *r*. [video explaining standarization and mathematical properties of r]: 
+{{< video https://www.youtube.com/watch?v=2bcmklvrXTQ&t=186s >}} [@tilestats2021]
+:::
+
+$$
+r = \frac {Cov(x,y)}{(\sqrt{var(x)})(\sqrt{var(y)})}
+$$
+
+**Correlation Matrix**
+
+![Sample correlation matrix](CorrR_for.png)
+
+**Correlation Properties: direction**
+
+-   **r = 1:** A perfect positive correlation.
+-   **r = 0:** Zero or no correlation.
+-   **r = -1:** A perfect negative relationship. where,
+    -   The sign of the correlation coefficient indicates the direction
+        of the association.
+
+**Correlation Properties: strength**
+
+-   .1 \< \| *r* \| \< .3 (small / weak correlation).
+-   .3 \< \| *r* \| \< .5 (medium / moderate correlation).
+-   .5 \< \| *r* \| (large / strong correlation).
+    -   The magnitude of the correlation coefficient indicates the
+        strength of the association.
+
+**Correlation uses**
+
+-   To summarize the correlation among various variables of a data set.
+-   To perform regression testing (like multicollinarity)
+-   Basis of other analyses (like regression models)
+
+**Correlation, r and Covariance**
+
+![Visual contrast](CorCov.png)
+:::
+
+We will concentrate on the **Correlation Matrix** which provides the
+Pearson Correlation Coefficient or (its variations for non-parametric
+data such as, spearman and kendall).
+
+# Data set used
+
+We will use the R data set "mtcars" to provide examples on developing a
+**Covariance Matrix** and on checking the assumptions for and
+development of a **Correlation Matrix** using the pearson correlation
+coefficient.
+
+```{r}
+#| label: mtcars sample using kable
+
+# Load data
+data("mtcars")
+# Print sample
+head(mtcars) %>% 
+  kable(
+    format = "markdown",
+    digits = 2,
+    caption = "The mtcars data set"
+  )
+```
+
+# Covariance Matrix Procedure
+
+The procedure to develop a covariance matrix uses the cov() function. It
+takes the data frame as an argument and returns the covariance matrix as
+result. It is as follows:
+
+```{r}
+#| label: Cov() function
+#| code-fold: false
+#| echo: true
+
+conflicts_prefer(rstatix::select)
+mtcars2 <- mtcars %>%
+  select(1, 3, 4, 5, 6, 7)
+mtcars2_cov <- cov(mtcars2)
+kable(mtcars2_cov,
+      caption = "Covariance of mtcars using the Pearson type"
+      )
+```
+
+> 1.  Only the "continuous" variables of mtcars were included in this
+>     covariance matrix because the default type of procedure is
+>     "Pearson".
+> 2.  The printout of the covariance matrix is not easy to read or as
+>     useful as the correlation matrix which has several functions that
+>     allow for visual and organizational displays of information.
+> 3.  Some of the results are the following:\
+>
+> -   The values along the diagonals of the matrix are simply the
+>     variances of each product.
+> -   The variance of mpg is 36.32
+> -   The variance of disp is 15360.8
+> -   The other values in the matrix represent the covariances between
+>     the various products, for example:
+> -   The covariance between mpg and disp is -633.10, this is a negative
+>     covariance indicating that vehicles that are fuel efficient or
+>     have high miles per galon have lower levels of displacement
+>     (smaller engines, less powerful).
+> -   The covariance between hp and wt is 44.19, this is a positive
+>     covariance indicating that as horse power increases, so does the
+>     weight of a vehicle.
+
+# The Correlation Matrix Procedure
+
+The **Correlation Matrix** procedure is of emphasis because it provides
+information on the linear relationship among variables (strength and
+direction). This analysis is of importance to build Regression and
+multivariate models, as it assists in:
+
+::: border
+```         
+1. The observation of patterns and associations in the data.
+2. To conduct or as the basis of other analyses (linear regression models)
+3. To conduct diagnostic checks (multicollinearity)
+```
+:::
+
+## Hypothesis testing in correlations
+
+The bivariate Pearson Correlation produces a sample correlation
+coefficient, *r*, which measures the strength and direction of linear
+relationships between pairs of continuous variables in a sample. By
+extension, the Pearson Correlation evaluates whether there is
+statistical evidence for a linear relationship among the same pairs of
+variables in the population, represented by a population correlation
+coefficient, ρ ("rho"), which is unknown. The sample pearson correlation
+coefficient, *r*, is the estimate of the unknown population coefficient
+(ρ). Therefore,
+
+> The hypothesis test lets us decide whether the value of the population
+> correlation coefficient ρ is "close to zero" or "significantly
+> different from zero". We decide this based on the sample correlation
+> coefficient r and the sample size n .
+
+**Two-tailed significance test:**
+
+The **null hypothesis** for a two-tailed significance test of a
+correlation is: $$
+H_0: ρ = 0 
+$$ rho is zero or approximately zero. This means that the relationship
+in the population is equal to 0; ("there is no association")
+
+The **alternative hypothesis** for a two-tailed significance test of a
+correlation is: $$
+H_1: ρ ≠ 0 
+$$ rho is not zero, which means that the relationship in the population
+is not equal to 0; ("there is an association in the population")
+
+**One-tailed significance test:**
+
+The **null hypothesis** for a one-tailed significance test of a
+correlation is: $$
+H_0: ρ = 0 
+$$ which means that the relationship in the population is equal to 0;
+("there is no association")
+
+The **alternative hypothesis** for a one-tailed significance test of a
+correlation where ρ \> 0 is: $$
+H_1: ρ > 0 
+$$ which means that there is a positive relationship in the population.
+
+```         
+OR
+```
+
+The **alternative hypothesis** for a one-tailed significance test of a
+correlation where ρ \< 0 is: $$
+H_1: ρ < 0 
+$$ which means that there is a negative relationship in the population.
+
+```         
+These hypotheses are in terms of ρ.
+```
+
+## Assumptions of a Correlation Matrix:
+
+**1.** The two variables should be measured at the interval or ratio
+level (e.i., ***continuous***).
+
+```         
+a.  If interested in the relationship between two categorical variables or ranks (categorical is misleading) you can use "Spearman" as the type of correlation. But if you have two binary variables (i.e. living/dead, black/white, success/failure), then use a Phi Correlation coefficient.
+
+b.  If interested in a mix, one can use various functions like "mixedCor" in the `psych` package.
+
+c.  If interested in how the levels of a variable like male or female affect the correlation of two variables, we conduct a partial correlation which allow us to control for a third or more other variables using the function "pcor.test" in the `ppcor` package.
+```
+
+**2.** There should exist a **linear relationship** between the two
+variables.
+
+**3.** Variables should be roughly **normally distributed**.
+
+**4.** Each observation in the dataset should have a **pair of values**.
+
+**5.** There should be **no extreme outliers** in the dataset.
+
+## Checking Assumptions
+
+#### Level of Measurement
+
+Using the `skimr` package, we will get data set information such as the
+distribution (histogram) of, and the type/level of measurement for the
+variables in the "mtcars" data set.
+
+```{r}
+#| label: skim procedure
+
+skim(mtcars)
+```
+
+The `skimr` function nicely displays the data. It indicates that all the
+variables are currently in numeric format but based on the descriptive
+information and on the information provided by `?mtcars`, only 6
+variables meet the level of measurement assumption (interval, ratio), we
+will then create a data frame from mtcars named cars_df where we leave
+these 6 variables as continuous double/numeric and categorize the other
+5 variables. We present the summary using the `gtsummary` package.
+
+```{r}
+#| label: categorize five variables and present summary as gtsummary
+
+cars_df <- within(mtcars, {
+   vs <- factor(vs, labels = c("V", "S"))
+   am <- factor(am, labels = c("automatic", "manual"))
+   cyl  <- ordered(cyl)
+   gear <- ordered(gear)
+   carb <- ordered(carb)
+})
+
+cars_df %>%
+  gtsummary::tbl_summary(
+    label = list(
+      mpg ~	"Miles/(US) gallon",
+      cyl ~	"Number of cylinders",
+      disp ~ "Displacement (cu.in.)",
+      hp ~	"Gross horsepower",
+      drat ~ "Rear axle ratio",
+      wt ~	"Weight (1000 lbs)",
+      qsec ~ "1/4 mile time",
+      vs ~	"Engine (0 = V-shaped, 1 = straight)",
+      am ~ "Transmission (0 = automatic, 1 = manual)",
+      gear ~ "Number of forward gears"),
+    type = all_continuous() ~ "continuous2",
+    statistic = all_continuous() ~ c(
+      "{median} ({p25}, {p75})",
+      "{min}, {max}"
+    )
+  ) %>%
+  add_n() %>%
+  bold_labels() %>%
+  modify_header(label ~ "**Variable**")
+```
+
+Now we will examine only the 6 variables meeting the measurement
+assumption.
+
+### Linear Relationship
+
+```{r}
+#| label: Basic Scatterplot Matrix
+#| code-fold: false
+#| echo: true
+pairs(
+  ~mpg + disp + hp + drat + wt + qsec,
+  data = cars_df,
+  main="Simple Scatterplot Matrix")
+```
+
+Based on this simple scatterplot matrix, all variables seem to follow a
+linear relationship, therefore, we will examine the normality and
+outliers assumption of these variables.
+
+### Normality distribution and extreme outliers
+
+```{r}
+#| label: Normality and outlier tests-qqplots
+
+par(mfrow = c(2, 3))
+
+qqnorm(cars_df$mpg,
+       main = "MPG Q-Q plot",
+       ylab = "Miles per Gallon")
+qqline(cars_df$mpg)
+
+qqnorm(cars_df$disp, 
+         main = "Disp Q-Q plot",
+         ylab = "Displacement")
+qqline(cars_df$disp)
+
+qqnorm(cars_df$hp, 
+       main = "hp Q-Q plot",
+       ylab = "Gross horsepower")
+qqline(cars_df$hp)
+
+qqnorm(cars_df$drat, 
+       main = "drat Q-Q plot",
+       ylab = "Rear axle ratio")
+qqline(cars_df$drat)
+
+qqnorm(cars_df$wt, 
+       main = "wt Q-Q plot",
+       ylab = "Weight")
+qqline(cars_df$wt)
+
+qqnorm(cars_df$qsec,
+       main = "qsec Q-Q plot",
+       ylab = "1/4 Mile Time")
+qqline(cars_df$qsec)
+
+# A combination of ggqqplot and plot_annotation can also be used for the qq plot chart creation
+```
+
+```{r}
+#| label: Normality tests boxplots
+
+par(mfrow = c(2, 3))
+
+MPG_b <- boxplot(cars_df$mpg,
+                 main = "MPG boxplot",
+                 ylab = "Miles per Gallon")
+
+DISP_b <- boxplot(cars_df$disp,
+                  main = "Disp boxplot",
+                  ylab = "Displacement")
+
+HP_b <- boxplot(cars_df$hp,
+                main = "hp boxplot",
+                ylab = "Gross HP")
+
+DRAT_b <- boxplot(cars_df$drat,
+                  main = "drat boxplot",
+                  ylab = "drat")
+
+WT_b <- boxplot(cars_df$wt,
+                main = "wt boxplot",
+                ylab = "Weight")
+
+qsec_b <- boxplot(cars_df$qsec,
+       main = "qsec boxplot",
+       ylab = "1/4 Mile Time")
+```
+
+```{r}
+#| label: Normality tests histograms
+
+par(mfrow = c(2, 3))
+
+MPG_h <- hist(cars_df$mpg,
+              main = "MPG Histogram",
+              xlab = "Miles per Gallon")
+
+DISP_h <- hist(cars_df$disp,
+               main = "disp Histogram", 
+               xlab = "Displacement")
+
+HP_h <- hist(cars_df$hp,
+             main = "hp Histogram",
+             xlab = "Gross HP")
+
+DRAT_h <- hist(cars_df$drat,
+               main = "drat Histogram",
+               xlab = "drat")
+
+WT_h <- hist(cars_df$wt,
+             main = "wt Histogram",
+             xlab = "Weight")
+
+QSEC_h <- hist(cars_df$qsec,
+          main = "qsec Histogram",
+          ylab = "1/4 Mile Time")
+
+```
+
+::: callout-important
+## Important procedures
+
+-   We will run the correlation matrix using a "Pearson Correlation" for
+    these data without resolving or reviewing some of the issues found
+    with non-normality and extreme outliers for procedural and visual
+    methods used to develop correlation matrices. However,
+    -   ***Normality of variables:*** The qqplots, boxplots, and
+        histograms visually hightlight that most of the variables have
+        non-normality issues, for some of the variables, the issues with
+        non-normality might not be too extreme for use in a pearson
+        correlation. However, for three of the variables (displacement
+        (disp), horse power (hp), and weight (wt)), the violation of
+        non-normality might require one of the following strategies
+        because non normally distributed data inflate the significance
+        of "r" and outliers can have great influence on Pearson'
+        corrrelations as it might result in misleading results (like no
+        association or very low association):
+
+        -   *Strategies to assist non normal distributions:* Data
+            transformations (such as log), Spearman rho correlation,
+            Kendall tau's correlation.
+
+    -   ***Presence of outliers*** The qqplots, and boxplots visually
+        hightlight that most of the outliers present should be further
+        analyzed as these can have great influence on Pearson'
+        corrrelations because they might provide misleading
+        results/associations (like no association or very low
+        association):
+
+        -   *Strategies for outliers:* Removal (if it is a confirmed
+            measurement failure or a collection error), The use of
+            Spearman correlation, adjustment/revisions.
+:::
+
+## Computation of a Correlation Matrix
+
+The function in R to create a basic correlation matrix is **cor()**.
+This function uses "pearson" as the default coefficient/method. The
+other two methods (for ranked correlation matrices) are "kendall" or
+"spearman".
+
+If the data set has missing values, one can ask (use =) for
+"everything", "all.obs", "complete.obs", "na.or.complete", or
+"pairwise.complete.obs". The easiest and most commonly used approach is
+"use = complete.obs" in which missing values are handled by case wise
+deletion (and if there are no complete cases, that gives an error).
+
+Our data set (mtcars2) is composed of only the 6 "continuous" variables
+of the data set 'mtcars", and does not have missing values, therefore we
+can use the default method of "pearson" and do not need to specify a use
+for missing values.
+
+```{r}
+#| label: basic cor()
+#| code-fold: false
+#| echo: true
+
+cars_cor <- round(cor(mtcars2, method = "pearson"),2)
+kable(cars_cor,
+      caption = "Basic correlation matrix")
+```
+
+We can also display the lower triangle of the pearson coefficient matrix
+by using the upper.tri() function.
+
+```{r}
+#| label: lower triangle of matrix correlation
+#| code-fold: false
+#| echo: true
+
+upper<-cars_cor
+upper[upper.tri(cars_cor)]<-""
+upper<-as.data.frame(upper)
+kable(upper,
+      caption = "Lower triangle of matrix correlation")
+```
+
+Another way (easier) to compute and visualize the lower triangle of a
+correlation matrix could be accomplished by using the function
+datasummary_correlation() in the `modelsummary` package.
+
+```{r}
+#| label: datasummary_correlation()
+#| code-fold: false
+#| echo: true
+
+
+datasummary_correlation(mtcars2)
+```
+
+However, this table is difficult to interpret as p-values for the
+pearson correlation coefficients are not included. The package `Hmisc`
+has functions available to provide p-values and to format the results of
+a correlation matrix. The function **rcorr()** provides the p-values of
+a correlation matrix. It is necessary to convert the data frame to a
+matrix to run this procedure:
+
+```{r}
+#| label: correlation with p-values using rcorr()
+#| code-fold: false
+#| echo: true
+
+cars_cor_p <- rcorr(as.matrix(mtcars2))
+
+cars_cor_p
+```
+
+Another way in which a correlation matrix could be constructed
+displaying p-values is with the function corr.test in the `psych`
+package. The default alpha = 0.05 and the default method is "pearson".
+Both could be changed to for instance, alpha = 0.01 and method =
+"spearman". However, the R documentation for this function indicates
+that non parametric method calculation is slow.
+
+```{r}
+#|  label: Use of corr.test
+#|  code-fold: false
+#|  echo: true
+
+mtcars2_p <- corr.test(mtcars2)$p
+
+kable(mtcars2_p)
+```
+
+We can use the package \`rstatix to: 1. Create a pearson coefficient
+correlation matrix with the function cor_mat() 2. Create a matrix of
+p-values (95% significance is default) with the function cor_pmat(), but
+p-values are not adjusted or rounded so it is not the best display 3.
+Create a visual representation of the matrix
+
+```{r}
+#| label: Correlation using rstatix
+#| code-fold: false
+#| echo: true
+
+# Correlation matrix between all variables
+mtcars2_corr <- mtcars2 %>% 
+  cor_mat()
+mtcars2_corr
+
+mtcars2_corr_p <- mtcars2 %>% 
+  cor_pmat()
+mtcars2_corr_p
+
+mtcars2_corr %>%
+  #cor_get_pval() %>%
+  cor_reorder() %>%
+  pull_lower_triangle %>%
+  cor_plot(label = TRUE)
+```
+
+The **rquery.cormat** in the `corrplot` package also provides the
+results of a correlation matrix showing r, p-values, and a visual
+representation. It can also provide formated results.
+
+<!-- ```{r} -->
+
+<!-- #| label: Correlation visuals using rquery.cormat -->
+
+<!-- #| code-fold: false -->
+
+<!-- #| echo: true -->
+
+<!-- # have to apply the source -->
+
+<!-- #source("http://www.sthda.com/upload/rquery_cormat.r") -->
+
+<!-- rquery.cormat(mtcars2, type="flatten", graph=TRUE) -->
+
+<!-- ``` -->
+
+The package `corrplot` allows us to visually format the correlation
+matrix so that it can be a full matrix or the bottom or top triangle.
+Additionally, it can display the correlation coefficients, or another
+with p-values, or a visual representation of significant values.
+
+```{r}
+#| label: Correlation with corrplot
+#| code-fold: false
+#| echo: true
+#| warning: true
+#| error: true
+
+
+testmtcars2 = cor.mtest(mtcars2, conf.level = 0.95)
+
+
+corrplot(cars_cor,
+         type = 'full',
+         method = 'circle',
+         addCoef.col = 'black',
+         )
+par(mfrow = c(1, 2))
+corrplot(cars_cor,
+         type = 'lower',
+         p.mat = testmtcars2$p,
+         number.font = 1,
+         tl.cex = 0.9,
+         pch.cex = 2,
+         insig = 'p-value', 
+         sig.level = -1
+         )
+corrplot(cars_cor,
+         type = 'upper',
+         tl.pos = 'n',
+         p.mat = testmtcars2$p,
+         method = 'color',
+         diag = FALSE, 
+         sig.level = c(0.001, 0.01, 0.05),          
+         pch.cex = 0.9,
+         insig = 'label_sig',
+         pch.col = 'grey20'
+)
+
+```
+
+Using the add = TRUE call inside the upper triangle **corrplot**
+function, one could stack matrices, but this method is complicated and
+requires adjusting sizes and labeling. To create stack full matrices it
+is best to use the function **corrplot.mixed** also in the `corrplot`
+package. Sadly, some of the features of **corrplot** are not available,
+but you can still have very informative visual outputs.
+
+```{r}
+corrplot.mixed(cars_cor)
+```
+
+The following matrix visualization using the function
+**chart.Correlation** in the package `PerformanceAnalytics` provides
+many of the assumption tests for a correlation. The top triangle is the
+(absolute) value of the correlation coefficient (the default method is
+"pearson" but it could be changed to "kendall" or "spearman") plus the
+result of the cor.test as stars (this can be changed to other symbols).
+In the bottom triangle of the matrix are the bivariate scatterplots,
+with a fitted line. This is a quick way to visualize a correlation
+matrix coefficient and significant relationships while examining
+assumptions. A must to run this function is to use the data set
+developed with the six continuous variables of interest (mtcars2).
+
+```{r}
+#| label: Correlation visuals using chart.Correlation
+#| code-fold: false
+#| echo: true
+chart.Correlation(mtcars2,
+                  histogram = TRUE,
+                  pch = 19)
+```
+
+```         
+*  The same visualization could be built using the **pairs()** function in base R, but **pairs()** is not very user friendly to construct a correlation matrix.
+*  In addition, the function **pair.panel** in the `psych` package returns something similar. 
+    *  Of interest about this function is that it also allows for regression visualization as regression lines and coinfidence intervals could be part of the output.
+```
+
+::: callout-note
+-   A simple correlation matrix could be ran using the full data set and
+    then select the variables significantly correlated and then see if
+    any of them meet the assumptions.
+-   The **cpairs()** in the `gclus` package allows for a plot matrix
+    while ordering and coloring the subplots by correlation.
+:::
+
+# Other Correlation Types (spearman and partial)
+
+## Spearman (ranking of variables, non-parametric)
+
+```{r}
+#| label: sperman procedure
+#| code-fold: false
+#| echo: true
+
+# Load data
+data("mtcars")
+cars_partial <- mtcars
+cars_spearman <- cor.test(mtcars$cyl, mtcars$carb, method = "spearman")
+
+# This is simply an example of how a spearman procedure is done. Although we can 
+# use continuous variables, the exact p-value cannot be computed with ties. 
+# Therefore, it is better to use ranked data in order to compute the exact p-value. 
+
+```
+
+## Partial Correlation
+
+The Partial correlation is the correlation of two variables while
+controlling for a third or more other variables. The partial correlation
+coefficient is a measure of the strength of the linear relationship
+between two variables after entirely controlling for the effects of
+other variables.
+
+To conduct the **partial correlation test**
+
+```{r}
+#| label: ppcor procedure
+#| code-fold: false
+#| echo: true
+
+# partial correlation between "mpg" and "wt"  given "am"
+pcor.test(cars_partial$mpg,cars_partial$wt,cars_partial$am)
+```
+
+This is the calculation of the correlation between miles per gallon and
+weight while controlling the variable "am" = Transmission (0 =
+automatic, 1 = manual).
+
+# Example of *r* in examining the relationship in a pair of variables using the Pearson Correlation Coefficient type of correlation
+
+Using the **ggscatter** function in the `ggpubr` package, we could
+examine the Pearson coefficient and the related p-value for a pair of
+variables we found of interest in the scatterplot matrix above. We will
+explore the relationship between the the number of miles per gallon and
+the weight of a vehicle.
+
+## Hypothesis test between mpg and wt
+
+We will test if a vehicle's weight is related to its fuel efficiency.
+
+$$
+H_0: ρ = 0,
+$$ $$
+H_1: ρ ≠ 0
+$$
+
+```{r}
+#| label: mpg and weight using ggscatter in ggpubr
+#| code-fold: false
+#| echo: true
+
+ggscatter(cars_df, x = "mpg", y = "wt", 
+          add = "reg.line",
+          conf.int = TRUE, 
+          cor.coef = TRUE, 
+          cor.method = "pearson",
+          xlab = "Miles/(US) gallon",
+          ylab = "Weight (1000 lbs)"
+          )
+
+```
+
+We can then conduct a Pearson correlation test using the **cor.test**
+function.
+
+```{r}
+#| label: Correlation test using cor.test between mpg and wt variables
+#| code-fold: false
+#| echo: true
+
+cars_ct <- cor.test(cars_df$wt, cars_df$mpg, 
+                    method = "pearson")
+cars_ct
+
+```
+
+**To test the Hypothesis:**
+
+The test statistic t is rounded to -10 and the corresponding p-value is
+1e-10.
+
+Since the p-value is less than .05, we have sufficient evidence to say
+that the correlation between a vehicle's weight and miles per gallon is
+statistically significant.
+
+**We can also test the hypothesis manually:**
+
+Using a t-test:
+
+n(ordered pairs) = 32 r(sample correlation coefficient) = -0.868 alpha =
+0.05
+
+$$
+t = \frac {r}{\sqrt{\frac {1-r^2}{n-2}}}
+$$
+
+$$
+t = \frac {-0.868}{\sqrt{\frac {0.2466}{30}}} = -9.574
+$$
+
+The critical values $-t_O = - 2.0423$ and $t_o = 2.0423$ form the
+rejection regions for the standardized test statistic. Since t = -9.574
+and it is less than $-t_O = - 2.0423$, we reject the null hypothesis and
+we can conclude that there is enough evidence at the 95% level of
+significance that there is a significant linear correlation between fuel
+efficiency and a vehicle's weight.
+
+Alternatively, we can use a table of critical values for pearson's r. In
+this two-tailed example, with df = 30 and alpha = .05 the critical value
+is .349, then we can make a decision, \|*r*\| = 0.868 is greater than
+0.349, which means that we reject the null hypothesis and conclude that
+there is a relationship between vehicle weight and miles per gallon,
+r(30) = -0.868, p\<0.05
+
+Furthermore,
+
+> -   The direction of the relationship is negative (i.e., heavier
+>     vehicles have lower numbers of miles per gallon or are less fuel
+>     efficient), meaning that when one variable increases the other
+>     variable decreases.
+> -   The magnitude, or strength, of the association is approximately
+>     strong (5 \< \| *r* \|).
+
+# Ordinary Least Squares (OLS) Regression
+
+OLS is a "method that allows to find a line that best describes the
+relationship between one or more predictor variables and a response
+variable" [@howtop], with our end result being:
+
+$$
+\hat{y} = b_0 + b_1x
+$$
+
+The best fitting line is typically calculated utilizing the least
+squares, which can be visually described as the deviation in the
+vertical direction.
+
+Now, we will continue with our correlation example examining the
+relationship between a vehicle's weight (WT) and its miles per gallon or
+fuel efficiency (MPG).
+
+When performed, this correlation provided us with a pearson's
+correlation coefficient of r(30) = -0.868, p\<0.05. Based on this
+information, we concluded that there is a strong negative relationship
+between MPG and WT. Where, heavier vehicles are associated with lower
+miles per gallon. Essentially this means that heavier vehicles are less
+fuel efficient. We will use the interpretation of this correlation as
+the basis of building an OLS regression to predict the value of MPG for
+a vehicle based on its weight. An OLS regression could be described as a
+common method used in regression analysis due to its efficiency in
+fitting the best straight line through a set of points. Thus, an OLS
+regression model gives best approximate of true population regression
+line as it minimizes the total distance from all of the points to the
+line.
+
+The OLS model could be expressed as:
+$$\hat{y}_i = \beta_0 + \beta_1x_i$$
+
+Then the OLS regression model line for our example is:
+
+$$\widehat{MPG_i} = \beta_0 +\beta_1*WT_i$$
+
+-   **The line has the following properties:**
+
+    > The intercept ($\beta_0$), its measure is defined by the units
+    > in Y. In our case, the units used in MPG. It is the predicted
+    > value of Y (MPG) when X (WT) is zero
+
+    > The slope ($\beta_1$), is the predicted change in Y for a one-unit
+    > increase in X. Like the correlation coefficient, it provides
+    > information on the relationship between X and Y. But unlike the
+    > correlation coefficient (unitless), it highlights the relationship
+    > in real terms of units. In our example this would look at how
+    > miles per gallon increase or decrease for a one unit increase in a
+    > vehicle's weight (according to the R docummentation for the
+    > `mtcars` data set, weight is provided as a measure per every 1,000
+    > pounds and miles per gallon are provided as Miles/(US) gallon),
+    > therefore the units are defined by the Y (MPG) and the X (WT).
+
+    > -   For example, the data for a vehicle that weighs 2,000 pounds
+    >     the unit is given as "2"
+    > -   For example, a vehicle that spends one gallon of fuel per
+    >     every 19 miles is given as "19"
+
+## How to develop the best fitting line?
+
+![Sample residual/error terms plot](Residuals.png)
+
+The best fitting line is one that minimizes errors in prediction or one
+with the Minimum sum of squared residuals (SSR). For more details, you
+can watch this video: [@khanacademy2018]
+
+$$
+SSR = \sum_{i = 1}^{n}{(y_i - \hat{y_i})^2}
+$$
+
+$residual_i = y_i - \hat{y_i}$
+
+It is important to note that prior to calculating the residuals, we must
+visualize and examine the data, which was done in the previous example.
+Then, we must run the regression line. We can utilize lm() to perform
+the OLS regression which will provide us with the model summary,
+including the following:
+
+> Pr(\>\|t\|) Multiple R-Squared Adjusted R-Squared Residual Standard
+> Error F-statistic P-value
+
+Once the model summary is given, we can then move on to creating the
+residual plots. When performing this step, we have to check the
+assumptions of homoscedasticity and normality.
+
+```         
+* Residuals = error terms
+* $$ Residual = observed value - predicted value $$
+* The larger the error term in absolute value, the worse the prediction
+* Squaring residuals solve issues arising from some residuals being negative and some positive.
+```
+
+-   **Assumptions**
+    1.  ***Linearity:*** Linear relationship between the dependent
+        variable and the independent variables.
+
+    2.  ***Independence:*** The observations must be independent of each
+        other.
+
+    3.  ***Homoscedasticity:*** The variance of the residuals should be
+        constant across all levels of the independent variables.
+
+    4.  ***Normality:*** The residuals / errors should be normally
+        distributed.
+
+    5.  ***No multicollinearity:*** In the case of multiple regression
+        (2+ independent variables), the independent variables should not
+        be highly correlated with each other.
+
+::: {.callout-note appearance="simple"}
+## Be careful about outliers
+
+Outliers can influence the estimates of the relationship.
+:::
+
+## Example of an OLS regression in R
+
+In R, the `lm` function command allows us to develop an OLS regression.
+
+```{r}
+#| label: OLS regression mpg~wt
+#| echo: true
+#| code-fold: false
+
+# model predicting mpg (fuel efficiency) using wt (weight)
+MPGReg <- lm(mpg ~ wt, data = mtcars)
+summary(MPGReg)
+```
+
+The OLS regression model is then:
+
+$\widehat{MPG_i} = 37.285 - 5.344*WT_i$
+
+-   **Interpretation:** $\beta_0$
+
+    -   The model predicts that vehicles with no weight will have 37.285
+        miles per gallon, on average.
+
+    -   This is not a very meaningful intercept as vehicles with "0"
+        weight do not exist. A meaningful intercept can be created by
+        subtracting a constant from the *x* variable to move the
+        intercept.In R as part of the `lm` command, this can be done by
+        surrounding the independent variable with `I()` which applies
+        the function inside and treats it as a new variable. For our
+        example we used the rounded lowest weight of the data (1.5) to
+        predict miles per gallon.
+
+        > This procedure does not change the slope of the line
+
+```{r}
+#| label: OLS regression mpg~wt I()
+#| echo: true
+#| code-fold: false
+
+# model predicting mpg (fuel efficiency) using wt (weight)
+MPGReg2 <- lm(mpg ~ I(wt-1.5), data = mtcars)
+summary(MPGReg2)
+```
+
+-   Then, the meaningful intercept model predicts that vehicles with a
+    weight of 1500 pounds have 29.268 miles per gallon, on average.
+
+-   **Interpretation:** $\beta_1$
+
+    -   The model predicts that on average, an increase of 1,000 pounds
+        in the weight of a vehicle is associated with a decrease of
+        5.344 miles per gallon.
+
+```{r}
+#| label: Creating Residual Plots
+#| echo: true
+#| code-fold: false
+
+# define residuals 
+res <- resid(MPGReg)
+
+# produce residual vs. fitted plot 
+plot(fitted(MPGReg), res)
+
+# add a horizontal line at 0
+abline(0,0)
+
+# create Q-Q- plot for residuals
+qqnorm(res)
+
+# add a straight diagonal line to the plot
+qqline(res)
+
+```
+
+Based on the graph above, it is visually clear that normality may not be
+met due to some outliers. This means that we must explore our data even
+deeper as it is possible that transformation of our data utilizing one
+of the following methods must take place:
+
+> Log transformation Square Root Transformation Cube Root Transformation
+
+Once the data is transformed, we can run the residual plot over again in
+order to achieve normality. For the sake of this presentation, we are
+only using an example with known limitations such as non-normality.
+
+## Hypothesis testing in OLS regression
+
+The null hypothesis in this case would be that the slope is zero
+indicating no relationship between x and y. Or in our example, we can
+state that there is no relationship between a vehicle's weight and its
+miles per gallon. The alternative hypothesis is then that the slope is
+not zero.
+
+$$
+H_0: \beta_1 = 0
+$$
+
+$$
+H_1: \beta_1 ≠ 0 
+$$
+
+We can test this hypothesis by using the `lm summary` printout which
+provides the p-value for the `wt` coefficient. This indicates that there
+is indeed a significant relationship between the weight of the car and
+its efficiency (miles per gallon used). R provides a t-value for the
+'wt' coefficient which has a p-value of p \< 0.000 as seen below:
+
+```         
+                  Estimate        Std. Error       t value      Pr(>|t|)   
+
+    wt           -5.3445             0.5591       -9.559       1.29e-10
+```
+
+## R-Squared Value
+
+R-squared is "a measure of how much of the variation in the dependent
+variable is explained by the independent variables in the model. It
+ranges from 0 to 1, with higher values indicating a better fit"
+[@ordinary].
+
+Adjusted R-squared is "similar to R-squared, but it takes into account
+the number of independent variables in the model. It is a more
+conservative estimate of the model's fit, as it penalizes the addition
+of variables that do not improve the model's performance" [@ordinary].
+
+## F-Statistic
+
+The F-statistic "tests the overall significance of the model by
+comparing the variation in the dependent variable explained by the model
+to the variation not explained by the model. A large F-statistic
+indicates that the model as a whole is significant"[@interpre].
+
+## Visual representation
+
+The visual representation of this model using `ggplot` is the following:
+
+```{r}
+#| label: Visual representation of MPGReg
+#| echo: true
+#| code-fold: false
+
+ggplot(mtcars, aes(x = wt, y = mpg))+
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)+ #se is option for coinfidence bar
+  labs(x= "Weight (per 1,000 pounds)",
+       y = "Miles per gallon")+
+  theme_bw()
+```
+
+As shown in the figure above, we see the summary statistics represented
+in a visual manner with the line of best fit. As indicated previously,
+we see a steep negative correlation between weight of the car and the
+miles per gallon (efficiency) utilized.
+
+# References

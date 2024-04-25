@@ -1,0 +1,318 @@
+---
+title: "How to create a scatterplot"
+author: "Patrice Lewis and Julissa Martinez"
+date: "`r Sys.Date()`"
+format:
+  html:
+    self-contained: true
+    toc: true
+    code-fold: true
+    warnings: FALSE
+---
+
+## Introduction
+
+Scatterplots display the relationship between two variables using dots to represent the values for each numeric variable. This presentation will examine the relationship between `GDP per capita` and `Fertility` over time using ggplot with facets.
+
+**Hypothesis:** A negative relationship exists between GDP per capita and fertility i.e. as GDP per capita increases, fertility decreases.
+
+## Data
+
+Data was obtained from GapMinder for each health and non-health indicator and combined into one data set. The data includes information on over 180 countries and territories from the years 1800 to 2099. Countries and territories with missing information were not excluded from the data set as the lack of information can also be looked into and shed light on why data was not collected or provided.
+
+To determine whether a country's health and income outcomes are influenced by population sizes and GDP per capita, the data will be used to create a series of graphs to view different trends. It is important to note certain analysis' will only be done on specific countries and on certain years. Predictive values were provided up until 2099 however, we will focus on years with full and current data.
+
+```{r setup}
+#| output: false
+
+
+# Contains colour palette for ggplot
+library(viridis)
+
+# Contains "gganimate"
+library(ggplot2)
+library(gganimate)
+
+library(tidyverse)
+
+
+# Reads csv file
+gapminder_data <-  
+  read_csv("clean_data/gapminder_scatterplot.csv")
+
+
+```
+
+## How to create a scatter-plot
+
+### Intro to ggplot2
+
+Ggplot2 is a package used to create graphs and visualize data. The main three components of ggplot2 are the data, aesthetics and geom layers.
+
+-   The data layer - states what data will be used to graph
+
+-   The aesthetics layer - specifies the variables that are being mapped
+
+-   The geom layer - specifies the type of graph to be produced
+
+![](ggplot_image.jpeg){fig-align="left"}
+
+### Basic scatter-plot using ggplot2
+
+In order to create a scatter-plot using ggplot, you must specify what data you will be using, state which variables will be mapped and how under aesthetics. What differentiates the scatter-plot from any other type of graph will be specified under the geom layer. For the scatter-plot, geom_point will be used.
+
+In this example, we will analyze the relationship between fertility rates and gdp per capita for each country in 2011.
+
+```{r ggplot-2011-basic}
+#| warning: false
+#| code-fold: false
+
+
+fig_bubble_2011 <-
+  ggplot(data = filter(gapminder_data, year == 2011)) +
+  aes(x = gdpPerCap, y = fertility) +
+  geom_point()
+
+fig_bubble_2011 
+
+```
+
+### Elevating your scatter-plot
+
+In the example above, we have mapped out fertility as our y-axis and gdp per capita as our x-axis. However, at it's very basic level, there is not enough information provided to accurately analyze the relationship between the two. For this reason, we can add additional layers that will provide more information to properly analyze the scatter-plot.
+
+```{r ggplot-2011-adv}
+#| warning: false
+
+
+fig_bubble_pretty_2011 <-
+  ggplot(data = filter(gapminder_data, year == 2011)) +
+  aes(
+    x = gdpPerCap,
+    y = fertility,
+    # will change the size of the point based on population size 
+    size = population, 
+    # will assign colors based on the continent the country is in 
+    color = continent
+  ) +
+  # gives a range as to how big or small the points of population should be
+  scale_size(range = c(1, 20)) + 
+  # removes N/A from the legend and titles it Continent 
+  scale_colour_discrete(na.translate = F, name = "Continent") +
+  # removes population size from the legend 
+  guides(size = "none") +
+  scale_x_continuous(
+    name = "GDP per Capita",
+    trans = "log10",
+    # transforms numbers from scientific notation to regular number 
+    labels = scales::comma
+  ) +
+  labs(
+    title = "Fertility rate descreases as GDP per capita increases in 2011",
+    y = "Fertility rates",
+    caption = "Source: Gapminder"
+  ) +
+  # the ylim was set based on the fertility, lowest was 1.15 & highest was 7.25
+  ylim(1.2, 8.0) +
+  # alpha increases transparency of the points to ensure they can all be seen
+  geom_point(alpha = 0.5) 
+
+fig_bubble_pretty_2011
+
+```
+
+[@ggplot-2011-adv] builds on the previous scatterplot of `Fertility Rates` (y axis) against `GDP per capita` (x axis) for 2011. The bubble size depicts respective country populations, and continents are coded by colors according to the key. This figure displays a negative relationship between `GDP per capita` and `Fertility Rates`. It supports the **Hypothesis** which states that as `GDP per capita` increases, `Fertility Rates` decreases. This trend can be confirmed for all continents, however, the degree to which fertility rates drop between continents varies. Most European country appear below a fertility rate of 2 babies per woman. The Americas appear to follow closely behind (under 4), followed by Oceania and Asia. A significant number of African countries still maintained higher fertility rates with lower GDP per capita for 2011.
+
+### Facets
+
+Here is an example of wanting to create four separate graphs to see the relationship between fertility rates and GDP per capita based on the years 1860,1910, 1960 and 2010. In this example we omitted the facet argument.
+
+```{r ggplot-multiple-years}
+#| warning: false
+
+
+fig_bubble_multiple <-
+  ggplot(data = filter(gapminder_data, year %in% c(1860, 1910, 1960, 2010))) +
+  aes(
+    x = gdpPerCap,
+    y = fertility,
+    size = population,
+    color = continent
+  ) +
+  scale_x_continuous(
+    name = "GDP per Capita",
+    trans = "log10",
+    labels = scales::comma
+  ) +
+  scale_size(range = c(0, 20)) +
+  guides(size = "none") +
+  scale_colour_discrete(na.translate = F, name = "Continent") +
+  labs(
+    title = "Fertility continues to decrease as GDP per capita increases",
+    subtitle = "throughout 1860, 1910, 1960 and 2010",
+    caption = "Source: Gapminder",
+    y = "Fertility rates"
+  ) +
+  geom_point(alpha = 0.3) 
+
+fig_bubble_multiple
+```
+
+Without having used the facet argument, all points of all four years have been included into one graph. This graph does not provide us with the information we were looking for.
+
+```{r ggplot-facet-years}
+#| warning: false
+
+
+fig_bubble_multiple_facet <-
+  ggplot(data = filter(gapminder_data, year %in% c(1860, 1910, 1960, 2010))) +
+  aes(
+    x = gdpPerCap,
+    y = fertility,
+    size = population,
+    color = continent
+  ) +
+  scale_x_continuous(
+    name = "GDP per Capita",
+    trans = "log10",
+    labels = scales::comma
+  ) +
+  scale_size(range = c(0, 20)) +
+  guides(size = "none") +
+  scale_colour_discrete(na.translate = FALSE , name = "Continent") +
+  labs(
+    title = "Fertility continues to decrease as GDP per capita increases",
+    subtitle = "throughout 1860, 1910, 1960 and 2010",
+    caption = "Source: Gapminder",
+    y = "Fertility rates"
+  ) +
+  geom_point(alpha = 0.3) +
+  # specifiying we want the graphs split based on year
+  facet_wrap(~ year)
+
+fig_bubble_multiple_facet
+
+```
+
+Now that we've specified the facet argument, we now have four seperate graphs that can be properly analysed. In [@ggplot-facet-years] we see an increasingly negative relationship between the two variables over time. This observation is congruent with the **hypothesis** that as `GDP per capita` increases, `fertility` decreases.
+
+This global trend can be attributed to the increasing proportion of women in the workforce in the mid to late 20th century. As a result of World War II (1939-1945), women took on roles outside the home to compensate for men at war. Despite increased GDP per capita, this may have contributed to reduced fertility (babies per woman) over time. During 1860 - 1910, the scatter-plot figures remained in the upper left quadrant with the numbers remaining between 2 - 8 babies per woman. In 1960, a clear disparity among continents is seen. Most European countries' fertility rates fell below 5, while their GDP per capita increased. Most African countries maintained high fertility rates above 5, but little change is seen in GDP per capita. The Asian continent shows the most variation among countries during that year. Some smaller Asian countries continued to maintain high fertility rates as GDP per capita increased in 1960. However, others displayed a drastic decrease in fertility rates by 1960. The Americas followed a steady decline over the years. By 2010, an overall negative relationship can be seen with most countries' fertility rates below 5 babies per woman.
+
+```{r plot-facet-continent}
+#| warning: false
+#| code-fold: false
+
+
+fig_bubble_row_2011 <-
+  ggplot(data = filter(gapminder_data, year == 2011)) +
+  aes(
+    x = gdpPerCap,
+    y = fertility) +
+  geom_point(alpha = 0.5) +
+  facet_wrap(~ continent, nrow = 1)
+
+fig_bubble_row_2011 
+
+```
+
+In the graph above, we see an example of seperating the single graph into graphs based on continent. It has also been specified to have all graphs appear in one single row through the nrow argument. However, this graph is also unclear and cannot be used to compare the relationship between fertility and gdp per capita.
+
+```{r}
+#| warning: false
+#| code-fold: false
+
+
+fig_bubble_facet_2011 <-
+  ggplot(data = filter(gapminder_data, year == 2011)) +
+  aes(
+    x = gdpPerCap,
+    y = fertility) +
+  geom_point(alpha = 0.5) +
+  facet_wrap(~ continent)
+
+fig_bubble_facet_2011 
+
+```
+
+In the next example above, we removed the nrow argument and the system automatically seperated the graphs into three columns with two rows. However, again, there is no way to clearly determine any relationship between fertility and gdp per capita.
+
+## Scatterplot animation
+
+GGplot2 contains the "gganimate" package that allows for animation of data. It enhances data visualization through real-time outputs. In this case the gapminder data will be filtered to 2011 and below (full data available).
+
+```{r plot-animate}
+#| warning: false
+
+gapminder_df <- 
+  gapminder_data %>% 
+  #Excludes data beyond 2011 (last year with complete data)
+  filter(year <= "2011")
+
+fig_animate <- 
+  ggplot(gapminder_df,
+       aes(x = gdpPerCap,
+           y = fertility,
+           size = population,
+           color = continent )
+  ) +
+  scale_x_continuous(
+    name = "GDP per Capita",
+    trans = "log10",
+    labels = scales::comma
+  ) +
+  # Assigns color palette 
+  scale_color_viridis_d() +
+  scale_size(range =c(0, 20)) +
+  guides(size = "none") +
+  geom_point(show.legend = TRUE, alpha = 0.7) +
+  # Assigns the gganimate features
+  transition_time(year) +
+  ease_aes('linear', interval = 2.0) +
+  # Prints time of current frame
+  labs(title = "Year: {frame_time}", x = "GDP per capita", y = "Fertility")
+  
+
+fig_animate
+```
+
+@plot-animate depicts the changes between `Fertility` and `GDP per capita` as the years increase from 1799 to 2011 (last full data year). This allows real-time visualization of the decrease in fertility and increase in GDP per capita.
+
+```{r animate-facets}
+#| warning: false
+
+
+facet_animate <- 
+  ggplot(gapminder_df,
+       aes(x = gdpPerCap, 
+           y = fertility,
+           size = population, 
+           colour = continent)
+) +
+  scale_x_continuous(
+    name = "GDP per Capita",
+    trans = "log10",
+    labels = scales::comma
+  ) +
+  scale_size(range = c(0, 20)) +
+  guides(size = "none") +
+  # Groups output by continents
+  facet_wrap(~continent) +
+  labs(
+    title = 'Year: {closest_state}', 
+    x = 'GDP per capita', 
+    y = 'fertility'
+  ) +
+  geom_point(alpha = 0.7, show.legend = TRUE) +
+  # Contains gganimate features
+  transition_states(year, transition_length = 3, state_length = 1) +
+  # Animation pattern, time between each state
+  ease_aes('linear', interval = 2.0)
+
+facet_animate
+```
+
+In @animate-facets, the ggplot data for various continents as time passes is shown to support the initial hypothesis.
+
+## Conclusion
+
+A global negative trend is depicted between `GDP per capita` and `fertility` over time. Such changes were due to wars as well as social, cultural and economic changes that incentivize smaller families especially in Asian countries. Most European, American and Asian countries depicted significant decreases in fertility rates over time as `GDP per capita` increased. On the other hand, African countries remain in the top rank for fertility over the years. These differences are depicted in the population pyramid changes of developed vs developing countries. Public health policies can be tailored to incentivizing increased fertility in developed countries to ensure generation continuity, and effective family planning strategies in developing countries.
