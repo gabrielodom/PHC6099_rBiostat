@@ -51,9 +51,8 @@ In this article we will be discussing the **Student's t test**.
 
     The corresponding alternative hypotheses would be as follows:
 
-```{=html}
 <!-- -->
-```
+
 1.  $(H_1)$: $(m_A)\neq(m_B)$- two tailed test.
 2.  $(H_1)$: $(m_A)<(m_B)$- one tailed test.
 3.  $(H_1)$: $(m_A)> (m_B)$- one tailed test.
@@ -86,7 +85,7 @@ If the data is not independent such as paired data in the form of matched pairs 
 
 ------------------------------------------------------------------------
 
-## Example 
+## Example
 
 ### Prerequisites
 
