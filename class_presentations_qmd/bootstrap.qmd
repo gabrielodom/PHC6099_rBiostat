@@ -1,0 +1,243 @@
+---
+title: "Bootstrap Confidence Intervals"
+author: "Shelly Sinclair and Alvonee Penn"
+date: "`r Sys.Date()`"
+format:
+  html:
+    self-contained: true
+    toc: true
+    number-sections: true
+    code-fold: true
+knitr:
+  opts_chunk:      ########## set global options ############
+    collapse: true # keep code from blocks together (if shown)
+    echo: true    # don't show code
+    message: false  # show messages
+    warning: false  # show warnings
+    error: false    # show error messages
+    comment: ""    # don't show ## with printed output
+    R.options:    
+      digits: 3    # round to three digits
+editor: source
+bibliography: [Permutations.bib]
+---
+
+
+
+# Bootstrap
+
+
+
+What is **bootstrapping**?
+
+Bootstrapping is a technique from Efron (1979) that is built on a simple idea:
+if the data we have is a sample from a population, why don't we sample from
+our own data to make more samples? Now, because we don't have access to any
+new data, we're going to take samples of our data set *with replacement*.
+
+
+## When to use bootstrapping?
+
+
+
+The purpose of bootstrapping is to increase the sample size for our analysis
+when the sample we have been given is small. 
+
+
+# Packages
+
+
+
+`palmerpenguins` - The dataset we will using in this Lesson.
+
+`tidyverse` - includes the packages to be used for data wrangling.
+
+`boot` - The R package boot generates bootstrap samples in R. 
+
+```{r}
+
+# install.packages("palmerpenguins")
+
+library(palmerpenguins)
+library(boot)
+library(tidyverse)
+
+```
+
+
+
+# Penguins
+
+
+
+This Data was collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica. The palmerpenguins package contains two datasets. One is called penguins, and is a simplified version of the raw data.
+
+Penguins includes measurements for penguin species, island in Palmer Archipelago, size (flipper length, body mass, bill dimensions), and sex. The full dataset contains A tibble with 344 rows and 8 variables[@noauthor_palmerpenguins_nodate].
+
+
+> Research Question: What is the difference in flipper length of the Adelie penguin from two different Islands? 
+
+```{r}
+
+# load the data
+data(penguins)
+
+# see the structure of the data
+str(penguins)
+
+
+```
+
+First we created empty vectors to list and store data points. 
+
+Our for loop will organize the data for two of the islands where *Adelie Penguins* reside - Torgersen and Biscoe
+
+For simplicity, we excluded the island of Dream because their population size 
+was much larger compared to Torgersen and Biscoe populations. 
+
+```{r}
+#| code-fold: show
+
+new_penguins_df <- 
+  filter(penguins, species == "Adelie", island != "Dream") %>% 
+  select(species, island, flipper_length_mm) %>% 
+  arrange(island, .by_group = TRUE) %>% 
+  drop_na()
+
+str(new_penguins_df)
+
+```
+
+
+## Distribution
+
+
+Boxplots and histograms will be useful to understand the distribution of the data. 
+
+Our data is not normal based on the distribution. 
+
+```{r}
+#| code-fold: show
+
+# check the boxplot of the data
+boxplot(
+  new_penguins_df$flipper_length_mm ~ new_penguins_df$island, las = 1, 
+  ylab = "Flipper Length (mm)",
+  xlab = "Island",
+  main = "Flipper Length by Island"
+)
+
+# check the histogram of the data
+hist(
+  x = new_penguins_df$flipper_length_mm,
+  main = "Distribution of Flipper Length (mm)",
+  xlab = "Flipper Length"
+)
+
+```
+
+
+## Bootstrapping Test
+
+
+We need the difference in means in order to conduct our permutation test. We will test whether the difference is significant so that we can reject the null. This indicates that there is a different in flipper length among the same species that come from different islands. 
+
+```{r}
+#| code-fold: show
+
+# set a seed so that our random results can be replicated by other people:
+set.seed(20150516)
+
+# take a random re-sample of the data that is the *same size*
+N <- length(new_penguins_df$flipper_length_mm)
+
+# a random sample:
+sample(new_penguins_df$flipper_length_mm, size = N, replace = TRUE)
+
+# number of bootstrap samples
+B_int <- 10000
+
+# create a list of these thousands of samples 
+bootstrapSamples_ls <- map(
+  .x = 1:B_int,
+  .f = ~{
+    sample(new_penguins_df$flipper_length_mm, size = N, replace = TRUE)
+  }
+)
+
+# subset of the random samples 
+bootstrapSamples_ls[1:3]
+
+```
+
+
+## Building Confidence Intervals for Various Statistics: Example 1
+
+
+```{r}
+
+# The Sample Mean
+bootMeans_num <-
+  bootstrapSamples_ls %>%
+  # the map_dbl() function takes in a list and returns an atomic vector of type
+  #   double (numeric)
+  map_dbl(mean)
+
+# a normally distributed histogram using the samples from bootstrapping
+hist(bootMeans_num)
+
+# 95% confidence interval?
+quantile(bootMeans_num, probs = c(0.025, 0.975))
+
+```
+
+
+## Building Confidence Intervals for Various Statistics: Example 2
+
+Source: <https://www.geeksforgeeks.org/bootstrap-confidence-interval-with-r-programming/>
+
+```{r}
+
+# Custom function to find correlation between the bill length and depth 
+corr.fun <- function(data, idx) {
+  
+# vector of indices that the boot function uses
+  df <- data[idx, ]
+
+# Find the spearman correlation between
+# the 3rd (length) and 5th (depth) columns of dataset
+  cor(df[, 3], df[, 4], method = 'spearman')
+}
+
+# Setting the seed for reproducability of results
+set.seed(42)
+
+# Calling the boot function with the dataset
+bootstrap <- boot(iris, corr.fun, R = 1000)
+
+# Display the result of boot function
+bootstrap
+
+# Plot the bootstrap sampling distribution using ggplot
+plot(bootstrap)
+
+# Function to find the bootstrap CI
+boot.ci(boot.out = bootstrap,
+		type = "perc"
+)
+
+```
+
+
+
+# Conclusion
+
+
+
+The bootstrapping method is useful when working with data with relatively small samples in order to increase the sample size and normality of the data.
+
+
+
+
+
+
