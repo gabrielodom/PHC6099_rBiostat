@@ -38,7 +38,8 @@ library(tidyverse)
 
 # Reads csv file
 gapminder_data <-  
-  read_csv("clean_data/gapminder_scatterplot.csv")
+  # read_csv("clean_data/gapminder_scatterplot.csv")
+  read_csv("../data/01_gapminder_2024spring.csv")
 
 
 ```
@@ -55,7 +56,7 @@ Ggplot2 is a package used to create graphs and visualize data. The main three co
 
 -   The geom layer - specifies the type of graph to be produced
 
-![](ggplot_image.jpeg){fig-align="left"}
+![](https://zhuhao.org/post/2019-01-31-tips-on-designing-a-hex-sticker-for-rstats-packages_files/hex-ggplot2.png){fig-align="left"}
 
 ### Basic scatter-plot using ggplot2
 
@@ -70,7 +71,7 @@ In this example, we will analyze the relationship between fertility rates and gd
 
 fig_bubble_2011 <-
   ggplot(data = filter(gapminder_data, year == 2011)) +
-  aes(x = gdpPerCap, y = fertility) +
+  aes(x = gdp_per_capita, y = fertility) +
   geom_point()
 
 fig_bubble_2011 
@@ -88,7 +89,7 @@ In the example above, we have mapped out fertility as our y-axis and gdp per cap
 fig_bubble_pretty_2011 <-
   ggplot(data = filter(gapminder_data, year == 2011)) +
   aes(
-    x = gdpPerCap,
+    x = gdp_per_capita,
     y = fertility,
     # will change the size of the point based on population size 
     size = population, 
@@ -125,7 +126,7 @@ fig_bubble_pretty_2011
 
 ### Facets
 
-Here is an example of wanting to create four separate graphs to see the relationship between fertility rates and GDP per capita based on the years 1860,1910, 1960 and 2010. In this example we omitted the facet argument.
+Here is an example of wanting to create four separate graphs to see the relationship between fertility rates and GDP per capita based on the years 1860, 1910, 1960 and 2010. In this example we omitted the facet argument.
 
 ```{r ggplot-multiple-years}
 #| warning: false
@@ -134,7 +135,7 @@ Here is an example of wanting to create four separate graphs to see the relation
 fig_bubble_multiple <-
   ggplot(data = filter(gapminder_data, year %in% c(1860, 1910, 1960, 2010))) +
   aes(
-    x = gdpPerCap,
+    x = gdp_per_capita,
     y = fertility,
     size = population,
     color = continent
@@ -146,7 +147,7 @@ fig_bubble_multiple <-
   ) +
   scale_size(range = c(0, 20)) +
   guides(size = "none") +
-  scale_colour_discrete(na.translate = F, name = "Continent") +
+  scale_colour_discrete(na.translate = FALSE, name = "Continent") +
   labs(
     title = "Fertility continues to decrease as GDP per capita increases",
     subtitle = "throughout 1860, 1910, 1960 and 2010",
@@ -167,7 +168,7 @@ Without having used the facet argument, all points of all four years have been i
 fig_bubble_multiple_facet <-
   ggplot(data = filter(gapminder_data, year %in% c(1860, 1910, 1960, 2010))) +
   aes(
-    x = gdpPerCap,
+    x = gdp_per_capita,
     y = fertility,
     size = population,
     color = continent
@@ -206,8 +207,9 @@ This global trend can be attributed to the increasing proportion of women in the
 fig_bubble_row_2011 <-
   ggplot(data = filter(gapminder_data, year == 2011)) +
   aes(
-    x = gdpPerCap,
-    y = fertility) +
+    x = gdp_per_capita,
+    y = fertility
+  ) +
   geom_point(alpha = 0.5) +
   facet_wrap(~ continent, nrow = 1)
 
@@ -225,8 +227,9 @@ In the graph above, we see an example of seperating the single graph into graphs
 fig_bubble_facet_2011 <-
   ggplot(data = filter(gapminder_data, year == 2011)) +
   aes(
-    x = gdpPerCap,
-    y = fertility) +
+    x = gdp_per_capita,
+    y = fertility
+  ) +
   geom_point(alpha = 0.5) +
   facet_wrap(~ continent)
 
@@ -245,15 +248,16 @@ GGplot2 contains the "gganimate" package that allows for animation of data. It e
 
 gapminder_df <- 
   gapminder_data %>% 
-  #Excludes data beyond 2011 (last year with complete data)
+  # Excludes data beyond 2011 (last year with complete data)
   filter(year <= "2011")
 
 fig_animate <- 
-  ggplot(gapminder_df,
-       aes(x = gdpPerCap,
-           y = fertility,
-           size = population,
-           color = continent )
+  ggplot(gapminder_df) +
+  aes(
+    x = gdp_per_capita,
+    y = fertility,
+    size = population,
+    color = continent 
   ) +
   scale_x_continuous(
     name = "GDP per Capita",
@@ -262,7 +266,7 @@ fig_animate <-
   ) +
   # Assigns color palette 
   scale_color_viridis_d() +
-  scale_size(range =c(0, 20)) +
+  scale_size(range = c(0, 20)) +
   guides(size = "none") +
   geom_point(show.legend = TRUE, alpha = 0.7) +
   # Assigns the gganimate features
@@ -282,12 +286,13 @@ fig_animate
 
 
 facet_animate <- 
-  ggplot(gapminder_df,
-       aes(x = gdpPerCap, 
-           y = fertility,
-           size = population, 
-           colour = continent)
-) +
+  ggplot(gapminder_df) +
+  aes(
+    x = gdp_per_capita, 
+    y = fertility,
+    size = population, 
+    colour = continent
+  ) +
   scale_x_continuous(
     name = "GDP per Capita",
     trans = "log10",

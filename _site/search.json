@@ -12,5 +12,138 @@
     "title": "About",
     "section": "",
     "text": "1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "lessons_original/01_ggplot2.html",
+    "href": "lessons_original/01_ggplot2.html",
+    "title": "How to create a scatterplot",
+    "section": "",
+    "text": "Scatterplots display the relationship between two variables using dots to represent the values for each numeric variable. This presentation will examine the relationship between GDP per capita and Fertility over time using ggplot with facets.\nHypothesis: A negative relationship exists between GDP per capita and fertility i.e. as GDP per capita increases, fertility decreases."
+  },
+  {
+    "objectID": "lessons_original/01_ggplot2.html#introduction",
+    "href": "lessons_original/01_ggplot2.html#introduction",
+    "title": "How to create a scatterplot",
+    "section": "",
+    "text": "Scatterplots display the relationship between two variables using dots to represent the values for each numeric variable. This presentation will examine the relationship between GDP per capita and Fertility over time using ggplot with facets.\nHypothesis: A negative relationship exists between GDP per capita and fertility i.e. as GDP per capita increases, fertility decreases."
+  },
+  {
+    "objectID": "lessons_original/01_ggplot2.html#data",
+    "href": "lessons_original/01_ggplot2.html#data",
+    "title": "How to create a scatterplot",
+    "section": "Data",
+    "text": "Data\nData was obtained from GapMinder for each health and non-health indicator and combined into one data set. The data includes information on over 180 countries and territories from the years 1800 to 2099. Countries and territories with missing information were not excluded from the data set as the lack of information can also be looked into and shed light on why data was not collected or provided.\nTo determine whether a country’s health and income outcomes are influenced by population sizes and GDP per capita, the data will be used to create a series of graphs to view different trends. It is important to note certain analysis’ will only be done on specific countries and on certain years. Predictive values were provided up until 2099 however, we will focus on years with full and current data.\n\n\nCode\n# Contains colour palette for ggplot\nlibrary(viridis)\n\n# Contains \"gganimate\"\nlibrary(ggplot2)\nlibrary(gganimate)\n\nlibrary(tidyverse)\n\n\n# Reads csv file\ngapminder_data &lt;-  \n  # read_csv(\"clean_data/gapminder_scatterplot.csv\")\n  read_csv(\"../data/gapminder_2024spring.csv\")"
+  },
+  {
+    "objectID": "lessons_original/01_ggplot2.html#how-to-create-a-scatter-plot",
+    "href": "lessons_original/01_ggplot2.html#how-to-create-a-scatter-plot",
+    "title": "How to create a scatterplot",
+    "section": "How to create a scatter-plot",
+    "text": "How to create a scatter-plot\n\nIntro to ggplot2\nGgplot2 is a package used to create graphs and visualize data. The main three components of ggplot2 are the data, aesthetics and geom layers.\n\nThe data layer - states what data will be used to graph\nThe aesthetics layer - specifies the variables that are being mapped\nThe geom layer - specifies the type of graph to be produced\n\n\n\n\n\n\n\n\nBasic scatter-plot using ggplot2\nIn order to create a scatter-plot using ggplot, you must specify what data you will be using, state which variables will be mapped and how under aesthetics. What differentiates the scatter-plot from any other type of graph will be specified under the geom layer. For the scatter-plot, geom_point will be used.\nIn this example, we will analyze the relationship between fertility rates and gdp per capita for each country in 2011.\n\nfig_bubble_2011 &lt;-\n  ggplot(data = filter(gapminder_data, year == 2011)) +\n  aes(x = gdp_per_capita, y = fertility) +\n  geom_point()\n\nfig_bubble_2011 \n\n\n\n\n\n\n\n\n\n\nElevating your scatter-plot\nIn the example above, we have mapped out fertility as our y-axis and gdp per capita as our x-axis. However, at it’s very basic level, there is not enough information provided to accurately analyze the relationship between the two. For this reason, we can add additional layers that will provide more information to properly analyze the scatter-plot.\n\n\nCode\nfig_bubble_pretty_2011 &lt;-\n  ggplot(data = filter(gapminder_data, year == 2011)) +\n  aes(\n    x = gdp_per_capita,\n    y = fertility,\n    # will change the size of the point based on population size \n    size = population, \n    # will assign colors based on the continent the country is in \n    color = continent\n  ) +\n  # gives a range as to how big or small the points of population should be\n  scale_size(range = c(1, 20)) + \n  # removes N/A from the legend and titles it Continent \n  scale_colour_discrete(na.translate = F, name = \"Continent\") +\n  # removes population size from the legend \n  guides(size = \"none\") +\n  scale_x_continuous(\n    name = \"GDP per Capita\",\n    trans = \"log10\",\n    # transforms numbers from scientific notation to regular number \n    labels = scales::comma\n  ) +\n  labs(\n    title = \"Fertility rate descreases as GDP per capita increases in 2011\",\n    y = \"Fertility rates\",\n    caption = \"Source: Gapminder\"\n  ) +\n  # the ylim was set based on the fertility, lowest was 1.15 & highest was 7.25\n  ylim(1.2, 8.0) +\n  # alpha increases transparency of the points to ensure they can all be seen\n  geom_point(alpha = 0.5) \n\nfig_bubble_pretty_2011\n\n\n\n\n\n\n\n\n\n[@ggplot-2011-adv] builds on the previous scatterplot of Fertility Rates (y axis) against GDP per capita (x axis) for 2011. The bubble size depicts respective country populations, and continents are coded by colors according to the key. This figure displays a negative relationship between GDP per capita and Fertility Rates. It supports the Hypothesis which states that as GDP per capita increases, Fertility Rates decreases. This trend can be confirmed for all continents, however, the degree to which fertility rates drop between continents varies. Most European country appear below a fertility rate of 2 babies per woman. The Americas appear to follow closely behind (under 4), followed by Oceania and Asia. A significant number of African countries still maintained higher fertility rates with lower GDP per capita for 2011.\n\n\nFacets\nHere is an example of wanting to create four separate graphs to see the relationship between fertility rates and GDP per capita based on the years 1860, 1910, 1960 and 2010. In this example we omitted the facet argument.\n\n\nCode\nfig_bubble_multiple &lt;-\n  ggplot(data = filter(gapminder_data, year %in% c(1860, 1910, 1960, 2010))) +\n  aes(\n    x = gdp_per_capita,\n    y = fertility,\n    size = population,\n    color = continent\n  ) +\n  scale_x_continuous(\n    name = \"GDP per Capita\",\n    trans = \"log10\",\n    labels = scales::comma\n  ) +\n  scale_size(range = c(0, 20)) +\n  guides(size = \"none\") +\n  scale_colour_discrete(na.translate = FALSE, name = \"Continent\") +\n  labs(\n    title = \"Fertility continues to decrease as GDP per capita increases\",\n    subtitle = \"throughout 1860, 1910, 1960 and 2010\",\n    caption = \"Source: Gapminder\",\n    y = \"Fertility rates\"\n  ) +\n  geom_point(alpha = 0.3) \n\nfig_bubble_multiple\n\n\n\n\n\n\n\n\n\nWithout having used the facet argument, all points of all four years have been included into one graph. This graph does not provide us with the information we were looking for.\n\n\nCode\nfig_bubble_multiple_facet &lt;-\n  ggplot(data = filter(gapminder_data, year %in% c(1860, 1910, 1960, 2010))) +\n  aes(\n    x = gdp_per_capita,\n    y = fertility,\n    size = population,\n    color = continent\n  ) +\n  scale_x_continuous(\n    name = \"GDP per Capita\",\n    trans = \"log10\",\n    labels = scales::comma\n  ) +\n  scale_size(range = c(0, 20)) +\n  guides(size = \"none\") +\n  scale_colour_discrete(na.translate = FALSE , name = \"Continent\") +\n  labs(\n    title = \"Fertility continues to decrease as GDP per capita increases\",\n    subtitle = \"throughout 1860, 1910, 1960 and 2010\",\n    caption = \"Source: Gapminder\",\n    y = \"Fertility rates\"\n  ) +\n  geom_point(alpha = 0.3) +\n  # specifiying we want the graphs split based on year\n  facet_wrap(~ year)\n\nfig_bubble_multiple_facet\n\n\n\n\n\n\n\n\n\nNow that we’ve specified the facet argument, we now have four seperate graphs that can be properly analysed. In [@ggplot-facet-years] we see an increasingly negative relationship between the two variables over time. This observation is congruent with the hypothesis that as GDP per capita increases, fertility decreases.\nThis global trend can be attributed to the increasing proportion of women in the workforce in the mid to late 20th century. As a result of World War II (1939-1945), women took on roles outside the home to compensate for men at war. Despite increased GDP per capita, this may have contributed to reduced fertility (babies per woman) over time. During 1860 - 1910, the scatter-plot figures remained in the upper left quadrant with the numbers remaining between 2 - 8 babies per woman. In 1960, a clear disparity among continents is seen. Most European countries’ fertility rates fell below 5, while their GDP per capita increased. Most African countries maintained high fertility rates above 5, but little change is seen in GDP per capita. The Asian continent shows the most variation among countries during that year. Some smaller Asian countries continued to maintain high fertility rates as GDP per capita increased in 1960. However, others displayed a drastic decrease in fertility rates by 1960. The Americas followed a steady decline over the years. By 2010, an overall negative relationship can be seen with most countries’ fertility rates below 5 babies per woman.\n\nfig_bubble_row_2011 &lt;-\n  ggplot(data = filter(gapminder_data, year == 2011)) +\n  aes(\n    x = gdp_per_capita,\n    y = fertility\n  ) +\n  geom_point(alpha = 0.5) +\n  facet_wrap(~ continent, nrow = 1)\n\nfig_bubble_row_2011 \n\n\n\n\n\n\n\n\nIn the graph above, we see an example of seperating the single graph into graphs based on continent. It has also been specified to have all graphs appear in one single row through the nrow argument. However, this graph is also unclear and cannot be used to compare the relationship between fertility and gdp per capita.\n\nfig_bubble_facet_2011 &lt;-\n  ggplot(data = filter(gapminder_data, year == 2011)) +\n  aes(\n    x = gdp_per_capita,\n    y = fertility\n  ) +\n  geom_point(alpha = 0.5) +\n  facet_wrap(~ continent)\n\nfig_bubble_facet_2011 \n\n\n\n\n\n\n\n\nIn the next example above, we removed the nrow argument and the system automatically seperated the graphs into three columns with two rows. However, again, there is no way to clearly determine any relationship between fertility and gdp per capita."
+  },
+  {
+    "objectID": "lessons_original/01_ggplot2.html#scatterplot-animation",
+    "href": "lessons_original/01_ggplot2.html#scatterplot-animation",
+    "title": "How to create a scatterplot",
+    "section": "Scatterplot animation",
+    "text": "Scatterplot animation\nGGplot2 contains the “gganimate” package that allows for animation of data. It enhances data visualization through real-time outputs. In this case the gapminder data will be filtered to 2011 and below (full data available).\n\n\nCode\ngapminder_df &lt;- \n  gapminder_data %&gt;% \n  # Excludes data beyond 2011 (last year with complete data)\n  filter(year &lt;= \"2011\")\n\nfig_animate &lt;- \n  ggplot(gapminder_df) +\n  aes(\n    x = gdp_per_capita,\n    y = fertility,\n    size = population,\n    color = continent \n  ) +\n  scale_x_continuous(\n    name = \"GDP per Capita\",\n    trans = \"log10\",\n    labels = scales::comma\n  ) +\n  # Assigns color palette \n  scale_color_viridis_d() +\n  scale_size(range = c(0, 20)) +\n  guides(size = \"none\") +\n  geom_point(show.legend = TRUE, alpha = 0.7) +\n  # Assigns the gganimate features\n  transition_time(year) +\n  ease_aes('linear', interval = 2.0) +\n  # Prints time of current frame\n  labs(title = \"Year: {frame_time}\", x = \"GDP per capita\", y = \"Fertility\")\n  \n\nfig_animate\n\n\nNULL\n\n\n@plot-animate depicts the changes between Fertility and GDP per capita as the years increase from 1799 to 2011 (last full data year). This allows real-time visualization of the decrease in fertility and increase in GDP per capita.\n\n\nCode\nfacet_animate &lt;- \n  ggplot(gapminder_df) +\n  aes(\n    x = gdp_per_capita, \n    y = fertility,\n    size = population, \n    colour = continent\n  ) +\n  scale_x_continuous(\n    name = \"GDP per Capita\",\n    trans = \"log10\",\n    labels = scales::comma\n  ) +\n  scale_size(range = c(0, 20)) +\n  guides(size = \"none\") +\n  # Groups output by continents\n  facet_wrap(~continent) +\n  labs(\n    title = 'Year: {closest_state}', \n    x = 'GDP per capita', \n    y = 'fertility'\n  ) +\n  geom_point(alpha = 0.7, show.legend = TRUE) +\n  # Contains gganimate features\n  transition_states(year, transition_length = 3, state_length = 1) +\n  # Animation pattern, time between each state\n  ease_aes('linear', interval = 2.0)\n\nfacet_animate\n\n\nNULL\n\n\nIn @animate-facets, the ggplot data for various continents as time passes is shown to support the initial hypothesis."
+  },
+  {
+    "objectID": "lessons_original/01_ggplot2.html#conclusion",
+    "href": "lessons_original/01_ggplot2.html#conclusion",
+    "title": "How to create a scatterplot",
+    "section": "Conclusion",
+    "text": "Conclusion\nA global negative trend is depicted between GDP per capita and fertility over time. Such changes were due to wars as well as social, cultural and economic changes that incentivize smaller families especially in Asian countries. Most European, American and Asian countries depicted significant decreases in fertility rates over time as GDP per capita increased. On the other hand, African countries remain in the top rank for fertility over the years. These differences are depicted in the population pyramid changes of developed vs developing countries. Public health policies can be tailored to incentivizing increased fertility in developed countries to ensure generation continuity, and effective family planning strategies in developing countries."
+  },
+  {
+    "objectID": "lessons_original/01_rayshader.html",
+    "href": "lessons_original/01_rayshader.html",
+    "title": "R Rayshader Overview",
+    "section": "",
+    "text": "R rayshader is an R package that allows users to generate high-quality 3D maps, visualizations, and animations.\nrayshader also allows the user to translate ggplot2 objects into beautiful 3D data visualizations.\n\nTo install rayshader, you can use the following code in R:\n\n# remotes::install_github(\n#   \"tylermorganwall/rayshader\"\n# )\n\n# remotes::install_cran(\"rayrender\")"
+  },
+  {
+    "objectID": "lessons_original/01_rayshader.html#overview",
+    "href": "lessons_original/01_rayshader.html#overview",
+    "title": "R Rayshader Overview",
+    "section": "",
+    "text": "R rayshader is an R package that allows users to generate high-quality 3D maps, visualizations, and animations.\nrayshader also allows the user to translate ggplot2 objects into beautiful 3D data visualizations.\n\nTo install rayshader, you can use the following code in R:\n\n# remotes::install_github(\n#   \"tylermorganwall/rayshader\"\n# )\n\n# remotes::install_cran(\"rayrender\")"
+  },
+  {
+    "objectID": "lessons_original/01_rayshader.html#functions",
+    "href": "lessons_original/01_rayshader.html#functions",
+    "title": "R Rayshader Overview",
+    "section": "Functions",
+    "text": "Functions\n\nrayshader 0.35. 1 has 56 functions and 4 datasets\nseven functions related to mapping\nalso has functions to add water and generate overlays\nalso included are functions to add additional effects and information to 3D visualizations\nfunctions for converting rasters to matrices\nfunctions to display and save your visualizations\nrayshader has a function to generate 3D plots using ggplot2 objects"
+  },
+  {
+    "objectID": "lessons_original/01_rayshader.html#example",
+    "href": "lessons_original/01_rayshader.html#example",
+    "title": "R Rayshader Overview",
+    "section": "Example",
+    "text": "Example\nFirst we load all the required libraries. These libraries are required for various functions and operations used in creating 3D maps with rayshader.\n\nlibrary(rayshader)\nlibrary(rayrender) \nlibrary(reshape2)\nlibrary(tidyverse)"
+  },
+  {
+    "objectID": "lessons_original/01_rayshader.html#example-1",
+    "href": "lessons_original/01_rayshader.html#example-1",
+    "title": "R Rayshader Overview",
+    "section": "Example",
+    "text": "Example\nThen, we download and load the data\n\n# Here, I load a map with the raster package.\nloadzip &lt;- tempfile() \n\ndownload.file(\"https://tylermw.com/data/dem_01.tif.zip\", loadzip)\n\nlocaltif &lt;- raster::raster(\n  unzip(loadzip, \"dem_01.tif\")\n)\n\nunlink(loadzip)\n\n# write_rds(localtif, \"../data/01_rayshader_eg_20240503.rds\")\n\nIn this code snippet, we create a temporary file (loadzip) to store the downloaded zip file from the specified URL. The download.file() function is used to download the file, and unzip() is used to extract the “dem_01.tif” file from the downloaded zip. Finally, we load the raster data into the localtif object."
+  },
+  {
+    "objectID": "lessons_original/01_rayshader.html#create-map",
+    "href": "lessons_original/01_rayshader.html#create-map",
+    "title": "R Rayshader Overview",
+    "section": "Create Map",
+    "text": "Create Map\nTo create a map first we need to convert this raster data file into a matrix using raster_to_matrix()\n\n#And convert it to a matrix:\nelmat &lt;- raster_to_matrix(localtif)\n\nLoading required package: raster\n\n\nLoading required package: sp\n\n\n\nAttaching package: 'raster'\n\n\nThe following object is masked from 'package:dplyr':\n\n    select\n\n\nThen we use sphere_shade() and plot_map() to create our base map\n\nelmat %&gt;%\n  sphere_shade(texture = \"desert\") %&gt;%\n  plot_map()\n\n\n\n\n\n\n\n\nHere, elmat is a matrix created from the raster data using the raster_to_matrix() function. sphere_shade() applies shading to the elevation matrix, giving it a 3D effect. The texture parameter specifies the type of texture to be applied. In this case, it uses the “desert” texture. Finally, plot_map() is used to display the shaded map."
+  },
+  {
+    "objectID": "lessons_original/01_rayshader.html#add-water-layer",
+    "href": "lessons_original/01_rayshader.html#add-water-layer",
+    "title": "R Rayshader Overview",
+    "section": "Add Water Layer",
+    "text": "Add Water Layer\nWe can add a water layer to the map using detect_water() and add_water()\n\n# detect_water and add_water adds a water layer to the map:\nelmat %&gt;%\n  sphere_shade(texture = \"desert\") %&gt;%\n  add_water(detect_water(elmat), color = \"desert\") %&gt;%\n  plot_map()\n\n\n\n\n\n\n\n\nIn this code snippet, detect_water() function detects water areas in the elevation matrix. Then, add_water() adds a water layer to the map using the detected water areas. The color parameter specifies the color of the water. Finally, plot_map() is used to display the map with the water layer."
+  },
+  {
+    "objectID": "lessons_original/01_rayshader.html#add-shadow-layer",
+    "href": "lessons_original/01_rayshader.html#add-shadow-layer",
+    "title": "R Rayshader Overview",
+    "section": "Add Shadow Layer",
+    "text": "Add Shadow Layer\nWe can also add shadow layer in the map.\n\n# And here we add an ambient occlusion shadow layer, which models lighting\n#   from atmospheric scattering:\n\nelmat %&gt;%\n  sphere_shade(texture = \"desert\") %&gt;%\n  add_water(detect_water(elmat), color = \"desert\") %&gt;%\n  add_shadow(ray_shade(elmat), 0.5) %&gt;%\n  add_shadow(ambient_shade(elmat), 0) %&gt;%\n  plot_map()\n\n\n\n\n\n\n\n\nHere, add_shadow() is used to add a shadow layer to the map. ray_shade() calculates shadows based on the elevation matrix (elmat). The zscale parameter controls the strength of the shadows. ambient_shade() generates ambient lighting for the map. The second parameter of add_shadow() specifies the opacity of the shadows. Finally, plot_map() displays the map with shadows."
+  },
+  {
+    "objectID": "lessons_original/01_rayshader.html#convert-to-3d",
+    "href": "lessons_original/01_rayshader.html#convert-to-3d",
+    "title": "R Rayshader Overview",
+    "section": "Convert to 3D",
+    "text": "Convert to 3D\nWe can convert this 2D map into 3D mapping using plot_3d() (by passing a texture map into the plot_3d function)\n\nelmat %&gt;%\n  sphere_shade(texture = \"desert\") %&gt;%\n  add_water(detect_water(elmat), color = \"desert\") %&gt;%\n  add_shadow(ray_shade(elmat, zscale = 3), 0.5) %&gt;%\n  add_shadow(ambient_shade(elmat), 0) %&gt;%\n  plot_3d(\n    elmat, zscale = 10, fov = 0, theta = 135,\n    zoom = 0.75, phi = 45, windowsize = c(1000, 800)\n  )\nSys.sleep(0.2)\nrender_snapshot()\n\n\n\n\n\n\n\n\nWe can add a scale bar, as well as a compass using render_scalebar() and render_compass()\n\nrender_camera(fov = 0, theta = 60, zoom = 0.75, phi = 45)\nrender_scalebar(\n  limits = c(0, 5, 10),\n  label_unit = \"km\",\n  position = \"W\",\n  y = 50,\n  scale_length = c(0.33,1)\n)\nrender_compass(position = \"E\")\nrender_snapshot(clear = TRUE)\n\n\n\n\n\n\n\n\nHere, render_camera() sets the camera properties for the 3D map. render_scalebar() adds a scale bar to the map. The limits parameter specifies the limits of the scale bar, label_unit provides the label for the scale, position sets the position of the scale bar, y controls the vertical position, and scale_length determines the length of the scale bar. render_compass() adds a compass to the map, and render_snapshot() captures the final image of the map."
+  },
+  {
+    "objectID": "lessons_original/01_rayshader.html#d-plotting-with-rayshader-and-ggplot2",
+    "href": "lessons_original/01_rayshader.html#d-plotting-with-rayshader-and-ggplot2",
+    "title": "R Rayshader Overview",
+    "section": "3D plotting with rayshader and ggplot2",
+    "text": "3D plotting with rayshader and ggplot2\nRayshader can also be used to make 3D plots out of ggplot2 objects using the plot_gg() function\n\nggdiamonds = ggplot(diamonds) +\n  stat_density_2d(\n    aes(\n      x = x, y = depth, fill = stat(nlevel)\n    ), \n    geom = \"polygon\", n = 200, bins = 50,contour = TRUE\n  ) +\n  facet_wrap(clarity~.) +\n  scale_fill_viridis_c(option = \"A\")\n\npar(mfrow = c(1, 2))\n\nplot_gg(ggdiamonds, width = 5, height = 5, raytrace = FALSE, preview = TRUE)\n\nWarning: `stat(nlevel)` was deprecated in ggplot2 3.4.0.\nℹ Please use `after_stat(nlevel)` instead.\n\n\n\n\n\n\n\n\nplot_gg(\n  ggdiamonds, \n  width = 5, \n  height = 5, \n  multicore = TRUE, \n  scale = 250, \n  zoom = 0.7, \n  theta = 10, \n  phi = 30, \n  windowsize = c(800, 800)\n)\nSys.sleep(0.2)\nrender_snapshot(clear = TRUE)"
+  },
+  {
+    "objectID": "lessons_original/01_rayshader.html#contour-plot",
+    "href": "lessons_original/01_rayshader.html#contour-plot",
+    "title": "R Rayshader Overview",
+    "section": "Contour Plot",
+    "text": "Contour Plot\nRayshader will automatically ignore lines and other elements that should not be mapped to 3D.\nHere’s a contour plot of the volcano dataset.\n\n# Contours and other lines will automatically be ignored. Here is the volcano\n#   dataset:\n\nggvolcano &lt;- volcano %&gt;% \n  melt() %&gt;%\n  ggplot() +\n  geom_tile(aes(x = Var1, y = Var2, fill = value)) +\n  geom_contour(aes(x = Var1, y = Var2, z = value), color = \"black\") +\n  scale_x_continuous(\"X\", expand = c(0, 0)) +\n  scale_y_continuous(\"Y\", expand = c(0, 0)) +\n  scale_fill_gradientn(\"Z\", colours = terrain.colors(10)) +\n  coord_fixed()\n\npar(mfrow = c(1, 2))\nplot_gg(ggvolcano, width = 7, height = 4, raytrace = FALSE, preview = TRUE)\n\nWarning: Removed 1861 rows containing missing values or values outside the scale range\n(`geom_contour()`).\n\n\n\n\n\n\n\n\n\n\nplot_gg(\n  ggvolcano,\n  multicore = TRUE, \n  raytrace = TRUE, \n  width = 7, \n  height = 4, \n  scale = 300, \n  windowsize = c(1400, 866), \n  zoom = 0.6, \n  phi = 30, \n  theta = 30\n)\n\nWarning: Removed 1861 rows containing missing values or values outside the scale range\n(`geom_contour()`).\n\nSys.sleep(0.2)\n\nrender_snapshot(clear = TRUE)"
+  },
+  {
+    "objectID": "lessons_original/01_rayshader.html#mtcars-data-example",
+    "href": "lessons_original/01_rayshader.html#mtcars-data-example",
+    "title": "R Rayshader Overview",
+    "section": "mtcars Data Example",
+    "text": "mtcars Data Example\nRayshader also detects when the user passes the color aesthetic, and maps those values to 3D\n\nmtplot = ggplot(mtcars) + \n  geom_point(\n    aes(x = mpg, y = disp, color = cyl)\n  ) + \n  scale_color_continuous(limits = c(0, 8))\n\npar(mfrow = c(1, 2))\nplot_gg(mtplot, width = 3.5, raytrace = FALSE, preview = TRUE)\n\n\n\n\n\n\n\nplot_gg(mtplot)\nSys.sleep(0.2)\nrender_snapshot(clear = TRUE)"
+  },
+  {
+    "objectID": "lessons_original/01_rayshader.html#reference",
+    "href": "lessons_original/01_rayshader.html#reference",
+    "title": "R Rayshader Overview",
+    "section": "Reference",
+    "text": "Reference\n\nhttps://www.rayshader.com/\nhttps://www.youtube.com/watch?v=zgFXVhmKNbU"
   }
 ]

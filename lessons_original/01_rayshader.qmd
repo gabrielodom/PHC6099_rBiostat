@@ -2,7 +2,9 @@
 title: "R Rayshader Overview"
 subtitle: "PHC 6099 - Summer 2023"
 author: "Kazi Tanvir Hasan"
-format: html
+format:
+  html:
+    self-contained: true
 ---
 
 
@@ -16,9 +18,11 @@ To install rayshader, you can use the following code in R:
 
 ```{r}
 #| message: false
-remotes::install_github(
-  "tylermorganwall/rayshader"
-)
+# remotes::install_github(
+#   "tylermorganwall/rayshader"
+# )
+
+# remotes::install_cran("rayrender") 
 ```
 
 
@@ -48,7 +52,6 @@ various functions and operations used in creating 3D maps with rayshader.
 #| message: false
 
 library(rayshader)
-# remotes::install_cran("rayrender") 
 library(rayrender) 
 library(reshape2)
 library(tidyverse)
@@ -59,9 +62,10 @@ library(tidyverse)
 
 Then, we download and load the data 
 
-
 ```{r}
-#Here, I load a map with the raster package.
+#| eval: false
+
+# Here, I load a map with the raster package.
 loadzip <- tempfile() 
 
 download.file("https://tylermw.com/data/dem_01.tif.zip", loadzip)
@@ -71,7 +75,15 @@ localtif <- raster::raster(
 )
 
 unlink(loadzip)
+
+# write_rds(localtif, "../data/01_rayshader_eg_20240503.rds")
 ```
+
+```{r}
+#| echo: false
+localtif <- read_rds("../data/01_rayshader_eg_20240503.rds")
+```
+
 
 In this code snippet, we create a temporary file (loadzip) to store the downloaded zip file from the specified URL. The `download.file()` function is used to download the file, and `unzip()` is used to extract the "dem_01.tif" file from the downloaded zip. Finally, we load the raster data into the localtif object.
 
@@ -101,7 +113,7 @@ Here, elmat is a matrix created from the raster data using the `raster_to_matrix
 We can add a water layer to the map using `detect_water()` and `add_water()`
 
 ```{r}
-#detect_water and add_water adds a water layer to the map:
+# detect_water and add_water adds a water layer to the map:
 elmat %>%
   sphere_shade(texture = "desert") %>%
   add_water(detect_water(elmat), color = "desert") %>%
@@ -116,8 +128,8 @@ In this code snippet, detect_water() function detects water areas in the elevati
 We can also add shadow layer in the map.
 
 ```{r}
-#And here we add an ambient occlusion shadow layer, which models 
-#lighting from atmospheric scattering:
+# And here we add an ambient occlusion shadow layer, which models lighting
+#   from atmospheric scattering:
 
 elmat %>%
   sphere_shade(texture = "desert") %>%
@@ -140,7 +152,10 @@ elmat %>%
   add_water(detect_water(elmat), color = "desert") %>%
   add_shadow(ray_shade(elmat, zscale = 3), 0.5) %>%
   add_shadow(ambient_shade(elmat), 0) %>%
-  plot_3d(elmat, zscale = 10, fov = 0, theta = 135, zoom = 0.75, phi = 45, windowsize = c(1000, 800))
+  plot_3d(
+    elmat, zscale = 10, fov = 0, theta = 135,
+    zoom = 0.75, phi = 45, windowsize = c(1000, 800)
+  )
 Sys.sleep(0.2)
 render_snapshot()
 ```
@@ -149,10 +164,15 @@ We can add a scale bar, as well as a compass using `render_scalebar()` and `rend
 
 ```{r}
 render_camera(fov = 0, theta = 60, zoom = 0.75, phi = 45)
-render_scalebar(limits=c(0, 5, 10),label_unit = "km",position = "W", y=50,
-                scale_length = c(0.33,1))
+render_scalebar(
+  limits = c(0, 5, 10),
+  label_unit = "km",
+  position = "W",
+  y = 50,
+  scale_length = c(0.33,1)
+)
 render_compass(position = "E")
-render_snapshot(clear=TRUE)
+render_snapshot(clear = TRUE)
 ```
 
 Here, `render_camera()` sets the camera properties for the 3D map. `render_scalebar()` adds a scale bar to the map. The limits parameter specifies the limits of the scale bar, label_unit provides the label for the scale, position sets the position of the scale bar, y controls the vertical position, and scale_length determines the length of the scale bar. `render_compass()` adds a compass to the map, and `render_snapshot()` captures the final image of the map.
@@ -202,9 +222,10 @@ Here’s a contour plot of the volcano dataset.
 
 
 ```{r}
-#Contours and other lines will automatically be ignored. Here is the volcano dataset:
+# Contours and other lines will automatically be ignored. Here is the volcano
+#   dataset:
 
-ggvolcano = volcano %>% 
+ggvolcano <- volcano %>% 
   melt() %>%
   ggplot() +
   geom_tile(aes(x = Var1, y = Var2, fill = value)) +
@@ -252,9 +273,7 @@ mtplot = ggplot(mtcars) +
 par(mfrow = c(1, 2))
 plot_gg(mtplot, width = 3.5, raytrace = FALSE, preview = TRUE)
 
-plot_gg(
-  mtplot
-)
+plot_gg(mtplot)
 Sys.sleep(0.2)
 render_snapshot(clear = TRUE)
 ```

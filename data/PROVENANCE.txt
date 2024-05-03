@@ -1,0 +1,15 @@
+DATA PROVENANCE
+Gabriel Odom
+2024-05-03
+
+1. Gapminder data:
+  - file: 01_gapminder_2024spring.csv
+  - created: spring 2024 PHC6701 semester
+  - curators: Micaela Larson and Ashlee Perez
+  - method: downloaded data files from <https://www.gapminder.org/data/> and and wrangled in R
+
+2. Rayshader example map:
+  - file: 01_rayshader_eg_20240503.rds
+  - created: summer 2023 PHC6099 semester
+  - curators: Kazi Tanvir Hasan
+  - method: code included in `01_rayshader.qmd`
