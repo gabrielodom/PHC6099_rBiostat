@@ -3,5 +3,9 @@
 .RData
 .Ruserdata
 *.Rproj
+.DS_Store
 
 /.quarto/
+
+# internal data
+data/02_dataset-gmss-2017-subset1_original.csv

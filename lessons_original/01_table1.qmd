@@ -17,8 +17,8 @@ knitr:
     comment: ""    # don't show ## with printed output
     R.options:    
       digits: 3    # round to three digits
-bibliography: [references.bib, packages.bib]
-csl: the-new-england-journal-of-medicine.csl
+bibliography: [bib/06_power_ols_references.bib, bib/packages.bib]
+csl: bib/the-new-england-journal-of-medicine.csl
 ---
 
 ```{r}
@@ -35,8 +35,6 @@ options(dplyr.summarise.inform = FALSE)
 
 ```
 
-
-
 # Introduction
 
 In most scientific research journals, the first included table is often referred to as **Table1**.
@@ -45,12 +43,11 @@ Table1 includes descriptive statistics for the total study sample, with the rows
 
 There are a few ways that Table1 can be created without using functions like table1. For example, for a research paper, dissertation, and/or the results of a clinical trial, we might have to go through the time consuming task of using the **summary()** function, or the **describe()** function in the *library(Hmisc)*. Then, if you decide that you would like to see a variable in relation to a categorical response/outcome variable, you would have to build 2 x 2 tables for each explanatory variable. The **table1()** function does all of this for us, but first lets discuss the packages that will be in use today.
 
-
 ## Necessary Packages
 
 The **htmlTable** package allows for the usage of the table1() function to create a table 1, while also making life easy when attempting to copy this table into a Word document.
 
-The **boot** package was created to aid in performing bootstrapping analysis. With it comes numerous data sets, specifically clinical trial data sets to make this possible. However, there is no code book provided within the package when the data is downloaded as a csv file. This is a link on Github that explains and elaborates on every data within the package itself @arel-bundock2023[@boot1997].
+The **boot** package was created to aid in performing bootstrapping analysis. With it comes numerous data sets, specifically clinical trial data sets to make this possible. However, there is no code book provided within the package when the data is downloaded as a csv file. This is a link on Github that explains and elaborates on every data within the package itself [@boot1997].
 
 ```{r}
 #| label: libraries
@@ -66,11 +63,9 @@ library(boot)
 
 ```
 
-
-
 # Data Exploration and Wrangling
 
-Today, we will be using the **melanoma** data set which consists of malignant melanoma measurements of patients. Each patient had their tumor surgically removed between the years of 1962 and 1977 at the Department of Plastic Surgery, University Hospital of Odense located in Denamrk. Each surgery consisted of the complete removal of the tumor with an additional removal of about 2.5cm of the surrounding skin. When this was completed, the thickness of the tumor was recorded along with the physical appearance of ulceration vs no ulceration, as it is an important prognostic indication of those with a thick/ulcerated tumor to have an increased chance of death as a consequence of melanoma. 
+Today, we will be using the **melanoma** data set which consists of malignant melanoma measurements of patients. Each patient had their tumor surgically removed between the years of 1962 and 1977 at the Department of Plastic Surgery, University Hospital of Odense located in Denamrk. Each surgery consisted of the complete removal of the tumor with an additional removal of about 2.5cm of the surrounding skin. When this was completed, the thickness of the tumor was recorded along with the physical appearance of ulceration vs no ulceration, as it is an important prognostic indication of those with a thick/ulcerated tumor to have an increased chance of death as a consequence of melanoma.
 
 ```{r}
 #| label: Data-Import-And-Exploration
@@ -80,10 +75,11 @@ Today, we will be using the **melanoma** data set which consists of malignant me
 library(readxl)
 setwd("~/OneDrive - Florida International University/RMethods_2023/Presentation05182023")
       
-melanoma_data <- 
-  read.csv("data/melanoma.csv", 
-           header = TRUE,
-           sep = ",")
+# melanoma_data <- read.csv(
+#   "data/melanoma.csv", header = TRUE, sep = ","
+# )
+data(melanoma, package = "boot")
+melanoma_data <- melanoma
 
 #Now that we loaded the raw data set, we will conduct a visual
 #exploration before wrangling the data and applying any functions,
@@ -104,14 +100,14 @@ typeof(melanoma_data$status)
 
 ```
 
-We will first provide a basic table1 to illustrate how the function works. Currently, all the variables are in numeric/double formats, however for the creation of a basic table1, it is of importance to convert the dependent/response variable of interest to reflect categories (factor). 
+We will first provide a basic table1 to illustrate how the function works. Currently, all the variables are in numeric/double formats, however for the creation of a basic table1, it is of importance to convert the dependent/response variable of interest to reflect categories (factor).
 
 Our main variable of interest (dependent/response) is the **status**. According to the code book found in Github, status is coded into three levels that indicate the patients status at the end of the study. **Level 1** indicates that they had died from melanoma, **Level 2** indicates that they were still alive at the conclusion of the study, and **Level 3** indicates that they had died from causes unrelated to their melanoma. As such, we will factor the "status" variable into three levels.
 
 With this in mind, let us go ahead and convert melanoma into a factor variable with three levels. For ease of analysis we will use **2 = "Alive"** as the **reference level**. This can be done in two ways:
 
-1. Although more time consuming, it is highly recommended that beginners utilize the function **as.factor()** and then utilize the **recode_factor()** function to minimize the errors. 
-2. When you become more skilled and are able to understand how the factor function works, it is possible to do everything in one step with the **factor()** function. In this function you can put levels and labels all in one function instead of having to break it up into more than one function. 
+1.  Although more time consuming, it is highly recommended that beginners utilize the function **as.factor()** and then utilize the **recode_factor()** function to minimize the errors.
+2.  When you become more skilled and are able to understand how the factor function works, it is possible to do everything in one step with the **factor()** function. In this function you can put levels and labels all in one function instead of having to break it up into more than one function.
 
 For our example we will use as.factor then recode_factor() using **2 = "Alive"** as our **reference group**.
 
@@ -126,11 +122,11 @@ melanoma_data$status <-
 head(melanoma_data$status)
 
 # Recode
-melanoma_data$status <-
-  recode_factor(melanoma_data$status, 
-                "2" =	"Alive", # this is the reference group
-                "1" =	"Died from melanoma",
-                "3" =   "Non-Melanoma death"
+melanoma_data$status <- recode_factor(
+  melanoma_data$status, 
+  "2" =	"Alive", # this is the reference group
+  "1" =	"Died from melanoma",
+  "3" = "Non-Melanoma death"
 )
 
 # Print the first six observations
@@ -138,9 +134,7 @@ head(melanoma_data$status)
 
 ```
 
-As you can see in the variable levels, "Alive" is the reference level. It is extremely important to pick a reference level to lay the foundation of the table along with highlighting the outcome of interest of your hypothesis. In summary, this lays the foundation of a well organized table. 
-
-
+As you can see in the variable levels, "Alive" is the reference level. It is extremely important to pick a reference level to lay the foundation of the table along with highlighting the outcome of interest of your hypothesis. In summary, this lays the foundation of a well organized table.
 
 # Basic table 1
 
@@ -154,10 +148,9 @@ For the independent variables, if they have factors in the front, it provides th
 #| label: basic-table-1
 #| code-fold: false
 
-basic_table1 <-
-  table1( 
-    ~ factor(sex) + age + factor(ulcer) + thickness | status, 
-       data = melanoma_data
+basic_table1 <- table1( 
+  ~ factor(sex) + age + factor(ulcer) + thickness | status, 
+  data = melanoma_data
 )
 
 basic_table1
@@ -169,66 +162,63 @@ If we do not put factor for a grouped variable then the following will happen:
 #| label: Incorrect-Example 
 #| code-fold: false
 
-wrong_table1 <-
-  table1(
-    ~ sex + age + ulcer + thickness | status, 
-       data = melanoma_data
+wrong_table1 <- table1(
+  ~ sex + age + ulcer + thickness | status, 
+  data = melanoma_data
 )
 
 wrong_table1
 
 ```
 
-As you can see above, we have the incorrect values provided of the explanatory variables. 
+As you can see above, we have the incorrect values provided of the explanatory variables.
 
-For example, in the variable of sex, we expect to see the number of individuals who identify as male or female, but instead we observe the mean, which is not a proper descriptive statistic as sex is a categorical variable. 
+For example, in the variable of sex, we expect to see the number of individuals who identify as male or female, but instead we observe the mean, which is not a proper descriptive statistic as sex is a categorical variable.
 
-To avoid this issue as well as problems in other procedures (like logistic regressions), it is crucial that we remember to factor the variables before we run any function. 
+To avoid this issue as well as problems in other procedures (like logistic regressions), it is crucial that we remember to factor the variables before we run any function.
 
-As mentioned, two of the independent/explanatory variables of interest need to be converted to factor variables: **sex** and **ulcer**. Then, we are to label each level of these variables. 
+As mentioned, two of the independent/explanatory variables of interest need to be converted to factor variables: **sex** and **ulcer**. Then, we are to label each level of these variables.
 
 According to the code book, the patient's **sex**: 1 = male, 0 = female, and **ulcer** is an indicator of ulceration : 1 = present, 0 = absent
 
 ```{r}
-#| label: Data wrangling for the independent/explanatory variable Sex
+#| label: Data-wrangling-independent-variable-Sex
 #| code-fold: false
 
 typeof(melanoma_data$sex)
 
-melanoma_data$sex <-
-  as.factor(melanoma_data$sex)
+melanoma_data$sex <- as.factor(melanoma_data$sex)
 
 # print the first six observations
 head(melanoma_data$sex)
 
 # Recode
-melanoma_data$sex <-
-  recode_factor(melanoma_data$sex, 
-                "0" =	"Female",
-                "1" =	"Male"
-                )
+melanoma_data$sex <- recode_factor(
+  melanoma_data$sex, 
+  "0" =	"Female",
+  "1" =	"Male"
+)
 
 # Print the first six observations
 head(melanoma_data$sex)
 ```
 
 ```{r}
-#| label: Data wrangling for the independent/explanatory variable Ulcer
+#| label: Data-wrangling-independent-variable-Ulcer
 #| code-fold: false
 
 typeof(melanoma_data$ulcer)
 
-melanoma_data$ulcer <-
-  as.factor(melanoma_data$ulcer)
+melanoma_data$ulcer <- as.factor(melanoma_data$ulcer)
 
 # print the first six observations
 head(melanoma_data$ulcer)
 
 # Recode
-melanoma_data$ulcer <-
-  recode_factor(melanoma_data$ulcer, 
-                "0" =	"Absent",
-                "1" =	"Present"
+melanoma_data$ulcer <- recode_factor(
+  melanoma_data$ulcer, 
+  "0" =	"Absent",
+  "1" =	"Present"
 )
 
 # Print the first six observations
@@ -249,7 +239,7 @@ units(melanoma_data$thickness) <- "mm"
 
 ```
 
-Additionally, for visual and descriptive purposes, the function table1 is able to easily provide labels for the variables that will be shown in the final table using the **label()** function. Also, (caption <-) provides a title for the table and (footnote <-) provides any footnote information.
+Additionally, for visual and descriptive purposes, the function table1 is able to easily provide labels for the variables that will be shown in the final table using the **label()** function. Also, (caption \<-) provides a title for the table and (footnote \<-) provides any footnote information.
 
 ```{r}
 #| label: Visual-Dsecriptives 
@@ -260,42 +250,39 @@ label(melanoma_data$age) <- "Age"
 label(melanoma_data$ulcer) <- "Ulceration"
 label(melanoma_data$thickness) <-"Thickness*"
 
-caption <- "Table 1. Melanoma Dataset Descriptive Statistics"
-footnote <- "*Also known as Breslow thickness"
+caption_char <- "Table 1. Melanoma Dataset Descriptive Statistics"
+footnote_char <- "*Also known as Breslow thickness"
 ```
 
-Below, we can demonstrate the final table1 layout. As you can see, you no longer use factor() in front of the variable as we already factorized it in the previous steps. 
+Below, we can demonstrate the final table1 layout. As you can see, you no longer use factor() in front of the variable as we already factorized it in the previous steps.
 
 ```{r}
-#| label: Formatted table 1
+#| label: Formatted-table-1
 #| code-fold: false
 
 table1(
   ~ sex + age + ulcer + thickness | status, 
-      data = melanoma_data,
-      overall = c(left = "Total"), 
-      caption = caption, 
-      footnote = footnote
+  data = melanoma_data,
+  overall = c(left = "Total"), 
+  caption = caption_char, 
+  footnote = footnote_char
 )
 
 ```
 
-
-
 # Conclusion
 
-In conclusion, table1 is one of the most utilized tools in the scientific research field. Understanding how to use the table1 package in R can be of benefit to many. 
+In conclusion, table1 is one of the most utilized tools in the scientific research field. Understanding how to use the table1 package in R can be of benefit to many.
 
 It is important to note that this presentation is just a brief summary with what is possible with this package. For example, you can change the tables appearance with the **topclass** function which has built in styles like zebra, grid, shades, times and center.
 
-In addition, you can also stratify the response variable to highlight two of the responses, like dead or alive in our example. 
-
-
+In addition, you can also stratify the response variable to highlight two of the responses, like dead or alive in our example.
 
 # References {.unnumbered}
 
 ```{r}
 #| include: false
+#| eval: false
 
 # automatically create a bib database for loaded R packages & rUM
 knitr::write_bib(

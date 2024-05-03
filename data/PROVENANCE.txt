@@ -13,3 +13,15 @@ Gabriel Odom
   - created: summer 2023 PHC6099 semester
   - curators: Kazi Tanvir Hasan
   - method: code included in `01_rayshader.qmd`
+
+3. US 2010 Census by County:
+  - file: 01_census_2010.xlsx
+  - created: summer 2023 PHC6099 semester
+  - curators: Shelly Sinclair and Alvonee Penn
+  - method: unknown; data hosted on FIU Sharepoint: <https://fiudit-my.sharepoint.com/:x:/g/personal/ssinc013_fiu_edu/ESK1A13PstVGtf7HUwNNt68Bnh1YPfH8L-hnvMUxjBuCVw?e=CCwQU9>
+
+4. Greater Manchester Police Stop and Search Data:
+  - file: 02_dataset-gmss-2017-subset1_jittered_20240503.csv
+  - created: original sometime in 2017; this is a "jittered" version (to avoid copyright infringement) that was created in 2024
+  - curators: Julie Scott Jones (Sage Research) for the original; found by Tendai Gwanzura and Ana Bravo at <https://methods.sagepub.com/dataset/fishers-exact-gmss-2017>
+  - method: random non-missing values from the original data were replaced with draws from a random process

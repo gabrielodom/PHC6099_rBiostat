@@ -6,7 +6,6 @@ author:
   - name: Ana Bravo
 format: html
 toc: true
-editor: visual
 theme: zephyr
 ---
 
@@ -66,37 +65,39 @@ Lets say we have information on the gender of participants in a clinical trial a
 # Example R code to create a contingency table
 
 # Creating a data frame
- df = data.frame (
+ df <- data.frame(
    "Drug" = c("Drug A", "Drug B", "Drug A"),
    "Gender" = c("Male", "Male", "Female")
  )
  
 # Creating contingency table using table()
- ctable = table(df)
- print(ctable)
+ctable <- table(df)
+print(ctable)
 
 ```
 
 ### Performing Fisher's Exact Test in R
 
-We will need to install the ggstatplot package to visualize the statistical results.
+We will need to install the `ggstatplot` package to visualize the statistical results.
 
 ```{r, install }
 #| echo: true
 
-#install.packages("ggstatplot") 
-#install.packages("summarytools")
-#install.packages("gmodels")
-#install.packages(tidyVerse)
+# install.packages("ggstatplot") 
+# install.packages("summarytools")
+# install.packages("gmodels")
+# install.packages(tidyverse)
 ```
 
 ### Data Source: GMP2017
 
-For this example we will be using the Greater Manchester Police's UK stop and search data from 2017(December) sourced from the Sage Research Methods Dataset Part 2. This data has information on stop and search events, gender and ethnicity. For this example we would like to access whether there is a significant relationship between gender and stop and search events (having controlled drugs vs harmful weapons)?
+For this example we will be using the Greater Manchester Police's UK stop and search data from 2017(December) sourced from the Sage Research Methods Dataset Part 2 (<https://methods.sagepub.com/dataset/fishers-exact-gmss-2017>). This data has information on stop and search events, gender and ethnicity. For this example we would like to access whether there is a significant relationship between gender and stop and search events (having controlled drugs vs harmful weapons)?
 
 ```{r, load-data}
 #| echo: true
-GMP17 <- read.csv("dataset-gmss-2017-subset1.csv")
+GMP17 <- read.csv(
+  "../data/02_dataset-gmss-2017-subset1_jittered_20240503.csv"
+)
 ```
 
 ### Load in libraries
@@ -140,7 +141,7 @@ head(newGMP17)
   
 ```
 
-The data contains missing values categorized as -9 that we need to drop and we need to rename our variables based on the data dictionary provided <https://methods.sagepub.com/dataset/fishers-exact-gmss-2017-r>.
+The data contains missing values categorized as -9 that we need to drop and we need to rename our variables based on the data dictionary provided <https://methods.sagepub.com/dataset/download/fishers-exact-gmss-2017/guide/codebook>.
 
 ```{r}
 # Exclude rows that have missing data in both variables
@@ -153,19 +154,17 @@ nrow(newGMP17_nom2)
 
 ```{r}
 # Renaming the Gender variable based on data dictionary
-newGMP17_nom2$Gender <- 
-  recode_factor(
-    newGMP17_nom2$Gender,
-            "1" = "Male",
-            "2" = "Female"
+newGMP17_nom2$Gender <- recode_factor(
+  newGMP17_nom2$Gender,
+  "1" = "Male",
+  "2" = "Female"
 )
 
 # Renaming the Gender variable based on data dictionary
-newGMP17_nom2$ObjectSearch <- 
-  recode_factor(
-    newGMP17_nom2$ObjectSearch,
-            "1" = "Controlled_Drugs",
-            "2" = "Harmful_Objects"
+newGMP17_nom2$ObjectSearch <- recode_factor(
+  newGMP17_nom2$ObjectSearch,
+  "1" = "Controlled_Drugs",
+  "2" = "Harmful_Objects"
 )
 
 ```
@@ -183,10 +182,11 @@ print(cGMP17)
 
 ```{r}
 #| echo: true
-mosaicplot(cGMP17,
-           main ='Mosaic Plot',
-           color = TRUE)
-
+mosaicplot(
+  cGMP17,
+  main = 'Mosaic Plot',
+  color = TRUE
+)
 ```
 
 ### Running the Fisher's exact test using fisher.test()
@@ -218,7 +218,7 @@ Using the gt summary to view results.
 ```{r}
 newGMP17_nom2 |> 
   tbl_summary(by = Gender) |> 
-   add_p() |> 
+  add_p() |> 
   add_overall()
 ```
 
@@ -251,13 +251,13 @@ test <- fisher.test(cGMP17)
 # combine plot and statistical test with ggbarstats
 
 ggbarstats(
- newGMP17_nom2, Gender, ObjectSearch,
- results.subtitle = FALSE,
- subtitle = paste0(
- "Fisher's exact test", ", p-value = ",
- ifelse(test$p.value < 0.001, "< 0.001", round(test$p.value, 3))
+  newGMP17_nom2, Gender, ObjectSearch,
+  results.subtitle = FALSE,
+  subtitle = paste0(
+    "Fisher's exact test", ", p-value = ",
+    ifelse(test$p.value < 0.001, "< 0.001", round(test$p.value, 3))
   )
- )
+)
 
 ```
 
@@ -273,14 +273,14 @@ Using the drug example used previously lets say we have 3 drugs 'Drug A, Drug B 
 #| echo: true
 
 # Creating a data frame
- df = data.frame (
-   "Drug" = c("Drug A", "Drug B", "Drug A", "Drug C", "Drug C"),
-   "Gender" = c("Male", "Male", "Female", "Female", "Female")
- )
+df <- data.frame (
+  "Drug" = c("Drug A", "Drug B", "Drug A", "Drug C", "Drug C"),
+  "Gender" = c("Male", "Male", "Female", "Female", "Female")
+)
  
 # Creating contingency table using table()
- ctable = table(df)
- print(ctable)
+ctable <- table(df)
+print(ctable)
 
 ```
 

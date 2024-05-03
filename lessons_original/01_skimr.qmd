@@ -19,7 +19,7 @@ knitr:
     R.options:    
       digits: 3    # round to three digits
 editor: source
-bibliography: [Skimr_Package.bib]
+bibliography: [bib/packages.bib]
 ---
 
 
@@ -62,9 +62,11 @@ and visualization.
 # install.packages("knitr")
 # install.packages("tidyverse")
 
-# load all the packages we will need to analyze the data and use the skim function
+# load all the packages we will need to analyze the data and use the skim
+#   function
 library(skimr)
 library(knitr)
+library(readxl)
 library(tidyverse)
 
 ```
@@ -91,7 +93,8 @@ The data can be imported into R from the following link:
 #| label: import-Data
 
 # import the data
-census_2010 <- read_csv("Data/census_2010.csv")
+# census_2010 <- read_csv("Data/census_2010.csv")
+census_2010 <- readxl::read_xlsx("../data/01_census_2010.xlsx")
 
 # what are the variables
 colnames(census_2010) %>% 
@@ -106,7 +109,7 @@ colnames(census_2010) %>%
 
 
 In R, the most similar function is `summary()`. The `summary()` function in R 
-can be used to quickly summarize the values in a data frame or vector[@Summary].
+can be used to quickly summarize the values in a data frame or vector.
 
 This syntax shows examples of the summary function using both our data set, and
 a vector:
@@ -131,7 +134,7 @@ The `summary()` function automatically calculates: The minimum value, The value
 of the 1st quartile (25th percentile), The median value, The value of the 3rd 
 quartile (75th percentile) and The maximum value. Any missing values (NA) in the 
 vector, the `summary()` function will automatically exclude them when 
-calculating the summary statistics [@Summary].
+calculating the summary statistics.
 
 Now, let's see how `skim()` compares.
 
@@ -143,7 +146,7 @@ Now, let's see how `skim()` compares.
 
 The `skim()` function will generate a summary of the variables in your dataset, 
 including their data type, number of non-missing values, minimum and maximum 
-values, median, mean, standard deviation, and more [@Skimr].
+values, median, mean, standard deviation, and more [@R-skimr].
 
 The following syntax ensures that the data is compatible with `Skimr` 
 functions.
@@ -153,7 +156,8 @@ functions.
 #| code-fold: show
 
 # is the summary data a skimr dataframe
-skim(census_2010) %>% is_skim_df() # TRUE
+skim(census_2010) %>% 
+  is_skim_df() # TRUE
 
 ```
 
@@ -262,10 +266,12 @@ and data type using `select()`.
 #| code-fold: show
 
 # use dplyr functions on the statistics summary table
-census_filter <- skim(census_2010) %>% filter(skim_variable == "CENSUS2010POP")
+census_filter <- skim(census_2010) %>% 
+  filter(skim_variable == "CENSUS2010POP")
 census_filter
 
-census_select <- skim(census_2010) %>% select(skim_type, skim_variable)
+census_select <- skim(census_2010) %>% 
+  select(skim_type, skim_variable)
 head(census_select)
 
 ```
@@ -326,8 +332,11 @@ median, min, max, IQR, length.
 #| label: add-Variables
 #| code-fold: show
 
-my_skim <- skim_with(numeric = sfl(median, min, max, IQR), character = sfl(length), 
-            append = TRUE)
+my_skim <- skim_with(
+  numeric = sfl(median, min, max, IQR),
+  character = sfl(length), 
+  append = TRUE
+)
 
 # add new variables into the summary table
 census_2010 %>% 
