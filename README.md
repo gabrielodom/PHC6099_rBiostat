@@ -15,8 +15,8 @@ The chapters are:
     - $Z$-test
     - Paired $t$-test
     - Paired Wilcoxon test
-    - Transformations to Normality
-    - McNemar's Test
+    - Transformations to Normality (Freeman Lewis)
+    - McNemar's Test 
     - Fisher's Exact Test
     - Chi-Square Goodness of Fit
     - Permutation Tests
