@@ -1,0 +1,57 @@
+---
+title: "The Method"
+author:
+  - name: Author 1 and Author 2
+    affiliations:
+      - Florida International University
+      - Robert Stempel College of Public Health and Social Work
+toc: true
+number-sections: true
+---
+
+```{r}
+#| label: load-packages
+#| message: false
+
+# install.packages("tidyverse")
+library(tidyverse)
+```
+
+
+
+# Introduction to \<the method\>
+
+
+
+# Mathematical definition of \<the method\>
+
+
+
+# Data source and description
+
+
+
+# Cleaning the data to create a model data frame
+
+
+
+# Assumptions of \<the method\>
+
+
+
+# Checking the assumptions with plots
+
+
+
+# Code to run \<the method\>
+
+
+
+# Code output
+**NOTE: this section will be created automatically by the Quarto document. You should not create a section specifically for this. When you run the code in the previous section, you will get the output automatically.**
+
+
+
+# Brief interpretation of the output
+
+

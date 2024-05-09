@@ -25,3 +25,9 @@ Gabriel Odom
   - created: original sometime in 2017; this is a "jittered" version (to avoid copyright infringement) that was created in 2024
   - curators: Julie Scott Jones (Sage Research) for the original; found by Tendai Gwanzura and Ana Bravo at <https://methods.sagepub.com/dataset/fishers-exact-gmss-2017>
   - method: random non-missing values from the original data were replaced with draws from a random process
+
+5. Student Alcohol Consumption--Math Class:
+    - file: 03_student-mat.csv
+    - created: 2008
+    - curators: P. Cortez and A. Silva. "Using Data Mining to Predict Secondary School Student Performance." In A. Brito and J. Teixeira Eds., Proceedings of 5th FUture BUsiness TEChnology Conference (FUBUTEC 2008) pp. 5-12, Porto, Portugal, April, 2008, EUROSIS, ISBN 978-9077381-39-7. Hosted by Kaggle and UCI Machine Learning; found by Tendai Gwanzura and Ana Bravo at <https://www.kaggle.com/datasets/uciml/student-alcohol-consumption?resource=download>
+    - method: unzip the data and save the "student-mat.csv" file

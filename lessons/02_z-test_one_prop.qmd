@@ -1,0 +1,104 @@
+---
+title: "Z-Test for One Proportion"
+author:
+  - name: Gabriel J. Odom
+    affiliations:
+      - Florida International University
+      - Robert Stempel College of Public Health and Social Work
+toc: true
+number-sections: true
+---
+
+# Introduction to One-Sample $Z$-Tests
+The one-sample $Z$-test is used to compare a sample proportion to a population proportion.
+
+
+# Mathematical definition of the One-Sample $Z$-Test
+Consider a sample of size $n$ with binary values (such as "true" or "false"). Let $p_{s}$ and $p_{E}$ be the observed sample and expected (population) proportions, respectively. The formula to calculate the $z$ statistic is
+
+$$
+z \equiv \frac{
+  p_s - p_E
+}{
+  \sqrt{
+    \frac{1}{n}p_s(1 - p_s)
+  }
+}.
+$$
+
+
+# Data source and description
+We will use the CTN-0094 data set, a data set of harmonized clinical trials for opioid use disorder. The full database is in `public.ctn0094data::`, engineered features are in `public.ctn0094extra::`, and clinical trial outcomes (wrangled dependent variables) are in `CTNote::`. We will install all three packages, but only use `CTNote::` for now.
+```{r}
+#| label: load-packages
+#| message: false
+
+# install.packages("public.ctn0094data")
+# install.packages("public.ctn0094extra")
+# install.packages("CTNote")
+
+library(CTNote)
+library(tidyverse)
+```
+
+
+
+# Cleaning the data to create a model data frame
+Because our method requires only one sample, we have very little work to do. We will use the [Kosten et al. (1993)](https://journals.lww.com/jonmd/abstract/1993/06000/buprenorphine_versus_methadone_maintenance_for.4.aspx) definition of opioid abstinence, provided in the data set `outcomesCTN0094` as the column `kosten1993_isAbs`.
+```{r}
+# What do the values look like?
+summary(outcomesCTN0094$kosten1993_isAbs)
+# How many samples are there?
+nrow(outcomesCTN0094)
+```
+
+There are `r nrow(outcomesCTN0094)` logical values, and `TRUE` indicates that the trial participant achieved abstinence according to the definition used in Kosten et al. (1993).
+
+
+
+# Assumptions of the One-Sample $Z$-Test
+To use a one-sample $Z$-test, we make the following assumptions:
+
+1. The data are from a random sample
+2. Each observation in the data are independent
+3. Neither the sample proportion nor population proportions are "extreme"; usually we apply this method if these proportions are between 5\% and 95\%.
+4. The data can be described as "successes" and "failures", and there are at least 10 samples in each category.
+
+If these assumptions hold, then
+$$
+z \sim N(0, 1).
+$$
+
+
+# Checking the assumptions with plots
+
+## Independence and Randomness
+Because the samples were collected at random via an FDA approved clinical trial protocol, we assume that all the participants were randomly selected and are independent of each other.
+
+## "Extreme" Proportions
+According to [Ling et al. (2020)](https://doi.org/10.1097/ADM.0000000000000647), the 12-month abstinence proportion of all 533 participants in their study was `r round(0.508 * (425/533) * 100, 1)` percent. As we can see here, our abstinence rates are `r round(mean(outcomesCTN0094$kosten1993_isAbs) * 100, 1)`. Neither these proportions are smaller than 5\% or greater than 95\%.
+```{r}
+(pExpected <- 0.508 * (425/533))
+# Count the number of TRUE values
+(nAbstinent <- sum(outcomesCTN0094$kosten1993_isAbs))
+```
+
+## Type and Counts of Data
+We observe binary data, and we see at least 10 successes and at least 10 failures.
+
+
+# Code to run a One-Sample $Z$-Test
+Now that we have checked our assumptions, we can perform the one-sample $Z$-test for proportions.
+```{r}
+prop.test(
+  x = nAbstinent,
+  n = nrow(outcomesCTN0094),
+  p = pExpected
+)
+```
+
+
+
+# Brief interpretation of the output
+The 95\% confidence interval contains the population proportion, so we fail to reject the hypothesis that the patients from these clinical trials achieve different abstinence rates than the general population.
+

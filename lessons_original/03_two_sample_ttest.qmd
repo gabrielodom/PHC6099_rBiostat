@@ -15,7 +15,7 @@ format:
 toc: true
 theme: zephyr
 highlight-style: pygemnts
-bibliography: references.bib
+bibliography: bib/packages.bib
 ---
 
 # Two sample t test
@@ -106,13 +106,6 @@ If the data is not independent such as paired data in the form of matched pairs 
 
 This example dataset sourced from [kaggle](https://www.kaggle.com/datasets/uciml/student-alcohol-consumption/versions/2?resource=download) was obtained from surveys of students in Math and Portuguese classes in secondary school. It contains demographic information on gender, social and study information.[@cortez2008]
 
-```{r, load-data}
-#| echo: true
-
-# load the dataset
-stu_math <- read.csv("student-mat.csv")
-```
-
 ```{r, load-libraries}
 #| echo: true 
 #| message: false
@@ -126,6 +119,13 @@ library(gtsummary)
 library(ggpubr)
 library(rstatix)
 library(tidyverse)
+```
+
+```{r, load-data}
+#| echo: true
+
+# load the dataset
+stu_math <- read_csv("../data/03_student-mat.csv")
 ```
 
 **Checking the data**

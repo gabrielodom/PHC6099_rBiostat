@@ -2,11 +2,13 @@
 
 This material is for the course "R Computing for Health Sciences". The course notes are published here: <https://gabrielodom.github.io/PHC6099_rBiostat/>
 
+
+## Topics  
 The chapters are:
 
 1. Exploring Data  
-    - `ggplot2::` scatterplots and facets
     - `ggplot2::` mosaic plots, histograms, and violin plots
+    - `ggplot2::` scatterplots and facets
     - `rayshader::`
     - `skimr::`
     - `table1::`
@@ -15,11 +17,11 @@ The chapters are:
     - $Z$-test
     - Paired $t$-test
     - Paired Wilcoxon test
-    - Transformations to Normality (Freeman Lewis)
+    - Transformations to Normality
     - McNemar's Test 
     - Fisher's Exact Test
     - Chi-Square Goodness of Fit
-    - Permutation Tests
+    - Bootstrapped Confidence Intervals
 3. Two-Sample Tests  
     - $t$-test
     - Welch's $t$-test
@@ -31,7 +33,7 @@ The chapters are:
     - Two-way ANOVA
     - Welch's ANOVA
     - Kruskal-Wallace Test
-    - Durbin's / Friedman’s Test
+    - Tukey HSD Post-Hoc Test
     - Repeated Measures ANOVA
     - Random Intercept Models
     - Correlation Matrices and Covariances
@@ -40,5 +42,28 @@ The chapters are:
 5. Generalized Linear Models  
     - Generalized Linear Models: Binary
     - Generalized Linear Models: Ordered
-    - Generalized Linear Models: Count
-6. Power Calculations (in progress)
+    - Generalized Linear Models: Count (Poisson)
+    - Generalized Linear Models: Count (Negative Binomial)
+6. Special Topics  
+    - Linear Mixed Effects Models
+    - Structural Equation Models
+    - Cox Proportional Hazards Regression
+    - (TBD) Multivariate Methods for Genetics/Genomics
+    - Ridge, LASSO, and Elastic Net Regression
+7. Power Calculations (in progress)
+
+
+## Lesson Outline
+This is a shell of a lesson that can be copied and pasted for new lessons (or to edit and clean up existing lessons). If you copy this shell, then change all the headings from level 3 to 1. Replace \<the method\> with the name of your method, or its abbreviation.
+
+### Introduction to \<the method\>
+### Mathematical definition of \<the method\>
+### Data source and description
+### Cleaning the data to create a model data frame
+### Assumptions of \<the method\>
+### Checking the assumptions with plots
+### Code to run \<the method\>
+### Code output
+### Brief interpretation of the output
+
+
