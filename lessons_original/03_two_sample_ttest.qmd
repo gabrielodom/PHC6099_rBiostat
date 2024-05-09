@@ -13,7 +13,6 @@ format:
     code-fold: true
     html-math-method: katex
 toc: true
-editor: visual
 theme: zephyr
 highlight-style: pygemnts
 bibliography: references.bib

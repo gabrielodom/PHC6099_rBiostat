@@ -236,5 +236,47 @@
     "title": "Fisher’s Exact Test",
     "section": "References",
     "text": "References\n\nBower, Keith M. 2003. “When to Use Fisher’s Exact Test.” In American Society for Quality, Six Sigma Forum Magazine, 2:35–37. 4.\nMcCrum-Gardner, Evie. 2008. “Which Is the Correct Statistical Test to Use?” British Journal of Oral and Maxillofacial Surgery 46 (1): 38–41.\nWong KC. Chi squared test versus Fisher’s exact test. Hong Kong Med J. 2011 Oct;17(5):427\nPatil, I. (2021). Visualizations with statistical details: The ‘ggstatsplot’ approach. Journal of Open Source Software, 6(61), 3167, doi:10.21105/joss.03167\nZach Bobbit. (2021). Fisher’s Exact Test: Definition, Formula, and Example"
+  },
+  {
+    "objectID": "lessons_original/03_two_sample_bootstrap_conf_int.html",
+    "href": "lessons_original/03_two_sample_bootstrap_conf_int.html",
+    "title": "Bootstrap Confidence Intervals",
+    "section": "",
+    "text": "What is bootstrapping?\nBootstrapping is a technique from Efron (1979) that is built on a simple idea: if the data we have is a sample from a population, why don’t we sample from our own data to make more samples? Now, because we don’t have access to any new data, we’re going to take samples of our data set with replacement.\n\n\nThe purpose of bootstrapping is to increase the sample size for our analysis when the sample we have been given is small."
+  },
+  {
+    "objectID": "lessons_original/03_two_sample_bootstrap_conf_int.html#when-to-use-bootstrapping",
+    "href": "lessons_original/03_two_sample_bootstrap_conf_int.html#when-to-use-bootstrapping",
+    "title": "Bootstrap Confidence Intervals",
+    "section": "",
+    "text": "The purpose of bootstrapping is to increase the sample size for our analysis when the sample we have been given is small."
+  },
+  {
+    "objectID": "lessons_original/03_two_sample_bootstrap_conf_int.html#distribution",
+    "href": "lessons_original/03_two_sample_bootstrap_conf_int.html#distribution",
+    "title": "Bootstrap Confidence Intervals",
+    "section": "3.1 Distribution",
+    "text": "3.1 Distribution\nBoxplots and histograms will be useful to understand the distribution of the data.\nOur data is not normal based on the distribution.\n\n\nCode\n# check the boxplot of the data\nboxplot(\n  new_penguins_df$flipper_length_mm ~ new_penguins_df$island, las = 1, \n  ylab = \"Flipper Length (mm)\",\n  xlab = \"Island\",\n  main = \"Flipper Length by Island\"\n)\n\n\n\n\n\n\n\n\n\nCode\n\n# check the histogram of the data\nhist(\n  x = new_penguins_df$flipper_length_mm,\n  main = \"Distribution of Flipper Length (mm)\",\n  xlab = \"Flipper Length\"\n)"
+  },
+  {
+    "objectID": "lessons_original/03_two_sample_bootstrap_conf_int.html#bootstrapping-test",
+    "href": "lessons_original/03_two_sample_bootstrap_conf_int.html#bootstrapping-test",
+    "title": "Bootstrap Confidence Intervals",
+    "section": "3.2 Bootstrapping Test",
+    "text": "3.2 Bootstrapping Test\nWe need the difference in means in order to conduct our permutation test. We will test whether the difference is significant so that we can reject the null. This indicates that there is a different in flipper length among the same species that come from different islands.\n\n\nCode\n# set a seed so that our random results can be replicated by other people:\nset.seed(20150516)\n\n# take a random re-sample of the data that is the *same size*\nN &lt;- length(new_penguins_df$flipper_length_mm)\n\n# a random sample:\nsample(new_penguins_df$flipper_length_mm, size = N, replace = TRUE)\n [1] 184 192 198 195 195 176 188 183 184 193 199 198 184 190 198 195 195 199 193\n[20] 197 198 189 197 188 189 199 200 190 183 198 194 190 191 196 189 195 198 197\n[39] 191 184 198 180 195 186 193 193 191 195 190 198 189 181 197 196 182 200 188\n[58] 184 202 189 197 186 181 195 181 191 185 193 196 185 192 199 186 196 180 190\n[77] 190 195 197 193 191 181 195 190 186 189 192 187 190 195 195 182 172 194 181\n\n# number of bootstrap samples\nB_int &lt;- 10000\n\n# create a list of these thousands of samples \nbootstrapSamples_ls &lt;- map(\n  .x = 1:B_int,\n  .f = ~{\n    sample(new_penguins_df$flipper_length_mm, size = N, replace = TRUE)\n  }\n)\n\n# subset of the random samples \nbootstrapSamples_ls[1:3]\n[[1]]\n [1] 183 190 189 188 181 198 181 172 187 189 189 193 180 197 191 190 196 191 195\n[20] 181 193 190 190 186 188 195 190 197 198 190 180 198 194 188 195 191 203 199\n[39] 190 189 195 186 189 199 202 197 189 190 194 190 181 190 190 181 186 196 174\n[58] 185 174 202 191 184 181 184 193 190 190 190 191 196 189 195 195 198 193 190\n[77] 197 184 186 188 193 190 191 195 198 180 191 185 189 192 183 192 199 186 195\n\n[[2]]\n [1] 187 194 187 189 184 188 187 187 184 197 193 191 187 189 190 172 187 186 180\n[20] 193 191 195 195 180 184 189 197 191 187 186 186 187 184 188 190 193 198 190\n[39] 195 198 184 197 195 195 195 198 194 191 198 197 198 186 194 195 189 186 181\n[58] 180 191 180 191 193 196 191 202 191 187 181 199 172 181 191 195 195 194 198\n[77] 191 191 190 192 190 199 195 193 195 197 188 181 190 185 186 191 174 193 195\n\n[[3]]\n [1] 191 196 203 195 185 195 193 186 186 202 186 203 187 180 185 186 192 202 186\n[20] 192 200 195 184 185 195 193 199 190 189 185 181 181 188 197 181 190 188 185\n[39] 187 184 184 195 199 186 200 186 192 195 190 182 189 191 203 193 195 191 191\n[58] 199 195 198 187 191 195 190 190 187 189 192 186 199 193 190 187 181 190 191\n[77] 190 190 183 193 190 197 181 190 187 198 187 190 200 184 190 184 186 191 193"
+  },
+  {
+    "objectID": "lessons_original/03_two_sample_bootstrap_conf_int.html#building-confidence-intervals-for-various-statistics-example-1",
+    "href": "lessons_original/03_two_sample_bootstrap_conf_int.html#building-confidence-intervals-for-various-statistics-example-1",
+    "title": "Bootstrap Confidence Intervals",
+    "section": "3.3 Building Confidence Intervals for Various Statistics: Example 1",
+    "text": "3.3 Building Confidence Intervals for Various Statistics: Example 1\n\n\nCode\n\n# The Sample Mean\nbootMeans_num &lt;-\n  bootstrapSamples_ls %&gt;%\n  # the map_dbl() function takes in a list and returns an atomic vector of type\n  #   double (numeric)\n  map_dbl(mean)\n\n# a normally distributed histogram using the samples from bootstrapping\nhist(bootMeans_num)\n\n\n\n\n\n\n\n\n\nCode\n\n# 95% confidence interval?\nquantile(bootMeans_num, probs = c(0.025, 0.975))\n 2.5% 97.5% \n  189   191"
+  },
+  {
+    "objectID": "lessons_original/03_two_sample_bootstrap_conf_int.html#building-confidence-intervals-for-various-statistics-example-2",
+    "href": "lessons_original/03_two_sample_bootstrap_conf_int.html#building-confidence-intervals-for-various-statistics-example-2",
+    "title": "Bootstrap Confidence Intervals",
+    "section": "3.4 Building Confidence Intervals for Various Statistics: Example 2",
+    "text": "3.4 Building Confidence Intervals for Various Statistics: Example 2\nSource: https://www.geeksforgeeks.org/bootstrap-confidence-interval-with-r-programming/\n\n\nCode\n\n# Custom function to find correlation between the bill length and depth \ncorr.fun &lt;- function(data, idx) {\n  \n# vector of indices that the boot function uses\n  df &lt;- data[idx, ]\n\n# Find the spearman correlation between\n# the 3rd (length) and 5th (depth) columns of dataset\n  cor(df[, 3], df[, 4], method = 'spearman')\n}\n\n# Setting the seed for reproducability of results\nset.seed(42)\n\n# Calling the boot function with the dataset\nbootstrap &lt;- boot(iris, corr.fun, R = 1000)\n\n# Display the result of boot function\nbootstrap\n\nORDINARY NONPARAMETRIC BOOTSTRAP\n\n\nCall:\nboot(data = iris, statistic = corr.fun, R = 1000)\n\n\nBootstrap Statistics :\n    original   bias    std. error\nt1*    0.938 -0.00272     0.00944\n\n# Plot the bootstrap sampling distribution using ggplot\nplot(bootstrap)\n\n\n\n\n\n\n\n\n\nCode\n\n# Function to find the bootstrap CI\nboot.ci(\n  boot.out = bootstrap,\n    type = \"perc\"\n)\nBOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS\nBased on 1000 bootstrap replicates\n\nCALL : \nboot.ci(boot.out = bootstrap, type = \"perc\")\n\nIntervals : \nLevel     Percentile     \n95%   ( 0.914,  0.952 )  \nCalculations and Intervals on Original Scale"
   }
 ]

@@ -19,7 +19,7 @@ knitr:
     R.options:    
       digits: 3    # round to three digits
 editor: source
-bibliography: [Permutations.bib]
+bibliography: [bib/packages.bib]
 ---
 
 
@@ -57,6 +57,7 @@ when the sample we have been given is small.
 ```{r}
 
 # install.packages("palmerpenguins")
+# install.packages("boot")
 
 library(palmerpenguins)
 library(boot)
@@ -72,7 +73,7 @@ library(tidyverse)
 
 This Data was collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica. The palmerpenguins package contains two datasets. One is called penguins, and is a simplified version of the raw data.
 
-Penguins includes measurements for penguin species, island in Palmer Archipelago, size (flipper length, body mass, bill dimensions), and sex. The full dataset contains A tibble with 344 rows and 8 variables[@noauthor_palmerpenguins_nodate].
+Penguins includes measurements for penguin species, island in Palmer Archipelago, size (flipper length, body mass, bill dimensions), and sex. The full dataset contains A tibble with 344 rows and 8 variables[@horst_palmerpenguins_2020].
 
 
 > Research Question: What is the difference in flipper length of the Adelie penguin from two different Islands? 
@@ -222,8 +223,9 @@ bootstrap
 plot(bootstrap)
 
 # Function to find the bootstrap CI
-boot.ci(boot.out = bootstrap,
-		type = "perc"
+boot.ci(
+  boot.out = bootstrap,
+	type = "perc"
 )
 
 ```
