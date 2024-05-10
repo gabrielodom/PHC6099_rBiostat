@@ -355,5 +355,26 @@
     "title": "Z-Test for One Proportion",
     "section": "6.3 Type and Counts of Data",
     "text": "6.3 Type and Counts of Data\nWe observe binary data, and we see at least 10 successes and at least 10 failures."
+  },
+  {
+    "objectID": "lessons/01_mosaic_violin.html",
+    "href": "lessons/01_mosaic_violin.html",
+    "title": "Mosaic & Box/Violin Plots",
+    "section": "",
+    "text": "# install.packages(\"public.ctn0094data\")\n# install.packages(\"tidyverse\")\n# install.packages(\"ggmosaic\")\n\nlibrary(public.ctn0094data)\nlibrary(tidyverse)\nlibrary(ggmosaic)"
+  },
+  {
+    "objectID": "lessons/01_mosaic_violin.html#mosaic-plot",
+    "href": "lessons/01_mosaic_violin.html#mosaic-plot",
+    "title": "Mosaic & Box/Violin Plots",
+    "section": "6.1 Mosaic Plot",
+    "text": "6.1 Mosaic Plot\n\n# mosaic\nmosaic_basic &lt;- demographics_final_df %&gt;% \n  ggplot() +\n  geom_mosaic(\n    aes(\n      x = product(project),\n      fill = race\n    )\n  ) +\n  labs(y=\"Race\", x=\"Project\", title = \"Mosaic Plot of Race by CTN Project\") +\n  theme_mosaic() +\n  theme(legend.position = \"none\")\n  \nmosaic_basic"
+  },
+  {
+    "objectID": "lessons/01_mosaic_violin.html#violin-plot",
+    "href": "lessons/01_mosaic_violin.html#violin-plot",
+    "title": "Mosaic & Box/Violin Plots",
+    "section": "6.2 Violin Plot",
+    "text": "6.2 Violin Plot\n\nviolin_basic &lt;- demographics_final_df %&gt;% \n  ggplot() +\n  aes(x = race, y = age, color = race) +\n  labs(\n    x = \"Race\",\n    y = \"Age\",\n    title = \"Violin Plot of Race and Age\",\n    subtitle = \"With Summary Information\",\n    color = \"Race\"\n  ) +\n  geom_violin() +\n  geom_boxplot(width=0.1)\n\nviolin_basic"
   }
 ]

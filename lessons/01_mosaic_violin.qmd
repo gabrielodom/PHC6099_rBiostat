@@ -1,0 +1,110 @@
+---
+title: "Mosaic & Box/Violin Plots"
+authors: 
+  - name: Ashlee Perez & Michaela Larson
+    affiliations:
+      - Florida International University
+      - Robert Stempel College of Public Health and Social Work
+toc: true
+number-sections: true
+format: html
+---
+
+
+# Packages for this Lesson
+```{r}
+#| label: load-packages
+#| message: false
+
+# install.packages("public.ctn0094data")
+# install.packages("tidyverse")
+# install.packages("ggmosaic")
+
+library(public.ctn0094data)
+library(tidyverse)
+library(ggmosaic)
+```
+
+
+# Introduction to Mosaic and Box/Violin Plots
+
+- Mosaic: stacked bar chart, contingency table (cell frequencies), width/height proportional to %s
+- box/violin plots: box = summary stats, violin = box + kernel density (probability)
+
+
+# Data Source and Description
+
+- CTN 094: Individual Level Predictive Modeling of Opioid Use Disorder Treatment
+- CTN: The National Drug Abuse Treatment Clinical Trials Network (CTN) is a means by which medical and specialty treatment providers, treatment researchers, participating patients, and the National Institute on Drug Abuse cooperatively develop, validate, refine, and deliver new treatment options to patients.
+
+
+# Cleaning the Data to Create a Model Data Frame
+
+```{r}
+#| label: data-cleaning
+#| message: false
+
+demographics_df <- demographics %>% 
+  left_join(everybody, by = "who") 
+
+# for mosaic: gender, race; for box/violin: age 
+demographics_final_df <- demographics_df %>%
+  select(age, race, project)
+
+# removing old data frame
+rm(demographics_df)
+```
+
+
+# Assumptions with Plots
+- types of variables needed for mosaic and violin
+
+
+# Code to Run Mosaic & Box/Violin Plots & output
+
+## Mosaic Plot
+```{r}
+#| label: figure-mosaic-basic
+#| message: false
+#| warning: false
+
+# mosaic
+mosaic_basic <- demographics_final_df %>% 
+  ggplot() +
+  geom_mosaic(
+    aes(
+      x = product(project),
+      fill = race
+    )
+  ) +
+  labs(y="Race", x="Project", title = "Mosaic Plot of Race by CTN Project") +
+  theme_mosaic() +
+  theme(legend.position = "none")
+  
+mosaic_basic
+```
+
+## Violin Plot
+```{r}
+#| label: figure-violin-basic
+#| message: false
+#| warning: false
+
+violin_basic <- demographics_final_df %>% 
+  ggplot() +
+  aes(x = race, y = age, color = race) +
+  labs(
+    x = "Race",
+    y = "Age",
+    title = "Violin Plot of Race and Age",
+    subtitle = "With Summary Information",
+    color = "Race"
+  ) +
+  geom_violin() +
+  geom_boxplot(width=0.1)
+
+violin_basic                        
+```
+
+# Brief Interpretation
+- stuff here.
