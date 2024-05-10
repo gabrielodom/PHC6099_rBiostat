@@ -279,18 +279,3 @@ It is important to note that this presentation is just a brief summary with what
 In addition, you can also stratify the response variable to highlight two of the responses, like dead or alive in our example.
 
 # References {.unnumbered}
-
-```{r}
-#| include: false
-#| eval: false
-
-# automatically create a bib database for loaded R packages & rUM
-knitr::write_bib(
-  c(
-    .packages(),
-    "rUM",
-    "table1"
-  ),
-  "packages.bib"
-)
-```

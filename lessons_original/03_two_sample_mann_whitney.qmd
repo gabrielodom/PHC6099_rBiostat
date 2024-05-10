@@ -430,17 +430,3 @@ The mean age at which diabetes is diagnosed is not significantly different in ma
 From the above result, we can conclude that gender does not play a significant role in the age at which one is diagnosed with diabetes. Diabetes is the 8th leading cause of death and disability in the US, and 1 in 5 US adults are currently unaware of their diabetes condition. This urges the need for increased policy efforts towards timely diabetes testing and diagnosing. Although previous research has suggested that there are gender based differences in diabetes related severity of inquiries, @kautzky-willer2016 Our findings suggest that this difference is not due to age and can be due to other gender based differences such as willingness to seek medical care, underlying health issues etc. We found that there is no need for gender-based approaches to interventions aimed at increasing diabetes surveillance, and efforts should focus on targeting the population as a whole.
 
 # References {.unnumbered}
-
-```{r}
-#| include: false
-
-#automatically create a bib database for loaded R packages & rUM
-#knitr::write_bib(
-# c(
-#   .packages(),
-#   "rUM",
-#   "table1"
-# ),
-# "packages.bib"
-#)
-```
