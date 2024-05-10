@@ -28,8 +28,7 @@ library(ggmosaic)
 
 # Introduction to Mosaic and Box/Violin Plots
 
-- Mosaic: stacked bar chart, contingency table (cell frequencies), width/height proportional to %s
-- box/violin plots: box = summary stats, violin = box + kernel density (probability)
+Mosaic and box violin plots are useful for visualizing summary statistics. Specifically, mosaic plots are used for two or more categorical variables. The relationship between the categorical variables is displayed by dividing a rectangular area into segments that represent the proportion of the number of observations in each combination of categories. Box and violin plots are used for continuous variables by group. Box plots display six summary measures (the minimum, first quartile (Q1), median, third quartile (Q3), the interquartile range, and maximum). Violin plots aare similar to box plots but provide additional information about the shape of the distribution using kernel density estimation. The (fluctuating) width of the violin represents the frequency or density of observations at each value.
 
 
 # Data Source and Description
@@ -49,7 +48,7 @@ demographics_df <- demographics %>%
 
 # for mosaic: gender, race; for box/violin: age 
 demographics_final_df <- demographics_df %>%
-  select(age, race, project)
+  select(age, race, project, is_hispanic)
 
 # removing old data frame
 rm(demographics_df)
@@ -57,12 +56,15 @@ rm(demographics_df)
 
 
 # Assumptions with Plots
-- types of variables needed for mosaic and violin
+
+For a mosaic plot, you need at least 2 cateogrical variables. For box and violin plots you need at least one categorical and one continuous variable.
 
 
 # Code to Run Mosaic & Box/Violin Plots & output
 
-## Mosaic Plot
+## Basic Mosaic Plot
+
+The basic mosaic plot shows the relationship between 2 categorical variables (race and CTN project).
 ```{r}
 #| label: figure-mosaic-basic
 #| message: false
@@ -84,7 +86,59 @@ mosaic_basic <- demographics_final_df %>%
 mosaic_basic
 ```
 
+## More Advanced Mosaic Plot
+
+
+```{r}
+#| label: figure-mosaic-advanced
+#| message: false
+#| warning: false
+
+# mosaic advanced
+# ASHLEE: help, this looks like hot harbage because of the tick mark overlapping
+mosaic_advanced <- demographics_final_df %>% 
+  ggplot() +
+  geom_mosaic(
+    aes(
+      x = product(race, project),
+      fill = is_hispanic
+    )
+  ) +
+  labs(y="Race", x="Project", title = "Mosaic Plot of Race by CTN Project") +
+#  scale_x_discrete(guide = guide_axis(n.dodge=50)) +
+  theme_mosaic() +
+  theme(legend.position = "none", axis.text.x = element_text(angle =45, hjust = 1))
+  
+mosaic_advanced
+```
+
+
+## Box Plot
+
+stuff here about box plot
+```{r}
+#| label: figure-box-basic
+#| message: false
+#| warning: false
+
+box_basic <- demographics_final_df %>% 
+  ggplot() +
+  aes(x = race, y = age, color = race) +
+  labs(
+    x = "Race",
+    y = "Age",
+    title = "Violin Plot of Race and Age",
+    subtitle = "With Summary Information",
+    color = "Race"
+  ) +
+  geom_boxplot(width=0.5)
+
+box_basic
+```
+
 ## Violin Plot
+
+stuff about violin plot
 ```{r}
 #| label: figure-violin-basic
 #| message: false
