@@ -37,3 +37,11 @@ Gabriel Odom
     - created: 2007
     - curators: O'Connor et al, 2007 (https://www.jstor.org/stable/25426272); hosted by Prof. Steve Midway on GitHub; found by Tendai Gwanzura and Ana Bravo
     - method: downloaded from <https://github.com/stevemidway/DAR/blob/main/PLD.txt>
+
+7. Hispanic Established Populations for the Epidemiologic Study of the Elderly (HEPESE) Wave 8:
+    - file: 03_HEPESE_synthetic_20240510.csv
+    - created: original in 2008; synthetic on 2024-05-10
+    - curators: people; found by Srijana Gautam and Arturo Barahona
+    - method: downloaded from <https://www.icpsr.umich.edu/web/ICPSR/studies/36578> in SPSS .sav file format; due to data sharing restrictions, values from the original data were replaced with randomly jittered values (see R/jitter_HEPESE_data_20240510.R).
+
+

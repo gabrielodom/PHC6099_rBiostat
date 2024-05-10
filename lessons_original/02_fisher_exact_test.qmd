@@ -4,7 +4,9 @@ subtitle: "Explaining Fisher's Exact Test, how to run it in R and it's interpret
 author:
   - name: Tendai Gwanzura
   - name: Ana Bravo
-format: html
+format:
+  html:
+    self-contained: true
 toc: true
 theme: zephyr
 ---

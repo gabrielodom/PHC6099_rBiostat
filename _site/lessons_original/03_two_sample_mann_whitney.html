@@ -6,9 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Gabriel J. Odom">
+<meta name="author" content="Srijana Acharya">
+<meta name="author" content="Arturo Barahona">
+<meta name="dcterms.date" content="2024-05-10">
 
-<title>PHC 6099: R Computing for Health Sciences - Z-Test for One Proportion</title>
+<title>PHC 6099: R Computing for Health Sciences - Mann-Whittney-U-Test-Example</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -4893,19 +4895,24 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction-to-one-sample-z-tests" id="toc-introduction-to-one-sample-z-tests" class="nav-link active" data-scroll-target="#introduction-to-one-sample-z-tests"><span class="header-section-number">1</span> Introduction to One-Sample <span class="math inline">\(Z\)</span>-Tests</a></li>
-  <li><a href="#mathematical-definition-of-the-one-sample-z-test" id="toc-mathematical-definition-of-the-one-sample-z-test" class="nav-link" data-scroll-target="#mathematical-definition-of-the-one-sample-z-test"><span class="header-section-number">2</span> Mathematical definition of the One-Sample <span class="math inline">\(Z\)</span>-Test</a></li>
-  <li><a href="#data-source-and-description" id="toc-data-source-and-description" class="nav-link" data-scroll-target="#data-source-and-description"><span class="header-section-number">3</span> Data source and description</a></li>
-  <li><a href="#cleaning-the-data-to-create-a-model-data-frame" id="toc-cleaning-the-data-to-create-a-model-data-frame" class="nav-link" data-scroll-target="#cleaning-the-data-to-create-a-model-data-frame"><span class="header-section-number">4</span> Cleaning the data to create a model data frame</a></li>
-  <li><a href="#assumptions-of-the-one-sample-z-test" id="toc-assumptions-of-the-one-sample-z-test" class="nav-link" data-scroll-target="#assumptions-of-the-one-sample-z-test"><span class="header-section-number">5</span> Assumptions of the One-Sample <span class="math inline">\(Z\)</span>-Test</a></li>
-  <li><a href="#checking-the-assumptions-with-plots" id="toc-checking-the-assumptions-with-plots" class="nav-link" data-scroll-target="#checking-the-assumptions-with-plots"><span class="header-section-number">6</span> Checking the assumptions with plots</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
-  <li><a href="#independence-and-randomness" id="toc-independence-and-randomness" class="nav-link" data-scroll-target="#independence-and-randomness"><span class="header-section-number">6.1</span> Independence and Randomness</a></li>
-  <li><a href="#extreme-proportions" id="toc-extreme-proportions" class="nav-link" data-scroll-target="#extreme-proportions"><span class="header-section-number">6.2</span> “Extreme” Proportions</a></li>
-  <li><a href="#type-and-counts-of-data" id="toc-type-and-counts-of-data" class="nav-link" data-scroll-target="#type-and-counts-of-data"><span class="header-section-number">6.3</span> Type and Counts of Data</a></li>
+  <li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses">Hypotheses</a>
+  <ul class="collapse">
+  <li><a href="#mathematical-equation" id="toc-mathematical-equation" class="nav-link" data-scroll-target="#mathematical-equation">Mathematical Equation</a></li>
+  <li><a href="#basic-criteria" id="toc-basic-criteria" class="nav-link" data-scroll-target="#basic-criteria">Basic criteria</a></li>
   </ul></li>
-  <li><a href="#code-to-run-a-one-sample-z-test" id="toc-code-to-run-a-one-sample-z-test" class="nav-link" data-scroll-target="#code-to-run-a-one-sample-z-test"><span class="header-section-number">7</span> Code to run a One-Sample <span class="math inline">\(Z\)</span>-Test</a></li>
-  <li><a href="#brief-interpretation-of-the-output" id="toc-brief-interpretation-of-the-output" class="nav-link" data-scroll-target="#brief-interpretation-of-the-output"><span class="header-section-number">8</span> Brief interpretation of the output</a></li>
+  </ul></li>
+  <li><a href="#performing-mann-whitney-u-test-in-r" id="toc-performing-mann-whitney-u-test-in-r" class="nav-link" data-scroll-target="#performing-mann-whitney-u-test-in-r">Performing <strong>Mann-Whitney <em>U</em> Test</strong> in R</a>
+  <ul class="collapse">
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages">Packages</a></li>
+  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration">Data Exploration</a></li>
+  <li><a href="#mann-whitney-u-test" id="toc-mann-whitney-u-test" class="nav-link" data-scroll-target="#mann-whitney-u-test">Mann Whitney <em>U</em> Test</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -4914,30 +4921,27 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Z-Test for One Proportion</h1>
+<h1 class="title">Mann-Whittney-U-Test-Example</h1>
 </div>
 
 
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Author</div>
-  <div class="quarto-title-meta-heading">Affiliations</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author">Gabriel J. Odom </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            Florida International University
-          </p>
-        <p class="affiliation">
-            Robert Stempel College of Public Health and Social Work
-          </p>
-      </div>
-  </div>
 
 <div class="quarto-title-meta">
 
-      
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Srijana Acharya </p>
+             <p>Arturo Barahona </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 10, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -4947,119 +4951,405 @@ window.Quarto = {
 </header>
 
 
-<section id="introduction-to-one-sample-z-tests" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction to One-Sample <span class="math inline">\(Z\)</span>-Tests</h1>
-<p>The one-sample <span class="math inline">\(Z\)</span>-test is used to compare a sample proportion to a population proportion.</p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<ul>
+<li><p><strong>Mann Whitney <em>U</em> test</strong>, also known as the Wilcoxon Rank-Sum test, is commonly used to compare the means or medians of <strong>two independent</strong> groups with the <strong>assumption</strong> that the at least one group <strong>is not</strong> normally distributed and when sample size is small.</p>
+<ul>
+<li>The Welch <em>U</em> test should be used when there exists signs of skewness and variance of heterogeneity.<span class="citation" data-cites="fagerland2009"><sup><a href="#ref-fagerland2009" role="doc-biblioref"><strong>fagerland2009?</strong></a></sup></span></li>
+</ul></li>
+<li><p>It is useful for <strong>numerical/continuous variables</strong>.</p>
+<ul>
+<li>For example, if researchers want to compare two different groups’ age or height (continuous variables) in a study with non-normally distributed data.<span class="citation" data-cites="sundjaja2023"><sup><a href="#ref-sundjaja2023" role="doc-biblioref"><strong>sundjaja2023?</strong></a></sup></span></li>
+</ul></li>
+<li><p>When conducting this test, aside from reporting the <em>p-value</em>, the spread, and the shape of the data should be described.<span class="citation" data-cites="hart2001"><sup><a href="#ref-hart2001" role="doc-biblioref"><strong>hart2001?</strong></a></sup></span></p></li>
+</ul>
+<p><strong>Overall goal:</strong> Identify whether the distribution of two groups significantly differs.</p>
+<section id="hypotheses" class="level2">
+<h2 class="anchored" data-anchor-id="hypotheses">Hypotheses</h2>
+<p>Null Hypothesis <strong>(<em>H<sub>0</sub></em>):</strong> <em>Distribution</em><sub>1</sub> = <em>Distribution</em><sub>2</sub></p>
+<ul>
+<li>Mean/Median Ranks of two levels are equal<span class="citation" data-cites="chiyau2020"><sup><a href="#ref-chiyau2020" role="doc-biblioref"><strong>chiyau2020?</strong></a></sup></span></li>
+</ul>
+<p>Alternate Hypothesis <strong>(<em>H<sub>1</sub></em>):</strong> <em>Distribution</em><sub>1</sub> ≠ <em>Distribution</em><sub>2</sub></p>
+<ul>
+<li>Mean/Median Ranks of two levels are significantly different<span class="citation" data-cites="chiyau2020"><sup><a href="#ref-chiyau2020" role="doc-biblioref"><strong>chiyau2020?</strong></a></sup></span></li>
+</ul>
+<section id="mathematical-equation" class="level3">
+<h3 class="anchored" data-anchor-id="mathematical-equation">Mathematical Equation</h3>
+<p><span class="math inline">\(U_1 = n_1n_2 + \frac{n_1 \cdot (n_1 + 1)}{2} - R_1\)</span></p>
+<p><span class="math inline">\(U_2 = n_1n_2 + \frac{n_2 \cdot (n_2 + 1)}{2} - R_2\)</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(U_1\)</span> and <span class="math inline">\(U_2\)</span> represent the test statistics for two groups;(Male &amp; Female).</li>
+<li><span class="math inline">\(R_1\)</span> and <span class="math inline">\(R_2\)</span> represent the sum of the ranks of the observations for two groups.</li>
+<li><span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> are the sample sizes for two groups.</li>
+</ul>
 </section>
-<section id="mathematical-definition-of-the-one-sample-z-test" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Mathematical definition of the One-Sample <span class="math inline">\(Z\)</span>-Test</h1>
-<p>Consider a sample of size <span class="math inline">\(n\)</span> with binary values (such as “true” or “false”). Let <span class="math inline">\(p_{s}\)</span> and <span class="math inline">\(p_{E}\)</span> be the observed sample and expected (population) proportions, respectively. The formula to calculate the <span class="math inline">\(z\)</span> statistic is</p>
-<p><span class="math display">\[
-z \equiv \frac{
-  p_s - p_E
-}{
-  \sqrt{
-    \frac{1}{n}p_s(1 - p_s)
-  }
-}.
-\]</span></p>
-</section>
-<section id="data-source-and-description" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Data source and description</h1>
-<p>We will use the CTN-0094 data set, a data set of harmonized clinical trials for opioid use disorder. The full database is in <code>public.ctn0094data::</code>, engineered features are in <code>public.ctn0094extra::</code>, and clinical trial outcomes (wrangled dependent variables) are in <code>CTNote::</code>. We will install all three packages, but only use <code>CTNote::</code> for now.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;public.ctn0094data&quot;)</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;public.ctn0094extra&quot;)</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;CTNote&quot;)</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(CTNote)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="cleaning-the-data-to-create-a-model-data-frame" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Cleaning the data to create a model data frame</h1>
-<p>Because our method requires only one sample, we have very little work to do. We will use the <a href="https://journals.lww.com/jonmd/abstract/1993/06000/buprenorphine_versus_methadone_maintenance_for.4.aspx">Kosten et al. (1993)</a> definition of opioid abstinence, provided in the data set <code>outcomesCTN0094</code> as the column <code>kosten1993_isAbs</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What do the values look like?</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(outcomesCTN0094<span class="sc">$</span>kosten1993_isAbs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   Mode   FALSE    TRUE 
-logical    2158    1402 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many samples are there?</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(outcomesCTN0094)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3560</code></pre>
-</div>
-</div>
-<p>There are 3560 logical values, and <code>TRUE</code> indicates that the trial participant achieved abstinence according to the definition used in Kosten et al. (1993).</p>
-</section>
-<section id="assumptions-of-the-one-sample-z-test" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Assumptions of the One-Sample <span class="math inline">\(Z\)</span>-Test</h1>
-<p>To use a one-sample <span class="math inline">\(Z\)</span>-test, we make the following assumptions:</p>
+<section id="basic-criteria" class="level3">
+<h3 class="anchored" data-anchor-id="basic-criteria">Basic criteria</h3>
 <ol type="1">
-<li>The data are from a random sample</li>
-<li>Each observation in the data are independent</li>
-<li>Neither the sample proportion nor population proportions are “extreme”; usually we apply this method if these proportions are between 5% and 95%.</li>
-<li>The data can be described as “successes” and “failures”, and there are at least 10 samples in each category.</li>
+<li><p>Samples are independent: Each dependent variable must be related to only one independent variable.</p></li>
+<li><p>The response variable is ordinal or continuous.</p></li>
+<li><p>At least one variable is not normally distributed.</p></li>
 </ol>
-<p>If these assumptions hold, then <span class="math display">\[
-z \sim N(0, 1).
-\]</span></p>
 </section>
-<section id="checking-the-assumptions-with-plots" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Checking the assumptions with plots</h1>
-<section id="independence-and-randomness" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="independence-and-randomness"><span class="header-section-number">6.1</span> Independence and Randomness</h2>
-<p>Because the samples were collected at random via an FDA approved clinical trial protocol, we assume that all the participants were randomly selected and are independent of each other.</p>
 </section>
-<section id="extreme-proportions" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="extreme-proportions"><span class="header-section-number">6.2</span> “Extreme” Proportions</h2>
-<p>According to <a href="https://doi.org/10.1097/ADM.0000000000000647">Ling et al. (2020)</a>, the 12-month abstinence proportion of all 533 participants in their study was 40.5 percent. As we can see here, our abstinence rates are 39.4. Neither these proportions are smaller than 5% or greater than 95%.</p>
+</section>
+<section id="performing-mann-whitney-u-test-in-r" class="level1">
+<h1>Performing <strong>Mann-Whitney <em>U</em> Test</strong> in R</h1>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>In this example, we will perform the <strong>Mann-Whitney <em>U</em> Test</strong> using wave 8 (2012-2013) data of a longitudinal epidemiological study titled <em>Hispanic Established Populations For the Epidemiological Study of Elderly</em> (HEPESE).</p>
+<p>The HEPESE provides data on risk factors for mortality and morbidity in Mexican Americans in order to contrast how these factors operate differently in non-Hispanic White Americans, African Americans, and other major ethnic groups.The data is publicly available and can be obtained from the University of Michigan website.<span class="citation" data-cites="kyriakoss.markides2016"><sup><a href="#ref-kyriakoss.markides2016" role="doc-biblioref"><strong>kyriakoss.markides2016?</strong></a></sup></span></p>
+<p>Using this data, we want to explore whether there are significant gender differences in age when Type 2 diabetes mellitus (T2DM) is diagnosed. Type 2 diabetes is a chronic disease condition that has affected 37 million people living in the United States. Type 2 diabetes is the eighth leading cause of death and disability in US. Type 2 diabetes generally occurs among adults aged 45 or older although, young adults and children are also diagnosed with it these days. Diabetes and its complications are preventable when following proper lifestyles and timely medications. <strong><em>1 in 5 of US people don’t know they have diabetes.</em></strong><span class="citation" data-cites="national2020"><sup><a href="#ref-national2020" role="doc-biblioref"><strong>national2020?</strong></a></sup></span></p>
+<p>Research has shown that men are more likely to develop type 2 diabetes while women are more likely to experience complications, including heart and kidney disease.<span class="citation" data-cites="meissner2021"><sup><a href="#ref-meissner2021" role="doc-biblioref"><strong>meissner2021?</strong></a></sup></span></p>
+<p>In this report, we want to test whether there are significant differences in age at which diabetes is diagnosed among males and females.</p>
+<p><u>Dependent Response Variable</u></p>
+<p>ageAtDx = Age_Diagnosed = Age at which diabetes is diagnosed.</p>
+<p><u>Independent Variable</u></p>
+<p>isMale = Gender</p>
+<p><strong>Research Question:</strong></p>
+<p><strong><em>Does the age at which diabetes is diagnosed significantly differ among Men and Women?</em></strong></p>
+<p>Null Hypothesis <strong>(<em>H<sub>0</sub></em>):</strong> Mean rank of age at which diabetes is diagnosed <u><em>is equal</em></u> among men and women.</p>
+<p>Alternate Hypothesis <strong>(<em>H<sub>1</sub></em>):</strong> Mean rank of age at which diabetes is diagnosed <u><em>is not equal</em></u> among men and women.</p>
+</section>
+<section id="packages" class="level2">
+<h2 class="anchored" data-anchor-id="packages">Packages</h2>
+<ul>
+<li><p><strong>gmodels:</strong> It helps to compute and display confidence intervals (CI) for model estimates.<span class="citation" data-cites="warnes2022"><sup><a href="#ref-warnes2022" role="doc-biblioref"><strong>warnes2022?</strong></a></sup></span></p></li>
+<li><p><strong>DescTools:</strong> It provides tools for basic statistics e.g. to compute Median CI for an efficient data description.<span class="citation" data-cites="andrisignorell2023"><sup><a href="#ref-andrisignorell2023" role="doc-biblioref"><strong>andrisignorell2023?</strong></a></sup></span></p></li>
+<li><p><strong>ggplot2:</strong> It helps to create Boxplots.</p></li>
+<li><p><strong>qqplotr:</strong> It helps to create QQ plot.</p></li>
+<li><p><strong>dplyr:</strong> It is used to manipulate data and provide summary statistics.</p></li>
+<li><p><strong>haven:</strong> It helps to import spss data into r.</p>
+<p><strong><em>Dependencies = TRUE</em></strong> : It indicates that while installing packages, it must also install all dependencies of the specified package.</p></li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(pExpected <span class="ot">&lt;-</span> <span class="fl">0.508</span> <span class="sc">*</span> (<span class="dv">425</span><span class="sc">/</span><span class="dv">533</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4050657</code></pre>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;gmodels&quot;, dependencies = TRUE)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;car&quot;, dependencies = TRUE)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;DescTools&quot;, dependencies = TRUE)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;ggplot2&quot;, dependencies = TRUE)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;qqplotr&quot;, dependencies = TRUE)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;gtsummary&quot;, dependencies = TRUE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Count the number of TRUE values</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>(nAbstinent <span class="ot">&lt;-</span> <span class="fu">sum</span>(outcomesCTN0094<span class="sc">$</span>kosten1993_isAbs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1402</code></pre>
-</div>
-</div>
-</section>
-<section id="type-and-counts-of-data" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="type-and-counts-of-data"><span class="header-section-number">6.3</span> Type and Counts of Data</h2>
-<p>We observe binary data, and we see at least 10 successes and at least 10 failures.</p>
-</section>
-</section>
-<section id="code-to-run-a-one-sample-z-test" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Code to run a One-Sample <span class="math inline">\(Z\)</span>-Test</h1>
-<p>Now that we have checked our assumptions, we can perform the one-sample <span class="math inline">\(Z\)</span>-test for proportions.</p>
+<p><strong>Loading Library</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.test</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> nAbstinent,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">nrow</span>(outcomesCTN0094),</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> pExpected</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    1-sample proportions test with continuity correction
-
-data:  nAbstinent out of nrow(outcomesCTN0094), null probability pExpected
-X-squared = 1.8218, df = 1, p-value = 0.1771
-alternative hypothesis: true p is not equal to 0.4050657
-95 percent confidence interval:
- 0.3777537 0.4101176
-sample estimates:
-        p 
-0.3938202 </code></pre>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(haven))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggpubr))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(gmodels))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(DescTools))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(ggplot2))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(qqplotr))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(gtsummary))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
+<p><strong>Data Importing</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Mann_W_U &lt;- read_sav(&quot;data\\36578-0001-Data.sav&quot;)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>Mann_W_U <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">&quot;../data/03_HEPESE_synthetic_20240510.csv&quot;</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>Error<span class="sc">:</span> Failed to parse <span class="sc">/</span>Users<span class="sc">/</span>gabrielodom<span class="sc">/</span>Documents<span class="sc">/</span>GitHub<span class="sc">/</span>PHC6099_rBiostat<span class="sc">/</span>data<span class="sc">/</span><span class="dv">03</span>_HEPESE_synthetic_20240510.csv<span class="sc">:</span> Invalid file, or file has unsupported features.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
-<section id="brief-interpretation-of-the-output" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Brief interpretation of the output</h1>
-<p>The 95% confidence interval contains the population proportion, so we fail to reject the hypothesis that the patients from these clinical trials achieve different abstinence rates than the general population.</p>
+<section id="data-exploration" class="level2">
+<h2 class="anchored" data-anchor-id="data-exploration">Data Exploration</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># str(Mann_W_U)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(Mann_W_U<span class="sc">$</span>isMale)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">eval</span>(expr, envir, enclos)<span class="sc">:</span> object <span class="st">&#39;Mann_W_U&#39;</span> not found</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(Mann_W_U<span class="sc">$</span>ageAtDx)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">eval</span>(expr, envir, enclos)<span class="sc">:</span> object <span class="st">&#39;Mann_W_U&#39;</span> not found</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>After inspecting the data, we found that values of our dependent and independent variable values are in character form. We want them to be numerical and categorical, respectively. First, we will convert dependent variable into numerical form and our independent variable into categorical. Next, we will recode the factors as male and female. Also for ease, we will rename our dependent and independent variable.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># convert to number and factor</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>Mann_W_U<span class="sc">$</span>ageAtDx <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(Mann_W_U<span class="sc">$</span>ageAtDx)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">eval</span>(expr, envir, enclos)<span class="sc">:</span> object <span class="st">&#39;Mann_W_U&#39;</span> not found</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Mann_W_U<span class="sc">$</span>ageAtDx)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">eval</span>(expr, envir, enclos)<span class="sc">:</span> object <span class="st">&#39;Mann_W_U&#39;</span> not found</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>Mann_W_U<span class="sc">$</span>isMale <span class="ot">&lt;-</span> <span class="fu">as_factor</span>(Mann_W_U<span class="sc">$</span>isMale)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">eval</span>(expr, envir, enclos)<span class="sc">:</span> object <span class="st">&#39;Mann_W_U&#39;</span> not found</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Mann_W_U<span class="sc">$</span>isMale)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">eval</span>(expr, envir, enclos)<span class="sc">:</span> object <span class="st">&#39;Mann_W_U&#39;</span> not found</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The next step is to calculate some of the descriptive data to give us a better idea of the data that we are dealing with. This can be done using the <code>summarise</code> function.</p>
+<p><strong>Descriptive Data</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Des <span class="ot">&lt;-</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a> Mann_W_U <span class="sc">%&gt;%</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">select</span>(isMale, ageAtDx) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">group_by</span>(isMale) <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">summarise</span>(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>   <span class="at">mean =</span> <span class="fu">mean</span>(ageAtDx, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>   <span class="at">sd =</span> <span class="fu">sd</span>(ageAtDx, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>   <span class="at">stderr =</span> sd<span class="sc">/</span><span class="fu">sqrt</span>(n),</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>   <span class="at">LCL =</span> mean <span class="sc">-</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> (<span class="fl">0.05</span> <span class="sc">/</span> <span class="dv">2</span>), n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> stderr,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>   <span class="at">UCL =</span> mean <span class="sc">+</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> (<span class="fl">0.05</span> <span class="sc">/</span> <span class="dv">2</span>), n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> stderr,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>   <span class="at">median =</span> <span class="fu">median</span>(ageAtDx, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>   <span class="at">min =</span> <span class="fu">min</span>(ageAtDx, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>   <span class="at">max =</span> <span class="fu">max</span>(ageAtDx, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>   <span class="at">IQR =</span> <span class="fu">IQR</span>(ageAtDx, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>   <span class="at">LCLmed =</span> <span class="fu">MedianCI</span>(ageAtDx, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)[<span class="dv">2</span>],</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>   <span class="at">UCLmed =</span> <span class="fu">MedianCI</span>(ageAtDx, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)[<span class="dv">3</span>]</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a> )</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">eval</span>(expr, envir, enclos)<span class="sc">:</span> object <span class="st">&#39;Mann_W_U&#39;</span> not found</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>Des</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">eval</span>(expr, envir, enclos)<span class="sc">:</span> object <span class="st">&#39;Des&#39;</span> not found</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol type="1">
+<li><p><strong>n:</strong> The number of observations for each gender.</p></li>
+<li><p><strong>mean:</strong> The mean age when diabetes is diagnosed for each gender.</p></li>
+<li><p><strong>sd:</strong> The standard deviation of each gender.</p></li>
+<li><p><strong>stderr:</strong> The standard error of each gender level.  That is the standard deviation / sqrt (n).</p></li>
+<li><p><strong>LCL, UCL:</strong> The upper and lower confidence intervals of the mean.  This values indicates the range at which we can be 95% certain that the true mean falls between the lower and upper values specified for each gender group assuming a normal distribution. </p></li>
+<li><p><strong>median:</strong> The median value for each gender.</p></li>
+<li><p><strong>min, max:</strong> The minimum and maximum value for each gender.</p></li>
+<li><p><strong>IQR:</strong> The interquartile range of each gender. That is the 75th percentile –  25th percentile.</p></li>
+<li><p><strong>LCLmed, UCLmed:</strong> The 95% confidence interval for the median.</p></li>
+</ol>
+<p><strong>Visual exploration of data</strong></p>
+<p>The next step is to visualize the data. This can be done using different functions under the <code>ggplot</code> package.</p>
+<p><strong>1) Box plot</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a> Mann_W_U, </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">aes</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">x =</span> isMale, </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">y =</span> ageAtDx, </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">fill =</span> isMale</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a> )</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">stat_boxplot</span>(</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>   <span class="at">geom =</span> <span class="st">&quot;errorbar&quot;</span>, </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>   <span class="at">width =</span> <span class="fl">0.5</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a> ) <span class="sc">+</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_boxplot</span>(</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>   <span class="at">fill =</span> <span class="st">&quot;light blue&quot;</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a> ) <span class="sc">+</span> </span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a> <span class="fu">stat_summary</span>(</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>   <span class="at">fun.y =</span> mean, </span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>   <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, </span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>   <span class="at">shape =</span> <span class="dv">10</span>, </span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>   <span class="at">size =</span> <span class="fl">3.5</span>, </span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>   <span class="at">color =</span> <span class="st">&quot;black&quot;</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a> ) <span class="sc">+</span> </span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a> <span class="fu">ggtitle</span>(</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>   <span class="st">&quot;Boxplot of Gender&quot;</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a> ) <span class="sc">+</span> </span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme</span>(</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>   <span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a> )</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">eval</span>(expr, envir, enclos)<span class="sc">:</span> object <span class="st">&#39;Mann_W_U&#39;</span> not found</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>2) QQ plot</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(conflicted)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">&quot;stat_qq_line&quot;</span>, <span class="st">&quot;qqplotr&quot;</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform QQ plots by group</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>QQ_Plot <span class="ot">&lt;-</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a> <span class="at">data =</span> Mann_W_U, </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">aes</span>(</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>   <span class="at">sample =</span> ageAtDx, </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>   <span class="at">color =</span> isMale, </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>   <span class="at">fill =</span> isMale</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a> )</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a> <span class="fu">stat_qq_band</span>(</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>   <span class="at">alpha =</span> <span class="fl">0.5</span>, </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>   <span class="at">conf =</span> <span class="fl">0.95</span>, </span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>   <span class="at">qtype =</span> <span class="dv">1</span>, </span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>   <span class="at">bandType =</span> <span class="st">&quot;boot&quot;</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a> ) <span class="sc">+</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a> <span class="fu">stat_qq_line</span>(</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>   <span class="at">identity =</span> <span class="cn">TRUE</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a> ) <span class="sc">+</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a> <span class="fu">stat_qq_point</span>(</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>   <span class="at">col =</span> <span class="st">&quot;black&quot;</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a> ) <span class="sc">+</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a> <span class="fu">facet_wrap</span>(</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>   <span class="sc">~</span> isMale, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a> ) <span class="sc">+</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a> <span class="fu">labs</span>(</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>   <span class="at">x =</span> <span class="st">&quot;Theoretical Quantiles&quot;</span>, </span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>   <span class="at">y =</span> <span class="st">&quot;Sample Quantiles&quot;</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a> ) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">eval</span>(expr, envir, enclos)<span class="sc">:</span> object <span class="st">&#39;Mann_W_U&#39;</span> not found</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>QQ_Plot</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">eval</span>(expr, envir, enclos)<span class="sc">:</span> object <span class="st">&#39;QQ_Plot&#39;</span> not found</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ul>
+<li><p><strong>stat_qq_line:</strong> Draws a reference line based on the data quantiles.</p></li>
+<li><p><strong>Stat_qq_band:</strong> Draws confidence bands based on three methods; “pointwise”/“boot”,“Ks” and “ts”.</p>
+<ul>
+<li><p><code>&quot;pointwise&quot;</code> constructs simultaneous confidence bands based on the normal distribution;</p></li>
+<li><p><code>&quot;boot&quot;</code> creates pointwise confidence bands based on a parametric boostrap;</p></li>
+<li><p><code>&quot;ks&quot;</code> constructs simultaneous confidence bands based on an inversion of the Kolmogorov-Smirnov test;</p></li>
+<li><p><code>&quot;ts&quot;</code> constructs tail-sensitive confidence bands<span class="citation" data-cites="aldor-noiman2013"><sup><a href="#ref-aldor-noiman2013" role="doc-biblioref"><strong>aldor-noiman2013?</strong></a></sup></span></p></li>
+</ul></li>
+<li><p><strong>Stat_qq_Point:</strong> It is a modified version of ggplot: : stat_qq with some parameters adjustments and a new option to detrend the points.</p>
+<p><strong>3) Histogram</strong></p>
+<p>A histogram is the most commonly used graph to show frequency distributions.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Hist <span class="ot">&lt;-</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">ggplot</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>Mann_W_U,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">aes</span>(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> ageAtDx,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill =</span> isMale</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">facet_wrap</span>(<span class="sc">~</span> isMale) </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">eval</span>(expr, envir, enclos)<span class="sc">:</span> object <span class="st">&#39;Mann_W_U&#39;</span> not found</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>Hist</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">eval</span>(expr, envir, enclos)<span class="sc">:</span> object <span class="st">&#39;Hist&#39;</span> not found</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>3b) Density curve in Histogram</strong></p></li>
+</ul>
+<p>A density curve gives us a good idea of the “shape” of a distribution, including whether or not a distribution has one or more “peaks” of frequently occurring values and whether or not the distribution is skewed to the left or the right.<span class="citation" data-cites="zach2020"><sup><a href="#ref-zach2020" role="doc-biblioref"><strong>zach2020?</strong></a></sup></span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  Mann_W_U, </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> ageAtDx,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> isMale</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span> </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Age When diabetes is diagnosed&quot;</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Density&quot;</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;Gender&quot;</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;A Density Plot of Age when diabetes is diagnosed&quot;</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Data Source: HEPESE Wave 8 (ICPSR 36578)&quot;</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>isMale)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">eval</span>(expr, envir, enclos)<span class="sc">:</span> object <span class="st">&#39;Mann_W_U&#39;</span> not found</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The density curve provided us idea that our data do not have bell shaped distribution and it is slightly skewed towards left.</p>
+<p><strong>4) Statistical test for normality</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>   Mann_W_U <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">group_by</span>(</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>   isMale</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a> ) <span class="sc">%&gt;%</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">summarise</span>(</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>   <span class="st">`</span><span class="at">W Stat</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">shapiro.test</span>(ageAtDx)<span class="sc">$</span>statistic,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">p.value =</span> <span class="fu">shapiro.test</span>(ageAtDx)<span class="sc">$</span>p.value,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a> )</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">eval</span>(expr, envir, enclos)<span class="sc">:</span> object <span class="st">&#39;Mann_W_U&#39;</span> not found</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>Interpretation</strong></p>
+<p>From the above table, we see that the value of the Shapiro-Wilk Test is 0.0006 and 0.000002 which are both less than 0.05, therefore we have enough evidence to reject the null hypothesis and confirm that the data significantly deviate from a normal distribution.</p>
+</section>
+<section id="mann-whitney-u-test" class="level2">
+<h2 class="anchored" data-anchor-id="mann-whitney-u-test">Mann Whitney <em>U</em> Test</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">wilcox.test</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>   ageAtDx <span class="sc">~</span> isMale, </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">data =</span> Mann_W_U, </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">na.rm =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>   <span class="at">paired =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>   <span class="at">exact =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>   <span class="at">conf.int =</span> <span class="cn">TRUE</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a> )</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">wilcox.test.formula</span>(ageAtDx <span class="sc">~</span> isMale, <span class="at">data =</span> Mann_W_U, <span class="at">na.rm =</span> <span class="cn">TRUE</span>, <span class="sc">:</span> cannot use <span class="st">&#39;paired&#39;</span> <span class="cf">in</span> formula method</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>test_statistics <span class="ot">&lt;-</span> result<span class="sc">$</span>statistic</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">eval</span>(expr, envir, enclos)<span class="sc">:</span> object <span class="st">&#39;result&#39;</span> not found</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>p_values <span class="ot">&lt;-</span> result<span class="sc">$</span>p.value</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">eval</span>(expr, envir, enclos)<span class="sc">:</span> object <span class="st">&#39;result&#39;</span> not found</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>method_used <span class="ot">&lt;-</span> result<span class="sc">$</span>method</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">eval</span>(expr, envir, enclos)<span class="sc">:</span> object <span class="st">&#39;result&#39;</span> not found</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>result_df <span class="ot">&lt;-</span> </span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">Test_Statistic =</span> test_statistics,</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">P_Value =</span> p_values,</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">Method =</span> method_used</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">eval</span>(expr, envir, enclos)<span class="sc">:</span> object <span class="st">&#39;test_statistics&#39;</span> not found</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>tbl <span class="ot">&lt;-</span> </span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_df</span>(</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> result_df</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>  ) </span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">eval</span>(expr, envir, enclos)<span class="sc">:</span> object <span class="st">&#39;result_df&#39;</span> not found</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>tbl</span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> (src, ...) </span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">UseMethod</span>(<span class="st">&quot;tbl&quot;</span>)</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a><span class="sc">&lt;</span>bytecode<span class="sc">:</span> <span class="dv">0x7fbccdb2ee10</span><span class="sc">&gt;</span></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a><span class="er">&lt;</span>environment<span class="sc">:</span> namespace<span class="sc">:</span>dplyr<span class="sc">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+<section id="results" class="level1">
+<h1>Results</h1>
+<p>The mean age at which diabetes is diagnosed is not significantly different in males (69 years old) and females (66 years old). The Mann-Whitney U-Test showed that this difference is not statistically significant at 0.05 level of significance because statistical p value (p=.155) is greater than critical value (p=0.05). The test statistic is W = 5040.</p>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>From the above result, we can conclude that gender does not play a significant role in the age at which one is diagnosed with diabetes. Diabetes is the 8th leading cause of death and disability in the US, and 1 in 5 US adults are currently unaware of their diabetes condition. This urges the need for increased policy efforts towards timely diabetes testing and diagnosing. Although previous research has suggested that there are gender based differences in diabetes related severity of inquiries,<span class="citation" data-cites="kautzky-willer2016"><sup><a href="#ref-kautzky-willer2016" role="doc-biblioref"><strong>kautzky-willer2016?</strong></a></sup></span> Our findings suggest that this difference is not due to age and can be due to other gender based differences such as willingness to seek medical care, underlying health issues etc. We found that there is no need for gender-based approaches to interventions aimed at increasing diabetes surveillance, and efforts should focus on targeting the population as a whole.</p>
+</section>
+<section id="references" class="level1 unnumbered">
+<h1 class="unnumbered">References</h1>
 
 
 </section>

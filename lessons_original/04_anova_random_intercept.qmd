@@ -15,6 +15,7 @@ format:
   html:
     code-fold: true
     html-math-method: katex
+    self-contained: true
 ---
 
 ## Libraries Used

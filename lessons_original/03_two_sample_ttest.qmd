@@ -12,6 +12,7 @@ format:
   html:
     code-fold: true
     html-math-method: katex
+    self-contained: true
 toc: true
 theme: zephyr
 highlight-style: pygemnts

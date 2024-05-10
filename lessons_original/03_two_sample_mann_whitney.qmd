@@ -20,8 +20,8 @@ knitr:
     comment: ""    # don't show ## with printed output
     R.options:    
       digits: 3    # round to three digits
-bibliography: references.bib
-csl: the-new-england-journal-of-medicine.csl
+bibliography: bib/packages.bib
+csl: bib/the-new-england-journal-of-medicine.csl
 ---
 
 ```{r}
@@ -99,11 +99,11 @@ In this report, we want to test whether there are significant differences in age
 
 [Dependent Response Variable]{.underline}
 
-MDIAB82 = Age_Diagnosed = Age at which diabetes is diagnosed.
+ageAtDx = Age_Diagnosed = Age at which diabetes is diagnosed.
 
 [Independent Variable]{.underline}
 
-Sex8 = Gender
+isMale = Gender
 
 **Research Question:**
 
@@ -159,7 +159,8 @@ suppressPackageStartupMessages(library(tidyverse))
 
 ```{r importing-data}
 
-Mann_W_U <- read_sav("data\\36578-0001-Data.sav")
+# Mann_W_U <- read_sav("data\\36578-0001-Data.sav")
+Mann_W_U <- read_sav("../data/03_HEPESE_synthetic_20240510.csv")
 
 ```
 
@@ -167,8 +168,8 @@ Mann_W_U <- read_sav("data\\36578-0001-Data.sav")
 
 ```{r data-exploration}
 # str(Mann_W_U)
-str(Mann_W_U$SEX8)
-str(Mann_W_U$MDIAB82)
+str(Mann_W_U$isMale)
+str(Mann_W_U$ageAtDx)
 ```
 
 After inspecting the data, we found that values of our dependent and independent variable values are in character form. We want them to be numerical and categorical, respectively. First, we will convert dependent variable into numerical form and our independent variable into categorical. Next, we will recode the factors as male and female. Also for ease, we will rename our dependent and independent variable.
@@ -176,28 +177,11 @@ After inspecting the data, we found that values of our dependent and independent
 ```{r data-wrangling}
 
 # convert to number and factor
-Mann_W_U$MDIAB82 <- as.numeric(Mann_W_U$MDIAB82)
-class(Mann_W_U$MDIAB82)
+Mann_W_U$ageAtDx <- as.numeric(Mann_W_U$ageAtDx)
+class(Mann_W_U$ageAtDx)
 
-Mann_W_U$SEX8 <- as_factor(Mann_W_U$SEX8)
-class(Mann_W_U$SEX8)
-
-# recode factors
-Mann_W_U$SEX8 <- 
- recode_factor(
-   Mann_W_U$SEX8,
-        "0" = "Male",
-        "1" = "Female"
- )
-
-# renaming variables
-
-Mann_W_U <- 
- Mann_W_U %>%  
- rename(
-   Gender = SEX8,
-   Age_diagnosed = MDIAB82
- )
+Mann_W_U$isMale <- as_factor(Mann_W_U$isMale)
+class(Mann_W_U$isMale)
 
 ```
 
@@ -208,21 +192,21 @@ The next step is to calculate some of the descriptive data to give us a better i
 ```{r}
 Des <- 
  Mann_W_U %>% 
- select(Gender, Age_diagnosed) %>% 
- group_by(Gender) %>%
+ select(isMale, ageAtDx) %>% 
+ group_by(isMale) %>%
  summarise(
    n = n(),
-   mean = mean(Age_diagnosed, na.rm = TRUE),
-   sd = sd(Age_diagnosed, na.rm = TRUE),
+   mean = mean(ageAtDx, na.rm = TRUE),
+   sd = sd(ageAtDx, na.rm = TRUE),
    stderr = sd/sqrt(n),
    LCL = mean - qt(1 - (0.05 / 2), n - 1) * stderr,
    UCL = mean + qt(1 - (0.05 / 2), n - 1) * stderr,
-   median = median(Age_diagnosed, na.rm = TRUE),
-   min = min(Age_diagnosed, na.rm = TRUE), 
-   max = max(Age_diagnosed, na.rm = TRUE),
-   IQR = IQR(Age_diagnosed, na.rm = TRUE),
-   LCLmed = MedianCI(Age_diagnosed, na.rm = TRUE)[2],
-   UCLmed = MedianCI(Age_diagnosed, na.rm = TRUE)[3]
+   median = median(ageAtDx, na.rm = TRUE),
+   min = min(ageAtDx, na.rm = TRUE), 
+   max = max(ageAtDx, na.rm = TRUE),
+   IQR = IQR(ageAtDx, na.rm = TRUE),
+   LCLmed = MedianCI(ageAtDx, na.rm = TRUE)[2],
+   UCLmed = MedianCI(ageAtDx, na.rm = TRUE)[3]
  )
 
 Des
@@ -256,9 +240,9 @@ The next step is to visualize the data. This can be done using different functio
 ggplot(
  Mann_W_U, 
  aes(
-   x = Gender, 
-   y = Age_diagnosed, 
-   fill = Gender
+   x = isMale, 
+   y = ageAtDx, 
+   fill = isMale
  )
 ) +
  stat_boxplot(
@@ -297,9 +281,9 @@ QQ_Plot <-
 ggplot(
  data = Mann_W_U, 
  aes(
-   sample = Age_diagnosed, 
-   color = Gender, 
-   fill = Gender
+   sample = ageAtDx, 
+   color = isMale, 
+   fill = isMale
  )
 ) +
  stat_qq_band(
@@ -315,7 +299,7 @@ ggplot(
    col = "black"
  ) +
  facet_wrap(
-   ~ Gender, scales = "free"
+   ~ isMale, scales = "free"
  ) +
  labs(
    x = "Theoretical Quantiles", 
@@ -348,12 +332,12 @@ Hist <-
  ggplot(
     Mann_W_U,
     aes(
-      x = Age_diagnosed,
-      fill = Gender
+      x = ageAtDx,
+      fill = isMale
     )
   ) +
     geom_histogram() +
-    facet_wrap(~ Gender) 
+    facet_wrap(~ isMale) 
 
     Hist
     ```
@@ -366,8 +350,8 @@ A density curve gives us a good idea of the "shape" of a distribution, including
 ggplot(
   Mann_W_U, 
   aes(
-    x = Age_diagnosed,
-    fill = Gender
+    x = ageAtDx,
+    fill = isMale
   )
 ) + 
   geom_density() +
@@ -378,7 +362,7 @@ ggplot(
     title = "A Density Plot of Age when diabetes is diagnosed",
     caption = "Data Source: HEPESE Wave 8 (ICPSR 36578)"
   ) +
-  facet_wrap(~Gender)
+  facet_wrap(~isMale)
 ```
 
 The density curve provided us idea that our data do not have bell shaped distribution and it is slightly skewed towards left.
@@ -388,11 +372,11 @@ The density curve provided us idea that our data do not have bell shaped distrib
 ```{r}
    Mann_W_U %>%
  group_by(
-   Gender
+   isMale
  ) %>%
  summarise(
-   `W Stat` = shapiro.test(Age_diagnosed)$statistic,
-    p.value = shapiro.test(Age_diagnosed)$p.value,
+   `W Stat` = shapiro.test(ageAtDx)$statistic,
+    p.value = shapiro.test(ageAtDx)$p.value,
    options(scipen = 999)
  )
 ```
@@ -407,7 +391,7 @@ From the above table, we see that the value of the Shapiro-Wilk Test is 0.0006 a
 
 result <-
  wilcox.test(
-   Age_diagnosed ~ Gender, 
+   ageAtDx ~ isMale, 
    data = Mann_W_U, 
    na.rm = TRUE, 
    paired = FALSE, 

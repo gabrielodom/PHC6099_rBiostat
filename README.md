@@ -54,7 +54,7 @@ The chapters are:
 
 
 ## Lesson Outline
-This is a shell of a lesson that can be copied and pasted for new lessons (or to edit and clean up existing lessons). If you copy this shell, then change all the headings from level 3 to 1. Replace \<the method\> with the name of your method, or its abbreviation.
+This is a shell of a lesson that can be copied and pasted for new lessons (or to edit and clean up existing lessons). If you copy this shell, then change all the headings from level 3 to 1. Replace \<the method\> with the name of your method, or its abbreviation. The file `lessons/00_lesson_template.qmd` has a `.qmd` template with these sections.
 
 ### Introduction to \<the method\>
 ### Mathematical definition of \<the method\>
