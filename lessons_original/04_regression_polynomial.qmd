@@ -14,7 +14,6 @@ code-overflow: scroll
 code-copy: true
 css: styles.css
 footer: "PHC 6099 - R Computing for Health Sciences"
-editor: visual
 title-slide-attributes: 
   data-background-image: https://marketplace.canva.com/EAEthkBVLfQ/1/0/1600w/canva-blush-wave-desktop-wallpaper-drvq3zaYl2E.jpg
 ---

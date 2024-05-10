@@ -44,4 +44,8 @@ Gabriel Odom
     - curators: people; found by Srijana Gautam and Arturo Barahona
     - method: downloaded from <https://www.icpsr.umich.edu/web/ICPSR/studies/36578> in SPSS .sav file format; due to data sharing restrictions, values from the original data were replaced with randomly jittered values (see R/jitter_HEPESE_data_20240510.R).
 
-
+8. Agricultural crop yield:
+    - file: 04_crop_data.csv
+    - created: 2020
+    - curators: Rebecca Bevans for Scribbr; found by Patrice Lewis and Julissa Martinez
+    - method: downloaded ZIP data from <https://www.scribbr.com/statistics/one-way-anova/> using the direct access link <https://www.scribbr.com/wp-content/uploads//2020/03/crop.data_.anova_.zip>; extracted the data and renamed the file from crop.data.csv to remove the extra period in the file name.
