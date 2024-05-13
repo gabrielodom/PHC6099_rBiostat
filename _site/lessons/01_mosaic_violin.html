@@ -163,10 +163,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#assumptions-with-plots" id="toc-assumptions-with-plots" class="nav-link" data-scroll-target="#assumptions-with-plots"><span class="header-section-number">5</span> Assumptions with Plots</a></li>
   <li><a href="#code-to-run-mosaic-boxviolin-plots-output" id="toc-code-to-run-mosaic-boxviolin-plots-output" class="nav-link" data-scroll-target="#code-to-run-mosaic-boxviolin-plots-output"><span class="header-section-number">6</span> Code to Run Mosaic &amp; Box/Violin Plots &amp; output</a>
   <ul class="collapse">
-  <li><a href="#mosaic-plot" id="toc-mosaic-plot" class="nav-link" data-scroll-target="#mosaic-plot"><span class="header-section-number">6.1</span> Mosaic Plot</a></li>
-  <li><a href="#violin-plot" id="toc-violin-plot" class="nav-link" data-scroll-target="#violin-plot"><span class="header-section-number">6.2</span> Violin Plot</a></li>
+  <li><a href="#mosaic-plots" id="toc-mosaic-plots" class="nav-link" data-scroll-target="#mosaic-plots"><span class="header-section-number">6.1</span> Mosaic Plots</a>
+  <ul class="collapse">
+  <li><a href="#basic-mosaic-plot" id="toc-basic-mosaic-plot" class="nav-link" data-scroll-target="#basic-mosaic-plot"><span class="header-section-number">6.1.1</span> Basic Mosaic Plot</a></li>
+  <li><a href="#more-advanced-mosaic-plot" id="toc-more-advanced-mosaic-plot" class="nav-link" data-scroll-target="#more-advanced-mosaic-plot"><span class="header-section-number">6.1.2</span> More Advanced Mosaic Plot</a></li>
   </ul></li>
-  <li><a href="#brief-interpretation" id="toc-brief-interpretation" class="nav-link" data-scroll-target="#brief-interpretation"><span class="header-section-number">7</span> Brief Interpretation</a></li>
+  <li><a href="#box-plot" id="toc-box-plot" class="nav-link" data-scroll-target="#box-plot"><span class="header-section-number">6.2</span> Box Plot</a></li>
+  <li><a href="#violin-plot" id="toc-violin-plot" class="nav-link" data-scroll-target="#violin-plot"><span class="header-section-number">6.3</span> Violin Plot</a></li>
+  </ul></li>
+  <li><a href="#brief-interpretation" id="toc-brief-interpretation" class="nav-link" data-scroll-target="#brief-interpretation"><span class="header-section-number">7</span> Brief Interpretation</a>
+  <ul class="collapse">
+  <li><a href="#mosaic-plot" id="toc-mosaic-plot" class="nav-link" data-scroll-target="#mosaic-plot"><span class="header-section-number">7.1</span> Mosaic Plot</a></li>
+  <li><a href="#box-plot-1" id="toc-box-plot-1" class="nav-link" data-scroll-target="#box-plot-1"><span class="header-section-number">7.2</span> Box Plot</a></li>
+  <li><a href="#violin-plot-1" id="toc-violin-plot-1" class="nav-link" data-scroll-target="#violin-plot-1"><span class="header-section-number">7.3</span> Violin Plot</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -209,90 +219,206 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="packages-for-this-lesson" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Packages for this Lesson</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("public.ctn0094data")</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("tidyverse")</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("ggmosaic")</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(public.ctn0094data)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggmosaic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># installing required packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("public.ctn0094data")</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("tidyverse")</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("ggmosaic")</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># loading required packages</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(public.ctn0094data)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggmosaic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="introduction-to-mosaic-and-boxviolin-plots" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Introduction to Mosaic and Box/Violin Plots</h1>
-<ul>
-<li>Mosaic: stacked bar chart, contingency table (cell frequencies), width/height proportional to %s</li>
-<li>box/violin plots: box = summary stats, violin = box + kernel density (probability)</li>
-</ul>
+<p>Mosaic, box, and violin plots are useful for visualizing summary statistics.</p>
+<p>A mosaic plot is a special type of stacked bar chart used for two or more categorical variables. The width of the columns is proportional to the number of observations in each level of the variable plotted on the horizontal, or x-axis. The vertical length of the bars is proportional to the number of observations in the second variable within each level of the first variable.</p>
+<p>Box and violin plots are used for continuous variables by group. Box plots display six summary measures (the minimum, first quartile (Q1), median, third quartile (Q3), the interquartile range, and maximum). A violin plot illustrates the distribution of numerical data for one or more level of a categorical variable by combining summary statistics and density of each variable. Each curve corresponds to the respective frequency of data points within each region. A box plot is typically overlaid to provide additional information.</p>
 </section>
 <section id="data-source-and-description" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Data Source and Description</h1>
-<ul>
-<li>CTN 094: Individual Level Predictive Modeling of Opioid Use Disorder Treatment</li>
-<li>CTN: The National Drug Abuse Treatment Clinical Trials Network (CTN) is a means by which medical and specialty treatment providers, treatment researchers, participating patients, and the National Institute on Drug Abuse cooperatively develop, validate, refine, and deliver new treatment options to patients.</li>
-</ul>
+<p>The National Drug Abuse Treatment Clinical Trials Network (CTN) is a means by which medical and specialty treatment providers, treatment researchers, participating patients, and the National Institute on Drug Abuse cooperatively develop, validate, refine, and deliver new treatment options to patients. The CTN 094 <code>demographics</code> and <code>everybody</code> data sets from the <code>{public.ctn0094data}</code> package were utilized for the following visualizations. CTN 094 is a comprehensive, harmonized and normalized database of treatment data from CTN_0027, CTN_0030, and CTN_0051, where experiences of individuals with opioid use disorder (OUD) who seek care are described.</p>
 </section>
 <section id="cleaning-the-data-to-create-a-model-data-frame" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Cleaning the Data to Create a Model Data Frame</h1>
+<p>The <code>demographics</code> and <code>everybody</code> data sets within the <code>{public.ctn0094data}</code> package were joined by ID (<code>who</code> variable). <code>Race</code>, <code>age</code>, <code>is_male</code> (), and <code>project</code> were selected features for the following visualizations.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>demographics_df <span class="ot">&lt;-</span> demographics <span class="sc">%&gt;%</span> </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(everybody, <span class="at">by =</span> <span class="st">"who"</span>) </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># for mosaic: gender, race; for box/violin: age </span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>demographics_final_df <span class="ot">&lt;-</span> demographics_df <span class="sc">%&gt;%</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, race, project)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># removing old data frame</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(demographics_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating model data frame to include age, race, project, and is_male</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># from demographics and everybody data sets. Joined by subject ID (who)</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>demographics_df <span class="ot">&lt;-</span> demographics <span class="sc">%&gt;%</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(everybody, <span class="at">by =</span> <span class="st">"who"</span>)  <span class="sc">%&gt;%</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, race, project, is_male)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="assumptions-with-plots" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Assumptions with Plots</h1>
-<ul>
-<li>types of variables needed for mosaic and violin</li>
-</ul>
+<p>In mosaic plots, two categorical variables are plotted along the horizontal (x) and vertical (y) axis. Each combination of categories forms a rectangle or tile within the plot.</p>
+<p>In box and violin plots, a categorical variable is plotted along the horizontal or x-axis, while a continuous variable is plotted along the vertical or y-axis. Violin plots can be limiting if symmetry, skew, or other shape and variability characteristics are different between groups because precise comparison cannot be easily interpreted between density curves. For this reason, violin plots are typically rendered with another overlaid chart type, like box plot quartiles.</p>
 </section>
 <section id="code-to-run-mosaic-boxviolin-plots-output" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Code to Run Mosaic &amp; Box/Violin Plots &amp; output</h1>
-<section id="mosaic-plot" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="mosaic-plot"><span class="header-section-number">6.1</span> Mosaic Plot</h2>
+<section id="mosaic-plots" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="mosaic-plots"><span class="header-section-number">6.1</span> Mosaic Plots</h2>
+<p>In order to create a Mosaic plot, you must specify what data object you will be using within the <code>ggplot()</code> function. Then you will set aesthetic mapping options within the following geometric object layer: <code>geom_mosaic()</code>.</p>
+<p>In <code>geom_mosaic()</code>, the following aesthetics can be specified:</p>
+<ol type="1">
+<li><code>weight:</code> a weighting variable.</li>
+<li><code>x:</code> categorical variable for the x-axis.
+<ul>
+<li>Specified as <code>x = product(var1, var2, ...)</code></li>
+<li>The <code>product()</code> function is used to extract the values from the categorical variable specified.</li>
+</ul></li>
+<li><code>alpha:</code> a variable specifying transparency.
+<ul>
+<li>If the variable is not called in <code>x:</code>, then <code>alpha:</code> will be added in the first position.</li>
+</ul></li>
+<li><code>fill:</code> a variable specifying fill color.
+<ul>
+<li>If the variable is not called in <code>x:</code>, then <code>fill:</code> will be added after the optional <code>alpha:</code> variable.</li>
+</ul></li>
+<li><code>conds:</code> a variable specifying conditions.
+<ul>
+<li>Specified as <code>conds = product(var1, var2, ...)</code></li>
+</ul></li>
+</ol>
+<p>The ordering of the variables is vital as the product plot is created hierarchically.</p>
+<section id="basic-mosaic-plot" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="basic-mosaic-plot"><span class="header-section-number">6.1.1</span> Basic Mosaic Plot</h3>
+<p>In the following example of a basic mosaic plot, we visualize the distribution of Race among CTN Projects 27, 30, and 51.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mosaic</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mosaic_basic <span class="ot">&lt;-</span> demographics_final_df <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic Mosaic Plot</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mosaic_basic <span class="ot">&lt;-</span> demographics_df <span class="sc">%&gt;%</span> </span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_mosaic</span>(</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="fu">product</span>(project),</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> race</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Race"</span>, <span class="at">x=</span><span class="st">"Project"</span>, <span class="at">title =</span> <span class="st">"Mosaic Plot of Race by CTN Project"</span>) <span class="sc">+</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mosaic</span>() <span class="sc">+</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>mosaic_basic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="co"># geom_mosaic() does not have one-to-one mapping between a variable and the x- </span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      <span class="co"># or y-axis. So you must use the product() function when assigning a variable</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      <span class="co"># to the x-axis to account for the variable number of variables.</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="fu">product</span>(project),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> race</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Race"</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Project"</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Mosaic Plot of Race by CTN Project"</span>) <span class="sc">+</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Specifies default `geom_mosaic` aesthetics, e.g white panel background, </span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># removes grid lines, adjusts widths and heights of rows and columns to </span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># reflect frequencies</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mosaic</span>() <span class="sc">+</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Removes legend illustrating Race and respective fill colors</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"None"</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>mosaic_basic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="01_mosaic_violin_files/figure-html/figure-mosaic-basic-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="violin-plot" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="violin-plot"><span class="header-section-number">6.2</span> Violin Plot</h2>
+<section id="more-advanced-mosaic-plot" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="more-advanced-mosaic-plot"><span class="header-section-number">6.1.2</span> More Advanced Mosaic Plot</h3>
+<p>In a more advanced version of a mosaic plot, we can visualize more than 2 categorical variables. The following example utilizes race, project, and ethnicity among CTN Projects 27, 30, and 51.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>violin_basic <span class="ot">&lt;-</span> demographics_final_df <span class="sc">%&gt;%</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> race, <span class="at">y =</span> age, <span class="at">color =</span> race) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Race"</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Age"</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Violin Plot of Race and Age"</span>,</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"With Summary Information"</span>,</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Race"</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width=</span><span class="fl">0.1</span>)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>violin_basic                        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mosaic advanced</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mosaic_advanced <span class="ot">&lt;-</span> demographics_df <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_mosaic</span>(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="fu">product</span>(race, project),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> is_male</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Race"</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Project"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Mosaic Plot of Race by Gender and CTN Project"</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_mosaic</span>() <span class="sc">+</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Adjust axis tick labels to 60 degrees and justification to the right</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># with hjust (horizontal justification) and vjust (vertical justification)</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"None"</span>)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>mosaic_advanced</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="01_mosaic_violin_files/figure-html/figure-mosaic-advanced-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="box-plot" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="box-plot"><span class="header-section-number">6.2</span> Box Plot</h2>
+<p>In order to create a box plot, you must specify what data object you will be using within the <code>ggplot()</code> function. Then you will set aesthetic mapping options within the <code>aes()</code> or aesthetic layer. The <code>geom_boxplot()</code> layer specifies the box plot.</p>
+<p>The following aesthetics are understood by <code>geom_boxplot()</code>:</p>
+<ol type="1">
+<li><code>x</code> or <code>y</code>: Specifies the categorical variable along the x- or y-axis.</li>
+<li><code>lower</code> or <code>xlower</code>: Specifies the 25th percentile/first quartile.</li>
+<li><code>upper</code> or <code>xupper</code>: Specifies the 75th percentile/third quartile.</li>
+<li><code>middle</code> or <code>xmiddle</code>: Specifies the 50th percentile/second quartile/median.</li>
+<li><code>ymin</code> or <code>xmin</code>: Specifies the y or x minimum for the plot.</li>
+<li><code>ymax</code> or <code>xmax</code>: Specifies the y or x maximum for the plot.</li>
+<li><code>alpha</code>: Specifies a variable to determine transparency.</li>
+<li><code>color</code>: Assigns an outline color to respective levels of a specified categorical variable.</li>
+<li><code>fill</code>: Assigns a fill color to respective levels of a specified categorical variable.</li>
+<li><code>group</code>: Partitions data by a discrete variable when no other grouping variable is specified, or grouping is incorrectly defaulted by R.</li>
+<li><code>linetype</code>: Specifies line type of box plot.</li>
+<li><code>linewidth</code>: Specifies line width of box plot.</li>
+<li><code>shape</code>: Specifies the shape of the (outlier) points.</li>
+<li><code>size</code>: Specifies the size of the points and text.</li>
+<li><code>weight</code>: Specifies a weight variable.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>box_basic <span class="ot">&lt;-</span> demographics_df <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> race, <span class="at">y =</span> age, <span class="at">color =</span> race) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Race"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Age"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Box Plot of Race and Age"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Race"</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Using width to adjust the width of the boxes</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"None"</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>box_basic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="01_mosaic_violin_files/figure-html/figure-box-basic-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="violin-plot" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="violin-plot"><span class="header-section-number">6.3</span> Violin Plot</h2>
+<p>In order to create a Violin plot, you must specify what data object you will be using within the <code>ggplot()</code> function. Then you will set aesthetic mapping options within the <code>aes()</code> or aesthetic layer. The <code>geom_violin()</code> layer specifies the violin plot. An additional call for <code>geom_boxplot()</code> will overlay box quartiles on the violin plot.</p>
+<p>The following aesthetics are understood by <code>geom_violin()</code>:</p>
+<ol type="1">
+<li><code>x</code>: Specifies the categorical variable along the x-axis.</li>
+<li><code>y</code>: Specifies the continuous variable along the y-axis.</li>
+<li><code>alpha</code>: Specifies a variable to determine transparency.</li>
+<li><code>color</code>: Assigns an outline color to respective levels of a specified categorical variable.</li>
+<li><code>fill</code>: Assigns a fill color to respective levels of a specified categorical variable.</li>
+<li><code>group</code>: Partitions data by a discrete variable when no other grouping variable is specified, or grouping is incorrectly defaulted by R.</li>
+<li><code>linetype</code>: Specifies line type of violin plot.</li>
+<li><code>linewidth</code>: Specifies line width of violin plot.</li>
+<li><code>weight</code>: Specifies a weight variable.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>violin_basic <span class="ot">&lt;-</span> demographics_df <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> race, <span class="at">y =</span> age, <span class="at">color =</span> race) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Race"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Age"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Violin Plot of Race and Age"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"With Summary Information"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Race"</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"None"</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>violin_basic                        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="01_mosaic_violin_files/figure-html/figure-violin-basic-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -301,11 +427,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="brief-interpretation" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> Brief Interpretation</h1>
+<section id="mosaic-plot" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="mosaic-plot"><span class="header-section-number">7.1</span> Mosaic Plot</h2>
 <ul>
-<li>stuff here.</li>
+<li>Compared to Project 27 and Project 51, Project 30 had the highest proportion of participants who indicated that their race is ‘White’.</li>
+<li>Compared to Project 30 and Project 51, Project 27 had the highest proportion of participants who indicated that their race is ‘Other’.</li>
+<li>Compared to Project 27 and Project 51, Project 30 has the lowest proportion of participants who indicated that their race is ‘Other’.</li>
+</ul>
+</section>
+<section id="box-plot-1" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="box-plot-1"><span class="header-section-number">7.2</span> Box Plot</h2>
+<ul>
+<li>Participants who indicated that their race is ‘Black’ exhibited the highest median age of around 45 years old</li>
+<li>Participants who indicated that their race is ‘White’ exhibited the lowest median age at approximately 31 years old.</li>
+</ul>
+</section>
+<section id="violin-plot-1" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="violin-plot-1"><span class="header-section-number">7.3</span> Violin Plot</h2>
+<ul>
+<li>Participants who indicated that their race is ‘White’ exhibited peak density around mid-20s compared to those who indicated that their race is ‘Black’, where peak density is exhibited around late-40s.</li>
+<li>Participants who indicated that their race is ‘White’ had the lowest median age at approximately 31 years old, where participants who indicated that their race is ‘Black’ had the highest median age at approximately 45 years old.</li>
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
