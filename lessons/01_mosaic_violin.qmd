@@ -150,17 +150,20 @@ mosaic_advanced <- demographics_df %>%
     x = "Project",
     title = "Mosaic Plot of Race by Gender and CTN Project"
   ) +
+  scale_fill_manual(
+    labels = c("No" = "Female", "Yes" = "Male"),
+    values = c("darkorchid4", "darkolivegreen4", "grey")
+  ) +
   theme_mosaic() +
   # Adjust axis tick labels to 60 degrees and justification to the right
   # with hjust (horizontal justification) and vjust (vertical justification)
-  theme(axis.text.x = element_text(angle = 60, hjust = 1, vjust = 1)) +
-  theme(legend.position = "None")
+  theme(axis.text.x = element_text(angle = 60, hjust = 1, vjust = 1))
   
 mosaic_advanced
 ```
 
 
-## Box Plot
+## Box Plots
 
 In order to create a box plot, you must specify what data object you will be using within the `ggplot()` function. Then you will set aesthetic mapping options within the `aes()` or aesthetic layer. The `geom_boxplot()` layer specifies the box plot.
 
@@ -181,6 +184,10 @@ The following aesthetics are understood by `geom_boxplot()`:
 14.  `shape`: Specifies the shape of the (outlier) points.
 15.  `size`: Specifies the size of the points and text.
 16.  `weight`: Specifies a weight variable.
+
+### Basic Box Plot
+
+The following is a basic box plot showing the relationship between one continuous and one categorical variable.
 ```{r}
 #| label: figure-box-basic
 #| message: false
@@ -202,6 +209,36 @@ box_basic <- demographics_df %>%
 
 box_basic
 ```
+
+### More Advanced Box Plot
+
+With `geom_box()`, you can also specify a additional categorical variable (different from you x and y variables) to break up your plot by that variable. For example, the following plot takes the previous plot of `race` and `age` and adds information by gender (`is_male`)
+```{r}
+#| label: figure-box-advanced
+#| message: false
+#| warning: false
+
+# Box Plot
+box_advanced <- demographics_df %>% 
+  ggplot() +
+  aes(x = race, y = age, color = is_male) +
+  # changing the labels for is_male, and specifying the colors we want
+  scale_color_manual(
+    labels = c("No" = "Female", "Yes" = "Male"),
+    values = c("darkorchid4", "darkolivegreen4")
+  ) +
+  labs(
+    x = "Race",
+    y = "Age",
+    title = "Box Plot of Race and Age",
+    color = "Gender"
+  ) +
+  # Using width to adjust the width of the boxes
+  geom_boxplot(width = 0.5)
+
+box_advanced
+```
+
 
 
 ## Violin Plot
@@ -261,3 +298,9 @@ violin_basic
 ## Violin Plot
 -   Participants who indicated that their race is 'White' exhibited peak density around mid-20s compared to those who indicated that their race is 'Black', where peak density is exhibited around late-40s.
 -   Participants who indicated that their race is 'White' had the lowest median age at approximately 31 years old, where participants who indicated that their race is 'Black' had the highest median age at approximately 45 years old.
+
+
+
+# Conclusion
+
+Going to update this
