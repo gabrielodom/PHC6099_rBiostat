@@ -1,0 +1,309 @@
+---
+title: "Mosaic & Box/Violin Plots"
+authors: 
+  - name: Ashlee Perez & Michaela Larson
+    affiliations:
+      - Florida International University
+      - Robert Stempel College of Public Health and Social Work
+toc: true
+number-sections: true
+format:
+  html:
+    self-contained: true
+editor_options: 
+  chunk_output_type: console
+---
+
+
+
+# Packages for this Lesson
+```{r}
+#| label: load-packages
+#| message: false
+
+# Installing Required Packages
+# install.packages("public.ctn0094data")
+# install.packages("tidyverse")
+# install.packages("ggmosaic")
+
+# Loading Required Packages
+library(public.ctn0094data)
+library(tidyverse)
+library(ggmosaic)
+```
+
+
+
+# Introduction to Mosaic and Box/Violin Plots
+
+Mosaic, box, and violin plots are useful for visualizing summary statistics. 
+
+A mosaic plot is a special type of stacked bar chart used for two or more categorical variables. The width of the columns is proportional to the number of observations in each level of the variable plotted on the horizontal, or x-axis. The vertical length of the bars is proportional to the number of observations in the second variable within each level of the first variable.
+
+Box and violin plots are used for continuous variables by group. Box plots display six summary measures (the minimum, first quartile (Q1), median, third quartile (Q3), the interquartile range, and maximum). A violin plot illustrates the distribution of numerical data for one or more level of a categorical variable by combining summary statistics and density of each variable. Each curve corresponds to the respective frequency of data points within each region. A box plot is typically overlaid to provide additional information.
+
+
+
+# Data Source and Description
+
+The National Drug Abuse Treatment Clinical Trials Network (CTN) is a means by which medical and specialty treatment providers, treatment researchers, participating patients, and the National Institute on Drug Abuse cooperatively develop, validate, refine, and deliver new treatment options to patients. The CTN 094 `demographics` and `everybody` data sets from the `{public.ctn0094data}` package were utilized for the following visualizations. CTN 094 is a comprehensive, harmonized and normalized database of treatment data from CTN_0027, CTN_0030, and CTN_0051, where experiences of individuals with opioid use disorder (OUD) who seek care are described.
+
+
+
+# Cleaning the Data to Create a Model Data Frame
+
+The `demographics` and `everybody` data sets within the `{public.ctn0094data}` package were joined by ID (`who` variable). `Race`, `age`, `is_male` (gender), and `project` were selected features for the following visualizations.
+```{r}
+#| label: data-cleaning
+#| message: false
+
+# Creating model data frame to include age, race, project, and is_male
+# from demographics and everybody data sets. Joined by subject ID (who)
+demographics_df <- demographics %>% 
+  left_join(everybody, by = "who")  %>%
+  select(age, race, project, is_male)
+```
+
+
+
+# Assumptions with Plots
+
+In mosaic plots, two categorical variables are plotted along the horizontal (x) and vertical (y) axis. Each combination of categories forms a rectangle or tile within the plot. 
+
+In box and violin plots, a categorical variable is plotted along the horizontal or x-axis, while a continuous variable is plotted along the vertical or y-axis. Violin plots can be limiting if symmetry, skew, or other shape and variability characteristics are different between groups because precise comparison cannot be easily interpreted between density curves. For this reason, violin plots are typically rendered with another overlaid chart type, like box plot quartiles.
+
+
+
+# Code to Run Mosaic & Box/Violin Plots & output
+
+
+## Mosaic Plots
+
+In order to create a Mosaic plot, you must specify what data object you will be using within the `ggplot()` function. Then you will set aesthetic mapping options within the following geometric object layer: `geom_mosaic()`. 
+
+In `geom_mosaic()`, the following aesthetics can be specified:
+
+1.  `weight:` a weighting variable.
+2.  `x:` categorical variable for the x-axis.
+    -   Specified as `x = product(var1, var2, ...)`
+    -   The `product()` function is used to extract the values from the categorical variable specified.
+3.  `alpha:` a variable specifying transparency.
+    -   If the variable is not called in `x:`, then `alpha:` will be added in the first position.
+4.  `fill:` a variable specifying fill color.
+    -   If the variable is not called in `x:`, then `fill:` will be added after the optional `alpha:` variable.
+5.  `conds:` a variable specifying conditions.
+    -   Specified as `conds = product(var1, var2, ...)`
+
+The ordering of the variables is vital as the product plot is created hierarchically. 
+
+### Basic Mosaic Plot
+
+In the following example of a basic mosaic plot, we visualize the distribution of Race among CTN Projects 27, 30, and 51.
+```{r}
+#| label: figure-mosaic-basic
+#| message: false
+#| warning: false
+
+# Basic Mosaic Plot
+mosaic_basic <- demographics_df %>% 
+  ggplot() +
+  geom_mosaic(
+    aes(
+      # geom_mosaic() does not have one-to-one mapping between a variable and the x- 
+      # or y-axis. So you must use the product() function when assigning a variable
+      # to the x-axis to account for the variable number of variables.
+      x = product(project),
+      fill = race
+    )
+  ) +
+  labs(
+    y = "Race",
+    x = "Project",
+    title = "Mosaic Plot of Race by CTN Project") +
+  # Specifies default `geom_mosaic` aesthetics, e.g white panel background, 
+  # removes grid lines, adjusts widths and heights of rows and columns to 
+  # reflect frequencies
+  theme_mosaic() +
+  # Removes legend illustrating Race and respective fill colors
+  theme(legend.position = "None")
+  
+mosaic_basic
+```
+
+### More Advanced Mosaic Plot
+
+In a more advanced version of a mosaic plot, we can visualize more than 2 categorical variables. The following example utilizes race, project, and ethnicity among CTN Projects 27, 30, and 51.
+```{r}
+#| label: figure-mosaic-advanced
+#| message: false
+#| warning: false
+
+# Advanced Mosaic Plot
+mosaic_advanced <- demographics_df %>% 
+  ggplot() +
+  geom_mosaic(
+    aes(
+      x = product(race, project),
+      fill = is_male
+    )
+  ) +
+  labs(
+    y = "Race",
+    x = "Project",
+    title = "Mosaic Plot of Race by Gender and CTN Project",
+    fill = "Gender"
+  ) +
+  scale_fill_manual(
+    labels = c("No" = "Female", "Yes" = "Male"),
+    values = c("darkseagreen2", "darkslategray3", "grey")
+  ) +
+  theme_mosaic() +
+  # Adjust axis tick labels to 60 degrees and justification to the right
+  # with hjust (horizontal justification) and vjust (vertical justification)
+  theme(axis.text.x = element_text(angle = 60, hjust = 1, vjust = 1))
+  
+mosaic_advanced
+```
+
+
+## Box Plots
+
+In order to create a box plot, you must specify what data object you will be using within the `ggplot()` function. Then you will set aesthetic mapping options within the `aes()` or aesthetic layer. The `geom_boxplot()` layer specifies the box plot.
+
+The following aesthetics are understood by `geom_boxplot()`:
+
+1.  `x` or `y`: Specifies the categorical variable along the x- or y-axis.
+2.  `lower` or `xlower`: Specifies the 25th percentile/first quartile.
+4.  `upper` or `xupper`: Specifies the 75th percentile/third quartile.
+5.  `middle` or `xmiddle`: Specifies the 50th percentile/second quartile/median.
+6.  `ymin` or `xmin`: Specifies the y or x minimum for the plot.
+7.  `ymax` or `xmax`: Specifies the y or x maximum for the plot.
+8.  `alpha`: Specifies a variable to determine transparency.
+9.  `color`: Assigns an outline color to respective levels of a specified categorical variable.
+10.  `fill`: Assigns a fill color to respective levels of a specified categorical variable.
+11.  `group`: Partitions data by a discrete variable when no other grouping variable is specified, or grouping is incorrectly defaulted by R.
+12.  `linetype`: Specifies line type of box plot.
+13.  `linewidth`: Specifies line width of box plot.
+14.  `shape`: Specifies the shape of the (outlier) points.
+15.  `size`: Specifies the size of the points and text.
+16.  `weight`: Specifies a weight variable.
+
+### Basic Box Plot
+
+The following is a basic box plot showing the relationship between one continuous and one categorical variable.
+```{r}
+#| label: figure-box-basic
+#| message: false
+#| warning: false
+
+# Box Plot
+box_basic <- demographics_df %>% 
+  ggplot() +
+  aes(x = race, y = age, color = race) +
+  labs(
+    x = "Race",
+    y = "Age",
+    title = "Box Plot of Race and Age",
+    color = "Race"
+  ) +
+  # Using width to adjust the width of the boxes
+  geom_boxplot(width = 0.5) +
+  theme(legend.position = "None")
+
+box_basic
+```
+
+### More Advanced Box Plot
+
+With `geom_box()`, you can also specify a additional categorical variable (different from you x and y variables) to break up your plot by that variable. For example, the following plot takes the previous plot of `race` and `age` and adds information by gender (`is_male`)
+```{r}
+#| label: figure-box-advanced
+#| message: false
+#| warning: false
+
+# Box Plot
+box_advanced <- demographics_df %>% 
+  ggplot() +
+  aes(x = race, y = age, color = is_male) +
+  # changing the labels for is_male, and specifying the colors we want
+  scale_color_manual(
+    labels = c("No" = "Female", "Yes" = "Male"),
+    values = c("darkorchid4", "darkolivegreen4")
+  ) +
+  labs(
+    x = "Race",
+    y = "Age",
+    title = "Box Plot of Race and Age",
+    color = "Gender"
+  ) +
+  # Using width to adjust the width of the boxes
+  geom_boxplot(width = 0.5)
+
+box_advanced
+```
+
+
+
+## Violin Plot
+
+In order to create a Violin plot, you must specify what data object you will be using within the `ggplot()` function. Then you will set aesthetic mapping options within the `aes()` or aesthetic layer. The `geom_violin()` layer specifies the violin plot. An additional call for `geom_boxplot()` will overlay box quartiles on the violin plot.
+
+The following aesthetics are understood by `geom_violin()`:
+
+1.  `x`: Specifies the categorical variable along the x-axis.
+2.  `y`: Specifies the continuous variable along the y-axis.
+3.  `alpha`: Specifies a variable to determine transparency.
+4.  `color`: Assigns an outline color to respective levels of a specified categorical variable.
+5.  `fill`: Assigns a fill color to respective levels of a specified categorical variable.
+6.  `group`: Partitions data by a discrete variable when no other grouping variable is specified, or grouping is incorrectly defaulted by R.
+7.  `linetype`: Specifies line type of violin plot.
+8.  `linewidth`: Specifies line width of violin plot.
+9.  `weight`: Specifies a weight variable.
+```{r}
+#| label: figure-violin-basic
+#| message: false
+#| warning: false
+
+# Violin Plot
+violin_basic <- demographics_df %>% 
+  ggplot() +
+  aes(x = race, y = age, color = race) +
+  labs(
+    x = "Race",
+    y = "Age",
+    title = "Violin Plot of Race and Age",
+    subtitle = "With Summary Information",
+    color = "Race"
+  ) +
+  geom_violin() +
+  geom_boxplot(width = 0.1) +
+  theme(legend.position = "None")
+
+violin_basic                        
+```
+
+
+
+# Brief Interpretation
+
+
+## Mosaic Plot
+-   Compared to Project 27 and Project 51, Project 30 had the highest proportion of participants who indicated that their race is 'White'.
+-   Compared to Project 30 and Project 51, Project 27 had the highest proportion of participants who indicated that their race is 'Other'.
+-   Compared to Project 27 and Project 51, Project 30 has the lowest proportion of participants who indicated that their race is 'Other'.
+
+
+## Box Plot 
+-   Participants who indicated that their race is 'Black' exhibited the highest median age of around 45 years old
+-   Participants who indicated that their race is 'White' exhibited the lowest median age at approximately 31 years old.
+
+
+## Violin Plot
+-   Participants who indicated that their race is 'White' exhibited peak density around mid-20s compared to those who indicated that their race is 'Black', where peak density is exhibited around late-40s.
+-   Participants who indicated that their race is 'White' had the lowest median age at approximately 31 years old, where participants who indicated that their race is 'Black' had the highest median age at approximately 45 years old.
+
+
+
+# Conclusion
+
+Going to update this
