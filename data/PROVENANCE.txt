@@ -23,11 +23,29 @@ Gabriel Odom
 4. Greater Manchester Police Stop and Search Data:
   - file: 02_dataset-gmss-2017-subset1_jittered_20240503.csv
   - created: original sometime in 2017; this is a "jittered" version (to avoid copyright infringement) that was created in 2024
-  - curators: Julie Scott Jones (Sage Research) for the original; found by Tendai Gwanzura and Ana Bravo at <https://methods.sagepub.com/dataset/fishers-exact-gmss-2017>
-  - method: random non-missing values from the original data were replaced with draws from a random process
+  - curators: Julie Scott Jones (Sage Research) for the original; found by Tendai Gwanzura and Ana Bravo
+  - method: downloaded from <https://methods.sagepub.com/dataset/fishers-exact-gmss-2017>; random non-missing values from the original data were replaced with draws from a random process
 
 5. Student Alcohol Consumption--Math Class:
     - file: 03_student-mat.csv
     - created: 2008
-    - curators: P. Cortez and A. Silva. "Using Data Mining to Predict Secondary School Student Performance." In A. Brito and J. Teixeira Eds., Proceedings of 5th FUture BUsiness TEChnology Conference (FUBUTEC 2008) pp. 5-12, Porto, Portugal, April, 2008, EUROSIS, ISBN 978-9077381-39-7. Hosted by Kaggle and UCI Machine Learning; found by Tendai Gwanzura and Ana Bravo at <https://www.kaggle.com/datasets/uciml/student-alcohol-consumption?resource=download>
-    - method: unzip the data and save the "student-mat.csv" file
+    - curators: P. Cortez and A. Silva. "Using Data Mining to Predict Secondary School Student Performance." In A. Brito and J. Teixeira Eds., Proceedings of 5th FUture BUsiness TEChnology Conference (FUBUTEC 2008) pp. 5-12, Porto, Portugal, April, 2008, EUROSIS, ISBN 978-9077381-39-7. Hosted by Kaggle and UCI Machine Learning; found by Tendai Gwanzura and Ana Bravo
+    - method: downloaded from <https://www.kaggle.com/datasets/uciml/student-alcohol-consumption?resource=download>; unzipped data and saved the "student-mat.csv" file
+
+6. Planktonic larval duration:
+    - file: 04_PLD.txt
+    - created: 2007
+    - curators: O'Connor et al, 2007 (https://www.jstor.org/stable/25426272); hosted by Prof. Steve Midway on GitHub; found by Tendai Gwanzura and Ana Bravo
+    - method: downloaded from <https://github.com/stevemidway/DAR/blob/main/PLD.txt>
+
+7. Hispanic Established Populations for the Epidemiologic Study of the Elderly (HEPESE) Wave 8:
+    - file: 03_HEPESE_synthetic_20240510.csv
+    - created: original in 2008; synthetic on 2024-05-10
+    - curators: people; found by Srijana Gautam and Arturo Barahona
+    - method: downloaded from <https://www.icpsr.umich.edu/web/ICPSR/studies/36578> in SPSS .sav file format; due to data sharing restrictions, values from the original data were replaced with randomly jittered values (see R/jitter_HEPESE_data_20240510.R).
+
+8. Agricultural crop yield:
+    - file: 04_crop_data.csv
+    - created: 2020
+    - curators: Rebecca Bevans for Scribbr; found by Patrice Lewis and Julissa Martinez
+    - method: downloaded ZIP data from <https://www.scribbr.com/statistics/one-way-anova/> using the direct access link <https://www.scribbr.com/wp-content/uploads//2020/03/crop.data_.anova_.zip>; extracted the data and renamed the file from crop.data.csv to remove the extra period in the file name.

@@ -22,7 +22,7 @@ knitr:
     comment: ""    # don't show ## with printed output
     R.options:    
       digits: 3    # round to three digits
-bibliography: references.bib
+bibliography: bib/packages.bib
 ---
 
 ## Introduction

@@ -15,6 +15,7 @@ format:
   html:
     code-fold: true
     html-math-method: katex
+    self-contained: true
 ---
 
 ## Libraries Used
@@ -169,7 +170,7 @@ this is example is from [O'Connor et al (2007).](https://www.jstor.org/stable/25
 #| message: false
 
 
-PLD <- read_table("/Users/anabravo/Documents/GitHub/R-health-blog/PLD.txt")
+PLD <- read_table("../data/04_PLD.txt")
 
 ```
 

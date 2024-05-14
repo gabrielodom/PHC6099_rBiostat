@@ -324,19 +324,3 @@ In conclusion, the Kruskal-Wallace test is a non-parametric hypothesis test that
 
 
 # References {.unnumbered}
-
-```{r}
-#| include: false
-
-# automatically create a bib database for loaded R packages & rUM
-knitr::write_bib(
-  c(
-    .packages(),
-    "rUM",
-    "table1"
-  ),
-  "packages.bib"
-)
-```
-
-

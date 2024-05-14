@@ -7,6 +7,9 @@ author:
       - Robert Stempel College of Public Health and Social Work
 toc: true
 number-sections: true
+format:
+  html:
+    self-contained: true
 ---
 
 # Introduction to One-Sample $Z$-Tests
