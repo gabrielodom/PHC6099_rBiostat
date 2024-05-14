@@ -7,7 +7,9 @@ authors:
       - Robert Stempel College of Public Health and Social Work
 toc: true
 number-sections: true
-format: html
+format:
+  html:
+    self-contained: true
 editor_options: 
   chunk_output_type: console
 ---
@@ -148,7 +150,8 @@ mosaic_advanced <- demographics_df %>%
   labs(
     y = "Race",
     x = "Project",
-    title = "Mosaic Plot of Race by Gender and CTN Project"
+    title = "Mosaic Plot of Race by Gender and CTN Project",
+    fill = "Gender"
   ) +
   scale_fill_manual(
     labels = c("No" = "Female", "Yes" = "Male"),
