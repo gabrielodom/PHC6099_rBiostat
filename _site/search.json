@@ -726,5 +726,103 @@
     "title": "Ordinary Least Squares Regression",
     "section": "Visual representation",
     "text": "Visual representation\nThe visual representation of this model using ggplot is the following:\n\nggplot(mtcars, aes(x = wt, y = mpg))+\n  geom_point()+\n  geom_smooth(method = \"lm\", se = FALSE)+ #se is option for coinfidence bar\n  labs(x= \"Weight (per 1,000 pounds)\",\n       y = \"Miles per gallon\")+\n  theme_bw()\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\nAs shown in the figure above, we see the summary statistics represented in a visual manner with the line of best fit. As indicated previously, we see a steep negative correlation between weight of the car and the miles per gallon (efficiency) utilized."
+  },
+  {
+    "objectID": "lessons_original/04_regression_polynomial.html",
+    "href": "lessons_original/04_regression_polynomial.html",
+    "title": "Introduction to Polynomial Regression",
+    "section": "",
+    "text": "Polynomial regression is a type of regression analysis that models the non-linear relationship between the predictor variable(s) and response variable1. It is an extension of simple linear regression that allows for more complex relationships between predictor and response variables1.\nIn simple terms, it allows us to fit a curve to our data instead of a straight line.\n\n\nPolynomial regression is useful when the relationship between the independent and dependent variables is nonlinear.\nIt can capture more complex relationships than linear regression, making it suitable for cases where the data exhibits curvature.\n\n\n\n\nLinearity: There is a curvilinear relationship between the independent variable(s) and the dependent variable.\nIndependence: The predictor variables are independent of each other.\nHomoscedasticity: The variance of the errors should be constant across all levels of the independent variable(s).\nNormality: The errors should be normally distributed with mean zero and a constant variance.\n\n\n\n\nConsider independent samples \\(i = 1, \\ldots, n\\). The general formula for a polynomial regression representing the relationship between the response variable (\\(y\\)) and the predictor variable (\\(x\\)) as a polynomial function of degree \\(d\\) is:\n\\[\ny_i = \\beta_0 + \\beta_1x_i + \\beta_2x_i^2 + \\beta_3x_i^3 + ... \\beta_dx_i^d + \\epsilon_i,\n\\]\nwhere:\n\n\\(y_i\\) represents the response variable,\n\\(x_i\\) represents the predictor variable,\n\\(\\beta_0,\\ \\beta_1,\\ \\ldots,\\ \\beta_d\\) are the coefficients to be estimated, and\n\\(\\epsilon_i\\) represents the errors.\n\nFor large degree \\(d\\), polynomial regression allows us to produce an extremely non-linear curve. Therefore, it is not common to use \\(d &gt; 3\\) because the larger value of \\(d\\), the more overly flexible polynomial curve becomes, which can lead to overfitting them model to the data.\nThe coefficients in polynomial function can be estimated using least square linear regression because it can be viewed as a standard linear model with predictors \\(x_i, \\,x_i^2, \\,x_i^3, ..., x_i^d\\). Hence, polynomial regression is also known as polynomial linear regression.\n\n\n\n\nStep 0: Load required packages\nStep 1: Load and inspect the data\nStep 2: Visualize the data\nStep 3: Fit the model\nStep 4: Assess Assumptions\nStep 5: Describe model output"
+  },
+  {
+    "objectID": "lessons_original/04_regression_polynomial.html#when-is-a-polynomial-regression-used",
+    "href": "lessons_original/04_regression_polynomial.html#when-is-a-polynomial-regression-used",
+    "title": "Introduction to Polynomial Regression",
+    "section": "",
+    "text": "Polynomial regression is useful when the relationship between the independent and dependent variables is nonlinear.\nIt can capture more complex relationships than linear regression, making it suitable for cases where the data exhibits curvature."
+  },
+  {
+    "objectID": "lessons_original/04_regression_polynomial.html#assumptions-of-polynomial-regression",
+    "href": "lessons_original/04_regression_polynomial.html#assumptions-of-polynomial-regression",
+    "title": "Introduction to Polynomial Regression",
+    "section": "",
+    "text": "Linearity: There is a curvilinear relationship between the independent variable(s) and the dependent variable.\nIndependence: The predictor variables are independent of each other.\nHomoscedasticity: The variance of the errors should be constant across all levels of the independent variable(s).\nNormality: The errors should be normally distributed with mean zero and a constant variance."
+  },
+  {
+    "objectID": "lessons_original/04_regression_polynomial.html#mathematical-equation",
+    "href": "lessons_original/04_regression_polynomial.html#mathematical-equation",
+    "title": "Introduction to Polynomial Regression",
+    "section": "",
+    "text": "Consider independent samples \\(i = 1, \\ldots, n\\). The general formula for a polynomial regression representing the relationship between the response variable (\\(y\\)) and the predictor variable (\\(x\\)) as a polynomial function of degree \\(d\\) is:\n\\[\ny_i = \\beta_0 + \\beta_1x_i + \\beta_2x_i^2 + \\beta_3x_i^3 + ... \\beta_dx_i^d + \\epsilon_i,\n\\]\nwhere:\n\n\\(y_i\\) represents the response variable,\n\\(x_i\\) represents the predictor variable,\n\\(\\beta_0,\\ \\beta_1,\\ \\ldots,\\ \\beta_d\\) are the coefficients to be estimated, and\n\\(\\epsilon_i\\) represents the errors.\n\nFor large degree \\(d\\), polynomial regression allows us to produce an extremely non-linear curve. Therefore, it is not common to use \\(d &gt; 3\\) because the larger value of \\(d\\), the more overly flexible polynomial curve becomes, which can lead to overfitting them model to the data.\nThe coefficients in polynomial function can be estimated using least square linear regression because it can be viewed as a standard linear model with predictors \\(x_i, \\,x_i^2, \\,x_i^3, ..., x_i^d\\). Hence, polynomial regression is also known as polynomial linear regression."
+  },
+  {
+    "objectID": "lessons_original/04_regression_polynomial.html#performing-a-polynomial-regression-in-r",
+    "href": "lessons_original/04_regression_polynomial.html#performing-a-polynomial-regression-in-r",
+    "title": "Introduction to Polynomial Regression",
+    "section": "",
+    "text": "Step 0: Load required packages\nStep 1: Load and inspect the data\nStep 2: Visualize the data\nStep 3: Fit the model\nStep 4: Assess Assumptions\nStep 5: Describe model output"
+  },
+  {
+    "objectID": "lessons_original/04_regression_polynomial.html#hypotheses",
+    "href": "lessons_original/04_regression_polynomial.html#hypotheses",
+    "title": "Introduction to Polynomial Regression",
+    "section": "2.1 Hypotheses",
+    "text": "2.1 Hypotheses\nFor this example, we are investigating the following:\n\nResearch Question: Is there a significant quadratic relationship between the weight of a car (wt) and its miles per gallon (mpg) in the mtcars dataset?\nNull hypothesis (\\(H_0\\)): There is no significant relationship between the weight of a car (wt) and its miles per gallon (mpg).\nAlternative hypothesis (\\(H_A\\)): There is a significant relationship between the weight of a car (wt) and its miles per gallon (mpg).\n\nIn this case, the null hypothesis assumes that the coefficients of the quadratic polynomial terms are zero, indicating no relationship between the weight of the car and miles per gallon. The alternative hypothesis, on the other hand, suggests that at least one of the quadratic polynomial terms is non-zero, indicating a significant relationship between the weight of the car and miles per gallon.\nBy performing the polynomial regression analysis and examining the model summary and coefficients, we can evaluate the statistical significance of the relationship and determine whether to reject or fail to reject the null hypothesis."
+  },
+  {
+    "objectID": "lessons_original/04_regression_polynomial.html#step-0-install-and-load-required-package",
+    "href": "lessons_original/04_regression_polynomial.html#step-0-install-and-load-required-package",
+    "title": "Introduction to Polynomial Regression",
+    "section": "2.2 Step 0: Install and load required package",
+    "text": "2.2 Step 0: Install and load required package\nIn R, we’ll use the lm() function from the base package to perform polynomial regression. Also, since we want to visualize our data, we will be loading the ggplot2 package for use.\n\n# For data visualization purposes\n# install.packages(\"ggplot2\")\nlibrary(ggplot2)"
+  },
+  {
+    "objectID": "lessons_original/04_regression_polynomial.html#step-1-load-and-inspect-the-data",
+    "href": "lessons_original/04_regression_polynomial.html#step-1-load-and-inspect-the-data",
+    "title": "Introduction to Polynomial Regression",
+    "section": "2.3 Step 1: Load and inspect the data",
+    "text": "2.3 Step 1: Load and inspect the data\nFor this example, we will use the built-in mtcars dataset (from the standard R package datasets) which is publicly available and contains information about various car models.\n\n# Load mtcars dataset\ndata(mtcars)\n\n\n# Print the first few rows\nhead(mtcars)\n\n                   mpg cyl disp  hp drat    wt  qsec vs am gear carb\nMazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1\nHornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1\nHornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2\nValiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1"
+  },
+  {
+    "objectID": "lessons_original/04_regression_polynomial.html#step-2-visualize-the-data",
+    "href": "lessons_original/04_regression_polynomial.html#step-2-visualize-the-data",
+    "title": "Introduction to Polynomial Regression",
+    "section": "2.4 Step 2: Visualize the data",
+    "text": "2.4 Step 2: Visualize the data\nBefore fitting a polynomial regression model, it’s helpful to visualize the data to identify any non-linear patterns. For our example, we will use a scatter plot to visualize the relationship between the independent and dependent variables:\n\n# Scatter plot of mpg (dependent variable) vs. wt (independent variable)\nggplot(mtcars) +\n  theme_minimal() +\n  aes(x = wt, y = mpg) + \n  labs(x = \"Weight (lbs/1000)\", y = \"Miles per Gallon\") +\n  geom_point()"
+  },
+  {
+    "objectID": "lessons_original/04_regression_polynomial.html#step-3-fit-models",
+    "href": "lessons_original/04_regression_polynomial.html#step-3-fit-models",
+    "title": "Introduction to Polynomial Regression",
+    "section": "2.5 Step 3: Fit Models",
+    "text": "2.5 Step 3: Fit Models\nLet’s create a function so we can build multiple models. We will build a standard linear model and a quadratic model (degrees 1 and 2, respectively).\n\n# Function to fit and evaluate polynomial regression models\nfit_poly_regression &lt;- function(degree) {\n  formula &lt;- as.formula(paste(\"mpg ~ poly(wt, \", degree, \")\"))\n  lm(formula, data = mtcars)\n}\n\n# Fit polynomial regression models with degrees 1 to 2\nmodel_1 &lt;- fit_poly_regression(1)\nmodel_2 &lt;- fit_poly_regression(2)\n\nTo fit a polynomial regression model, we’ll use the lm() function and create polynomial terms using the poly() function. In this example, we’ll fit a standard linear (degree = 1) and a quadratic polynomial (degree = 2) to the mtcars dataset."
+  },
+  {
+    "objectID": "lessons_original/04_regression_polynomial.html#step-4-assess-assumptions",
+    "href": "lessons_original/04_regression_polynomial.html#step-4-assess-assumptions",
+    "title": "Introduction to Polynomial Regression",
+    "section": "2.6 Step 4: Assess Assumptions",
+    "text": "2.6 Step 4: Assess Assumptions\nBefore we can interpret the model, we have to check the assumptions. We will check these assumptions via plots:\n\nResiduals vs. Fitted values (used to check the linearity assumption),\na Q-Q plot of the Residuals (used to check the normality of the residuals),\na Scale-Location plot (used to check for heteroskedasticity), and\nResiduals vs. Leverage values (identifies overly influential values, if any exist).\n\n\npar(mfrow = c(2, 2))\nplot(model_1, which = c(1, 2, 3, 5))\n\n\n\n\n\n\n\nplot(model_2, which = c(1, 2, 3, 5))\n\n\n\n\n\n\n\npar(mfrow = c(1, 1))\n\nWe see that Model 2 (the quadratic one) satisfies the “linearity” assumption, because the red line in the “Residuals vs Fitted” graph is flat. However, the Q-Q plot shows that the residuals are not normally distributed, so we should take additional steps to transform the response feature (such as via a square root or log transformation, or something similar)."
+  },
+  {
+    "objectID": "lessons_original/04_regression_polynomial.html#step-5.-describe-model-output",
+    "href": "lessons_original/04_regression_polynomial.html#step-5.-describe-model-output",
+    "title": "Introduction to Polynomial Regression",
+    "section": "2.7 Step 5. Describe Model Output",
+    "text": "2.7 Step 5. Describe Model Output\nAlthough we recognize that this model is not correct (because the residuals are not approximately normal), we will give an example of how to interpret this output.\n\nsummary(model_2)\n\n\nCall:\nlm(formula = formula, data = mtcars)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-3.483 -1.998 -0.773  1.462  6.238 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   20.0906     0.4686  42.877  &lt; 2e-16 ***\npoly(wt, 2)1 -29.1157     2.6506 -10.985 7.52e-12 ***\npoly(wt, 2)2   8.6358     2.6506   3.258  0.00286 ** \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2.651 on 29 degrees of freedom\nMultiple R-squared:  0.8191,    Adjusted R-squared:  0.8066 \nF-statistic: 65.64 on 2 and 29 DF,  p-value: 1.715e-11"
+  },
+  {
+    "objectID": "lessons_original/04_regression_polynomial.html#bonus-step-visualize-the-final-model",
+    "href": "lessons_original/04_regression_polynomial.html#bonus-step-visualize-the-final-model",
+    "title": "Introduction to Polynomial Regression",
+    "section": "2.8 Bonus Step: Visualize the Final Model",
+    "text": "2.8 Bonus Step: Visualize the Final Model\nFinally, let’s plot the scatter plot with the polynomial regression line to visualize the fit:\n\n# Create a data frame with data points and predictions \nplot_data &lt;- data.frame(\n  wt = mtcars$wt,\n  mpg = mtcars$mpg, \n  mpg_predicted = predict(model_2, newdata = mtcars)\n)\n\n# Scatter plot with the polynomial regression line\nggplot(plot_data) +\n  theme_minimal() + \n  aes(x = wt, y = mpg) + \n  labs(\n    title = \"Scatter Plot with Polynomial Regression Line\",\n    x = \"Weight (wt)\",\n    y = \"Miles per Gallon (mpg)\"\n  ) +\n  geom_point() +\n  geom_line(aes(y = mpg_predicted), color = \"red\", size = 1)\n\nWarning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.\nℹ Please use `linewidth` instead."
+  },
+  {
+    "objectID": "lessons_original/04_regression_polynomial.html#references",
+    "href": "lessons_original/04_regression_polynomial.html#references",
+    "title": "Introduction to Polynomial Regression",
+    "section": "3.1 References",
+    "text": "3.1 References\n\nField, A. (2013). Discovering Statistics Using IBM SPSS Statistics. (4th ed.). Sage Publications.\nJames, G., Witten, D., Hastie, T., & Tibshirani, R. (2013). An Introduction to Statistical Learning with Applications in R. (2nd ed.). Publisher. (pp. 290-300)"
   }
 ]

@@ -1,28 +1,23 @@
 ---
 title: "Introduction to Polynomial Regression"
 subtitle: "Understanding and Coding in R"
-author: "Linh Cao & Deidre Okeke"
+author: "Linh Cao, Deidre Okeke, and Gabriel Odom"
 format:
-  revealjs: 
-    theme: default
-    scrollable: true
-slide-number: true
+  html:
+    self-contained: true
+    toc: true
+    number-sections: true
 preview-links: auto
-center-title-slide: true
-output-location: fragment
-code-overflow: scroll
-code-copy: true
-css: styles.css
-footer: "PHC 6099 - R Computing for Health Sciences"
-title-slide-attributes: 
-  data-background-image: https://marketplace.canva.com/EAEthkBVLfQ/1/0/1600w/canva-blush-wave-desktop-wallpaper-drvq3zaYl2E.jpg
 ---
 
-# What is a Polynomial Regression? {.smaller}
+
+
+# What is a Polynomial Regression?
 
 Polynomial regression is a type of regression analysis that models the non-linear relationship between the predictor variable(s) and response variable^**1**^. It is an extension of simple linear regression that allows for more complex relationships between predictor and response variables^**1**^.
 
 In simple terms, it allows us to fit a [curve]{.underline} to our data instead of a straight line.
+
 
 ## When is a Polynomial Regression Used?
 
@@ -30,104 +25,75 @@ Polynomial regression is useful when the relationship between the independent an
 
 It can capture more complex relationships than linear regression, making it suitable for cases where the data exhibits [curvature]{.underline}.
 
+
 ## Assumptions of Polynomial Regression
 
-::: incremental
 1.  **Linearity**: There is a curvilinear relationship between the independent variable(s) and the dependent variable.
-
 2.  **Independence**: The predictor variables are independent of each other.
-
 3.  **Homoscedasticity**: The variance of the errors should be constant across all levels of the independent variable(s).
-
 4.  **Normality**: The errors should be normally distributed with mean zero and a constant variance.
-:::
 
-## Mathematical Equation {.smaller}
 
-The mathematical equation for a polynomial regression represents the relationship between the response variable (Y) and the predictor variable (X) as a polynomial function. The general formula is:
+## Mathematical Equation
 
-::: columns
-::: {.column width="50%"}
+Consider independent samples $i = 1, \ldots, n$. The general formula for a polynomial regression representing the relationship between the response variable ($y$) and the predictor variable ($x$) as a polynomial function of degree $d$ is:
+
 $$
-y_i = \beta_0 + \beta_1x_i + \beta_2x_i^2 + \beta_3x_i^3 + ... \beta_dx_i^d + \epsilon_i
+y_i = \beta_0 + \beta_1x_i + \beta_2x_i^2 + \beta_3x_i^3 + ... \beta_dx_i^d + \epsilon_i,
 $$
-:::
 
-::: {.column width="50%"}
-Where:
+where:
 
--   Y~i~ = represents the response variable.
+-   $y_i$ represents the response variable,
+-   $x_i$ represents the predictor variable,
+-   $\beta_0,\ \beta_1,\ \ldots,\ \beta_d$ are the coefficients to be estimated, and
+-   $\epsilon_i$ represents the errors.
 
--   X~i~ = represents the predictor variable.
-
--   β₀, β₁, ... ,β~d~ are the coefficients to be estimated.
-
--   ε~i~ = represents the errors.
-:::
-:::
-
-For large degree d, polynomial regression allows us to produce an extremely non-linear curve. Therefore, it is not common to use d greater than 3 because the larger value of d, the more overly flexible polynomial curve becomes, which can create very strange shapes.
+For large degree $d$, polynomial regression allows us to produce an extremely non-linear curve. Therefore, it is not common to use $d > 3$ because the larger value of $d$, the more overly flexible polynomial curve becomes, which can lead to overfitting them model to the data.
 
 The coefficients in polynomial function can be estimated using least square linear regression because it can be viewed as a standard linear model with predictors $x_i, \,x_i^2, \,x_i^3, ..., x_i^d$. Hence, polynomial regression is also known as *polynomial linear regression*.
 
-Generally, this kind of regression is used for one resultant variable and one predictor.
 
 ## Performing a Polynomial Regression in R
 
--   Step 0: Load required package(s)
-
+-   Step 0: Load required packages
 -   Step 1: Load and inspect the data
-
 -   Step 2: Visualize the data
+-   Step 3: Fit the model
+-   Step 4: Assess Assumptions
+-   Step 5: Describe model output
 
--   Step 3: Split Data into Train and Test Set
 
--   Step 4: Fit Models
 
--   Step 5: Assess Assumptions
+# Let's Practice!
 
--   Step 6: Make Predictions & Evaluate The Models
+Now let's go through the steps to perform a polynomial regression in R. We'll be using the `lm()` function to fit the polynomial regression model. This function comes standard in base R.
 
--   Step 7: Visualize The Final Model on The Test Set
 
-# Let's Practice! {.smaller}
-
-Now let's go through the steps to perform a polynomial regression in R. We'll be using the **`lm()`** function to fit the polynomial regression model. This function comes standard in base R.
-
-## Let's Practice! {.smaller}
-
+## Hypotheses
 For this example, we are investigating the following:
 
--   **Research Question**: Is there a significant relationship between the weight of a car (**`wt`**) and its miles per gallon (**`mpg`**) in the **`mtcars`** dataset?
+-   **Research Question**: Is there a significant *quadratic relationship* between the weight of a car (`wt`) and its miles per gallon (`mpg`) in the `mtcars` dataset?
+-   **Null hypothesis ($H_0$)**: There is no significant relationship between the weight of a car (`wt`) and its miles per gallon (`mpg`).
+-   **Alternative hypothesis ($H_A$)**: There is a significant relationship between the weight of a car (`wt`) and its miles per gallon (`mpg`).
 
--   **Null hypothesis (H~0~)**: There is no significant relationship between the weight of a car (**`wt`**) and its miles per gallon (**`mpg`**) in the **`mtcars`** dataset.
-
--   **Alternative hypothesis (H~a~)**: There is a significant relationship between the weight of a car (**`wt`**) and its miles per gallon (**`mpg`**) in the **`mtcars`** dataset.
-
-::: columns
-::: {.column width="50%"}
 In this case, the null hypothesis assumes that the coefficients of the quadratic polynomial terms are zero, indicating no relationship between the weight of the car and miles per gallon. The alternative hypothesis, on the other hand, suggests that at least one of the quadratic polynomial terms is non-zero, indicating a significant relationship between the weight of the car and miles per gallon.
-:::
 
-::: {.column width="50%"}
 By performing the polynomial regression analysis and examining the model summary and coefficients, we can evaluate the statistical significance of the relationship and determine whether to reject or fail to reject the null hypothesis.
-:::
-:::
+
 
 ## Step 0: Install and load required package
-
-In R, we'll use the **`lm()`** function from the base package to perform polynomial regression. We will also use the `caret` package to help streamline the process of creating predictive models. This package contains the functions we need for data splitting. Finally, since we want to visualize our data, we will be loading the `ggplot2` package for use.
+In R, we'll use the `lm()` function from the base package to perform polynomial regression. Also, since we want to visualize our data, we will be loading the `ggplot2` package for use.
 
 ```{r, echo=TRUE}
 # For data visualization purposes
 # install.packages("ggplot2")
 library(ggplot2)
-library(caret)
 ```
 
-## Step 1: Load and inspect the data {.smaller}
 
-For this example, we will use the built-in **`mtcars`** dataset which is publicly available and contains information about various car models.
+## Step 1: Load and inspect the data
+For this example, we will use the built-in `mtcars` dataset (from the standard R package `datasets`) which is publicly available and contains information about various car models.
 
 ```{r, echo=TRUE}
 # Load mtcars dataset
@@ -139,118 +105,99 @@ data(mtcars)
 head(mtcars)
 ```
 
-## Step 2: Visualize the data {.smaller}
 
-Before fitting a polynomial regression model, it's helpful to visualize the data to identify any [non-linear]{.underline} patterns.
-
-For our example, we will use a scatter plot to visualize the relationship between the independent and dependent variables:
+## Step 2: Visualize the data
+Before fitting a polynomial regression model, it's helpful to visualize the data to identify any [non-linear]{.underline} patterns. For our example, we will use a scatter plot to visualize the relationship between the independent and dependent variables:
 
 ```{r, echo=TRUE}
 # Scatter plot of mpg (dependent variable) vs. wt (independent variable)
-ggplot(mtcars, aes(x = wt, y = mpg)) +
-  geom_point() +
+ggplot(mtcars) +
+  theme_minimal() +
+  aes(x = wt, y = mpg) + 
   labs(x = "Weight (lbs/1000)", y = "Miles per Gallon") +
-  theme_minimal()
+  geom_point()
 ```
 
-## Step 3: Split the data {.smaller}
 
-You will need to split the data to apply different models and compare which one is the better fit.
-
-```{r, echo=TRUE}
-# Set seed for reproducibility
-set.seed(123)
-
-# Randomly split the dataset into training and testing sets
-train_index <- createDataPartition(mtcars$mpg, p = 0.7, list = FALSE)
-train_data <- mtcars[train_index, ]
-test_data <- mtcars[-train_index, ]
-```
-
-## Step 4: Fit Models {.smaller}
-
+## Step 3: Fit Models
 Let's create a function so we can build multiple models. We will build a standard linear model and a quadratic model (degrees 1 and 2, respectively).
 
 ```{r, echo=TRUE}
 # Function to fit and evaluate polynomial regression models
 fit_poly_regression <- function(degree) {
   formula <- as.formula(paste("mpg ~ poly(wt, ", degree, ")"))
-  model <- lm(formula, data = train_data)
-  return(model)
+  lm(formula, data = mtcars)
 }
 
 # Fit polynomial regression models with degrees 1 to 2
 model_1 <- fit_poly_regression(1)
-summary(model_1)
-
 model_2 <- fit_poly_regression(2)
+```
+
+To fit a polynomial regression model, we'll use the `lm()` function and create polynomial terms using the `poly()` function. In this example, we'll fit a standard linear (degree = 1) and a quadratic polynomial (degree = 2) to the `mtcars` dataset.
+
+
+## Step 4: Assess Assumptions
+Before we can interpret the model, we have to check the assumptions. We will check these assumptions via plots:
+
+1) Residuals vs. Fitted values (used to check the linearity assumption),
+2) a Q-Q plot of the Residuals (used to check the normality of the residuals),
+3) a Scale-Location plot (used to check for heteroskedasticity), and
+4) Residuals vs. Leverage values (identifies overly influential values, if any exist). 
+
+```{r}
+par(mfrow = c(2, 2))
+plot(model_1, which = c(1, 2, 3, 5))
+plot(model_2, which = c(1, 2, 3, 5))
+par(mfrow = c(1, 1))
+```
+
+We see that Model 2 (the quadratic one) satisfies the "linearity" assumption, because the red line in the "Residuals vs Fitted" graph is flat. However, the Q-Q plot shows that the residuals are not normally distributed, so we should take additional steps to transform the response feature (such as via a square root or log transformation, or something similar).
+
+
+## Step 5. Describe Model Output
+Although we recognize that this model is not correct (because the residuals are not approximately normal), we will give an example of how to interpret this output.
+
+```{r}
 summary(model_2)
 ```
 
-To fit a polynomial regression model, we'll use the **`lm()`** function and create polynomial terms using the **`poly()`** function. In this example, we'll fit a standard linear (degree = 1) and a quadratic polynomial (degree = 2) to the **`mtcars`** dataset.
 
-## Step 5: Assess Assumptions {.smaller}
-
-```{r}
-plot(model_1, which = c(1,2,5))
-plot(model_2, which = c(1,2,5))
-```
-
-## Step 6: Make Predictions and Evaluate The Models {.smaller}
-
-We can use the fitted model to make predictions on new data. Let's create a sequence of weights to predict the corresponding miles per gallon:
-
-```{r, echo=TRUE}
-
-# Function to evaluate model performance on the test set
-evaluate_model <- function(model, test_data) {
-      predictions <- predict(model, newdata = test_data)
-      rmse = RMSE(predictions, test_data$mpg)
-      r2 = R2(predictions, test_data$mpg)
-      aic = AIC(model)
-      print(rmse)
-      print(r2)
-      print(aic)
-}
-```
-
-```{r}
-# Evaluate model 1's performance
-evaluate_model(model_1, test_data = test_data)
-```
-
-```{r}
-# Evaluate model 2's performance
-evaluate_model(model_2, test_data = test_data)
-```
-
-We select the final model with the lowest RMSE, R-square, and AIC. The quadratic regression has all three lowest, hence, it is our final model.
-
-## Step 7: Visualize The Final Model on The Test Set {.smaller}
+## Bonus Step: Visualize the Final Model 
 
 Finally, let's plot the scatter plot with the polynomial regression line to visualize the fit:
 
 ```{r, echo=TRUE}
-# Create a data frame with data points and predictions from the best-fit model
-plot_data <- data.frame(wt = test_data$wt, mpg = test_data$mpg, 
-                        Predicted = predict(model_2, newdata = test_data))
+# Create a data frame with data points and predictions 
+plot_data <- data.frame(
+  wt = mtcars$wt,
+  mpg = mtcars$mpg, 
+  mpg_predicted = predict(model_2, newdata = mtcars)
+)
 
 # Scatter plot with the polynomial regression line
-ggplot(plot_data, aes(x = wt, y = mpg)) +
+ggplot(plot_data) +
+  theme_minimal() + 
+  aes(x = wt, y = mpg) + 
+  labs(
+    title = "Scatter Plot with Polynomial Regression Line",
+    x = "Weight (wt)",
+    y = "Miles per Gallon (mpg)"
+  ) +
   geom_point() +
-  geom_line(aes(y = Predicted), color = "red", size = 1) +
-  labs(title = "Scatter Plot with Polynomial Regression Line",
-       x = "Weight (wt)", y = "Miles per Gallon (mpg)") +
-  theme_minimal()
+  geom_line(aes(y = mpg_predicted), color = "red", size = 1)
 ```
 
-## Further Discussion
+
+
+# Further Discussion
 
 -   **Piecewise polynomials**: Instead of fitting a high-degree polynomial over the entire range of X, piece- wise polynomial regression involves fitting separate low-degree polynomials over different regions of X. The coefficients βi differ in different parts of the range of X. The points where the coefficients change are called knots. Using more knots leads to a more flexible piecewise polynomial^**2**^.
-
 -   **Constraints and spline**: the technique of reduce the number of degree of freedom on piecewise polynomial to produce a continuous and naturally smooth fit model on data^**2**^.
 
-## References {visibility="hidden"}
+
+
+## References 
 
 1.  Field, A. (2013). Discovering Statistics Using IBM SPSS Statistics. (4th ed.). Sage Publications.
 
