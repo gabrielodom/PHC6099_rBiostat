@@ -155,7 +155,7 @@ mosaic_advanced <- demographics_df %>%
   ) +
   scale_fill_manual(
     labels = c("No" = "Female", "Yes" = "Male"),
-    values = c("darkorchid4", "darkolivegreen4", "grey")
+    values = c("darkseagreen2", "darkslategray3", "grey")
   ) +
   theme_mosaic() +
   # Adjust axis tick labels to 60 degrees and justification to the right
