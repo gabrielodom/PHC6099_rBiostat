@@ -19,12 +19,12 @@ editor_options:
 #| label: load-packages
 #| message: false
 
-# installing required packages
+# Installing Required Packages
 # install.packages("public.ctn0094data")
 # install.packages("tidyverse")
 # install.packages("ggmosaic")
 
-# loading required packages
+# Loading Required Packages
 library(public.ctn0094data)
 library(tidyverse)
 library(ggmosaic)
@@ -50,7 +50,7 @@ The National Drug Abuse Treatment Clinical Trials Network (CTN) is a means by wh
 
 # Cleaning the Data to Create a Model Data Frame
 
-The `demographics` and `everybody` data sets within the `{public.ctn0094data}` package were joined by ID (`who` variable). `Race`, `age`, `is_male` (), and `project` were selected features for the following visualizations.
+The `demographics` and `everybody` data sets within the `{public.ctn0094data}` package were joined by ID (`who` variable). `Race`, `age`, `is_male` (gender), and `project` were selected features for the following visualizations.
 ```{r}
 #| label: data-cleaning
 #| message: false
@@ -136,7 +136,7 @@ In a more advanced version of a mosaic plot, we can visualize more than 2 catego
 #| message: false
 #| warning: false
 
-# mosaic advanced
+# Advanced Mosaic Plot
 mosaic_advanced <- demographics_df %>% 
   ggplot() +
   geom_mosaic(
@@ -186,6 +186,7 @@ The following aesthetics are understood by `geom_boxplot()`:
 #| message: false
 #| warning: false
 
+# Box Plot
 box_basic <- demographics_df %>% 
   ggplot() +
   aes(x = race, y = age, color = race) +
@@ -223,6 +224,7 @@ The following aesthetics are understood by `geom_violin()`:
 #| message: false
 #| warning: false
 
+# Violin Plot
 violin_basic <- demographics_df %>% 
   ggplot() +
   aes(x = race, y = age, color = race) +
