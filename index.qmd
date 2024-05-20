@@ -1,7 +1,84 @@
 ---
-title: "PHC 6099: R Computing for Health Sciences"
-author: "Gabriel J. Odom, PhD, ThD"
+title: "Course Materials for PHC 6099: 'R Computing for Health Sciences'"
+author:
+  - name: Gabriel Odom
+    affiliations:
+      - Florida International University
+      - Robert Stempel College of Public Health and Social Work
+toc: true
+number-sections: true
+format:
+  html:
+    self-contained: true
 ---
 
-# About
-These are the written lecture materials for the class PHC 6099 at Florida International University's Stempel College of Public Health. This is the second semester of the "R" course sequence (the first semester is PHC6701; the text for that class is available here: <https://gabrielodom.github.io/PHC6701_r4ds/>) The source code and data sets for this book are available here: <https://github.com/gabrielodom/PHC6099_rBiostat>.
+
+# Source Code for PHC6099 Course Notes
+
+This material is for the course "R Computing for Health Sciences". The course notes are published here: <https://gabrielodom.github.io/PHC6099_rBiostat/>
+
+
+## Topics  
+The chapters are:
+
+1. Exploring Data  
+    - `ggplot2::` mosaic plots, histograms, and violin plots
+    - `ggplot2::` scatterplots and facets
+    - `rayshader::`
+    - `skimr::`
+    - `table1::`
+    - `gtsummary::`
+2. One-Sample Tests  
+    - $Z$-test
+    - Paired $t$-test
+    - Paired Wilcoxon test
+    - Transformations to Normality
+    - McNemar's Test 
+    - Fisher's Exact Test
+    - Chi-Square Goodness of Fit
+    - Bootstrapped Confidence Intervals
+3. Two-Sample Tests  
+    - $t$-test
+    - Welch's $t$-test
+    - Mann-Whitney $U$ test
+    - Cochran's $Q$ test
+    - $\chi^2$ Test for Independence
+4. Linear Regression and ANOVA  
+    - One-Way ANOVA
+    - Two-way ANOVA
+    - Welch's ANOVA
+    - Kruskal-Wallace Test
+    - Tukey HSD Post-Hoc Test
+    - Repeated Measures ANOVA
+    - Random Intercept Models
+    - Correlation Matrices and Covariances
+    - Multiple Regression(linear)
+    - Polynomial regression
+5. Generalized Linear Models  
+    - Generalized Linear Models: Binary
+    - Generalized Linear Models: Ordered
+    - Generalized Linear Models: Count (Poisson)
+    - Generalized Linear Models: Count (Negative Binomial)
+6. Special Topics  
+    - Linear Mixed Effects Models
+    - Structural Equation Models
+    - Cox Proportional Hazards Regression
+    - (TBD) Multivariate Methods for Genetics/Genomics
+    - Ridge, LASSO, and Elastic Net Regression
+7. Power Calculations (in progress)
+
+
+## Lesson Outline
+This is a shell of a lesson that can be copied and pasted for new lessons (or to edit and clean up existing lessons). If you copy this shell, then change all the headings from level 3 to 1. Replace \<the method\> with the name of your method, or its abbreviation. The file `lessons/00_lesson_template.qmd` has a `.qmd` template with these sections.
+
+### Introduction to \<the method\>
+### Mathematical definition of \<the method\>
+### Data source and description
+### Cleaning the data to create a model data frame
+### Assumptions of \<the method\>
+### Checking the assumptions with plots
+### Code to run \<the method\>
+### Code output
+### Brief interpretation of the output
+
+

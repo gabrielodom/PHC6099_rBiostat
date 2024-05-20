@@ -1,9 +1,7 @@
 ---
-title: "About"
+title: "PHC 6099: R Computing for Health Sciences"
+author: "Gabriel J. Odom, PhD, ThD"
 ---
 
-About this site
-
-```{r}
-1 + 1
-```
+# About
+These are the written lecture materials for the class PHC 6099 at Florida International University's Stempel College of Public Health. This is the second semester of the "R" course sequence (the first semester is PHC6701; the text for that class is available here: <https://gabrielodom.github.io/PHC6701_r4ds/>) The source code and data sets for this book are available here: <https://github.com/gabrielodom/PHC6099_rBiostat>.

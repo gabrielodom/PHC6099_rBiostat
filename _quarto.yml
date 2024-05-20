@@ -1,22 +1,70 @@
-project:
-  type: website
+# yml file from Hadley: <https://github.com/hadley/r4ds/blob/main/_quarto.yml>
 
-website:
-  title: "PHC 6099: R Computing for Health Sciences"
-  page-navigation: true
-  sidebar:
-    style: "docked"
-    search: true
-    contents:
-      - href: index.qmd
-        text: Home
-      - href: about.qmd
+project:
+  type: book
+  output-dir: _book
+
+bibliography: lessons_original/bib/packages.bib
+
+book:
+  title: "An R Cookbook for Public Health"
+  subtitle: "Course Materials for PHC 6099: 'R Computing for Health Sciences'"
+  reader-mode: true
+
+  page-footer:
+    right: |
+      This book was built with <a href="https://quarto.org/">Quarto</a>.
+  site-url: https://gabrielodom.github.io/PHC6099_rBiostat/
+  repo-url: https://github.com/gabrielodom/PHC6099_rBiostat
+  repo-branch: main
+  repo-actions: [edit, issue]
+  chapters:
+    - index.qmd
+    - about.qmd
+
+    - part: lessons/00_part_headers.qmd
+      chapters:
+        - lessons/01_mosaic_violin.qmd
+        - lessons/01_scatterplots.qmd
+        - lessons_original/01_skimr.qmd
+        - lessons_original/01_table1.qmd
+        - lessons_original/01_rayshader.qmd
+
+    - part: lessons/00_part_headers.qmd
+      chapters:
+        - lessons/02_z-test_one_prop.qmd
+        - lessons_original/02_fisher_exact_test.qmd
+
+    - part: lessons/00_part_headers.qmd
+      chapters:
+        - lessons_original/03_two_sample_ttest.qmd
+        - lessons_original/03_two_sample_mann_whitney.qmd
+        - lessons_original/03_two_sample_bootstrap_conf_int.qmd
+        - lessons_original/03_two_sample_chi_sq_independence.qmd
+
+    - part: lessons/00_part_headers.qmd
+      chapters:
+        - lessons_original/04_anova_two_way.qmd
+        - lessons_original/04_anova_random_intercept.qmd
+        - lessons_original/04_correlation.qmd
+        - lessons_original/04_regression_ols.qmd
+        - lessons_original/04_regression_mls.qmd
+        - lessons_original/04_regression_polynomial.qmd
+
+    - part: lessons/00_part_headers.qmd
+      chapters:
+        - lessons_original/05_glm_ordinal_logistic.qmd
+
+    - part: lessons/00_part_headers.qmd
+      chapters:
+        - lessons_original/06_power_kruskal_wallis.qmd
+        - lessons_original/06_power_ols.qmd
 
 format:
   html:
-    theme: cosmo
-    css: styles.css
-    toc: true
-
-
-
+    theme:
+      - cosmo
+      - styles.scss
+    code-link: true
+    author-meta: "Gabriel Odom"
+    callout-appearance: simple
