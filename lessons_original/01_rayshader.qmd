@@ -2,9 +2,10 @@
 title: "R Rayshader Overview"
 subtitle: "PHC 6099 - Summer 2023"
 author: "Kazi Tanvir Hasan"
-format:
-  html:
-    self-contained: true
+toc: true
+number-sections: true
+format: html
+embed-resources: false
 ---
 
 

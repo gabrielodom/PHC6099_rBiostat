@@ -2,12 +2,10 @@
 title: "Introduction to Polynomial Regression"
 subtitle: "Understanding and Coding in R"
 author: "Linh Cao, Deidre Okeke, and Gabriel Odom"
-format:
-  html:
-    self-contained: true
-    toc: true
-    number-sections: true
-preview-links: auto
+toc: true
+number-sections: true
+format: html
+embed-resources: false
 ---
 
 

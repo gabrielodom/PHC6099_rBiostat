@@ -2,26 +2,13 @@
 title: "Correlation and Covariance Matrices"
 author: "Lea Nehme & Zhayda Reilly"
 date: "July 18, 2023"
-format:
-  html:
-    code-fold: true
-    self-contained: true
-    toc: true
-knitr:
-  opts_chunk:      ########## set global options ############
-    collapse: true # keep code from blocks together (if shown)
-    echo: true    # show code
-    message: true  # show messages
-    warning: false  # don't show warnings
-    error: false    # don't show error messages
-    comment: ""    # don't show ## with printed output
-    R.options:    
-      digits: 3    # round to three digits
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+
 bibliography: [bib/packages.bib]
 csl: bib/the-new-england-journal-of-medicine.csl
-editor: 
-  markdown: 
-    wrap: 72
 ---
 
 ```{r}

@@ -2,23 +2,11 @@
 title: "Bootstrap Confidence Intervals"
 author: "Shelly Sinclair and Alvonee Penn"
 date: "`r Sys.Date()`"
-format:
-  html:
-    self-contained: true
-    toc: true
-    number-sections: true
-    code-fold: true
-knitr:
-  opts_chunk:      ########## set global options ############
-    collapse: true # keep code from blocks together (if shown)
-    echo: true    # don't show code
-    message: false  # show messages
-    warning: false  # show warnings
-    error: false    # show error messages
-    comment: ""    # don't show ## with printed output
-    R.options:    
-      digits: 3    # round to three digits
-editor: source
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+
 bibliography: [bib/packages.bib]
 ---
 

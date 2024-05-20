@@ -1,21 +1,17 @@
 ---
 title: "Two sample t test"
 subtitle: "Explaining the Two sample t test and how to run it in R"
-title-block-banner: true
 date: "`r Sys.Date()`"
 author:
   - name: Tendai Gwanzura & Ana Bravo
     affiliations:
       - Florida International University
       - Robert Stempel College of Public Health and Social Work
-format:
-  html:
-    code-fold: true
-    html-math-method: katex
-    self-contained: true
 toc: true
-theme: zephyr
-highlight-style: pygemnts
+number-sections: true
+format: html
+embed-resources: false
+
 bibliography: bib/packages.bib
 ---
 

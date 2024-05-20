@@ -1,7 +1,6 @@
 ---
 title: "Random Intercept Model"
-subtitle: Learning how to use Random Intercept Models in R 
-title-block-banner: true
+subtitle: "Learning how to use Random Intercept Models in R"
 date: "`r Sys.Date()`"
 author:
   - name: Ana Bravo & Tendai Gwanzura
@@ -10,12 +9,8 @@ author:
       - Robert Stempel College of Public Health and Social Work
 toc: true
 number-sections: true
-highlight-style: pygments
-format:
-  html:
-    code-fold: true
-    html-math-method: katex
-    self-contained: true
+format: html
+embed-resources: false
 ---
 
 ## Libraries Used

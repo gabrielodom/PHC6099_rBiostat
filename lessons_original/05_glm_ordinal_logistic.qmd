@@ -1,30 +1,17 @@
 ---
 title: "Ordinal Logistic Regression"
 subtitle: "DIY Ordinal Logistic Regression in R"
-title-block-banner: true
 date: "`r Sys.Date()`"
 author: 
   - name: "Sultana Mubarika Rahman Chowdhury and Gabriel Odom"
     affiliations: 
-       - Robert Stemple College of Public Health
-       - Florida Internationa University
-format:
-  html:
-    self-contained: true 
-    html-math-method: katex
-    theme: minty
-toc: TRUE
-    
-knitr:
-  opts_chunk:      ########## set global options ############
-    collapse: true # keep code from blocks together (if shown)
-    echo: true    # don't show code
-    message: true  # show messages
-    warning: FALSE  # show warnings
-    error: true    # show error messages
-    comment: ""    # don't show ## with printed output
-    R.options:    
-      digits: 3    # round to three digits
+       - Robert Stempel College of Public Health
+       - Florida International University
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+
 bibliography: [bib/packages.bib]
 csl: bib/the-new-england-journal-of-medicine.csl
 ---

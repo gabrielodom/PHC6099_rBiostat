@@ -2,15 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/04_anova_kruskal_wallis.html</loc>
-    <lastmod>2024-05-20T22:48:21.714Z</lastmod>
+    <lastmod>2024-05-20T23:17:09.178Z</lastmod>
   </url>
   <url>
     <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/06_power_ols.html</loc>
-    <lastmod>2024-05-20T22:49:38.700Z</lastmod>
+    <lastmod>2024-05-20T23:19:07.210Z</lastmod>
   </url>
   <url>
     <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/04_anova_random_intercept.html</loc>
-    <lastmod>2024-05-10T20:17:09.590Z</lastmod>
+    <lastmod>2024-05-20T23:17:35.617Z</lastmod>
   </url>
   <url>
     <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/01_table1.html</loc>
@@ -27,5 +27,57 @@
   <url>
     <loc>https://gabrielodom.github.io/PHC6099_rBiostat/about.html</loc>
     <lastmod>2024-02-07T14:43:30.729Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/03_two_sample_mann_whitney.html</loc>
+    <lastmod>2024-05-20T23:26:40.356Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/03_two_sample_bootstrap_conf_int.html</loc>
+    <lastmod>2024-05-20T23:15:52.264Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/03_two_sample_chi_sq_independence.html</loc>
+    <lastmod>2024-05-20T23:16:09.322Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/04_anova_two_way.html</loc>
+    <lastmod>2024-05-20T23:11:10.859Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/04_correlation.html</loc>
+    <lastmod>2024-05-20T23:17:58.711Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/04_regression_ols.html</loc>
+    <lastmod>2024-05-20T23:13:04.262Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/04_regression_mls.html</loc>
+    <lastmod>2024-05-20T23:18:17.146Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/04_regression_polynomial.html</loc>
+    <lastmod>2024-05-20T23:13:37.623Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/05_glm_ordinal_logistic.html</loc>
+    <lastmod>2024-05-20T23:18:54.785Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons/00_part_headers.html</loc>
+    <lastmod>2024-05-20T23:00:27.669Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons/01_mosaic_violin.html</loc>
+    <lastmod>2024-05-20T23:20:02.803Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons/01_scatterplots.html</loc>
+    <lastmod>2024-05-20T23:20:32.617Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/01_skimr.html</loc>
+    <lastmod>2024-05-20T23:15:14.804Z</lastmod>
   </url>
 </urlset>

@@ -5,23 +5,11 @@ authors:
   - "Arturo Barahona"
   - "Srijana Acharya"
 date: "`r Sys.Date()`"
-format:
-  html:
-    self-contained: true
-    toc: true
-    toc-title: "On this page"
-    code-fold: true
-    # smooth-scroll: TRUE
-knitr:
-  opts_chunk:      ########## set global options ##########
-    collapse: true # keep code from blocks together (if shown)
-    echo: true     # false, if you do not want to show code
-    message: true  # show messages
-    warning: false  # hide warnings
-    error: true    # show error messages
-    comment: ""    # don't show ## with printed output
-    R.options:    
-      digits: 3    # round to three digits
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+
 bibliography: bib/packages.bib
 ---
 

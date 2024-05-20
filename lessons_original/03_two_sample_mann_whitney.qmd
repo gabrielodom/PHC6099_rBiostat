@@ -1,25 +1,14 @@
 ---
-title: "Mann-Whittney-U-Test-Example"
+title: "Mann-Whittney-U Test Example"
 author: 
   - "Srijana Acharya"
   - "Arturo Barahona"
 date: "`r Sys.Date()`"
-format: 
- html:
-  self-contained: true
-  toc: true
-  toc-title: "On this page"
-  code-fold: true
-knitr:
-  opts_chunk:      ########## set global options ############
-    collapse: true # keep code from blocks together (if shown)
-    echo: true    # don't show code
-    message: true  # show messages
-    warning: false  # show warnings
-    error: true    # show error messages
-    comment: ""    # don't show ## with printed output
-    R.options:    
-      digits: 3    # round to three digits
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+
 bibliography: bib/packages.bib
 csl: bib/the-new-england-journal-of-medicine.csl
 ---
@@ -160,7 +149,7 @@ suppressPackageStartupMessages(library(tidyverse))
 ```{r importing-data}
 
 # Mann_W_U <- read_sav("data\\36578-0001-Data.sav")
-Mann_W_U <- read_sav("../data/03_HEPESE_synthetic_20240510.csv")
+Mann_W_U <- read_csv("../data/03_HEPESE_synthetic_20240510.csv")
 
 ```
 
@@ -389,15 +378,14 @@ From the above table, we see that the value of the Shapiro-Wilk Test is 0.0006 a
 
 ```{r}
 
-result <-
- wilcox.test(
-   ageAtDx ~ isMale, 
-   data = Mann_W_U, 
-   na.rm = TRUE, 
-   paired = FALSE, 
-   exact = FALSE, 
-   conf.int = TRUE
- )
+result <- wilcox.test(
+  ageAtDx ~ isMale, 
+  data = Mann_W_U, 
+  na.rm = TRUE, 
+  # paired = FALSE, 
+  exact = FALSE, 
+  conf.int = TRUE
+)
 
 test_statistics <- result$statistic
 

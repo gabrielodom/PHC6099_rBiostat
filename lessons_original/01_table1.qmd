@@ -2,21 +2,11 @@
 title: "Demographics table with table1"
 author: "Lea Nehme and Zhayda Reilly"
 date: "May 18, 2023"
-format:
-  html:
-    code-fold: true
-    self-contained: true
-    toc: true
-knitr:
-  opts_chunk:      ########## set global options ############
-    collapse: true # keep code from blocks together (if shown)
-    echo: true    # don't show code
-    message: true  # show messages
-    warning: true  # show warnings
-    error: true    # show error messages
-    comment: ""    # don't show ## with printed output
-    R.options:    
-      digits: 3    # round to three digits
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+
 bibliography: [bib/06_power_ols_references.bib, bib/packages.bib]
 csl: bib/the-new-england-journal-of-medicine.csl
 ---
@@ -73,7 +63,7 @@ Today, we will be using the **melanoma** data set which consists of malignant me
 #| code-fold: false
 
 library(readxl)
-setwd("~/OneDrive - Florida International University/RMethods_2023/Presentation05182023")
+# setwd("~/OneDrive - Florida International University/RMethods_2023/Presentation05182023")
       
 # melanoma_data <- read.csv(
 #   "data/melanoma.csv", header = TRUE, sep = ","

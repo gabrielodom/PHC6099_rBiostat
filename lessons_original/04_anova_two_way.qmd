@@ -2,13 +2,10 @@
 title: "Two-Way ANOVA"
 author: "Patrice Lewis & Julissa Martinez"
 date: "`r Sys.Date()`"
-format:
-  html:
-    theme: united
-    self-contained: true
-    toc: true
-    code-fold: true
-    html-math-method: katex
+toc: true
+number-sections: true
+format: html
+embed-resources: false
 ---
 
 ## Two-way ANOVA
