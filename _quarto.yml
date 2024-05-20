@@ -28,7 +28,7 @@ book:
         - lessons/01_scatterplots.qmd
         - lessons_original/01_skimr.qmd
         - lessons_original/01_table1.qmd
-        - lessons_original/01_rayshader.qmd
+        # - lessons_original/01_rayshader.qmd
 
     - part: lessons/00_part_headers.qmd
       chapters:
@@ -45,6 +45,7 @@ book:
     - part: lessons/00_part_headers.qmd
       chapters:
         - lessons_original/04_anova_two_way.qmd
+        - lessons_original/04_anova_kruskal_wallis.qmd
         - lessons_original/04_anova_random_intercept.qmd
         - lessons_original/04_correlation.qmd
         - lessons_original/04_regression_ols.qmd
@@ -57,7 +58,6 @@ book:
 
     - part: lessons/00_part_headers.qmd
       chapters:
-        - lessons_original/06_power_kruskal_wallis.qmd
         - lessons_original/06_power_ols.qmd
 
 format:

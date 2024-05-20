@@ -17,8 +17,8 @@ knitr:
     comment: ""    # don't show ## with printed output
     R.options:    
       digits: 3    # round to three digits
-bibliography: [06_power_ols_references.bib, 06_power_ols_packages.bib]
-csl: the-new-england-journal-of-medicine.csl
+bibliography: [bib/06_power_ols_references.bib, bib/packages.bib]
+csl: bib/the-new-england-journal-of-medicine.csl
 editor: 
   markdown: 
     wrap: 72

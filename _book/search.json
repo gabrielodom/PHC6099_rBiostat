@@ -1,0 +1,460 @@
+[
+  {
+    "objectID": "lessons_original/04_anova_kruskal_wallis.html",
+    "href": "lessons_original/04_anova_kruskal_wallis.html",
+    "title": "14  Non-Parametric ANOVA: The Kruskal-Wallis Test",
+    "section": "",
+    "text": "15 Introduction\nThe Kruskal-Wallis test (H-test) is a hypothesis test for multiple independent samples, which is used when the assumptions for a one factor analysis of variance are violated. In other word, it is the non-parametric alternative to the One Way ANOVA. Non-parametric means that the data does not follow normal distribution. It is sometimes called the one-way ANOVA on ranks, as the ranks of the data values are used in the test rather than the actual data points.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Non-Parametric ANOVA: The Kruskal-Wallis Test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_kruskal_wallis.html#mathematical-equation",
+    "href": "lessons_original/04_anova_kruskal_wallis.html#mathematical-equation",
+    "title": "14  Non-Parametric ANOVA: The Kruskal-Wallis Test",
+    "section": "15.1 Mathematical Equation",
+    "text": "15.1 Mathematical Equation\n\\[H = \\frac{{n-1}}{{n}}\\sum^k_{i=1}\\frac{n_i({\\bar{R_i} - E})^2}{{σ^2_R}}\\]\nWhere:\n\n\\(H\\) is the Kruskal-Wallis test statistic,\n\\(n\\) is the total number of observations,\n\\(R_i\\) is the sum of ranks for each group,\n\\(E\\) is the expected value of the sum of ranks under the null hypothesis.\n\\(σ^2_R\\) is the square of standard deviation of Rank sum.\n\nEquation for Expected Rank\n\\[E = \\frac{{n+1}}{{2}}\\]\nWhere:\n-n represents total number of observations.\nEquation for Rank Mean for group i\n\\[R_i = \\frac{{\\sum{R}}}{{n_g}}\\]\nWhere:\n\nR_i represents mean rank for \\(i^{th}\\) group,\n\\(\\sum{R}\\) represents sum of ranks in \\(i^{th}\\) group,\n\\(n_g\\) represents number of observation in \\(i^{th}\\) group.\n\nExample\n\n\n\nAssigning ranks/ E and mean rank calculated/ ready for H calculation",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Non-Parametric ANOVA: The Kruskal-Wallis Test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_kruskal_wallis.html#assumptions",
+    "href": "lessons_original/04_anova_kruskal_wallis.html#assumptions",
+    "title": "14  Non-Parametric ANOVA: The Kruskal-Wallis Test",
+    "section": "15.2 Assumptions",
+    "text": "15.2 Assumptions\n1. Ordinal or Continuous Response Variable – the response variable should be an ordinal or continuous variable.\n2. Independence – the observations in each group need to be independent of each other.\n3. Sample Size and distribution – each group must have a sample size of 5 or more and the distributions in each group need to have a similar shape but groups does not follow normal distribution.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Non-Parametric ANOVA: The Kruskal-Wallis Test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_kruskal_wallis.html#hypothesis",
+    "href": "lessons_original/04_anova_kruskal_wallis.html#hypothesis",
+    "title": "14  Non-Parametric ANOVA: The Kruskal-Wallis Test",
+    "section": "15.3 Hypothesis",
+    "text": "15.3 Hypothesis\nThe test determines whether two or more independent groups have same central tendency.\n\nH0: population rank sum average are equal for independent group and therefore come from same population.\nH1: population rank sum average are significantly different for at-least two or more independent group and therefore come from different population.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Non-Parametric ANOVA: The Kruskal-Wallis Test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_kruskal_wallis.html#packages",
+    "href": "lessons_original/04_anova_kruskal_wallis.html#packages",
+    "title": "14  Non-Parametric ANOVA: The Kruskal-Wallis Test",
+    "section": "16.1 Packages",
+    "text": "16.1 Packages\n\nLoading required package: ICSNP\nLoading required package: mvtnorm\nLoading required package: ICS",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Non-Parametric ANOVA: The Kruskal-Wallis Test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_kruskal_wallis.html#data",
+    "href": "lessons_original/04_anova_kruskal_wallis.html#data",
+    "title": "14  Non-Parametric ANOVA: The Kruskal-Wallis Test",
+    "section": "16.2 Data",
+    "text": "16.2 Data\nAs an example we will manually create a data, details of which can be found Here.\nThe data represents antibody production after receiving a vaccine. A hospital administered one of three different vaccines - A, B, or C to 6 individuals per group and measured the antibody presence (\\(\\mu\\)g/mL) in their blood after a chosen time period. The data is as follows: The goal of this exercise will be to determine how the three vaccines performed compared to each other. Essentially, we are looking to determine if the antibody data for each vaccine originates from the same distribution. The sample size is small and normal distribution cannot be assumed. Therefore, we will be conducting the Kruskal-Wallis test.\nNull Hypothesis (H0): The vaccines induce equal amounts of antibody production. (all three groups originate from the same distribution and have the same median)\nAlternative Hypothesis (H1): At least one vaccine induces different amount of antibodies to be produced.(at least one group originates from a different distribution and has a different median)\n\n# A tibble: 18 × 2\n   Vaccines Antibody\n   &lt;chr&gt;       &lt;dbl&gt;\n 1 A            1232\n 2 A             751\n 3 A             339\n 4 A             848\n 5 A             447\n 6 A             542\n 7 B             302\n 8 B              57\n 9 B             521\n10 B             278\n11 B             176\n12 B             201\n13 C             839\n14 C             342\n15 C             473\n16 C            1128\n17 C             242\n18 C             475\n\n\ntibble [18 × 2] (S3: tbl_df/tbl/data.frame)\n $ Vaccines: chr [1:18] \"A\" \"A\" \"A\" \"A\" ...\n $ Antibody: num [1:18] 1232 751 339 848 447 ...\n\n\ntibble [18 × 2] (S3: tbl_df/tbl/data.frame)\n $ Vaccines: Factor w/ 3 levels \"A\",\"B\",\"C\": 1 1 1 1 1 1 2 2 2 2 ...\n $ Antibody: num [1:18] 1232 751 339 848 447 ...",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Non-Parametric ANOVA: The Kruskal-Wallis Test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_kruskal_wallis.html#computing-summary-statistics-by-group",
+    "href": "lessons_original/04_anova_kruskal_wallis.html#computing-summary-statistics-by-group",
+    "title": "14  Non-Parametric ANOVA: The Kruskal-Wallis Test",
+    "section": "16.3 Computing summary statistics by group",
+    "text": "16.3 Computing summary statistics by group\nThe first step is to inspect the data and calculate a summary of statistics. This can be done by using the summarise function.\n\n# A tibble: 3 × 6\n  Vaccines count  mean    sd median   IQR\n  &lt;fct&gt;    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1 A            6  693.  325.   646.  353 \n2 B            6  256.  156.   240.  114.\n3 C            6  583.  335.   474   373.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Non-Parametric ANOVA: The Kruskal-Wallis Test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_kruskal_wallis.html#box-plot",
+    "href": "lessons_original/04_anova_kruskal_wallis.html#box-plot",
+    "title": "14  Non-Parametric ANOVA: The Kruskal-Wallis Test",
+    "section": "16.4 Box Plot",
+    "text": "16.4 Box Plot\nThe next step will be to visualize the dataset using a box plot. This will allow us to estimate differences in distribution.\n\n\n\n\n\n\n\n\n\nBased on the box plot, we see that there is similarity in distribution of A and C while B looks to be different. We can also add the individual data points and connect the boxes to visually see the density distribution and compare with normal distribution for each vaccines.\n\n16.4.1 Adding error bars: mean_se\n\n\n\n\n\n\n\n\n\n\n\n16.4.2 Density plot with overlaid normal plot\nNext, we want to create a density plot to further visualize the data and compare it to what a normal distribution of these data should look like. This can be done by using the ggdensity function as seen below.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFrom these density plots, we see that our data is not normally distributed and distribution shape for two vaccines looks similar while one vaccine deviates. As our data is not normally distributed and has small sample size, we will now perform Kruskal-Wallis test to find out whether there are any significant differences between the three vaccines in terms of their efficacy (antibodies production in the body).",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Non-Parametric ANOVA: The Kruskal-Wallis Test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_kruskal_wallis.html#kruskal-wallis-test",
+    "href": "lessons_original/04_anova_kruskal_wallis.html#kruskal-wallis-test",
+    "title": "14  Non-Parametric ANOVA: The Kruskal-Wallis Test",
+    "section": "16.5 Kruskal-Wallis Test",
+    "text": "16.5 Kruskal-Wallis Test\nThe Kruskal-Wallis test can be done in R using the kruskal.test function as seen below.\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  Antibody by Vaccines\nKruskal-Wallis chi-squared = 7, df = 2, p-value = 0.03",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Non-Parametric ANOVA: The Kruskal-Wallis Test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_kruskal_wallis.html#tabulating-the-result",
+    "href": "lessons_original/04_anova_kruskal_wallis.html#tabulating-the-result",
+    "title": "14  Non-Parametric ANOVA: The Kruskal-Wallis Test",
+    "section": "16.6 Tabulating the result",
+    "text": "16.6 Tabulating the result\n\n\n\n\n\n\n\nAntibody Production of Different Vaccines\n\n\nCharacteristic\nA, N = 61\nB, N = 61\nC, N = 61\np-value2\n\n\n\n\nAntibody\n647 (471, 824)\n240 (182, 296)\n474 (375, 748)\n0.026\n\n\n\n1 Median (IQR)\n\n\n2 Kruskal-Wallis rank sum test",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Non-Parametric ANOVA: The Kruskal-Wallis Test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_kruskal_wallis.html#interpretation",
+    "href": "lessons_original/04_anova_kruskal_wallis.html#interpretation",
+    "title": "14  Non-Parametric ANOVA: The Kruskal-Wallis Test",
+    "section": "16.7 Interpretation",
+    "text": "16.7 Interpretation\nFrom the Kruskal-Wallis test, we get that our test statistic is 26.63 with p-value 0.026, which is smaller than our level of significance 0.05. This gives us enough evidence to reject the null hypothesis. Therefore, we conclude that there is a significant difference in the efficacy of at least two of the three vaccines.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Non-Parametric ANOVA: The Kruskal-Wallis Test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_kruskal_wallis.html#post-hoc-test",
+    "href": "lessons_original/04_anova_kruskal_wallis.html#post-hoc-test",
+    "title": "14  Non-Parametric ANOVA: The Kruskal-Wallis Test",
+    "section": "16.8 Post-hoc-Test",
+    "text": "16.8 Post-hoc-Test\nThe Kruskal-Wallis test helps to determine whether at least two groups differ from each other but it does not specify where in which groups the significance lies. We need to conduct a post-hoc test for this. For this purpose, the Dunn test is the appropriate nonparametric test for the pairwise multiple comparison. We will use Holm adjustment method for multiple comparison. You can read about various adjustment methods for multiple comparison herechen2017?\n\nDunn (1964) Kruskal-Wallis multiple comparison\n  p-values adjusted with the Holm method.\n  Comparison      Z P.unadj  P.adj\n1      A - B  2.596 0.00944 0.0283\n2      A - C  0.649 0.51641 0.5164\n3      B - C -1.947 0.05158 0.1032",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Non-Parametric ANOVA: The Kruskal-Wallis Test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_kruskal_wallis.html#interpretation-1",
+    "href": "lessons_original/04_anova_kruskal_wallis.html#interpretation-1",
+    "title": "14  Non-Parametric ANOVA: The Kruskal-Wallis Test",
+    "section": "16.9 Interpretation",
+    "text": "16.9 Interpretation\nWhen looking at the adjusted p-values in the last column for each pairwise comparison, we can see that only the A-B vaccine comparison has a p-value that is less than our level of significance of 0.05. Therefore, we conclude that there is significant difference in vaccine A-B while there is no significant difference between vaccines A-C, and B-C.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Non-Parametric ANOVA: The Kruskal-Wallis Test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_kruskal_wallis.html#alternative-method",
+    "href": "lessons_original/04_anova_kruskal_wallis.html#alternative-method",
+    "title": "14  Non-Parametric ANOVA: The Kruskal-Wallis Test",
+    "section": "16.10 Alternative method",
+    "text": "16.10 Alternative method\nA very good alternative for performing a Kruskal-Wallis and the post-hoc tests in R is with the ggbetweenstats() function from the {ggstatsplot} package: It provides a combination of box and violin plots along with jittered data points for between-subjects designs with statistical details included in the plot as a subtitle.\n\n\n\n\n\n\n\n\n\nThis method has the advantage that all necessary statistical results are displayed directly on the plot. It also provides a more efficient and concise code.\nThe results of the Kruskal-Wallis test are shown in the subtitle above the plot (the p-value is after p =). Moreover, the results of the post-hoc test are displayed between each group via accolades, and the boxplots allow to visualize the distribution for each species.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Non-Parametric ANOVA: The Kruskal-Wallis Test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_kruskal_wallis.html#conclusion",
+    "href": "lessons_original/04_anova_kruskal_wallis.html#conclusion",
+    "title": "14  Non-Parametric ANOVA: The Kruskal-Wallis Test",
+    "section": "16.11 Conclusion",
+    "text": "16.11 Conclusion\nIn conclusion, the Kruskal-Wallace test is a non-parametric hypothesis test that can be used to determine if there are significant differences between two or more groups using the ranks of the data values. The first step involves visualizing the data to confirm it violates the rules of normality. Next, you conduct the Kruskal-Wallis test to determine if there are significant differences. Finally, you run a post-hoc test to calculate pairwise comparisons and determine which specific groups are significantly different.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Non-Parametric ANOVA: The Kruskal-Wallis Test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_kruskal_wallis.html#description",
+    "href": "lessons_original/04_anova_kruskal_wallis.html#description",
+    "title": "14  Non-Parametric ANOVA: The Kruskal-Wallis Test",
+    "section": "16.12 Description",
+    "text": "16.12 Description",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Non-Parametric ANOVA: The Kruskal-Wallis Test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/06_power_ols.html",
+    "href": "lessons_original/06_power_ols.html",
+    "title": "21  Power Analysis for OLS Regression",
+    "section": "",
+    "text": "22 Introduction\nThe power of a hypothesis test is the probability of correctly rejecting the null hypothesis or the probability that the test will correctly support the alternative hypothesis (detecting an effect when there actually is one)1. Then,\n\\[\nPower = 1-\\beta\n\\]\nWhere, \\(\\beta\\) = probability of committing a Type II Error (the probability that we would accept the null hypothesis even if the alternative hypothesis is actually true). Then, by decreasing \\(\\beta\\) power increases [@(pdf)ef].\nPower is mainly influenced by sample size, effect size, and significance level.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Power Analysis for OLS Regression</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/06_power_ols.html#the-pwrss.f.reg-function",
+    "href": "lessons_original/06_power_ols.html#the-pwrss.f.reg-function",
+    "title": "21  Power Analysis for OLS Regression",
+    "section": "23.1 The pwrss.f.reg function",
+    "text": "23.1 The pwrss.f.reg function\nWe will start our power analysis using the The pwrss.f.reg function for one predictor in an OLS regression, with our given observations of n = 32 and \\(R^2\\) = .75. Given these values, we are expecting that one variable (WT) explains 75% of the variance in the outcome or Miles per gallon (R2=0.75 or r2 = 0.75 in the code)2.\n\nRegOne_lm &lt;- pwrss.f.reg(\n  r2 = 0.75,\n  k = 1,\n  n = 32,\n  power = NULL,\n  alpha = 0.05\n)\n Linear Regression (F test) \n R-squared Deviation from 0 (zero) \n H0: r2 = 0 \n HA: r2 &gt; 0 \n ------------------------------ \n  Statistical power = 1 \n  n = 32 \n ------------------------------ \n Numerator degrees of freedom = 1 \n Denominator degrees of freedom = 30 \n Non-centrality parameter = 96 \n Type I error rate = 0.05 \n Type II error rate = 0 \nRegOne_lm$power\n[1] 1\n\nGiven the information provided, we get 100% power. Our effect size of r2 = 0.75 is considered a large effect provided the following guidelines by Cohen (1988)3\n\\(f^2\\) = 0.02 indicates a small effect;\n\\(f^2\\) = 0.15 indicates a medium effect;\n\\(f^2\\) = 0.35 indicates a large effect.\nWe will use these guidelines to continue our exploration. We will concentrate on a fixed medium effect size. Where, the paired correlation is approximately r = .40 for a medium correlation and for an \\(f^2\\) or effect size of 0.15. using this fixed effect, we will look at various sample sizes to obtain power of 80% or greater given a medium effect size. In our sequence of possible sample sizes, the minimum n = 1 as n &gt; p(p+1)/2 = 1(2)/2 = 1\n\nOLSReg_df &lt;- tibble(n = seq.int(from = 2, to = 99 + 2))\n\nOLSReg_df$power &lt;- map_dbl(\n  .x = OLSReg_df$n,\n  .f = ~{\n    out_ls &lt;- pwrss.f.reg(\n      # \"Effect size\" of a linear model\n      r2 = 0.15,\n      # number of predictors\n      k = 1,\n      # sample size\n      n = .x,\n      power = NULL,\n      alpha = 0.05,\n      # Stop printing messages\n      verbose = FALSE\n    )\n    out_ls$power\n  }\n)\n\nThe following is the power curve for a fixed effect of f2 = 0.15\n\nggplot(data = OLSReg_df) +\n  theme_bw() +\n  aes(x = n, y = power) +\n  labs(\n    title = \"Omnibus (F-test) Power for Linear Model\",\n    subtitle = \"Fixed Effect Size R2 = 0.15, 1 Predictor\"\n  ) +\n  scale_y_continuous(limits = c(0, 1)) +\n  geom_point() +\n  geom_abline(slope = 0, intercept = 0.8, colour = \"gold\")\n\n\n\n\n\n\n\n\nGiven the graph, we notice that we need an approximate sample size or n of close to 50 to detect a medium effect size in an OLS Regression.\nThe following is a power analysis for a univariate OLS regression given a fixed sample size. We will create a sequence of effect sizes that capture Cohen’s guidelines as well as the effect size of 0.75 of our sample regression. Our fixed n will be n = 32 as the sample.\n\nOLSRegN_df &lt;- tibble(R2 = seq(0, 0.75, length.out = 100))\n\nOLSRegN_df$power &lt;- map_dbl(\n  .x = OLSRegN_df$R2,\n  .f = ~{\n    out2_ls &lt;- pwrss.f.reg(\n      # \"Effect size\" of a linear model\n      r2 = .x,\n      # number of predictors\n      k = 1,\n      # sample size\n      n = 32,\n      power = NULL,\n      alpha = 0.05,\n      # Stop printing messages\n      verbose = FALSE\n    )\n    out2_ls$power\n  }\n)\n\nThe following is the power curve for a fixed sample size of n = 32\n\nggplot(data = OLSRegN_df) +\n  theme_bw() +\n  aes(x = R2, y = power) +\n  labs(\n    title = \"Omnibus (F-test) Power for Linear Model\",\n    subtitle = \"Fixed Sample Size = 32, 1 Predictor\"\n  ) +\n  scale_y_continuous(limits = c(0, 1)) +\n  geom_point() +\n  geom_abline(slope = 0, intercept = 0.8, colour = \"red\")\n\n\n\n\n\n\n\n\nGiven the graph, we notice that given n = 32, a power of 80% and higher is achieved when the effect size is at least approximately r2 = 0.20.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Power Analysis for OLS Regression</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/06_power_ols.html#the-pwr.f2.test-function",
+    "href": "lessons_original/06_power_ols.html#the-pwr.f2.test-function",
+    "title": "21  Power Analysis for OLS Regression",
+    "section": "23.2 The pwr.f2.test function",
+    "text": "23.2 The pwr.f2.test function\nPower analysis using the pwr.f2.test: where, u = 1, The F numerator degrees of freedom (u=1) or the number of coefficients(independent variables) in the model\nand we will use Cohen’s criteria for effect sizes and first provide analyses for a medium effect size of 0.15 [3]45\n\n# Using Cohen 1988 criteria, where, \n#f2 = 0.02 small effect;\n#f2 = 0.15 medium effect;\n#f2 = 0.35 indicates a large effect\n\n### Fixed Effect size f2 = 0.15###\n# n = 50\npwr.f2.test(\n  u = 1, \n  v = 50 - 1 - 1,\n  f2 = .15, \n  sig.level = 0.05, \n  power = NULL\n  )\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 48\n             f2 = 0.15\n      sig.level = 0.05\n          power = 0.765\n# n = 25\npwr.f2.test(\n  u = 1, \n  v = 25 - 1 - 1,\n  f2 = 0.15, \n  sig.level = 0.05, \n  power = NULL\n  )\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 23\n             f2 = 0.15\n      sig.level = 0.05\n          power = 0.458\n# n = 12\npwr.f2.test(\n  u = 1, \n  v = 12 - 1 - 1,\n  f2 = 0.15, \n  sig.level = 0.05, \n  power = NULL\n  )\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 10\n             f2 = 0.15\n      sig.level = 0.05\n          power = 0.229\n\nNow, we will explore a fixed n = 32\n\n# ES = .02, r = .14\npwr.f2.test(\n  u = 1, \n  v = 32 - 1 - 1,\n  f2 = .02, \n  sig.level = 0.05, \n  power = NULL\n  )\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 30\n             f2 = 0.02\n      sig.level = 0.05\n          power = 0.121\n# ES = 0.15, r = .39\npwr.f2.test(\n  u = 1, \n  v = 32 - 1 - 1,\n  f2 = 0.15, \n  sig.level = 0.05, \n  power = NULL\n  ) \n\n     Multiple regression power calculation \n\n              u = 1\n              v = 30\n             f2 = 0.15\n      sig.level = 0.05\n          power = 0.564\n# ES = .35, r = .59\npwr.f2.test(\n  u = 1, \n  v = 32 - 1 - 1,\n  f2 = 0.35, \n  sig.level = 0.05, \n  power = NULL\n  )\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 30\n             f2 = 0.35\n      sig.level = 0.05\n          power = 0.899\n\nWe will now look at the 3 types of effect sizes given various sample sizes\n\neffect_sizes &lt;- c(0.02, 0.15, 0.35) \nsample_sizes = seq(20, 100, 20)\n\ninput_df &lt;- crossing(effect_sizes,sample_sizes)\nglimpse(input_df)\nRows: 15\nColumns: 2\n$ effect_sizes &lt;dbl&gt; 0.02, 0.02, 0.02, 0.02, 0.02, 0.15, 0.15, 0.15, 0.15, 0.1…\n$ sample_sizes &lt;dbl&gt; 20, 40, 60, 80, 100, 20, 40, 60, 80, 100, 20, 40, 60, 80,…\n\nget_power &lt;- function(df){\n  power_result &lt;- pwr.f2.test(\n    u = 1,\n    v = df$sample_sizes - 1 - 1, \n    f2 = df$effect_sizes,\n    )\n  df$power=power_result$power\n  return(df)\n}\n\n# run get_power for each combination of effect size \n# and sample size\n\npower_curves &lt;- input_df %&gt;%\n  do(get_power(.)) %&gt;%\n  mutate(effect_sizes = as.factor(effect_sizes)) \n\n\nggplot(power_curves, \n       aes(x=sample_sizes,\n           y=power, \n           color=effect_sizes)\n       ) + \n  geom_line() + \n  geom_hline(yintercept = 0.8, \n             linetype='dotdash',\n             color = \"purple\")\n\n\n\n\n\n\n\n\nBased on the graph, if we have an effect size of 0.15, we need approximately 50 or more observations (recall n = v + 1 + 1)",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Power Analysis for OLS Regression</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/06_power_ols.html#the-wp.regression-function",
+    "href": "lessons_original/06_power_ols.html#the-wp.regression-function",
+    "title": "21  Power Analysis for OLS Regression",
+    "section": "23.3 The wp.regression function",
+    "text": "23.3 The wp.regression function\nLastly, we use the wp.regression function to examine the appropriate sample size given an effect size of 0.15 to achieve a power of 80% or higher [6]7\n\n# Using webpower \n#p1 = 1\n### Fixed ES = 0.15 ###\nres &lt;- wp.regression(n = seq(20,100,20), \n                     p1 = 1, \n                     f2 = 0.15, \n                     alpha = 0.05, \n                     power = NULL\n                    )\nres\nPower for multiple regression\n\n      n p1 p2   f2 alpha power\n     20  1  0 0.15  0.05 0.375\n     40  1  0 0.15  0.05 0.665\n     60  1  0 0.15  0.05 0.839\n     80  1  0 0.15  0.05 0.928\n    100  1  0 0.15  0.05 0.970\n\nURL: http://psychstat.org/regression\nplot(res,  main = \"Fixed Effect Size = 0.15\")+\nabline(a = .80, b = 0, col = 'steelblue', lwd = 3, lty = 2)\n\n\n\n\n\n\n\ninteger(0)\n\nThe results are similar to the previous functions. However, in this function, given an effect size of 0.15, we need an n of close to 60 to achieve 80% power.\n\n# Using webpower \n#p1 = 1\n### Fixed n = 50 ###\nres &lt;- wp.regression(n = 50, \n                     p1 = 1, \n                     f2 = seq(0.00, 0.35, 0.05), \n                     alpha = 0.05, \n                     power = NULL\n                    )\nres\nPower for multiple regression\n\n     n p1 p2   f2 alpha power\n    50  1  0 0.00  0.05 0.050\n    50  1  0 0.05  0.05 0.341\n    50  1  0 0.10  0.05 0.591\n    50  1  0 0.15  0.05 0.765\n    50  1  0 0.20  0.05 0.873\n    50  1  0 0.25  0.05 0.934\n    50  1  0 0.30  0.05 0.967\n    50  1  0 0.35  0.05 0.984\n\nURL: http://psychstat.org/regression",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Power Analysis for OLS Regression</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_random_intercept.html",
+    "href": "lessons_original/04_anova_random_intercept.html",
+    "title": "15  Random Intercept Model",
+    "section": "",
+    "text": "15.1 Libraries Used\nCode\nlibrary(gt)        # to make table outputs presentation/publication ready. \nlibrary(broom)     # clean output.\nlibrary(knitr)     # to make tables. \nlibrary(gtsummary) # extension to gt\nlibrary(lattice)   # It is a powerful data visualization for multivariate data\nlibrary(lme4)      # Fit linear and generalized linear mixed-effects models\nlibrary(arm)       # Data Analysis Using Regression and Multilevel models\nlibrary(tidyverse) # for cleaning wrangling data",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Random Intercept Model</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_random_intercept.html#what-is-a-random-intercept-model",
+    "href": "lessons_original/04_anova_random_intercept.html#what-is-a-random-intercept-model",
+    "title": "15  Random Intercept Model",
+    "section": "15.2 What is a Random Intercept model",
+    "text": "15.2 What is a Random Intercept model\nBefore talking about a random intercept model, let’s understand why they are necessary and important in the real world by discussing a variance component model first. This will make sense as we go along in this lecture.\n\n15.2.1 Variance component model\nWe are familiar with a fixed level of a factor or variable. Which means that the factor level in an experiment is the only thing we are interested. For example, let’s say we are interested in measuring the difference in resistance resulting from putting identical resistors to three different temperatures for a period of 24 hours. Let’s say we have three different groups, and each of these three different groups have a sample size of 5. So each of the three treatment groups was replicated 5 times.\n\n\n\nLevel 1\nLevel 2\nLevel 3\n\n\n\n\n6.9\n8.3\n8.0\n\n\n5.4\n6.8\n10.5\n\n\n5.8\n7.8\n8.1\n\n\n4.6\n9.2\n6.9\n\n\n4.0\n6.5\n9.3\n\n\nmean\nmean\nmean\n\n\n5.34\n7.72\n8.56\n\n\n\nIn this example, the level of the temperature is considered fixed meaning, the three temperatures were the only ones that we are interested in. This is called a fixed effects model.\na fixed effect model is a statistical model in which the parameters are fixed or non-random. This can also be referred to a regression model, in which group mean are “fixed” (non-random) or in simpler, terms something that is “fixed” in analysis is constant like sex assigned at birth or ethnicity.\n y_i = \\beta_0 + X_i\\beta_i + \\alpha_u + \\epsilon_i \nNow, let’s say we want to look at different levels of factors that were chosen because of random sampling, like number of operators working that day, lot batches, days etc. So in this case we are now regarding factors not related to themselves (variables) but we are now trying to represent all possible levels that these factors may take, the appropriate model is now a random effects model.\nfitting these random effects models are important because we want to obtain estimates of different contributions that experimental factors make to the variability of our data! (we can represent this as the variance) this is what is called variance component\n\n\n15.2.2 Why this is relevant\nWell, a variance component model helps us see how much variance in our response at the different levels. But what if you are interested in seeing the effects of the explanatory variables? Or, what if your observations are NOT randomly sampled from simple random sample but instead from a cluster or a multi-level sampling design? Random intercept models or random effects models are important.\n\n\n15.2.3 Example 1: School level data\nLet’s say we have some data on exam results of students within a school and we use a variance component model and see that 15% of the variance is at the school level. Like for example, differing school districts, differing school policies etc. However, is it fair to really say that 15% of the variance in example scores is caused by schools? you could also say that maybe that part of the variance could be cause by the students being different themselves as well before taking the exam.\nIn this case, it might be important to control for the previous exams the students took, so you can look at the variance that is due to the things that happened when the students were at that school.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Random Intercept Model</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_random_intercept.html#fitting-a-single-level-regression-model",
+    "href": "lessons_original/04_anova_random_intercept.html#fitting-a-single-level-regression-model",
+    "title": "15  Random Intercept Model",
+    "section": "15.3 Fitting a single-level regression model",
+    "text": "15.3 Fitting a single-level regression model\nwhen we want to control for something (like previous exams students took) we can fit a single-level regression model that looks something like this:\ny_1 = \\beta_0 + \\beta_1x_i + e_i where\n\ny_1 is your dependent variable\n\\beta_0 is your intercept and\n\\beta_1 is your slope parameter (which is also your slope treatment effect).\nand e_i is your random error\n\nWhen you have clustered data fitting this model causes problems. Clustered data is data where you observation or participants are related. Like exam results for students within a school, height of children within a family etc.\nif we try to fit this clustered data:\n\nour standard errors will be wrong.\nthis single level data model doesn’t show up how much variation is at the school level and how much much of the variation is at the student level.\n\nSo fitting this type of data in this regression we wont know how much of an effect the school level has on the exam score, after controlling for the previous score.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Random Intercept Model</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_random_intercept.html#solution-fitting-a-random-intercept-model",
+    "href": "lessons_original/04_anova_random_intercept.html#solution-fitting-a-random-intercept-model",
+    "title": "15  Random Intercept Model",
+    "section": "15.4 Solution: Fitting a Random Intercept model",
+    "text": "15.4 Solution: Fitting a Random Intercept model\nSo what we can do is combine the variance component and single-level regression model to build a random intercept model. So this random intercept model has 2 random terms. the level one random term: e_{ij} \\sim N(0, \\sigma_e^2) and the N(0, \\sigma_u^2) and has two parts:\n\na fixed part\na random part\n\n y_{ij} = \\overbrace{\\beta_0 + \\beta_1X_{ij}}^{\\text{fixed part}} + \\underbrace{u_j + e_{ij}}_{\\text{random part}} where the fixed parts includes our parameters that we estimate as our coefficients, and the random part is the parameter we estimate as the variance e_{ij} \\sim N(0, \\sigma_e^2) and the N(0, \\sigma_u^2) and these are allowed to vary and u_j and e_{ij} are normally distributed.\nwhere:\n\ny_{ij} is your dependent variable at i individual and j level\nN(0, \\sigma_u^2) is the measurement at the school level\nand e_{ij} \\sim N(0, \\sigma_e^2) is the measurement at the student level\nand i subscript is for the students\nand j is the school subscript\n\nwe can also write this equation like so:\n Y_{ij} = \\mu + b_i + \\varepsilon_{ij} \nwhere\n\nY_{ij} is your dependent outcome of intested for a subject i at school j\n\\mu is the population average mean\nb_i is the random students effects (you have a random effect for every student)\n\\varepsilon_{ij} is your random error.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Random Intercept Model</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_random_intercept.html#final-key-points",
+    "href": "lessons_original/04_anova_random_intercept.html#final-key-points",
+    "title": "15  Random Intercept Model",
+    "section": "15.5 Final key points",
+    "text": "15.5 Final key points\n\nrandom intercept models are used for answering questions about clustered data, and at different levels. For example, what is the relationship between exam scores at 11 and at age 16? how much variation is there between students progress from 11 to 16 at the school level?\nb_i is the error associated with the students.\n\\varepsilon_{ij} is the random error.\nfor a random intercept model, each individual will have a random intercept, but the sample slope.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Random Intercept Model</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_random_intercept.html#assumptions-of-a-random-effects-model",
+    "href": "lessons_original/04_anova_random_intercept.html#assumptions-of-a-random-effects-model",
+    "title": "15  Random Intercept Model",
+    "section": "15.6 Assumptions of a random effects model:",
+    "text": "15.6 Assumptions of a random effects model:\n\nunobserved cluster effects is not correlated with observed variables (all u_{ij} terms are not correlated with the your predictors.)\nthe within and between effects are the same.\nyour error term is independent with your constant term.\nyou have homoscedasticity\nb_i and \\varepsilon are independent of each other",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Random Intercept Model</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_random_intercept.html#hypothesis-of-a-random-effects-model",
+    "href": "lessons_original/04_anova_random_intercept.html#hypothesis-of-a-random-effects-model",
+    "title": "15  Random Intercept Model",
+    "section": "15.7 hypothesis of a random effects model:",
+    "text": "15.7 hypothesis of a random effects model:\nhypothesis testing for a random effects model runs as follows:\n H_0: \\sigma^2_u = 0 H_1: \\sigma^2_u \\not = 0 the null hypothesis states that if \\sigma^2_u is true, then the random component is not needed in this model. so you can fit a single level regression model. to do this, you would can do a likelihood ratio test comparing the two model to see if sigma is significant. In other words, seeing if there is no difference in intercepts. If there is NO difference in intercepts (or the slopes are similar), then a random intercept model or random component is not needed.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Random Intercept Model</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_random_intercept.html#example-2-planktonic-larval-duration-pld",
+    "href": "lessons_original/04_anova_random_intercept.html#example-2-planktonic-larval-duration-pld",
+    "title": "15  Random Intercept Model",
+    "section": "15.8 Example 2: Planktonic larval duration (PLD)",
+    "text": "15.8 Example 2: Planktonic larval duration (PLD)\nthis is example is from O’Connor et al (2007). A brief intro on this study, temperature is important for the development of organisms. In marine species, temperature is very important and linked to growth. So the time spent as a planktonic larvae can have associations on mortality and regulation on the species. Previous research has looked at the association between species comparison but not within species comparisons. What if we are interest in within and between species variation?\n\n15.8.1 load PLD data\n\n\nCode\nPLD &lt;- read_table(\"../data/04_PLD.txt\")\n\n\nI am curious about the structure of this data and how it briefly looks.\n\n\nCode\n#strcuture \nstr(PLD)\n\n\nspc_tbl_ [214 × 5] (S3: spec_tbl_df/tbl_df/tbl/data.frame)\n $ phylum : chr [1:214] \"Annelida\" \"Annelida\" \"Annelida\" \"Annelida\" ...\n $ species: chr [1:214] \"Circeus.spirillum\" \"Circeus.spirillum\" \"Circeus.spirillum\" \"Hydroides.elegans\" ...\n $ D.mode : chr [1:214] \"L\" \"L\" \"L\" \"P\" ...\n $ temp   : num [1:214] 5 10 15 15 20 25 30 5 10 17 ...\n $ pld    : num [1:214] 16 16 4 8 6.5 5 3.2 15 9.5 4.5 ...\n - attr(*, \"spec\")=\n  .. cols(\n  ..   phylum = col_character(),\n  ..   species = col_character(),\n  ..   D.mode = col_character(),\n  ..   temp = col_double(),\n  ..   pld = col_double()\n  .. )\n\n\nCode\n# just the top - seeing how it looks\nhead(PLD)\n\n\n# A tibble: 6 × 5\n  phylum   species           D.mode  temp   pld\n  &lt;chr&gt;    &lt;chr&gt;             &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1 Annelida Circeus.spirillum L          5  16  \n2 Annelida Circeus.spirillum L         10  16  \n3 Annelida Circeus.spirillum L         15   4  \n4 Annelida Hydroides.elegans P         15   8  \n5 Annelida Hydroides.elegans P         20   6.5\n6 Annelida Hydroides.elegans P         25   5  \n\n\nCode\n# brief summary\nsummary(PLD)\n\n\n    phylum            species             D.mode               temp      \n Length:214         Length:214         Length:214         Min.   : 2.50  \n Class :character   Class :character   Class :character   1st Qu.:12.28  \n Mode  :character   Mode  :character   Mode  :character   Median :20.00  \n                                                          Mean   :18.59  \n                                                          3rd Qu.:25.00  \n                                                          Max.   :32.00  \n      pld        \n Min.   :  1.00  \n 1st Qu.: 11.00  \n Median : 19.30  \n Mean   : 26.28  \n 3rd Qu.: 33.45  \n Max.   :129.00  \n\n\nI am curious about how this would look just plotting the variable pld or planktonic larvae duration and the temperature. So i am interested in seeing how the temperature is associated with their their survival duration.\n\n\nCode\n# how to plot in base R \nplot(pld ~ temp, data = PLD,\n     xlab = \"temperature (C)\",\n     ylab = \"PLD survival (Days)\",\n     pch = 16)\n# add lm line in base R\nabline(lm(pld ~ temp, data = PLD))\n\n\n\n\n\n\n\n\n\nyou can also do this in ggplot plot like so:\n\n\nCode\nggplot(data = PLD) +\n  aes(y = pld, x = temp) +\n  stat_smooth(method = \"lm\") +\n  geom_point() +\n  theme_bw()\n\n\n\n\n\n\n\n\n\n\n\n15.8.2 Fit first model: Linear model\nLet’s first fit a linear model and check any assumptions. Why are we fitting a linear model first? It might be important to check the standard error of this model and compare to the next model, that might be a better fit later on.\n\n\nCode\n# fitting linear model first \n\nLinearModel_1 &lt;- lm(pld ~ temp, data = PLD)\n\nsummary(LinearModel_1)\n\n\n\nCall:\nlm(formula = pld ~ temp, data = PLD)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-44.158 -11.351  -0.430   7.684  93.884 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  54.8390     3.7954  14.449  &lt; 2e-16 ***\ntemp         -1.5361     0.1899  -8.087 4.65e-14 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 20.36 on 212 degrees of freedom\nMultiple R-squared:  0.2358,    Adjusted R-squared:  0.2322 \nF-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14\n\n\nWe can fit this output in a gtsummary to make it nicer looking:\n\n\nCode\nLinearModel_1 |&gt; \n  tbl_regression()\n\n\n\n\n\n\n\n\n\nCharacteristic\nBeta\n95% CI1\np-value\n\n\n\n\ntemp\n-1.5\n-1.9, -1.2\n&lt;0.001\n\n\n\n1 CI = Confidence Interval\n\n\n\n\n\n\n\n\n\nI am interested in checking out visually, the equal variance (homoscedasticity) and so i will plot a a base residual graph:\n\n\nCode\n# better to do a scatter plot \nLinearModel_res &lt;- resid(LinearModel_1)\n\n# plot residual \nplot(PLD$temp, LinearModel_res,\n     ylab = \"residuals\",\n     xlab = \"temp\",\n     main = \"Residual graph\"\n     )\nabline(0,0)\n\n\n\n\n\n\n\n\n\nJust upon visual observation, it seems like this assumption may be violated so i think it might be important to do some transformations.\n\n\n15.8.3 Log transformation\n\n\nCode\nLinearMode_2Log &lt;- lm(log(pld) ~ log(temp), data= PLD)\n\nsummary(LinearMode_2Log)\n\n\n\nCall:\nlm(formula = log(pld) ~ log(temp), data = PLD)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-3.0768 -0.3956  0.1802  0.5461  1.9656 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   4.6946     0.3128  15.011  &lt; 2e-16 ***\nlog(temp)    -0.6308     0.1093  -5.771 2.77e-08 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.8236 on 212 degrees of freedom\nMultiple R-squared:  0.1358,    Adjusted R-squared:  0.1317 \nF-statistic: 33.31 on 1 and 212 DF,  p-value: 2.767e-08\n\n\n\n\n15.8.4 residual of new log transformed graph\n\n\nCode\n# better to do a scatter plot \nLinearModel2_res &lt;- resid(LinearMode_2Log)\n\n# plot residual \nplot(PLD$temp, LinearModel2_res,\n     ylab = \"residuals(log)\",\n     xlab = \"temp(log)\",\n     main = \"Residual graph (log transformation)\"\n     )\nabline(0,0)\n\n\n\n\n\n\n\n\n\nA bit better! Now i kinda want to see the original plot i plotted with PLD and temperature:\n\n\nCode\nplot(log(pld) ~ log(temp), data = PLD,\n     xlab = \"Temperature in C\",\n     ylab = \"PLD in days\")\nabline(LinearMode_2Log)\n\n\n\n\n\n\n\n\n\nin ggplot you can use the facet_wrap() function to separate by phylum:\n\n\nCode\nggplot(data = PLD) +\n  aes(x = log(temp), y = log(pld)) +\n  geom_point() +\n  stat_smooth(method = \"lm\") +\n  facet_wrap(~phylum) +\n  theme_classic()",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Random Intercept Model</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_random_intercept.html#fitting-a-random-intercept-model-random-intercept-same-slope",
+    "href": "lessons_original/04_anova_random_intercept.html#fitting-a-random-intercept-model-random-intercept-same-slope",
+    "title": "15  Random Intercept Model",
+    "section": "15.9 Fitting a random intercept model (random intercept, same slope)",
+    "text": "15.9 Fitting a random intercept model (random intercept, same slope)\nI am interested in seeing if the overall temperature and the PLD relationship is similar among species, but not the same. We are interested in plotting a mixed effects model with a random intercept but fixed/same slope. I am only interested in the species-specific plot for now with the phylum Mollusca.\n\n\nCode\n# filter to only mollusca\n\nMollusca_subset &lt;- \n  PLD |&gt; \n  filter(phylum == \"Mollusca\")\n\nggplot(data = Mollusca_subset) +\n  aes(x = log(pld), y = log(temp)) +\n  geom_point() +\n  labs(x = \"Log(temperature)\",\n       y = \"Log(PLD)\") + \n  stat_smooth(method = \"lm\", formula = \"y ~ x\", se = FALSE, fullrange = TRUE) +\n  theme_classic() +\n  facet_wrap(~ species)\n\n\n\n\n\n\n\n\n\n\n15.9.1 fitting model\nWe can use the library lme4 to fit a model of a linear regression with a random effect\n\n\nCode\n# creating log -transformed variables \nMollusca_subset$log_pld &lt;- log(Mollusca_subset$pld)\nMollusca_subset$log_temp &lt;- log(Mollusca_subset$temp)\n\n# mixed model with random intercept only \nRandIntModel_Mollusca &lt;- lmer(log_pld ~ log_temp + (1 | species), data = Mollusca_subset)\n\nsummary(RandIntModel_Mollusca)\n\n\nLinear mixed model fit by REML ['lmerMod']\nFormula: log_pld ~ log_temp + (1 | species)\n   Data: Mollusca_subset\n\nREML criterion at convergence: 43.7\n\nScaled residuals: \n     Min       1Q   Median       3Q      Max \n-2.37222 -0.32686 -0.09382  0.43821  2.34871 \n\nRandom effects:\n Groups   Name        Variance Std.Dev.\n species  (Intercept) 0.86457  0.9298  \n Residual             0.03309  0.1819  \nNumber of obs: 44, groups:  species, 16\n\nFixed effects:\n            Estimate Std. Error t value\n(Intercept)   7.1728     0.5284  13.575\nlog_temp     -1.5175     0.1592  -9.531\n\nCorrelation of Fixed Effects:\n         (Intr)\nlog_temp -0.896\n\n\n\nthe fixed effects: section in the output is the estimate for the fixed slope, and the grand mean of the intercept. in the fixed effects section the intercept here is the random effect, and you can see this\nin the Random effects section in this output, in this case our random effect was specified in the the Names sections, which tells us the parameter is the intercept.\nthe Group section tells us we have a random intercept for each species. We also have the variance and standard deviation for the random effects (as well as the residuals)\n\nSince we have a random effect at the individual level, we can subset this section out so it is clear to see that these organism will have a random intercept and fixed slope.\n\n\nCode\n# subset of the coefficients for random intercept and fixed slop\n\ncoef(RandIntModel_Mollusca)$species\n\n\n                      (Intercept) log_temp\nChlamys.hastata          7.612748 -1.51751\nCrassostrea.virginica    7.592515 -1.51751\nCrepidula.fornicata.     8.045609 -1.51751\nCrepidula.plana          8.063220 -1.51751\nHaliotis.asinina         5.807247 -1.51751\nHaliotis.fulgens         6.083069 -1.51751\nHaliotis.sorenseni.      6.688210 -1.51751\nMactra.solidissima       7.589660 -1.51751\nMopalia.muscosa          7.061086 -1.51751\nMytilus.edulis           7.141801 -1.51751\nNassarius.obsoletus      7.370159 -1.51751\nOstrea.lurida            6.967626 -1.51751\nPerna.viridis            8.144314 -1.51751\nStrombus.gigas           8.048942 -1.51751\nTivela.mactroides        7.677603 -1.51751\nTonicella.lineata        4.871674 -1.51751\n\n\nSo now we can see that in the Mollusca subset, we have all random intercepts for individual specifies, but the same slope.\n\n\n15.9.2 Inter class correlation coefficient (ICC)\nfor a random intercept model, we can run a diagnostic called the inter-class correlation coefficient (ICC), which lets us know how much group specific information is available for the random effect. this is somewhat similar to the ANOVA, in which it looks at the variability within groups compared to the variability between groups. Low ICC means that observation within group don’t really cluster.\n ICC = {\\sigma^2_{\\alpha} \\over \\sigma^2 + \\sigma^2_\\alpha} \n\n\nCode\n# creating data frame\nvar &lt;- as.data.frame(VarCorr(RandIntModel_Mollusca))\n\n#check our data frame\nvar\n\n\n       grp        var1 var2       vcov     sdcor\n1  species (Intercept) &lt;NA&gt; 0.86457141 0.9298233\n2 Residual        &lt;NA&gt; &lt;NA&gt; 0.03309183 0.1819116\n\n\nCode\n#ICC equation\nICC &lt;- var$vcov[1] / (var$vcov[1] + var$vcov[2])\n\n# ICC value \nICC\n\n\n[1] 0.9631356\n\n\nIn our model, the \\sigma^2_{\\alpha} is 0.8645 (also the vcov part) and the \\sigma^2 is 0.033. so once we do the mathematics we get 0.9631. Which is the proportion of the total variance in Y that is accounted for by clustering. This is a high value and therefore, suggesting we have within-group variability, so it might be good we are running this random effects model.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Random Intercept Model</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_random_intercept.html#interpretation-of-results",
+    "href": "lessons_original/04_anova_random_intercept.html#interpretation-of-results",
+    "title": "15  Random Intercept Model",
+    "section": "15.10 Interpretation of results",
+    "text": "15.10 Interpretation of results\n\n\nCode\nsummary(RandIntModel_Mollusca)\n\n\nLinear mixed model fit by REML ['lmerMod']\nFormula: log_pld ~ log_temp + (1 | species)\n   Data: Mollusca_subset\n\nREML criterion at convergence: 43.7\n\nScaled residuals: \n     Min       1Q   Median       3Q      Max \n-2.37222 -0.32686 -0.09382  0.43821  2.34871 \n\nRandom effects:\n Groups   Name        Variance Std.Dev.\n species  (Intercept) 0.86457  0.9298  \n Residual             0.03309  0.1819  \nNumber of obs: 44, groups:  species, 16\n\nFixed effects:\n            Estimate Std. Error t value\n(Intercept)   7.1728     0.5284  13.575\nlog_temp     -1.5175     0.1592  -9.531\n\nCorrelation of Fixed Effects:\n         (Intr)\nlog_temp -0.896\n\n\nInterpretation: Summary of this PLD data includes information about the random effects. Here we can see that the column groups shows the random effect variable. in the name section, you can see that the random effect is our intercept. so we have the variation due to the species. in the Residuals section, this is the variation that cannot be explained by the model (the error). As you will notice our Standard error is smaller compared to the ordinary regression we ran in the previous one. Standard error for this model is 0.15 and the previous standard error for the first model we ran was 0.18.\nSo 0.86 / 0.86 + 0.03 = 0.96 , so the difference between between species can explain 96% of the variance that is is left over after the variance is explained by our fixed effect. since the random effects of the species explain most.\nthere is a very long description on the why the lmer() function doesn’t include the p-value that can be found here.\ninterpretation of temp variable for the fixed part, we can interpret this parameter the same as a single-level regression model, so \\beta_1 is the increase/decrease in response for 1 unit increase/decrease in x. In other words, for one unit increase in the degrees of temperature, there is a -1.5 decrease in Planktonic larval duration. (or, as the temperature increase, the plankton duration is lower.)",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Random Intercept Model</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_random_intercept.html#conclusion",
+    "href": "lessons_original/04_anova_random_intercept.html#conclusion",
+    "title": "15  Random Intercept Model",
+    "section": "15.11 Conclusion",
+    "text": "15.11 Conclusion\nIn this lecture you learned about the importance of a random intercept model, when it is appropriate to use a random intercept model, the difference between an ordinary single-level model, and a random intercept model, the assumptions of the random intercept model, hypothesis testing for the variation, the Interclass correlation coefficient (ICC) and finally, how to interpret results from the fixed part and the random part of a random intercept model.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Random Intercept Model</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/04_anova_random_intercept.html#references",
+    "href": "lessons_original/04_anova_random_intercept.html#references",
+    "title": "15  Random Intercept Model",
+    "section": "15.12 References",
+    "text": "15.12 References\n\nAbedin, Jaynal, and Kishor Kumar Das. 2015. Data Manipulation with r. Packt Publishing Ltd.\nAnnesley, Thomas M. 2010. “Bars and Pies Make Better Desserts Than Figures.” Clinical Chemistry 56 (9): 1394–1400.\nAnscombe, Francis J. 1973. “Graphs in Statistical Analysis.” The American Statistician 27 (1): 17–21.\nBorer, Elizabeth T, Eric W Seabloom, Matthew B Jones, and Mark Schildhauer. 2009. “Some Simple Guidelines for Effective Data Management.” The Bulletin of the Ecological Society of America 90 (2): 205–14.\nBorghi, John, Stephen Abrams, Daniella Lowenberg, Stephanie Simms, and John Chodacki. 2018. “Support Your Data: A Research Data Management Guide for Researchers.” Research Ideas and Outcomes 4: e26439.\nBroman, Karl W, and Kara H Woo. 2018. “Data Organization in Spreadsheets.” The American Statistician 72 (1): 2–10.\nChamberlin, Thomas C. 1890. “The Method of Multiple Working Hypotheses.” Science 15 (366): 92–96.\nsupplementary material for Tom Snijders and Roel Bosker textbook - Shjders, T Bosker R, 1999. Multilevel analysis: an introduction to basic and advanced mltilevel modeling, London, Sage, including updates and corrections data set examples http://stat.gamma.rug.nl/multilevel.htm\nUniversity of Bristol, Random Intercept model, (2018). http://www.bristol.ac.uk/cmm/learning/videos/random-intercepts.html\nMidway, S. (2019). “Data Analysis in R.” https://bookdown.org/steve_midway/DAR/random-effects.html",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Random Intercept Model</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/01_table1.html",
+    "href": "lessons_original/01_table1.html",
+    "title": "6  Demographics table with table1",
+    "section": "",
+    "text": "7 Introduction\nIn most scientific research journals, the first included table is often referred to as Table1.\nTable1 includes descriptive statistics for the total study sample, with the rows (explanatory variables) consisting of the key study variables that are often included in the final analysis1. Then within the columns (outcome of interest/response variable), you will find cells given as a n (%) for categorical variables, whereas a mean, SD, or the median will be provided for continuous variables. Additionally, there will be a total column provided which can help in the assessment of the overall sample.\nThere are a few ways that Table1 can be created without using functions like table1. For example, for a research paper, dissertation, and/or the results of a clinical trial, we might have to go through the time consuming task of using the summary() function, or the describe() function in the library(Hmisc). Then, if you decide that you would like to see a variable in relation to a categorical response/outcome variable, you would have to build 2 x 2 tables for each explanatory variable. The table1() function does all of this for us, but first lets discuss the packages that will be in use today.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Demographics table with table1</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/01_table1.html#necessary-packages",
+    "href": "lessons_original/01_table1.html#necessary-packages",
+    "title": "6  Demographics table with table1",
+    "section": "7.1 Necessary Packages",
+    "text": "7.1 Necessary Packages\nThe htmlTable package allows for the usage of the table1() function to create a table 1, while also making life easy when attempting to copy this table into a Word document.\nThe boot package was created to aid in performing bootstrapping analysis. With it comes numerous data sets, specifically clinical trial data sets to make this possible. However, there is no code book provided within the package when the data is downloaded as a csv file. This is a link on Github that explains and elaborates on every data within the package itself2.\n\n#install.packages(\"htmlTable\")\n#install.packages(\"boot\")\n\n# Load libraries\nlibrary(htmlTable)\nlibrary(table1)\nlibrary(boot)",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Demographics table with table1</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/02_z-test_one_prop.html",
+    "href": "lessons/02_z-test_one_prop.html",
+    "title": "7  Z-Test for One Proportion",
+    "section": "",
+    "text": "8 Introduction to One-Sample \\(Z\\)-Tests\nThe one-sample \\(Z\\)-test is used to compare a sample proportion to a population proportion.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Z-Test for One Proportion</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/02_z-test_one_prop.html#independence-and-randomness",
+    "href": "lessons/02_z-test_one_prop.html#independence-and-randomness",
+    "title": "7  Z-Test for One Proportion",
+    "section": "13.1 Independence and Randomness",
+    "text": "13.1 Independence and Randomness\nBecause the samples were collected at random via an FDA approved clinical trial protocol, we assume that all the participants were randomly selected and are independent of each other.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Z-Test for One Proportion</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/02_z-test_one_prop.html#extreme-proportions",
+    "href": "lessons/02_z-test_one_prop.html#extreme-proportions",
+    "title": "7  Z-Test for One Proportion",
+    "section": "13.2 “Extreme” Proportions",
+    "text": "13.2 “Extreme” Proportions\nAccording to Ling et al. (2020), the 12-month abstinence proportion of all 533 participants in their study was 40.5 percent. As we can see here, our abstinence rates are 39.4. Neither these proportions are smaller than 5% or greater than 95%.\n\n(pExpected &lt;- 0.508 * (425/533))\n\n[1] 0.4050657\n\n# Count the number of TRUE values\n(nAbstinent &lt;- sum(outcomesCTN0094$kosten1993_isAbs))\n\n[1] 1402",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Z-Test for One Proportion</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/02_z-test_one_prop.html#type-and-counts-of-data",
+    "href": "lessons/02_z-test_one_prop.html#type-and-counts-of-data",
+    "title": "7  Z-Test for One Proportion",
+    "section": "13.3 Type and Counts of Data",
+    "text": "13.3 Type and Counts of Data\nWe observe binary data, and we see at least 10 successes and at least 10 failures.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Z-Test for One Proportion</span>"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "An R Cookbook for Public Health",
+    "section": "",
+    "text": "1 Source Code for PHC6099 Course Notes\nThis material is for the course “R Computing for Health Sciences”. The course notes are published here: https://gabrielodom.github.io/PHC6099_rBiostat/",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Course Materials for PHC 6099: 'R Computing for Health Sciences'</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#topics",
+    "href": "index.html#topics",
+    "title": "An R Cookbook for Public Health",
+    "section": "1.1 Topics",
+    "text": "1.1 Topics\nThe chapters are:\n\nExploring Data\n\nggplot2:: mosaic plots, histograms, and violin plots\nggplot2:: scatterplots and facets\nrayshader::\nskimr::\ntable1::\ngtsummary::\n\nOne-Sample Tests\n\n\\(Z\\)-test\nPaired \\(t\\)-test\nPaired Wilcoxon test\nTransformations to Normality\nMcNemar’s Test\nFisher’s Exact Test\nChi-Square Goodness of Fit\nBootstrapped Confidence Intervals\n\nTwo-Sample Tests\n\n\\(t\\)-test\nWelch’s \\(t\\)-test\nMann-Whitney \\(U\\) test\nCochran’s \\(Q\\) test\n\\(\\chi^2\\) Test for Independence\n\nLinear Regression and ANOVA\n\nOne-Way ANOVA\nTwo-way ANOVA\nWelch’s ANOVA\nKruskal-Wallace Test\nTukey HSD Post-Hoc Test\nRepeated Measures ANOVA\nRandom Intercept Models\nCorrelation Matrices and Covariances\nMultiple Regression(linear)\nPolynomial regression\n\nGeneralized Linear Models\n\nGeneralized Linear Models: Binary\nGeneralized Linear Models: Ordered\nGeneralized Linear Models: Count (Poisson)\nGeneralized Linear Models: Count (Negative Binomial)\n\nSpecial Topics\n\nLinear Mixed Effects Models\nStructural Equation Models\nCox Proportional Hazards Regression\n(TBD) Multivariate Methods for Genetics/Genomics\nRidge, LASSO, and Elastic Net Regression\n\nPower Calculations (in progress)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Course Materials for PHC 6099: 'R Computing for Health Sciences'</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#lesson-outline",
+    "href": "index.html#lesson-outline",
+    "title": "An R Cookbook for Public Health",
+    "section": "1.2 Lesson Outline",
+    "text": "1.2 Lesson Outline\nThis is a shell of a lesson that can be copied and pasted for new lessons (or to edit and clean up existing lessons). If you copy this shell, then change all the headings from level 3 to 1. Replace &lt;the method&gt; with the name of your method, or its abbreviation. The file lessons/00_lesson_template.qmd has a .qmd template with these sections.\n\n1.2.1 Introduction to &lt;the method&gt;\n\n\n1.2.2 Mathematical definition of &lt;the method&gt;\n\n\n1.2.3 Data source and description\n\n\n1.2.4 Cleaning the data to create a model data frame\n\n\n1.2.5 Assumptions of &lt;the method&gt;\n\n\n1.2.6 Checking the assumptions with plots\n\n\n1.2.7 Code to run &lt;the method&gt;\n\n\n1.2.8 Code output\n\n\n1.2.9 Brief interpretation of the output",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Course Materials for PHC 6099: 'R Computing for Health Sciences'</span>"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "2  PHC 6099: R Computing for Health Sciences",
+    "section": "",
+    "text": "3 About\nThese are the written lecture materials for the class PHC 6099 at Florida International University’s Stempel College of Public Health. This is the second semester of the “R” course sequence (the first semester is PHC6701; the text for that class is available here: https://gabrielodom.github.io/PHC6701_r4ds/) The source code and data sets for this book are available here: https://github.com/gabrielodom/PHC6099_rBiostat.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>PHC 6099: R Computing for Health Sciences</span>"
+    ]
+  }
+]
