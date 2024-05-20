@@ -4,16 +4,16 @@ subtitle: "DIY Ordinal Logistic Regression in R"
 title-block-banner: true
 date: "`r Sys.Date()`"
 author: 
-  - name: "Sultana Mubarika Rahman Chowdhury"
+  - name: "Sultana Mubarika Rahman Chowdhury and Gabriel Odom"
     affiliations: 
        - Robert Stemple College of Public Health
        - Florida Internationa University
 format:
   html:
     self-contained: true 
-    code-fold: true
     html-math-method: katex
     theme: minty
+toc: TRUE
     
 knitr:
   opts_chunk:      ########## set global options ############
@@ -25,25 +25,26 @@ knitr:
     comment: ""    # don't show ## with printed output
     R.options:    
       digits: 3    # round to three digits
-editor: visual
-bibliography: [references.bib, packages.bib]
-csl: the-new-england-journal-of-medicine.csl
-
-toc: TRUE
+bibliography: [bib/packages.bib]
+csl: bib/the-new-england-journal-of-medicine.csl
 ---
+
+
 
 # Introduction to Logistic Regression
 
-We are all familiar with the concept of Logistic regression. It is used to analyze data when the outcome variables is categorical. There are three types of logistic regression, Binary logistic regression where the outcome variable is binary (Yes/No), Multinomial logistic regression when the outcome variable is categorical with three or more categories, Ordinal logistic regression where there is a natural ordering among three or more categories of the outcome variable[@agresti2002] .
+We are all familiar with the concept of Logistic regression. It is used to analyze data when the outcome variables is categorical. There are three types of logistic regression, Binary logistic regression where the outcome variable is binary (Yes/No), Multinomial logistic regression when the outcome variable is categorical with three or more categories, Ordinal logistic regression where there is a natural ordering among three or more categories of the outcome variable[@agresti2002].
 
-**Title: Types of Logistic Regression**
+|                       | Binary LR | Multinomial LR | Ordinal LR    |
+|-----------------------|-----------|----------------|---------------|
+| Number of categories? | Two       | Three or more  | Three or more |
+| Ordering matters?     | No        | No             | Yes           |
 
-|                                     | Binary LR | Multinomial LR | Ordinal LR    |
-|-------------------|------------------|------------------|------------------|
-| Number of categories of the outcome | Two       | Three or more  | Three or more |
-| Ordering matters                    | No        | No             | Yes           |
+: Types of Logistic Regression
 
-# What is Ordinal Logistic Regression
+
+
+# What is Ordinal Logistic Regression?
 
 Ordinal logistic regression is a statistical modeling technique used to investigate relationships between predictor variables and ordered ordinal outcome variables. It extends traditional logistic regression to account for the response variable's inherent ordering, making it suitable for situations where the outcome has multiple levels with unequal intervals.
 
@@ -53,225 +54,263 @@ For example, cases when ordinal logistic regression can be applicable are,
 -   Satisfaction level: Measuring satisfaction level of a service on a scale like, "very dissatisfied," "dissatisfied," "neutral," "satisfied," and "very satisfied."
 -   Pain Intensity: Patients participating in medical research may be asked to rate the intensity of their pain on a scale ranging from "no pain" to "mild pain," "moderate pain," and "severe pain."
 
+
+
 # How to do Ordinary Logistic Regression in R
 
 Some popular R packages that perform Ordinal/Ordered Logistic Regression are,
 
 -   `MASS` package : function `polr()`
-
 -   `ordinal` package: function `clm()`
-
 -   `rms` package: function `orm()`
 
 In this demonstration I will be using `polr()` from `MASS` package to conduct the analysis.
 
+
+
 # Mathematical Formulation of a Ordinal model
 
-Let us assume Y is an outcome variable with levels, l = 1, 2, ... , L. According to the `MASS` package the parameterization of the outcome variable Y with l levels is,
+Let us assume Y is an outcome variable with levels, $l = 1, 2, ... , L$. According to the `MASS` package the parameterization of the outcome variable Y with l levels is,
 
 $$
-ln(\frac{P(Y\le l)}{P(Y>l)}) =\zeta - \eta_{1}X_{1}- \eta_{2}X_{2} - … - \eta_{k}X_{k}
+\ln\left(\frac{P(Y\le l)}{P(Y>l)}\right) =
+  \zeta - \eta_{1}X_{1}- \eta_{2}X_{2} - \ldots - \eta_{k}X_{k}
 $$
 
 Here,
 
 -   $\zeta$ is the intercept representing the log-odds of $Y$ being less than or equal to $l$ when the other covariates are 0 or in there reference level. Ordinal logistic regression model has one intercept for each level of Y and the total number of intercepts is $L-1$.
+-   In case of categorical predictors, each coefficient $\eta_{k}$ is the log of odds ratio comparing the odds of $Y\le l$ at a level compared to the reference category. Taking exponent of this term we get $e^{\eta_{k}}$ which is the odds ratio comparing the odds of $Y\le l$ at a level compared to the reference category.
+-   In case of continuous predictors, each coefficient $\eta_{k}$ is the log of odds ratio comparing the odds of $Y\le l$ between subjects who differ by 1 unit. Taking exponent of this term we get $e^{\eta_{k}}$ which is the odds ratio comparing the odds of $Y\le l$ between subjects who differ by 1 unit.
 
-<!-- -->
+Similar to binary logistic regression the left hand side of this equation is the log-odds of a probability. In case of binary logistic regression it is log-odds of probability of an event whereas here we consider the cumulative probability up to and a specified level including that level.
 
--   In case of categorical predictors, each coefficient $- \eta_{k}$ is the log of odds ratio comparing the odds of $Y\le l$ at a level compared to the reference category. Taking exponent of this term we get $e^{\eta_{k}}$ which is the odds ratio comparing the odds of $Y\le l$ at a level compared to the reference category.
-
--   In case of continuous predictors, each coefficient $- \eta_{k}$ is the log of odds ratio comparing the odds of $Y\le l$ between subjects who differ by 1 unit. Taking exponent of this term we get $e^{\eta_{k}}$ which is the odds ratio comparing the odds of $Y\le l$ between subjects who differ by 1 unit.
-
-Similar to binary logistic regression the left hand side of this equation is the log-odds of a probability. In case of binary logistic regression it is log-odds of probability of an event whereas here we consider the cumulative probability upto and a specified level including that level.
 
 ## Model Assumptions
 
 The key assumptions of Ordinary logistic Regression which ensures the validity of the model are as follows,
 
 -   The outcome variable is ordered.
-
--   The predictor variables are either continuous, categorical or ordinal.
-
+-   The predictor variables are either continuous, categorical, or ordinal.
 -   There is no multicollinearity among the predictors.
-
 -   Proportional odds.
+
+
 
 # Example
 
-To demonstrate the methods I will be using the `arthritis` data from `multgee` package. The data has Rheumatoid self-assessment scores for 302 patients, measured on a five-level ordinal response scale at three follow-up times.
+To demonstrate the methods I will be using the `arthritis` data from `multgee` package. The data has Rheumatoid self-assessment scores for 302 patients, measured on a five-level ordinal response scale at three follow-up times. The `arthritis` dataset is in a data frame with 906 observations with the following 7 variables:
 
-The dataset has these 7 variables, A data frame with 906 observations on the following 7 variables:
+-   `id`: Patient identifier variable.
+-   `y`: Self-assessment score of rheumatoid arthritis measured on a five-level ordinal response scale, 1 being the lowest.
+-   `sex`: Coded as (1) for female and (2) for male.
+-   `age`: Recorded at the baseline.
+-   `trt`: Treatment group variable, coded as (1) for the placebo group and (2) for the drug group.
+-   `baseline`: Self-assessment score of rheumatoid arthritis at the baseline.
+-   `time`: Follow-up time recorded in months.
 
--   **id** : Patient identifier variable.
-
--   **y :** Self-assessment score of rheumatoid arthritis measured on a five-level ordinal response scale, 1 being the lowest.
-
--   **sex :** Coded as (1) for female and (2) for male.
-
--   **age :** Recorded at the baseline.
-
--   **trt :** Treatment group variable, coded as (1) for the placebo group and (2) for the drug group.
-
--   **baseline** : Self-assessment score of rheumatoid arthritis at the baseline.
-
--   **time** : Follow-up time recorded in months.
 
 ## Libraries
 
 Here are libraries required to run the analysis.
 
 ```{r}
-#| label: tidyverse
+#| label: packages
+#| message: false
+#| warning: false
 
 # install.packages("multgee")
 # install.packages("pander")
 # install.packages("table1")
 # install.packages("car")
+# install.packages("mltools")
+# install.packages("pomcheckr")
+library(conflicted)
 library(table1)
 library(multgee)
 library(skimr)
 library(pander)
 library(gtsummary)
 library(car)
-library(table1)
-library(conflicted)
-suppressMessages(conflict_prefer("filter", "dplyr", quiet = TRUE))
-suppressPackageStartupMessages(library(tidyverse))
-# suppress "`summarise()` has grouped output by " messages
-options(dplyr.summarise.inform = F)
+library(mltools)
+library(MASS)
+library(pomcheckr)
+
+conflict_prefer("filter", "dplyr", quiet = TRUE)
+conflict_prefer("select", "dplyr", quiet = TRUE)
+library(tidyverse)
 ```
 
 ### Warning
 
 Instead of installing package `MASS` to the global environment use `MASS::polr()` for running the Ordinal Logistic Regression model. As masking it conflicts wirh the `select()` function for `tidyverse` and `gtsummary()`.
 
+
 ## Exploring data
 
 Let's begin by looking at the data.
 
 ```{r}
-# loading data
+#| label: loading-data
 
-arthritis_df <- multgee::arthritis
-
-df <- arthritis_df %>%
+arthritis_df <- 
+  multgee::arthritis %>%
   mutate(
-    y = as.factor(y),
-    sex = factor(sex,
+    y = factor(y, ordered = TRUE),
+    sex = factor(
+      sex,
       levels = c(1, 2),
       labels = c("Female", "Male")
     ),
-    treatment = factor(trt,
+    treatment = factor(
+      trt,
       levels = c("1", "2"),
       labels = c("Placebo", "Drug")
     ),
-    baseline = factor(baseline)
+    baseline = factor(baseline, ordered = TRUE)
   ) %>%
   select("y", "sex", "age", "treatment", "baseline") %>%
-  drop_na()
+  drop_na() %>% 
+  as_tibble()
 ```
 
 ### Summary
 
 ```{r}
-skim(df)
+skim(arthritis_df)
 ```
 
 ### Descriptives
 
 ```{r}
-tbl_summary(df, by = treatment) %>%
-  modify_caption("**Table 1. Predictors by treatment group**")
+#| label: tbl-table1
+#| tbl-cap: Predictors by treatment group
+arthritis_df %>% 
+  tbl_summary(by = treatment) 
 ```
 
 ### Plotting Outcome variable (rheumatoid arthritis score)
 
 ```{r}
-df %>%
-  ggplot(
-    .,
-    aes(y)
-  ) +
-  geom_bar(aes(y = after_stat(count) / sum(after_stat(count))), position = "dodge") +
-  scale_y_continuous(labels = scales::percent) +
-  ylab("realtive frequencies") +
-  xlab("score")
+#| label: proportion-histogram
+arthritis_df %>% 
+  count(y) %>% 
+  mutate(prop = n / sum(n)) %>% 
+  rename(score = y) %>% 
+  ggplot() + 
+    aes(x = score, y = prop) +
+    labs(
+      x = "Rheumatoid Arthritis Score", 
+      y = "Relative Frequencies (w Obs. Count)"
+    ) +
+    scale_y_continuous(labels = scales::percent) +
+    geom_col() +
+    geom_text(aes(label = n), vjust = 1.5, color = "white")
+```
+```{r}
+#| label: old-histogram-code
+#| include: false
+
+# ggplot(arthritis_df, aes(y)) +
+#   aes(y = after_stat(count) / sum(after_stat(count))) + 
+#   geom_bar(position = "dodge") +
+#   scale_y_continuous(labels = scales::percent) +
+#   ylab("realtive frequencies") +
+#   xlab("score")
 ```
 
-## How to use `Polr()`
 
-The basic structure of the function looks like this:
+### Pairs
 
-`polr(formula, data, weights, start, ..., subset, na.action, contrasts = NULL, Hess = FALSE, model = TRUE, method = c("logistic", "probit", "loglog", "cloglog", "cauchit"))`
+```{r}
+#| label: pairs-plot
+#| message: false
+#| warning: false
+
+GGally::ggpairs(arthritis_df)
+```
+
+
+## How to use `polr()`
+
+The basic structure of the function looks like this (there are other options we don't list, but we won't need them):
+
+```{r}
+#| eval: false
+polr(
+  # Two required arguments
+  formula,
+  data,
+  # Optional stuff
+  weights,
+  subset,
+  na.action,
+  Hess = FALSE,
+  method = "logistic"
+)
+```
 
 Here,
 
--   `formula` a formula expression as for regression models, of the form response \~ predictors. The response should be a factor (preferably an ordered factor), which will be interpreted as an ordinal response, with levels ordered as in the factor. The model must have an intercept: attempts to remove one will lead to a warning and be ignored. An offset may be used. See the documentation of formula for other details.
+-   `formula`: a formula expression as for regression models, of the form response \~ predictors. The response should be a factor (preferably an ordered factor), which will be interpreted as an ordinal response, with levels ordered as in the factor. 
+-   `data`: a data frame which contains the variables occurring in formula.
+-   `weights`: optional case weights in fitting. Defaults to 1.
+-   `subset`: expression saying which subset of the rows of the data should be used in the fit. All observations are included by default.
+-   `na.action`: a function to filter missing data. We removed all the missing values from our data, so we won't use this.
+-   `Hess`: logical for whether the Hessian (the observed information matrix) should be returned. We will use this if we intend to call summary or variance covariance on the fit.
+-   `method`: `"logistic"`, `"probit"`, `"loglog"` (log-log), `"cloglog"` (complementary log-log), or `"cauchit"` (corresponding to a Cauchy latent variable). The default option is to use the Logistic link function.
 
--   `data` an optional data frame, list or environment in which to interpret the variables occurring in formula.
-
--   `weights` optional case weights in fitting. Default to 1.
-
--   `start` initial values for the parameters. This is in the format c(coefficients, zeta): see the Values section.
-
--   `...` additional arguments to be passed to optim, most often a control argument.
-
--   `subset` expression saying which subset of the rows of the data should be used in the fit. All observations are included by default.
-
--   `na.action` a function to filter missing data.
-
--   `contrasts` a list of contrasts to be used for some or all of the factors appearing as variables in the model formula.
-
--   `Hess` logical for whether the Hessian (the observed information matrix) should be returned. Use this if you intend to call summary or variance covariance on the fit.
-
--   `model` logical for whether the model matrix should be returned.
-
--   `method` logistic or probit or (complementary) log-log or cauchit (corresponding to a Cauchy latent variable).
 
 ## Fitting the model
 
-Using this function lets fit the data,
+Using this function, let's fit the POLR model to the data. By default, the `Hess` option is turned off, so we turn it on so that we can calculate the odds ratios later.
 
 ```{r}
-## fitting the model
+#| label: fitting-the-model
 
-fit_olr_mod <-
-  MASS::polr(y ~ ., data = df, Hess = T)
+fit_olr_mod <- MASS::polr(y ~ ., data = arthritis_df, Hess = TRUE)
+```
+
+The output is a bit ugly, so we clean it up for more professional documents using the `pander()` function (from the `pander::` and `knitr::` packages).
+```{r}
+#| label: polr-model-output
 
 pander(summary(fit_olr_mod))
 ```
 
-The function gives us the coefficients, intercepts along with their standard error and t statistic.
+The `summary()` function called on a `polr` model object gives us the coefficients, intercepts, their standard errors, and $t$-statistics.
+
 
 ## Odds Ratio
 
-In order to get the Odds Ratio and their confidence interval we take the exponential of the coefficient. There is no straight forward way of doing that in `R`. Below is one way of solving that issue.
+In order to get the Odds Ratio and the predictor's confidence intervals we take the exponential of the coefficient. There is no straight forward way of doing that in `R`. Below is one way of solving that issue, which uses the `confint()` function from the `multgee::` package.
 
 ```{r}
-## Odds ratio and Confidence Interval
+#| label: Odds-ratio-and-CI
+#| message: false
 
-CI <- confint(fit_olr_mod)
-results <- data.frame(
-  Variable = c(
-    "sex_male", "age", "treatment_drug", "baseline_2", "baseline_3", "baseline_4",
-    "baseline_5"
-  ),
-  OR = exp(fit_olr_mod$coefficients),
-  lower = exp(CI[, 1]),
-  upper = exp(CI[, 2])
+# Calculate a matrix of the lower and upper confidence intervals
+CI_mat <- confint(fit_olr_mod)
+
+# Combine results and make them "pretty"
+orResults_df <- tibble(
+  variable = rownames(CI_mat),
+  oddsRatio = exp(fit_olr_mod$coefficients),
+  lower = exp(CI_mat[, 1]),
+  upper = exp(CI_mat[, 2])
 )
-odds_ratio <- results %>% tibble()
-pander(odds_ratio)
+
+pander(orResults_df)
 ```
+
 
 ## Interpreting the Results
 
--   *Sex:* Compared to female participants, Male participants had 1.16 fold higher odds of reporting high score of rheumatoid arthritis
+-   *Sex:* Compared to female participants, Male participants had `orResults_df[1, "oddsRatio", drop = TRUE]` fold higher odds of reporting high score of rheumatoid arthritis.
+-   *Age:* For 1 year change in age the odds of reporting high rheumatoid arthritis score changes `orResults_df[2, "oddsRatio", drop = TRUE]` times.
+-   *Treatment:* Compared to the Placebo group participants, the participant who received the drug had `orResults_df[3, "oddsRatio", drop = TRUE]` times higher odds of reporting high score of rheumatoid arthritis.
+-   *Baseline score:* It appears that we could perhaps collapse the baseline rheumatoid arthritis score into only three levels, because the confidence intervals for the cubic and quartic polynomial components include 1.
 
--   *Age:* For 1 year change in age the odds of reporting high rheumatoid arthritis score changes 0.99 times.
-
--   *Treatment:* Compared to the Placebo group participants, the participant who received the drug had 1.73 times higher odds of reporting high score of rheumatoid arthritis.
 
 ## Checking Assumptions
 
@@ -279,46 +318,35 @@ Next we check the key assumptions to verify whether the model is appropriate to 
 
 ### Multicollinearity
 
-#### Pairs Plot
-
+Two of our predictors are binary, one predictor is continuous, and one predictor and the response are ordered. Because of this, there are no "standard" functions to calculate the correlation matrix of these predictors. However, we will use [indicator encoding](https://online.stat.psu.edu/stat462/node/161/) to transform the binary predictors, and we will use [polynomial encoding](https://library.virginia.edu/data/articles/understanding-ordered-factors-in-a-linear-model) to transform the ordered predictor (polynomial encoding represents ordered predictors as a set of polynomial terms with $G-1$ components, where $G$ is the number of categories). Both actions were already done "behind the scenes" by the `polr()` function, so we simply need to access the "model matrix" object. We do this via the `model.matrix()` function, but we remove the first column because it represents the intercept.
 ```{r}
-## model assumption
+#| label: assess-multicollinearity
 
-# Pairs plot to check multicollinearity
-df %>%
-  GGally::ggpairs()
+# Extract the encoded features used by the POLR model, dropping the intercept
+model.matrix(fit_olr_mod)[, -1] %>% 
+  # calculate the correlation matrix of the predictors (using the "spearman" 
+  #   option because some of the predictors are binary)
+  cor(method = "spearman")
 ```
 
-As there is only have one continuous variable the `pairs` plot is not that useful. So instead let's check the pairwise correlation among predictors.
-
-#### Correlation Plot
-
-```{r}
-arthritis_df %>%
-  GGally::ggcorr(
-    method = c("pairwise"),
-    label = TRUE
-  ) # low cor coft, may assume no multicollinearity
-```
-
-The correlation is quite low among the predictors so there is no multicollinearity.
+The correlation is quite low among most of the predictors. However, we see that the quadratic and quartic (`.Q` and `^4`, respectively) components are just under the "let's worry about this" threshold of 0.8 in absolute value. This suggests to me that the highest two categories of the rheumatoid arthritis score at baseline (4 and 5) can probably be collapsed without losing a lot of information. However, we'll keep things simple for now and say there is no multicollinearity.
 
 ### Proportional Odds
 
-Ordinal logistic regression makes the assumption that the relationship between each pair of outcome groups is the same. In other words, ordinal logistic regression assumes that the coefficients describing the relationship between, say, the lowest and all higher categories of the response variable are the same as those describing the relationship between the next lowest and all higher categories, and so on. This assumption can be vefied several way. Here, I have used a package called [@pomcheckr] that generates graphics to check for proportional odds assumption created by UCLA statistical consulting group \[see more\](https://stats.oarc.ucla.edu/) .
+Ordinal logistic regression makes the assumption that the relationship between each pair of outcome groups is the same. In other words, ordinal logistic regression assumes that the coefficients describing the relationship between, say, the lowest and all higher categories of the response variable are the same as those describing the relationship between the next lowest and all higher categories, and so on. This assumption can be vefied several ways. Here, I have used a package called [@pomcheckr] that generates graphics to check for proportional odds assumption created by UCLA statistical consulting group [see more here](https://stats.oarc.ucla.edu/) .
 
 #### Graphics to check for proportional odds
 
 ```{r}
-# install.packages("pomcheckr")
-library(pomcheckr)
-pomchk <-
-  pomcheck(y ~ sex + age + treatment + baseline, data = df)
+pomchk <- pomcheck(
+  y ~ sex + age + treatment + baseline,
+  data = arthritis_df
+)
 plot(pomchk)
 ```
 
-Here the function is calculating the difference in proportion of the categories in the outcome variable and plotting them against each category of the predictors. In idea case scinario is the distance between the dots in each line is somewhat equal they will be considered proportional.
+Here the function is calculating the difference in proportion of the categories in the outcome variable and plotting them against each category of the predictors. In the ideal case scenario, the distance between the dots in each line is somewhat equal; if this is true, then the categories should be considered proportional. It appears that the proportional odds assumption is violated here.
 
-
+**Add discussion on how to fix the assumption violation.**
 
 # References {.unnumbered}
