@@ -178,45 +178,45 @@
   {
     "objectID": "lessons_original/06_power_ols.html",
     "href": "lessons_original/06_power_ols.html",
-    "title": "\n21  Power Analysis for OLS Regression\n",
+    "title": "\n22  Power Analysis for OLS Regression\n",
     "section": "",
-    "text": "22 Introduction\nThe power of a hypothesis test is the probability of correctly rejecting the null hypothesis or the probability that the test will correctly support the alternative hypothesis (detecting an effect when there actually is one)1. Then,\n\\[\nPower = 1-\\beta\n\\]\nWhere, \\(\\beta\\) = probability of committing a Type II Error (the probability that we would accept the null hypothesis even if the alternative hypothesis is actually true). Then, by decreasing \\(\\beta\\) power increases [@(pdf)ef].\nPower is mainly influenced by sample size, effect size, and significance level.",
+    "text": "23 Introduction\nThe power of a hypothesis test is the probability of correctly rejecting the null hypothesis or the probability that the test will correctly support the alternative hypothesis (detecting an effect when there actually is one)1. Then,\n\\[\nPower = 1-\\beta\n\\]\nWhere, \\(\\beta\\) = probability of committing a Type II Error (the probability that we would accept the null hypothesis even if the alternative hypothesis is actually true). Then, by decreasing \\(\\beta\\) power increases [@(pdf)ef].\nPower is mainly influenced by sample size, effect size, and significance level.",
     "crumbs": [
-      "New Part",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Power Analysis for OLS Regression</span>"
+      "Statistical Power and Sample Size Determination",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Power Analysis for OLS Regression</span>"
     ]
   },
   {
     "objectID": "lessons_original/06_power_ols.html#the-pwrss.f.reg-function",
     "href": "lessons_original/06_power_ols.html#the-pwrss.f.reg-function",
-    "title": "\n21  Power Analysis for OLS Regression\n",
-    "section": "\n23.1 The pwrss.f.reg function",
-    "text": "23.1 The pwrss.f.reg function\nWe will start our power analysis using the The pwrss.f.reg function for one predictor in an OLS regression, with our given observations of n = 32 and \\(R^2\\) = .75. Given these values, we are expecting that one variable (WT) explains 75% of the variance in the outcome or Miles per gallon (R2=0.75 or r2 = 0.75 in the code)2.\n\nRegOne_lm &lt;- pwrss.f.reg(\n  r2 = 0.75,\n  k = 1,\n  n = 32,\n  power = NULL,\n  alpha = 0.05\n)\n\n Linear Regression (F test) \n R-squared Deviation from 0 (zero) \n H0: r2 = 0 \n HA: r2 &gt; 0 \n ------------------------------ \n  Statistical power = 1 \n  n = 32 \n ------------------------------ \n Numerator degrees of freedom = 1 \n Denominator degrees of freedom = 30 \n Non-centrality parameter = 96 \n Type I error rate = 0.05 \n Type II error rate = 0 \n\nRegOne_lm$power\n\n[1] 1\n\n\nGiven the information provided, we get 100% power. Our effect size of r2 = 0.75 is considered a large effect provided the following guidelines by Cohen (1988)3\n\\(f^2\\) = 0.02 indicates a small effect;\n\\(f^2\\) = 0.15 indicates a medium effect;\n\\(f^2\\) = 0.35 indicates a large effect.\nWe will use these guidelines to continue our exploration. We will concentrate on a fixed medium effect size. Where, the paired correlation is approximately r = .40 for a medium correlation and for an \\(f^2\\) or effect size of 0.15. using this fixed effect, we will look at various sample sizes to obtain power of 80% or greater given a medium effect size. In our sequence of possible sample sizes, the minimum n = 1 as n &gt; p(p+1)/2 = 1(2)/2 = 1\n\nOLSReg_df &lt;- tibble(n = seq.int(from = 2, to = 99 + 2))\n\nOLSReg_df$power &lt;- map_dbl(\n  .x = OLSReg_df$n,\n  .f = ~{\n    out_ls &lt;- pwrss.f.reg(\n      # \"Effect size\" of a linear model\n      r2 = 0.15,\n      # number of predictors\n      k = 1,\n      # sample size\n      n = .x,\n      power = NULL,\n      alpha = 0.05,\n      # Stop printing messages\n      verbose = FALSE\n    )\n    out_ls$power\n  }\n)\n\nWarning in qf(alpha, df1 = u, df2 = v, lower.tail = FALSE): NaNs produced\n\n\nThe following is the power curve for a fixed effect of f2 = 0.15\n\nggplot(data = OLSReg_df) +\n  theme_bw() +\n  aes(x = n, y = power) +\n  labs(\n    title = \"Omnibus (F-test) Power for Linear Model\",\n    subtitle = \"Fixed Effect Size R2 = 0.15, 1 Predictor\"\n  ) +\n  scale_y_continuous(limits = c(0, 1)) +\n  geom_point() +\n  geom_abline(slope = 0, intercept = 0.8, colour = \"gold\")\n\nWarning: Removed 1 row containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\nGiven the graph, we notice that we need an approximate sample size or n of close to 50 to detect a medium effect size in an OLS Regression.\nThe following is a power analysis for a univariate OLS regression given a fixed sample size. We will create a sequence of effect sizes that capture Cohen’s guidelines as well as the effect size of 0.75 of our sample regression. Our fixed n will be n = 32 as the sample.\n\nOLSRegN_df &lt;- tibble(R2 = seq(0, 0.75, length.out = 100))\n\nOLSRegN_df$power &lt;- map_dbl(\n  .x = OLSRegN_df$R2,\n  .f = ~{\n    out2_ls &lt;- pwrss.f.reg(\n      # \"Effect size\" of a linear model\n      r2 = .x,\n      # number of predictors\n      k = 1,\n      # sample size\n      n = 32,\n      power = NULL,\n      alpha = 0.05,\n      # Stop printing messages\n      verbose = FALSE\n    )\n    out2_ls$power\n  }\n)\n\nThe following is the power curve for a fixed sample size of n = 32\n\nggplot(data = OLSRegN_df) +\n  theme_bw() +\n  aes(x = R2, y = power) +\n  labs(\n    title = \"Omnibus (F-test) Power for Linear Model\",\n    subtitle = \"Fixed Sample Size = 32, 1 Predictor\"\n  ) +\n  scale_y_continuous(limits = c(0, 1)) +\n  geom_point() +\n  geom_abline(slope = 0, intercept = 0.8, colour = \"red\")\n\n\n\n\n\n\n\nGiven the graph, we notice that given n = 32, a power of 80% and higher is achieved when the effect size is at least approximately r2 = 0.20.",
+    "title": "\n22  Power Analysis for OLS Regression\n",
+    "section": "\n24.1 The pwrss.f.reg function",
+    "text": "24.1 The pwrss.f.reg function\nWe will start our power analysis using the The pwrss.f.reg function for one predictor in an OLS regression, with our given observations of n = 32 and \\(R^2\\) = .75. Given these values, we are expecting that one variable (WT) explains 75% of the variance in the outcome or Miles per gallon (R2=0.75 or r2 = 0.75 in the code)2.\n\nRegOne_lm &lt;- pwrss.f.reg(\n  r2 = 0.75,\n  k = 1,\n  n = 32,\n  power = NULL,\n  alpha = 0.05\n)\n\n Linear Regression (F test) \n R-squared Deviation from 0 (zero) \n H0: r2 = 0 \n HA: r2 &gt; 0 \n ------------------------------ \n  Statistical power = 1 \n  n = 32 \n ------------------------------ \n Numerator degrees of freedom = 1 \n Denominator degrees of freedom = 30 \n Non-centrality parameter = 96 \n Type I error rate = 0.05 \n Type II error rate = 0 \n\nRegOne_lm$power\n\n[1] 1\n\n\nGiven the information provided, we get 100% power. Our effect size of r2 = 0.75 is considered a large effect provided the following guidelines by Cohen (1988)3\n\\(f^2\\) = 0.02 indicates a small effect;\n\\(f^2\\) = 0.15 indicates a medium effect;\n\\(f^2\\) = 0.35 indicates a large effect.\nWe will use these guidelines to continue our exploration. We will concentrate on a fixed medium effect size. Where, the paired correlation is approximately r = .40 for a medium correlation and for an \\(f^2\\) or effect size of 0.15. using this fixed effect, we will look at various sample sizes to obtain power of 80% or greater given a medium effect size. In our sequence of possible sample sizes, the minimum n = 1 as n &gt; p(p+1)/2 = 1(2)/2 = 1\n\nOLSReg_df &lt;- tibble(n = seq.int(from = 2, to = 99 + 2))\n\nOLSReg_df$power &lt;- map_dbl(\n  .x = OLSReg_df$n,\n  .f = ~{\n    out_ls &lt;- pwrss.f.reg(\n      # \"Effect size\" of a linear model\n      r2 = 0.15,\n      # number of predictors\n      k = 1,\n      # sample size\n      n = .x,\n      power = NULL,\n      alpha = 0.05,\n      # Stop printing messages\n      verbose = FALSE\n    )\n    out_ls$power\n  }\n)\n\nWarning in qf(alpha, df1 = u, df2 = v, lower.tail = FALSE): NaNs produced\n\n\nThe following is the power curve for a fixed effect of f2 = 0.15\n\nggplot(data = OLSReg_df) +\n  theme_bw() +\n  aes(x = n, y = power) +\n  labs(\n    title = \"Omnibus (F-test) Power for Linear Model\",\n    subtitle = \"Fixed Effect Size R2 = 0.15, 1 Predictor\"\n  ) +\n  scale_y_continuous(limits = c(0, 1)) +\n  geom_point() +\n  geom_abline(slope = 0, intercept = 0.8, colour = \"gold\")\n\nWarning: Removed 1 row containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\nGiven the graph, we notice that we need an approximate sample size or n of close to 50 to detect a medium effect size in an OLS Regression.\nThe following is a power analysis for a univariate OLS regression given a fixed sample size. We will create a sequence of effect sizes that capture Cohen’s guidelines as well as the effect size of 0.75 of our sample regression. Our fixed n will be n = 32 as the sample.\n\nOLSRegN_df &lt;- tibble(R2 = seq(0, 0.75, length.out = 100))\n\nOLSRegN_df$power &lt;- map_dbl(\n  .x = OLSRegN_df$R2,\n  .f = ~{\n    out2_ls &lt;- pwrss.f.reg(\n      # \"Effect size\" of a linear model\n      r2 = .x,\n      # number of predictors\n      k = 1,\n      # sample size\n      n = 32,\n      power = NULL,\n      alpha = 0.05,\n      # Stop printing messages\n      verbose = FALSE\n    )\n    out2_ls$power\n  }\n)\n\nThe following is the power curve for a fixed sample size of n = 32\n\nggplot(data = OLSRegN_df) +\n  theme_bw() +\n  aes(x = R2, y = power) +\n  labs(\n    title = \"Omnibus (F-test) Power for Linear Model\",\n    subtitle = \"Fixed Sample Size = 32, 1 Predictor\"\n  ) +\n  scale_y_continuous(limits = c(0, 1)) +\n  geom_point() +\n  geom_abline(slope = 0, intercept = 0.8, colour = \"red\")\n\n\n\n\n\n\n\nGiven the graph, we notice that given n = 32, a power of 80% and higher is achieved when the effect size is at least approximately r2 = 0.20.",
     "crumbs": [
-      "New Part",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Power Analysis for OLS Regression</span>"
+      "Statistical Power and Sample Size Determination",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Power Analysis for OLS Regression</span>"
     ]
   },
   {
     "objectID": "lessons_original/06_power_ols.html#the-pwr.f2.test-function",
     "href": "lessons_original/06_power_ols.html#the-pwr.f2.test-function",
-    "title": "\n21  Power Analysis for OLS Regression\n",
-    "section": "\n23.2 The pwr.f2.test function",
-    "text": "23.2 The pwr.f2.test function\nPower analysis using the pwr.f2.test: where, u = 1, The F numerator degrees of freedom (u=1) or the number of coefficients(independent variables) in the model\nand we will use Cohen’s criteria for effect sizes and first provide analyses for a medium effect size of 0.15 [3]45\n\n# Using Cohen 1988 criteria, where, \n#f2 = 0.02 small effect;\n#f2 = 0.15 medium effect;\n#f2 = 0.35 indicates a large effect\n\n### Fixed Effect size f2 = 0.15###\n# n = 50\npwr.f2.test(\n  u = 1, \n  v = 50 - 1 - 1,\n  f2 = .15, \n  sig.level = 0.05, \n  power = NULL\n  )\n\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 48\n             f2 = 0.15\n      sig.level = 0.05\n          power = 0.7653128\n\n# n = 25\npwr.f2.test(\n  u = 1, \n  v = 25 - 1 - 1,\n  f2 = 0.15, \n  sig.level = 0.05, \n  power = NULL\n  )\n\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 23\n             f2 = 0.15\n      sig.level = 0.05\n          power = 0.4584646\n\n# n = 12\npwr.f2.test(\n  u = 1, \n  v = 12 - 1 - 1,\n  f2 = 0.15, \n  sig.level = 0.05, \n  power = NULL\n  )\n\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 10\n             f2 = 0.15\n      sig.level = 0.05\n          power = 0.2289402\n\n\nNow, we will explore a fixed n = 32\n\n# ES = .02, r = .14\npwr.f2.test(\n  u = 1, \n  v = 32 - 1 - 1,\n  f2 = .02, \n  sig.level = 0.05, \n  power = NULL\n  )\n\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 30\n             f2 = 0.02\n      sig.level = 0.05\n          power = 0.1210661\n\n# ES = 0.15, r = .39\npwr.f2.test(\n  u = 1, \n  v = 32 - 1 - 1,\n  f2 = 0.15, \n  sig.level = 0.05, \n  power = NULL\n  ) \n\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 30\n             f2 = 0.15\n      sig.level = 0.05\n          power = 0.5637733\n\n# ES = .35, r = .59\npwr.f2.test(\n  u = 1, \n  v = 32 - 1 - 1,\n  f2 = 0.35, \n  sig.level = 0.05, \n  power = NULL\n  )\n\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 30\n             f2 = 0.35\n      sig.level = 0.05\n          power = 0.8993357\n\n\nWe will now look at the 3 types of effect sizes given various sample sizes\n\neffect_sizes &lt;- c(0.02, 0.15, 0.35) \nsample_sizes = seq(20, 100, 20)\n\ninput_df &lt;- crossing(effect_sizes,sample_sizes)\nglimpse(input_df)\n\nRows: 15\nColumns: 2\n$ effect_sizes &lt;dbl&gt; 0.02, 0.02, 0.02, 0.02, 0.02, 0.15, 0.15, 0.15, 0.15, 0.1…\n$ sample_sizes &lt;dbl&gt; 20, 40, 60, 80, 100, 20, 40, 60, 80, 100, 20, 40, 60, 80,…\n\nget_power &lt;- function(df){\n  power_result &lt;- pwr.f2.test(\n    u = 1,\n    v = df$sample_sizes - 1 - 1, \n    f2 = df$effect_sizes,\n    )\n  df$power=power_result$power\n  return(df)\n}\n\n# run get_power for each combination of effect size \n# and sample size\n\npower_curves &lt;- input_df %&gt;%\n  do(get_power(.)) %&gt;%\n  mutate(effect_sizes = as.factor(effect_sizes)) \n\n\nggplot(power_curves, \n       aes(x=sample_sizes,\n           y=power, \n           color=effect_sizes)\n       ) + \n  geom_line() + \n  geom_hline(yintercept = 0.8, \n             linetype='dotdash',\n             color = \"purple\")\n\n\n\n\n\n\n\nBased on the graph, if we have an effect size of 0.15, we need approximately 50 or more observations (recall n = v + 1 + 1)",
+    "title": "\n22  Power Analysis for OLS Regression\n",
+    "section": "\n24.2 The pwr.f2.test function",
+    "text": "24.2 The pwr.f2.test function\nPower analysis using the pwr.f2.test: where, u = 1, The F numerator degrees of freedom (u=1) or the number of coefficients(independent variables) in the model\nand we will use Cohen’s criteria for effect sizes and first provide analyses for a medium effect size of 0.15 [3]45\n\n# Using Cohen 1988 criteria, where, \n#f2 = 0.02 small effect;\n#f2 = 0.15 medium effect;\n#f2 = 0.35 indicates a large effect\n\n### Fixed Effect size f2 = 0.15###\n# n = 50\npwr.f2.test(\n  u = 1, \n  v = 50 - 1 - 1,\n  f2 = .15, \n  sig.level = 0.05, \n  power = NULL\n  )\n\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 48\n             f2 = 0.15\n      sig.level = 0.05\n          power = 0.7653128\n\n# n = 25\npwr.f2.test(\n  u = 1, \n  v = 25 - 1 - 1,\n  f2 = 0.15, \n  sig.level = 0.05, \n  power = NULL\n  )\n\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 23\n             f2 = 0.15\n      sig.level = 0.05\n          power = 0.4584646\n\n# n = 12\npwr.f2.test(\n  u = 1, \n  v = 12 - 1 - 1,\n  f2 = 0.15, \n  sig.level = 0.05, \n  power = NULL\n  )\n\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 10\n             f2 = 0.15\n      sig.level = 0.05\n          power = 0.2289402\n\n\nNow, we will explore a fixed n = 32\n\n# ES = .02, r = .14\npwr.f2.test(\n  u = 1, \n  v = 32 - 1 - 1,\n  f2 = .02, \n  sig.level = 0.05, \n  power = NULL\n  )\n\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 30\n             f2 = 0.02\n      sig.level = 0.05\n          power = 0.1210661\n\n# ES = 0.15, r = .39\npwr.f2.test(\n  u = 1, \n  v = 32 - 1 - 1,\n  f2 = 0.15, \n  sig.level = 0.05, \n  power = NULL\n  ) \n\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 30\n             f2 = 0.15\n      sig.level = 0.05\n          power = 0.5637733\n\n# ES = .35, r = .59\npwr.f2.test(\n  u = 1, \n  v = 32 - 1 - 1,\n  f2 = 0.35, \n  sig.level = 0.05, \n  power = NULL\n  )\n\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 30\n             f2 = 0.35\n      sig.level = 0.05\n          power = 0.8993357\n\n\nWe will now look at the 3 types of effect sizes given various sample sizes\n\neffect_sizes &lt;- c(0.02, 0.15, 0.35) \nsample_sizes = seq(20, 100, 20)\n\ninput_df &lt;- crossing(effect_sizes,sample_sizes)\nglimpse(input_df)\n\nRows: 15\nColumns: 2\n$ effect_sizes &lt;dbl&gt; 0.02, 0.02, 0.02, 0.02, 0.02, 0.15, 0.15, 0.15, 0.15, 0.1…\n$ sample_sizes &lt;dbl&gt; 20, 40, 60, 80, 100, 20, 40, 60, 80, 100, 20, 40, 60, 80,…\n\nget_power &lt;- function(df){\n  power_result &lt;- pwr.f2.test(\n    u = 1,\n    v = df$sample_sizes - 1 - 1, \n    f2 = df$effect_sizes,\n    )\n  df$power=power_result$power\n  return(df)\n}\n\n# run get_power for each combination of effect size \n# and sample size\n\npower_curves &lt;- input_df %&gt;%\n  do(get_power(.)) %&gt;%\n  mutate(effect_sizes = as.factor(effect_sizes)) \n\n\nggplot(power_curves, \n       aes(x=sample_sizes,\n           y=power, \n           color=effect_sizes)\n       ) + \n  geom_line() + \n  geom_hline(yintercept = 0.8, \n             linetype='dotdash',\n             color = \"purple\")\n\n\n\n\n\n\n\nBased on the graph, if we have an effect size of 0.15, we need approximately 50 or more observations (recall n = v + 1 + 1)",
     "crumbs": [
-      "New Part",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Power Analysis for OLS Regression</span>"
+      "Statistical Power and Sample Size Determination",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Power Analysis for OLS Regression</span>"
     ]
   },
   {
     "objectID": "lessons_original/06_power_ols.html#the-wp.regression-function",
     "href": "lessons_original/06_power_ols.html#the-wp.regression-function",
-    "title": "\n21  Power Analysis for OLS Regression\n",
-    "section": "\n23.3 The wp.regression function",
-    "text": "23.3 The wp.regression function\nLastly, we use the wp.regression function to examine the appropriate sample size given an effect size of 0.15 to achieve a power of 80% or higher [6]7\n\n# Using webpower \n#p1 = 1\n### Fixed ES = 0.15 ###\nres &lt;- wp.regression(n = seq(20,100,20), \n                     p1 = 1, \n                     f2 = 0.15, \n                     alpha = 0.05, \n                     power = NULL\n                    )\nres\n\nPower for multiple regression\n\n      n p1 p2   f2 alpha     power\n     20  1  0 0.15  0.05 0.3745851\n     40  1  0 0.15  0.05 0.6654126\n     60  1  0 0.15  0.05 0.8389166\n     80  1  0 0.15  0.05 0.9280168\n    100  1  0 0.15  0.05 0.9695895\n\nURL: http://psychstat.org/regression\n\nplot(res,  main = \"Fixed Effect Size = 0.15\")+\nabline(a = .80, b = 0, col = 'steelblue', lwd = 3, lty = 2)\n\n\n\n\n\n\n\ninteger(0)\n\n\nThe results are similar to the previous functions. However, in this function, given an effect size of 0.15, we need an n of close to 60 to achieve 80% power.\n\n# Using webpower \n#p1 = 1\n### Fixed n = 50 ###\nres &lt;- wp.regression(n = 50, \n                     p1 = 1, \n                     f2 = seq(0.00, 0.35, 0.05), \n                     alpha = 0.05, \n                     power = NULL\n                    )\nres\n\nPower for multiple regression\n\n     n p1 p2   f2 alpha     power\n    50  1  0 0.00  0.05 0.0500000\n    50  1  0 0.05  0.05 0.3409707\n    50  1  0 0.10  0.05 0.5914439\n    50  1  0 0.15  0.05 0.7653128\n    50  1  0 0.20  0.05 0.8725329\n    50  1  0 0.25  0.05 0.9337077\n    50  1  0 0.30  0.05 0.9667049\n    50  1  0 0.35  0.05 0.9837529\n\nURL: http://psychstat.org/regression",
+    "title": "\n22  Power Analysis for OLS Regression\n",
+    "section": "\n24.3 The wp.regression function",
+    "text": "24.3 The wp.regression function\nLastly, we use the wp.regression function to examine the appropriate sample size given an effect size of 0.15 to achieve a power of 80% or higher [6]7\n\n# Using webpower \n#p1 = 1\n### Fixed ES = 0.15 ###\nres &lt;- wp.regression(n = seq(20,100,20), \n                     p1 = 1, \n                     f2 = 0.15, \n                     alpha = 0.05, \n                     power = NULL\n                    )\nres\n\nPower for multiple regression\n\n      n p1 p2   f2 alpha     power\n     20  1  0 0.15  0.05 0.3745851\n     40  1  0 0.15  0.05 0.6654126\n     60  1  0 0.15  0.05 0.8389166\n     80  1  0 0.15  0.05 0.9280168\n    100  1  0 0.15  0.05 0.9695895\n\nURL: http://psychstat.org/regression\n\nplot(res,  main = \"Fixed Effect Size = 0.15\")+\nabline(a = .80, b = 0, col = 'steelblue', lwd = 3, lty = 2)\n\n\n\n\n\n\n\ninteger(0)\n\n\nThe results are similar to the previous functions. However, in this function, given an effect size of 0.15, we need an n of close to 60 to achieve 80% power.\n\n# Using webpower \n#p1 = 1\n### Fixed n = 50 ###\nres &lt;- wp.regression(n = 50, \n                     p1 = 1, \n                     f2 = seq(0.00, 0.35, 0.05), \n                     alpha = 0.05, \n                     power = NULL\n                    )\nres\n\nPower for multiple regression\n\n     n p1 p2   f2 alpha     power\n    50  1  0 0.00  0.05 0.0500000\n    50  1  0 0.05  0.05 0.3409707\n    50  1  0 0.10  0.05 0.5914439\n    50  1  0 0.15  0.05 0.7653128\n    50  1  0 0.20  0.05 0.8725329\n    50  1  0 0.25  0.05 0.9337077\n    50  1  0 0.30  0.05 0.9667049\n    50  1  0 0.35  0.05 0.9837529\n\nURL: http://psychstat.org/regression",
     "crumbs": [
-      "New Part",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Power Analysis for OLS Regression</span>"
+      "Statistical Power and Sample Size Determination",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Power Analysis for OLS Regression</span>"
     ]
   },
   {
@@ -354,9 +354,9 @@
   {
     "objectID": "lessons_original/01_table1.html",
     "href": "lessons_original/01_table1.html",
-    "title": "6  Demographics table with table1",
+    "title": "\n6  Demographics table with table1\n",
     "section": "",
-    "text": "7 Introduction\nIn most scientific research journals, the first included table is often referred to as Table1.\nTable1 includes descriptive statistics for the total study sample, with the rows (explanatory variables) consisting of the key study variables that are often included in the final analysis1. Then within the columns (outcome of interest/response variable), you will find cells given as a n (%) for categorical variables, whereas a mean, SD, or the median will be provided for continuous variables. Additionally, there will be a total column provided which can help in the assessment of the overall sample.\nThere are a few ways that Table1 can be created without using functions like table1. For example, for a research paper, dissertation, and/or the results of a clinical trial, we might have to go through the time consuming task of using the summary() function, or the describe() function in the library(Hmisc). Then, if you decide that you would like to see a variable in relation to a categorical response/outcome variable, you would have to build 2 x 2 tables for each explanatory variable. The table1() function does all of this for us, but first lets discuss the packages that will be in use today.",
+    "text": "6.1 Introduction\nIn most scientific research journals, the first included table is often referred to as Table1.\nTable1 includes descriptive statistics for the total study sample, with the rows (explanatory variables) consisting of the key study variables that are often included in the final analysis1. Then within the columns (outcome of interest/response variable), you will find cells given as a n (%) for categorical variables, whereas a mean, SD, or the median will be provided for continuous variables. Additionally, there will be a total column provided which can help in the assessment of the overall sample.\nThere are a few ways that Table1 can be created without using functions like table1. For example, for a research paper, dissertation, and/or the results of a clinical trial, we might have to go through the time consuming task of using the summary() function, or the describe() function in the library(Hmisc). Then, if you decide that you would like to see a variable in relation to a categorical response/outcome variable, you would have to build 2 x 2 tables for each explanatory variable. The table1() function does all of this for us, but first lets discuss the packages that will be in use today.",
     "crumbs": [
       "New Part",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Demographics table with table1</span>"
@@ -376,11 +376,11 @@
   {
     "objectID": "lessons/02_z-test_one_prop.html",
     "href": "lessons/02_z-test_one_prop.html",
-    "title": "7  Z-Test for One Proportion",
+    "title": "\n7  Z-Test for One Proportion\n",
     "section": "",
-    "text": "8 Introduction to One-Sample \\(Z\\)-Tests\nThe one-sample \\(Z\\)-test is used to compare a sample proportion to a population proportion.",
+    "text": "7.1 Introduction to One-Sample \\(Z\\)-Tests\nThe one-sample \\(Z\\)-test is used to compare a sample proportion to a population proportion.",
     "crumbs": [
-      "New Part",
+      "One-Sample Tests",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Z-Test for One Proportion</span>"
     ]
   },
@@ -422,7 +422,7 @@
     "href": "index.html",
     "title": "An R Cookbook for Public Health",
     "section": "",
-    "text": "1 Source Code for PHC6099 Course Notes\nThis material is for the course “R Computing for Health Sciences”. The course notes are published here: https://gabrielodom.github.io/PHC6099_rBiostat/",
+    "text": "0.1 Source Code for PHC6099 Course Notes\nThis material is for the course “R Computing for Health Sciences”. The course notes are published here: https://gabrielodom.github.io/PHC6099_rBiostat/",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Course Materials for PHC 6099: 'R Computing for Health Sciences'</span>"
     ]
@@ -662,7 +662,7 @@
     "section": "",
     "text": "13.1 Two-way ANOVA\nA two-way ANOVA is used to estimate how the mean of a quantitative variable changes according to the levels of two categorical variables.",
     "crumbs": [
-      "New Part",
+      "ANOVA and Regression",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Two-Way ANOVA</span>"
     ]
   },
@@ -673,7 +673,7 @@
     "section": "",
     "text": "It is used to determine how independent (grouping) variables, in combination, affect a dependent (response) variable.\nGrouping variables are also called factors. Levels are the categories of each component.",
     "crumbs": [
-      "New Part",
+      "ANOVA and Regression",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Two-Way ANOVA</span>"
     ]
   },
@@ -684,7 +684,7 @@
     "section": "\n13.2 How does it work?",
     "text": "13.2 How does it work?\nThe F test is used in ANOVA to determine statistical significance. The F test compares the variance in each group mean to the overall variance in the dependent variable because it is a group-wise comparison test.\nWhen the variance is higher between groups than within the groups, the F test value will be greater, and therefore a higher likelihood that the difference observed is real and not due to chance.\nThere are three null hypotheses tested while doing a two-way ANOVA:\n\nThere is no difference between the group means at any level of the first independent variable.\nThere is no difference between the group means at any level of the second independent variable.\nThe effect of one independent variable does not depend on the effect of the other independent variable (also viewed as no interaction effect),\n\n\n13.2.1 Assumptions needed\nThere are certain assumptions that must be considered before using a two-way ANOVA.\n\nHomogenuity of variance: The variances for each group should be roughly equal.\nIndependence of observations: The observations in each group are independent of each other and the observations within groups were obtained by a random sample.\nNormally distributed: The response variable is approximately normally distributed for each group.\n\nBelow we will see an example on how to test for these assumptions and how to conduct a two-way ANOVA test once we know they have been met.",
     "crumbs": [
-      "New Part",
+      "ANOVA and Regression",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Two-Way ANOVA</span>"
     ]
   },
@@ -695,7 +695,7 @@
     "section": "\n13.3 Two-Way ANOVA Table",
     "text": "13.3 Two-Way ANOVA Table\n\n\n\n\n\n\n\n\n\nSource of Variation\nSum of Squares\nDegrees of freedom\nMean Squares\nF value\n\n\n\nFactor A\n\\(SS_A\\)\n\\(k-1\\)\n\\(MS_A\\)\n\\(F_A\\)\n\n\nFactor B\n\\(SS_B\\)\n\\(l-1\\)\n\\(MS_B\\)\n\\(F_B\\)\n\n\nInteraction AB\n\\(SS_{AB}\\)\n\\((k-1)(l-1)\\)\n\\(MS_{AB}\\)\n\\(F_{AB}\\)\n\n\nError\n\\(SS_E\\)\n\\(kl(m-1)\\)\n\\(MS_E\\)\n\n\n\nTotal\n\\(SS_T\\)\n\\(klm-1\\)\n\n\n\n\n\nWhere\n\n\\[ MS_E := \\frac{SS_E}{kl(m-1)} \\]\n\\[ MS_A := \\frac{SS_A}{k-1} \\text{ and } F_A := \\frac{MS_A}{MS_E} \\]\n\\[ MS_B := \\frac{SS_B}{l-1} \\text{ and } F_B := \\frac{MS_B}{MS_E} \\]\n\\[ MS_{AB} := \\frac{SS_{AB}}{(k-1)(l-1)} \\text{ and } F_{AB} := \\frac{MS_{AB}}{MS_E} \\]\n\nWe explain these components as:\n\n\n\\(SS_A\\): Factor \\(A\\) main effect sums of squares with associated df \\(k-1\\)\n\n\n\\(SS_B\\): Factor \\(B\\) main effect sums of squares, with associated df \\(l-1\\)\n\n\n\\(SS_{AB}\\): interaction sum of squares, with associated df \\((k-1)(l-1)\\)\n\n\n\\(SS_E\\): error sum of squares with associated df \\(kl(m-1)\\)\n\n\n\\(SS_T\\): Total sums of squares, associated with df \\(klm-1\\)\n\n\n\n13.3.1 Example\nFor this example, an agricultural crop yield dataset was sourced from Scribbr.\nThe dataset contains:\n\nType of fertilizer (1,2,3)\nPlanting density (1 = low, 2 = high)\nBlock number in the field (1,2,3,4)\n\nThis two-way ANOVA will examine whether the type of fertilizer and planting density (independent variables) have an effect on the average crop yield (dependent variable).\n\n13.3.1.1 Loading Libraries and Data\n\n# needed to create presentation ready table \nlibrary(gt)\n# needed to create presentation ready table \nlibrary(tidymodels)\n# needed to create AIC table to compare all three models \nlibrary(AICcmodavg)\nlibrary(ggplot2)\nlibrary(tidyverse)\n\ncrop_data_df &lt;- read_csv(\"../data/04_crop_data.csv\")\n\n\n13.3.1.2 Data Exploration\n\n# show first six rows of the dataset\nhead(crop_data_df)\n\n# A tibble: 6 × 4\n  density block fertilizer yield\n    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;\n1       1     1          1  177.\n2       2     2          1  178.\n3       1     3          1  176.\n4       2     4          1  178.\n5       1     1          1  177.\n6       2     2          1  177.\n\n# overview of summary statistics\nsummary(crop_data_df)\n\n    density        block        fertilizer     yield      \n Min.   :1.0   Min.   :1.00   Min.   :1    Min.   :175.4  \n 1st Qu.:1.0   1st Qu.:1.75   1st Qu.:1    1st Qu.:176.5  \n Median :1.5   Median :2.50   Median :2    Median :177.1  \n Mean   :1.5   Mean   :2.50   Mean   :2    Mean   :177.0  \n 3rd Qu.:2.0   3rd Qu.:3.25   3rd Qu.:3    3rd Qu.:177.4  \n Max.   :2.0   Max.   :4.00   Max.   :3    Max.   :179.1  \n\n\n\n13.3.1.2.1 Boxplots\n\nplot_fertilizer &lt;- \n  ggplot(data = crop_data_df) +\n    aes(\n      x = as.factor(fertilizer),\n      y = yield,\n      color = as.factor(fertilizer) \n    ) +\n  labs(\n    x = \"Fertilizer Type\",\n    y = \"Crop Yield\"\n  ) +\n  geom_boxplot()\n\nplot_fertilizer\n\n\n\n\n\n\nplot_density &lt;- \n  ggplot(data = crop_data_df) +\n    aes(\n      x = as.factor(density),\n      y = yield,\n      color = as.factor(density)\n    ) +\n  labs(\n    x = \"Planting Density\",\n    y = \"Crop Yield\"\n  ) +\n  geom_boxplot()\n\nplot_density\n\n\n\n\n\n\n\n\n13.3.1.3 Null\n\nH01: There is no statistical difference in average yield for any fertilizer type\nH02: There is no difference in average yield between either planting density\nH03: The effect of fertilizer type on average yield is not dependent on the effect of planting density - no interaction effect\n\n13.3.1.4 Alternative\n\nH11: There is a difference in the average yield for fertilizer types\nH12: There is a difference in the average yield based on planting density\nH13: There is an interaction effect between planting density and fertilizer type average yield\n\n13.3.1.5 Performing the two-way ANOVA\nFirst we want to test without interaction between the two independent variables for our first model. The code below is\n\n# converting into a factor for post-hoc assessment \ncrop_data_df$fertilizer &lt;- as.factor(crop_data_df$fertilizer)\ncrop_data_df$density &lt;- as.factor(crop_data_df$density)\n\n# performing the two-way ANOVA\ntwo_way &lt;- \n  aov(yield ~ fertilizer + density, data = crop_data_df)\n\n# creating a tidy table using gt\ntable_1 &lt;- two_way %&gt;% \n  tidy() %&gt;% \n  gt()\n\n# customizing table \ntable_1 |&gt;\n   tab_header(\n      title = \"ANOVA Results\",\n      subtitle = \"Two-way ANOVA for yield\"\n    )\n\n\n\n\n\n\n\nANOVA Results\n\n\nTwo-way ANOVA for yield\n\n\nterm\ndf\nsumsq\nmeansq\nstatistic\np.value\n\n\n\n\nfertilizer\n2\n6.068047\n3.0340233\n9.073123\n0.0002532992\n\n\ndensity\n1\n5.121681\n5.1216812\n15.316179\n0.0001741418\n\n\nResiduals\n92\n30.764505\n0.3343968\nNA\nNA\n\n\n\n\n\n\n\nWe also want to test a model that shows interaction between the two independent variables.\n\n# performing the two-way ANOVA with interaction \ninteraction &lt;- \n  aov(yield ~ fertilizer * density, data = crop_data_df)\n\n# creating a tidy table using gt\ntable_int &lt;- interaction %&gt;% \n  tidy() %&gt;% \n  gt()\n\n# customizing table \ntable_int |&gt;\n   tab_header(\n      title = \"ANOVA Results\",\n      subtitle = \"Two-way ANOVA for yield with interaction term\"\n    )\n\n\n\n\n\n\n\nANOVA Results\n\n\nTwo-way ANOVA for yield with interaction term\n\n\nterm\ndf\nsumsq\nmeansq\nstatistic\np.value\n\n\n\n\nfertilizer\n2\n6.0680466\n3.0340233\n9.0010522\n0.0002731890\n\n\ndensity\n1\n5.1216812\n5.1216812\n15.1945174\n0.0001864075\n\n\nfertilizer:density\n2\n0.4278183\n0.2139091\n0.6346053\n0.5325000914\n\n\nResiduals\n90\n30.3366866\n0.3370743\nNA\nNA\n\n\n\n\n\n\n\nThe p-value for both independent variables are less than 0.05, therefore we reject the null hypotheses (H01 and H02).\nThe p value for the interaction term is greater than 0.05, hence we fail to reject the null hypothesis (H03). Hence not much variation can be explained by the interaction term.\n\n13.3.1.6 Blocking Variable - 3rd Model\nThe crops were planted in across various blocks that may differ in other factors such as sunlight, moisture etc. This could possibly lead to confounding. Therefore it is important to control for the effect of differences between blocks by adding the third variable to our tests.\n\n# performing two-way anova with interaction and blocking\nblocking &lt;- \n  aov(yield ~ fertilizer * density + block, data = crop_data_df)\n\n# creating a tidy table using gt \ntable_block &lt;- blocking %&gt;% \n  tidy() %&gt;% \n  gt()\n\n# customizes gt table\ntable_block |&gt;\n   tab_header(\n      title = \"Two- way ANOVA Results\",\n      subtitle = \"with interaction term & blocking variable\"\n    )\n\n\n\n\n\n\n\nTwo- way ANOVA Results\n\n\nwith interaction term & blocking variable\n\n\nterm\ndf\nsumsq\nmeansq\nstatistic\np.value\n\n\n\n\nfertilizer\n2\n6.0680466\n3.0340233\n9.0459852\n0.0002652607\n\n\ndensity\n1\n5.1216812\n5.1216812\n15.2703680\n0.0001813274\n\n\nblock\n1\n0.4860877\n0.4860877\n1.4492776\n0.2318360383\n\n\nfertilizer:density\n2\n0.4278183\n0.2139091\n0.6377732\n0.5308657318\n\n\nResiduals\n89\n29.8505990\n0.3354000\nNA\nNA\n\n\n\n\n\n\n\nFor the block variable the sum of squares is low and the p value is greater than 0.05. Hence not much information is added to the model. The sum of square for both independent variables also remain unchanged.\n\n13.3.1.7 Determining the Best Fit Model\nThe Akaike information criterion (AIC) can be used to determine the best model. AIC balances the variation explained by the number of parameters used to calculate the information value of each model. The lower the AIC value, the more information explained.\n\nmodel_set &lt;- list(two_way, interaction, blocking)\nmodel_names &lt;- c(\"two_way\", \"interaction\", \"blocking\")\n \ngt_fmt &lt;-\n  aictab(model_set, modnames = model_names) \n\ngt_print &lt;- \n  gt(gt_fmt)\n\ngt_print\n\n\n\n\n\n\nModnames\nK\nAICc\nDelta_AICc\nModelLik\nAICcWt\nLL\nCum.Wt\n\n\n\ntwo_way\n5\n173.8562\n0.000000\n1.0000000\n0.75476252\n-81.59474\n0.7547625\n\n\ninteraction\n7\n177.1178\n3.261693\n0.1957638\n0.14775516\n-80.92256\n0.9025177\n\n\nblocking\n8\n177.9496\n4.093464\n0.1291563\n0.09748232\n-80.14722\n1.0000000\n\n\n\n\n\n\n\nAs shown in this table, the two_way model is the best fit for our crop data analysis.\n\n13.3.2 Checking for homoscedasticity\n\npar(mfrow=c(2,2))\nplot(two_way)\n\n\n\n\n\n\npar(mfrow=c(1,1))\n\nThe output of the residual means shows no large outliers that could possibly skew the data. Hence we can assume equal variances. The Q-Q plot also depicts normality.",
     "crumbs": [
-      "New Part",
+      "ANOVA and Regression",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Two-Way ANOVA</span>"
     ]
   },
@@ -706,7 +706,7 @@
     "section": "\n13.4 Post-hoc testing (Tukey HSD)",
     "text": "13.4 Post-hoc testing (Tukey HSD)\nIn order to determine how the levels differ from one another the Tukey’s Honestly-Significant-difference test can be used.\n\ntukey_crop &lt;- TukeyHSD(two_way)  \n  \ntukey_crop %&gt;% \n  tidy %&gt;% \n  gt() %&gt;% \n  tab_header(\n      title = \"Tukey Multiple Comparisons of means\",\n      subtitle = \"for fertilizer & density\"\n  )\n\n\n\n\n\n\n\nTukey Multiple Comparisons of means\n\n\nfor fertilizer & density\n\n\nterm\ncontrast\nnull.value\nestimate\nconf.low\nconf.high\nadj.p.value\n\n\n\n\nfertilizer\n2-1\n0\n0.1761687\n-0.16822506\n0.5205625\n0.4452958212\n\n\nfertilizer\n3-1\n0\n0.5991256\n0.25473179\n0.9435194\n0.0002218678\n\n\nfertilizer\n3-2\n0\n0.4229569\n0.07856306\n0.7673506\n0.0119381379\n\n\ndensity\n2-1\n0\n0.4619560\n0.22752045\n0.6963916\n0.0001741423\n\n\n\n\n\n\n\nThis table shows of pairwise differences between each level in the independent variables. Comparisons with p values less than 0.05 are termed significant;\n\nfertilizer types 1 and 3\nfertilizer types 2 and 3\nplanting density groups (binary)\n\n\nplot(tukey_crop, las = 1)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOnly the fertilizer comparison of type 1 & 2 confidence interval includes 0; no significant statistical difference\n\n\n13.4.1 Summary Chart of Crop yield data\n\nanova_plot &lt;- \n  ggplot(crop_data_df,\n    aes(\n      x = density, \n      y = yield, \n      group = fertilizer, \n      color = fertilizer\n    )\n  ) +\n  geom_point(\n    cex = 1.5, \n    pch = 1.0, \n    position = position_jitter(w = 0.1, h = 0.1)\n  )\n\nanova_plot &lt;- anova_plot + \n  stat_summary(fun.data = 'mean_se', geom = 'errorbar', width = 0.2, color = \"grey50\") +\n  stat_summary(fun.data = 'mean_se', geom = 'pointrange') \n\nanova_plot &lt;- anova_plot +\n  facet_wrap(~ fertilizer)\n\nanova_plot &lt;- anova_plot +\n  theme_classic() +\n  labs(title = \"Crop yield averages based on fertilizer types and planting density\",\n      x = \"Planting density (1 = low density, 2 = high density)\",\n      y = \"Yield Average\")\n\nanova_plot",
     "crumbs": [
-      "New Part",
+      "ANOVA and Regression",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Two-Way ANOVA</span>"
     ]
   },
@@ -1231,9 +1231,9 @@
     "href": "lessons/01_mosaic_violin.html",
     "title": "\n3  Mosaic & Box/Violin Plots\n",
     "section": "",
-    "text": "4 Packages for this Lesson\n# Installing Required Packages\n# install.packages(\"public.ctn0094data\")\n# install.packages(\"tidyverse\")\n# install.packages(\"ggmosaic\")\n\n# Loading Required Packages\nlibrary(public.ctn0094data)\nlibrary(tidyverse)\nlibrary(ggmosaic)",
+    "text": "3.1 Packages for this Lesson\n# Installing Required Packages\n# install.packages(\"public.ctn0094data\")\n# install.packages(\"tidyverse\")\n# install.packages(\"ggmosaic\")\n\n# Loading Required Packages\nlibrary(public.ctn0094data)\nlibrary(tidyverse)\nlibrary(ggmosaic)",
     "crumbs": [
-      "New Part",
+      "Exploratory Data Analysis",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Mosaic & Box/Violin Plots</span>"
     ]
   },
@@ -1308,7 +1308,7 @@
     "href": "lessons/01_scatterplots.html",
     "title": "\n4  How to Create a Scatterplot\n",
     "section": "",
-    "text": "library(tidyverse)\n# Contains colour palette for ggplot\nlibrary(viridis)\n# Gapminder dataset\nlibrary(dslabs)\n\n\n5 Introduction to Scatterplots\nScatterplots display the relationship between two variables using dots to represent the values for each numeric variable. This presentation will examine the relationship between GDP per capita and Fertility over time using ggplot with facets.\nHypothesis: A negative relationship exists between GDP per capita and fertility i.e. as GDP per capita increases, fertility decreases.\n\n6 Gapminder data description\nData was obtained from the dslabs package and comes from Gapminder a Swedish non-profit organization. The Gapmidner data set has health and income outcomes for 184 countries from 1960 to 2016. Gapminder aims to promote a fact-based worldview by providing accessible and understandable global development data. The dataset covers a wide range of variables, including economic, social, and health-related indicators like GDP, infant mortality, life expectancy, fertility, as well as population, making it a valuable resource for understanding global trends and patterns over time. Countries and territories with missing information were not excluded from the data set as the lack of information can also be looked into and shed light on why data was not collected or provided. To determine whether a country’s health and income outcomes are influenced by population sizes and GDP per capita, the data will be used to create a series of graphs to view different trends.\n\n7 Cleaning the data to create a model data frame\nA tibble was created from the gapminder dataset, and a new column was created to measure GDP per capita. Overall, using tibbles enhances the readability, usability, and compatibility of your code within the tidyverse ecosystem.\n\n# Creating gapminder dataset\\tibble\ngapminder_df &lt;-\n  as_tibble(gapminder) %&gt;%\n  mutate(gdp_per_capita = gdp / population)\n\n\n8 Components of ggplot2\n\nggplot2 is a package used to create graphs and visualize data. The main three components of ggplot2 are the data, aesthetics and geom layers.\n\nThe data layer - states what data will be used to graph\nThe aesthetics layer - specifies the variables that are being mapped\nThe geom layer - specifies the type of graph to be produced\n\n\n\n\n\n\n9 Code to run interpretable scatterplots and create facets\nIn order to create a scatter-plot using ggplot, you must specify what data you will be using, state which variables will be mapped and how under aesthetics. What differentiates the scatter-plot from any other type of graph will be specified under the geom layer. For the scatter-plot, geom_point will be used.\nIn this example, we will analyze the relationship between fertility rates and gdp per capita for each country in 2011.\n\nfig_bubble_2011 &lt;-\n  ggplot(data = filter(gapminder_df, year == 2011)) +\n  aes(x = gdp_per_capita, y = fertility) +\n  geom_point()\n\nfig_bubble_2011 \n\n\n\n\n\n\nFigure 9.1: Association between fertility rates and gdp per capita for each country in 2011\n\n\n\n\nIn the example above, we have mapped out fertility as our y-axis and gdp per capita as our x-axis. However, at it’s very basic level, there is not enough information provided to accurately analyze the relationship between the two. For this reason, we can add additional layers that will provide more information to properly analyze the scatter-plot.\n\nfig_bubble_pretty_2011 &lt;-\n  ggplot(data = filter(gapminder_df, year == 2011)) +\n  aes(\n    x = gdp_per_capita,\n    y = fertility,\n    # will change the size of the point based on population size \n    size = population, \n    # will assign colors based on the continent the country is in \n    color = continent\n  ) +\n  # gives a range as to how big or small the points of population should be\n  scale_size(range = c(1, 20)) + \n  # removes N/A from the legend and titles it Continent \n  scale_colour_discrete(na.translate = F, name = \"Continent\") +\n  # removes population size from the legend \n  guides(size = \"none\") +\n  scale_x_continuous(\n    name = \"GDP per Capita\",\n    trans = \"log10\",\n    # transforms numbers from scientific notation to regular number \n    labels = scales::comma\n  ) +\n  labs(\n    title = \"Fertility rate descreases as GDP per capita increases in 2011\",\n    y = \"Fertility rates\",\n    caption = \"Source: Gapminder\"\n  ) +\n  # the ylim was set based on the fertility, lowest was near 1 & highest was above 7\n  ylim(1.2, 8.0) +\n  # alpha increases transparency of the points to ensure they can all be seen\n  geom_point(alpha = 0.5) \n\nfig_bubble_pretty_2011\n\n\n\n\n\n\nFigure 9.2: Association between fertility rates and gdp per capita for each country, grouped by continent, in 2011\n\n\n\n\nFigure 9.2 builds on the previous scatterplot of Fertility Rates (y axis) against GDP per capita (x axis) for 2011. The bubble size depicts respective country populations, and continents are coded by colors according to the key. This figure displays a negative relationship between GDP per capita and Fertility Rates. It supports the Hypothesis which states that as GDP per capita increases, Fertility Rates decreases. This trend can be confirmed for all continents, however, the degree to which fertility rates drop between continents varies. Most European country appear below a fertility rate of 2 babies per woman. The Americas appear to follow closely behind (under 4), followed by Oceania and Asia. A significant number of African countries still maintained higher fertility rates with lower GDP per capita for 2011.\nThis is an example of wanting to create four separate graphs to see the relationship between fertility rates and GDP per capita based on the years 1960, 1975, 1990 and 2005. In this example we omitted the facet argument.\n\nfig_bubble_multiple &lt;-\n  ggplot(data = filter(gapminder_df, year %in% c(1960, 1975, 1990, 2005))) +\n  aes(\n    x = gdp_per_capita,\n    y = fertility,\n    size = population,\n    color = continent\n  ) +\n  scale_x_continuous(\n    name = \"GDP per Capita\",\n    trans = \"log10\",\n    labels = scales::comma\n  ) +\n  scale_size(range = c(0, 20)) +\n  guides(size = \"none\") +\n  scale_colour_discrete(na.translate = FALSE, name = \"Continent\") +\n  labs(\n    title = \"Fertility continues to decrease as GDP per capita increases\",\n    caption = \"Source: Gapminder\",\n    y = \"Fertility rates\"\n  ) +\n  geom_point(alpha = 0.3) \n\nfig_bubble_multiple\n\n\n\n\n\n\nFigure 9.3: Association between fertility rates and GDP per capita based on the years 1960, 1975, 1990 and 2005\n\n\n\n\nWithout having used the facet argument, all points of all four years have been included into one graph. This graph does not provide us with the information we were looking for.\n\nfig_bubble_multiple_facet &lt;-\n  ggplot(data = filter(gapminder_df, year %in% c(1960, 1975, 1990, 2005))) +\n  aes(\n    x = gdp_per_capita,\n    y = fertility,\n    size = population,\n    color = continent\n  ) +\n  scale_x_continuous(\n    name = \"GDP per Capita\",\n    trans = \"log10\",\n    labels = scales::comma\n  ) +\n  scale_size(range = c(0, 20)) +\n  guides(size = \"none\") +\n  scale_colour_discrete(na.translate = FALSE , name = \"Continent\") +\n  labs(\n    title = \"Fertility continues to decrease as GDP per capita increases\",\n    caption = \"Source: Gapminder\",\n    y = \"Fertility rates\"\n  ) +\n  geom_point(alpha = 0.3) +\n  # specifiying we want the graphs split based on year\n  facet_wrap(~ year)\n\nfig_bubble_multiple_facet\n\n\n\n\n\n\nFigure 9.4: Association between fertility rates and GDP per capita based on the years 1960, 1975, 1990 and 2005, using facet\n\n\n\n\nNow that we’ve specified the facet argument, we now have four separate graphs that can be properly analysed. In Figure 9.4 we see an increasingly negative relationship between the two variables over time. This observation is congruent with the hypothesis that as GDP per capita increases, fertility decreases.\nThis global trend can be attributed to the increasing proportion of women in the workforce in the mid to late 20th century. As a result of World War II (1939-1945), women took on roles outside the home to compensate for men at war. Despite increased GDP per capita, this may have contributed to reduced fertility (babies per woman) over time. In 1960, a clear disparity among continents is seen. Most European countries’ fertility rates fell below 5, while their GDP per capita increased. Most African countries maintained high fertility rates above 5, but little change is seen in GDP per capita. The Asian continent shows the most variation among countries during that year. Some smaller Asian countries continued to maintain high fertility rates as GDP per capita increased in 1960. However, others displayed a drastic decrease in fertility rates by 1960. The Americas followed a steady decline over the years. By 2005, an overall negative relationship can be seen with most countries’ fertility rates below 5 babies per woman.\n\nfig_bubble_row_2011 &lt;-\n  ggplot(data = filter(gapminder_df, year == 2011)) +\n  aes(\n    x = gdp_per_capita,\n    y = fertility\n  ) +\n  geom_point(alpha = 0.5) +\n  facet_wrap(~ continent, nrow = 1)\n\nfig_bubble_row_2011 \n\n\n\n\n\n\nFigure 9.5: Association between fertility rates and GDP per capita based on continent\n\n\n\n\nIn the graph above, we see an example of separating the single graph into graphs based on continent. It has also been specified to have all graphs appear in one single row through the nrow argument. Very importantly however, this graph is unclear and cannot be used to compare the relationship between fertility and gdp per capita.\n\nfig_bubble_facet_2011 &lt;-\n  ggplot(data = filter(gapminder_df, year == 2011)) +\n  aes(\n    x = gdp_per_capita,\n    y = fertility\n  ) +\n  scale_x_continuous(\n    name = \"GDP per Capita\",\n    trans = \"log10\",\n    labels = scales::comma\n  )  +\n  geom_point(alpha = 0.5) +\n  facet_wrap(~ continent)\n\nfig_bubble_facet_2011 \n\n\n\n\n\n\nFigure 9.6: Association between fertility rates and GDP per capita based on continent not using nrow\n\n\n\n\nIn the next example above, we removed the nrow argument and the system automatically separated the graphs into three columns with two rows. Additionally, we changed the x-axis to a log scale to better interpret gdp per capita. There is a way to determine a relationship between fertility and gdp per capita by continent.\n\n10 Public Health Interpretation\nA global negative trend is depicted between GDP per capita and fertility over time. Such changes were due to wars as well as social, cultural and economic changes that incentivize smaller families especially in Asian countries. Most European, American and Asian countries depicted significant decreases in fertility rates over time as GDP per capita increased. On the other hand, African countries remain in the top rank for fertility over the years. These differences are depicted in the population pyramid changes of developed vs developing countries. Public health policies can be tailored to incentivizing increased fertility in developed countries to ensure generation continuity, and effective family planning strategies in developing countries.\n\n11 Conclusion\nIn this lesson, the basic functions of ggplot2 package were shown, which can create a scatterplot. There are three layers to the code to make a plot in R: data, aesthetic, and geometric. Within the aesthetic layer, functions can be added such as size and color to analyze more variables. Additionally, facets can split up graphs over a categorical variable, adding another potential variable to analyze in the plot.",
+    "text": "4.1 Introduction to Scatterplots\nScatterplots display the relationship between two variables using dots to represent the values for each numeric variable. This presentation will examine the relationship between GDP per capita and Fertility over time using ggplot with facets.\nHypothesis: A negative relationship exists between GDP per capita and fertility i.e. as GDP per capita increases, fertility decreases.",
     "crumbs": [
       "New Part",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>How to Create a Scatterplot</span>"
@@ -1319,7 +1319,7 @@
     "href": "lessons_original/01_skimr.html",
     "title": "\n5  Skimr Package\n",
     "section": "",
-    "text": "6 Introduction\nSkimr is an R package designed to provide summary statistics about variables in data frames, tibbles, data tables and vectors. The function is modifiable where you can add additional variables, which are not a part of default summary function within R. Skimr allows us to quickly assess data quality by feature and type in a quick report. This is a critical step in Data Exploration, where Understanding our data helps us to generate a hypothesis and determine what data analysis are appropriate.\nThis presentation will cover the simplest and most effective ways to explore data in R.",
+    "text": "5.1 Introduction\nSkimr is an R package designed to provide summary statistics about variables in data frames, tibbles, data tables and vectors. The function is modifiable where you can add additional variables, which are not a part of default summary function within R. Skimr allows us to quickly assess data quality by feature and type in a quick report. This is a critical step in Data Exploration, where Understanding our data helps us to generate a hypothesis and determine what data analysis are appropriate.\nThis presentation will cover the simplest and most effective ways to explore data in R.",
     "crumbs": [
       "New Part",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Skimr Package</span>"
@@ -1378,6 +1378,812 @@
     "crumbs": [
       "New Part",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Skimr Package</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/01_mosaic_violin.html#introduction-to-mosaic-and-boxviolin-plots",
+    "href": "lessons/01_mosaic_violin.html#introduction-to-mosaic-and-boxviolin-plots",
+    "title": "\n3  Mosaic & Box/Violin Plots\n",
+    "section": "\n3.2 Introduction to Mosaic and Box/Violin Plots",
+    "text": "3.2 Introduction to Mosaic and Box/Violin Plots\nMosaic, box, and violin plots are useful for visualizing summary statistics.\nA mosaic plot is a special type of stacked bar chart used for two or more categorical variables. The width of the columns is proportional to the number of observations in each level of the variable plotted on the horizontal, or x-axis. The vertical length of the bars is proportional to the number of observations in the second variable within each level of the first variable.\nBox and violin plots are used for continuous variables by group. Box plots display six summary measures (the minimum, first quartile (Q1), median, third quartile (Q3), the interquartile range, and maximum). A violin plot illustrates the distribution of numerical data for one or more level of a categorical variable by combining summary statistics and density of each variable. Each curve corresponds to the respective frequency of data points within each region. A box plot is typically overlaid to provide additional information.",
+    "crumbs": [
+      "Exploratory Data Analysis",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Mosaic & Box/Violin Plots</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/01_mosaic_violin.html#data-source-and-description",
+    "href": "lessons/01_mosaic_violin.html#data-source-and-description",
+    "title": "\n3  Mosaic & Box/Violin Plots\n",
+    "section": "\n3.3 Data Source and Description",
+    "text": "3.3 Data Source and Description\nThe National Drug Abuse Treatment Clinical Trials Network (CTN) is a means by which medical and specialty treatment providers, treatment researchers, participating patients, and the National Institute on Drug Abuse cooperatively develop, validate, refine, and deliver new treatment options to patients. The CTN 094 demographics and everybody data sets from the public.ctn0094data package were utilized for the following visualizations. CTN 094 is a comprehensive, harmonized and normalized database of treatment data from CTN_0027, CTN_0030, and CTN_0051, where experiences of individuals with opioid use disorder (OUD) who seek care are described.",
+    "crumbs": [
+      "Exploratory Data Analysis",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Mosaic & Box/Violin Plots</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/01_mosaic_violin.html#cleaning-the-data-to-create-a-model-data-frame",
+    "href": "lessons/01_mosaic_violin.html#cleaning-the-data-to-create-a-model-data-frame",
+    "title": "\n3  Mosaic & Box/Violin Plots\n",
+    "section": "\n3.4 Cleaning the Data to Create a Model Data Frame",
+    "text": "3.4 Cleaning the Data to Create a Model Data Frame\nThe demographics and everybody data sets within the public.ctn0094data package were joined by ID (who variable). Race, age, is_male (gender), and project were selected features for the following visualizations.\n\n# Creating model data frame to include age, race, project, and is_male\n# from demographics and everybody data sets. Joined by subject ID (who)\ndemographics_df &lt;- demographics %&gt;% \n  left_join(everybody, by = \"who\")  %&gt;%\n  select(age, race, project, is_male)",
+    "crumbs": [
+      "Exploratory Data Analysis",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Mosaic & Box/Violin Plots</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/01_mosaic_violin.html#assumptions-with-plots",
+    "href": "lessons/01_mosaic_violin.html#assumptions-with-plots",
+    "title": "\n3  Mosaic & Box/Violin Plots\n",
+    "section": "\n3.5 Assumptions with Plots",
+    "text": "3.5 Assumptions with Plots\nIn mosaic plots, two categorical variables are plotted along the horizontal (x) and vertical (y) axis. Each combination of categories forms a rectangle or tile within the plot.\nIn box and violin plots, a categorical variable is plotted along the horizontal or x-axis, while a continuous variable is plotted along the vertical or y-axis. Violin plots can be limiting if symmetry, skew, or other shape and variability characteristics are different between groups because precise comparison cannot be easily interpreted between density curves. For this reason, violin plots are typically rendered with another overlaid chart type, like box plot quartiles.",
+    "crumbs": [
+      "Exploratory Data Analysis",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Mosaic & Box/Violin Plots</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/01_mosaic_violin.html#code-to-run-mosaic-boxviolin-plots-output",
+    "href": "lessons/01_mosaic_violin.html#code-to-run-mosaic-boxviolin-plots-output",
+    "title": "\n3  Mosaic & Box/Violin Plots\n",
+    "section": "\n3.6 Code to Run Mosaic & Box/Violin Plots & output",
+    "text": "3.6 Code to Run Mosaic & Box/Violin Plots & output\n\n3.6.1 Mosaic Plots\nIn order to create a Mosaic plot, you must specify what data object you will be using within the ggplot() function. Then you will set aesthetic mapping options within the following geometric object layer: geom_mosaic().\nIn geom_mosaic(), the following aesthetics can be specified:\n\n\nweight: a weighting variable.\n\nx: categorical variable for the x-axis.\n\nSpecified as x = product(var1, var2, ...)\n\nThe product() function is used to extract the values from the categorical variable specified.\n\n\n\nalpha: a variable specifying transparency.\n\nIf the variable is not called in x:, then alpha: will be added in the first position.\n\n\n\nfill: a variable specifying fill color.\n\nIf the variable is not called in x:, then fill: will be added after the optional alpha: variable.\n\n\n\nconds: a variable specifying conditions.\n\nSpecified as conds = product(var1, var2, ...)\n\n\n\n\nThe ordering of the variables is vital as the product plot is created hierarchically.\n\n3.6.1.1 Basic Mosaic Plot\nIn the following example of a basic mosaic plot, we visualize the distribution of Race among CTN Projects 27, 30, and 51.\n\n# Basic Mosaic Plot\nmosaic_basic &lt;- demographics_df %&gt;% \n  ggplot() +\n  geom_mosaic(\n    aes(\n      # geom_mosaic() does not have one-to-one mapping between a variable and the x- \n      # or y-axis. So you must use the product() function when assigning a variable\n      # to the x-axis to account for the variable number of variables.\n      x = product(project),\n      fill = race\n    )\n  ) +\n  labs(\n    y = \"Race\",\n    x = \"Project\",\n    title = \"Mosaic Plot of Race by CTN Project\") +\n  # Specifies default `geom_mosaic` aesthetics, e.g white panel background, \n  # removes grid lines, adjusts widths and heights of rows and columns to \n  # reflect frequencies\n  theme_mosaic() +\n  # Removes legend illustrating Race and respective fill colors\n  theme(legend.position = \"None\")\n  \nmosaic_basic\n\n\n\n\n\n\n\n\n3.6.1.2 More Advanced Mosaic Plot\nIn a more advanced version of a mosaic plot, we can visualize more than 2 categorical variables. The following example utilizes race, project, and ethnicity among CTN Projects 27, 30, and 51.\n\n# Advanced Mosaic Plot\nmosaic_advanced &lt;- demographics_df %&gt;% \n  ggplot() +\n  geom_mosaic(\n    aes(\n      x = product(race, project),\n      fill = is_male\n    )\n  ) +\n  labs(\n    y = \"Race\",\n    x = \"Project\",\n    title = \"Mosaic Plot of Race by Gender and CTN Project\",\n    fill = \"Gender\"\n  ) +\n  scale_fill_manual(\n    labels = c(\"No\" = \"Female\", \"Yes\" = \"Male\"),\n    values = c(\"darkseagreen2\", \"darkslategray3\", \"grey\")\n  ) +\n  theme_mosaic() +\n  # Adjust axis tick labels to 60 degrees and justification to the right\n  # with hjust (horizontal justification) and vjust (vertical justification)\n  theme(axis.text.x = element_text(angle = 60, hjust = 1, vjust = 1))\n  \nmosaic_advanced\n\n\n\n\n\n\n\n\n3.6.2 Box Plots\nIn order to create a box plot, you must specify what data object you will be using within the ggplot() function. Then you will set aesthetic mapping options within the aes() or aesthetic layer. The geom_boxplot() layer specifies the box plot.\nThe following aesthetics are understood by geom_boxplot():\n\n\nx or y: Specifies the categorical variable along the x- or y-axis.\n\nlower or xlower: Specifies the 25th percentile/first quartile.\n\nupper or xupper: Specifies the 75th percentile/third quartile.\n\nmiddle or xmiddle: Specifies the 50th percentile/second quartile/median.\n\nymin or xmin: Specifies the y or x minimum for the plot.\n\nymax or xmax: Specifies the y or x maximum for the plot.\n\nalpha: Specifies a variable to determine transparency.\n\ncolor: Assigns an outline color to respective levels of a specified categorical variable.\n\nfill: Assigns a fill color to respective levels of a specified categorical variable.\n\ngroup: Partitions data by a discrete variable when no other grouping variable is specified, or grouping is incorrectly defaulted by R.\n\nlinetype: Specifies line type of box plot.\n\nlinewidth: Specifies line width of box plot.\n\nshape: Specifies the shape of the (outlier) points.\n\nsize: Specifies the size of the points and text.\n\nweight: Specifies a weight variable.\n\n\n3.6.2.1 Basic Box Plot\nThe following is a basic box plot showing the relationship between one continuous and one categorical variable.\n\n# Box Plot\nbox_basic &lt;- demographics_df %&gt;% \n  ggplot() +\n  aes(x = race, y = age, color = race) +\n  labs(\n    x = \"Race\",\n    y = \"Age\",\n    title = \"Box Plot of Race and Age\",\n    color = \"Race\"\n  ) +\n  # Using width to adjust the width of the boxes\n  geom_boxplot(width = 0.5) +\n  theme(legend.position = \"None\")\n\nbox_basic\n\n\n\n\n\n\n\n\n3.6.2.2 More Advanced Box Plot\nWith geom_box(), you can also specify a additional categorical variable (different from you x and y variables) to break up your plot by that variable. For example, the following plot takes the previous plot of race and age and adds information by gender (is_male)\n\n# Box Plot\nbox_advanced &lt;- demographics_df %&gt;% \n  ggplot() +\n  aes(x = race, y = age, color = is_male) +\n  # changing the labels for is_male, and specifying the colors we want\n  scale_color_manual(\n    labels = c(\"No\" = \"Female\", \"Yes\" = \"Male\"),\n    values = c(\"darkorchid4\", \"darkolivegreen4\")\n  ) +\n  labs(\n    x = \"Race\",\n    y = \"Age\",\n    title = \"Box Plot of Race and Age\",\n    color = \"Gender\"\n  ) +\n  # Using width to adjust the width of the boxes\n  geom_boxplot(width = 0.5)\n\nbox_advanced\n\n\n\n\n\n\n\n\n3.6.3 Violin Plot\nIn order to create a Violin plot, you must specify what data object you will be using within the ggplot() function. Then you will set aesthetic mapping options within the aes() or aesthetic layer. The geom_violin() layer specifies the violin plot. An additional call for geom_boxplot() will overlay box quartiles on the violin plot.\nThe following aesthetics are understood by geom_violin():\n\n\nx: Specifies the categorical variable along the x-axis.\n\ny: Specifies the continuous variable along the y-axis.\n\nalpha: Specifies a variable to determine transparency.\n\ncolor: Assigns an outline color to respective levels of a specified categorical variable.\n\nfill: Assigns a fill color to respective levels of a specified categorical variable.\n\ngroup: Partitions data by a discrete variable when no other grouping variable is specified, or grouping is incorrectly defaulted by R.\n\nlinetype: Specifies line type of violin plot.\n\nlinewidth: Specifies line width of violin plot.\n\nweight: Specifies a weight variable.\n\n\n# Violin Plot\nviolin_basic &lt;- demographics_df %&gt;% \n  ggplot() +\n  aes(x = race, y = age, color = race) +\n  labs(\n    x = \"Race\",\n    y = \"Age\",\n    title = \"Violin Plot of Race and Age\",\n    subtitle = \"With Summary Information\",\n    color = \"Race\"\n  ) +\n  geom_violin() +\n  geom_boxplot(width = 0.1) +\n  theme(legend.position = \"None\")\n\nviolin_basic",
+    "crumbs": [
+      "Exploratory Data Analysis",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Mosaic & Box/Violin Plots</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/01_mosaic_violin.html#brief-interpretation",
+    "href": "lessons/01_mosaic_violin.html#brief-interpretation",
+    "title": "\n3  Mosaic & Box/Violin Plots\n",
+    "section": "\n3.7 Brief Interpretation",
+    "text": "3.7 Brief Interpretation\n\n3.7.1 Mosaic Plot\n\nCompared to Project 27 and Project 51, Project 30 had the highest proportion of participants who indicated that their race is ‘White’.\nCompared to Project 30 and Project 51, Project 27 had the highest proportion of participants who indicated that their race is ‘Other’.\nCompared to Project 27 and Project 51, Project 30 has the lowest proportion of participants who indicated that their race is ‘Other’.\n\n3.7.2 Box Plot\n\nParticipants who indicated that their race is ‘Black’ exhibited the highest median age of around 45 years old\nParticipants who indicated that their race is ‘White’ exhibited the lowest median age at approximately 31 years old.\n\n3.7.3 Violin Plot\n\nParticipants who indicated that their race is ‘White’ exhibited peak density around mid-20s compared to those who indicated that their race is ‘Black’, where peak density is exhibited around late-40s.\nParticipants who indicated that their race is ‘White’ had the lowest median age at approximately 31 years old, where participants who indicated that their race is ‘Black’ had the highest median age at approximately 45 years old.",
+    "crumbs": [
+      "Exploratory Data Analysis",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Mosaic & Box/Violin Plots</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/01_mosaic_violin.html#conclusion",
+    "href": "lessons/01_mosaic_violin.html#conclusion",
+    "title": "\n3  Mosaic & Box/Violin Plots\n",
+    "section": "\n3.8 Conclusion",
+    "text": "3.8 Conclusion\nGoing to update this",
+    "crumbs": [
+      "Exploratory Data Analysis",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Mosaic & Box/Violin Plots</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/01_scatterplots.html#gapminder-data-description",
+    "href": "lessons/01_scatterplots.html#gapminder-data-description",
+    "title": "\n4  How to Create a Scatterplot\n",
+    "section": "\n4.2 Gapminder data description",
+    "text": "4.2 Gapminder data description\nData was obtained from the dslabs package and comes from Gapminder a Swedish non-profit organization. The Gapmidner data set has health and income outcomes for 184 countries from 1960 to 2016. Gapminder aims to promote a fact-based worldview by providing accessible and understandable global development data. The dataset covers a wide range of variables, including economic, social, and health-related indicators like GDP, infant mortality, life expectancy, fertility, as well as population, making it a valuable resource for understanding global trends and patterns over time. Countries and territories with missing information were not excluded from the data set as the lack of information can also be looked into and shed light on why data was not collected or provided. To determine whether a country’s health and income outcomes are influenced by population sizes and GDP per capita, the data will be used to create a series of graphs to view different trends.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>How to Create a Scatterplot</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/01_scatterplots.html#cleaning-the-data-to-create-a-model-data-frame",
+    "href": "lessons/01_scatterplots.html#cleaning-the-data-to-create-a-model-data-frame",
+    "title": "\n4  How to Create a Scatterplot\n",
+    "section": "\n4.3 Cleaning the data to create a model data frame",
+    "text": "4.3 Cleaning the data to create a model data frame\nA tibble was created from the gapminder dataset, and a new column was created to measure GDP per capita. Overall, using tibbles enhances the readability, usability, and compatibility of your code within the tidyverse ecosystem.\n\n# Creating gapminder dataset\\tibble\ngapminder_df &lt;-\n  as_tibble(gapminder) %&gt;%\n  mutate(gdp_per_capita = gdp / population)",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>How to Create a Scatterplot</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/01_scatterplots.html#components-of-ggplot2",
+    "href": "lessons/01_scatterplots.html#components-of-ggplot2",
+    "title": "\n4  How to Create a Scatterplot\n",
+    "section": "\n4.4 Components of ggplot2\n",
+    "text": "4.4 Components of ggplot2\n\nggplot2 is a package used to create graphs and visualize data. The main three components of ggplot2 are the data, aesthetics and geom layers.\n\nThe data layer - states what data will be used to graph\nThe aesthetics layer - specifies the variables that are being mapped\nThe geom layer - specifies the type of graph to be produced",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>How to Create a Scatterplot</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/01_scatterplots.html#code-to-run-interpretable-scatterplots-and-create-facets",
+    "href": "lessons/01_scatterplots.html#code-to-run-interpretable-scatterplots-and-create-facets",
+    "title": "\n4  How to Create a Scatterplot\n",
+    "section": "\n4.5 Code to run interpretable scatterplots and create facets",
+    "text": "4.5 Code to run interpretable scatterplots and create facets\nIn order to create a scatter-plot using ggplot, you must specify what data you will be using, state which variables will be mapped and how under aesthetics. What differentiates the scatter-plot from any other type of graph will be specified under the geom layer. For the scatter-plot, geom_point will be used.\nIn this example, we will analyze the relationship between fertility rates and gdp per capita for each country in 2011.\n\nfig_bubble_2011 &lt;-\n  ggplot(data = filter(gapminder_df, year == 2011)) +\n  aes(x = gdp_per_capita, y = fertility) +\n  geom_point()\n\nfig_bubble_2011 \n\n\n\n\n\n\nFigure 4.1: Association between fertility rates and gdp per capita for each country in 2011\n\n\n\n\nIn the example above, we have mapped out fertility as our y-axis and gdp per capita as our x-axis. However, at it’s very basic level, there is not enough information provided to accurately analyze the relationship between the two. For this reason, we can add additional layers that will provide more information to properly analyze the scatter-plot.\n\nfig_bubble_pretty_2011 &lt;-\n  ggplot(data = filter(gapminder_df, year == 2011)) +\n  aes(\n    x = gdp_per_capita,\n    y = fertility,\n    # will change the size of the point based on population size \n    size = population, \n    # will assign colors based on the continent the country is in \n    color = continent\n  ) +\n  # gives a range as to how big or small the points of population should be\n  scale_size(range = c(1, 20)) + \n  # removes N/A from the legend and titles it Continent \n  scale_colour_discrete(na.translate = F, name = \"Continent\") +\n  # removes population size from the legend \n  guides(size = \"none\") +\n  scale_x_continuous(\n    name = \"GDP per Capita\",\n    trans = \"log10\",\n    # transforms numbers from scientific notation to regular number \n    labels = scales::comma\n  ) +\n  labs(\n    title = \"Fertility rate descreases as GDP per capita increases in 2011\",\n    y = \"Fertility rates\",\n    caption = \"Source: Gapminder\"\n  ) +\n  # the ylim was set based on the fertility, lowest was near 1 & highest was above 7\n  ylim(1.2, 8.0) +\n  # alpha increases transparency of the points to ensure they can all be seen\n  geom_point(alpha = 0.5) \n\nfig_bubble_pretty_2011\n\n\n\n\n\n\nFigure 4.2: Association between fertility rates and gdp per capita for each country, grouped by continent, in 2011\n\n\n\n\nFigure 4.2 builds on the previous scatterplot of Fertility Rates (y axis) against GDP per capita (x axis) for 2011. The bubble size depicts respective country populations, and continents are coded by colors according to the key. This figure displays a negative relationship between GDP per capita and Fertility Rates. It supports the Hypothesis which states that as GDP per capita increases, Fertility Rates decreases. This trend can be confirmed for all continents, however, the degree to which fertility rates drop between continents varies. Most European country appear below a fertility rate of 2 babies per woman. The Americas appear to follow closely behind (under 4), followed by Oceania and Asia. A significant number of African countries still maintained higher fertility rates with lower GDP per capita for 2011.\nThis is an example of wanting to create four separate graphs to see the relationship between fertility rates and GDP per capita based on the years 1960, 1975, 1990 and 2005. In this example we omitted the facet argument.\n\nfig_bubble_multiple &lt;-\n  ggplot(data = filter(gapminder_df, year %in% c(1960, 1975, 1990, 2005))) +\n  aes(\n    x = gdp_per_capita,\n    y = fertility,\n    size = population,\n    color = continent\n  ) +\n  scale_x_continuous(\n    name = \"GDP per Capita\",\n    trans = \"log10\",\n    labels = scales::comma\n  ) +\n  scale_size(range = c(0, 20)) +\n  guides(size = \"none\") +\n  scale_colour_discrete(na.translate = FALSE, name = \"Continent\") +\n  labs(\n    title = \"Fertility continues to decrease as GDP per capita increases\",\n    caption = \"Source: Gapminder\",\n    y = \"Fertility rates\"\n  ) +\n  geom_point(alpha = 0.3) \n\nfig_bubble_multiple\n\n\n\n\n\n\nFigure 4.3: Association between fertility rates and GDP per capita based on the years 1960, 1975, 1990 and 2005\n\n\n\n\nWithout having used the facet argument, all points of all four years have been included into one graph. This graph does not provide us with the information we were looking for.\n\nfig_bubble_multiple_facet &lt;-\n  ggplot(data = filter(gapminder_df, year %in% c(1960, 1975, 1990, 2005))) +\n  aes(\n    x = gdp_per_capita,\n    y = fertility,\n    size = population,\n    color = continent\n  ) +\n  scale_x_continuous(\n    name = \"GDP per Capita\",\n    trans = \"log10\",\n    labels = scales::comma\n  ) +\n  scale_size(range = c(0, 20)) +\n  guides(size = \"none\") +\n  scale_colour_discrete(na.translate = FALSE , name = \"Continent\") +\n  labs(\n    title = \"Fertility continues to decrease as GDP per capita increases\",\n    caption = \"Source: Gapminder\",\n    y = \"Fertility rates\"\n  ) +\n  geom_point(alpha = 0.3) +\n  # specifiying we want the graphs split based on year\n  facet_wrap(~ year)\n\nfig_bubble_multiple_facet\n\n\n\n\n\n\nFigure 4.4: Association between fertility rates and GDP per capita based on the years 1960, 1975, 1990 and 2005, using facet\n\n\n\n\nNow that we’ve specified the facet argument, we now have four separate graphs that can be properly analysed. In Figure 4.4 we see an increasingly negative relationship between the two variables over time. This observation is congruent with the hypothesis that as GDP per capita increases, fertility decreases.\nThis global trend can be attributed to the increasing proportion of women in the workforce in the mid to late 20th century. As a result of World War II (1939-1945), women took on roles outside the home to compensate for men at war. Despite increased GDP per capita, this may have contributed to reduced fertility (babies per woman) over time. In 1960, a clear disparity among continents is seen. Most European countries’ fertility rates fell below 5, while their GDP per capita increased. Most African countries maintained high fertility rates above 5, but little change is seen in GDP per capita. The Asian continent shows the most variation among countries during that year. Some smaller Asian countries continued to maintain high fertility rates as GDP per capita increased in 1960. However, others displayed a drastic decrease in fertility rates by 1960. The Americas followed a steady decline over the years. By 2005, an overall negative relationship can be seen with most countries’ fertility rates below 5 babies per woman.\n\nfig_bubble_row_2011 &lt;-\n  ggplot(data = filter(gapminder_df, year == 2011)) +\n  aes(\n    x = gdp_per_capita,\n    y = fertility\n  ) +\n  geom_point(alpha = 0.5) +\n  facet_wrap(~ continent, nrow = 1)\n\nfig_bubble_row_2011 \n\n\n\n\n\n\nFigure 4.5: Association between fertility rates and GDP per capita based on continent\n\n\n\n\nIn the graph above, we see an example of separating the single graph into graphs based on continent. It has also been specified to have all graphs appear in one single row through the nrow argument. Very importantly however, this graph is unclear and cannot be used to compare the relationship between fertility and gdp per capita.\n\nfig_bubble_facet_2011 &lt;-\n  ggplot(data = filter(gapminder_df, year == 2011)) +\n  aes(\n    x = gdp_per_capita,\n    y = fertility\n  ) +\n  scale_x_continuous(\n    name = \"GDP per Capita\",\n    trans = \"log10\",\n    labels = scales::comma\n  )  +\n  geom_point(alpha = 0.5) +\n  facet_wrap(~ continent)\n\nfig_bubble_facet_2011 \n\n\n\n\n\n\nFigure 4.6: Association between fertility rates and GDP per capita based on continent not using nrow\n\n\n\n\nIn the next example above, we removed the nrow argument and the system automatically separated the graphs into three columns with two rows. Additionally, we changed the x-axis to a log scale to better interpret gdp per capita. There is a way to determine a relationship between fertility and gdp per capita by continent.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>How to Create a Scatterplot</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/01_scatterplots.html#public-health-interpretation",
+    "href": "lessons/01_scatterplots.html#public-health-interpretation",
+    "title": "\n4  How to Create a Scatterplot\n",
+    "section": "\n4.6 Public Health Interpretation",
+    "text": "4.6 Public Health Interpretation\nA global negative trend is depicted between GDP per capita and fertility over time. Such changes were due to wars as well as social, cultural and economic changes that incentivize smaller families especially in Asian countries. Most European, American and Asian countries depicted significant decreases in fertility rates over time as GDP per capita increased. On the other hand, African countries remain in the top rank for fertility over the years. These differences are depicted in the population pyramid changes of developed vs developing countries. Public health policies can be tailored to incentivizing increased fertility in developed countries to ensure generation continuity, and effective family planning strategies in developing countries.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>How to Create a Scatterplot</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/01_scatterplots.html#conclusion",
+    "href": "lessons/01_scatterplots.html#conclusion",
+    "title": "\n4  How to Create a Scatterplot\n",
+    "section": "\n4.7 Conclusion",
+    "text": "4.7 Conclusion\nIn this lesson, the basic functions of ggplot2 package were shown, which can create a scatterplot. There are three layers to the code to make a plot in R: data, aesthetic, and geometric. Within the aesthetic layer, functions can be added such as size and color to analyze more variables. Additionally, facets can split up graphs over a categorical variable, adding another potential variable to analyze in the plot.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>How to Create a Scatterplot</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/01_skimr.html#introduction",
+    "href": "lessons_original/01_skimr.html#introduction",
+    "title": "\n5  Skimr Package\n",
+    "section": "",
+    "text": "5.1.1 Packages\nTo begin we will upload the packages necessary for the lesson, this includes the following:\n\n\nreadr() to import our data file\n\nknitr() that houses the kable() feature that allows us to construct and customize tables.\n\ntidyverse houses the dyplyrpackage that assists with data manipulation and visualization.\nTheskimrpackage provides a compact summary of the variables in a dataset.\n\n\n# install.packages(\"skimr\")\n# install.packages(\"knitr\")\n# install.packages(\"tidyverse\")\n\n# load all the packages we will need to analyze the data and use the skim\n#   function\nlibrary(skimr)\nlibrary(knitr)\nlibrary(readxl)\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\n\n5.1.2 Census Data\nFor this assignment we will be using the Census_2010 dataset. There is no code book associated with the data, making it difficult to provide an accurate description of the variables. The information recorded shows the United States population estimates from the years 2010-2015, as well as relevant variables like net population change, number of births, number of deaths, international and domestic migration. Within the dataframe, there are 3,193 observations and 100 variables.\nThe data can be imported into R from the following link: https://fiudit-my.sharepoint.com/:x:/g/personal/ssinc013_fiu_edu/ESK1A13PstVGtf7HUwNNt68Bnh1YPfH8L-hnvMUxjBuCVw?e=CCwQU9\n\n# import the data\n# census_2010 &lt;- read_csv(\"Data/census_2010.csv\")\ncensus_2010 &lt;- readxl::read_xlsx(\"../data/01_census_2010.xlsx\")\n\n# what are the variables\ncolnames(census_2010) %&gt;% \n  head(n = 10)\n\n [1] \"SUMLEV\"            \"REGION\"            \"DIVISION\"         \n [4] \"STATE\"             \"COUNTY\"            \"STNAME\"           \n [7] \"CTYNAME\"           \"CENSUS2010POP\"     \"ESTIMATESBASE2010\"\n[10] \"POPESTIMATE2010\"",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Skimr Package</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/01_skimr.html#the-summary-function",
+    "href": "lessons_original/01_skimr.html#the-summary-function",
+    "title": "\n5  Skimr Package\n",
+    "section": "\n5.2 The Summary() Function",
+    "text": "5.2 The Summary() Function\nIn R, the most similar function is summary(). The summary() function in R can be used to quickly summarize the values in a data frame or vector.\nThis syntax shows examples of the summary function using both our data set, and a vector:\n\n#| label: Summary-syntax-with-data\n\n# Example using summary function with data\nsummary(census_2010$CENSUS2010POP)\n\n    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. \n      82    11299    26424   193387    71404 37253956 \n\n# Example using summary function with vector\n# Define vector\nx &lt;- c(3, 4, 23, 5, 7, 8, 9, 12, 26, 15, 20, 21, NA)\n\n# Summarize values in vector\nsummary(x)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n   3.00    6.50   10.50   12.75   20.25   26.00       1 \n\n\nThe summary() function automatically calculates: The minimum value, The value of the 1st quartile (25th percentile), The median value, The value of the 3rd quartile (75th percentile) and The maximum value. Any missing values (NA) in the vector, the summary() function will automatically exclude them when calculating the summary statistics.\nNow, let’s see how skim() compares.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Skimr Package</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/01_skimr.html#skimr-package",
+    "href": "lessons_original/01_skimr.html#skimr-package",
+    "title": "\n5  Skimr Package\n",
+    "section": "\n5.3 Skimr Package",
+    "text": "5.3 Skimr Package\nThe skim() function will generate a summary of the variables in your dataset, including their data type, number of non-missing values, minimum and maximum values, median, mean, standard deviation, and more (Waring et al. 2022).\nThe following syntax ensures that the data is compatible with Skimr functions.\n\nCode# is the summary data a skimr dataframe\nskim(census_2010) %&gt;% \n  is_skim_df() # TRUE\n\n[1] TRUE\nattr(,\"message\")\ncharacter(0)\n\n\nWe can explore the data as a tibble:\n\nCode# use skim to get descriptive statistics of the data\nskim(census_2010) %&gt;% \n  head(n = 10)\n\n\nData summary\n\n\nName\ncensus_2010\n\n\nNumber of rows\n3193\n\n\nNumber of columns\n100\n\n\n_______________________\n\n\n\nColumn type frequency:\n\n\n\ncharacter\n2\n\n\nnumeric\n8\n\n\n________________________\n\n\n\nGroup variables\nNone\n\n\n\nVariable type: character\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmin\nmax\nempty\nn_unique\nwhitespace\n\n\n\nSTNAME\n0\n1\n4\n20\n0\n51\n0\n\n\nCTYNAME\n0\n1\n4\n33\n0\n1927\n0\n\n\n\nVariable type: numeric\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmean\nsd\np0\np25\np50\np75\np100\nhist\n\n\n\nSUMLEV\n0\n1\n49.84\n1.25\n40\n50\n50\n50\n50\n▁▁▁▁▇\n\n\nREGION\n0\n1\n2.67\n0.81\n1\n2\n3\n3\n4\n▁▆▁▇▂\n\n\nDIVISION\n0\n1\n5.19\n1.97\n1\n4\n5\n7\n9\n▂▇▅▆▃\n\n\nSTATE\n0\n1\n30.26\n15.15\n1\n18\n29\n45\n56\n▃▇▆▆▇\n\n\nCOUNTY\n0\n1\n101.92\n107.63\n0\n33\n77\n133\n840\n▇▁▁▁▁\n\n\nCENSUS2010POP\n0\n1\n193387.05\n1176201.45\n82\n11299\n26424\n71404\n37253956\n▇▁▁▁▁\n\n\nESTIMATESBASE2010\n0\n1\n193396.87\n1176244.25\n82\n11299\n26446\n71491\n37254503\n▇▁▁▁▁\n\n\nPOPESTIMATE2010\n0\n1\n193765.65\n1178710.28\n83\n11275\n26467\n71721\n37334079\n▇▁▁▁▁\n\n\n\n\n\nUsing skimr functions provides a cleaner and more detailed display of the results compared to the summary() function. In this example we are showing the first ten variables in our data set. The data summary tab shows the number of rows and columns, column type frequency and group variables. There is also additional descriptive information like missing values, unique characters.\nThis will be relevant for data cleaning as well as understanding the distribution. Both are critical to determine which statistical analysis would be most appropriate to use for a project.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Skimr Package</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/01_skimr.html#other-skimr-features",
+    "href": "lessons_original/01_skimr.html#other-skimr-features",
+    "title": "\n5  Skimr Package\n",
+    "section": "\n5.4 Other Skimr Features",
+    "text": "5.4 Other Skimr Features\n\n5.4.1 Separate dataframes by type\nThe data frames produced by skim() are wide and sparse, filled with columns that are mostly NA. For that reason, it can be convenient to work with “by type” subsets of the original data frame. These smaller subsets have their NA columns removed.\nFeatures:\n\n\npartition() - Creates a list of smaller data frames. Each entry in the list is a data type from the original dataframe\n\nbind() - Takes the list and rebuilds the original dataframe.\n\nyank() - Extract a subtable from a dataframe with a particular type.\n\nThe following syntax is using partition() to separate the large census_df.\n\nCode# split the character and numeric data\nseparate_df &lt;- partition(skim(census_2010))\n# check only the character data\nseparate_df$character\n\nVariable type: character\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmin\nmax\nempty\nn_unique\nwhitespace\n\n\n\nSTNAME\n0\n1\n4\n20\n0\n51\n0\n\n\nCTYNAME\n0\n1\n4\n33\n0\n1927\n0\n\n\n\n\nCode# create summary statistics for only numeric variables\nnumeric_separate_df &lt;- separate_df[2]\n# pull out the desired summary statistics in the nested list\nhead(numeric_separate_df$numeric[\"mean\"]) %&gt;% \n  kable(digits = 1) \n\n\n\nmean\n\n\n\n49.8\n\n\n2.7\n\n\n5.2\n\n\n30.3\n\n\n101.9\n\n\n193387.1\n\n\n\n\n\nThe following syntax is using bind() to combine the smaller character and numeric lists into the desired df.\n\nCode# combine the character and numeric data\nhead(bind(separate_df))\n\n\nData summary\n\n\nName\ncensus_2010\n\n\nNumber of rows\n3193\n\n\nNumber of columns\n100\n\n\n_______________________\n\n\n\nColumn type frequency:\n\n\n\ncharacter\n2\n\n\nnumeric\n4\n\n\n________________________\n\n\n\nGroup variables\nNone\n\n\n\nVariable type: character\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmin\nmax\nempty\nn_unique\nwhitespace\n\n\n\nSTNAME\n0\n1\n4\n20\n0\n51\n0\n\n\nCTYNAME\n0\n1\n4\n33\n0\n1927\n0\n\n\n\nVariable type: numeric\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmean\nsd\np0\np25\np50\np75\np100\nhist\n\n\n\nSUMLEV\n0\n1\n49.84\n1.25\n40\n50\n50\n50\n50\n▁▁▁▁▇\n\n\nREGION\n0\n1\n2.67\n0.81\n1\n2\n3\n3\n4\n▁▆▁▇▂\n\n\nDIVISION\n0\n1\n5.19\n1.97\n1\n4\n5\n7\n9\n▂▇▅▆▃\n\n\nSTATE\n0\n1\n30.26\n15.15\n1\n18\n29\n45\n56\n▃▇▆▆▇\n\n\n\n\nCode# confirm that the bound table is the same as the original skimmed table\nidentical(bind(separate_df), skim(census_2010)) \n\n[1] TRUE\n\n\nThe following syntax is using yank() to extract a specific table eg.character to examine.\n\nCode# Extract character data\nyank(skim(census_2010), \"character\")\n\nVariable type: character\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmin\nmax\nempty\nn_unique\nwhitespace\n\n\n\nSTNAME\n0\n1\n4\n20\n0\n51\n0\n\n\nCTYNAME\n0\n1\n4\n33\n0\n1927\n0\n\n\n\n\n\n\n5.4.2 Skimr with Dplyr\nSkimr functions can be used in combination with Dplyr functions to examine specific variables within the census dataset.\nThe following example used skim() with filter() to display the variable CENSUS2010POP. The dataframe was further customized to display variable name and data type using select().\n\nCode# use dplyr functions on the statistics summary table\ncensus_filter &lt;- skim(census_2010) %&gt;% \n  filter(skim_variable == \"CENSUS2010POP\")\ncensus_filter\n\n\nData summary\n\n\nName\ncensus_2010\n\n\nNumber of rows\n3193\n\n\nNumber of columns\n100\n\n\n_______________________\n\n\n\nColumn type frequency:\n\n\n\nnumeric\n1\n\n\n________________________\n\n\n\nGroup variables\nNone\n\n\n\nVariable type: numeric\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmean\nsd\np0\np25\np50\np75\np100\nhist\n\n\nCENSUS2010POP\n0\n1\n193387\n1176201\n82\n11299\n26424\n71404\n37253956\n▇▁▁▁▁\n\n\n\nCodecensus_select &lt;- skim(census_2010) %&gt;% \n  select(skim_type, skim_variable)\nhead(census_select)\n\n# A tibble: 6 × 2\n  skim_type skim_variable\n  &lt;chr&gt;     &lt;chr&gt;        \n1 character STNAME       \n2 character CTYNAME      \n3 numeric   SUMLEV       \n4 numeric   REGION       \n5 numeric   DIVISION     \n6 numeric   STATE        \n\n\nYou can also customize the output of the skim() function by using various arguments. For example, you can use the numeric argument to specify which variables should be treated as numeric variables, or use the ranges argument to specify custom ranges for variables.\nUsing skim() in combination with mutate() we will compute a new variable to add to our skim dataframe.\n\nCode# create a new variable calculate the change in birth rate from 2010 to 2011\ncensus_2010 %&gt;% \n  # new variable\n  mutate(net_birth = BIRTHS2011 - BIRTHS2010) %&gt;% \n  # move the variable to the beginning of the dataset\n  relocate(net_birth, .after = CENSUS2010POP) %&gt;% \n  # summary statistics table\n  skim() %&gt;% \n  # only the first fifteen variables\n  head(n = 15) %&gt;% \n  # change the formatting \n  kable(digit = 2)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_type\nskim_variable\nn_missing\ncomplete_rate\ncharacter.min\ncharacter.max\ncharacter.empty\ncharacter.n_unique\ncharacter.whitespace\nnumeric.mean\nnumeric.sd\nnumeric.p0\nnumeric.p25\nnumeric.p50\nnumeric.p75\nnumeric.p100\nnumeric.hist\n\n\n\ncharacter\nSTNAME\n0\n1\n4\n20\n0\n51\n0\nNA\nNA\nNA\nNA\nNA\nNA\nNA\nNA\n\n\ncharacter\nCTYNAME\n0\n1\n4\n33\n0\n1927\n0\nNA\nNA\nNA\nNA\nNA\nNA\nNA\nNA\n\n\nnumeric\nSUMLEV\n0\n1\nNA\nNA\nNA\nNA\nNA\n49.84\n1.25\n40\n50\n50\n50\n50\n▁▁▁▁▇\n\n\nnumeric\nREGION\n0\n1\nNA\nNA\nNA\nNA\nNA\n2.67\n0.81\n1\n2\n3\n3\n4\n▁▆▁▇▂\n\n\nnumeric\nDIVISION\n0\n1\nNA\nNA\nNA\nNA\nNA\n5.19\n1.97\n1\n4\n5\n7\n9\n▂▇▅▆▃\n\n\nnumeric\nSTATE\n0\n1\nNA\nNA\nNA\nNA\nNA\n30.26\n15.15\n1\n18\n29\n45\n56\n▃▇▆▆▇\n\n\nnumeric\nCOUNTY\n0\n1\nNA\nNA\nNA\nNA\nNA\n101.92\n107.63\n0\n33\n77\n133\n840\n▇▁▁▁▁\n\n\nnumeric\nCENSUS2010POP\n0\n1\nNA\nNA\nNA\nNA\nNA\n193387.05\n1176201.45\n82\n11299\n26424\n71404\n37253956\n▇▁▁▁▁\n\n\nnumeric\nnet_birth\n0\n1\nNA\nNA\nNA\nNA\nNA\n1870.12\n11792.85\n-3\n96\n232\n639\n386443\n▇▁▁▁▁\n\n\nnumeric\nESTIMATESBASE2010\n0\n1\nNA\nNA\nNA\nNA\nNA\n193396.87\n1176244.25\n82\n11299\n26446\n71491\n37254503\n▇▁▁▁▁\n\n\nnumeric\nPOPESTIMATE2010\n0\n1\nNA\nNA\nNA\nNA\nNA\n193765.65\n1178710.28\n83\n11275\n26467\n71721\n37334079\n▇▁▁▁▁\n\n\nnumeric\nPOPESTIMATE2011\n0\n1\nNA\nNA\nNA\nNA\nNA\n195251.40\n1189647.76\n90\n11277\n26417\n72387\n37700034\n▇▁▁▁▁\n\n\nnumeric\nPOPESTIMATE2012\n0\n1\nNA\nNA\nNA\nNA\nNA\n196744.52\n1200508.37\n81\n11195\n26362\n72496\n38056055\n▇▁▁▁▁\n\n\nnumeric\nPOPESTIMATE2013\n0\n1\nNA\nNA\nNA\nNA\nNA\n198200.69\n1211123.45\n89\n11180\n26519\n72222\n38414128\n▇▁▁▁▁\n\n\nnumeric\nPOPESTIMATE2014\n0\n1\nNA\nNA\nNA\nNA\nNA\n199754.09\n1222669.36\n87\n11121\n26483\n72257\n38792291\n▇▁▁▁▁\n\n\n\n\n\n\n5.4.3 Adding Variables\n\nbase - An sfl that sets skimmers for all column types.\nappend - Whether the provided options should be in addition to the defaults already in skim. Default is TRUE.\n\nAs mentioned, skim() is designed to display default statistics, however you can use this function to change the summary statistics that it returns.\nskim_with() is type closure: a function that returns adds a new variable to the table. This lets you have several skimming functions in a single R session, but it also means that you need to assign the return of skim_with() before you can use it.\nYou assign values within skim_with() by using the sfl() helper (skimr function list). It identifies which skimming functions you want to remove, by setting them to NULL. Assign an sfl to each column type that you wish to modify.\nFor example, we will add the following variables to the dataframe: median, min, max, IQR, length.\n\nCodemy_skim &lt;- skim_with(\n  numeric = sfl(median, min, max, IQR),\n  character = sfl(length), \n  append = TRUE\n)\n\n# add new variables into the summary table\ncensus_2010 %&gt;% \n  my_skim() %&gt;% \n  head(n = 10)\n\n\nData summary\n\n\nName\nPiped data\n\n\nNumber of rows\n3193\n\n\nNumber of columns\n100\n\n\n_______________________\n\n\n\nColumn type frequency:\n\n\n\ncharacter\n2\n\n\nnumeric\n8\n\n\n________________________\n\n\n\nGroup variables\nNone\n\n\n\nVariable type: character\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmin\nmax\nempty\nn_unique\nwhitespace\nlength\n\n\n\nSTNAME\n0\n1\n4\n20\n0\n51\n0\n3193\n\n\nCTYNAME\n0\n1\n4\n33\n0\n1927\n0\n3193\n\n\n\nVariable type: numeric\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmean\nsd\np0\np25\np50\np75\np100\nhist\nmedian\nmin\nmax\nIQR\n\n\n\nSUMLEV\n0\n1\n49.84\n1.25\n40\n50\n50\n50\n50\n▁▁▁▁▇\n50\n40\n50\n0\n\n\nREGION\n0\n1\n2.67\n0.81\n1\n2\n3\n3\n4\n▁▆▁▇▂\n3\n1\n4\n1\n\n\nDIVISION\n0\n1\n5.19\n1.97\n1\n4\n5\n7\n9\n▂▇▅▆▃\n5\n1\n9\n3\n\n\nSTATE\n0\n1\n30.26\n15.15\n1\n18\n29\n45\n56\n▃▇▆▆▇\n29\n1\n56\n27\n\n\nCOUNTY\n0\n1\n101.92\n107.63\n0\n33\n77\n133\n840\n▇▁▁▁▁\n77\n0\n840\n100\n\n\nCENSUS2010POP\n0\n1\n193387.05\n1176201.45\n82\n11299\n26424\n71404\n37253956\n▇▁▁▁▁\n26424\n82\n37253956\n60105\n\n\nESTIMATESBASE2010\n0\n1\n193396.87\n1176244.25\n82\n11299\n26446\n71491\n37254503\n▇▁▁▁▁\n26446\n82\n37254503\n60192\n\n\nPOPESTIMATE2010\n0\n1\n193765.65\n1178710.28\n83\n11275\n26467\n71721\n37334079\n▇▁▁▁▁\n26467\n83\n37334079\n60446",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Skimr Package</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/01_skimr.html#conclusion",
+    "href": "lessons_original/01_skimr.html#conclusion",
+    "title": "\n5  Skimr Package\n",
+    "section": "\n5.5 Conclusion",
+    "text": "5.5 Conclusion\nOverall, Skimr is a useful package for quickly summarizing the variables in a dataset and gaining insights into its structure and content.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Skimr Package</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/01_skimr.html#references",
+    "href": "lessons_original/01_skimr.html#references",
+    "title": "\n5  Skimr Package\n",
+    "section": "\n5.6 References",
+    "text": "5.6 References\n\n\n\n\nWaring, Elin, Michael Quinn, Amelia McNamara, Eduardo Arino de la Rubia, Hao Zhu, and Shannon Ellis. 2022. Skimr: Compact and Flexible Summaries of Data. https://docs.ropensci.org/skimr/.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Skimr Package</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/01_table1.html#introduction",
+    "href": "lessons_original/01_table1.html#introduction",
+    "title": "\n6  Demographics table with table1\n",
+    "section": "",
+    "text": "6.1.1 Necessary Packages\nThe htmlTable package allows for the usage of the table1() function to create a table 1, while also making life easy when attempting to copy this table into a Word document.\nThe boot package was created to aid in performing bootstrapping analysis. With it comes numerous data sets, specifically clinical trial data sets to make this possible. However, there is no code book provided within the package when the data is downloaded as a csv file. This is a link on Github that explains and elaborates on every data within the package itself2.\n\n#install.packages(\"htmlTable\")\n#install.packages(\"boot\")\n\n# Load libraries\nlibrary(htmlTable)\nlibrary(table1)\nlibrary(boot)",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Demographics table with table1</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/01_table1.html#data-exploration-and-wrangling",
+    "href": "lessons_original/01_table1.html#data-exploration-and-wrangling",
+    "title": "\n6  Demographics table with table1\n",
+    "section": "\n6.2 Data Exploration and Wrangling",
+    "text": "6.2 Data Exploration and Wrangling\nToday, we will be using the melanoma data set which consists of malignant melanoma measurements of patients. Each patient had their tumor surgically removed between the years of 1962 and 1977 at the Department of Plastic Surgery, University Hospital of Odense located in Denamrk. Each surgery consisted of the complete removal of the tumor with an additional removal of about 2.5cm of the surrounding skin. When this was completed, the thickness of the tumor was recorded along with the physical appearance of ulceration vs no ulceration, as it is an important prognostic indication of those with a thick/ulcerated tumor to have an increased chance of death as a consequence of melanoma.\n\nlibrary(readxl)\n# setwd(\"~/OneDrive - Florida International University/RMethods_2023/Presentation05182023\")\n      \n# melanoma_data &lt;- read.csv(\n#   \"data/melanoma.csv\", header = TRUE, sep = \",\"\n# )\ndata(melanoma, package = \"boot\")\nmelanoma_data &lt;- melanoma\n\n#Now that we loaded the raw data set, we will conduct a visual\n#exploration before wrangling the data and applying any functions,\n#while also considering the requirements involved in the construction\n#of a table1.\n\nsummary(melanoma_data)\n\n      time          status          sex              age             year     \n Min.   :  10   Min.   :1.00   Min.   :0.0000   Min.   : 4.00   Min.   :1962  \n 1st Qu.:1525   1st Qu.:1.00   1st Qu.:0.0000   1st Qu.:42.00   1st Qu.:1968  \n Median :2005   Median :2.00   Median :0.0000   Median :54.00   Median :1970  \n Mean   :2153   Mean   :1.79   Mean   :0.3854   Mean   :52.46   Mean   :1970  \n 3rd Qu.:3042   3rd Qu.:2.00   3rd Qu.:1.0000   3rd Qu.:65.00   3rd Qu.:1972  \n Max.   :5565   Max.   :3.00   Max.   :1.0000   Max.   :95.00   Max.   :1977  \n   thickness         ulcer      \n Min.   : 0.10   Min.   :0.000  \n 1st Qu.: 0.97   1st Qu.:0.000  \n Median : 1.94   Median :0.000  \n Mean   : 2.92   Mean   :0.439  \n 3rd Qu.: 3.56   3rd Qu.:1.000  \n Max.   :17.42   Max.   :1.000  \n\n\nLet us now explore the type of variables within the data set.\n\ntypeof(melanoma_data$status) \n\n[1] \"double\"\n\n\nWe will first provide a basic table1 to illustrate how the function works. Currently, all the variables are in numeric/double formats, however for the creation of a basic table1, it is of importance to convert the dependent/response variable of interest to reflect categories (factor).\nOur main variable of interest (dependent/response) is the status. According to the code book found in Github, status is coded into three levels that indicate the patients status at the end of the study. Level 1 indicates that they had died from melanoma, Level 2 indicates that they were still alive at the conclusion of the study, and Level 3 indicates that they had died from causes unrelated to their melanoma. As such, we will factor the “status” variable into three levels.\nWith this in mind, let us go ahead and convert melanoma into a factor variable with three levels. For ease of analysis we will use 2 = “Alive” as the reference level. This can be done in two ways:\n\nAlthough more time consuming, it is highly recommended that beginners utilize the function as.factor() and then utilize the recode_factor() function to minimize the errors.\nWhen you become more skilled and are able to understand how the factor function works, it is possible to do everything in one step with the factor() function. In this function you can put levels and labels all in one function instead of having to break it up into more than one function.\n\nFor our example we will use as.factor then recode_factor() using 2 = “Alive” as our reference group.\n\nmelanoma_data$status &lt;-\n  as.factor(melanoma_data$status)\n\n# print the first six observations\nhead(melanoma_data$status)\n\n[1] 3 3 2 3 1 1\nLevels: 1 2 3\n\n# Recode\nmelanoma_data$status &lt;- recode_factor(\n  melanoma_data$status, \n  \"2\" = \"Alive\", # this is the reference group\n  \"1\" = \"Died from melanoma\",\n  \"3\" = \"Non-Melanoma death\"\n)\n\n# Print the first six observations\nhead(melanoma_data$status)\n\n[1] Non-Melanoma death Non-Melanoma death Alive              Non-Melanoma death\n[5] Died from melanoma Died from melanoma\nLevels: Alive Died from melanoma Non-Melanoma death\n\n\nAs you can see in the variable levels, “Alive” is the reference level. It is extremely important to pick a reference level to lay the foundation of the table along with highlighting the outcome of interest of your hypothesis. In summary, this lays the foundation of a well organized table.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Demographics table with table1</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/01_table1.html#basic-table-1",
+    "href": "lessons_original/01_table1.html#basic-table-1",
+    "title": "\n6  Demographics table with table1\n",
+    "section": "\n6.3 Basic table 1",
+    "text": "6.3 Basic table 1\nNow that our main variable of interest is a factor with three levels, we will run a basic table1 with the independent/explanatory variables of interest: sex, age, ulcer, and thickness.\nRecall that the explanatory variables of interest are still in “double” formats. Conveniently, to analyze data before the independent variables are converted to factors and labeled, the table1 provides the ability to highlight level results. This only applies for independent variables that are in numeric/double formats in which each number represents a group. For instance 0 although is a number format we know it has a group meaning such as male.\nFor the independent variables, if they have factors in the front, it provides the number of cases (aka observations). If they are a continuous variable, we will get the mean, the SD, the minimum and the maximum amounts.\n\nbasic_table1 &lt;- table1( \n  ~ factor(sex) + age + factor(ulcer) + thickness | status, \n  data = melanoma_data\n)\n\nbasic_table1\n\n\n\n\n\n\n\n\n\n\n\n\n\nAlive(N=134)\nDied from melanoma(N=57)\nNon-Melanoma death(N=14)\nOverall(N=205)\n\n\n\nfactor(sex)\n\n\n\n\n\n\n0\n91 (67.9%)\n28 (49.1%)\n7 (50.0%)\n126 (61.5%)\n\n\n1\n43 (32.1%)\n29 (50.9%)\n7 (50.0%)\n79 (38.5%)\n\n\nage\n\n\n\n\n\n\nMean (SD)\n50.0 (15.9)\n55.1 (17.9)\n65.3 (10.9)\n52.5 (16.7)\n\n\nMedian [Min, Max]\n52.0 [4.00, 84.0]\n56.0 [14.0, 95.0]\n65.0 [49.0, 86.0]\n54.0 [4.00, 95.0]\n\n\nfactor(ulcer)\n\n\n\n\n\n\n0\n92 (68.7%)\n16 (28.1%)\n7 (50.0%)\n115 (56.1%)\n\n\n1\n42 (31.3%)\n41 (71.9%)\n7 (50.0%)\n90 (43.9%)\n\n\nthickness\n\n\n\n\n\n\nMean (SD)\n2.24 (2.33)\n4.31 (3.57)\n3.72 (3.63)\n2.92 (2.96)\n\n\nMedian [Min, Max]\n1.36 [0.100, 12.9]\n3.54 [0.320, 17.4]\n2.26 [0.160, 12.6]\n1.94 [0.100, 17.4]\n\n\n\n\n\n\n\nIf we do not put factor for a grouped variable then the following will happen:\n\nwrong_table1 &lt;- table1(\n  ~ sex + age + ulcer + thickness | status, \n  data = melanoma_data\n)\n\nwrong_table1\n\n\n\n\n\n\n\n\n\n\n\n\n\nAlive(N=134)\nDied from melanoma(N=57)\nNon-Melanoma death(N=14)\nOverall(N=205)\n\n\n\nsex\n\n\n\n\n\n\nMean (SD)\n0.321 (0.469)\n0.509 (0.504)\n0.500 (0.519)\n0.385 (0.488)\n\n\nMedian [Min, Max]\n0 [0, 1.00]\n1.00 [0, 1.00]\n0.500 [0, 1.00]\n0 [0, 1.00]\n\n\nage\n\n\n\n\n\n\nMean (SD)\n50.0 (15.9)\n55.1 (17.9)\n65.3 (10.9)\n52.5 (16.7)\n\n\nMedian [Min, Max]\n52.0 [4.00, 84.0]\n56.0 [14.0, 95.0]\n65.0 [49.0, 86.0]\n54.0 [4.00, 95.0]\n\n\nulcer\n\n\n\n\n\n\nMean (SD)\n0.313 (0.466)\n0.719 (0.453)\n0.500 (0.519)\n0.439 (0.497)\n\n\nMedian [Min, Max]\n0 [0, 1.00]\n1.00 [0, 1.00]\n0.500 [0, 1.00]\n0 [0, 1.00]\n\n\nthickness\n\n\n\n\n\n\nMean (SD)\n2.24 (2.33)\n4.31 (3.57)\n3.72 (3.63)\n2.92 (2.96)\n\n\nMedian [Min, Max]\n1.36 [0.100, 12.9]\n3.54 [0.320, 17.4]\n2.26 [0.160, 12.6]\n1.94 [0.100, 17.4]\n\n\n\n\n\n\n\nAs you can see above, we have the incorrect values provided of the explanatory variables.\nFor example, in the variable of sex, we expect to see the number of individuals who identify as male or female, but instead we observe the mean, which is not a proper descriptive statistic as sex is a categorical variable.\nTo avoid this issue as well as problems in other procedures (like logistic regressions), it is crucial that we remember to factor the variables before we run any function.\nAs mentioned, two of the independent/explanatory variables of interest need to be converted to factor variables: sex and ulcer. Then, we are to label each level of these variables.\nAccording to the code book, the patient’s sex: 1 = male, 0 = female, and ulcer is an indicator of ulceration : 1 = present, 0 = absent\n\ntypeof(melanoma_data$sex)\n\n[1] \"double\"\n\nmelanoma_data$sex &lt;- as.factor(melanoma_data$sex)\n\n# print the first six observations\nhead(melanoma_data$sex)\n\n[1] 1 1 1 0 1 1\nLevels: 0 1\n\n# Recode\nmelanoma_data$sex &lt;- recode_factor(\n  melanoma_data$sex, \n  \"0\" = \"Female\",\n  \"1\" = \"Male\"\n)\n\n# Print the first six observations\nhead(melanoma_data$sex)\n\n[1] Male   Male   Male   Female Male   Male  \nLevels: Female Male\n\n\n\ntypeof(melanoma_data$ulcer)\n\n[1] \"double\"\n\nmelanoma_data$ulcer &lt;- as.factor(melanoma_data$ulcer)\n\n# print the first six observations\nhead(melanoma_data$ulcer)\n\n[1] 1 0 0 0 1 1\nLevels: 0 1\n\n# Recode\nmelanoma_data$ulcer &lt;- recode_factor(\n  melanoma_data$ulcer, \n  \"0\" = \"Absent\",\n  \"1\" = \"Present\"\n)\n\n# Print the first six observations\nhead(melanoma_data$ulcer)\n\n[1] Present Absent  Absent  Absent  Present Present\nLevels: Absent Present\n\n\nIn addition, we need to add units to the two continuous variables age and thickness\nAccording to the code book, age is the patient’s age measured in years and thickness corresponds to the tumor’s thickness in millimeters (mm). The package table1 provides an easy way to demonstrate measurement information:\n\nunits(melanoma_data$age) &lt;- \"years\"\nunits(melanoma_data$thickness) &lt;- \"mm\"\n\nAdditionally, for visual and descriptive purposes, the function table1 is able to easily provide labels for the variables that will be shown in the final table using the label() function. Also, (caption &lt;-) provides a title for the table and (footnote &lt;-) provides any footnote information.\n\nlabel(melanoma_data$sex) &lt;- \"Sex\"\nlabel(melanoma_data$age) &lt;- \"Age\"\nlabel(melanoma_data$ulcer) &lt;- \"Ulceration\"\nlabel(melanoma_data$thickness) &lt;-\"Thickness*\"\n\ncaption_char &lt;- \"Table 1. Melanoma Dataset Descriptive Statistics\"\nfootnote_char &lt;- \"*Also known as Breslow thickness\"\n\nBelow, we can demonstrate the final table1 layout. As you can see, you no longer use factor() in front of the variable as we already factorized it in the previous steps.\n\ntable1(\n  ~ sex + age + ulcer + thickness | status, \n  data = melanoma_data,\n  overall = c(left = \"Total\"), \n  caption = caption_char, \n  footnote = footnote_char\n)\n\n\nTable 1. Melanoma Dataset Descriptive Statistics\n\n\n\nTotal(N=205)\nAlive(N=134)\nDied from melanoma(N=57)\nNon-Melanoma death(N=14)\n\n\n*Also known as Breslow thickness\n\n\n\nSex\n\n\n\n\n\n\nFemale\n126 (61.5%)\n91 (67.9%)\n28 (49.1%)\n7 (50.0%)\n\n\nMale\n79 (38.5%)\n43 (32.1%)\n29 (50.9%)\n7 (50.0%)\n\n\nAge (years)\n\n\n\n\n\n\nMean (SD)\n52.5 (16.7)\n50.0 (15.9)\n55.1 (17.9)\n65.3 (10.9)\n\n\nMedian [Min, Max]\n54.0 [4.00, 95.0]\n52.0 [4.00, 84.0]\n56.0 [14.0, 95.0]\n65.0 [49.0, 86.0]\n\n\nUlceration\n\n\n\n\n\n\nAbsent\n115 (56.1%)\n92 (68.7%)\n16 (28.1%)\n7 (50.0%)\n\n\nPresent\n90 (43.9%)\n42 (31.3%)\n41 (71.9%)\n7 (50.0%)\n\n\nThickness* (mm)\n\n\n\n\n\n\nMean (SD)\n2.92 (2.96)\n2.24 (2.33)\n4.31 (3.57)\n3.72 (3.63)\n\n\nMedian [Min, Max]\n1.94 [0.100, 17.4]\n1.36 [0.100, 12.9]\n3.54 [0.320, 17.4]\n2.26 [0.160, 12.6]",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Demographics table with table1</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/01_table1.html#conclusion",
+    "href": "lessons_original/01_table1.html#conclusion",
+    "title": "\n6  Demographics table with table1\n",
+    "section": "\n6.4 Conclusion",
+    "text": "6.4 Conclusion\nIn conclusion, table1 is one of the most utilized tools in the scientific research field. Understanding how to use the table1 package in R can be of benefit to many.\nIt is important to note that this presentation is just a brief summary with what is possible with this package. For example, you can change the tables appearance with the topclass function which has built in styles like zebra, grid, shades, times and center.\nIn addition, you can also stratify the response variable to highlight two of the responses, like dead or alive in our example.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Demographics table with table1</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/01_table1.html#references",
+    "href": "lessons_original/01_table1.html#references",
+    "title": "\n6  Demographics table with table1\n",
+    "section": "References",
+    "text": "References\n\n\n\n\n1. \nHayes-Larson E, Kezios KL, Mooney SJ, Lovasi G. Who is in this study, anyway? Guidelines for a useful Table 1. Journal of Clinical Epidemiology [Internet] 2019;114:125–32. Available from: http://dx.doi.org/10.1016/j.jclinepi.2019.06.011\n\n\n\n2. \nA. C. Davison, D. V. Hinkley. Bootstrap methods and their applications [Internet]. Cambridge: Cambridge University Press; 1997. Available from: doi:10.1017/CBO9780511802843",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Demographics table with table1</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/02_z-test_one_prop.html#mathematical-definition-of-the-one-sample-z-test",
+    "href": "lessons/02_z-test_one_prop.html#mathematical-definition-of-the-one-sample-z-test",
+    "title": "\n7  Z-Test for One Proportion\n",
+    "section": "\n7.2 Mathematical definition of the One-Sample \\(Z\\)-Test",
+    "text": "7.2 Mathematical definition of the One-Sample \\(Z\\)-Test\nConsider a sample of size \\(n\\) with binary values (such as “true” or “false”). Let \\(p_{s}\\) and \\(p_{E}\\) be the observed sample and expected (population) proportions, respectively. The formula to calculate the \\(z\\) statistic is\n\\[\nz \\equiv \\frac{\n  p_s - p_E\n}{\n  \\sqrt{\n    \\frac{1}{n}p_s(1 - p_s)\n  }\n}.\n\\]",
+    "crumbs": [
+      "One-Sample Tests",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Z-Test for One Proportion</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/02_z-test_one_prop.html#data-source-and-description",
+    "href": "lessons/02_z-test_one_prop.html#data-source-and-description",
+    "title": "\n7  Z-Test for One Proportion\n",
+    "section": "\n7.3 Data source and description",
+    "text": "7.3 Data source and description\nWe will use the CTN-0094 data set, a data set of harmonized clinical trials for opioid use disorder. The full database is in public.ctn0094data::, engineered features are in public.ctn0094extra::, and clinical trial outcomes (wrangled dependent variables) are in CTNote::. We will install all three packages, but only use CTNote:: for now.\n\n# install.packages(\"public.ctn0094data\")\n# install.packages(\"public.ctn0094extra\")\n# install.packages(\"CTNote\")\n\nlibrary(CTNote)\nlibrary(tidyverse)",
+    "crumbs": [
+      "One-Sample Tests",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Z-Test for One Proportion</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/02_z-test_one_prop.html#cleaning-the-data-to-create-a-model-data-frame",
+    "href": "lessons/02_z-test_one_prop.html#cleaning-the-data-to-create-a-model-data-frame",
+    "title": "\n7  Z-Test for One Proportion\n",
+    "section": "\n7.4 Cleaning the data to create a model data frame",
+    "text": "7.4 Cleaning the data to create a model data frame\nBecause our method requires only one sample, we have very little work to do. We will use the Kosten et al. (1993) definition of opioid abstinence, provided in the data set outcomesCTN0094 as the column kosten1993_isAbs.\n\n# What do the values look like?\nsummary(outcomesCTN0094$kosten1993_isAbs)\n\n   Mode   FALSE    TRUE \nlogical    2158    1402 \n\n# How many samples are there?\nnrow(outcomesCTN0094)\n\n[1] 3560\n\n\nThere are 3560 logical values, and TRUE indicates that the trial participant achieved abstinence according to the definition used in Kosten et al. (1993).",
+    "crumbs": [
+      "One-Sample Tests",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Z-Test for One Proportion</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/02_z-test_one_prop.html#assumptions-of-the-one-sample-z-test",
+    "href": "lessons/02_z-test_one_prop.html#assumptions-of-the-one-sample-z-test",
+    "title": "\n7  Z-Test for One Proportion\n",
+    "section": "\n7.5 Assumptions of the One-Sample \\(Z\\)-Test",
+    "text": "7.5 Assumptions of the One-Sample \\(Z\\)-Test\nTo use a one-sample \\(Z\\)-test, we make the following assumptions:\n\nThe data are from a random sample\nEach observation in the data are independent\nNeither the sample proportion nor population proportions are “extreme”; usually we apply this method if these proportions are between 5% and 95%.\nThe data can be described as “successes” and “failures”, and there are at least 10 samples in each category.\n\nIf these assumptions hold, then \\[\nz \\sim N(0, 1).\n\\]",
+    "crumbs": [
+      "One-Sample Tests",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Z-Test for One Proportion</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/02_z-test_one_prop.html#checking-the-assumptions-with-plots",
+    "href": "lessons/02_z-test_one_prop.html#checking-the-assumptions-with-plots",
+    "title": "\n7  Z-Test for One Proportion\n",
+    "section": "\n7.6 Checking the assumptions with plots",
+    "text": "7.6 Checking the assumptions with plots\n\n7.6.1 Independence and Randomness\nBecause the samples were collected at random via an FDA approved clinical trial protocol, we assume that all the participants were randomly selected and are independent of each other.\n\n7.6.2 “Extreme” Proportions\nAccording to Ling et al. (2020), the 12-month abstinence proportion of all 533 participants in their study was 40.5 percent. As we can see here, our abstinence rates are 39.4. Neither these proportions are smaller than 5% or greater than 95%.\n\n(pExpected &lt;- 0.508 * (425/533))\n\n[1] 0.4050657\n\n# Count the number of TRUE values\n(nAbstinent &lt;- sum(outcomesCTN0094$kosten1993_isAbs))\n\n[1] 1402\n\n\n\n7.6.3 Type and Counts of Data\nWe observe binary data, and we see at least 10 successes and at least 10 failures.",
+    "crumbs": [
+      "One-Sample Tests",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Z-Test for One Proportion</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/02_z-test_one_prop.html#code-to-run-a-one-sample-z-test",
+    "href": "lessons/02_z-test_one_prop.html#code-to-run-a-one-sample-z-test",
+    "title": "\n7  Z-Test for One Proportion\n",
+    "section": "\n7.7 Code to run a One-Sample \\(Z\\)-Test",
+    "text": "7.7 Code to run a One-Sample \\(Z\\)-Test\nNow that we have checked our assumptions, we can perform the one-sample \\(Z\\)-test for proportions.\n\nprop.test(\n  x = nAbstinent,\n  n = nrow(outcomesCTN0094),\n  p = pExpected\n)\n\n\n    1-sample proportions test with continuity correction\n\ndata:  nAbstinent out of nrow(outcomesCTN0094), null probability pExpected\nX-squared = 1.8218, df = 1, p-value = 0.1771\nalternative hypothesis: true p is not equal to 0.4050657\n95 percent confidence interval:\n 0.3777537 0.4101176\nsample estimates:\n        p \n0.3938202",
+    "crumbs": [
+      "One-Sample Tests",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Z-Test for One Proportion</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/02_z-test_one_prop.html#brief-interpretation-of-the-output",
+    "href": "lessons/02_z-test_one_prop.html#brief-interpretation-of-the-output",
+    "title": "\n7  Z-Test for One Proportion\n",
+    "section": "\n7.8 Brief interpretation of the output",
+    "text": "7.8 Brief interpretation of the output\nThe 95% confidence interval contains the population proportion, so we fail to reject the hypothesis that the patients from these clinical trials achieve different abstinence rates than the general population.",
+    "crumbs": [
+      "One-Sample Tests",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Z-Test for One Proportion</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#source-code-for-phc6099-course-notes",
+    "href": "index.html#source-code-for-phc6099-course-notes",
+    "title": "An R Cookbook for Public Health",
+    "section": "",
+    "text": "0.1.1 Topics\nThe chapters are:\n\nExploring Data\n\nggplot2:: mosaic plots, histograms, and violin plots\nggplot2:: scatterplots and facets \nskimr::\ntable1::\ngtsummary::\n\nOne-Sample Tests\n\n\\(Z\\)-test\nPaired \\(t\\)-test\nPaired Wilcoxon test\nTransformations to Normality\nMcNemar’s Test\nFisher’s Exact Test\nChi-Square Goodness of Fit\nBootstrapped Confidence Intervals\n\nTwo-Sample Tests\n\n\\(t\\)-test\nWelch’s \\(t\\)-test\nMann-Whitney \\(U\\) test\nCochran’s \\(Q\\) test\n\\(\\chi^2\\) Test for Independence\n\nANOVA and Linear Regression\n\nOne-Way ANOVA\nTwo-way ANOVA\nWelch’s ANOVA\nKruskal-Wallace Test\nTukey HSD Post-Hoc Test\nRepeated Measures ANOVA\nRandom Intercept Models\nCorrelation Matrices and Covariances\nMultiple Regression (linear)\nPolynomial regression\n\nGeneralized Linear Models\n\nGeneralized Linear Models: Binary\nGeneralized Linear Models: Ordered\nGeneralized Linear Models: Count (Poisson)\nGeneralized Linear Models: Count (Negative Binomial)\n\nSpecial Topics\n\nLinear Mixed Effects Models\nStructural Equation Models\nCox Proportional Hazards Regression\n(TBD) Multivariate Methods for Genetics/Genomics\nRidge, LASSO, and Elastic Net Regression\n\nPower Calculations (in progress)\n\n\n\n0.1.2 Lesson Outline\nThis is a shell of a lesson that can be copied and pasted for new lessons (or to edit and clean up existing lessons). If you copy this shell, then change all the headings from level 4 to 2. Replace &lt;the method&gt; with the name of your method, or its abbreviation. The file lessons/00_lesson_template.qmd has a .qmd template with these sections.\n\n0.1.2.1 Introduction to &lt;the method&gt;\n\n\n0.1.2.2 Mathematical definition of &lt;the method&gt;\n\n\n0.1.2.3 Data source and description\n\n\n0.1.2.4 Cleaning the data to create a model data frame\n\n\n0.1.2.5 Assumptions of &lt;the method&gt;\n\n\n0.1.2.6 Checking the assumptions with plots\n\n\n0.1.2.7 Code to run &lt;the method&gt;\n\n\n0.1.2.8 Code output\n\n\n0.1.2.9 Brief interpretation of the output",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Course Materials for PHC 6099: 'R Computing for Health Sciences'</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/02_fisher_exact_test.html",
+    "href": "lessons_original/02_fisher_exact_test.html",
+    "title": "\n8  Fisher’s Exact Test\n",
+    "section": "",
+    "text": "8.1 Introduction",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Fisher's Exact Test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/02_fisher_exact_test.html#introduction",
+    "href": "lessons_original/02_fisher_exact_test.html#introduction",
+    "title": "\n8  Fisher’s Exact Test\n",
+    "section": "",
+    "text": "Fisher’s exact test is an independent test used to determine if there is a relationship between categorical (non-parametric) variables with a small sample size.\nUsed to assess whether proportions of one variable are different among values of another table.\nUses (hypergeometric) marginal distribution to derive exact p-values which are not approximated, which are also somewhat conservative.\nThe rules of Chi distribution do not apply when the frequency count is &lt;5 for more than 20% of the cells in a contingency table (Bower 2003).\nData is easily manipulated by using a contingency table.\n\n\n8.1.1 Assumptions\n\nAssumes that the individual observations are independent.\nAssumes that the row and column totals are fixed or conditioned.\nThe variables are categorical and randomly sampled.\nObservations are count data.\n\n8.1.2 Hypotheses\nThe hypotheses of Fisher’s exact test are similar to Chi-square test:\nNull hypothesis:\\((H_0)\\) There is no relationship between the categorical variables, the variables are independent.\nAlternative hypothesis: \\((H_1)\\) There is a relationship between the categorical variables, the variables are dependent.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Fisher's Exact Test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/02_fisher_exact_test.html#fishers-exact-test-equation",
+    "href": "lessons_original/02_fisher_exact_test.html#fishers-exact-test-equation",
+    "title": "\n8  Fisher’s Exact Test\n",
+    "section": "\n8.2 Fisher’s Exact Test Equation",
+    "text": "8.2 Fisher’s Exact Test Equation\nFisher’s exact test for a one-tailed p-value is calculated using the following formula:\n\\[   p = {(a+b)!(c+d)!(a+c)!(b+d)! \\over a! b! c! d! n!} \\] - n = population size/ total frequency\n- a + b = “successes” values in the contingency table\n- a + c = sample size / draws from the population\n- a = sample successes\n\n8.2.1 Formula description\nthis test is usually used as a one-tailed test but it can also be used as a two tailed test as well, \\(a\\),\\(b\\),\\(c\\), and \\(d\\) are the individual frequencies on the 2x2 contingency table and \\(n\\) is our total frequency. This particular test is used to obtain the probability of the combination of frequencies that we can actually obtain.\n\n8.2.2 What is a contingency table?\nThis is a table that shows the distribution of a variable in the rows and columns. Sometimes referred to as a 2x2 table. They are useful in summarizing categorical variables. The table() function is used to create a contingency table in R. When the variables of interest are summarized in a contingency table it is easier to run the Fisher’s Exact test.\n\n8.2.2.1 Example: Creating a contingency table\nLets say we have information on the gender of participants in a clinical trial and the type of drug administered to them we can create the following contingency table for further analysis.\n\n# Example R code to create a contingency table\n\n# Creating a data frame\n df &lt;- data.frame(\n   \"Drug\" = c(\"Drug A\", \"Drug B\", \"Drug A\"),\n   \"Gender\" = c(\"Male\", \"Male\", \"Female\")\n )\n \n# Creating contingency table using table()\nctable &lt;- table(df)\nprint(ctable)\n\n        Gender\nDrug     Female Male\n  Drug A      1    1\n  Drug B      0    1\n\n\n\n8.2.3 Performing Fisher’s Exact Test in R\nWe will need to install the ggstatplot package to visualize the statistical results.\n\n# install.packages(\"ggstatplot\") \n# install.packages(\"summarytools\")\n# install.packages(\"gmodels\")\n# install.packages(tidyverse)\n\n\n8.2.4 Data Source: GMP2017\nFor this example we will be using the Greater Manchester Police’s UK stop and search data from 2017(December) sourced from the Sage Research Methods Dataset Part 2 (https://methods.sagepub.com/dataset/fishers-exact-gmss-2017). This data has information on stop and search events, gender and ethnicity. For this example we would like to access whether there is a significant relationship between gender and stop and search events (having controlled drugs vs harmful weapons)?\n\nGMP17 &lt;- read.csv(\n  \"../data/02_dataset-gmss-2017-subset1_jittered_20240503.csv\"\n)\n\n\n8.2.5 Load in libraries\n\nlibrary(gmodels)\nlibrary(ggstatsplot)\nlibrary(gt)\nlibrary(gtsummary)\nlibrary(katex)\nlibrary(tidyverse)\n\n\n8.2.6 Descriptive summary\n\nCodehead(GMP17)\n\n  Gender Ethnicity ObjectSearch\n1      1         1            1\n2      1         1           -9\n3      1         1            1\n4      1         1            1\n5      1         1           -9\n6      1         1            1\n\nCodestr(GMP17)\n\n'data.frame':   186 obs. of  3 variables:\n $ Gender      : int  1 1 1 1 1 1 1 1 1 -9 ...\n $ Ethnicity   : int  1 1 1 1 1 1 2 1 1 1 ...\n $ ObjectSearch: int  1 -9 1 1 -9 1 1 1 -9 -9 ...\n\nCode# determining the number of rows\nNROW(GMP17)\n\n[1] 186\n\n\n\n8.2.7 Assessing frequencies to answer research question\nFor this analysis we will use the Gender variable and the ObjectSearch variable\n\n# Dropping the Ethnicity variable to remain with variables of interest for for the 2x2 table\n\nnewGMP17 &lt;-GMP17[ -c(2) ]\n \nhead(newGMP17)\n\n  Gender ObjectSearch\n1      1            1\n2      1           -9\n3      1            1\n4      1            1\n5      1           -9\n6      1            1\n\n\nThe data contains missing values categorized as -9 that we need to drop and we need to rename our variables based on the data dictionary provided https://methods.sagepub.com/dataset/download/fishers-exact-gmss-2017/guide/codebook.\n\n# Exclude rows that have missing data in both variables\nnewGMP17_nom &lt;- subset(newGMP17, Gender &gt; 0)\nnewGMP17_nom2 &lt;- subset(newGMP17_nom, ObjectSearch  &gt; 0)\nsummary(newGMP17_nom2)\n\n     Gender       ObjectSearch  \n Min.   :1.000   Min.   :1.000  \n 1st Qu.:1.000   1st Qu.:1.000  \n Median :1.000   Median :1.000  \n Mean   :1.052   Mean   :1.267  \n 3rd Qu.:1.000   3rd Qu.:2.000  \n Max.   :2.000   Max.   :2.000  \n\nnrow(newGMP17_nom2)\n\n[1] 116\n\n\n\n# Renaming the Gender variable based on data dictionary\nnewGMP17_nom2$Gender &lt;- recode_factor(\n  newGMP17_nom2$Gender,\n  \"1\" = \"Male\",\n  \"2\" = \"Female\"\n)\n\n# Renaming the Gender variable based on data dictionary\nnewGMP17_nom2$ObjectSearch &lt;- recode_factor(\n  newGMP17_nom2$ObjectSearch,\n  \"1\" = \"Controlled_Drugs\",\n  \"2\" = \"Harmful_Objects\"\n)\n\n\n# Creating the contingency table for subset data\ncGMP17 = table(newGMP17_nom2)\nprint(cGMP17)\n\n        ObjectSearch\nGender   Controlled_Drugs Harmful_Objects\n  Male                 83              27\n  Female                2               4\n\n\n\n8.2.8 Visualizing data using mosaic plot\n\nwe can use the mosaic plot to represent the data.\n\n\nmosaicplot(\n  cGMP17,\n  main = 'Mosaic Plot',\n  color = TRUE\n)\n\n\n\n\n\n\n\n\n8.2.9 Running the Fisher’s exact test using fisher.test()\nWhat if we just run a Chi-square test?\nUsing our GMP17 dataset we can try to run a Chi-square test instead of the Fisher’s Exact test and see what happens.\nThe R output gives us a warning that the Chi Square is not appropriate hence we should use another test in this case the Fisher’s Exact Test.\n\nchisq.test(cGMP17)$expected\n\nWarning in chisq.test(cGMP17): Chi-squared approximation may be incorrect\n\n\n        ObjectSearch\nGender   Controlled_Drugs Harmful_Objects\n  Male          80.603448       29.396552\n  Female         4.396552        1.603448\n\n\n\n8.2.10 Running the test\n\n# running the fisher's exact test\n\ntest &lt;- fisher.test(cGMP17)\ntest\n\n\n    Fisher's Exact Test for Count Data\n\ndata:  cGMP17\np-value = 0.04297\nalternative hypothesis: true odds ratio is not equal to 1\n95 percent confidence interval:\n  0.8133673 70.2637501\nsample estimates:\nodds ratio \n  6.030297 \n\n\nUsing the gt summary to view results.\n\nnewGMP17_nom2 |&gt; \n  tbl_summary(by = Gender) |&gt; \n  add_p() |&gt; \n  add_overall()\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\n\nOverall, N = 1161\n\n\nMale, N = 1101\n\n\nFemale, N = 61\n\n\np-value2\n\n\n\n\nObjectSearch\n\n\n\n0.043\n\n\n    Controlled_Drugs\n85 (73%)\n83 (75%)\n2 (33%)\n\n\n\n    Harmful_Objects\n31 (27%)\n27 (25%)\n4 (67%)\n\n\n\n\n\n\n1 n (%)\n\n\n\n2 Fisher’s exact test\n\n\n\n\n\n\n\n\n8.2.11 Interpretation of results\nThe most important test statistic is the p - value therefore we can retrieve the specific result using the following code;\n\ntest$p.value \n\n[1] 0.04297268\n\n\nOdds ratio = 6.33, 95% CI = 0.85-73.59], we reject the null hypothesis (p &lt; 0.05) and conclude that there is a strong association between the two categorical independent variables (gender and object search events)\nTherefore the odds ratio indicates that the odds of having controlled drugs at a stop and search is 6.33 times as likely for males compared to females. In other words, males are more likely of having controlled drugs at a stop and search than females.\n\n8.2.12 Visualizing statistical results with plots using ggstatsplot\n\nwe download the ggsattsplot package to visualize the results in a plot.\n\n\n# Fisher's exact test \n\ntest &lt;- fisher.test(cGMP17)\n\n# combine plot and statistical test with ggbarstats\n\nggbarstats(\n  newGMP17_nom2, Gender, ObjectSearch,\n  results.subtitle = FALSE,\n  subtitle = paste0(\n    \"Fisher's exact test\", \", p-value = \",\n    ifelse(test$p.value &lt; 0.001, \"&lt; 0.001\", round(test$p.value, 3))\n  )\n)\n\n\n\n\n\n\n\nFrom the plot, it is clear that the proportion of males among object search events is higher compared to females, suggesting that there is a relationship between the two variables.\nThis is confirmed thanks to the p-value displayed in the subtitle of the plot. As previously, we reject the null hypothesis and we conclude that the variables gender and stop and search events are not independent (p-value = 0.038).",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Fisher's Exact Test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/02_fisher_exact_test.html#what-if-we-have-more-than-two-levels",
+    "href": "lessons_original/02_fisher_exact_test.html#what-if-we-have-more-than-two-levels",
+    "title": "\n8  Fisher’s Exact Test\n",
+    "section": "\n8.3 What if we have more than two levels?",
+    "text": "8.3 What if we have more than two levels?\nUsing the drug example used previously lets say we have 3 drugs ‘Drug A, Drug B or Drug C’ and we want to see if there is any relationship with gender ‘Male/Female’.\n\n# Creating a data frame\ndf &lt;- data.frame (\n  \"Drug\" = c(\"Drug A\", \"Drug B\", \"Drug A\", \"Drug C\", \"Drug C\"),\n  \"Gender\" = c(\"Male\", \"Male\", \"Female\", \"Female\", \"Female\")\n)\n \n# Creating contingency table using table()\nctable &lt;- table(df)\nprint(ctable)\n\n        Gender\nDrug     Female Male\n  Drug A      1    1\n  Drug B      0    1\n  Drug C      2    0\n\n\n\n# Running the Fisher's Exact test for the 3x2 table\nfisher.test(ctable)\n\n\n    Fisher's Exact Test for Count Data\n\ndata:  ctable\np-value = 0.6\nalternative hypothesis: two.sided\n\n\nThe p-value is non-significant [p = 0.6], we fail to reject the null hypothesis (p &lt; 0.05) and conclude that there is no association between the drug treatments and gender. If the results had been significant we would have gone ahead and conducted a post hoc analysis using pairwise_fisher_test to asses each combination.\nSummary\nThis article describe the assumptions and hypotheses of the Fisher’s Exact test. It also provides examples on how it can be applied.",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Fisher's Exact Test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/02_fisher_exact_test.html#references",
+    "href": "lessons_original/02_fisher_exact_test.html#references",
+    "title": "\n8  Fisher’s Exact Test\n",
+    "section": "\n8.4 References",
+    "text": "8.4 References\n\nBower, Keith M. 2003. “When to Use Fisher’s Exact Test.” In American Society for Quality, Six Sigma Forum Magazine, 2:35–37. 4.\nMcCrum-Gardner, Evie. 2008. “Which Is the Correct Statistical Test to Use?” British Journal of Oral and Maxillofacial Surgery 46 (1): 38–41.\nWong KC. Chi squared test versus Fisher’s exact test. Hong Kong Med J. 2011 Oct;17(5):427\nPatil, I. (2021). Visualizations with statistical details: The ‘ggstatsplot’ approach. Journal of Open Source Software, 6(61), 3167, doi:10.21105/joss.03167\nZach Bobbit. (2021). Fisher’s Exact Test: Definition, Formula, and Example",
+    "crumbs": [
+      "New Part",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Fisher's Exact Test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/03_two_sample_ttest.html",
+    "href": "lessons_original/03_two_sample_ttest.html",
+    "title": "\n9  Two sample t test\n",
+    "section": "",
+    "text": "10 Two sample t test\nThis is also called the independent sample t test. It is used to see whether the unknown population means of two groups are equal or different. This test requires one variable which can be the exposure x and another variable which can be the outcome y. If you have more than two groups then analysis of variance (ANOVA) will be more suitable. If data is nonparametric then an alternative test to use would be the Mann Whitney U test or a permutation test.(cressie1986?).\nThere are two types of t tests, the first being the Student’s t test, which assumes the variance of the two groups is equal, the second being the Welch’s t test (default in R), which assumes the variance in the two groups is different.\nIn this article we will be discussing the Student’s t test.",
+    "crumbs": [
+      "Two-Sample Tests",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Two sample t test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/03_two_sample_ttest.html#assumptions",
+    "href": "lessons_original/03_two_sample_ttest.html#assumptions",
+    "title": "\n9  Two sample t test\n",
+    "section": "\n10.1 Assumptions",
+    "text": "10.1 Assumptions\n\nMeasurements for one observation do not affect measurements for any other observation (assumes independence).\nData in each group must be obtained via a random sample from the population.\nData in each group are normally distributed.\nData values are continuous.\nThe variances for the two independent groups are equal in the Student’s t test.\nThere should be no significant outliers.",
+    "crumbs": [
+      "Two-Sample Tests",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Two sample t test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/03_two_sample_ttest.html#hypotheses",
+    "href": "lessons_original/03_two_sample_ttest.html#hypotheses",
+    "title": "\n9  Two sample t test\n",
+    "section": "\n10.2 Hypotheses",
+    "text": "10.2 Hypotheses\n\n\\((H_0)\\): the mean of group A \\((m_A)\\) is equal to the mean of group B \\((m_B)\\)- two tailed test,\n\\((H_0)\\): \\((m_A)\\ge (m_B)\\)- one tailed test.\n\n\\((H_0)\\): \\((m_A)\\le (m_B)\\)- one tailed test.\nThe corresponding alternative hypotheses would be as follows:\n\n\n\n\n\\((H_1)\\): \\((m_A)\\neq(m_B)\\)- two tailed test.\n\n\\((H_1)\\): \\((m_A)&lt;(m_B)\\)- one tailed test.\n\n\\((H_1)\\): \\((m_A)&gt; (m_B)\\)- one tailed test.",
+    "crumbs": [
+      "Two-Sample Tests",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Two sample t test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/03_two_sample_ttest.html#statistical-hypotheses-formula",
+    "href": "lessons_original/03_two_sample_ttest.html#statistical-hypotheses-formula",
+    "title": "\n9  Two sample t test\n",
+    "section": "\n10.3 Statistical hypotheses formula",
+    "text": "10.3 Statistical hypotheses formula\nFor the Student’s t test which assumes equal variance the following is how the |t| statistic may be calculated using groups A and B as examples:\n\\(t ={ {m_{A} - m_{B}} \\over \\sqrt{ {S^2 \\over n_{A} } + {S^2 \\over n_{B}}   }}\\)\nThis can be described as the sample mean difference divided by the sample standard deviation of the sample mean difference where:\n\\(m_A\\) and \\(m_B\\) are the mean values of A and B,\n\\(n_A\\) and \\(n_B\\) are the seize of group A and B,\n\\(S^2\\) is the estimator for the pooled variance,\nwith the degrees of freedom (df) = \\(n_A + n_B - 2\\),\nand \\(S^2\\) is calculated as follows:\n\\(S^2 = { {\\sum{ (x_A-m_{A})^2} + \\sum{ (x_B-m_{B})^2}} \\over {n_{A} + n_{B} - 2 }}\\)\nResults for both Students t test and Welch’s t test are usually similar unless the group sizes and standard deviations are different.\nWhat if the data is not independent?\nIf the data is not independent such as paired data in the form of matched pairs which are correlated, we use the paired t test. This test checks whether the means of two paired groups are different from each other. It’s usually used in clinical trial studies with a “before and after” or case control studies with matched pairs. For this test we only assume the difference of each pair to be normally distributed (the paired groups are the ones important for analysis) unlike the independent t test which assumes that data from both samples are independent and variances are equal.(fralick?)",
+    "crumbs": [
+      "Two-Sample Tests",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Two sample t test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/03_two_sample_ttest.html#example",
+    "href": "lessons_original/03_two_sample_ttest.html#example",
+    "title": "\n9  Two sample t test\n",
+    "section": "\n10.4 Example",
+    "text": "10.4 Example\n\n10.4.1 Prerequisites\n\n\ntidyverse: data manipulation and visualization.\n\nrstatix: providing pipe friendly R functions for easy statistical analyses.\n\ncar: providing variance tests.\n\n\n#install.packages(\"ggstatplot\") \n#install.packages(\"car\")\n#install.packages(\"rstatix\")\n#install.packages(tidyVerse)\n\n\n10.4.2 Dataset\nThis example dataset sourced from kaggle was obtained from surveys of students in Math and Portuguese classes in secondary school. It contains demographic information on gender, social and study information.(cortez2008?)\n\n# load relevant libraries\nlibrary(rcompanion)\nlibrary(car)\nlibrary (gt)\nlibrary(gtsummary)\nlibrary(ggpubr)\nlibrary(rstatix)\nlibrary(tidyverse)\n\n\n# load the dataset\nstu_math &lt;- read_csv(\"../data/03_student-mat.csv\")\n\nRows: 395 Columns: 33\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (17): school, sex, address, famsize, Pstatus, Mjob, Fjob, reason, guardi...\ndbl (16): age, Medu, Fedu, traveltime, studytime, failures, famrel, freetime...\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nChecking the data\n\n# check the data\nglimpse(stu_math)\n\nRows: 395\nColumns: 33\n$ school     &lt;chr&gt; \"GP\", \"GP\", \"GP\", \"GP\", \"GP\", \"GP\", \"GP\", \"GP\", \"GP\", \"GP\",…\n$ sex        &lt;chr&gt; \"F\", \"F\", \"F\", \"F\", \"F\", \"M\", \"M\", \"F\", \"M\", \"M\", \"F\", \"F\",…\n$ age        &lt;dbl&gt; 18, 17, 15, 15, 16, 16, 16, 17, 15, 15, 15, 15, 15, 15, 15,…\n$ address    &lt;chr&gt; \"U\", \"U\", \"U\", \"U\", \"U\", \"U\", \"U\", \"U\", \"U\", \"U\", \"U\", \"U\",…\n$ famsize    &lt;chr&gt; \"GT3\", \"GT3\", \"LE3\", \"GT3\", \"GT3\", \"LE3\", \"LE3\", \"GT3\", \"LE…\n$ Pstatus    &lt;chr&gt; \"A\", \"T\", \"T\", \"T\", \"T\", \"T\", \"T\", \"A\", \"A\", \"T\", \"T\", \"T\",…\n$ Medu       &lt;dbl&gt; 4, 1, 1, 4, 3, 4, 2, 4, 3, 3, 4, 2, 4, 4, 2, 4, 4, 3, 3, 4,…\n$ Fedu       &lt;dbl&gt; 4, 1, 1, 2, 3, 3, 2, 4, 2, 4, 4, 1, 4, 3, 2, 4, 4, 3, 2, 3,…\n$ Mjob       &lt;chr&gt; \"at_home\", \"at_home\", \"at_home\", \"health\", \"other\", \"servic…\n$ Fjob       &lt;chr&gt; \"teacher\", \"other\", \"other\", \"services\", \"other\", \"other\", …\n$ reason     &lt;chr&gt; \"course\", \"course\", \"other\", \"home\", \"home\", \"reputation\", …\n$ guardian   &lt;chr&gt; \"mother\", \"father\", \"mother\", \"mother\", \"father\", \"mother\",…\n$ traveltime &lt;dbl&gt; 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 3, 1, 2, 1, 1, 1, 3, 1, 1,…\n$ studytime  &lt;dbl&gt; 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 3, 1, 2, 3, 1, 3, 2, 1, 1,…\n$ failures   &lt;dbl&gt; 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0,…\n$ schoolsup  &lt;chr&gt; \"yes\", \"no\", \"yes\", \"no\", \"no\", \"no\", \"no\", \"yes\", \"no\", \"n…\n$ famsup     &lt;chr&gt; \"no\", \"yes\", \"no\", \"yes\", \"yes\", \"yes\", \"no\", \"yes\", \"yes\",…\n$ paid       &lt;chr&gt; \"no\", \"no\", \"yes\", \"yes\", \"yes\", \"yes\", \"no\", \"no\", \"yes\", …\n$ activities &lt;chr&gt; \"no\", \"no\", \"no\", \"yes\", \"no\", \"yes\", \"no\", \"no\", \"no\", \"ye…\n$ nursery    &lt;chr&gt; \"yes\", \"no\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes…\n$ higher     &lt;chr&gt; \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"ye…\n$ internet   &lt;chr&gt; \"no\", \"yes\", \"yes\", \"yes\", \"no\", \"yes\", \"yes\", \"no\", \"yes\",…\n$ romantic   &lt;chr&gt; \"no\", \"no\", \"no\", \"yes\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\"…\n$ famrel     &lt;dbl&gt; 4, 5, 4, 3, 4, 5, 4, 4, 4, 5, 3, 5, 4, 5, 4, 4, 3, 5, 5, 3,…\n$ freetime   &lt;dbl&gt; 3, 3, 3, 2, 3, 4, 4, 1, 2, 5, 3, 2, 3, 4, 5, 4, 2, 3, 5, 1,…\n$ goout      &lt;dbl&gt; 4, 3, 2, 2, 2, 2, 4, 4, 2, 1, 3, 2, 3, 3, 2, 4, 3, 2, 5, 3,…\n$ Dalc       &lt;dbl&gt; 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1,…\n$ Walc       &lt;dbl&gt; 1, 1, 3, 1, 2, 2, 1, 1, 1, 1, 2, 1, 3, 2, 1, 2, 2, 1, 4, 3,…\n$ health     &lt;dbl&gt; 3, 3, 3, 5, 5, 5, 3, 1, 1, 5, 2, 4, 5, 3, 3, 2, 2, 4, 5, 5,…\n$ absences   &lt;dbl&gt; 6, 4, 10, 2, 4, 10, 0, 6, 0, 0, 0, 4, 2, 2, 0, 4, 6, 4, 16,…\n$ G1         &lt;dbl&gt; 5, 5, 7, 15, 6, 15, 12, 6, 16, 14, 10, 10, 14, 10, 14, 14, …\n$ G2         &lt;dbl&gt; 6, 5, 8, 14, 10, 15, 12, 5, 18, 15, 8, 12, 14, 10, 16, 14, …\n$ G3         &lt;dbl&gt; 6, 6, 10, 15, 10, 15, 11, 6, 19, 15, 9, 12, 14, 11, 16, 14,…\n\n\nIn total there are 395 observations and 33 variables. We will drop the variables we do not need and keep the variables that will help us answer the following: Is there a difference between boys and girls in math final grades?\n\\(H_0\\): There is no statistical difference between the final grades between boys and girls.\n\\(H_1\\): There is a statistically significant difference in the final grades between the two groups.\n\n# creating a subset of the data \nmath = subset(stu_math, select= c(sex,G3))\nglimpse(math)\n\nRows: 395\nColumns: 2\n$ sex &lt;chr&gt; \"F\", \"F\", \"F\", \"F\", \"F\", \"M\", \"M\", \"F\", \"M\", \"M\", \"F\", \"F\", \"M\", \"…\n$ G3  &lt;dbl&gt; 6, 6, 10, 15, 10, 15, 11, 6, 19, 15, 9, 12, 14, 11, 16, 14, 14, 10…\n\n\nSummary statistics- the dependent variable is continuous (grades=G3) and the independent variable is character but binary (sex).\n\n# summarizing our data\n summary(math)\n\n     sex                  G3       \n Length:395         Min.   : 0.00  \n Class :character   1st Qu.: 8.00  \n Mode  :character   Median :11.00  \n                    Mean   :10.42  \n                    3rd Qu.:14.00  \n                    Max.   :20.00  \n\n\nWe see that data ranges from 0-20 with 0 being people who were absent and could not take the test therefore missing data. We remove these 0 values before running the t test. However other models should be considered such as the zero inflated model to differentiate those who truly got a 0 and those who were not present to take test.\n\n# creating a boxplot to visualize the data with no outliers\nmath2 = subset(math, G3&gt;0)\nboxplot(G3 ~ sex,data=math2)\n\n\n\n\n\n\n\nVisualizing the data- we can use histograms and box lots to visualize the data to check for outliers and distribution thus checking for normality.\n\n# Histograms for data by groups \n\nmale = math2$G3[math2$sex == \"M\"]\nfemale = math2$G3[math2$sex == \"F\"]\n\n# plotting distribution for males\nplotNormalHistogram(\n  male, \n  breaks= 20,\n  xlim=c(0,20),\n  main=\"Distribution of the grades for males \", \n  xlab= \"Math Grades\"\n  )\n\n\n\n\n\n\n\nFinal grades for males seem to be normally distributed from 0-20. Data is approximately normal because we have a large amount of bins.\n\n# plotting distribution for females\nplotNormalHistogram(\n  female, breaks= 20,\n  xlim=c(0,20),\n  main=\"Distribution of the grades for females \", \n  xlab= \"Math Grades\"\n  )\n\n\n\n\n\n\n\nFinal grades for females also appear to be normally distributed. The final score across both is almost evenly distributed. However there seem to be a significant number of individuals who failed the test (grade=0).\n\n# plotting bar plot to see the distribution in sample size\nsample_size = table(math2$sex)\nbarplot(sample_size,main= \"Distribution of sample size by sex\")\n\n\n\n\n\n\n\nThe bar graph shows that there are slightly more females in the sample than males.\nIdentifying outliers\n\n# creating a boxplot to visualize the outliers (G3=0)\nboxplot(G3 ~ sex,data=math2)\n\n\n\n\n\n\n\nThe box plot shows us that there are no outliers as these have been removed in terms of people who had a score of 0. This score is not truly reflective of the performance between boys and girls as a grade of 0 may represent absentia or other reasons for the test not been taken. Therefore we opt to drop the outliers. We will compare to see if this decision affects the mean which appears similar from the above plot.\n\n# finding the mean for the groups with outliers\nmean(math$G3[math$sex==\"F\"])\n\n[1] 9.966346\n\nmean(math$G3[math$sex==\"M\"])\n\n[1] 10.91444\n\n# finding the mean for the groups without outliers\nmean(math2$G3[math2$sex==\"F\"])\n\n[1] 11.20541\n\nmean(math2$G3[math2$sex==\"M\"])\n\n[1] 11.86628\n\n\nThe mean has increased slightly and the difference decreased after removing the outliers but the distribution is still the same.\nCheck the equality of variances (homogeneity)\nWe can use the Levene’s test or the Bartlett’s test to check for homogeneity of variances. The former is in the car library and the later in the rstatix library. If the variances are homogeneous the p value will be greater than 0.05.\nOther tests include F test 2 sided, Brown-Forsythe and O’Brien but we shall not cover these.\n\n# running the Bartlett's test to check equal variance\nbartlett.test(G3~sex, data=math2)\n\n\n    Bartlett test of homogeneity of variances\n\ndata:  G3 by sex\nBartlett's K-squared = 0.12148, df = 1, p-value = 0.7274\n\n# running the Levene's test to check equal variance\nmath2 %&gt;% levene_test(G3~sex)\n\n# A tibble: 1 × 4\n    df1   df2 statistic     p\n  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;\n1     1   355     0.614 0.434\n\n\nThe p value is greater than 0.05 suggesting there is no difference between the variances of the two groups.\n\n10.4.3 Assessment\n\nData is continuous(G3)\nData is normally distributed\nData is independent (males and females distinct not the same individual)\nNo significant outliers\nThere are equal variances\n\nAs the assumptions are met we go ahead to perform the Student’s t test.\n\n10.4.4 Performing the two-sample t-test\n\nSince the default is the Welch t test we use the \\(\\color{blue}{\\text{var.eqaul = TRUE }}\\) code to signify a Student’s t test. There is a t.test() function in stats package and a t_test() in the rstatix package. For this analysis we use the rstatix method as it comes out as a table.\n\n# perfoming the two sample t test\nstat.test &lt;- math2 %&gt;% \n  t_test(G3~ sex, var.equal=TRUE) %&gt;%\n  add_significance()\nstat.test\n\n# A tibble: 1 × 9\n  .y.   group1 group2    n1    n2 statistic    df      p p.signif\n  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   \n1 G3    F      M        185   172     -1.94   355 0.0531 ns      \n\n\n\nstat.test$statistic\n\n        t \n-1.940477 \n\n\nThe results are represented as follows;\n\ny - dependent variable\ngroup1, group 2 - compared groups(independent variables)\ndf - degrees of freedom\np - p value\n\ngtsummary table of results\n\n math2 |&gt; \n  tbl_summary(\n    by = sex,\n    statistic =\n      list(\n        all_continuous() ~ \"{mean} ({sd})\",\n        all_dichotomous() ~ \"{p}%\")\n    ) |&gt; \n   add_n() |&gt; \n  add_overall() |&gt; \n  add_difference()\n\n\n\n\n\n\nCharacteristic\nN\n\nOverall, N = 3571\n\n\nF, N = 1851\n\n\nM, N = 1721\n\n\nDifference2\n\n\n95% CI2,3\n\n\np-value2\n\n\n\nG3\n357\n11.5 (3.2)\n11.2 (3.2)\n11.9 (3.3)\n-0.66\n-1.3, 0.01\n0.053\n\n\n\n\n1 Mean (SD)\n\n\n\n2 Welch Two Sample t-test\n\n\n\n3 CI = Confidence Interval\n\n\n\n\n\n\n\nInterpretation of results\nFor the two sample t test with t(355) = -1.940477, p = 0.0531, the p value is greater than our alpha of 0.05 , we fail to reject the null hypothesis and conclude that there is no statistical difference between the means of the two groups. There is no difference in final grades between boys and girls. (A significant |t| would be 1.96 or greater).\nEffect size\nCohen’s d can be an used as an effect size statistic for the two sample t test. It is the difference between the means of each group divided by the pooled standard deviation.\n\\(d= {m_A-m_B \\over SD_pooled}\\)\nIt ranges from 0 to infinity, with 0 indicating no effect where the means are equal. 0.5 means that the means differ by half the standard deviation of the data and 1 means they differ by 1 standard deviation. It is divided into small, medium or large using the following cut off points.\n\nsmall 0.2-&lt;0.5\nmedium 0.5-&lt;0.8\nlarge &gt;=0.8\n\nFor the above test the following is how we can find the effect size;\n\n#perfoming cohen's d\nmath2 %&gt;% \n  cohens_d(G3~sex,var.equal = TRUE)\n\n# A tibble: 1 × 7\n  .y.   group1 group2 effsize    n1    n2 magnitude\n* &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;ord&gt;    \n1 G3    F      M       -0.206   185   172 small    \n\n\nThe effect size is small d= -0.20.\nIn conclusion, a two-samples t-test showed that the difference was not statistically significant, t(355) = -1.940477, p &lt; 0.0531, d = -0.20; where, t(355) is shorthand notation for a t-statistic that has 355 degrees of freedom and d is Cohen’s d. We can conclude that the females mean final grade is greater than males final grade (d= -0.20) but this result is not significant.\nWhat if it is one tailed t test?\nUse the \\(\\color{blue}{\\text{alternative =}}\\) option to determine if one group is \\(\\color{blue}{\\text{\"less\"}}\\) or \\(\\color{blue}{\\text{\"greater\"}}\\). For example if we want to see whether the final grades for females are greater than males we can use the following code:\n\n# perfoming the one tailed two sample t test\nstat.test &lt;- math2 %&gt;% \n  t_test(G3~ sex, var.equal=TRUE, alternative = \"greater\") %&gt;%\n  add_significance()\nstat.test\n\n# A tibble: 1 × 9\n  .y.   group1 group2    n1    n2 statistic    df     p p.signif\n  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   \n1 G3    F      M        185   172     -1.94   355 0.973 ns      \n\n\nThe p value is greater than 0.05 (p=0.973), we fail to reject the null hypothesis. We conclude that the final grades for females are not significantly greater than for males.\nWhat about running the paired sample t test?\nWe can simply add the syntax \\(\\color{blue}{\\text{paired= TRUE}}\\) to our t_test() to run the analysis for matched pairs data.",
+    "crumbs": [
+      "Two-Sample Tests",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Two sample t test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/03_two_sample_ttest.html#conclusion",
+    "href": "lessons_original/03_two_sample_ttest.html#conclusion",
+    "title": "\n9  Two sample t test\n",
+    "section": "\n10.5 Conclusion",
+    "text": "10.5 Conclusion\nThis article covers the Student’s t test and how we run it in R. It also shows how we find the effect size and how we can conclude the results.",
+    "crumbs": [
+      "Two-Sample Tests",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Two sample t test</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/03_two_sample_ttest.html#references",
+    "href": "lessons_original/03_two_sample_ttest.html#references",
+    "title": "\n9  Two sample t test\n",
+    "section": "\n10.6 References\n",
+    "text": "10.6 References",
+    "crumbs": [
+      "Two-Sample Tests",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Two sample t test</span>"
+    ]
+  },
+  {
+    "objectID": "01_header_EDA.html",
+    "href": "01_header_EDA.html",
+    "title": "Exploratory Data Analysis",
+    "section": "",
+    "text": "Text Outline\nThis text covers the basics of:",
+    "crumbs": [
+      "Exploratory Data Analysis"
+    ]
+  },
+  {
+    "objectID": "01_header_EDA.html#text-outline",
+    "href": "01_header_EDA.html#text-outline",
+    "title": "Exploratory Data Analysis",
+    "section": "",
+    "text": "Exploring data\nOne-sample tests\nTwo-sample tests\nLinear regression and ANOVA\nGeneralized linear models\nSome special topics\nMaybe a bit about power calculations…",
+    "crumbs": [
+      "Exploratory Data Analysis"
+    ]
+  },
+  {
+    "objectID": "01_header_EDA.html#part-outline",
+    "href": "01_header_EDA.html#part-outline",
+    "title": "Exploratory Data Analysis",
+    "section": "Part Outline",
+    "text": "Part Outline\nThis part of the text contains the chapters on the following packages which are useful for exploratory data analysis:\n\nggplot2:: mosaic plots, histograms, and violin plots\nggplot2:: scatterplots and facets\nskimr::\ntable1::\ngtsummary::",
+    "crumbs": [
+      "Exploratory Data Analysis"
+    ]
+  },
+  {
+    "objectID": "02_header_one-sample.html",
+    "href": "02_header_one-sample.html",
+    "title": "One-Sample Tests",
+    "section": "",
+    "text": "Text Outline\nThis text covers the basics of:",
+    "crumbs": [
+      "One-Sample Tests"
+    ]
+  },
+  {
+    "objectID": "02_header_one-sample.html#text-outline",
+    "href": "02_header_one-sample.html#text-outline",
+    "title": "One-Sample Tests",
+    "section": "",
+    "text": "Exploring data\nOne-sample tests\nTwo-sample tests\nLinear regression and ANOVA\nGeneralized linear models\nSome special topics\nMaybe a bit about power calculations…",
+    "crumbs": [
+      "One-Sample Tests"
+    ]
+  },
+  {
+    "objectID": "02_header_one-sample.html#part-outline",
+    "href": "02_header_one-sample.html#part-outline",
+    "title": "One-Sample Tests",
+    "section": "Part Outline",
+    "text": "Part Outline\nThis part of the text contains the chapters on various one-sample statistical tests:\n\n\\(Z\\)-test\nPaired \\(t\\)-test\nPaired Wilcoxon test\nTransformations to Normality\nMcNemar’s Test\nFisher’s Exact Test\nChi-Square Goodness of Fit\nBootstrapped Confidence Intervals",
+    "crumbs": [
+      "One-Sample Tests"
+    ]
+  },
+  {
+    "objectID": "03_header_two-sample.html",
+    "href": "03_header_two-sample.html",
+    "title": "Two-Sample Tests",
+    "section": "",
+    "text": "Text Outline\nThis text covers the basics of:",
+    "crumbs": [
+      "Two-Sample Tests"
+    ]
+  },
+  {
+    "objectID": "03_header_two-sample.html#text-outline",
+    "href": "03_header_two-sample.html#text-outline",
+    "title": "Two-Sample Tests",
+    "section": "",
+    "text": "Exploring data\nOne-sample tests\nTwo-sample tests\nLinear regression and ANOVA\nGeneralized linear models\nSome special topics\nMaybe a bit about power calculations…",
+    "crumbs": [
+      "Two-Sample Tests"
+    ]
+  },
+  {
+    "objectID": "03_header_two-sample.html#part-outline",
+    "href": "03_header_two-sample.html#part-outline",
+    "title": "Two-Sample Tests",
+    "section": "Part Outline",
+    "text": "Part Outline\nThis part of the text contains the chapters on various two-sample statistical tests:\n\n\\(t\\)-test\nWelch’s \\(t\\)-test\nMann-Whitney \\(U\\) test\nCochran’s \\(Q\\) test\n\\(\\chi^2\\) Test for Independence",
+    "crumbs": [
+      "Two-Sample Tests"
+    ]
+  },
+  {
+    "objectID": "04_header_anova-and-regression.html",
+    "href": "04_header_anova-and-regression.html",
+    "title": "ANOVA and Regression",
+    "section": "",
+    "text": "Text Outline\nThis text covers the basics of:",
+    "crumbs": [
+      "ANOVA and Regression"
+    ]
+  },
+  {
+    "objectID": "04_header_anova-and-regression.html#text-outline",
+    "href": "04_header_anova-and-regression.html#text-outline",
+    "title": "ANOVA and Regression",
+    "section": "",
+    "text": "Exploring data\nOne-sample tests\nTwo-sample tests\nANOVA and linear regression\nGeneralized linear models\nSome special topics\nMaybe a bit about power calculations…",
+    "crumbs": [
+      "ANOVA and Regression"
+    ]
+  },
+  {
+    "objectID": "04_header_anova-and-regression.html#part-outline",
+    "href": "04_header_anova-and-regression.html#part-outline",
+    "title": "ANOVA and Regression",
+    "section": "Part Outline",
+    "text": "Part Outline\nThis part of the text contains the chapters on various ways to perform ANOVA and linear regression:\n\nOne-Way ANOVA\nTwo-way ANOVA\nWelch’s ANOVA\nKruskal-Wallace Test\nTukey HSD Post-Hoc Test\nRepeated Measures ANOVA\nRandom Intercept Models\nCorrelation Matrices and Covariances\nMultiple Regression (linear)\nPolynomial regression",
+    "crumbs": [
+      "ANOVA and Regression"
+    ]
+  },
+  {
+    "objectID": "06_header_special-topics.html",
+    "href": "06_header_special-topics.html",
+    "title": "Special Topics in Statistical Modelling",
+    "section": "",
+    "text": "Text Outline\nThis text covers the basics of:",
+    "crumbs": [
+      "Special Topics in Statistical Modelling"
+    ]
+  },
+  {
+    "objectID": "06_header_special-topics.html#text-outline",
+    "href": "06_header_special-topics.html#text-outline",
+    "title": "Special Topics in Statistical Modelling",
+    "section": "",
+    "text": "Exploring data\nOne-sample tests\nTwo-sample tests\nANOVA and linear regression\nGeneralized linear models\nSome special topics\nMaybe a bit about power calculations…",
+    "crumbs": [
+      "Special Topics in Statistical Modelling"
+    ]
+  },
+  {
+    "objectID": "06_header_special-topics.html#part-outline",
+    "href": "06_header_special-topics.html#part-outline",
+    "title": "Special Topics in Statistical Modelling",
+    "section": "Part Outline",
+    "text": "Part Outline\nThis part of the text contains the chapters on various different special statistical models:\n\nLinear Mixed Effects Models\nStructural Equation Models\nCox Proportional Hazards Regression\n(TBD) Multivariate Methods for Genetics/Genomics\nRidge, LASSO, and Elastic Net Regression",
+    "crumbs": [
+      "Special Topics in Statistical Modelling"
+    ]
+  },
+  {
+    "objectID": "lessons/06_lesson_template_spec_topc.html",
+    "href": "lessons/06_lesson_template_spec_topc.html",
+    "title": "\n21  The Method\n",
+    "section": "",
+    "text": "21.1 Introduction to &lt;the method&gt;",
+    "crumbs": [
+      "Special Topics in Statistical Modelling",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>The Method</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/06_lesson_template_spec_topc.html#mathematical-definition-of-the-method",
+    "href": "lessons/06_lesson_template_spec_topc.html#mathematical-definition-of-the-method",
+    "title": "\n21  The Method\n",
+    "section": "\n21.2 Mathematical definition of <the method>",
+    "text": "21.2 Mathematical definition of &lt;the method&gt;",
+    "crumbs": [
+      "Special Topics in Statistical Modelling",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>The Method</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/06_lesson_template_spec_topc.html#data-source-and-description",
+    "href": "lessons/06_lesson_template_spec_topc.html#data-source-and-description",
+    "title": "\n21  The Method\n",
+    "section": "\n21.3 Data source and description",
+    "text": "21.3 Data source and description",
+    "crumbs": [
+      "Special Topics in Statistical Modelling",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>The Method</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/06_lesson_template_spec_topc.html#cleaning-the-data-to-create-a-model-data-frame",
+    "href": "lessons/06_lesson_template_spec_topc.html#cleaning-the-data-to-create-a-model-data-frame",
+    "title": "\n21  The Method\n",
+    "section": "\n21.4 Cleaning the data to create a model data frame",
+    "text": "21.4 Cleaning the data to create a model data frame",
+    "crumbs": [
+      "Special Topics in Statistical Modelling",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>The Method</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/06_lesson_template_spec_topc.html#assumptions-of-the-method",
+    "href": "lessons/06_lesson_template_spec_topc.html#assumptions-of-the-method",
+    "title": "\n21  The Method\n",
+    "section": "\n21.5 Assumptions of <the method>",
+    "text": "21.5 Assumptions of &lt;the method&gt;",
+    "crumbs": [
+      "Special Topics in Statistical Modelling",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>The Method</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/06_lesson_template_spec_topc.html#checking-the-assumptions-with-plots",
+    "href": "lessons/06_lesson_template_spec_topc.html#checking-the-assumptions-with-plots",
+    "title": "\n21  The Method\n",
+    "section": "\n21.6 Checking the assumptions with plots",
+    "text": "21.6 Checking the assumptions with plots",
+    "crumbs": [
+      "Special Topics in Statistical Modelling",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>The Method</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/06_lesson_template_spec_topc.html#code-to-run-the-method",
+    "href": "lessons/06_lesson_template_spec_topc.html#code-to-run-the-method",
+    "title": "\n21  The Method\n",
+    "section": "\n21.7 Code to run <the method>",
+    "text": "21.7 Code to run &lt;the method&gt;",
+    "crumbs": [
+      "Special Topics in Statistical Modelling",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>The Method</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/06_lesson_template_spec_topc.html#code-output",
+    "href": "lessons/06_lesson_template_spec_topc.html#code-output",
+    "title": "\n21  The Method\n",
+    "section": "\n21.8 Code output",
+    "text": "21.8 Code output\nNOTE: this section will be created automatically by the Quarto document. You should not create a section specifically for this. When you run the code in the previous section, you will get the output automatically.",
+    "crumbs": [
+      "Special Topics in Statistical Modelling",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>The Method</span>"
+    ]
+  },
+  {
+    "objectID": "lessons/06_lesson_template_spec_topc.html#brief-interpretation-of-the-output",
+    "href": "lessons/06_lesson_template_spec_topc.html#brief-interpretation-of-the-output",
+    "title": "\n21  The Method\n",
+    "section": "\n21.9 Brief interpretation of the output",
+    "text": "21.9 Brief interpretation of the output",
+    "crumbs": [
+      "Special Topics in Statistical Modelling",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>The Method</span>"
+    ]
+  },
+  {
+    "objectID": "07_header_power.html",
+    "href": "07_header_power.html",
+    "title": "Statistical Power and Sample Size Determination",
+    "section": "",
+    "text": "Text Outline\nThis text covers the basics of:",
+    "crumbs": [
+      "Statistical Power and Sample Size Determination"
+    ]
+  },
+  {
+    "objectID": "07_header_power.html#text-outline",
+    "href": "07_header_power.html#text-outline",
+    "title": "Statistical Power and Sample Size Determination",
+    "section": "",
+    "text": "Exploring data\nOne-sample tests\nTwo-sample tests\nANOVA and linear regression\nGeneralized linear models\nSome special topics\nMaybe a bit about power calculations…",
+    "crumbs": [
+      "Statistical Power and Sample Size Determination"
+    ]
+  },
+  {
+    "objectID": "07_header_power.html#part-outline",
+    "href": "07_header_power.html#part-outline",
+    "title": "Statistical Power and Sample Size Determination",
+    "section": "Part Outline",
+    "text": "Part Outline\nThis part of the text will eventually contain some examples on statistical power calculations and sample size determination methods for some of the techniques covered in this text.",
+    "crumbs": [
+      "Statistical Power and Sample Size Determination"
+    ]
+  },
+  {
+    "objectID": "lessons_original/07_power_ols.html",
+    "href": "lessons_original/07_power_ols.html",
+    "title": "\n22  Power Analysis for OLS Regression\n",
+    "section": "",
+    "text": "23 Introduction\nThe power of a hypothesis test is the probability of correctly rejecting the null hypothesis or the probability that the test will correctly support the alternative hypothesis (detecting an effect when there actually is one)1. Then,\n\\[\nPower = 1-\\beta\n\\]\nWhere, \\(\\beta\\) = probability of committing a Type II Error (the probability that we would accept the null hypothesis even if the alternative hypothesis is actually true). Then, by decreasing \\(\\beta\\) power increases [@(pdf)ef].\nPower is mainly influenced by sample size, effect size, and significance level.",
+    "crumbs": [
+      "Statistical Power and Sample Size Determination",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Power Analysis for OLS Regression</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/07_power_ols.html#the-pwrss.f.reg-function",
+    "href": "lessons_original/07_power_ols.html#the-pwrss.f.reg-function",
+    "title": "\n22  Power Analysis for OLS Regression\n",
+    "section": "\n24.1 The pwrss.f.reg function",
+    "text": "24.1 The pwrss.f.reg function\nWe will start our power analysis using the The pwrss.f.reg function for one predictor in an OLS regression, with our given observations of n = 32 and \\(R^2\\) = .75. Given these values, we are expecting that one variable (WT) explains 75% of the variance in the outcome or Miles per gallon (R2=0.75 or r2 = 0.75 in the code)2.\n\nRegOne_lm &lt;- pwrss.f.reg(\n  r2 = 0.75,\n  k = 1,\n  n = 32,\n  power = NULL,\n  alpha = 0.05\n)\n\n Linear Regression (F test) \n R-squared Deviation from 0 (zero) \n H0: r2 = 0 \n HA: r2 &gt; 0 \n ------------------------------ \n  Statistical power = 1 \n  n = 32 \n ------------------------------ \n Numerator degrees of freedom = 1 \n Denominator degrees of freedom = 30 \n Non-centrality parameter = 96 \n Type I error rate = 0.05 \n Type II error rate = 0 \n\nRegOne_lm$power\n\n[1] 1\n\n\nGiven the information provided, we get 100% power. Our effect size of r2 = 0.75 is considered a large effect provided the following guidelines by Cohen (1988)3\n\\(f^2\\) = 0.02 indicates a small effect;\n\\(f^2\\) = 0.15 indicates a medium effect;\n\\(f^2\\) = 0.35 indicates a large effect.\nWe will use these guidelines to continue our exploration. We will concentrate on a fixed medium effect size. Where, the paired correlation is approximately r = .40 for a medium correlation and for an \\(f^2\\) or effect size of 0.15. using this fixed effect, we will look at various sample sizes to obtain power of 80% or greater given a medium effect size. In our sequence of possible sample sizes, the minimum n = 1 as n &gt; p(p+1)/2 = 1(2)/2 = 1\n\nOLSReg_df &lt;- tibble(n = seq.int(from = 2, to = 99 + 2))\n\nOLSReg_df$power &lt;- map_dbl(\n  .x = OLSReg_df$n,\n  .f = ~{\n    out_ls &lt;- pwrss.f.reg(\n      # \"Effect size\" of a linear model\n      r2 = 0.15,\n      # number of predictors\n      k = 1,\n      # sample size\n      n = .x,\n      power = NULL,\n      alpha = 0.05,\n      # Stop printing messages\n      verbose = FALSE\n    )\n    out_ls$power\n  }\n)\n\nWarning in qf(alpha, df1 = u, df2 = v, lower.tail = FALSE): NaNs produced\n\n\nThe following is the power curve for a fixed effect of f2 = 0.15\n\nggplot(data = OLSReg_df) +\n  theme_bw() +\n  aes(x = n, y = power) +\n  labs(\n    title = \"Omnibus (F-test) Power for Linear Model\",\n    subtitle = \"Fixed Effect Size R2 = 0.15, 1 Predictor\"\n  ) +\n  scale_y_continuous(limits = c(0, 1)) +\n  geom_point() +\n  geom_abline(slope = 0, intercept = 0.8, colour = \"gold\")\n\nWarning: Removed 1 row containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\nGiven the graph, we notice that we need an approximate sample size or n of close to 50 to detect a medium effect size in an OLS Regression.\nThe following is a power analysis for a univariate OLS regression given a fixed sample size. We will create a sequence of effect sizes that capture Cohen’s guidelines as well as the effect size of 0.75 of our sample regression. Our fixed n will be n = 32 as the sample.\n\nOLSRegN_df &lt;- tibble(R2 = seq(0, 0.75, length.out = 100))\n\nOLSRegN_df$power &lt;- map_dbl(\n  .x = OLSRegN_df$R2,\n  .f = ~{\n    out2_ls &lt;- pwrss.f.reg(\n      # \"Effect size\" of a linear model\n      r2 = .x,\n      # number of predictors\n      k = 1,\n      # sample size\n      n = 32,\n      power = NULL,\n      alpha = 0.05,\n      # Stop printing messages\n      verbose = FALSE\n    )\n    out2_ls$power\n  }\n)\n\nThe following is the power curve for a fixed sample size of n = 32\n\nggplot(data = OLSRegN_df) +\n  theme_bw() +\n  aes(x = R2, y = power) +\n  labs(\n    title = \"Omnibus (F-test) Power for Linear Model\",\n    subtitle = \"Fixed Sample Size = 32, 1 Predictor\"\n  ) +\n  scale_y_continuous(limits = c(0, 1)) +\n  geom_point() +\n  geom_abline(slope = 0, intercept = 0.8, colour = \"red\")\n\n\n\n\n\n\n\nGiven the graph, we notice that given n = 32, a power of 80% and higher is achieved when the effect size is at least approximately r2 = 0.20.",
+    "crumbs": [
+      "Statistical Power and Sample Size Determination",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Power Analysis for OLS Regression</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/07_power_ols.html#the-pwr.f2.test-function",
+    "href": "lessons_original/07_power_ols.html#the-pwr.f2.test-function",
+    "title": "\n22  Power Analysis for OLS Regression\n",
+    "section": "\n24.2 The pwr.f2.test function",
+    "text": "24.2 The pwr.f2.test function\nPower analysis using the pwr.f2.test: where, u = 1, The F numerator degrees of freedom (u=1) or the number of coefficients(independent variables) in the model\nand we will use Cohen’s criteria for effect sizes and first provide analyses for a medium effect size of 0.15 [3]45\n\n# Using Cohen 1988 criteria, where, \n#f2 = 0.02 small effect;\n#f2 = 0.15 medium effect;\n#f2 = 0.35 indicates a large effect\n\n### Fixed Effect size f2 = 0.15###\n# n = 50\npwr.f2.test(\n  u = 1, \n  v = 50 - 1 - 1,\n  f2 = .15, \n  sig.level = 0.05, \n  power = NULL\n  )\n\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 48\n             f2 = 0.15\n      sig.level = 0.05\n          power = 0.7653128\n\n# n = 25\npwr.f2.test(\n  u = 1, \n  v = 25 - 1 - 1,\n  f2 = 0.15, \n  sig.level = 0.05, \n  power = NULL\n  )\n\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 23\n             f2 = 0.15\n      sig.level = 0.05\n          power = 0.4584646\n\n# n = 12\npwr.f2.test(\n  u = 1, \n  v = 12 - 1 - 1,\n  f2 = 0.15, \n  sig.level = 0.05, \n  power = NULL\n  )\n\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 10\n             f2 = 0.15\n      sig.level = 0.05\n          power = 0.2289402\n\n\nNow, we will explore a fixed n = 32\n\n# ES = .02, r = .14\npwr.f2.test(\n  u = 1, \n  v = 32 - 1 - 1,\n  f2 = .02, \n  sig.level = 0.05, \n  power = NULL\n  )\n\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 30\n             f2 = 0.02\n      sig.level = 0.05\n          power = 0.1210661\n\n# ES = 0.15, r = .39\npwr.f2.test(\n  u = 1, \n  v = 32 - 1 - 1,\n  f2 = 0.15, \n  sig.level = 0.05, \n  power = NULL\n  ) \n\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 30\n             f2 = 0.15\n      sig.level = 0.05\n          power = 0.5637733\n\n# ES = .35, r = .59\npwr.f2.test(\n  u = 1, \n  v = 32 - 1 - 1,\n  f2 = 0.35, \n  sig.level = 0.05, \n  power = NULL\n  )\n\n\n     Multiple regression power calculation \n\n              u = 1\n              v = 30\n             f2 = 0.35\n      sig.level = 0.05\n          power = 0.8993357\n\n\nWe will now look at the 3 types of effect sizes given various sample sizes\n\neffect_sizes &lt;- c(0.02, 0.15, 0.35) \nsample_sizes = seq(20, 100, 20)\n\ninput_df &lt;- crossing(effect_sizes,sample_sizes)\nglimpse(input_df)\n\nRows: 15\nColumns: 2\n$ effect_sizes &lt;dbl&gt; 0.02, 0.02, 0.02, 0.02, 0.02, 0.15, 0.15, 0.15, 0.15, 0.1…\n$ sample_sizes &lt;dbl&gt; 20, 40, 60, 80, 100, 20, 40, 60, 80, 100, 20, 40, 60, 80,…\n\nget_power &lt;- function(df){\n  power_result &lt;- pwr.f2.test(\n    u = 1,\n    v = df$sample_sizes - 1 - 1, \n    f2 = df$effect_sizes,\n    )\n  df$power=power_result$power\n  return(df)\n}\n\n# run get_power for each combination of effect size \n# and sample size\n\npower_curves &lt;- input_df %&gt;%\n  do(get_power(.)) %&gt;%\n  mutate(effect_sizes = as.factor(effect_sizes)) \n\n\nggplot(power_curves, \n       aes(x=sample_sizes,\n           y=power, \n           color=effect_sizes)\n       ) + \n  geom_line() + \n  geom_hline(yintercept = 0.8, \n             linetype='dotdash',\n             color = \"purple\")\n\n\n\n\n\n\n\nBased on the graph, if we have an effect size of 0.15, we need approximately 50 or more observations (recall n = v + 1 + 1)",
+    "crumbs": [
+      "Statistical Power and Sample Size Determination",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Power Analysis for OLS Regression</span>"
+    ]
+  },
+  {
+    "objectID": "lessons_original/07_power_ols.html#the-wp.regression-function",
+    "href": "lessons_original/07_power_ols.html#the-wp.regression-function",
+    "title": "\n22  Power Analysis for OLS Regression\n",
+    "section": "\n24.3 The wp.regression function",
+    "text": "24.3 The wp.regression function\nLastly, we use the wp.regression function to examine the appropriate sample size given an effect size of 0.15 to achieve a power of 80% or higher [6]7\n\n# Using webpower \n#p1 = 1\n### Fixed ES = 0.15 ###\nres &lt;- wp.regression(n = seq(20,100,20), \n                     p1 = 1, \n                     f2 = 0.15, \n                     alpha = 0.05, \n                     power = NULL\n                    )\nres\n\nPower for multiple regression\n\n      n p1 p2   f2 alpha     power\n     20  1  0 0.15  0.05 0.3745851\n     40  1  0 0.15  0.05 0.6654126\n     60  1  0 0.15  0.05 0.8389166\n     80  1  0 0.15  0.05 0.9280168\n    100  1  0 0.15  0.05 0.9695895\n\nURL: http://psychstat.org/regression\n\nplot(res,  main = \"Fixed Effect Size = 0.15\")+\nabline(a = .80, b = 0, col = 'steelblue', lwd = 3, lty = 2)\n\n\n\n\n\n\n\ninteger(0)\n\n\nThe results are similar to the previous functions. However, in this function, given an effect size of 0.15, we need an n of close to 60 to achieve 80% power.\n\n# Using webpower \n#p1 = 1\n### Fixed n = 50 ###\nres &lt;- wp.regression(n = 50, \n                     p1 = 1, \n                     f2 = seq(0.00, 0.35, 0.05), \n                     alpha = 0.05, \n                     power = NULL\n                    )\nres\n\nPower for multiple regression\n\n     n p1 p2   f2 alpha     power\n    50  1  0 0.00  0.05 0.0500000\n    50  1  0 0.05  0.05 0.3409707\n    50  1  0 0.10  0.05 0.5914439\n    50  1  0 0.15  0.05 0.7653128\n    50  1  0 0.20  0.05 0.8725329\n    50  1  0 0.25  0.05 0.9337077\n    50  1  0 0.30  0.05 0.9667049\n    50  1  0 0.35  0.05 0.9837529\n\nURL: http://psychstat.org/regression",
+    "crumbs": [
+      "Statistical Power and Sample Size Determination",
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Power Analysis for OLS Regression</span>"
     ]
   }
 ]

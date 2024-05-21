@@ -356,14 +356,14 @@ div.csl-indent {
    
   <ul>
 <li>
-<a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">7</span> Introduction</a>
+<a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">6.1</span> Introduction</a>
   <ul class="collapse">
-<li><a href="#necessary-packages" id="toc-necessary-packages" class="nav-link" data-scroll-target="#necessary-packages"><span class="header-section-number">7.1</span> Necessary Packages</a></li>
+<li><a href="#necessary-packages" id="toc-necessary-packages" class="nav-link" data-scroll-target="#necessary-packages"><span class="header-section-number">6.1.1</span> Necessary Packages</a></li>
   </ul>
 </li>
-  <li><a href="#data-exploration-and-wrangling" id="toc-data-exploration-and-wrangling" class="nav-link" data-scroll-target="#data-exploration-and-wrangling"><span class="header-section-number">8</span> Data Exploration and Wrangling</a></li>
-  <li><a href="#basic-table-1" id="toc-basic-table-1" class="nav-link" data-scroll-target="#basic-table-1"><span class="header-section-number">9</span> Basic table 1</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">10</span> Conclusion</a></li>
+  <li><a href="#data-exploration-and-wrangling" id="toc-data-exploration-and-wrangling" class="nav-link" data-scroll-target="#data-exploration-and-wrangling"><span class="header-section-number">6.2</span> Data Exploration and Wrangling</a></li>
+  <li><a href="#basic-table-1" id="toc-basic-table-1" class="nav-link" data-scroll-target="#basic-table-1"><span class="header-section-number">6.3</span> Basic table 1</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">6.4</span> Conclusion</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/01_table1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -407,13 +407,13 @@ div.csl-indent {
 <span><span class="co"># suppress "`summarise()` has grouped output by " messages</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>dplyr.summarise.inform <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="introduction" class="level1" data-number="7"><h1 data-number="7">
-<span class="header-section-number">7</span> Introduction</h1>
+<section id="introduction" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">6.1</span> Introduction</h2>
 <p>In most scientific research journals, the first included table is often referred to as <strong>Table1</strong>.</p>
 <p>Table1 includes descriptive statistics for the total study sample, with the rows (explanatory variables) consisting of the key study variables that are often included in the final analysis<span class="citation" data-cites="hayes-larson2019"><sup><a href="#ref-hayes-larson2019" role="doc-biblioref">1</a></sup></span>. Then within the columns (outcome of interest/response variable), you will find cells given as a n (%) for <em>categorical variables</em>, whereas a mean, SD, or the median will be provided for <em>continuous variables</em>. Additionally, there will be a total column provided which can help in the assessment of the overall sample.</p>
 <p>There are a few ways that Table1 can be created without using functions like table1. For example, for a research paper, dissertation, and/or the results of a clinical trial, we might have to go through the time consuming task of using the <strong>summary()</strong> function, or the <strong>describe()</strong> function in the <em>library(Hmisc)</em>. Then, if you decide that you would like to see a variable in relation to a categorical response/outcome variable, you would have to build 2 x 2 tables for each explanatory variable. The <strong>table1()</strong> function does all of this for us, but first lets discuss the packages that will be in use today.</p>
-<section id="necessary-packages" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="necessary-packages">
-<span class="header-section-number">7.1</span> Necessary Packages</h2>
+<section id="necessary-packages" class="level3" data-number="6.1.1"><h3 data-number="6.1.1" class="anchored" data-anchor-id="necessary-packages">
+<span class="header-section-number">6.1.1</span> Necessary Packages</h3>
 <p>The <strong>htmlTable</strong> package allows for the usage of the table1() function to create a table 1, while also making life easy when attempting to copy this table into a Word document.</p>
 <p>The <strong>boot</strong> package was created to aid in performing bootstrapping analysis. With it comes numerous data sets, specifically clinical trial data sets to make this possible. However, there is no code book provided within the package when the data is downloaded as a csv file. This is a link on Github that explains and elaborates on every data within the package itself<span class="citation" data-cites="boot1997"><sup><a href="#ref-boot1997" role="doc-biblioref">2</a></sup></span>.</p>
 <div class="cell">
@@ -425,8 +425,8 @@ div.csl-indent {
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/benjaminrich/table1">table1</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">boot</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section></section><section id="data-exploration-and-wrangling" class="level1" data-number="8"><h1 data-number="8">
-<span class="header-section-number">8</span> Data Exploration and Wrangling</h1>
+</section></section><section id="data-exploration-and-wrangling" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="data-exploration-and-wrangling">
+<span class="header-section-number">6.2</span> Data Exploration and Wrangling</h2>
 <p>Today, we will be using the <strong>melanoma</strong> data set which consists of malignant melanoma measurements of patients. Each patient had their tumor surgically removed between the years of 1962 and 1977 at the Department of Plastic Surgery, University Hospital of Odense located in Denamrk. Each surgery consisted of the complete removal of the tumor with an additional removal of about 2.5cm of the surrounding skin. When this was completed, the thickness of the tumor was recorded along with the physical appearance of ulceration vs no ulceration, as it is an important prognostic indication of those with a thick/ulcerated tumor to have an increased chance of death as a consequence of melanoma.</p>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span>
@@ -503,8 +503,8 @@ Levels: Alive Died from melanoma Non-Melanoma death</code></pre>
 </div>
 </div>
 <p>As you can see in the variable levels, “Alive” is the reference level. It is extremely important to pick a reference level to lay the foundation of the table along with highlighting the outcome of interest of your hypothesis. In summary, this lays the foundation of a well organized table.</p>
-</section><section id="basic-table-1" class="level1" data-number="9"><h1 data-number="9">
-<span class="header-section-number">9</span> Basic table 1</h1>
+</section><section id="basic-table-1" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="basic-table-1">
+<span class="header-section-number">6.3</span> Basic table 1</h2>
 <p>Now that our main variable of interest is a factor with three levels, we will run a basic table1 with the independent/explanatory variables of interest: <strong>sex</strong>, <strong>age</strong>, <strong>ulcer</strong>, and <strong>thickness</strong>.</p>
 <p>Recall that the explanatory variables of interest are still in “double” formats. Conveniently, to analyze data before the independent variables are converted to factors and labeled, the table1 provides the ability to highlight level results. This only applies for independent variables that are in numeric/double formats in which each number represents a group. For instance 0 although is a number format we know it has a group meaning such as male.</p>
 <p>For the independent variables, if they have factors in the front, it provides the number of cases (aka observations). If they are a continuous variable, we will get the mean, the SD, the minimum and the maximum amounts.</p>
@@ -928,12 +928,12 @@ Levels: Absent Present</code></pre>
 </table></div>
 </div>
 </div>
-</section><section id="conclusion" class="level1" data-number="10"><h1 data-number="10">
-<span class="header-section-number">10</span> Conclusion</h1>
+</section><section id="conclusion" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="conclusion">
+<span class="header-section-number">6.4</span> Conclusion</h2>
 <p>In conclusion, table1 is one of the most utilized tools in the scientific research field. Understanding how to use the table1 package in R can be of benefit to many.</p>
 <p>It is important to note that this presentation is just a brief summary with what is possible with this package. For example, you can change the tables appearance with the <strong>topclass</strong> function which has built in styles like zebra, grid, shades, times and center.</p>
 <p>In addition, you can also stratify the response variable to highlight two of the responses, like dead or alive in our example.</p>
-</section><section id="references" class="level1 unnumbered"><h1 class="unnumbered">References</h1>
+</section><section id="references" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
 
 
 <div id="refs" class="references csl-bib-body" role="list">

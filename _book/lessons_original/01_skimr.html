@@ -357,24 +357,24 @@ div.csl-indent {
    
   <ul>
 <li>
-<a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">6</span> Introduction</a>
+<a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">5.1</span> Introduction</a>
   <ul class="collapse">
-<li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">6.1</span> Packages</a></li>
-  <li><a href="#census-data" id="toc-census-data" class="nav-link" data-scroll-target="#census-data"><span class="header-section-number">6.2</span> Census Data</a></li>
+<li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">5.1.1</span> Packages</a></li>
+  <li><a href="#census-data" id="toc-census-data" class="nav-link" data-scroll-target="#census-data"><span class="header-section-number">5.1.2</span> Census Data</a></li>
   </ul>
 </li>
-  <li><a href="#the-summary-function" id="toc-the-summary-function" class="nav-link" data-scroll-target="#the-summary-function"><span class="header-section-number">7</span> The Summary() Function</a></li>
-  <li><a href="#skimr-package" id="toc-skimr-package" class="nav-link" data-scroll-target="#skimr-package"><span class="header-section-number">8</span> Skimr Package</a></li>
+  <li><a href="#the-summary-function" id="toc-the-summary-function" class="nav-link" data-scroll-target="#the-summary-function"><span class="header-section-number">5.2</span> The Summary() Function</a></li>
+  <li><a href="#skimr-package" id="toc-skimr-package" class="nav-link" data-scroll-target="#skimr-package"><span class="header-section-number">5.3</span> Skimr Package</a></li>
   <li>
-<a href="#other-skimr-features" id="toc-other-skimr-features" class="nav-link" data-scroll-target="#other-skimr-features"><span class="header-section-number">9</span> Other Skimr Features</a>
+<a href="#other-skimr-features" id="toc-other-skimr-features" class="nav-link" data-scroll-target="#other-skimr-features"><span class="header-section-number">5.4</span> Other Skimr Features</a>
   <ul class="collapse">
-<li><a href="#separate-dataframes-by-type" id="toc-separate-dataframes-by-type" class="nav-link" data-scroll-target="#separate-dataframes-by-type"><span class="header-section-number">9.1</span> Separate dataframes by type</a></li>
-  <li><a href="#skimr-with-dplyr" id="toc-skimr-with-dplyr" class="nav-link" data-scroll-target="#skimr-with-dplyr"><span class="header-section-number">9.2</span> Skimr with Dplyr</a></li>
-  <li><a href="#adding-variables" id="toc-adding-variables" class="nav-link" data-scroll-target="#adding-variables"><span class="header-section-number">9.3</span> Adding Variables</a></li>
+<li><a href="#separate-dataframes-by-type" id="toc-separate-dataframes-by-type" class="nav-link" data-scroll-target="#separate-dataframes-by-type"><span class="header-section-number">5.4.1</span> Separate dataframes by type</a></li>
+  <li><a href="#skimr-with-dplyr" id="toc-skimr-with-dplyr" class="nav-link" data-scroll-target="#skimr-with-dplyr"><span class="header-section-number">5.4.2</span> Skimr with Dplyr</a></li>
+  <li><a href="#adding-variables" id="toc-adding-variables" class="nav-link" data-scroll-target="#adding-variables"><span class="header-section-number">5.4.3</span> Adding Variables</a></li>
   </ul>
 </li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">10</span> Conclusion</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">11</span> References</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">5.5</span> Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">5.6</span> References</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/01_skimr.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
@@ -407,12 +407,12 @@ div.csl-indent {
   
 
 
-</header><section id="introduction" class="level1" data-number="6"><h1 data-number="6">
-<span class="header-section-number">6</span> Introduction</h1>
+</header><section id="introduction" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">5.1</span> Introduction</h2>
 <p><code>Skimr</code> is an R package designed to provide summary statistics about variables in data frames, tibbles, data tables and vectors. The function is modifiable where you can add additional variables, which are not a part of default summary function within R. Skimr allows us to quickly assess data quality by feature and type in a quick report. This is a critical step in Data Exploration, where Understanding our data helps us to generate a hypothesis and determine what data analysis are appropriate.</p>
 <p>This presentation will cover the simplest and most effective ways to explore data in R.</p>
-<section id="packages" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="packages">
-<span class="header-section-number">6.1</span> Packages</h2>
+<section id="packages" class="level3" data-number="5.1.1"><h3 data-number="5.1.1" class="anchored" data-anchor-id="packages">
+<span class="header-section-number">5.1.1</span> Packages</h3>
 <p>To begin we will upload the packages necessary for the lesson, this includes the following:</p>
 <ul>
 <li>
@@ -447,8 +447,8 @@ div.csl-indent {
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 </div>
-</section><section id="census-data" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="census-data">
-<span class="header-section-number">6.2</span> Census Data</h2>
+</section><section id="census-data" class="level3" data-number="5.1.2"><h3 data-number="5.1.2" class="anchored" data-anchor-id="census-data">
+<span class="header-section-number">5.1.2</span> Census Data</h3>
 <p>For this assignment we will be using the Census_2010 dataset. There is no code book associated with the data, making it difficult to provide an accurate description of the variables. The information recorded shows the United States population estimates from the years 2010-2015, as well as relevant variables like net population change, number of births, number of deaths, international and domestic migration. Within the dataframe, there are 3,193 observations and 100 variables.</p>
 <p>The data can be imported into R from the following link: <a href="https://fiudit-my.sharepoint.com/:x:/g/personal/ssinc013_fiu_edu/ESK1A13PstVGtf7HUwNNt68Bnh1YPfH8L-hnvMUxjBuCVw?e=CCwQU9" class="uri">https://fiudit-my.sharepoint.com/:x:/g/personal/ssinc013_fiu_edu/ESK1A13PstVGtf7HUwNNt68Bnh1YPfH8L-hnvMUxjBuCVw?e=CCwQU9</a></p>
 <div class="cell">
@@ -466,8 +466,8 @@ div.csl-indent {
 [10] "POPESTIMATE2010"  </code></pre>
 </div>
 </div>
-</section></section><section id="the-summary-function" class="level1" data-number="7"><h1 data-number="7">
-<span class="header-section-number">7</span> The Summary() Function</h1>
+</section></section><section id="the-summary-function" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="the-summary-function">
+<span class="header-section-number">5.2</span> The Summary() Function</h2>
 <p>In R, the most similar function is <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>. The <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function in R can be used to quickly summarize the values in a data frame or vector.</p>
 <p>This syntax shows examples of the summary function using both our data set, and a vector:</p>
 <div class="cell">
@@ -492,8 +492,8 @@ div.csl-indent {
 </div>
 <p>The <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function automatically calculates: The minimum value, The value of the 1st quartile (25th percentile), The median value, The value of the 3rd quartile (75th percentile) and The maximum value. Any missing values (NA) in the vector, the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function will automatically exclude them when calculating the summary statistics.</p>
 <p>Now, let’s see how <code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim()</a></code> compares.</p>
-</section><section id="skimr-package" class="level1" data-number="8"><h1 data-number="8">
-<span class="header-section-number">8</span> Skimr Package</h1>
+</section><section id="skimr-package" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="skimr-package">
+<span class="header-section-number">5.3</span> Skimr Package</h2>
 <p>The <code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim()</a></code> function will generate a summary of the variables in your dataset, including their data type, number of non-missing values, minimum and maximum values, median, mean, standard deviation, and more <span class="citation" data-cites="R-skimr">(<a href="#ref-R-skimr" role="doc-biblioref">Waring et al. 2022</a>)</span>.</p>
 <p>The following syntax ensures that the data is compatible with <code>Skimr</code> functions.</p>
 <div class="cell">
@@ -737,10 +737,10 @@ character(0)</code></pre>
 </div>
 <p>Using <code>skimr</code> functions provides a cleaner and more detailed display of the results compared to the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function. In this example we are showing the first ten variables in our data set. The data summary tab shows the number of rows and columns, column type frequency and group variables. There is also additional descriptive information like missing values, unique characters.</p>
 <p>This will be relevant for data cleaning as well as understanding the distribution. Both are critical to determine which statistical analysis would be most appropriate to use for a project.</p>
-</section><section id="other-skimr-features" class="level1" data-number="9"><h1 data-number="9">
-<span class="header-section-number">9</span> Other Skimr Features</h1>
-<section id="separate-dataframes-by-type" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="separate-dataframes-by-type">
-<span class="header-section-number">9.1</span> Separate dataframes by type</h2>
+</section><section id="other-skimr-features" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="other-skimr-features">
+<span class="header-section-number">5.4</span> Other Skimr Features</h2>
+<section id="separate-dataframes-by-type" class="level3" data-number="5.4.1"><h3 data-number="5.4.1" class="anchored" data-anchor-id="separate-dataframes-by-type">
+<span class="header-section-number">5.4.1</span> Separate dataframes by type</h3>
 <p>The data frames produced by <code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim()</a></code> are wide and sparse, filled with columns that are mostly NA. For that reason, it can be convenient to work with “by type” subsets of the original data frame. These smaller subsets have their NA columns removed.</p>
 <p>Features:</p>
 <ul>
@@ -1070,8 +1070,8 @@ character(0)</code></pre>
 </table>
 </div>
 </div>
-</section><section id="skimr-with-dplyr" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="skimr-with-dplyr">
-<span class="header-section-number">9.2</span> Skimr with Dplyr</h2>
+</section><section id="skimr-with-dplyr" class="level3" data-number="5.4.2"><h3 data-number="5.4.2" class="anchored" data-anchor-id="skimr-with-dplyr">
+<span class="header-section-number">5.4.2</span> Skimr with Dplyr</h3>
 <p><code>Skimr</code> functions can be used in combination with <code>Dplyr</code> functions to examine specific variables within the census dataset.</p>
 <p>The following example used <code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim()</a></code> with <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> to display the variable <code>CENSUS2010POP</code>. The dataframe was further customized to display variable name and data type using <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>.</p>
 <div class="cell">
@@ -1520,8 +1520,8 @@ character(0)</code></pre>
 </table>
 </div>
 </div>
-</section><section id="adding-variables" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="adding-variables">
-<span class="header-section-number">9.3</span> Adding Variables</h2>
+</section><section id="adding-variables" class="level3" data-number="5.4.3"><h3 data-number="5.4.3" class="anchored" data-anchor-id="adding-variables">
+<span class="header-section-number">5.4.3</span> Adding Variables</h3>
 <ul>
 <li>base - An sfl that sets skimmers for all column types.</li>
 <li>append - Whether the provided options should be in addition to the defaults already in skim. Default is TRUE.</li>
@@ -1809,11 +1809,11 @@ character(0)</code></pre>
 </table>
 </div>
 </div>
-</section></section><section id="conclusion" class="level1" data-number="10"><h1 data-number="10">
-<span class="header-section-number">10</span> Conclusion</h1>
+</section></section><section id="conclusion" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="conclusion">
+<span class="header-section-number">5.5</span> Conclusion</h2>
 <p>Overall, <code>Skimr</code> is a useful package for quickly summarizing the variables in a dataset and gaining insights into its structure and content.</p>
-</section><section id="references" class="level1" data-number="11"><h1 data-number="11">
-<span class="header-section-number">11</span> References</h1>
+</section><section id="references" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="references">
+<span class="header-section-number">5.6</span> References</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">

@@ -26,7 +26,7 @@ library(dslabs)
 
 
 
-# Introduction to Scatterplots 
+## Introduction to Scatterplots 
 
 Scatterplots display the relationship between two variables using dots to represent the values for each numeric variable. This presentation will examine the relationship between `GDP per capita` and `Fertility` over time using ggplot with facets.
 
@@ -34,13 +34,13 @@ Scatterplots display the relationship between two variables using dots to repres
 
 
 
-# Gapminder data description
+## Gapminder data description
 
 Data was obtained from the `dslabs` package and comes from Gapminder a Swedish non-profit organization. The `Gapmidner` data set has health and income outcomes for 184 countries from 1960 to 2016. Gapminder aims to promote a fact-based worldview by providing accessible and understandable global development data. The dataset covers a wide range of variables, including economic, social, and health-related indicators like GDP, infant mortality, life expectancy, fertility, as well as population, making it a valuable resource for understanding global trends and patterns over time. Countries and territories with missing information were not excluded from the data set as the lack of information can also be looked into and shed light on why data was not collected or provided. To determine whether a country's health and income outcomes are influenced by population sizes and GDP per capita, the data will be used to create a series of graphs to view different trends. 
 
 
 
-# Cleaning the data to create a model data frame
+## Cleaning the data to create a model data frame
 
 A tibble was created from the `gapminder` dataset, and a new column was created to measure GDP per capita. Overall, using tibbles enhances the readability, usability, and compatibility of your code within the tidyverse ecosystem.
 ```{r}
@@ -56,7 +56,7 @@ gapminder_df <-
 
 
 
-# Components of `ggplot2`
+## Components of `ggplot2`
 
 `ggplot2` is a package used to create graphs and visualize data. The main three components of `ggplot2` are the data, aesthetics and geom layers.
 
@@ -70,7 +70,7 @@ gapminder_df <-
 
 
 
-# Code to run interpretable scatterplots and create facets 
+## Code to run interpretable scatterplots and create facets 
 
 In order to create a scatter-plot using ggplot, you must specify what data you will be using, state which variables will be mapped and how under aesthetics. What differentiates the scatter-plot from any other type of graph will be specified under the geom layer. For the scatter-plot, geom_point will be used.
 
@@ -260,12 +260,12 @@ In the next example above, we removed the `nrow` argument and the system automat
 
 
 
-# Public Health Interpretation 
+## Public Health Interpretation 
 
 A global negative trend is depicted between `GDP per capita` and `fertility` over time. Such changes were due to wars as well as social, cultural and economic changes that incentivize smaller families especially in Asian countries. Most European, American and Asian countries depicted significant decreases in fertility rates over time as `GDP per capita` increased. On the other hand, African countries remain in the top rank for fertility over the years. These differences are depicted in the population pyramid changes of developed vs developing countries. Public health policies can be tailored to incentivizing increased fertility in developed countries to ensure generation continuity, and effective family planning strategies in developing countries.
 
 
 
-# Conclusion 
+## Conclusion 
 
 In this lesson, the basic functions of `ggplot2` package were shown, which can create a scatterplot. There are three layers to the code to make a plot in R: data, aesthetic, and geometric. Within the aesthetic layer, functions can be added such as `size` and `color` to analyze more variables. Additionally, facets can split up graphs over a categorical variable, adding another potential variable to analyze in the plot.

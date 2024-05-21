@@ -13,18 +13,18 @@ format:
 ---
 
 
-# Source Code for PHC6099 Course Notes
+## Source Code for PHC6099 Course Notes
 
 This material is for the course "R Computing for Health Sciences". The course notes are published here: <https://gabrielodom.github.io/PHC6099_rBiostat/>
 
 
-## Topics  
+### Topics  
 The chapters are:
 
 1. Exploring Data  
     - `ggplot2::` mosaic plots, histograms, and violin plots
     - `ggplot2::` scatterplots and facets
-    - `rayshader::`
+    <!-- - `rayshader::` -->
     - `skimr::`
     - `table1::`
     - `gtsummary::`
@@ -43,7 +43,7 @@ The chapters are:
     - Mann-Whitney $U$ test
     - Cochran's $Q$ test
     - $\chi^2$ Test for Independence
-4. Linear Regression and ANOVA  
+4. ANOVA and Linear Regression  
     - One-Way ANOVA
     - Two-way ANOVA
     - Welch's ANOVA
@@ -52,7 +52,7 @@ The chapters are:
     - Repeated Measures ANOVA
     - Random Intercept Models
     - Correlation Matrices and Covariances
-    - Multiple Regression(linear)
+    - Multiple Regression (linear)
     - Polynomial regression
 5. Generalized Linear Models  
     - Generalized Linear Models: Binary
@@ -68,17 +68,17 @@ The chapters are:
 7. Power Calculations (in progress)
 
 
-## Lesson Outline
-This is a shell of a lesson that can be copied and pasted for new lessons (or to edit and clean up existing lessons). If you copy this shell, then change all the headings from level 3 to 1. Replace \<the method\> with the name of your method, or its abbreviation. The file `lessons/00_lesson_template.qmd` has a `.qmd` template with these sections.
+### Lesson Outline
+This is a shell of a lesson that can be copied and pasted for new lessons (or to edit and clean up existing lessons). If you copy this shell, then change all the headings from level 4 to 2. Replace \<the method\> with the name of your method, or its abbreviation. The file `lessons/00_lesson_template.qmd` has a `.qmd` template with these sections.
 
-### Introduction to \<the method\>
-### Mathematical definition of \<the method\>
-### Data source and description
-### Cleaning the data to create a model data frame
-### Assumptions of \<the method\>
-### Checking the assumptions with plots
-### Code to run \<the method\>
-### Code output
-### Brief interpretation of the output
+#### Introduction to \<the method\>
+#### Mathematical definition of \<the method\>
+#### Data source and description
+#### Cleaning the data to create a model data frame
+#### Assumptions of \<the method\>
+#### Checking the assumptions with plots
+#### Code to run \<the method\>
+#### Code output
+#### Brief interpretation of the output
 
 

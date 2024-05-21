@@ -335,13 +335,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction-to-scatterplots" id="toc-introduction-to-scatterplots" class="nav-link active" data-scroll-target="#introduction-to-scatterplots"><span class="header-section-number">5</span> Introduction to Scatterplots</a></li>
-  <li><a href="#gapminder-data-description" id="toc-gapminder-data-description" class="nav-link" data-scroll-target="#gapminder-data-description"><span class="header-section-number">6</span> Gapminder data description</a></li>
-  <li><a href="#cleaning-the-data-to-create-a-model-data-frame" id="toc-cleaning-the-data-to-create-a-model-data-frame" class="nav-link" data-scroll-target="#cleaning-the-data-to-create-a-model-data-frame"><span class="header-section-number">7</span> Cleaning the data to create a model data frame</a></li>
-  <li><a href="#components-of-ggplot2" id="toc-components-of-ggplot2" class="nav-link" data-scroll-target="#components-of-ggplot2"><span class="header-section-number">8</span> Components of <code>ggplot2</code></a></li>
-  <li><a href="#code-to-run-interpretable-scatterplots-and-create-facets" id="toc-code-to-run-interpretable-scatterplots-and-create-facets" class="nav-link" data-scroll-target="#code-to-run-interpretable-scatterplots-and-create-facets"><span class="header-section-number">9</span> Code to run interpretable scatterplots and create facets</a></li>
-  <li><a href="#public-health-interpretation" id="toc-public-health-interpretation" class="nav-link" data-scroll-target="#public-health-interpretation"><span class="header-section-number">10</span> Public Health Interpretation</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">11</span> Conclusion</a></li>
+<li><a href="#introduction-to-scatterplots" id="toc-introduction-to-scatterplots" class="nav-link active" data-scroll-target="#introduction-to-scatterplots"><span class="header-section-number">4.1</span> Introduction to Scatterplots</a></li>
+  <li><a href="#gapminder-data-description" id="toc-gapminder-data-description" class="nav-link" data-scroll-target="#gapminder-data-description"><span class="header-section-number">4.2</span> Gapminder data description</a></li>
+  <li><a href="#cleaning-the-data-to-create-a-model-data-frame" id="toc-cleaning-the-data-to-create-a-model-data-frame" class="nav-link" data-scroll-target="#cleaning-the-data-to-create-a-model-data-frame"><span class="header-section-number">4.3</span> Cleaning the data to create a model data frame</a></li>
+  <li><a href="#components-of-ggplot2" id="toc-components-of-ggplot2" class="nav-link" data-scroll-target="#components-of-ggplot2"><span class="header-section-number">4.4</span> Components of <code>ggplot2</code></a></li>
+  <li><a href="#code-to-run-interpretable-scatterplots-and-create-facets" id="toc-code-to-run-interpretable-scatterplots-and-create-facets" class="nav-link" data-scroll-target="#code-to-run-interpretable-scatterplots-and-create-facets"><span class="header-section-number">4.5</span> Code to run interpretable scatterplots and create facets</a></li>
+  <li><a href="#public-health-interpretation" id="toc-public-health-interpretation" class="nav-link" data-scroll-target="#public-health-interpretation"><span class="header-section-number">4.6</span> Public Health Interpretation</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">4.7</span> Conclusion</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/01_scatterplots.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
@@ -385,15 +385,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="co"># Gapminder dataset</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">dslabs</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="introduction-to-scatterplots" class="level1" data-number="5"><h1 data-number="5">
-<span class="header-section-number">5</span> Introduction to Scatterplots</h1>
+<section id="introduction-to-scatterplots" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="introduction-to-scatterplots">
+<span class="header-section-number">4.1</span> Introduction to Scatterplots</h2>
 <p>Scatterplots display the relationship between two variables using dots to represent the values for each numeric variable. This presentation will examine the relationship between <code>GDP per capita</code> and <code>Fertility</code> over time using ggplot with facets.</p>
 <p><strong>Hypothesis:</strong> A negative relationship exists between GDP per capita and fertility i.e.&nbsp;as GDP per capita increases, fertility decreases.</p>
-</section><section id="gapminder-data-description" class="level1" data-number="6"><h1 data-number="6">
-<span class="header-section-number">6</span> Gapminder data description</h1>
+</section><section id="gapminder-data-description" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="gapminder-data-description">
+<span class="header-section-number">4.2</span> Gapminder data description</h2>
 <p>Data was obtained from the <code>dslabs</code> package and comes from Gapminder a Swedish non-profit organization. The <code>Gapmidner</code> data set has health and income outcomes for 184 countries from 1960 to 2016. Gapminder aims to promote a fact-based worldview by providing accessible and understandable global development data. The dataset covers a wide range of variables, including economic, social, and health-related indicators like GDP, infant mortality, life expectancy, fertility, as well as population, making it a valuable resource for understanding global trends and patterns over time. Countries and territories with missing information were not excluded from the data set as the lack of information can also be looked into and shed light on why data was not collected or provided. To determine whether a country’s health and income outcomes are influenced by population sizes and GDP per capita, the data will be used to create a series of graphs to view different trends.</p>
-</section><section id="cleaning-the-data-to-create-a-model-data-frame" class="level1" data-number="7"><h1 data-number="7">
-<span class="header-section-number">7</span> Cleaning the data to create a model data frame</h1>
+</section><section id="cleaning-the-data-to-create-a-model-data-frame" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="cleaning-the-data-to-create-a-model-data-frame">
+<span class="header-section-number">4.3</span> Cleaning the data to create a model data frame</h2>
 <p>A tibble was created from the <code>gapminder</code> dataset, and a new column was created to measure GDP per capita. Overall, using tibbles enhances the readability, usability, and compatibility of your code within the tidyverse ecosystem.</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Creating gapminder dataset\tibble</span></span>
@@ -401,9 +401,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">gapminder</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>gdp_per_capita <span class="op">=</span> <span class="va">gdp</span> <span class="op">/</span> <span class="va">population</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="components-of-ggplot2" class="level1" data-number="8"><h1 data-number="8">
-<span class="header-section-number">8</span> Components of <code>ggplot2</code>
-</h1>
+</section><section id="components-of-ggplot2" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="components-of-ggplot2">
+<span class="header-section-number">4.4</span> Components of <code>ggplot2</code>
+</h2>
 <p><code>ggplot2</code> is a package used to create graphs and visualize data. The main three components of <code>ggplot2</code> are the data, aesthetics and geom layers.</p>
 <ul>
 <li><p>The data layer - states what data will be used to graph</p></li>
@@ -414,8 +414,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figure class="figure"><p><img src="https://zhuhao.org/post/2019-01-31-tips-on-designing-a-hex-sticker-for-rstats-packages_files/hex-ggplot2.png" class="img-fluid quarto-figure quarto-figure-left figure-img"></p>
 </figure>
 </div>
-</section><section id="code-to-run-interpretable-scatterplots-and-create-facets" class="level1" data-number="9"><h1 data-number="9">
-<span class="header-section-number">9</span> Code to run interpretable scatterplots and create facets</h1>
+</section><section id="code-to-run-interpretable-scatterplots-and-create-facets" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="code-to-run-interpretable-scatterplots-and-create-facets">
+<span class="header-section-number">4.5</span> Code to run interpretable scatterplots and create facets</h2>
 <p>In order to create a scatter-plot using ggplot, you must specify what data you will be using, state which variables will be mapped and how under aesthetics. What differentiates the scatter-plot from any other type of graph will be specified under the geom layer. For the scatter-plot, geom_point will be used.</p>
 <p>In this example, we will analyze the relationship between fertility rates and gdp per capita for each country in 2011.</p>
 <div class="cell">
@@ -431,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <img src="01_scatterplots_files/figure-html/fig-bubble-2011-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bubble-2011-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.1: Association between fertility rates and gdp per capita for each country in 2011
+Figure&nbsp;4.1: Association between fertility rates and gdp per capita for each country in 2011
 </figcaption></figure>
 </div>
 </div>
@@ -477,12 +477,12 @@ Figure&nbsp;9.1: Association between fertility rates and gdp per capita for each
 <img src="01_scatterplots_files/figure-html/fig-fertility-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fertility-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.2: Association between fertility rates and gdp per capita for each country, grouped by continent, in 2011
+Figure&nbsp;4.2: Association between fertility rates and gdp per capita for each country, grouped by continent, in 2011
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-fertility" class="quarto-xref">Figure&nbsp;<span>9.2</span></a> builds on the previous scatterplot of <code>Fertility Rates</code> (y axis) against <code>GDP per capita</code> (x axis) for 2011. The bubble size depicts respective country populations, and continents are coded by colors according to the key. This figure displays a negative relationship between <code>GDP per capita</code> and <code>Fertility Rates</code>. It supports the <strong>Hypothesis</strong> which states that as <code>GDP per capita</code> increases, <code>Fertility Rates</code> decreases. This trend can be confirmed for all continents, however, the degree to which fertility rates drop between continents varies. Most European country appear below a fertility rate of 2 babies per woman. The Americas appear to follow closely behind (under 4), followed by Oceania and Asia. A significant number of African countries still maintained higher fertility rates with lower GDP per capita for 2011.</p>
+<p><a href="#fig-fertility" class="quarto-xref">Figure&nbsp;<span>4.2</span></a> builds on the previous scatterplot of <code>Fertility Rates</code> (y axis) against <code>GDP per capita</code> (x axis) for 2011. The bubble size depicts respective country populations, and continents are coded by colors according to the key. This figure displays a negative relationship between <code>GDP per capita</code> and <code>Fertility Rates</code>. It supports the <strong>Hypothesis</strong> which states that as <code>GDP per capita</code> increases, <code>Fertility Rates</code> decreases. This trend can be confirmed for all continents, however, the degree to which fertility rates drop between continents varies. Most European country appear below a fertility rate of 2 babies per woman. The Americas appear to follow closely behind (under 4), followed by Oceania and Asia. A significant number of African countries still maintained higher fertility rates with lower GDP per capita for 2011.</p>
 <p>This is an example of wanting to create four separate graphs to see the relationship between fertility rates and GDP per capita based on the years 1960, 1975, 1990 and 2005. In this example we omitted the facet argument.</p>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fig_bubble_multiple</span> <span class="op">&lt;-</span></span>
@@ -515,7 +515,7 @@ Figure&nbsp;9.2: Association between fertility rates and gdp per capita for each
 <img src="01_scatterplots_files/figure-html/fig-ggplot-multiple-years-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ggplot-multiple-years-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.3: Association between fertility rates and GDP per capita based on the years 1960, 1975, 1990 and 2005
+Figure&nbsp;4.3: Association between fertility rates and GDP per capita based on the years 1960, 1975, 1990 and 2005
 </figcaption></figure>
 </div>
 </div>
@@ -554,12 +554,12 @@ Figure&nbsp;9.3: Association between fertility rates and GDP per capita based on
 <img src="01_scatterplots_files/figure-html/fig-ggplot-facet-years-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ggplot-facet-years-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.4: Association between fertility rates and GDP per capita based on the years 1960, 1975, 1990 and 2005, using <code>facet</code>
+Figure&nbsp;4.4: Association between fertility rates and GDP per capita based on the years 1960, 1975, 1990 and 2005, using <code>facet</code>
 </figcaption></figure>
 </div>
 </div>
 </div>
-<p>Now that we’ve specified the facet argument, we now have four separate graphs that can be properly analysed. In <a href="#fig-ggplot-facet-years" class="quarto-xref">Figure&nbsp;<span>9.4</span></a> we see an increasingly negative relationship between the two variables over time. This observation is congruent with the <strong>hypothesis</strong> that as <code>GDP per capita</code> increases, <code>fertility</code> decreases.</p>
+<p>Now that we’ve specified the facet argument, we now have four separate graphs that can be properly analysed. In <a href="#fig-ggplot-facet-years" class="quarto-xref">Figure&nbsp;<span>4.4</span></a> we see an increasingly negative relationship between the two variables over time. This observation is congruent with the <strong>hypothesis</strong> that as <code>GDP per capita</code> increases, <code>fertility</code> decreases.</p>
 <p>This global trend can be attributed to the increasing proportion of women in the workforce in the mid to late 20th century. As a result of World War II (1939-1945), women took on roles outside the home to compensate for men at war. Despite increased GDP per capita, this may have contributed to reduced fertility (babies per woman) over time. In 1960, a clear disparity among continents is seen. Most European countries’ fertility rates fell below 5, while their GDP per capita increased. Most African countries maintained high fertility rates above 5, but little change is seen in GDP per capita. The Asian continent shows the most variation among countries during that year. Some smaller Asian countries continued to maintain high fertility rates as GDP per capita increased in 1960. However, others displayed a drastic decrease in fertility rates by 1960. The Americas followed a steady decline over the years. By 2005, an overall negative relationship can be seen with most countries’ fertility rates below 5 babies per woman.</p>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fig_bubble_row_2011</span> <span class="op">&lt;-</span></span>
@@ -578,7 +578,7 @@ Figure&nbsp;9.4: Association between fertility rates and GDP per capita based on
 <img src="01_scatterplots_files/figure-html/fig-facet-continent-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-facet-continent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.5: Association between fertility rates and GDP per capita based on continent
+Figure&nbsp;4.5: Association between fertility rates and GDP per capita based on continent
 </figcaption></figure>
 </div>
 </div>
@@ -606,17 +606,17 @@ Figure&nbsp;9.5: Association between fertility rates and GDP per capita based on
 <img src="01_scatterplots_files/figure-html/fig-facet-continent-redo-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-facet-continent-redo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.6: Association between fertility rates and GDP per capita based on continent not using <code>nrow</code>
+Figure&nbsp;4.6: Association between fertility rates and GDP per capita based on continent not using <code>nrow</code>
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p>In the next example above, we removed the <code>nrow</code> argument and the system automatically separated the graphs into three columns with two rows. Additionally, we changed the x-axis to a log scale to better interpret gdp per capita. There is a way to determine a relationship between fertility and gdp per capita by continent.</p>
-</section><section id="public-health-interpretation" class="level1" data-number="10"><h1 data-number="10">
-<span class="header-section-number">10</span> Public Health Interpretation</h1>
+</section><section id="public-health-interpretation" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="public-health-interpretation">
+<span class="header-section-number">4.6</span> Public Health Interpretation</h2>
 <p>A global negative trend is depicted between <code>GDP per capita</code> and <code>fertility</code> over time. Such changes were due to wars as well as social, cultural and economic changes that incentivize smaller families especially in Asian countries. Most European, American and Asian countries depicted significant decreases in fertility rates over time as <code>GDP per capita</code> increased. On the other hand, African countries remain in the top rank for fertility over the years. These differences are depicted in the population pyramid changes of developed vs developing countries. Public health policies can be tailored to incentivizing increased fertility in developed countries to ensure generation continuity, and effective family planning strategies in developing countries.</p>
-</section><section id="conclusion" class="level1" data-number="11"><h1 data-number="11">
-<span class="header-section-number">11</span> Conclusion</h1>
+</section><section id="conclusion" class="level2" data-number="4.7"><h2 data-number="4.7" class="anchored" data-anchor-id="conclusion">
+<span class="header-section-number">4.7</span> Conclusion</h2>
 <p>In this lesson, the basic functions of <code>ggplot2</code> package were shown, which can create a scatterplot. There are three layers to the code to make a plot in R: data, aesthetic, and geometric. Within the aesthetic layer, functions can be added such as <code>size</code> and <code>color</code> to analyze more variables. Additionally, facets can split up graphs over a categorical variable, adding another potential variable to analyze in the plot.</p>
 
 

@@ -12,7 +12,7 @@ bibliography: [bib/packages.bib]
 
 
 
-# Introduction
+## Introduction
 
 
 
@@ -29,7 +29,7 @@ data in R.
 
 
 
-##  Packages 
+###  Packages 
 
 
 
@@ -61,7 +61,7 @@ library(tidyverse)
 
 
 
-## Census Data
+### Census Data
 
 For this assignment we will be using the Census_2010 dataset. There is no code 
 book associated with the data, making it difficult to provide an accurate 
@@ -92,7 +92,7 @@ colnames(census_2010) %>%
 
 
 
-# The Summary() Function
+## The Summary() Function
 
 
 
@@ -128,7 +128,7 @@ Now, let's see how `skim()` compares.
 
 
 
-# Skimr Package
+## Skimr Package
 
 
 
@@ -173,11 +173,11 @@ appropriate to use for a project.
 
 
 
-# Other Skimr Features
+## Other Skimr Features
 
 
 
-## Separate dataframes by type
+### Separate dataframes by type
 
 
 The data frames produced by `skim()` are wide and sparse, filled with columns 
@@ -239,7 +239,7 @@ yank(skim(census_2010), "character")
 ```
 
 
-## Skimr with Dplyr
+### Skimr with Dplyr
 
 
 `Skimr` functions can be used in combination with `Dplyr` functions to examine 
@@ -292,7 +292,7 @@ census_2010 %>%
 
 
 
-## Adding Variables
+### Adding Variables
 
 
 * base	- An sfl that sets skimmers for all column types.
@@ -336,7 +336,7 @@ census_2010 %>%
 
 
 
-# Conclusion
+## Conclusion
 
 
 
@@ -345,7 +345,7 @@ dataset and gaining insights into its structure and content.
 
 
 
-# References 
+## References 
 
 
 

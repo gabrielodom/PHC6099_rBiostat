@@ -1,0 +1,32 @@
+---
+title: "ANOVA and Regression"
+format: html
+embed-resources: false
+---
+
+
+## Text Outline
+This text covers the basics of:
+
+1. Exploring data
+2. One-sample tests
+3. Two-sample tests
+4. **ANOVA and linear regression**
+5. Generalized linear models
+6. Some special topics
+7. Maybe a bit about power calculations...
+
+
+## Part Outline
+This part of the text contains the chapters on various ways to perform ANOVA and linear regression: 
+
+- One-Way ANOVA
+- Two-way ANOVA
+- Welch's ANOVA
+- Kruskal-Wallace Test
+- Tukey HSD Post-Hoc Test
+- Repeated Measures ANOVA
+- Random Intercept Models
+- Correlation Matrices and Covariances
+- Multiple Regression (linear)
+- Polynomial regression

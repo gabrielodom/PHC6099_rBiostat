@@ -8,7 +8,7 @@
 
 <meta name="author" content="Gabriel Odom">
 
-<title>An R Cookbook for Public Health - 2&nbsp; PHC 6099: R Computing for Health Sciences</title>
+<title>An R Cookbook for Public Health - One-Sample Tests</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,8 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01_header_EDA.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./lessons/02_z-test_one_prop.html" rel="next">
+<link href="./lessons_original/01_table1.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -70,6 +70,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -82,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./about.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">PHC 6099: R Computing for Health Sciences</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_header_one-sample.html">One-Sample Tests</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -123,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./about.html" class="sidebar-item-text sidebar-link active">
+  <a href="./about.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">PHC 6099: R Computing for Health Sciences</span></span></a>
   </div>
 </li>
@@ -164,7 +193,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./02_header_one-sample.html" class="sidebar-item-text sidebar-link">
+            <a href="./02_header_one-sample.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">One-Sample Tests</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -334,28 +363,23 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#about" id="toc-about" class="nav-link active" data-scroll-target="#about"><span class="header-section-number">3</span> About</a></li>
+  <li><a href="#text-outline" id="toc-text-outline" class="nav-link active" data-scroll-target="#text-outline">Text Outline</a></li>
+  <li><a href="#part-outline" id="toc-part-outline" class="nav-link" data-scroll-target="#part-outline">Part Outline</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/about.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/02_header_one-sample.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">PHC 6099: R Computing for Health Sciences</span></h1>
+<h1 class="title">One-Sample Tests</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Gabriel J. Odom, PhD, ThD </p>
-          </div>
-  </div>
     
   
     
@@ -366,9 +390,32 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="about" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> About</h1>
-<p>These are the written lecture materials for the class PHC 6099 at Florida International University’s Stempel College of Public Health. This is the second semester of the “R” course sequence (the first semester is PHC6701; the text for that class is available here: <a href="https://gabrielodom.github.io/PHC6701_r4ds/" class="uri">https://gabrielodom.github.io/PHC6701_r4ds/</a>) The source code and data sets for this book are available here: <a href="https://github.com/gabrielodom/PHC6099_rBiostat" class="uri">https://github.com/gabrielodom/PHC6099_rBiostat</a>.</p>
+<section id="text-outline" class="level2">
+<h2 class="anchored" data-anchor-id="text-outline">Text Outline</h2>
+<p>This text covers the basics of:</p>
+<ol type="1">
+<li>Exploring data</li>
+<li><strong>One-sample tests</strong></li>
+<li>Two-sample tests</li>
+<li>Linear regression and ANOVA</li>
+<li>Generalized linear models</li>
+<li>Some special topics</li>
+<li>Maybe a bit about power calculations…</li>
+</ol>
+</section>
+<section id="part-outline" class="level2">
+<h2 class="anchored" data-anchor-id="part-outline">Part Outline</h2>
+<p>This part of the text contains the chapters on various one-sample statistical tests:</p>
+<ul>
+<li><span class="math inline">\(Z\)</span>-test</li>
+<li>Paired <span class="math inline">\(t\)</span>-test</li>
+<li>Paired Wilcoxon test</li>
+<li>Transformations to Normality</li>
+<li>McNemar’s Test</li>
+<li>Fisher’s Exact Test</li>
+<li>Chi-Square Goodness of Fit</li>
+<li>Bootstrapped Confidence Intervals</li>
+</ul>
 
 
 </section>
@@ -785,13 +832,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Course Materials for PHC 6099: 'R Computing for Health Sciences'">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Course Materials for PHC 6099: ‘R Computing for Health Sciences’</span></span>
+      <a href="./lessons_original/01_table1.html" class="pagination-link" aria-label="Demographics table with table1">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Demographics table with table1</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_header_EDA.html" class="pagination-link" aria-label="Exploratory Data Analysis">
-        <span class="nav-page-text">Exploratory Data Analysis</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./lessons/02_z-test_one_prop.html" class="pagination-link" aria-label="Z-Test for One Proportion">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -803,7 +850,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/about.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/02_header_one-sample.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>

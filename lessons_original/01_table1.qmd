@@ -25,7 +25,7 @@ options(dplyr.summarise.inform = FALSE)
 
 ```
 
-# Introduction
+## Introduction
 
 In most scientific research journals, the first included table is often referred to as **Table1**.
 
@@ -33,7 +33,7 @@ Table1 includes descriptive statistics for the total study sample, with the rows
 
 There are a few ways that Table1 can be created without using functions like table1. For example, for a research paper, dissertation, and/or the results of a clinical trial, we might have to go through the time consuming task of using the **summary()** function, or the **describe()** function in the *library(Hmisc)*. Then, if you decide that you would like to see a variable in relation to a categorical response/outcome variable, you would have to build 2 x 2 tables for each explanatory variable. The **table1()** function does all of this for us, but first lets discuss the packages that will be in use today.
 
-## Necessary Packages
+### Necessary Packages
 
 The **htmlTable** package allows for the usage of the table1() function to create a table 1, while also making life easy when attempting to copy this table into a Word document.
 
@@ -53,7 +53,7 @@ library(boot)
 
 ```
 
-# Data Exploration and Wrangling
+## Data Exploration and Wrangling
 
 Today, we will be using the **melanoma** data set which consists of malignant melanoma measurements of patients. Each patient had their tumor surgically removed between the years of 1962 and 1977 at the Department of Plastic Surgery, University Hospital of Odense located in Denamrk. Each surgery consisted of the complete removal of the tumor with an additional removal of about 2.5cm of the surrounding skin. When this was completed, the thickness of the tumor was recorded along with the physical appearance of ulceration vs no ulceration, as it is an important prognostic indication of those with a thick/ulcerated tumor to have an increased chance of death as a consequence of melanoma.
 
@@ -126,7 +126,7 @@ head(melanoma_data$status)
 
 As you can see in the variable levels, "Alive" is the reference level. It is extremely important to pick a reference level to lay the foundation of the table along with highlighting the outcome of interest of your hypothesis. In summary, this lays the foundation of a well organized table.
 
-# Basic table 1
+## Basic table 1
 
 Now that our main variable of interest is a factor with three levels, we will run a basic table1 with the independent/explanatory variables of interest: **sex**, **age**, **ulcer**, and **thickness**.
 
@@ -260,7 +260,7 @@ table1(
 
 ```
 
-# Conclusion
+## Conclusion
 
 In conclusion, table1 is one of the most utilized tools in the scientific research field. Understanding how to use the table1 package in R can be of benefit to many.
 
@@ -268,4 +268,4 @@ It is important to note that this presentation is just a brief summary with what
 
 In addition, you can also stratify the response variable to highlight two of the responses, like dead or alive in our example.
 
-# References {.unnumbered}
+## References {.unnumbered}

@@ -11,11 +11,11 @@ format: html
 embed-resources: false
 ---
 
-# Introduction to One-Sample $Z$-Tests
+## Introduction to One-Sample $Z$-Tests
 The one-sample $Z$-test is used to compare a sample proportion to a population proportion.
 
 
-# Mathematical definition of the One-Sample $Z$-Test
+## Mathematical definition of the One-Sample $Z$-Test
 Consider a sample of size $n$ with binary values (such as "true" or "false"). Let $p_{s}$ and $p_{E}$ be the observed sample and expected (population) proportions, respectively. The formula to calculate the $z$ statistic is
 
 $$
@@ -29,7 +29,7 @@ z \equiv \frac{
 $$
 
 
-# Data source and description
+## Data source and description
 We will use the CTN-0094 data set, a data set of harmonized clinical trials for opioid use disorder. The full database is in `public.ctn0094data::`, engineered features are in `public.ctn0094extra::`, and clinical trial outcomes (wrangled dependent variables) are in `CTNote::`. We will install all three packages, but only use `CTNote::` for now.
 ```{r}
 #| label: load-packages
@@ -45,7 +45,7 @@ library(tidyverse)
 
 
 
-# Cleaning the data to create a model data frame
+## Cleaning the data to create a model data frame
 Because our method requires only one sample, we have very little work to do. We will use the [Kosten et al. (1993)](https://journals.lww.com/jonmd/abstract/1993/06000/buprenorphine_versus_methadone_maintenance_for.4.aspx) definition of opioid abstinence, provided in the data set `outcomesCTN0094` as the column `kosten1993_isAbs`.
 ```{r}
 # What do the values look like?
@@ -58,7 +58,7 @@ There are `r nrow(outcomesCTN0094)` logical values, and `TRUE` indicates that th
 
 
 
-# Assumptions of the One-Sample $Z$-Test
+## Assumptions of the One-Sample $Z$-Test
 To use a one-sample $Z$-test, we make the following assumptions:
 
 1. The data are from a random sample
@@ -72,12 +72,12 @@ z \sim N(0, 1).
 $$
 
 
-# Checking the assumptions with plots
+## Checking the assumptions with plots
 
-## Independence and Randomness
+### Independence and Randomness
 Because the samples were collected at random via an FDA approved clinical trial protocol, we assume that all the participants were randomly selected and are independent of each other.
 
-## "Extreme" Proportions
+### "Extreme" Proportions
 According to [Ling et al. (2020)](https://doi.org/10.1097/ADM.0000000000000647), the 12-month abstinence proportion of all 533 participants in their study was `r round(0.508 * (425/533) * 100, 1)` percent. As we can see here, our abstinence rates are `r round(mean(outcomesCTN0094$kosten1993_isAbs) * 100, 1)`. Neither these proportions are smaller than 5\% or greater than 95\%.
 ```{r}
 (pExpected <- 0.508 * (425/533))
@@ -85,11 +85,11 @@ According to [Ling et al. (2020)](https://doi.org/10.1097/ADM.0000000000000647),
 (nAbstinent <- sum(outcomesCTN0094$kosten1993_isAbs))
 ```
 
-## Type and Counts of Data
+### Type and Counts of Data
 We observe binary data, and we see at least 10 successes and at least 10 failures.
 
 
-# Code to run a One-Sample $Z$-Test
+## Code to run a One-Sample $Z$-Test
 Now that we have checked our assumptions, we can perform the one-sample $Z$-test for proportions.
 ```{r}
 prop.test(
@@ -101,6 +101,6 @@ prop.test(
 
 
 
-# Brief interpretation of the output
+## Brief interpretation of the output
 The 95\% confidence interval contains the population proportion, so we fail to reject the hypothesis that the patients from these clinical trials achieve different abstinence rates than the general population.
 

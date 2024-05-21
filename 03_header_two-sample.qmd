@@ -1,0 +1,27 @@
+---
+title: "Two-Sample Tests"
+format: html
+embed-resources: false
+---
+
+
+## Text Outline
+This text covers the basics of:
+
+1. Exploring data
+2. One-sample tests
+3. **Two-sample tests**
+4. Linear regression and ANOVA
+5. Generalized linear models
+6. Some special topics
+7. Maybe a bit about power calculations...
+
+
+## Part Outline
+This part of the text contains the chapters on various two-sample statistical tests: 
+
+- $t$-test
+- Welch's $t$-test
+- Mann-Whitney $U$ test
+- Cochran's $Q$ test
+- $\chi^2$ Test for Independence
