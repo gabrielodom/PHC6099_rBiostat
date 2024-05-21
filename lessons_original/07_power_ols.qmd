@@ -37,7 +37,7 @@ library(pwrss)
 library(tidyverse)
 ```
 
-# Introduction
+## Introduction
 
 The power of a hypothesis test is the probability of correctly rejecting
 the null hypothesis or the probability that the test will correctly
@@ -63,7 +63,7 @@ power increases \[\@(pdf)ef\].
 Power is mainly influenced by sample size, effect size, and significance
 level.
 
-# Power Analysis: OLS Regression
+## Power Analysis: OLS Regression
 
 For this power analysis we will use the univariate (simple) OLS
 regression example of our last presentation examining the relationship
@@ -112,7 +112,7 @@ regression:
 2.  The `pwr.f2.test` function in the `pwr` package
 3.  The `wp.regression` function in the `WebPower` package
 
-## The `pwrss.f.reg` function
+### The `pwrss.f.reg` function
 
 We will start our power analysis using the The `pwrss.f.reg` function
 for one predictor in an OLS regression, with our given observations of n
@@ -256,7 +256,7 @@ ggplot(data = OLSRegN_df) +
 Given the graph, we notice that given n = 32, a power of 80% and higher
 is achieved when the effect size is at least approximately r2 = 0.20.
 
-## The `pwr.f2.test` function
+### The `pwr.f2.test` function
 
 Power analysis using the `pwr.f2.test`: where, u = 1, The F numerator
 degrees of freedom (u=1) or the number of coefficients(independent
@@ -381,7 +381,7 @@ ggplot(power_curves,
 Based on the graph, if we have an effect size of 0.15, we need
 approximately 50 or more observations (recall n = v + 1 + 1)
 
-## The `wp.regression` function
+### The `wp.regression` function
 
 Lastly, we use the `wp.regression` function to examine the appropriate
 sample size given an effect size of 0.15 to achieve a power of 80% or
@@ -429,4 +429,4 @@ res
 ```
 
 
-# References {.unnumbered}
+## References {.unnumbered}

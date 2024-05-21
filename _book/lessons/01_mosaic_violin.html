@@ -97,7 +97,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 </head>
 <body class="nav-sidebar floating">
 
@@ -217,7 +242,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Two sample t test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -338,7 +363,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/06_power_ols.html" class="sidebar-item-text sidebar-link">
+  <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>

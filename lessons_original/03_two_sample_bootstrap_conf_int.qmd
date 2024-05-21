@@ -12,7 +12,7 @@ bibliography: [bib/packages.bib]
 
 
 
-# Bootstrap
+## Bootstrap
 
 
 
@@ -24,7 +24,7 @@ our own data to make more samples? Now, because we don't have access to any
 new data, we're going to take samples of our data set *with replacement*.
 
 
-## When to use bootstrapping?
+### When to use bootstrapping?
 
 
 
@@ -32,7 +32,7 @@ The purpose of bootstrapping is to increase the sample size for our analysis
 when the sample we have been given is small. 
 
 
-# Packages
+## Packages
 
 
 
@@ -55,7 +55,7 @@ library(tidyverse)
 
 
 
-# Penguins
+## Penguins
 
 
 
@@ -98,7 +98,7 @@ str(new_penguins_df)
 ```
 
 
-## Distribution
+### Distribution
 
 
 Boxplots and histograms will be useful to understand the distribution of the data. 
@@ -126,7 +126,7 @@ hist(
 ```
 
 
-## Bootstrapping Test
+### Bootstrapping Test
 
 
 We need the difference in means in order to conduct our permutation test. We will test whether the difference is significant so that we can reject the null. This indicates that there is a different in flipper length among the same species that come from different islands. 
@@ -160,7 +160,7 @@ bootstrapSamples_ls[1:3]
 ```
 
 
-## Building Confidence Intervals for Various Statistics: Example 1
+### Building Confidence Intervals for Various Statistics: Example 1
 
 
 ```{r}
@@ -181,7 +181,7 @@ quantile(bootMeans_num, probs = c(0.025, 0.975))
 ```
 
 
-## Building Confidence Intervals for Various Statistics: Example 2
+### Building Confidence Intervals for Various Statistics: Example 2
 
 Source: <https://www.geeksforgeeks.org/bootstrap-confidence-interval-with-r-programming/>
 
@@ -220,7 +220,7 @@ boot.ci(
 
 
 
-# Conclusion
+## Conclusion
 
 
 

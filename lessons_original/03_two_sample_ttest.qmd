@@ -1,6 +1,6 @@
 ---
-title: "Two sample t test"
-subtitle: "Explaining the Two sample t test and how to run it in R"
+title: "Two sample $t$-test"
+subtitle: "Explaining the Two sample $t$-test and how to run it in R"
 date: "`r Sys.Date()`"
 author:
   - name: Tendai Gwanzura & Ana Bravo
@@ -15,7 +15,7 @@ embed-resources: false
 bibliography: bib/packages.bib
 ---
 
-# Two sample t test
+## Two sample $t$-test
 
 This is also called the independent sample *t* test. It is used to see whether the unknown population means of two groups are equal or different. This test requires one variable which can be the exposure *x* and another variable which can be the outcome *y*. If you have more than two groups then analysis of variance *(ANOVA)* will be more suitable. If data is nonparametric then an alternative test to use would be the *Mann Whitney U test* or a *permutation test*.[@cressie1986].
 
@@ -23,7 +23,7 @@ There are two types of t tests, the first being the **Student's t test,** which 
 
 In this article we will be discussing the **Student's t test**.
 
-## Assumptions
+### Assumptions
 
 -   Measurements for one observation do not affect measurements for any other observation (assumes independence).
 
@@ -37,7 +37,7 @@ In this article we will be discussing the **Student's t test**.
 
 -   There should be no significant outliers.
 
-## Hypotheses
+### Hypotheses
 
 1.  $(H_0)$: the mean of group A $(m_A)$ is equal to the mean of group B $(m_B)$- two tailed test,
 
@@ -53,7 +53,7 @@ In this article we will be discussing the **Student's t test**.
 2.  $(H_1)$: $(m_A)<(m_B)$- one tailed test.
 3.  $(H_1)$: $(m_A)> (m_B)$- one tailed test.
 
-## Statistical hypotheses formula
+### Statistical hypotheses formula
 
 For the **Student's t test** which assumes equal variance the following is how the \|t\| statistic may be calculated using groups A and B as examples:
 
@@ -81,9 +81,9 @@ If the data is not independent such as paired data in the form of matched pairs 
 
 ------------------------------------------------------------------------
 
-## Example
+### Example
 
-### Prerequisites
+#### Prerequisites
 
 1.  `tidyverse`: data manipulation and visualization.
 2.  `rstatix`: providing pipe friendly R functions for easy statistical analyses.
@@ -99,7 +99,7 @@ If the data is not independent such as paired data in the form of matched pairs 
 
 ```
 
-### Dataset
+#### Dataset
 
 This example dataset sourced from [kaggle](https://www.kaggle.com/datasets/uciml/student-alcohol-consumption/versions/2?resource=download) was obtained from surveys of students in Math and Portuguese classes in secondary school. It contains demographic information on gender, social and study information.[@cortez2008]
 
@@ -264,7 +264,7 @@ math2 %>% levene_test(G3~sex)
 
 The p value is greater than 0.05 suggesting there is no difference between the variances of the two groups.
 
-### Assessment
+#### Assessment
 
 1.  Data is continuous(G3)
 
@@ -276,9 +276,9 @@ The p value is greater than 0.05 suggesting there is no difference between the v
 
 5.  There are equal variances
 
-As the assumptions are met we go ahead to perform the **Student's t test**.
+As the assumptions are met we go ahead to perform the **Student's $t$-test**.
 
-### **Performing the two-sample *t*-test**
+#### **Performing the two-sample $t$-test**
 
 Since the default is the **Welch t test** we use the $\color{blue}{\text{var.eqaul = TRUE }}$ code to signify a **Student's t test**. There is a `t.test()` function in `stats` package and a `t_test()` in the `rstatix` package. For this analysis we use the `rstatix` method as it comes out as a table.
 
@@ -383,4 +383,4 @@ We can simply add the syntax $\color{blue}{\text{paired= TRUE}}$ to our `t_test(
 
 This article covers the **Student's t test** and how we run it in R. It also shows how we find the effect size and how we can conclude the results.
 
-## **References**
+### **References**

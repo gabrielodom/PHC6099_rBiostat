@@ -59,7 +59,7 @@ library(remotes)
 library(conflicted)
 ```
 
-# Introduction
+## Introduction
 
 One of the general goals of statistics is to understand if there is a
 relationship between two variables.
@@ -100,9 +100,9 @@ relationship between two variables.
 > covariance which can be achieved when the data is in standardized
 > form.
 
-# About Covariance and Correlation
+## About Covariance and Correlation
 
-## Equations, properties, and uses
+### Equations, properties, and uses
 
 **Mathematical equations, properties, and uses**
 
@@ -122,7 +122,7 @@ $$
 Cov(x,y) = \frac{1}{n-1}{\sum_{i = 1}^{n}{(x_i - \bar{x})(y_i-\bar{y})}}
 $$
 
-### Covariance Properties
+#### Covariance Properties
 
 -   **(x, y) \> 0:** the covariance for both variables is positive or
     moving in the same direction.
@@ -160,7 +160,7 @@ $$
 r = \frac {Cov(x,y)}{(\sqrt{var(x)})(\sqrt{var(y)})}
 $$
 
-### Correlation Matrix
+#### Correlation Matrix
 
 ![Sample correlation matrix](04_correlation_matrix_example.png)
 
@@ -194,7 +194,7 @@ We will concentrate on the **Correlation Matrix** which provides the
 Pearson Correlation Coefficient or (its variations for non-parametric
 data such as, spearman and kendall).
 
-# Data set used
+## Data set used
 
 We will use the R data set "mtcars" to provide examples on developing a
 **Covariance Matrix** and on checking the assumptions for and
@@ -215,7 +215,7 @@ head(mtcars) %>%
   )
 ```
 
-# Covariance Matrix Procedure
+## Covariance Matrix Procedure
 
 The procedure to develop a covariance matrix uses the cov() function. It
 takes the data frame as an argument and returns the covariance matrix as
@@ -257,7 +257,7 @@ kable(mtcars2_cov,
 >     covariance indicating that as horse power increases, so does the
 >     weight of a vehicle.
 
-# The Correlation Matrix Procedure
+## The Correlation Matrix Procedure
 
 The **Correlation Matrix** procedure is of emphasis because it provides
 information on the linear relationship among variables (strength and
@@ -272,7 +272,7 @@ multivariate models, as it assists in:
 ```
 :::
 
-## Hypothesis testing in correlations
+### Hypothesis testing in correlations
 
 The bivariate Pearson Correlation produces a sample correlation
 coefficient, *r*, which measures the strength and direction of linear
@@ -329,7 +329,7 @@ $$ which means that there is a negative relationship in the population.
 These hypotheses are in terms of ρ.
 ```
 
-## Assumptions of a Correlation Matrix:
+### Assumptions of a Correlation Matrix:
 
 **1.** The two variables should be measured at the interval or ratio
 level (e.i., ***continuous***).
@@ -351,9 +351,9 @@ variables.
 
 **5.** There should be **no extreme outliers** in the dataset.
 
-## Checking Assumptions
+### Checking Assumptions
 
-#### Level of Measurement
+##### Level of Measurement
 
 Using the `skimr` package, we will get data set information such as the
 distribution (histogram) of, and the type/level of measurement for the
@@ -411,7 +411,7 @@ cars_df %>%
 Now we will examine only the 6 variables meeting the measurement
 assumption.
 
-### Linear Relationship
+#### Linear Relationship
 
 ```{r}
 #| label: Basic Scatterplot Matrix
@@ -427,7 +427,7 @@ Based on this simple scatterplot matrix, all variables seem to follow a
 linear relationship, therefore, we will examine the normality and
 outliers assumption of these variables.
 
-### Normality distribution and extreme outliers
+#### Normality distribution and extreme outliers
 
 ```{r}
 #| label: Normality and outlier tests-qqplots
@@ -529,7 +529,7 @@ QSEC_h <- hist(cars_df$qsec,
 ```
 
 ::: callout-important
-## Important procedures
+### Important procedures
 
 -   We will run the correlation matrix using a "Pearson Correlation" for
     these data without resolving or reviewing some of the issues found
@@ -563,7 +563,7 @@ QSEC_h <- hist(cars_df$qsec,
             Spearman correlation, adjustment/revisions.
 :::
 
-## Computation of a Correlation Matrix
+### Computation of a Correlation Matrix
 
 The function in R to create a basic correlation matrix is **cor()**.
 This function uses "pearson" as the default coefficient/method. The
@@ -791,9 +791,9 @@ chart.Correlation(mtcars2,
     while ordering and coloring the subplots by correlation.
 :::
 
-# Other Correlation Types (Spearman and Partial)
+## Other Correlation Types (Spearman and Partial)
 
-## Spearman (ranking of variables, non-parametric)
+### Spearman (ranking of variables, non-parametric)
 
 ```{r}
 #| label: sperman procedure
@@ -811,7 +811,7 @@ cars_spearman <- cor.test(mtcars$cyl, mtcars$carb, method = "spearman")
 
 ```
 
-## Partial Correlation
+### Partial Correlation
 
 The Partial correlation is the correlation of two variables while
 controlling for a third or more other variables. The partial correlation
@@ -834,7 +834,7 @@ This is the calculation of the correlation between miles per gallon and
 weight while controlling the variable "am" = Transmission (0 =
 automatic, 1 = manual).
 
-# Example of *r* in examining the relationship in a pair of variables using the Pearson Correlation Coefficient type of correlation
+## Example of *r* in examining the relationship in a pair of variables using the Pearson Correlation Coefficient type of correlation
 
 Using the **ggscatter** function in the `ggpubr` package, we could
 examine the Pearson coefficient and the related p-value for a pair of
@@ -842,7 +842,7 @@ variables we found of interest in the scatterplot matrix above. We will
 explore the relationship between the the number of miles per gallon and
 the weight of a vehicle.
 
-## Hypothesis test between mpg and wt
+### Hypothesis test between mpg and wt
 
 We will test if a vehicle's weight is related to its fuel efficiency.
 
@@ -931,4 +931,4 @@ Furthermore,
 >     strong (5 \< \| *r* \|).
 
 
-# References
+## References

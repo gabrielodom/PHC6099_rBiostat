@@ -10,21 +10,21 @@ embed-resources: false
 
 
 
-# What is a Polynomial Regression?
+## What is a Polynomial Regression?
 
 Polynomial regression is a type of regression analysis that models the non-linear relationship between the predictor variable(s) and response variable^**1**^. It is an extension of simple linear regression that allows for more complex relationships between predictor and response variables^**1**^.
 
 In simple terms, it allows us to fit a [curve]{.underline} to our data instead of a straight line.
 
 
-## When is a Polynomial Regression Used?
+### When is a Polynomial Regression Used?
 
 Polynomial regression is useful when the relationship between the independent and dependent variables is **nonlinear**.
 
 It can capture more complex relationships than linear regression, making it suitable for cases where the data exhibits [curvature]{.underline}.
 
 
-## Assumptions of Polynomial Regression
+### Assumptions of Polynomial Regression
 
 1.  **Linearity**: There is a curvilinear relationship between the independent variable(s) and the dependent variable.
 2.  **Independence**: The predictor variables are independent of each other.
@@ -32,7 +32,7 @@ It can capture more complex relationships than linear regression, making it suit
 4.  **Normality**: The errors should be normally distributed with mean zero and a constant variance.
 
 
-## Mathematical Equation
+### Mathematical Equation
 
 Consider independent samples $i = 1, \ldots, n$. The general formula for a polynomial regression representing the relationship between the response variable ($y$) and the predictor variable ($x$) as a polynomial function of degree $d$ is:
 
@@ -52,7 +52,7 @@ For large degree $d$, polynomial regression allows us to produce an extremely no
 The coefficients in polynomial function can be estimated using least square linear regression because it can be viewed as a standard linear model with predictors $x_i, \,x_i^2, \,x_i^3, ..., x_i^d$. Hence, polynomial regression is also known as *polynomial linear regression*.
 
 
-## Performing a Polynomial Regression in R
+### Performing a Polynomial Regression in R
 
 -   Step 0: Load required packages
 -   Step 1: Load and inspect the data
@@ -63,12 +63,12 @@ The coefficients in polynomial function can be estimated using least square line
 
 
 
-# Let's Practice!
+## Let's Practice!
 
 Now let's go through the steps to perform a polynomial regression in R. We'll be using the `lm()` function to fit the polynomial regression model. This function comes standard in base R.
 
 
-## Hypotheses
+### Hypotheses
 For this example, we are investigating the following:
 
 -   **Research Question**: Is there a significant *quadratic relationship* between the weight of a car (`wt`) and its miles per gallon (`mpg`) in the `mtcars` dataset?
@@ -80,7 +80,7 @@ In this case, the null hypothesis assumes that the coefficients of the quadratic
 By performing the polynomial regression analysis and examining the model summary and coefficients, we can evaluate the statistical significance of the relationship and determine whether to reject or fail to reject the null hypothesis.
 
 
-## Step 0: Install and load required package
+### Step 0: Install and load required package
 In R, we'll use the `lm()` function from the base package to perform polynomial regression. Also, since we want to visualize our data, we will be loading the `ggplot2` package for use.
 
 ```{r, echo=TRUE}
@@ -90,7 +90,7 @@ library(ggplot2)
 ```
 
 
-## Step 1: Load and inspect the data
+### Step 1: Load and inspect the data
 For this example, we will use the built-in `mtcars` dataset (from the standard R package `datasets`) which is publicly available and contains information about various car models.
 
 ```{r, echo=TRUE}
@@ -104,7 +104,7 @@ head(mtcars)
 ```
 
 
-## Step 2: Visualize the data
+### Step 2: Visualize the data
 Before fitting a polynomial regression model, it's helpful to visualize the data to identify any [non-linear]{.underline} patterns. For our example, we will use a scatter plot to visualize the relationship between the independent and dependent variables:
 
 ```{r, echo=TRUE}
@@ -117,7 +117,7 @@ ggplot(mtcars) +
 ```
 
 
-## Step 3: Fit Models
+### Step 3: Fit Models
 Let's create a function so we can build multiple models. We will build a standard linear model and a quadratic model (degrees 1 and 2, respectively).
 
 ```{r, echo=TRUE}
@@ -135,7 +135,7 @@ model_2 <- fit_poly_regression(2)
 To fit a polynomial regression model, we'll use the `lm()` function and create polynomial terms using the `poly()` function. In this example, we'll fit a standard linear (degree = 1) and a quadratic polynomial (degree = 2) to the `mtcars` dataset.
 
 
-## Step 4: Assess Assumptions
+### Step 4: Assess Assumptions
 Before we can interpret the model, we have to check the assumptions. We will check these assumptions via plots:
 
 1) Residuals vs. Fitted values (used to check the linearity assumption),
@@ -153,7 +153,7 @@ par(mfrow = c(1, 1))
 We see that Model 2 (the quadratic one) satisfies the "linearity" assumption, because the red line in the "Residuals vs Fitted" graph is flat. However, the Q-Q plot shows that the residuals are not normally distributed, so we should take additional steps to transform the response feature (such as via a square root or log transformation, or something similar).
 
 
-## Step 5. Describe Model Output
+### Step 5. Describe Model Output
 Although we recognize that this model is not correct (because the residuals are not approximately normal), we will give an example of how to interpret this output.
 
 ```{r}
@@ -161,7 +161,7 @@ summary(model_2)
 ```
 
 
-## Bonus Step: Visualize the Final Model 
+### Bonus Step: Visualize the Final Model 
 
 Finally, let's plot the scatter plot with the polynomial regression line to visualize the fit:
 
@@ -188,7 +188,7 @@ ggplot(plot_data) +
 
 
 
-# Further Discussion
+## Further Discussion
 
 -   **Piecewise polynomials**: Instead of fitting a high-degree polynomial over the entire range of X, piece- wise polynomial regression involves fitting separate low-degree polynomials over different regions of X. The coefficients βi differ in different parts of the range of X. The points where the coefficients change are called knots. Using more knots leads to a more flexible piecewise polynomial^**2**^.
 -   **Constraints and spline**: the technique of reduce the number of degree of freedom on piecewise polynomial to produce a continuous and naturally smooth fit model on data^**2**^.

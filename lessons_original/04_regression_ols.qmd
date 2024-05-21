@@ -7,17 +7,6 @@ number-sections: true
 format: html
 embed-resources: false
 
-knitr:
-  opts_chunk:      ########## set global options ############
-    collapse: true # keep code from blocks together (if shown)
-    echo: true    # show code
-    message: true  # show messages
-    warning: false  # don't show warnings
-    error: false    # don't show error messages
-    comment: ""    # don't show ## with printed output
-    R.options:    
-      digits: 3    # round to three digits
-
 bibliography: [bib/packages.bib]
 csl: bib/the-new-england-journal-of-medicine.csl
 ---
@@ -70,7 +59,7 @@ library(remotes)
 library(conflicted)
 ```
 
-# Ordinary Least Squares (OLS) Regression
+## Ordinary Least Squares (OLS) Regression
 
 OLS is a "method that allows to find a line that best describes the
 relationship between one or more predictor variables and a response
@@ -131,7 +120,7 @@ $$\widehat{MPG_i} = \beta_0 +\beta_1*WT_i$$
     > -   For example, a vehicle that spends one gallon of fuel per
     >     every 19 miles is given as "19"
 
-## How to develop the best fitting line?
+### How to develop the best fitting line?
 
 ![Sample residual/error terms plot](04_regression_residuals.jpg)
 
@@ -183,12 +172,12 @@ assumptions of homoscedasticity and normality.
         be highly correlated with each other.
 
 ::: {.callout-note appearance="simple"}
-## Be careful about outliers
+### Be careful about outliers
 
 Outliers can influence the estimates of the relationship.
 :::
 
-## Example of an OLS regression in R
+### Example of an OLS regression in R
 
 In R, the `lm` function command allows us to develop an OLS regression.
 
@@ -274,7 +263,7 @@ Once the data is transformed, we can run the residual plot over again in
 order to achieve normality. For the sake of this presentation, we are
 only using an example with known limitations such as non-normality.
 
-## Hypothesis testing in OLS regression
+### Hypothesis testing in OLS regression
 
 The null hypothesis in this case would be that the slope is zero
 indicating no relationship between x and y. Or in our example, we can
@@ -301,7 +290,7 @@ its efficiency (miles per gallon used). R provides a t-value for the
     wt           -5.3445             0.5591       -9.559       1.29e-10
 ```
 
-## R-Squared Value
+### R-Squared Value
 
 R-squared is "a measure of how much of the variation in the dependent
 variable is explained by the independent variables in the model. It
@@ -313,14 +302,14 @@ the number of independent variables in the model. It is a more
 conservative estimate of the model's fit, as it penalizes the addition
 of variables that do not improve the model's performance" [@ordinary].
 
-## F-Statistic
+### F-Statistic
 
 The F-statistic "tests the overall significance of the model by
 comparing the variation in the dependent variable explained by the model
 to the variation not explained by the model. A large F-statistic
 indicates that the model as a whole is significant"[@interpre].
 
-## Visual representation
+### Visual representation
 
 The visual representation of this model using `ggplot` is the following:
 
@@ -342,4 +331,4 @@ in a visual manner with the line of best fit. As indicated previously,
 we see a steep negative correlation between weight of the car and the
 miles per gallon (efficiency) utilized.
 
-# References
+## References

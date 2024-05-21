@@ -8,7 +8,7 @@
 
 <meta name="author" content="Gabriel Odom">
 
-<title>An R Cookbook for Public Health - Special Topics in Statistical Modelling</title>
+<title>An R Cookbook for Public Health - Generalized Linear Models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,8 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./lessons/06_lesson_template_spec_topc.html" rel="next">
-<link href="./lessons_original/05_glm_ordinal_logistic.html" rel="prev">
+<link href="./lessons_original/05_glm_ordinal_logistic.html" rel="next">
+<link href="./lessons_original/04_regression_polynomial.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -111,7 +111,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06_header_special-topics.html">Special Topics in Statistical Modelling</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05_header_generalized-linear-models.html">Generalized Linear Models</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -304,8 +304,8 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
- <span class="menu-text">05_header_generalized_linear_models.qmd</span></a>
+            <a href="./05_header_generalized-linear-models.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Generalized Linear Models</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -321,7 +321,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./06_header_special-topics.html" class="sidebar-item-text sidebar-link active">
+            <a href="./06_header_special-topics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Special Topics in Statistical Modelling</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -366,14 +366,14 @@ window.Quarto = {
   <li><a href="#text-outline" id="toc-text-outline" class="nav-link active" data-scroll-target="#text-outline">Text Outline</a></li>
   <li><a href="#part-outline" id="toc-part-outline" class="nav-link" data-scroll-target="#part-outline">Part Outline</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/06_header_special-topics.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/05_header_generalized-linear-models.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Special Topics in Statistical Modelling</h1>
+<h1 class="title">Generalized Linear Models</h1>
 </div>
 
 
@@ -398,20 +398,19 @@ window.Quarto = {
 <li>One-sample tests</li>
 <li>Two-sample tests</li>
 <li>ANOVA and linear regression</li>
-<li>Generalized linear models</li>
-<li><strong>Some special topics</strong></li>
+<li><strong>Generalized linear models</strong></li>
+<li>Some special topics</li>
 <li>Maybe a bit about power calculations…</li>
 </ol>
 </section>
 <section id="part-outline" class="level2">
 <h2 class="anchored" data-anchor-id="part-outline">Part Outline</h2>
-<p>This part of the text contains the chapters on various different special statistical models:</p>
+<p>This part of the text contains the chapters on various different models within the GLM family:</p>
 <ul>
-<li>Linear Mixed Effects Models</li>
-<li>Structural Equation Models</li>
-<li>Cox Proportional Hazards Regression</li>
-<li>(TBD) Multivariate Methods for Genetics/Genomics</li>
-<li>Ridge, LASSO, and Elastic Net Regression</li>
+<li>Generalized Linear Models: Binary</li>
+<li>Generalized Linear Models: Ordered</li>
+<li>Generalized Linear Models: Count (Poisson)</li>
+<li>Generalized Linear Models: Count (Negative Binomial)</li>
 </ul>
 
 
@@ -829,13 +828,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./lessons_original/05_glm_ordinal_logistic.html" class="pagination-link" aria-label="Ordinal Logistic Regression">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span>
+      <a href="./lessons_original/04_regression_polynomial.html" class="pagination-link" aria-label="Introduction to Polynomial Regression">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./lessons/06_lesson_template_spec_topc.html" class="pagination-link" aria-label="The Method">
-        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">The Method</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./lessons_original/05_glm_ordinal_logistic.html" class="pagination-link" aria-label="Ordinal Logistic Regression">
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -847,7 +846,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/06_header_special-topics.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/05_header_generalized-linear-models.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>

@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<meta name="dcterms.date" content="2024-05-20">
+<meta name="dcterms.date" content="2024-05-21">
 <title>An R Cookbook for Public Health - 20&nbsp; Ordinal Logistic Regression</title>
 <style>
 code{white-space: pre-wrap;}
@@ -62,8 +62,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../lessons_original/06_power_ols.html" rel="next">
-<link href="../lessons_original/04_regression_polynomial.html" rel="prev">
+<link href="../06_header_special-topics.html" rel="next">
+<link href="../05_header_generalized-linear-models.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -132,7 +132,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/00_part_headers.html">New Part</a></li><li class="breadcrumb-item"><a href="../lessons_original/05_glm_ordinal_logistic.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../05_header_generalized-linear-models.html">Generalized Linear Models</a></li><li class="breadcrumb-item"><a href="../lessons_original/05_glm_ordinal_logistic.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -175,8 +175,8 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../lessons/00_part_headers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">New Part</span></a>
+            <a href="../01_header_EDA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exploratory Data Analysis</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -210,8 +210,8 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../lessons/00_part_headers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">New Part</span></a>
+            <a href="../02_header_one-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">One-Sample Tests</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -233,8 +233,8 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../lessons/00_part_headers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">New Part</span></a>
+            <a href="../03_header_two-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Two-Sample Tests</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -243,7 +243,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Two sample t test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -268,8 +268,8 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../lessons/00_part_headers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">New Part</span></a>
+            <a href="../04_header_anova-and-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ANOVA and Regression</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -321,8 +321,8 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../lessons/00_part_headers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">New Part</span></a>
+            <a href="../05_header_generalized-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generalized Linear Models</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -338,8 +338,8 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../lessons/00_part_headers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">New Part</span></a>
+            <a href="../06_header_special-topics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Special Topics in Statistical Modelling</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -347,8 +347,25 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/06_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+  <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../07_header_power.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Power and Sample Size Determination</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -361,51 +378,32 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction-to-logistic-regression" id="toc-introduction-to-logistic-regression" class="nav-link active" data-scroll-target="#introduction-to-logistic-regression"><span class="header-section-number">21</span> Introduction to Logistic Regression</a></li>
-  <li><a href="#what-is-ordinal-logistic-regression" id="toc-what-is-ordinal-logistic-regression" class="nav-link" data-scroll-target="#what-is-ordinal-logistic-regression"><span class="header-section-number">22</span> What is Ordinal Logistic Regression?</a></li>
-  <li><a href="#how-to-do-ordinary-logistic-regression-in-r" id="toc-how-to-do-ordinary-logistic-regression-in-r" class="nav-link" data-scroll-target="#how-to-do-ordinary-logistic-regression-in-r"><span class="header-section-number">23</span> How to do Ordinary Logistic Regression in R</a></li>
+<li><a href="#introduction-to-logistic-regression" id="toc-introduction-to-logistic-regression" class="nav-link active" data-scroll-target="#introduction-to-logistic-regression"><span class="header-section-number">20.1</span> Introduction to Logistic Regression</a></li>
+  <li><a href="#what-is-ordinal-logistic-regression" id="toc-what-is-ordinal-logistic-regression" class="nav-link" data-scroll-target="#what-is-ordinal-logistic-regression"><span class="header-section-number">20.2</span> What is Ordinal Logistic Regression?</a></li>
+  <li><a href="#how-to-do-ordinary-logistic-regression-in-r" id="toc-how-to-do-ordinary-logistic-regression-in-r" class="nav-link" data-scroll-target="#how-to-do-ordinary-logistic-regression-in-r"><span class="header-section-number">20.3</span> How to do Ordinary Logistic Regression in R</a></li>
   <li>
-<a href="#mathematical-formulation-of-a-ordinal-model" id="toc-mathematical-formulation-of-a-ordinal-model" class="nav-link" data-scroll-target="#mathematical-formulation-of-a-ordinal-model"><span class="header-section-number">24</span> Mathematical Formulation of a Ordinal model</a>
+<a href="#mathematical-formulation-of-a-ordinal-model" id="toc-mathematical-formulation-of-a-ordinal-model" class="nav-link" data-scroll-target="#mathematical-formulation-of-a-ordinal-model"><span class="header-section-number">20.4</span> Mathematical Formulation of a Ordinal model</a>
   <ul class="collapse">
-<li><a href="#model-assumptions" id="toc-model-assumptions" class="nav-link" data-scroll-target="#model-assumptions"><span class="header-section-number">24.1</span> Model Assumptions</a></li>
+<li><a href="#model-assumptions" id="toc-model-assumptions" class="nav-link" data-scroll-target="#model-assumptions"><span class="header-section-number">20.4.1</span> Model Assumptions</a></li>
   </ul>
 </li>
   <li>
-<a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">25</span> Example</a>
+<a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">20.5</span> Example</a>
   <ul class="collapse">
-<li>
-<a href="#libraries" id="toc-libraries" class="nav-link" data-scroll-target="#libraries"><span class="header-section-number">25.1</span> Libraries</a>
-  <ul class="collapse">
-<li><a href="#warning" id="toc-warning" class="nav-link" data-scroll-target="#warning"><span class="header-section-number">25.1.1</span> Warning</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#exploring-data" id="toc-exploring-data" class="nav-link" data-scroll-target="#exploring-data"><span class="header-section-number">25.2</span> Exploring data</a>
-  <ul class="collapse">
-<li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">25.2.1</span> Summary</a></li>
-  <li><a href="#descriptives" id="toc-descriptives" class="nav-link" data-scroll-target="#descriptives"><span class="header-section-number">25.2.2</span> Descriptives</a></li>
-  <li><a href="#plotting-outcome-variable-rheumatoid-arthritis-score" id="toc-plotting-outcome-variable-rheumatoid-arthritis-score" class="nav-link" data-scroll-target="#plotting-outcome-variable-rheumatoid-arthritis-score"><span class="header-section-number">25.2.3</span> Plotting Outcome variable (rheumatoid arthritis score)</a></li>
-  <li><a href="#pairs" id="toc-pairs" class="nav-link" data-scroll-target="#pairs"><span class="header-section-number">25.2.4</span> Pairs</a></li>
-  </ul>
-</li>
-  <li><a href="#how-to-use-polr" id="toc-how-to-use-polr" class="nav-link" data-scroll-target="#how-to-use-polr"><span class="header-section-number">25.3</span> How to use <code>polr()</code></a></li>
-  <li><a href="#fitting-the-model" id="toc-fitting-the-model" class="nav-link" data-scroll-target="#fitting-the-model"><span class="header-section-number">25.4</span> Fitting the model</a></li>
-  <li><a href="#odds-ratio" id="toc-odds-ratio" class="nav-link" data-scroll-target="#odds-ratio"><span class="header-section-number">25.5</span> Odds Ratio</a></li>
-  <li><a href="#interpreting-the-results" id="toc-interpreting-the-results" class="nav-link" data-scroll-target="#interpreting-the-results"><span class="header-section-number">25.6</span> Interpreting the Results</a></li>
-  <li>
-<a href="#checking-assumptions" id="toc-checking-assumptions" class="nav-link" data-scroll-target="#checking-assumptions"><span class="header-section-number">25.7</span> Checking Assumptions</a>
-  <ul class="collapse">
-<li><a href="#multicollinearity" id="toc-multicollinearity" class="nav-link" data-scroll-target="#multicollinearity"><span class="header-section-number">25.7.1</span> Multicollinearity</a></li>
-  <li><a href="#proportional-odds" id="toc-proportional-odds" class="nav-link" data-scroll-target="#proportional-odds"><span class="header-section-number">25.7.2</span> Proportional Odds</a></li>
-  </ul>
-</li>
+<li><a href="#libraries" id="toc-libraries" class="nav-link" data-scroll-target="#libraries"><span class="header-section-number">20.5.1</span> Libraries</a></li>
+  <li><a href="#exploring-data" id="toc-exploring-data" class="nav-link" data-scroll-target="#exploring-data"><span class="header-section-number">20.5.2</span> Exploring data</a></li>
+  <li><a href="#how-to-use-polr" id="toc-how-to-use-polr" class="nav-link" data-scroll-target="#how-to-use-polr"><span class="header-section-number">20.5.3</span> How to use <code>polr()</code></a></li>
+  <li><a href="#fitting-the-model" id="toc-fitting-the-model" class="nav-link" data-scroll-target="#fitting-the-model"><span class="header-section-number">20.5.4</span> Fitting the model</a></li>
+  <li><a href="#odds-ratio" id="toc-odds-ratio" class="nav-link" data-scroll-target="#odds-ratio"><span class="header-section-number">20.5.5</span> Odds Ratio</a></li>
+  <li><a href="#interpreting-the-results" id="toc-interpreting-the-results" class="nav-link" data-scroll-target="#interpreting-the-results"><span class="header-section-number">20.5.6</span> Interpreting the Results</a></li>
+  <li><a href="#checking-assumptions" id="toc-checking-assumptions" class="nav-link" data-scroll-target="#checking-assumptions"><span class="header-section-number">20.5.7</span> Checking Assumptions</a></li>
   </ul>
 </li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/05_glm_ordinal_logistic.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/00_part_headers.html">New Part</a></li><li class="breadcrumb-item"><a href="../lessons_original/05_glm_ordinal_logistic.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../05_header_generalized-linear-models.html">Generalized Linear Models</a></li><li class="breadcrumb-item"><a href="../lessons_original/05_glm_ordinal_logistic.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
 <span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span>
 </h1>
@@ -436,7 +434,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 20, 2024</p>
+      <p class="date">May 21, 2024</p>
     </div>
   </div>
   
@@ -445,8 +443,8 @@ window.Quarto = {
   
 
 
-</header><section id="introduction-to-logistic-regression" class="level1" data-number="21"><h1 data-number="21">
-<span class="header-section-number">21</span> Introduction to Logistic Regression</h1>
+</header><section id="introduction-to-logistic-regression" class="level2" data-number="20.1"><h2 data-number="20.1" class="anchored" data-anchor-id="introduction-to-logistic-regression">
+<span class="header-section-number">20.1</span> Introduction to Logistic Regression</h2>
 <p>We are all familiar with the concept of Logistic regression. It is used to analyze data when the outcome variables is categorical. There are three types of logistic regression, Binary logistic regression where the outcome variable is binary (Yes/No), Multinomial logistic regression when the outcome variable is categorical with three or more categories, Ordinal logistic regression where there is a natural ordering among three or more categories of the outcome variable<span class="citation" data-cites="agresti2002"><sup><a href="#ref-agresti2002" role="doc-biblioref"><strong>agresti2002?</strong></a></sup></span>.</p>
 <table class="table">
 <caption>Types of Logistic Regression</caption>
@@ -470,16 +468,16 @@ window.Quarto = {
 <td>Yes</td>
 </tr>
 </tbody>
-</table></section><section id="what-is-ordinal-logistic-regression" class="level1" data-number="22"><h1 data-number="22">
-<span class="header-section-number">22</span> What is Ordinal Logistic Regression?</h1>
+</table></section><section id="what-is-ordinal-logistic-regression" class="level2" data-number="20.2"><h2 data-number="20.2" class="anchored" data-anchor-id="what-is-ordinal-logistic-regression">
+<span class="header-section-number">20.2</span> What is Ordinal Logistic Regression?</h2>
 <p>Ordinal logistic regression is a statistical modeling technique used to investigate relationships between predictor variables and ordered ordinal outcome variables. It extends traditional logistic regression to account for the response variable’s inherent ordering, making it suitable for situations where the outcome has multiple levels with unequal intervals.</p>
 <p>For example, cases when ordinal logistic regression can be applicable are,</p>
 <ul>
 <li>Likelihood of agreement : In a survey the responses to the outcome variable is categorized in multiple levels such as, Strongly Disagree, Disagree, Agree, Strongly Agree.</li>
 <li>Satisfaction level: Measuring satisfaction level of a service on a scale like, “very dissatisfied,” “dissatisfied,” “neutral,” “satisfied,” and “very satisfied.”</li>
 <li>Pain Intensity: Patients participating in medical research may be asked to rate the intensity of their pain on a scale ranging from “no pain” to “mild pain,” “moderate pain,” and “severe pain.”</li>
-</ul></section><section id="how-to-do-ordinary-logistic-regression-in-r" class="level1" data-number="23"><h1 data-number="23">
-<span class="header-section-number">23</span> How to do Ordinary Logistic Regression in R</h1>
+</ul></section><section id="how-to-do-ordinary-logistic-regression-in-r" class="level2" data-number="20.3"><h2 data-number="20.3" class="anchored" data-anchor-id="how-to-do-ordinary-logistic-regression-in-r">
+<span class="header-section-number">20.3</span> How to do Ordinary Logistic Regression in R</h2>
 <p>Some popular R packages that perform Ordinal/Ordered Logistic Regression are,</p>
 <ul>
 <li>
@@ -493,8 +491,8 @@ window.Quarto = {
 </li>
 </ul>
 <p>In this demonstration I will be using <code><a href="https://rdrr.io/pkg/MASS/man/polr.html">polr()</a></code> from <code>MASS</code> package to conduct the analysis.</p>
-</section><section id="mathematical-formulation-of-a-ordinal-model" class="level1" data-number="24"><h1 data-number="24">
-<span class="header-section-number">24</span> Mathematical Formulation of a Ordinal model</h1>
+</section><section id="mathematical-formulation-of-a-ordinal-model" class="level2" data-number="20.4"><h2 data-number="20.4" class="anchored" data-anchor-id="mathematical-formulation-of-a-ordinal-model">
+<span class="header-section-number">20.4</span> Mathematical Formulation of a Ordinal model</h2>
 <p>Let us assume Y is an outcome variable with levels, <span class="math inline">\(l = 1, 2, ... , L\)</span>. According to the <code>MASS</code> package the parameterization of the outcome variable Y with l levels is,</p>
 <p><span class="math display">\[
 \ln\left(\frac{P(Y\le l)}{P(Y&gt;l)}\right) =
@@ -508,16 +506,16 @@ window.Quarto = {
 <li>In case of continuous predictors, each coefficient <span class="math inline">\(\eta_{k}\)</span> is the log of odds ratio comparing the odds of <span class="math inline">\(Y\le l\)</span> between subjects who differ by 1 unit. Taking exponent of this term we get <span class="math inline">\(e^{\eta_{k}}\)</span> which is the odds ratio comparing the odds of <span class="math inline">\(Y\le l\)</span> between subjects who differ by 1 unit.</li>
 </ul>
 <p>Similar to binary logistic regression the left hand side of this equation is the log-odds of a probability. In case of binary logistic regression it is log-odds of probability of an event whereas here we consider the cumulative probability up to and a specified level including that level.</p>
-<section id="model-assumptions" class="level2" data-number="24.1"><h2 data-number="24.1" class="anchored" data-anchor-id="model-assumptions">
-<span class="header-section-number">24.1</span> Model Assumptions</h2>
+<section id="model-assumptions" class="level3" data-number="20.4.1"><h3 data-number="20.4.1" class="anchored" data-anchor-id="model-assumptions">
+<span class="header-section-number">20.4.1</span> Model Assumptions</h3>
 <p>The key assumptions of Ordinary logistic Regression which ensures the validity of the model are as follows,</p>
 <ul>
 <li>The outcome variable is ordered.</li>
 <li>The predictor variables are either continuous, categorical, or ordinal.</li>
 <li>There is no multicollinearity among the predictors.</li>
 <li>Proportional odds.</li>
-</ul></section></section><section id="example" class="level1" data-number="25"><h1 data-number="25">
-<span class="header-section-number">25</span> Example</h1>
+</ul></section></section><section id="example" class="level2" data-number="20.5"><h2 data-number="20.5" class="anchored" data-anchor-id="example">
+<span class="header-section-number">20.5</span> Example</h2>
 <p>To demonstrate the methods I will be using the <code>arthritis</code> data from <code>multgee</code> package. The data has Rheumatoid self-assessment scores for 302 patients, measured on a five-level ordinal response scale at three follow-up times. The <code>arthritis</code> dataset is in a data frame with 906 observations with the following 7 variables:</p>
 <ul>
 <li>
@@ -535,8 +533,8 @@ window.Quarto = {
 <li>
 <code>time</code>: Follow-up time recorded in months.</li>
 </ul>
-<section id="libraries" class="level2" data-number="25.1"><h2 data-number="25.1" class="anchored" data-anchor-id="libraries">
-<span class="header-section-number">25.1</span> Libraries</h2>
+<section id="libraries" class="level3" data-number="20.5.1"><h3 data-number="20.5.1" class="anchored" data-anchor-id="libraries">
+<span class="header-section-number">20.5.1</span> Libraries</h3>
 <p>Here are libraries required to run the analysis.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># install.packages("multgee")</span></span>
@@ -560,11 +558,11 @@ window.Quarto = {
 <span><span class="fu"><a href="https://conflicted.r-lib.org/reference/conflict_prefer.html">conflict_prefer</a></span><span class="op">(</span><span class="st">"select"</span>, <span class="st">"dplyr"</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="warning" class="level3" data-number="25.1.1"><h3 data-number="25.1.1" class="anchored" data-anchor-id="warning">
-<span class="header-section-number">25.1.1</span> Warning</h3>
+<section id="warning" class="level4" data-number="20.5.1.1"><h4 data-number="20.5.1.1" class="anchored" data-anchor-id="warning">
+<span class="header-section-number">20.5.1.1</span> Warning</h4>
 <p>Instead of installing package <code>MASS</code> to the global environment use <code><a href="https://rdrr.io/pkg/MASS/man/polr.html">MASS::polr()</a></code> for running the Ordinal Logistic Regression model. As masking it conflicts wirh the <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> function for <code>tidyverse</code> and <code>gtsummary()</code>.</p>
-</section></section><section id="exploring-data" class="level2" data-number="25.2"><h2 data-number="25.2" class="anchored" data-anchor-id="exploring-data">
-<span class="header-section-number">25.2</span> Exploring data</h2>
+</section></section><section id="exploring-data" class="level3" data-number="20.5.2"><h3 data-number="20.5.2" class="anchored" data-anchor-id="exploring-data">
+<span class="header-section-number">20.5.2</span> Exploring data</h3>
 <p>Let’s begin by looking at the data.</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">arthritis_df</span> <span class="op">&lt;-</span> </span>
@@ -587,8 +585,8 @@ window.Quarto = {
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="summary" class="level3" data-number="25.2.1"><h3 data-number="25.2.1" class="anchored" data-anchor-id="summary">
-<span class="header-section-number">25.2.1</span> Summary</h3>
+<section id="summary" class="level4" data-number="20.5.2.1"><h4 data-number="20.5.2.1" class="anchored" data-anchor-id="summary">
+<span class="header-section-number">20.5.2.1</span> Summary</h4>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim</a></span><span class="op">(</span><span class="va">arthritis_df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -730,34 +728,34 @@ window.Quarto = {
 </table>
 </div>
 </div>
-</section><section id="descriptives" class="level3" data-number="25.2.2"><h3 data-number="25.2.2" class="anchored" data-anchor-id="descriptives">
-<span class="header-section-number">25.2.2</span> Descriptives</h3>
+</section><section id="descriptives" class="level4" data-number="20.5.2.2"><h4 data-number="20.5.2.2" class="anchored" data-anchor-id="descriptives">
+<span class="header-section-number">20.5.2.2</span> Descriptives</h4>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">arthritis_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="va">treatment</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="tbl-table1" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-table1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;25.1: Predictors by treatment group
+Table&nbsp;20.1: Predictors by treatment group
 </figcaption><div aria-describedby="tbl-table1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <div>
-<div id="xrzbvtzjxw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xrzbvtzjxw table {
+<div id="jmjhuxylok" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jmjhuxylok table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xrzbvtzjxw thead, #xrzbvtzjxw tbody, #xrzbvtzjxw tfoot, #xrzbvtzjxw tr, #xrzbvtzjxw td, #xrzbvtzjxw th {
+#jmjhuxylok thead, #jmjhuxylok tbody, #jmjhuxylok tfoot, #jmjhuxylok tr, #jmjhuxylok td, #jmjhuxylok th {
   border-style: none;
 }
 
-#xrzbvtzjxw p {
+#jmjhuxylok p {
   margin: 0;
   padding: 0;
 }
 
-#xrzbvtzjxw .gt_table {
+#jmjhuxylok .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -783,12 +781,12 @@ Table&nbsp;25.1: Predictors by treatment group
   border-left-color: #D3D3D3;
 }
 
-#xrzbvtzjxw .gt_caption {
+#jmjhuxylok .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xrzbvtzjxw .gt_title {
+#jmjhuxylok .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -800,7 +798,7 @@ Table&nbsp;25.1: Predictors by treatment group
   border-bottom-width: 0;
 }
 
-#xrzbvtzjxw .gt_subtitle {
+#jmjhuxylok .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -812,7 +810,7 @@ Table&nbsp;25.1: Predictors by treatment group
   border-top-width: 0;
 }
 
-#xrzbvtzjxw .gt_heading {
+#jmjhuxylok .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -824,13 +822,13 @@ Table&nbsp;25.1: Predictors by treatment group
   border-right-color: #D3D3D3;
 }
 
-#xrzbvtzjxw .gt_bottom_border {
+#jmjhuxylok .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xrzbvtzjxw .gt_col_headings {
+#jmjhuxylok .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -845,7 +843,7 @@ Table&nbsp;25.1: Predictors by treatment group
   border-right-color: #D3D3D3;
 }
 
-#xrzbvtzjxw .gt_col_heading {
+#jmjhuxylok .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -865,7 +863,7 @@ Table&nbsp;25.1: Predictors by treatment group
   overflow-x: hidden;
 }
 
-#xrzbvtzjxw .gt_column_spanner_outer {
+#jmjhuxylok .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -877,15 +875,15 @@ Table&nbsp;25.1: Predictors by treatment group
   padding-right: 4px;
 }
 
-#xrzbvtzjxw .gt_column_spanner_outer:first-child {
+#jmjhuxylok .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xrzbvtzjxw .gt_column_spanner_outer:last-child {
+#jmjhuxylok .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xrzbvtzjxw .gt_column_spanner {
+#jmjhuxylok .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -897,11 +895,11 @@ Table&nbsp;25.1: Predictors by treatment group
   width: 100%;
 }
 
-#xrzbvtzjxw .gt_spanner_row {
+#jmjhuxylok .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xrzbvtzjxw .gt_group_heading {
+#jmjhuxylok .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -927,7 +925,7 @@ Table&nbsp;25.1: Predictors by treatment group
   text-align: left;
 }
 
-#xrzbvtzjxw .gt_empty_group_heading {
+#jmjhuxylok .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -942,15 +940,15 @@ Table&nbsp;25.1: Predictors by treatment group
   vertical-align: middle;
 }
 
-#xrzbvtzjxw .gt_from_md > :first-child {
+#jmjhuxylok .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xrzbvtzjxw .gt_from_md > :last-child {
+#jmjhuxylok .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xrzbvtzjxw .gt_row {
+#jmjhuxylok .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -969,7 +967,7 @@ Table&nbsp;25.1: Predictors by treatment group
   overflow-x: hidden;
 }
 
-#xrzbvtzjxw .gt_stub {
+#jmjhuxylok .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -982,7 +980,7 @@ Table&nbsp;25.1: Predictors by treatment group
   padding-right: 5px;
 }
 
-#xrzbvtzjxw .gt_stub_row_group {
+#jmjhuxylok .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -996,15 +994,15 @@ Table&nbsp;25.1: Predictors by treatment group
   vertical-align: top;
 }
 
-#xrzbvtzjxw .gt_row_group_first td {
+#jmjhuxylok .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xrzbvtzjxw .gt_row_group_first th {
+#jmjhuxylok .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xrzbvtzjxw .gt_summary_row {
+#jmjhuxylok .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1014,16 +1012,16 @@ Table&nbsp;25.1: Predictors by treatment group
   padding-right: 5px;
 }
 
-#xrzbvtzjxw .gt_first_summary_row {
+#jmjhuxylok .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xrzbvtzjxw .gt_first_summary_row.thick {
+#jmjhuxylok .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xrzbvtzjxw .gt_last_summary_row {
+#jmjhuxylok .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1033,7 +1031,7 @@ Table&nbsp;25.1: Predictors by treatment group
   border-bottom-color: #D3D3D3;
 }
 
-#xrzbvtzjxw .gt_grand_summary_row {
+#jmjhuxylok .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1043,7 +1041,7 @@ Table&nbsp;25.1: Predictors by treatment group
   padding-right: 5px;
 }
 
-#xrzbvtzjxw .gt_first_grand_summary_row {
+#jmjhuxylok .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1053,7 +1051,7 @@ Table&nbsp;25.1: Predictors by treatment group
   border-top-color: #D3D3D3;
 }
 
-#xrzbvtzjxw .gt_last_grand_summary_row_top {
+#jmjhuxylok .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1063,11 +1061,11 @@ Table&nbsp;25.1: Predictors by treatment group
   border-bottom-color: #D3D3D3;
 }
 
-#xrzbvtzjxw .gt_striped {
+#jmjhuxylok .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xrzbvtzjxw .gt_table_body {
+#jmjhuxylok .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1076,7 +1074,7 @@ Table&nbsp;25.1: Predictors by treatment group
   border-bottom-color: #D3D3D3;
 }
 
-#xrzbvtzjxw .gt_footnotes {
+#jmjhuxylok .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1090,7 +1088,7 @@ Table&nbsp;25.1: Predictors by treatment group
   border-right-color: #D3D3D3;
 }
 
-#xrzbvtzjxw .gt_footnote {
+#jmjhuxylok .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1099,7 +1097,7 @@ Table&nbsp;25.1: Predictors by treatment group
   padding-right: 5px;
 }
 
-#xrzbvtzjxw .gt_sourcenotes {
+#jmjhuxylok .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1113,7 +1111,7 @@ Table&nbsp;25.1: Predictors by treatment group
   border-right-color: #D3D3D3;
 }
 
-#xrzbvtzjxw .gt_sourcenote {
+#jmjhuxylok .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1121,63 +1119,63 @@ Table&nbsp;25.1: Predictors by treatment group
   padding-right: 5px;
 }
 
-#xrzbvtzjxw .gt_left {
+#jmjhuxylok .gt_left {
   text-align: left;
 }
 
-#xrzbvtzjxw .gt_center {
+#jmjhuxylok .gt_center {
   text-align: center;
 }
 
-#xrzbvtzjxw .gt_right {
+#jmjhuxylok .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xrzbvtzjxw .gt_font_normal {
+#jmjhuxylok .gt_font_normal {
   font-weight: normal;
 }
 
-#xrzbvtzjxw .gt_font_bold {
+#jmjhuxylok .gt_font_bold {
   font-weight: bold;
 }
 
-#xrzbvtzjxw .gt_font_italic {
+#jmjhuxylok .gt_font_italic {
   font-style: italic;
 }
 
-#xrzbvtzjxw .gt_super {
+#jmjhuxylok .gt_super {
   font-size: 65%;
 }
 
-#xrzbvtzjxw .gt_footnote_marks {
+#jmjhuxylok .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xrzbvtzjxw .gt_asterisk {
+#jmjhuxylok .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xrzbvtzjxw .gt_indent_1 {
+#jmjhuxylok .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xrzbvtzjxw .gt_indent_2 {
+#jmjhuxylok .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xrzbvtzjxw .gt_indent_3 {
+#jmjhuxylok .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xrzbvtzjxw .gt_indent_4 {
+#jmjhuxylok .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xrzbvtzjxw .gt_indent_5 {
+#jmjhuxylok .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1290,8 +1288,8 @@ Table&nbsp;25.1: Predictors by treatment group
 </figure>
 </div>
 </div>
-</section><section id="plotting-outcome-variable-rheumatoid-arthritis-score" class="level3" data-number="25.2.3"><h3 data-number="25.2.3" class="anchored" data-anchor-id="plotting-outcome-variable-rheumatoid-arthritis-score">
-<span class="header-section-number">25.2.3</span> Plotting Outcome variable (rheumatoid arthritis score)</h3>
+</section><section id="plotting-outcome-variable-rheumatoid-arthritis-score" class="level4" data-number="20.5.2.3"><h4 data-number="20.5.2.3" class="anchored" data-anchor-id="plotting-outcome-variable-rheumatoid-arthritis-score">
+<span class="header-section-number">20.5.2.3</span> Plotting Outcome variable (rheumatoid arthritis score)</h4>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">arthritis_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -1313,8 +1311,8 @@ Table&nbsp;25.1: Predictors by treatment group
 </div>
 </div>
 </div>
-</section><section id="pairs" class="level3" data-number="25.2.4"><h3 data-number="25.2.4" class="anchored" data-anchor-id="pairs">
-<span class="header-section-number">25.2.4</span> Pairs</h3>
+</section><section id="pairs" class="level4" data-number="20.5.2.4"><h4 data-number="20.5.2.4" class="anchored" data-anchor-id="pairs">
+<span class="header-section-number">20.5.2.4</span> Pairs</h4>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">GGally</span><span class="fu">::</span><span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">arthritis_df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1324,9 +1322,9 @@ Table&nbsp;25.1: Predictors by treatment group
 </div>
 </div>
 </div>
-</section></section><section id="how-to-use-polr" class="level2" data-number="25.3"><h2 data-number="25.3" class="anchored" data-anchor-id="how-to-use-polr">
-<span class="header-section-number">25.3</span> How to use <code>polr()</code>
-</h2>
+</section></section><section id="how-to-use-polr" class="level3" data-number="20.5.3"><h3 data-number="20.5.3" class="anchored" data-anchor-id="how-to-use-polr">
+<span class="header-section-number">20.5.3</span> How to use <code>polr()</code>
+</h3>
 <p>The basic structure of the function looks like this (there are other options we don’t list, but we won’t need them):</p>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/MASS/man/polr.html">polr</a></span><span class="op">(</span></span>
@@ -1357,8 +1355,8 @@ Table&nbsp;25.1: Predictors by treatment group
 <code>Hess</code>: logical for whether the Hessian (the observed information matrix) should be returned. We will use this if we intend to call summary or variance covariance on the fit.</li>
 <li>
 <code>method</code>: <code>"logistic"</code>, <code>"probit"</code>, <code>"loglog"</code> (log-log), <code>"cloglog"</code> (complementary log-log), or <code>"cauchit"</code> (corresponding to a Cauchy latent variable). The default option is to use the Logistic link function.</li>
-</ul></section><section id="fitting-the-model" class="level2" data-number="25.4"><h2 data-number="25.4" class="anchored" data-anchor-id="fitting-the-model">
-<span class="header-section-number">25.4</span> Fitting the model</h2>
+</ul></section><section id="fitting-the-model" class="level3" data-number="20.5.4"><h3 data-number="20.5.4" class="anchored" data-anchor-id="fitting-the-model">
+<span class="header-section-number">20.5.4</span> Fitting the model</h3>
 <p>Using this function, let’s fit the POLR model to the data. By default, the <code>Hess</code> option is turned off, so we turn it on so that we can calculate the odds ratios later.</p>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_olr_mod</span> <span class="op">&lt;-</span> <span class="fu">MASS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MASS/man/polr.html">polr</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">arthritis_df</span>, Hess <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1473,8 +1471,8 @@ Table&nbsp;25.1: Predictors by treatment group
 </div>
 </div>
 <p>The <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function called on a <code>polr</code> model object gives us the coefficients, intercepts, their standard errors, and <span class="math inline">\(t\)</span>-statistics.</p>
-</section><section id="odds-ratio" class="level2" data-number="25.5"><h2 data-number="25.5" class="anchored" data-anchor-id="odds-ratio">
-<span class="header-section-number">25.5</span> Odds Ratio</h2>
+</section><section id="odds-ratio" class="level3" data-number="20.5.5"><h3 data-number="20.5.5" class="anchored" data-anchor-id="odds-ratio">
+<span class="header-section-number">20.5.5</span> Odds Ratio</h3>
 <p>In order to get the Odds Ratio and the predictor’s confidence intervals we take the exponential of the coefficient. There is no straight forward way of doing that in <code>R</code>. Below is one way of solving that issue, which uses the <code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code> function from the <code>multgee::</code> package.</p>
 <div class="cell">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calculate a matrix of the lower and upper confidence intervals</span></span>
@@ -1550,8 +1548,8 @@ Table&nbsp;25.1: Predictors by treatment group
 </table>
 </div>
 </div>
-</section><section id="interpreting-the-results" class="level2" data-number="25.6"><h2 data-number="25.6" class="anchored" data-anchor-id="interpreting-the-results">
-<span class="header-section-number">25.6</span> Interpreting the Results</h2>
+</section><section id="interpreting-the-results" class="level3" data-number="20.5.6"><h3 data-number="20.5.6" class="anchored" data-anchor-id="interpreting-the-results">
+<span class="header-section-number">20.5.6</span> Interpreting the Results</h3>
 <ul>
 <li>
 <em>Sex:</em> Compared to female participants, Male participants had <code>orResults_df[1, "oddsRatio", drop = TRUE]</code> fold higher odds of reporting high score of rheumatoid arthritis.</li>
@@ -1561,11 +1559,11 @@ Table&nbsp;25.1: Predictors by treatment group
 <em>Treatment:</em> Compared to the Placebo group participants, the participant who received the drug had <code>orResults_df[3, "oddsRatio", drop = TRUE]</code> times higher odds of reporting high score of rheumatoid arthritis.</li>
 <li>
 <em>Baseline score:</em> It appears that we could perhaps collapse the baseline rheumatoid arthritis score into only three levels, because the confidence intervals for the cubic and quartic polynomial components include 1.</li>
-</ul></section><section id="checking-assumptions" class="level2" data-number="25.7"><h2 data-number="25.7" class="anchored" data-anchor-id="checking-assumptions">
-<span class="header-section-number">25.7</span> Checking Assumptions</h2>
+</ul></section><section id="checking-assumptions" class="level3" data-number="20.5.7"><h3 data-number="20.5.7" class="anchored" data-anchor-id="checking-assumptions">
+<span class="header-section-number">20.5.7</span> Checking Assumptions</h3>
 <p>Next we check the key assumptions to verify whether the model is appropriate to use.</p>
-<section id="multicollinearity" class="level3" data-number="25.7.1"><h3 data-number="25.7.1" class="anchored" data-anchor-id="multicollinearity">
-<span class="header-section-number">25.7.1</span> Multicollinearity</h3>
+<section id="multicollinearity" class="level4" data-number="20.5.7.1"><h4 data-number="20.5.7.1" class="anchored" data-anchor-id="multicollinearity">
+<span class="header-section-number">20.5.7.1</span> Multicollinearity</h4>
 <p>Two of our predictors are binary, one predictor is continuous, and one predictor and the response are ordered. Because of this, there are no “standard” functions to calculate the correlation matrix of these predictors. However, we will use <a href="https://online.stat.psu.edu/stat462/node/161/">indicator encoding</a> to transform the binary predictors, and we will use <a href="https://library.virginia.edu/data/articles/understanding-ordered-factors-in-a-linear-model">polynomial encoding</a> to transform the ordered predictor (polynomial encoding represents ordered predictors as a set of polynomial terms with <span class="math inline">\(G-1\)</span> components, where <span class="math inline">\(G\)</span> is the number of categories). Both actions were already done “behind the scenes” by the <code><a href="https://rdrr.io/pkg/MASS/man/polr.html">polr()</a></code> function, so we simply need to access the “model matrix” object. We do this via the <code><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix()</a></code> function, but we remove the first column because it represents the intercept.</p>
 <div class="cell">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Extract the encoded features used by the POLR model, dropping the intercept</span></span>
@@ -1593,11 +1591,11 @@ baseline^4    -0.31490991  1.00000000</code></pre>
 </div>
 </div>
 <p>The correlation is quite low among most of the predictors. However, we see that the quadratic and quartic (<code>.Q</code> and <code>^4</code>, respectively) components are just under the “let’s worry about this” threshold of 0.8 in absolute value. This suggests to me that the highest two categories of the rheumatoid arthritis score at baseline (4 and 5) can probably be collapsed without losing a lot of information. However, we’ll keep things simple for now and say there is no multicollinearity.</p>
-</section><section id="proportional-odds" class="level3" data-number="25.7.2"><h3 data-number="25.7.2" class="anchored" data-anchor-id="proportional-odds">
-<span class="header-section-number">25.7.2</span> Proportional Odds</h3>
+</section><section id="proportional-odds" class="level4" data-number="20.5.7.2"><h4 data-number="20.5.7.2" class="anchored" data-anchor-id="proportional-odds">
+<span class="header-section-number">20.5.7.2</span> Proportional Odds</h4>
 <p>Ordinal logistic regression makes the assumption that the relationship between each pair of outcome groups is the same. In other words, ordinal logistic regression assumes that the coefficients describing the relationship between, say, the lowest and all higher categories of the response variable are the same as those describing the relationship between the next lowest and all higher categories, and so on. This assumption can be vefied several ways. Here, I have used a package called<span class="citation" data-cites="pomcheckr"><sup><a href="#ref-pomcheckr" role="doc-biblioref"><strong>pomcheckr?</strong></a></sup></span> that generates graphics to check for proportional odds assumption created by UCLA statistical consulting group <a href="https://stats.oarc.ucla.edu/">see more here</a> .</p>
-<section id="graphics-to-check-for-proportional-odds" class="level4" data-number="25.7.2.1"><h4 data-number="25.7.2.1" class="anchored" data-anchor-id="graphics-to-check-for-proportional-odds">
-<span class="header-section-number">25.7.2.1</span> Graphics to check for proportional odds</h4>
+<section id="graphics-to-check-for-proportional-odds" class="level5" data-number="20.5.7.2.1"><h5 data-number="20.5.7.2.1" class="anchored" data-anchor-id="graphics-to-check-for-proportional-odds">
+<span class="header-section-number">20.5.7.2.1</span> Graphics to check for proportional odds</h5>
 <div class="cell">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pomchk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pomcheckr/man/pomcheck.html">pomcheck</a></span><span class="op">(</span></span>
 <span>  <span class="va">y</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">age</span> <span class="op">+</span> <span class="va">treatment</span> <span class="op">+</span> <span class="va">baseline</span>,</span>
@@ -1631,7 +1629,7 @@ baseline^4    -0.31490991  1.00000000</code></pre>
 </div>
 <p>Here the function is calculating the difference in proportion of the categories in the outcome variable and plotting them against each category of the predictors. In the ideal case scenario, the distance between the dots in each line is somewhat equal; if this is true, then the categories should be considered proportional. It appears that the proportional odds assumption is violated here.</p>
 <p><strong>Add discussion on how to fix the assumption violation.</strong></p>
-</section></section></section></section><section id="references" class="level1 unnumbered"><h1 class="unnumbered">References</h1>
+</section></section></section></section><section id="references" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -2043,13 +2041,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../lessons_original/04_regression_polynomial.html" class="pagination-link" aria-label="Introduction to Polynomial Regression">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span>
+      <a href="../05_header_generalized-linear-models.html" class="pagination-link" aria-label="Generalized Linear Models">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Generalized Linear Models</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../lessons_original/06_power_ols.html" class="pagination-link" aria-label="Power Analysis for OLS Regression">
-        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../06_header_special-topics.html" class="pagination-link" aria-label="Special Topics in Statistical Modelling">
+        <span class="nav-page-text">Special Topics in Statistical Modelling</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

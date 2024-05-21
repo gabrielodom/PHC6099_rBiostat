@@ -29,11 +29,11 @@ options(dplyr.summarise.inform = FALSE)
 
 ```
 
-# Introduction
+## Introduction
 
 The Kruskal-Wallis test (H-test) **is a hypothesis test** for multiple **independent samples**, which is used when the assumptions for a one factor analysis of variance are violated. In other word, it is the **non-parametric alternative** to the One Way ANOVA. Non-parametric means that the ***data does*** ***not follow normal distribution***. It is sometimes called the ***one-way ANOVA on ranks***, as the ranks of the data values are used in the test rather **than the actual data points.**
 
-## Mathematical Equation
+### Mathematical Equation
 
 $$H = \frac{{n-1}}{{n}}\sum^k_{i=1}\frac{n_i({\bar{R_i} - E})^2}{{σ^2_R}}$$
 
@@ -67,7 +67,7 @@ Where:
 
 ![**Assigning ranks/ E and mean rank calculated/ ready for H calculation**](data/combined.jpg)
 
-## Assumptions
+### Assumptions
 
 **1. Ordinal or Continuous Response Variable** -- the response variable should be an ordinal or continuous variable.
 
@@ -75,7 +75,7 @@ Where:
 
 **3. Sample Size and distribution** -- each group must have a sample size of 5 or more and the distributions in each group need to have a similar shape but groups does not follow normal distribution.
 
-## Hypothesis
+### Hypothesis
 
 The test determines whether two or more independent groups have same central tendency.
 
@@ -83,9 +83,9 @@ The test determines whether two or more independent groups have same central ten
 
 -   H~1~: population rank sum average are significantly different for at-least two or more independent group and therefore come from different population.
 
-# Running Kruskal-Wallis in R
+## Running Kruskal-Wallis in R
 
-## Packages
+### Packages
 
 ```{r}
 # install.packages("FSA") # Houses dunnTest for pair wise comparison
@@ -105,7 +105,7 @@ suppressPackageStartupMessages(library(tidyverse))
 ```
 
 
-## Data
+### Data
 
 As an example we will manually create a data, details of which can be found [Here](https://data.library.virginia.edu/getting-started-with-the-kruskal-wallis-test/).
 
@@ -152,7 +152,7 @@ str(vaccine_efficacy)
 
 ```
 
-## Computing summary statistics by group
+### Computing summary statistics by group
 
 The first step is to inspect the data and calculate a summary of statistics. This can be done by using the `summarise` function.
 
@@ -169,7 +169,7 @@ group_by(vaccine_efficacy, Vaccines) %>%
 ```
 
 
-## Box Plot
+### Box Plot
 
 The next step will be to visualize the dataset using a box plot. This will allow us to estimate differences in distribution.
 
@@ -184,7 +184,7 @@ vaccine_efficacy %>%
 
 Based on the box plot, we see that there is similarity in distribution of A and C while B looks to be different. We can also add the individual data points and connect the boxes to visually see the density distribution and compare with normal distribution for each vaccines.
 
-### Adding error bars: mean_se
+#### Adding error bars: mean_se
 
 ```{r}
 
@@ -194,7 +194,7 @@ ggline(vaccine_efficacy, x = "Vaccines", y = "Antibody",
        ylab = "Antibody", xlab = "Vaccines")
 ```
 
-### Density plot with overlaid normal plot
+#### Density plot with overlaid normal plot
 
 Next, we want to create a density plot to further visualize the data and compare it to what a normal distribution of these data should look like. This can be done by using the `ggdensity` function as seen below.
 
@@ -224,7 +224,7 @@ ggdensity(df$C, fill = "lightgray", title = "Distribution plot of Antibody Produ
 
 From these density plots, we see that our data is not normally distributed and distribution shape for two vaccines looks similar while one vaccine deviates. As our data is not normally distributed and has small sample size, we will now perform Kruskal-Wallis test to find out whether there are any significant differences between the three vaccines in terms of their efficacy (antibodies production in the body).
 
-## Kruskal-Wallis Test
+### Kruskal-Wallis Test
 
 The Kruskal-Wallis test can be done in R using the `kruskal.test` function as seen below.
 
@@ -237,7 +237,7 @@ print(result)
 ```
 
 
-## Tabulating the result
+### Tabulating the result
 
 ```{r gtsummary}
 table1 <-   
@@ -253,12 +253,12 @@ table1 <-
 table1
 ```
 
-## Interpretation
+### Interpretation
 
 From the Kruskal-Wallis test, we get that our test statistic is 26.63 with `p-value` 0.026, which is smaller than our level of significance 0.05. This gives us enough evidence to reject the null hypothesis. Therefore, we conclude that there is a significant difference in the efficacy of at least two of the three vaccines.
 
 
-## Post-hoc-Test
+#### Post-hoc-Test
 
 The Kruskal-Wallis test helps to determine whether at least two groups differ from each other but it does not specify where in which groups the significance lies. We need to conduct a post-hoc test for this. For this purpose, the Dunn test is the appropriate nonparametric test for the pairwise multiple comparison. We will use Holm adjustment method for multiple comparison. You can read about various adjustment methods for multiple comparison [here](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5506159/)[@chen2017]
 
@@ -272,13 +272,10 @@ pair_wise_compare <- dunnTest(Antibody~Vaccines,
 pair_wise_compare
 ```
 
-
-## Interpretation
-
 When looking at the adjusted p-values in the last column for each pairwise comparison, we can see that only the A-B vaccine comparison has a p-value that is less than our level of significance of 0.05. Therefore, we conclude that there is significant difference in vaccine A-B while there is no significant difference between vaccines A-C, and B-C.
 
 
-## Alternative method
+### Alternative method
 
 A very good alternative for performing a Kruskal-Wallis and the post-hoc tests in R is with the ggbetweenstats() function from the {ggstatsplot} package: It provides a combination of box and violin plots along with jittered data points for between-subjects designs with statistical details included in the plot as a subtitle.
 
@@ -305,13 +302,4 @@ The results of the Kruskal-Wallis test are shown in the subtitle above the plot 
 In conclusion, the Kruskal-Wallace test is a non-parametric hypothesis test that can be used to determine if there are significant differences between two or more groups using the ranks of the data values. The first step involves visualizing the data to confirm it violates the rules of normality. Next, you conduct the Kruskal-Wallis test to determine if there are significant differences. Finally, you run a post-hoc test to calculate pairwise comparisons and determine which specific groups are significantly different.
 
 
-
-## Description
-
-
-```{r}
-
-```
-
-
-# References {.unnumbered}
+## References {.unnumbered}

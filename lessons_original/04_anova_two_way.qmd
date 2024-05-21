@@ -345,7 +345,7 @@ anova_plot <- anova_plot +
 anova_plot
 ```
 
-# Conclusions
+## Conclusions
 
 There is a statistically-significant difference in average crop yield by both the fertilizer type and planting density variables with F values of 9.018 (p \< 0.001) and 15.316 (p \< 0.001) respectively. The interaction between these two terms was not significant.
 

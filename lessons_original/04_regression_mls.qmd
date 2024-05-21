@@ -10,7 +10,7 @@ embed-resources: false
 
 
 
-# Multiple Linear Regression
+## Multiple Linear Regression
 
 
 
@@ -46,7 +46,7 @@ In the multiple regression situation, $b_1$, for example, is the change in $\hat
 
 5. Multicollinearity: Multicollinearity cannot exist among the predictors (the variables are not correlated)
 
-## Packages
+### Packages
 
 
 
@@ -62,7 +62,7 @@ library(tidyverse)
 ```
 
 
-## Data
+### Data
 
 
 The miles/gallon a car takes (dependent) based on the gross horsepower and weight of the car. 
@@ -74,9 +74,9 @@ head(mtcars)
 
 ```
 
-## Testing the Assumptions
+### Testing the Assumptions
 
-### Linearity 
+#### Linearity 
 
 Is there a linear relationship between the dependent variable and each of the independent variables?
 
@@ -101,7 +101,7 @@ ggplot(data = mtcars) +
 ```
 
 
-### Multicollinearity 
+#### Multicollinearity 
 
 
 Are the variables correlated? If the VIF score > 10 then there is multicollinearity. 
@@ -119,7 +119,7 @@ cor(mtcars$hp, mtcars$wt)
 
 ```
 
-### Homoscedasticity
+#### Homoscedasticity
 
 Checking the residual plots for homoscedasticity. The line below is relatively horizontal. 
 
@@ -134,7 +134,7 @@ ggplot(mtcars_df, aes(fitted(mod), res_sqrt)) +
 
 ```
 
-### Normality
+#### Normality
 
 Checking normality via histogram and QQ plot of the residuals.
 
@@ -169,7 +169,7 @@ Tentative model:
 
 mpg = $b_0$ + $b_1\times$horsepower + $b_2\times$weight + $\epsilon$
 
-## Hypothesis Testing
+### Hypothesis Testing
 
 Does the horsepower and weight of a car contribute significantly to the miles per gallon of the car? 
 
@@ -238,7 +238,7 @@ confint(car_model) %>%
 
 ```
 
-## Likelihood Ratio Test
+### Likelihood Ratio Test
 
 $H_0$: The full model and the nested model fit the data equally well. Thus, you should use the nested model.
 
@@ -271,7 +271,7 @@ lrtest(model_full, model_reduced)
 
 Our p-values are less than 0.05 for both Chi-squared values, suggesting that the full model offers significant improvement in fit over the model with just one of the predictors. 
 
-## Model Accuracy
+### Model Accuracy
 
 In multiple linear regression, the $R^2$ represents the correlation coefficient between the observed values of the outcome variable (y) and the fitted (i.e., predicted) values of y. For this reason, the value of R will always be positive and will range from zero to one.
 
@@ -291,7 +291,7 @@ summary(car_model)$adj.r.squared %>%
 Our model explains 81% of the variation in mpg values caused by horsepower and weight values. 
 
 
-# Conclusion
+## Conclusion
 
 
 ```{r}

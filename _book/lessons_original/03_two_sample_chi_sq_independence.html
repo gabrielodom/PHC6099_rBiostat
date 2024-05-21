@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Gabriel Odom">
-<meta name="dcterms.date" content="2024-05-20">
+<meta name="dcterms.date" content="2024-05-21">
 
 <title>An R Cookbook for Public Health - 12&nbsp; Chi-Squared Independence</title>
 <style>
@@ -66,7 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../lessons_original/04_anova_two_way.html" rel="next">
+<link href="../04_header_anova-and-regression.html" rel="next">
 <link href="../lessons_original/03_two_sample_bootstrap_conf_int.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -146,7 +146,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/00_part_headers.html">New Part</a></li><li class="breadcrumb-item"><a href="../lessons_original/03_two_sample_chi_sq_independence.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons_original/03_two_sample_chi_sq_independence.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -193,8 +193,8 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../lessons/00_part_headers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">New Part</span></a>
+            <a href="../01_header_EDA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exploratory Data Analysis</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -228,8 +228,8 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../lessons/00_part_headers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">New Part</span></a>
+            <a href="../02_header_one-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">One-Sample Tests</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -251,8 +251,8 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../lessons/00_part_headers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">New Part</span></a>
+            <a href="../03_header_two-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Two-Sample Tests</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -261,7 +261,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Two sample t test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -286,8 +286,8 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../lessons/00_part_headers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">New Part</span></a>
+            <a href="../04_header_anova-and-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ANOVA and Regression</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -339,8 +339,8 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../lessons/00_part_headers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">New Part</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">05_header_generalized_linear_models.qmd</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -356,8 +356,8 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../lessons/00_part_headers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">New Part</span></a>
+            <a href="../06_header_special-topics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Special Topics in Statistical Modelling</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -365,8 +365,25 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/06_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+  <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../07_header_power.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Power and Sample Size Determination</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -395,18 +412,18 @@ window.Quarto = {
   <li><a href="#running-the-chi-squared-test" id="toc-running-the-chi-squared-test" class="nav-link" data-scroll-target="#running-the-chi-squared-test"><span class="header-section-number">12.5.4</span> Running the Chi-Squared Test</a></li>
   <li><a href="#test-options" id="toc-test-options" class="nav-link" data-scroll-target="#test-options"><span class="header-section-number">12.5.5</span> Test Options</a></li>
   </ul></li>
-  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">12.6</span> Interpretation</a></li>
-  <li><a href="#post-hoc-test" id="toc-post-hoc-test" class="nav-link" data-scroll-target="#post-hoc-test"><span class="header-section-number">13</span> Post hoc test</a>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">12.6</span> Interpretation</a>
   <ul class="collapse">
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">13.0.1</span> Conclusion</a></li>
+  <li><a href="#post-hoc-test" id="toc-post-hoc-test" class="nav-link" data-scroll-target="#post-hoc-test"><span class="header-section-number">12.6.1</span> Post hoc test</a></li>
   </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">12.7</span> Conclusion</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/03_two_sample_chi_sq_independence.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/00_part_headers.html">New Part</a></li><li class="breadcrumb-item"><a href="../lessons_original/03_two_sample_chi_sq_independence.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons_original/03_two_sample_chi_sq_independence.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></h1>
 <p class="subtitle lead">What it is and how to run it</p>
@@ -427,7 +444,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 20, 2024</p>
+      <p class="date">May 21, 2024</p>
     </div>
   </div>
   
@@ -656,7 +673,7 @@ Levels: Failure Success</code></pre>
 </div>
 <p>Next, we can create the mosaic plot using the <code>mosaic()</code> function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating the mosaic plot</span></span>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating the mosaic plot</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaic</span>(</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span> treatment <span class="sc">+</span> outcome, </span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> diabetes2,</span>
@@ -707,23 +724,23 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
 <span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>table1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="ydjvjfvrnh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ydjvjfvrnh table {
+<div id="nowamcumxb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nowamcumxb table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ydjvjfvrnh thead, #ydjvjfvrnh tbody, #ydjvjfvrnh tfoot, #ydjvjfvrnh tr, #ydjvjfvrnh td, #ydjvjfvrnh th {
+#nowamcumxb thead, #nowamcumxb tbody, #nowamcumxb tfoot, #nowamcumxb tr, #nowamcumxb td, #nowamcumxb th {
   border-style: none;
 }
 
-#ydjvjfvrnh p {
+#nowamcumxb p {
   margin: 0;
   padding: 0;
 }
 
-#ydjvjfvrnh .gt_table {
+#nowamcumxb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -749,12 +766,12 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#ydjvjfvrnh .gt_caption {
+#nowamcumxb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ydjvjfvrnh .gt_title {
+#nowamcumxb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -766,7 +783,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-bottom-width: 0;
 }
 
-#ydjvjfvrnh .gt_subtitle {
+#nowamcumxb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -778,7 +795,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-top-width: 0;
 }
 
-#ydjvjfvrnh .gt_heading {
+#nowamcumxb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -790,13 +807,13 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ydjvjfvrnh .gt_bottom_border {
+#nowamcumxb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ydjvjfvrnh .gt_col_headings {
+#nowamcumxb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -811,7 +828,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ydjvjfvrnh .gt_col_heading {
+#nowamcumxb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -831,7 +848,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   overflow-x: hidden;
 }
 
-#ydjvjfvrnh .gt_column_spanner_outer {
+#nowamcumxb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -843,15 +860,15 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   padding-right: 4px;
 }
 
-#ydjvjfvrnh .gt_column_spanner_outer:first-child {
+#nowamcumxb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ydjvjfvrnh .gt_column_spanner_outer:last-child {
+#nowamcumxb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ydjvjfvrnh .gt_column_spanner {
+#nowamcumxb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -863,11 +880,11 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   width: 100%;
 }
 
-#ydjvjfvrnh .gt_spanner_row {
+#nowamcumxb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ydjvjfvrnh .gt_group_heading {
+#nowamcumxb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -893,7 +910,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   text-align: left;
 }
 
-#ydjvjfvrnh .gt_empty_group_heading {
+#nowamcumxb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -908,15 +925,15 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   vertical-align: middle;
 }
 
-#ydjvjfvrnh .gt_from_md > :first-child {
+#nowamcumxb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ydjvjfvrnh .gt_from_md > :last-child {
+#nowamcumxb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ydjvjfvrnh .gt_row {
+#nowamcumxb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -935,7 +952,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   overflow-x: hidden;
 }
 
-#ydjvjfvrnh .gt_stub {
+#nowamcumxb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -948,7 +965,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   padding-right: 5px;
 }
 
-#ydjvjfvrnh .gt_stub_row_group {
+#nowamcumxb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -962,15 +979,15 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   vertical-align: top;
 }
 
-#ydjvjfvrnh .gt_row_group_first td {
+#nowamcumxb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ydjvjfvrnh .gt_row_group_first th {
+#nowamcumxb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ydjvjfvrnh .gt_summary_row {
+#nowamcumxb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -980,16 +997,16 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   padding-right: 5px;
 }
 
-#ydjvjfvrnh .gt_first_summary_row {
+#nowamcumxb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ydjvjfvrnh .gt_first_summary_row.thick {
+#nowamcumxb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ydjvjfvrnh .gt_last_summary_row {
+#nowamcumxb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -999,7 +1016,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ydjvjfvrnh .gt_grand_summary_row {
+#nowamcumxb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1009,7 +1026,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   padding-right: 5px;
 }
 
-#ydjvjfvrnh .gt_first_grand_summary_row {
+#nowamcumxb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1019,7 +1036,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#ydjvjfvrnh .gt_last_grand_summary_row_top {
+#nowamcumxb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1029,11 +1046,11 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ydjvjfvrnh .gt_striped {
+#nowamcumxb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ydjvjfvrnh .gt_table_body {
+#nowamcumxb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1042,7 +1059,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ydjvjfvrnh .gt_footnotes {
+#nowamcumxb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1056,7 +1073,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ydjvjfvrnh .gt_footnote {
+#nowamcumxb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1065,7 +1082,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   padding-right: 5px;
 }
 
-#ydjvjfvrnh .gt_sourcenotes {
+#nowamcumxb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1079,7 +1096,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ydjvjfvrnh .gt_sourcenote {
+#nowamcumxb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1087,63 +1104,63 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   padding-right: 5px;
 }
 
-#ydjvjfvrnh .gt_left {
+#nowamcumxb .gt_left {
   text-align: left;
 }
 
-#ydjvjfvrnh .gt_center {
+#nowamcumxb .gt_center {
   text-align: center;
 }
 
-#ydjvjfvrnh .gt_right {
+#nowamcumxb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ydjvjfvrnh .gt_font_normal {
+#nowamcumxb .gt_font_normal {
   font-weight: normal;
 }
 
-#ydjvjfvrnh .gt_font_bold {
+#nowamcumxb .gt_font_bold {
   font-weight: bold;
 }
 
-#ydjvjfvrnh .gt_font_italic {
+#nowamcumxb .gt_font_italic {
   font-style: italic;
 }
 
-#ydjvjfvrnh .gt_super {
+#nowamcumxb .gt_super {
   font-size: 65%;
 }
 
-#ydjvjfvrnh .gt_footnote_marks {
+#nowamcumxb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ydjvjfvrnh .gt_asterisk {
+#nowamcumxb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ydjvjfvrnh .gt_indent_1 {
+#nowamcumxb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ydjvjfvrnh .gt_indent_2 {
+#nowamcumxb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ydjvjfvrnh .gt_indent_3 {
+#nowamcumxb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ydjvjfvrnh .gt_indent_4 {
+#nowamcumxb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ydjvjfvrnh .gt_indent_5 {
+#nowamcumxb .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1265,9 +1282,8 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
 <section id="interpretation" class="level2" data-number="12.6">
 <h2 data-number="12.6" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">12.6</span> Interpretation</h2>
 <p>Our results give us a chi-squared test statistic of 8.1645 with a <code>p-value</code> of 0.017. Since p value is smaller than critical p value (0.05), we have enough evidence to reject the null hypothesis and conclude that there is a strong association between the type of treatment on Type 2 diabetes. However, we dont’t know which treatment option is significantly different so we are going to do a post hoc test in below code chunk.</p>
-</section>
-<section id="post-hoc-test" class="level1" data-number="13">
-<h1 data-number="13"><span class="header-section-number">13</span> Post hoc test</h1>
+<section id="post-hoc-test" class="level3" data-number="12.6.1">
+<h3 data-number="12.6.1" class="anchored" data-anchor-id="post-hoc-test"><span class="header-section-number">12.6.1</span> Post hoc test</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>post_hoc_test <span class="ot">&lt;-</span> <span class="fu">pairwise_prop_test</span>(diabetes_table)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1281,12 +1297,13 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
 3 met       rosi   0.00606 0.0182 *           </code></pre>
 </div>
 </div>
-<section id="conclusion" class="level3" data-number="13.0.1">
-<h3 data-number="13.0.1" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">13.0.1</span> Conclusion</h3>
+</section>
+</section>
+<section id="conclusion" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">12.7</span> Conclusion</h2>
 <p>From our post hoc test result we see that there is a statistically significant difference between Met and Rosi. Given our data, we can conclude that Rosi is the better treatment option for the population tested.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1706,8 +1723,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../lessons_original/04_anova_two_way.html" class="pagination-link" aria-label="Two-Way ANOVA">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../04_header_anova-and-regression.html" class="pagination-link" aria-label="ANOVA and Regression">
+        <span class="nav-page-text">ANOVA and Regression</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

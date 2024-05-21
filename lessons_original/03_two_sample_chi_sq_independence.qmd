@@ -183,7 +183,7 @@ Next, we can create the mosaic plot using the `mosaic()` function.
 
 ```{r creating-mosaic-pot}
 
-#Creating the mosaic plot
+# Creating the mosaic plot
 mosaic(
   ~ treatment + outcome, 
        data = diabetes2,
@@ -250,7 +250,7 @@ The Chi-Squared Independence test statistic has various options in R. A brief de
 
 Our results give us a chi-squared test statistic of 8.1645 with a `p-value` of 0.017. Since p value is smaller than critical p value (0.05), we have enough evidence to reject the null hypothesis and conclude that there is a strong association between the type of treatment on Type 2 diabetes. However, we dont't know which treatment option is significantly different so we are going to do a post hoc test in below code chunk.
 
-# Post hoc test
+### Post hoc test
 
 ```{r}
 post_hoc_test <- pairwise_prop_test(diabetes_table)
@@ -259,7 +259,7 @@ post_hoc_test
 ```
 
 
-### Conclusion
+## Conclusion
 
 From our post hoc test result we see that there is a statistically significant difference between Met and Rosi. Given our data, we can conclude that Rosi is the better treatment option for the population tested. 
 

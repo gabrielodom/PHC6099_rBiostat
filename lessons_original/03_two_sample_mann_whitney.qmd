@@ -28,7 +28,7 @@ options(dplyr.summarise.inform = FALSE)
 
 ```
 
-# Introduction
+## Introduction
 
 -   **Mann Whitney *U* test**, also known as the Wilcoxon Rank-Sum test, is commonly used to compare the means or medians of **two independent** groups with the **assumption** that the at least one group **is not** normally distributed and when sample size is small.
 
@@ -42,7 +42,7 @@ options(dplyr.summarise.inform = FALSE)
 
 **Overall goal:** Identify whether the distribution of two groups significantly differs.
 
-## Hypotheses
+### Hypotheses
 
 Null Hypothesis **(*H~0~*):** *Distribution*~1~ = *Distribution*~2~
 
@@ -52,7 +52,7 @@ Alternate Hypothesis **(*H~1~*):** *Distribution*~1~ ≠ *Distribution*~2~
 
 -   Mean/Median Ranks of two levels are significantly different @chiyau2020
 
-### Mathematical Equation
+#### Mathematical Equation
 
 $U_1 = n_1n_2 + \frac{n_1 \cdot (n_1 + 1)}{2} - R_1$
 
@@ -64,7 +64,7 @@ Where:
 -   $R_1$ and $R_2$ represent the sum of the ranks of the observations for two groups.
 -   $n_1$ and $n_2$ are the sample sizes for two groups.
 
-### Basic criteria
+#### Basic criteria
 
 1.  Samples are independent: Each dependent variable must be related to only one independent variable.
 
@@ -72,9 +72,9 @@ Where:
 
 3.  At least one variable is not normally distributed.
 
-# Performing **Mann-Whitney *U* Test** in R
+## Performing **Mann-Whitney *U* Test** in R
 
-## Data
+### Data
 
 In this example, we will perform the **Mann-Whitney *U* Test** using wave 8 (2012-2013) data of a longitudinal epidemiological study titled *Hispanic Established Populations For the Epidemiological Study of Elderly* (HEPESE).
 
@@ -102,7 +102,7 @@ Null Hypothesis **(*H~0~*):** Mean rank of age at which diabetes is diagnosed [*
 
 Alternate Hypothesis **(*H~1~*):** Mean rank of age at which diabetes is diagnosed [*is not equal*]{.underline} among men and women.
 
-## Packages
+### Packages
 
 -   **gmodels:** It helps to compute and display confidence intervals (CI) for model estimates. @warnes2022
 
@@ -153,7 +153,7 @@ Mann_W_U <- read_csv("../data/03_HEPESE_synthetic_20240510.csv")
 
 ```
 
-## Data Exploration
+### Data Exploration
 
 ```{r data-exploration}
 # str(Mann_W_U)
@@ -374,7 +374,7 @@ The density curve provided us idea that our data do not have bell shaped distrib
 
 From the above table, we see that the value of the Shapiro-Wilk Test is 0.0006 and 0.000002 which are both less than 0.05, therefore we have enough evidence to reject the null hypothesis and confirm that the data significantly deviate from a normal distribution.
 
-## Mann Whitney *U* Test
+### Mann Whitney *U* Test
 
 ```{r}
 
@@ -409,12 +409,12 @@ tbl
 
 ```
 
-# Results
+## Results
 
 The mean age at which diabetes is diagnosed is not significantly different in males (69 years old) and females (66 years old). The Mann-Whitney U-Test showed that this difference is not statistically significant at 0.05 level of significance because statistical p value (p=.155) is greater than critical value (p=0.05). The test statistic is W = 5040.
 
-# Conclusion
+## Conclusion
 
 From the above result, we can conclude that gender does not play a significant role in the age at which one is diagnosed with diabetes. Diabetes is the 8th leading cause of death and disability in the US, and 1 in 5 US adults are currently unaware of their diabetes condition. This urges the need for increased policy efforts towards timely diabetes testing and diagnosing. Although previous research has suggested that there are gender based differences in diabetes related severity of inquiries, @kautzky-willer2016 Our findings suggest that this difference is not due to age and can be due to other gender based differences such as willingness to seek medical care, underlying health issues etc. We found that there is no need for gender-based approaches to interventions aimed at increasing diabetes surveillance, and efforts should focus on targeting the population as a whole.
 
-# References {.unnumbered}
+## References {.unnumbered}
