@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Gabriel Odom">
+<meta name="dcterms.date" content="2024-05-21">
+<title>An R Cookbook for Public Health - 10&nbsp; Mann-Whittney-U Test Example</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../lessons_original/03_two_sample_bootstrap_conf_int.html" rel="next">
+<link href="../lessons_original/03_two_sample_ttest.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons_original/03_two_sample_mann_whitney.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">An R Cookbook for Public Health</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/gabrielodom/PHC6099_rBiostat" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Course Materials for PHC 6099: ‘R Computing for Health Sciences’</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">PHC 6099: R Computing for Health Sciences</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../01_header_EDA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exploratory Data Analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_mosaic_violin.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Mosaic &amp; Box/Violin Plots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_scatterplots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">How to Create a Scatterplot</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/01_skimr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Skimr Package</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/01_table1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Demographics table with table1</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../02_header_one-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">One-Sample Tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_z-test_one_prop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../03_header_two-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Two-Sample Tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../04_header_anova-and-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ANOVA and Regression</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../05_header_generalized-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generalized Linear Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../06_header_special-topics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Special Topics in Statistical Modelling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../07_header_power.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Power and Sample Size Determination</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">10.1</span> Introduction</a>
+  <ul class="collapse">
+<li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><span class="header-section-number">10.1.1</span> Hypotheses</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#performing-mann-whitney-u-test-in-r" id="toc-performing-mann-whitney-u-test-in-r" class="nav-link" data-scroll-target="#performing-mann-whitney-u-test-in-r"><span class="header-section-number">10.2</span> Performing <strong>Mann-Whitney <em>U</em> Test</strong> in R</a>
+  <ul class="collapse">
+<li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">10.2.1</span> Data</a></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">10.2.2</span> Packages</a></li>
+  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration"><span class="header-section-number">10.2.3</span> Data Exploration</a></li>
+  <li><a href="#mann-whitney-u-test" id="toc-mann-whitney-u-test" class="nav-link" data-scroll-target="#mann-whitney-u-test"><span class="header-section-number">10.2.4</span> Mann Whitney <em>U</em> Test</a></li>
+  </ul>
+</li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">10.3</span> Results</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">10.4</span> Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/03_two_sample_mann_whitney.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons_original/03_two_sample_mann_whitney.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Srijana Acharya </p>
+             <p>Arturo Barahona </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 21, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header><section id="introduction" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">10.1</span> Introduction</h2>
+<ul>
+<li>
+<p><strong>Mann Whitney <em>U</em> test</strong>, also known as the Wilcoxon Rank-Sum test, is commonly used to compare the means or medians of <strong>two independent</strong> groups with the <strong>assumption</strong> that the at least one group <strong>is not</strong> normally distributed and when sample size is small.</p>
+<ul>
+<li>The Welch <em>U</em> test should be used when there exists signs of skewness and variance of heterogeneity.<span class="citation" data-cites="fagerland2009"><sup><a href="#ref-fagerland2009" role="doc-biblioref"><strong>fagerland2009?</strong></a></sup></span>
+</li>
+</ul>
+</li>
+<li>
+<p>It is useful for <strong>numerical/continuous variables</strong>.</p>
+<ul>
+<li>For example, if researchers want to compare two different groups’ age or height (continuous variables)&nbsp;in a study with&nbsp;non-normally distributed data.<span class="citation" data-cites="sundjaja2023"><sup><a href="#ref-sundjaja2023" role="doc-biblioref"><strong>sundjaja2023?</strong></a></sup></span>
+</li>
+</ul>
+</li>
+<li><p>When conducting this test, aside from reporting the <em>p-value</em>, the spread, and the shape of the data should be described.<span class="citation" data-cites="hart2001"><sup><a href="#ref-hart2001" role="doc-biblioref"><strong>hart2001?</strong></a></sup></span></p></li>
+</ul>
+<p><strong>Overall goal:</strong> Identify whether the distribution of two groups significantly differs.</p>
+<section id="hypotheses" class="level3" data-number="10.1.1"><h3 data-number="10.1.1" class="anchored" data-anchor-id="hypotheses">
+<span class="header-section-number">10.1.1</span> Hypotheses</h3>
+<p>Null Hypothesis <strong>(<em>H<sub>0</sub></em>):</strong> <em>Distribution</em><sub>1</sub> = <em>Distribution</em><sub>2</sub></p>
+<ul>
+<li>Mean/Median Ranks of two levels are equal<span class="citation" data-cites="chiyau2020"><sup><a href="#ref-chiyau2020" role="doc-biblioref"><strong>chiyau2020?</strong></a></sup></span>
+</li>
+</ul>
+<p>Alternate Hypothesis <strong>(<em>H<sub>1</sub></em>):</strong> <em>Distribution</em><sub>1</sub> ≠&nbsp;<em>Distribution</em><sub>2</sub></p>
+<ul>
+<li>Mean/Median Ranks of two levels are significantly different<span class="citation" data-cites="chiyau2020"><sup><a href="#ref-chiyau2020" role="doc-biblioref"><strong>chiyau2020?</strong></a></sup></span>
+</li>
+</ul>
+<section id="mathematical-equation" class="level4" data-number="10.1.1.1"><h4 data-number="10.1.1.1" class="anchored" data-anchor-id="mathematical-equation">
+<span class="header-section-number">10.1.1.1</span> Mathematical Equation</h4>
+<p><span class="math inline">\(U_1 = n_1n_2 + \frac{n_1 \cdot (n_1 + 1)}{2} - R_1\)</span></p>
+<p><span class="math inline">\(U_2 = n_1n_2 + \frac{n_2 \cdot (n_2 + 1)}{2} - R_2\)</span></p>
+<p>Where:</p>
+<ul>
+<li>
+<span class="math inline">\(U_1\)</span> and <span class="math inline">\(U_2\)</span> represent the test statistics for two groups;(Male &amp; Female).</li>
+<li>
+<span class="math inline">\(R_1\)</span> and <span class="math inline">\(R_2\)</span> represent the sum of the ranks of the observations for two groups.</li>
+<li>
+<span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> are the sample sizes for two groups.</li>
+</ul></section><section id="basic-criteria" class="level4" data-number="10.1.1.2"><h4 data-number="10.1.1.2" class="anchored" data-anchor-id="basic-criteria">
+<span class="header-section-number">10.1.1.2</span> Basic criteria</h4>
+<ol type="1">
+<li><p>Samples are independent: Each dependent variable must be related to only one independent variable.</p></li>
+<li><p>The response variable is ordinal or continuous.</p></li>
+<li><p>At least one variable is not normally distributed.</p></li>
+</ol></section></section></section><section id="performing-mann-whitney-u-test-in-r" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="performing-mann-whitney-u-test-in-r">
+<span class="header-section-number">10.2</span> Performing <strong>Mann-Whitney <em>U</em> Test</strong> in R</h2>
+<section id="data" class="level3" data-number="10.2.1"><h3 data-number="10.2.1" class="anchored" data-anchor-id="data">
+<span class="header-section-number">10.2.1</span> Data</h3>
+<p>In this example, we will perform the <strong>Mann-Whitney <em>U</em> Test</strong> using wave 8 (2012-2013) data of a longitudinal epidemiological study titled <em>Hispanic Established Populations For the Epidemiological Study of Elderly</em> (HEPESE).</p>
+<p>The HEPESE provides data on risk factors for mortality and morbidity in Mexican Americans in order to contrast how these factors operate differently in non-Hispanic White Americans, African Americans, and other major ethnic groups.The data is publicly available and can be obtained from the University of Michigan website.<span class="citation" data-cites="kyriakoss.markides2016"><sup><a href="#ref-kyriakoss.markides2016" role="doc-biblioref"><strong>kyriakoss.markides2016?</strong></a></sup></span></p>
+<p>Using this data, we want to explore whether there are significant gender differences in age when Type 2 diabetes mellitus (T2DM) is diagnosed. Type 2 diabetes is a chronic disease condition that has affected 37 million people living in the United States. Type 2 diabetes is the eighth leading cause of death and disability in US. Type 2 diabetes generally occurs among adults aged 45 or older although, young adults and children are also diagnosed with it these days. Diabetes and its complications are preventable when following proper lifestyles and timely medications. <strong><em>1 in 5 of US people don’t know they have diabetes.</em></strong><span class="citation" data-cites="national2020"><sup><a href="#ref-national2020" role="doc-biblioref"><strong>national2020?</strong></a></sup></span></p>
+<p>Research has shown that men are more likely to develop type 2 diabetes while women are more likely to experience complications, including heart and kidney disease.<span class="citation" data-cites="meissner2021"><sup><a href="#ref-meissner2021" role="doc-biblioref"><strong>meissner2021?</strong></a></sup></span></p>
+<p>In this report, we want to test whether there are significant differences in age at which diabetes is diagnosed among males and females.</p>
+<p><u>Dependent Response Variable</u></p>
+<p>ageAtDx = Age_Diagnosed = Age at which diabetes is diagnosed.</p>
+<p><u>Independent Variable</u></p>
+<p>isMale = Gender</p>
+<p><strong>Research Question:</strong></p>
+<p><strong><em>Does the age at which diabetes is diagnosed significantly differ among Men and Women?</em></strong></p>
+<p>Null Hypothesis <strong>(<em>H<sub>0</sub></em>):</strong> Mean rank of age at which diabetes is diagnosed <u><em>is equal</em></u> among men and women.</p>
+<p>Alternate Hypothesis <strong>(<em>H<sub>1</sub></em>):</strong> Mean rank of age at which diabetes is diagnosed <u><em>is not equal</em></u> among men and women.</p>
+</section><section id="packages" class="level3" data-number="10.2.2"><h3 data-number="10.2.2" class="anchored" data-anchor-id="packages">
+<span class="header-section-number">10.2.2</span> Packages</h3>
+<ul>
+<li><p><strong>gmodels:</strong> It helps to compute and display confidence intervals (CI) for model estimates.<span class="citation" data-cites="warnes2022"><sup><a href="#ref-warnes2022" role="doc-biblioref"><strong>warnes2022?</strong></a></sup></span></p></li>
+<li><p><strong>DescTools:</strong> It provides tools for basic statistics e.g.&nbsp;to compute Median CI for an efficient data description.<span class="citation" data-cites="andrisignorell2023"><sup><a href="#ref-andrisignorell2023" role="doc-biblioref"><strong>andrisignorell2023?</strong></a></sup></span></p></li>
+<li><p><strong>ggplot2:</strong> It helps to create Boxplots.</p></li>
+<li><p><strong>qqplotr:</strong> It helps to create QQ plot.</p></li>
+<li><p><strong>dplyr:</strong> It is used to manipulate data and provide summary statistics.</p></li>
+<li>
+<p><strong>haven:</strong> It helps to import spss data into r.</p>
+<p><strong><em>Dependencies = TRUE</em></strong> : It indicates that while installing packages, it must also install all dependencies of the specified package.</p>
+</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># install.packages("gmodels", dependencies = TRUE)</span></span>
+<span><span class="co"># install.packages("car", dependencies = TRUE)</span></span>
+<span><span class="co"># install.packages("DescTools", dependencies = TRUE)</span></span>
+<span><span class="co"># install.packages("ggplot2", dependencies = TRUE)</span></span>
+<span><span class="co"># install.packages("qqplotr", dependencies = TRUE)</span></span>
+<span><span class="co"># install.packages("gtsummary", dependencies = TRUE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Loading Library</strong></p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://haven.tidyverse.org">haven</a></span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-gregmisc/gmodels">gmodels</a></span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://andrisignorell.github.io/DescTools/">DescTools</a></span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/aloy/qqplotr">qqplotr</a></span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddsjoberg/gtsummary">gtsummary</a></span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Data Importing</strong></p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Mann_W_U &lt;- read_sav("data\\36578-0001-Data.sav")</span></span>
+<span><span class="va">Mann_W_U</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"../data/03_HEPESE_synthetic_20240510.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 744 Columns: 2
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (1): ageAtDx
+lgl (1): isMale
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+</section><section id="data-exploration" class="level3" data-number="10.2.3"><h3 data-number="10.2.3" class="anchored" data-anchor-id="data-exploration">
+<span class="header-section-number">10.2.3</span> Data Exploration</h3>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># str(Mann_W_U)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">Mann_W_U</span><span class="op">$</span><span class="va">isMale</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> logi [1:744] FALSE FALSE FALSE TRUE FALSE TRUE ...</code></pre>
+</div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">Mann_W_U</span><span class="op">$</span><span class="va">ageAtDx</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> num [1:744] 87 70 68 60 55 33 38 65 50 68 ...</code></pre>
+</div>
+</div>
+<p>After inspecting the data, we found that values of our dependent and independent variable values are in character form. We want them to be numerical and categorical, respectively. First, we will convert dependent variable into numerical form and our independent variable into categorical. Next, we will recode the factors as male and female. Also for ease, we will rename our dependent and independent variable.</p>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># convert to number and factor</span></span>
+<span><span class="va">Mann_W_U</span><span class="op">$</span><span class="va">ageAtDx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">Mann_W_U</span><span class="op">$</span><span class="va">ageAtDx</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">Mann_W_U</span><span class="op">$</span><span class="va">ageAtDx</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Mann_W_U</span><span class="op">$</span><span class="va">isMale</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="va">Mann_W_U</span><span class="op">$</span><span class="va">isMale</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">Mann_W_U</span><span class="op">$</span><span class="va">isMale</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "factor"</code></pre>
+</div>
+</div>
+<p>The next step is to calculate some of the descriptive data to give us a better idea of the data that we are dealing with. This can be done using the <code>summarise</code> function.</p>
+<p><strong>Descriptive Data</strong></p>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Des</span> <span class="op">&lt;-</span> </span>
+<span> <span class="va">Mann_W_U</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">isMale</span>, <span class="va">ageAtDx</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">isMale</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>   n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>   mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">ageAtDx</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>   sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">ageAtDx</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>   stderr <span class="op">=</span> <span class="va">sd</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>,</span>
+<span>   LCL <span class="op">=</span> <span class="va">mean</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="op">(</span><span class="fl">0.05</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span>, <span class="va">n</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="va">stderr</span>,</span>
+<span>   UCL <span class="op">=</span> <span class="va">mean</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="op">(</span><span class="fl">0.05</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span>, <span class="va">n</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="va">stderr</span>,</span>
+<span>   median <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">ageAtDx</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>   min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">ageAtDx</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, </span>
+<span>   max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">ageAtDx</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>   IQR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/IQR.html">IQR</a></span><span class="op">(</span><span class="va">ageAtDx</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>   LCLmed <span class="op">=</span> <span class="fu"><a href="https://andrisignorell.github.io/DescTools/reference/MedianCI.html">MedianCI</a></span><span class="op">(</span><span class="va">ageAtDx</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,</span>
+<span>   UCLmed <span class="op">=</span> <span class="fu"><a href="https://andrisignorell.github.io/DescTools/reference/MedianCI.html">MedianCI</a></span><span class="op">(</span><span class="va">ageAtDx</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></span>
+<span> <span class="op">)</span></span>
+<span></span>
+<span><span class="va">Des</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 13
+  isMale     n  mean    sd stderr   LCL   UCL median   min   max   IQR LCLmed
+  &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+1 FALSE    455  67.6  14.1  0.661  66.3  68.9     70    18    93    19     68
+2 TRUE     289  67.1  15.1  0.886  65.3  68.8     70    20    94    18     68
+# ℹ 1 more variable: UCLmed &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<ol type="1">
+<li><p><strong>n:</strong> The number of observations for each gender.</p></li>
+<li><p><strong>mean:</strong> The mean age when diabetes is diagnosed for each gender.</p></li>
+<li><p><strong>sd:</strong> The standard deviation of each gender.</p></li>
+<li><p><strong>stderr:</strong> The standard error of each gender level.&nbsp; That is the standard deviation / sqrt (n).</p></li>
+<li><p><strong>LCL, UCL:</strong> The upper and lower confidence intervals of the mean.&nbsp; This values indicates the range at which we can be 95% certain that the true mean falls between the lower and upper values specified for each gender group assuming a normal distribution.&nbsp;</p></li>
+<li><p><strong>median:</strong> The median value for each gender.</p></li>
+<li><p><strong>min, max:</strong> The minimum and maximum value for each gender.</p></li>
+<li><p><strong>IQR:</strong> The interquartile range of each gender. That is the 75th percentile –&nbsp; 25th percentile.</p></li>
+<li><p><strong>LCLmed, UCLmed:</strong> The 95% confidence interval for the median.</p></li>
+</ol>
+<p><strong>Visual exploration of data</strong></p>
+<p>The next step is to visualize the data. This can be done using different functions under the <code>ggplot</code> package.</p>
+<p><strong>1) Box plot</strong></p>
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span></span>
+<span> <span class="va">Mann_W_U</span>, </span>
+<span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
+<span>   x <span class="op">=</span> <span class="va">isMale</span>, </span>
+<span>   y <span class="op">=</span> <span class="va">ageAtDx</span>, </span>
+<span>   fill <span class="op">=</span> <span class="va">isMale</span></span>
+<span> <span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">+</span></span>
+<span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">stat_boxplot</a></span><span class="op">(</span></span>
+<span>   geom <span class="op">=</span> <span class="st">"errorbar"</span>, </span>
+<span>   width <span class="op">=</span> <span class="fl">0.5</span></span>
+<span> <span class="op">)</span> <span class="op">+</span></span>
+<span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span></span>
+<span>   fill <span class="op">=</span> <span class="st">"light blue"</span></span>
+<span> <span class="op">)</span> <span class="op">+</span> </span>
+<span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span></span>
+<span>   fun.y <span class="op">=</span> <span class="va">mean</span>, </span>
+<span>   geom <span class="op">=</span> <span class="st">"point"</span>, </span>
+<span>   shape <span class="op">=</span> <span class="fl">10</span>, </span>
+<span>   size <span class="op">=</span> <span class="fl">3.5</span>, </span>
+<span>   color <span class="op">=</span> <span class="st">"black"</span></span>
+<span> <span class="op">)</span> <span class="op">+</span> </span>
+<span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span></span>
+<span>   <span class="st">"Boxplot of Gender"</span></span>
+<span> <span class="op">)</span> <span class="op">+</span> </span>
+<span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
+<span>   legend.position <span class="op">=</span> <span class="st">"none"</span></span>
+<span> <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The `fun.y` argument of `stat_summary()` is deprecated as of ggplot2 3.3.0.
+ℹ Please use the `fun` argument instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="03_two_sample_mann_whitney_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>2) QQ plot</strong></p>
+<div class="cell">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://conflicted.r-lib.org/">conflicted</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://conflicted.r-lib.org/reference/conflict_prefer.html">conflict_prefer</a></span><span class="op">(</span><span class="st">"stat_qq_line"</span>, <span class="st">"qqplotr"</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># Perform QQ plots by group</span></span>
+<span><span class="va">QQ_Plot</span> <span class="op">&lt;-</span> </span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span></span>
+<span> data <span class="op">=</span> <span class="va">Mann_W_U</span>, </span>
+<span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
+<span>   sample <span class="op">=</span> <span class="va">ageAtDx</span>, </span>
+<span>   color <span class="op">=</span> <span class="va">isMale</span>, </span>
+<span>   fill <span class="op">=</span> <span class="va">isMale</span></span>
+<span> <span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">+</span></span>
+<span> <span class="fu"><a href="https://rdrr.io/pkg/qqplotr/man/stat_qq_band.html">stat_qq_band</a></span><span class="op">(</span></span>
+<span>   alpha <span class="op">=</span> <span class="fl">0.5</span>, </span>
+<span>   conf <span class="op">=</span> <span class="fl">0.95</span>, </span>
+<span>   qtype <span class="op">=</span> <span class="fl">1</span>, </span>
+<span>   bandType <span class="op">=</span> <span class="st">"boot"</span></span>
+<span> <span class="op">)</span> <span class="op">+</span></span>
+<span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq_line</a></span><span class="op">(</span></span>
+<span>   identity <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span> <span class="op">)</span> <span class="op">+</span></span>
+<span> <span class="fu"><a href="https://rdrr.io/pkg/qqplotr/man/stat_qq_point.html">stat_qq_point</a></span><span class="op">(</span></span>
+<span>   col <span class="op">=</span> <span class="st">"black"</span></span>
+<span> <span class="op">)</span> <span class="op">+</span></span>
+<span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span></span>
+<span>   <span class="op">~</span> <span class="va">isMale</span>, scales <span class="op">=</span> <span class="st">"free"</span></span>
+<span> <span class="op">)</span> <span class="op">+</span></span>
+<span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>   x <span class="op">=</span> <span class="st">"Theoretical Quantiles"</span>, </span>
+<span>   y <span class="op">=</span> <span class="st">"Sample Quantiles"</span></span>
+<span> <span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">QQ_Plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="03_two_sample_mann_whitney_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p><strong>stat_qq_line:</strong> Draws a reference line based on the data quantiles.</p></li>
+<li>
+<p><strong>Stat_qq_band:</strong> Draws confidence bands based on three methods; “pointwise”/“boot”,“Ks” and “ts”.</p>
+<ul>
+<li><p><code>"pointwise"</code> constructs simultaneous confidence bands based on the normal distribution;</p></li>
+<li><p><code>"boot"</code> creates pointwise confidence bands based on a parametric boostrap;</p></li>
+<li><p><code>"ks"</code> constructs simultaneous confidence bands based on an inversion of the Kolmogorov-Smirnov test;</p></li>
+<li><p><code>"ts"</code> constructs tail-sensitive confidence bands<span class="citation" data-cites="aldor-noiman2013"><sup><a href="#ref-aldor-noiman2013" role="doc-biblioref"><strong>aldor-noiman2013?</strong></a></sup></span></p></li>
+</ul>
+</li>
+<li>
+<p><strong>Stat_qq_Point:</strong> It is a modified version of ggplot: : stat_qq with some parameters adjustments and a new option to detrend the points.</p>
+<p><strong>3) Histogram</strong></p>
+<p>A histogram is the most commonly used graph to show frequency distributions.</p>
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Hist</span> <span class="op">&lt;-</span> </span>
+<span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span></span>
+<span><span class="va">Mann_W_U</span>,</span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="va">ageAtDx</span>,</span>
+<span>  fill <span class="op">=</span> <span class="va">isMale</span></span>
+<span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">isMale</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="va">Hist</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="03_two_sample_mann_whitney_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>3b) Density curve in Histogram</strong></p>
+</li>
+</ul>
+<p>A density curve gives us a good idea of the “shape” of a distribution, including whether or not a distribution has one or more “peaks” of frequently occurring values and whether or not the distribution is skewed to the left or the right.<span class="citation" data-cites="zach2020"><sup><a href="#ref-zach2020" role="doc-biblioref"><strong>zach2020?</strong></a></sup></span></p>
+<div class="cell">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span></span>
+<span>  <span class="va">Mann_W_U</span>, </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="va">ageAtDx</span>,</span>
+<span>    fill <span class="op">=</span> <span class="va">isMale</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Age When diabetes is diagnosed"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Density"</span>,</span>
+<span>    fill <span class="op">=</span> <span class="st">"Gender"</span>,</span>
+<span>    title <span class="op">=</span> <span class="st">"A Density Plot of Age when diabetes is diagnosed"</span>,</span>
+<span>    caption <span class="op">=</span> <span class="st">"Data Source: HEPESE Wave 8 (ICPSR 36578)"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">isMale</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="03_two_sample_mann_whitney_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The density curve provided us idea that our data do not have bell shaped distribution and it is slightly skewed towards left.</p>
+<p><strong>4) Statistical test for normality</strong></p>
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>   <span class="va">Mann_W_U</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span></span>
+<span>   <span class="va">isMale</span></span>
+<span> <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>   `W Stat` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">ageAtDx</span><span class="op">)</span><span class="op">$</span><span class="va">statistic</span>,</span>
+<span>    p.value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">ageAtDx</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span>,</span>
+<span>   <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>scipen <span class="op">=</span> <span class="fl">999</span><span class="op">)</span></span>
+<span> <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  isMale `W Stat`  p.value `options(scipen = 999)`
+  &lt;fct&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;named list&gt;           
+1 FALSE     0.959 6.50e-10 &lt;dbl [1]&gt;              
+2 TRUE      0.937 9.99e-10 &lt;dbl [1]&gt;              </code></pre>
+</div>
+</div>
+<p><strong>Interpretation</strong></p>
+<p>From the above table, we see that the value of the Shapiro-Wilk Test is 0.0006 and 0.000002 which are both less than 0.05, therefore we have enough evidence to reject the null hypothesis and confirm that the data significantly deviate from a normal distribution.</p>
+</section><section id="mann-whitney-u-test" class="level3" data-number="10.2.4"><h3 data-number="10.2.4" class="anchored" data-anchor-id="mann-whitney-u-test">
+<span class="header-section-number">10.2.4</span> Mann Whitney <em>U</em> Test</h3>
+<div class="cell">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span></span>
+<span>  <span class="va">ageAtDx</span> <span class="op">~</span> <span class="va">isMale</span>, </span>
+<span>  data <span class="op">=</span> <span class="va">Mann_W_U</span>, </span>
+<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>  <span class="co"># paired = FALSE, </span></span>
+<span>  exact <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>  conf.int <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">test_statistics</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">$</span><span class="va">statistic</span></span>
+<span></span>
+<span><span class="va">p_values</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">$</span><span class="va">p.value</span></span>
+<span></span>
+<span><span class="va">method_used</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">$</span><span class="va">method</span></span>
+<span></span>
+<span><span class="va">result_df</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>    Test_Statistic <span class="op">=</span> <span class="va">test_statistics</span>,</span>
+<span>    P_Value <span class="op">=</span> <span class="va">p_values</span>,</span>
+<span>    Method <span class="op">=</span> <span class="va">method_used</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">tbl</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl_df.html">tbl_df</a></span><span class="op">(</span></span>
+<span>    data <span class="op">=</span> <span class="va">result_df</span></span>
+<span>  <span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `tbl_df()` was deprecated in dplyr 1.0.0.
+ℹ Please use `tibble::as_tibble()` instead.</code></pre>
+</div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  Test_Statistic P_Value Method                                           
+           &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;                                            
+1          66178   0.880 Wilcoxon rank sum test with continuity correction</code></pre>
+</div>
+</div>
+</section></section><section id="results" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="results">
+<span class="header-section-number">10.3</span> Results</h2>
+<p>The mean age at which diabetes is diagnosed is not significantly different in males (69 years old) and females (66 years old). The Mann-Whitney U-Test showed that this difference is not statistically significant at 0.05 level of significance because statistical p value (p=.155) is greater than critical value (p=0.05). The test statistic is W = 5040.</p>
+</section><section id="conclusion" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="conclusion">
+<span class="header-section-number">10.4</span> Conclusion</h2>
+<p>From the above result, we can conclude that gender does not play a significant role in the age at which one is diagnosed with diabetes. Diabetes is the 8th leading cause of death and disability in the US, and 1 in 5 US adults are currently unaware of their diabetes condition. This urges the need for increased policy efforts towards timely diabetes testing and diagnosing. Although previous research has suggested that there are gender based differences in diabetes related severity of inquiries,<span class="citation" data-cites="kautzky-willer2016"><sup><a href="#ref-kautzky-willer2016" role="doc-biblioref"><strong>kautzky-willer2016?</strong></a></sup></span> Our findings suggest that this difference is not due to age and can be due to other gender based differences such as willingness to seek medical care, underlying health issues etc. We found that there is no need for gender-based approaches to interventions aimed at increasing diabetes surveillance, and efforts should focus on targeting the population as a whole.</p>
+</section><section id="references" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/gabrielodom\.github\.io\/PHC6099_rBiostat\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../lessons_original/03_two_sample_ttest.html" class="pagination-link" aria-label="Two sample $t$-test">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../lessons_original/03_two_sample_bootstrap_conf_int.html" class="pagination-link" aria-label="Bootstrap Confidence Intervals">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/03_two_sample_mann_whitney.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+
+
+</body></html>

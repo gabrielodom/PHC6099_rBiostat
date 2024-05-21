@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Gabriel Odom">
+<meta name="dcterms.date" content="2024-05-21">
+
+<title>An R Cookbook for Public Health - 15&nbsp; Random Intercept Model</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../lessons_original/04_correlation.html" rel="next">
+<link href="../lessons_original/04_anova_kruskal_wallis.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_anova_random_intercept.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">An R Cookbook for Public Health</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/gabrielodom/PHC6099_rBiostat" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Course Materials for PHC 6099: ‘R Computing for Health Sciences’</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">PHC 6099: R Computing for Health Sciences</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../01_header_EDA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exploratory Data Analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_mosaic_violin.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Mosaic &amp; Box/Violin Plots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_scatterplots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">How to Create a Scatterplot</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/01_skimr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Skimr Package</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/01_table1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Demographics table with table1</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../02_header_one-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">One-Sample Tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_z-test_one_prop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../03_header_two-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Two-Sample Tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../04_header_anova-and-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ANOVA and Regression</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../05_header_generalized-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generalized Linear Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../06_header_special-topics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Special Topics in Statistical Modelling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../07_header_power.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Power and Sample Size Determination</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#libraries-used" id="toc-libraries-used" class="nav-link active" data-scroll-target="#libraries-used"><span class="header-section-number">15.1</span> Libraries Used</a></li>
+  <li><a href="#what-is-a-random-intercept-model" id="toc-what-is-a-random-intercept-model" class="nav-link" data-scroll-target="#what-is-a-random-intercept-model"><span class="header-section-number">15.2</span> What is a Random Intercept model</a>
+  <ul class="collapse">
+  <li><a href="#variance-component-model" id="toc-variance-component-model" class="nav-link" data-scroll-target="#variance-component-model"><span class="header-section-number">15.2.1</span> Variance component model</a></li>
+  <li><a href="#why-this-is-relevant" id="toc-why-this-is-relevant" class="nav-link" data-scroll-target="#why-this-is-relevant"><span class="header-section-number">15.2.2</span> Why this is relevant</a></li>
+  <li><a href="#example-1-school-level-data" id="toc-example-1-school-level-data" class="nav-link" data-scroll-target="#example-1-school-level-data"><span class="header-section-number">15.2.3</span> Example 1: School level data</a></li>
+  </ul></li>
+  <li><a href="#fitting-a-single-level-regression-model" id="toc-fitting-a-single-level-regression-model" class="nav-link" data-scroll-target="#fitting-a-single-level-regression-model"><span class="header-section-number">15.3</span> Fitting a single-level regression model</a></li>
+  <li><a href="#solution-fitting-a-random-intercept-model" id="toc-solution-fitting-a-random-intercept-model" class="nav-link" data-scroll-target="#solution-fitting-a-random-intercept-model"><span class="header-section-number">15.4</span> Solution: Fitting a Random Intercept model</a></li>
+  <li><a href="#final-key-points" id="toc-final-key-points" class="nav-link" data-scroll-target="#final-key-points"><span class="header-section-number">15.5</span> Final key points</a></li>
+  <li><a href="#assumptions-of-a-random-effects-model" id="toc-assumptions-of-a-random-effects-model" class="nav-link" data-scroll-target="#assumptions-of-a-random-effects-model"><span class="header-section-number">15.6</span> Assumptions of a random effects model:</a></li>
+  <li><a href="#hypothesis-of-a-random-effects-model" id="toc-hypothesis-of-a-random-effects-model" class="nav-link" data-scroll-target="#hypothesis-of-a-random-effects-model"><span class="header-section-number">15.7</span> hypothesis of a random effects model:</a></li>
+  <li><a href="#example-2-planktonic-larval-duration-pld" id="toc-example-2-planktonic-larval-duration-pld" class="nav-link" data-scroll-target="#example-2-planktonic-larval-duration-pld"><span class="header-section-number">15.8</span> Example 2: Planktonic larval duration (PLD)</a>
+  <ul class="collapse">
+  <li><a href="#load-pld-data" id="toc-load-pld-data" class="nav-link" data-scroll-target="#load-pld-data"><span class="header-section-number">15.8.1</span> load PLD data</a></li>
+  <li><a href="#fit-first-model-linear-model" id="toc-fit-first-model-linear-model" class="nav-link" data-scroll-target="#fit-first-model-linear-model"><span class="header-section-number">15.8.2</span> Fit first model: Linear model</a></li>
+  <li><a href="#log-transformation" id="toc-log-transformation" class="nav-link" data-scroll-target="#log-transformation"><span class="header-section-number">15.8.3</span> Log transformation</a></li>
+  <li><a href="#residual-of-new-log-transformed-graph" id="toc-residual-of-new-log-transformed-graph" class="nav-link" data-scroll-target="#residual-of-new-log-transformed-graph"><span class="header-section-number">15.8.4</span> residual of new log transformed graph</a></li>
+  </ul></li>
+  <li><a href="#fitting-a-random-intercept-model-random-intercept-same-slope" id="toc-fitting-a-random-intercept-model-random-intercept-same-slope" class="nav-link" data-scroll-target="#fitting-a-random-intercept-model-random-intercept-same-slope"><span class="header-section-number">15.9</span> Fitting a random intercept model (random intercept, same slope)</a>
+  <ul class="collapse">
+  <li><a href="#fitting-model" id="toc-fitting-model" class="nav-link" data-scroll-target="#fitting-model"><span class="header-section-number">15.9.1</span> fitting model</a></li>
+  <li><a href="#inter-class-correlation-coefficient-icc" id="toc-inter-class-correlation-coefficient-icc" class="nav-link" data-scroll-target="#inter-class-correlation-coefficient-icc"><span class="header-section-number">15.9.2</span> Inter class correlation coefficient (ICC)</a></li>
+  </ul></li>
+  <li><a href="#interpretation-of-results" id="toc-interpretation-of-results" class="nav-link" data-scroll-target="#interpretation-of-results"><span class="header-section-number">15.10</span> Interpretation of results</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">15.11</span> Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">15.12</span> References</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/04_anova_random_intercept.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_anova_random_intercept.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></h1>
+<p class="subtitle lead">Learning how to use Random Intercept Models in R</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliations</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Ana Bravo &amp; Tendai Gwanzura </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Florida International University
+          </p>
+        <p class="affiliation">
+            Robert Stempel College of Public Health and Social Work
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 21, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="libraries-used" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="libraries-used"><span class="header-section-number">15.1</span> Libraries Used</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)        <span class="co"># to make table outputs presentation/publication ready. </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)     <span class="co"># clean output.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)     <span class="co"># to make tables. </span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary) <span class="co"># extension to gt</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lattice)   <span class="co"># It is a powerful data visualization for multivariate data</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)      <span class="co"># Fit linear and generalized linear mixed-effects models</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(arm)       <span class="co"># Data Analysis Using Regression and Multilevel models</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># for cleaning wrangling data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="what-is-a-random-intercept-model" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="what-is-a-random-intercept-model"><span class="header-section-number">15.2</span> What is a Random Intercept model</h2>
+<p>Before talking about a random intercept model, let’s understand why they are necessary and important in the real world by discussing a variance component model first. This will make sense as we go along in this lecture.</p>
+<section id="variance-component-model" class="level3" data-number="15.2.1">
+<h3 data-number="15.2.1" class="anchored" data-anchor-id="variance-component-model"><span class="header-section-number">15.2.1</span> Variance component model</h3>
+<p>We are familiar with a <em>fixed level of a factor</em> or variable. Which means that the factor level in an experiment is the only thing we are interested. For example, let’s say we are interested in measuring the difference in resistance resulting from putting identical resistors to three different temperatures for a period of 24 hours. Let’s say we have three different groups, and each of these three different groups have a sample size of 5. So each of the three treatment groups was replicated 5 times.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Level 1</th>
+<th>Level 2</th>
+<th>Level 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>6.9</td>
+<td>8.3</td>
+<td>8.0</td>
+</tr>
+<tr class="even">
+<td>5.4</td>
+<td>6.8</td>
+<td>10.5</td>
+</tr>
+<tr class="odd">
+<td>5.8</td>
+<td>7.8</td>
+<td>8.1</td>
+</tr>
+<tr class="even">
+<td>4.6</td>
+<td>9.2</td>
+<td>6.9</td>
+</tr>
+<tr class="odd">
+<td>4.0</td>
+<td>6.5</td>
+<td>9.3</td>
+</tr>
+<tr class="even">
+<td>mean</td>
+<td>mean</td>
+<td>mean</td>
+</tr>
+<tr class="odd">
+<td>5.34</td>
+<td>7.72</td>
+<td>8.56</td>
+</tr>
+</tbody>
+</table>
+<p>In this example, the level of the temperature is considered <em>fixed</em> meaning, the three temperatures were the only ones that we are interested in. This is called a <em>fixed effects model.</em></p>
+<p>a fixed effect model is a statistical model in which the parameters are fixed or non-random. This can also be referred to a regression model, in which group mean are “fixed” (non-random) or in simpler, terms something that is “fixed” in analysis is constant like sex assigned at birth or ethnicity.</p>
+<p><span class="math display">\[ y_i = \beta_0 + X_i\beta_i + \alpha_u + \epsilon_i \]</span></p>
+<p>Now, let’s say we want to look at different levels of <em>factors</em> that were chosen because of random sampling, like number of operators working that day, lot batches, days etc. So in this case we are now regarding factors not related to themselves (variables) but we are now trying to represent all possible levels that these factors may take, the appropriate model is now a <em>random effects model.</em></p>
+<p>fitting these <em>random effects models</em> are important because we want to obtain estimates of different contributions that experimental factors make to the variability of our data! (we can represent this as the variance) this is what is called <em>variance component</em></p>
+</section>
+<section id="why-this-is-relevant" class="level3" data-number="15.2.2">
+<h3 data-number="15.2.2" class="anchored" data-anchor-id="why-this-is-relevant"><span class="header-section-number">15.2.2</span> Why this is relevant</h3>
+<p>Well, a variance component model helps us see how much variance in our response at the different levels. But what if you are interested in seeing the effects of the explanatory variables? <span style="background-color:yellow">Or, what if your observations are NOT randomly sampled from simple random sample but instead from a cluster or a multi-level sampling design?</span> Random intercept models or random effects models are important.</p>
+</section>
+<section id="example-1-school-level-data" class="level3" data-number="15.2.3">
+<h3 data-number="15.2.3" class="anchored" data-anchor-id="example-1-school-level-data"><span class="header-section-number">15.2.3</span> Example 1: School level data</h3>
+<p>Let’s say we have some data on exam results of students within a school and we use a variance component model and see that 15% of the variance is at the school level. Like for example, differing school districts, differing school policies etc. However, is it fair to really say that 15% of the variance in example scores is caused by schools? you <em>could</em> also say that maybe that part of the variance could be cause by the students being different themselves as well before taking the exam.</p>
+<p>In this case, it might be important to <em>control</em> for the previous exams the students took, so you can look at the variance that is due to the things that happened when the students were at that school.</p>
+</section>
+</section>
+<section id="fitting-a-single-level-regression-model" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="fitting-a-single-level-regression-model"><span class="header-section-number">15.3</span> Fitting a single-level regression model</h2>
+<p>when we want to control for something (like previous exams students took) we can fit a single-level regression model that looks something like this:</p>
+<p><span class="math display">\[y_1 = \beta_0 + \beta_1x_i + e_i\]</span> where</p>
+<ul>
+<li><p><span class="math inline">\(y_1\)</span> is your dependent variable</p></li>
+<li><p><span class="math inline">\(\beta_0\)</span> is your intercept and</p></li>
+<li><p><span class="math inline">\(\beta_1\)</span> is your slope parameter (which is also your slope treatment effect).</p></li>
+<li><p>and <span class="math inline">\(e_i\)</span> is your random error</p></li>
+</ul>
+<p>When you have <em>clustered</em> data fitting this model causes problems. Clustered data is data where you observation or participants are related. Like exam results for students within a school, height of children within a family etc.</p>
+<p>if we try to fit this clustered data:</p>
+<ol type="1">
+<li><p>our standard errors will be wrong.</p></li>
+<li><p>this single level data model doesn’t show up how much variation is at the school level and how much much of the variation is at the student level.</p></li>
+</ol>
+<p>So fitting this type of data in this regression we wont know how much of an effect the school level has on the exam score, after controlling for the previous score.</p>
+</section>
+<section id="solution-fitting-a-random-intercept-model" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="solution-fitting-a-random-intercept-model"><span class="header-section-number">15.4</span> Solution: Fitting a Random Intercept model</h2>
+<p>So what we can do is combine the variance component and single-level regression model to build a <strong>random intercept model.</strong> So this random intercept model has 2 random terms. the level one random term: <span class="math inline">\(e_{ij} \sim N(0, \sigma_e^2)\)</span> and the <span class="math inline">\(N(0, \sigma_u^2)\)</span> and has two parts:</p>
+<ul>
+<li>a fixed part</li>
+<li>a random part</li>
+</ul>
+<p><span class="math display">\[ y_{ij} = \overbrace{\beta_0 + \beta_1X_{ij}}^{\text{fixed part}} + \underbrace{u_j + e_{ij}}_{\text{random part}}\]</span> where the fixed parts includes our parameters that we estimate as our coefficients, and the random part is the parameter we estimate as the variance <span class="math inline">\(e_{ij} \sim N(0, \sigma_e^2)\)</span> and the <span class="math inline">\(N(0, \sigma_u^2)\)</span> and these are allowed to vary and <span class="math inline">\(u_j\)</span> and <span class="math inline">\(e_{ij}\)</span> are normally distributed.</p>
+<p>where:</p>
+<ul>
+<li><p><span class="math inline">\(y_{ij}\)</span> is your dependent variable at <span class="math inline">\(i\)</span> individual and <span class="math inline">\(j\)</span> level</p></li>
+<li><p><span class="math inline">\(N(0, \sigma_u^2)\)</span> is the measurement at the school level</p></li>
+<li><p>and <span class="math inline">\(e_{ij} \sim N(0, \sigma_e^2)\)</span> is the measurement at the student level</p></li>
+<li><p>and <span class="math inline">\(i\)</span> subscript is for the students</p></li>
+<li><p>and <span class="math inline">\(j\)</span> is the school subscript</p></li>
+</ul>
+<p>we can also write this equation like so:</p>
+<p><span class="math display">\[ Y_{ij} = \mu + b_i + \varepsilon_{ij} \]</span></p>
+<p>where</p>
+<ul>
+<li><p><span class="math inline">\(Y_{ij}\)</span> is your dependent outcome of intested for a subject <span class="math inline">\(i\)</span> at school <span class="math inline">\(j\)</span></p></li>
+<li><p><span class="math inline">\(\mu\)</span> is the population average mean</p></li>
+<li><p><span class="math inline">\(b_i\)</span> is the random students effects (you have a random effect for every student)</p></li>
+<li><p><span class="math inline">\(\varepsilon_{ij}\)</span> is your random error.</p></li>
+</ul>
+</section>
+<section id="final-key-points" class="level2" data-number="15.5">
+<h2 data-number="15.5" class="anchored" data-anchor-id="final-key-points"><span class="header-section-number">15.5</span> Final key points</h2>
+<ul>
+<li><p>random intercept models are used for answering questions about clustered data, and at different levels. For example, what is the relationship between exam scores at 11 and at age 16? how much variation is there between students progress from 11 to 16 at the school level?</p></li>
+<li><p><span class="math inline">\(b_i\)</span> is the error associated with the students.</p></li>
+<li><p><span class="math inline">\(\varepsilon_{ij}\)</span> is the random error.</p></li>
+<li><p>for a random intercept model, each individual will have a random intercept, but the sample slope.</p></li>
+</ul>
+</section>
+<section id="assumptions-of-a-random-effects-model" class="level2" data-number="15.6">
+<h2 data-number="15.6" class="anchored" data-anchor-id="assumptions-of-a-random-effects-model"><span class="header-section-number">15.6</span> Assumptions of a random effects model:</h2>
+<ul>
+<li><p>unobserved cluster effects is not correlated with observed variables (all <span class="math inline">\(u_{ij}\)</span> terms are not correlated with the your predictors.)</p></li>
+<li><p>the within and between effects are the same.</p></li>
+<li><p>your error term is independent with your constant term.</p></li>
+<li><p>you have homoscedasticity</p></li>
+<li><p><span class="math inline">\(b_i\)</span> and <span class="math inline">\(\varepsilon\)</span> are independent of each other</p></li>
+</ul>
+</section>
+<section id="hypothesis-of-a-random-effects-model" class="level2" data-number="15.7">
+<h2 data-number="15.7" class="anchored" data-anchor-id="hypothesis-of-a-random-effects-model"><span class="header-section-number">15.7</span> hypothesis of a random effects model:</h2>
+<p>hypothesis testing for a random effects model runs as follows:</p>
+<p><span class="math display">\[ H_0: \sigma^2_u = 0\]</span> <span class="math display">\[H_1: \sigma^2_u \not = 0\]</span> the null hypothesis states that if <span class="math inline">\(\sigma^2_u\)</span> is true, then the random component is not needed in this model. so you can fit a single level regression model. to do this, you would can do a likelihood ratio test comparing the two model to see if sigma is significant. In other words, seeing if there is no difference in intercepts. If there is <em>NO</em> difference in intercepts (or the slopes are similar), then a random intercept model or random component is not needed.</p>
+</section>
+<section id="example-2-planktonic-larval-duration-pld" class="level2" data-number="15.8">
+<h2 data-number="15.8" class="anchored" data-anchor-id="example-2-planktonic-larval-duration-pld"><span class="header-section-number">15.8</span> Example 2: Planktonic larval duration (PLD)</h2>
+<p>this is example is from <a href="https://www.jstor.org/stable/25426272">O’Connor et al (2007).</a> A brief intro on this study, temperature is important for the development of organisms. In marine species, temperature is very important and linked to growth. So the time spent as a planktonic larvae can have associations on mortality and regulation on the species. Previous research has looked at the association between species comparison but not within species comparisons. What if we are interest in within and between species variation?</p>
+<section id="load-pld-data" class="level3" data-number="15.8.1">
+<h3 data-number="15.8.1" class="anchored" data-anchor-id="load-pld-data"><span class="header-section-number">15.8.1</span> load PLD data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>PLD <span class="ot">&lt;-</span> <span class="fu">read_table</span>(<span class="st">"../data/04_PLD.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>I am curious about the structure of this data and how it briefly looks.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#strcuture </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(PLD)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>spc_tbl_ [214 × 5] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ phylum : chr [1:214] "Annelida" "Annelida" "Annelida" "Annelida" ...
+ $ species: chr [1:214] "Circeus.spirillum" "Circeus.spirillum" "Circeus.spirillum" "Hydroides.elegans" ...
+ $ D.mode : chr [1:214] "L" "L" "L" "P" ...
+ $ temp   : num [1:214] 5 10 15 15 20 25 30 5 10 17 ...
+ $ pld    : num [1:214] 16 16 4 8 6.5 5 3.2 15 9.5 4.5 ...
+ - attr(*, "spec")=
+  .. cols(
+  ..   phylum = col_character(),
+  ..   species = col_character(),
+  ..   D.mode = col_character(),
+  ..   temp = col_double(),
+  ..   pld = col_double()
+  .. )</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># just the top - seeing how it looks</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(PLD)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  phylum   species           D.mode  temp   pld
+  &lt;chr&gt;    &lt;chr&gt;             &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1 Annelida Circeus.spirillum L          5  16  
+2 Annelida Circeus.spirillum L         10  16  
+3 Annelida Circeus.spirillum L         15   4  
+4 Annelida Hydroides.elegans P         15   8  
+5 Annelida Hydroides.elegans P         20   6.5
+6 Annelida Hydroides.elegans P         25   5  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># brief summary</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(PLD)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    phylum            species             D.mode               temp      
+ Length:214         Length:214         Length:214         Min.   : 2.50  
+ Class :character   Class :character   Class :character   1st Qu.:12.28  
+ Mode  :character   Mode  :character   Mode  :character   Median :20.00  
+                                                          Mean   :18.59  
+                                                          3rd Qu.:25.00  
+                                                          Max.   :32.00  
+      pld        
+ Min.   :  1.00  
+ 1st Qu.: 11.00  
+ Median : 19.30  
+ Mean   : 26.28  
+ 3rd Qu.: 33.45  
+ Max.   :129.00  </code></pre>
+</div>
+</div>
+<p>I am curious about how this would look just plotting the variable <code>pld</code> or planktonic larvae duration and the temperature. So i am interested in seeing how the temperature is associated with their their survival duration.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># how to plot in base R </span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pld <span class="sc">~</span> temp, <span class="at">data =</span> PLD,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"temperature (C)"</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"PLD survival (Days)"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># add lm line in base R</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(pld <span class="sc">~</span> temp, <span class="at">data =</span> PLD))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_anova_random_intercept_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>you can also do this in ggplot plot like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> PLD) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> pld, <span class="at">x =</span> temp) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_anova_random_intercept_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="fit-first-model-linear-model" class="level3" data-number="15.8.2">
+<h3 data-number="15.8.2" class="anchored" data-anchor-id="fit-first-model-linear-model"><span class="header-section-number">15.8.2</span> Fit first model: Linear model</h3>
+<p>Let’s first fit a linear model and check any assumptions. Why are we fitting a linear model first? It might be important to check the standard error of this model and compare to the next model, that might be a better fit later on.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fitting linear model first </span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>LinearModel_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(pld <span class="sc">~</span> temp, <span class="at">data =</span> PLD)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(LinearModel_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = pld ~ temp, data = PLD)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-44.158 -11.351  -0.430   7.684  93.884 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  54.8390     3.7954  14.449  &lt; 2e-16 ***
+temp         -1.5361     0.1899  -8.087 4.65e-14 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 20.36 on 212 degrees of freedom
+Multiple R-squared:  0.2358,    Adjusted R-squared:  0.2322 
+F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
+</div>
+</div>
+<p>We can fit this output in a <code>gtsummary</code> to make it nicer looking:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>LinearModel_1 <span class="sc">|&gt;</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<div id="dfmblcoirc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dfmblcoirc table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#dfmblcoirc thead, #dfmblcoirc tbody, #dfmblcoirc tfoot, #dfmblcoirc tr, #dfmblcoirc td, #dfmblcoirc th {
+  border-style: none;
+}
+
+#dfmblcoirc p {
+  margin: 0;
+  padding: 0;
+}
+
+#dfmblcoirc .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#dfmblcoirc .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#dfmblcoirc .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#dfmblcoirc .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#dfmblcoirc .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dfmblcoirc .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dfmblcoirc .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dfmblcoirc .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#dfmblcoirc .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#dfmblcoirc .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#dfmblcoirc .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#dfmblcoirc .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#dfmblcoirc .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#dfmblcoirc .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#dfmblcoirc .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#dfmblcoirc .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#dfmblcoirc .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#dfmblcoirc .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#dfmblcoirc .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dfmblcoirc .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#dfmblcoirc .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#dfmblcoirc .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#dfmblcoirc .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dfmblcoirc .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#dfmblcoirc .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#dfmblcoirc .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dfmblcoirc .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dfmblcoirc .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#dfmblcoirc .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dfmblcoirc .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#dfmblcoirc .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dfmblcoirc .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dfmblcoirc .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dfmblcoirc .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dfmblcoirc .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dfmblcoirc .gt_left {
+  text-align: left;
+}
+
+#dfmblcoirc .gt_center {
+  text-align: center;
+}
+
+#dfmblcoirc .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#dfmblcoirc .gt_font_normal {
+  font-weight: normal;
+}
+
+#dfmblcoirc .gt_font_bold {
+  font-weight: bold;
+}
+
+#dfmblcoirc .gt_font_italic {
+  font-style: italic;
+}
+
+#dfmblcoirc .gt_super {
+  font-size: 65%;
+}
+
+#dfmblcoirc .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#dfmblcoirc .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#dfmblcoirc .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#dfmblcoirc .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#dfmblcoirc .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#dfmblcoirc .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#dfmblcoirc .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+
+<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="<strong>Characteristic</strong>" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="<strong>Beta</strong>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Beta</strong></th>
+<th id="<strong>95% CI</strong><span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+<th id="<strong>p-value</strong>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong></th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">temp</td>
+<td class="gt_row gt_center" headers="estimate">-1.5</td>
+<td class="gt_row gt_center" headers="ci">-1.9, -1.2</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+</tbody><tfoot class="gt_footnotes">
+<tr class="even">
+<td colspan="4" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> CI = Confidence Interval</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<p>I am interested in checking out visually, the equal variance (homoscedasticity) and so i will plot a a base residual graph:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># better to do a scatter plot </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>LinearModel_res <span class="ot">&lt;-</span> <span class="fu">resid</span>(LinearModel_1)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># plot residual </span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(PLD<span class="sc">$</span>temp, LinearModel_res,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"residuals"</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"temp"</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Residual graph"</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>     )</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_anova_random_intercept_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Just upon visual observation, it seems like this assumption may be violated so i think it might be important to do some transformations.</p>
+</section>
+<section id="log-transformation" class="level3" data-number="15.8.3">
+<h3 data-number="15.8.3" class="anchored" data-anchor-id="log-transformation"><span class="header-section-number">15.8.3</span> Log transformation</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>LinearMode_2Log <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(pld) <span class="sc">~</span> <span class="fu">log</span>(temp), <span class="at">data=</span> PLD)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(LinearMode_2Log)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log(pld) ~ log(temp), data = PLD)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.0768 -0.3956  0.1802  0.5461  1.9656 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   4.6946     0.3128  15.011  &lt; 2e-16 ***
+log(temp)    -0.6308     0.1093  -5.771 2.77e-08 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.8236 on 212 degrees of freedom
+Multiple R-squared:  0.1358,    Adjusted R-squared:  0.1317 
+F-statistic: 33.31 on 1 and 212 DF,  p-value: 2.767e-08</code></pre>
+</div>
+</div>
+</section>
+<section id="residual-of-new-log-transformed-graph" class="level3" data-number="15.8.4">
+<h3 data-number="15.8.4" class="anchored" data-anchor-id="residual-of-new-log-transformed-graph"><span class="header-section-number">15.8.4</span> residual of new log transformed graph</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># better to do a scatter plot </span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>LinearModel2_res <span class="ot">&lt;-</span> <span class="fu">resid</span>(LinearMode_2Log)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># plot residual </span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(PLD<span class="sc">$</span>temp, LinearModel2_res,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"residuals(log)"</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"temp(log)"</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Residual graph (log transformation)"</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>     )</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_anova_random_intercept_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A bit better! Now i kinda want to see the original plot i plotted with PLD and temperature:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">log</span>(pld) <span class="sc">~</span> <span class="fu">log</span>(temp), <span class="at">data =</span> PLD,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Temperature in C"</span>,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"PLD in days"</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(LinearMode_2Log)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_anova_random_intercept_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>in ggplot you can use the <code>facet_wrap()</code> function to separate by phylum:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> PLD) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(temp), <span class="at">y =</span> <span class="fu">log</span>(pld)) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>phylum) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_anova_random_intercept_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="fitting-a-random-intercept-model-random-intercept-same-slope" class="level2" data-number="15.9">
+<h2 data-number="15.9" class="anchored" data-anchor-id="fitting-a-random-intercept-model-random-intercept-same-slope"><span class="header-section-number">15.9</span> Fitting a random intercept model (random intercept, same slope)</h2>
+<p>I am interested in seeing if the overall temperature and the PLD relationship is similar among species, but not the same. We are interested in plotting a mixed effects model with a random intercept but fixed/same slope. I am only interested in the species-specific plot for now with the phylum <code>Mollusca.</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filter to only mollusca</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>Mollusca_subset <span class="ot">&lt;-</span> </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  PLD <span class="sc">|&gt;</span> </span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(phylum <span class="sc">==</span> <span class="st">"Mollusca"</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> Mollusca_subset) <span class="sc">+</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(pld), <span class="at">y =</span> <span class="fu">log</span>(temp)) <span class="sc">+</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Log(temperature)"</span>,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Log(PLD)"</span>) <span class="sc">+</span> </span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> <span class="st">"y ~ x"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">fullrange =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_anova_random_intercept_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="fitting-model" class="level3" data-number="15.9.1">
+<h3 data-number="15.9.1" class="anchored" data-anchor-id="fitting-model"><span class="header-section-number">15.9.1</span> fitting model</h3>
+<p>We can use the library <code>lme4</code> to fit a model of a linear regression with a <strong>random effect</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creating log -transformed variables </span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>Mollusca_subset<span class="sc">$</span>log_pld <span class="ot">&lt;-</span> <span class="fu">log</span>(Mollusca_subset<span class="sc">$</span>pld)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>Mollusca_subset<span class="sc">$</span>log_temp <span class="ot">&lt;-</span> <span class="fu">log</span>(Mollusca_subset<span class="sc">$</span>temp)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># mixed model with random intercept only </span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>RandIntModel_Mollusca <span class="ot">&lt;-</span> <span class="fu">lmer</span>(log_pld <span class="sc">~</span> log_temp <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> species), <span class="at">data =</span> Mollusca_subset)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(RandIntModel_Mollusca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: log_pld ~ log_temp + (1 | species)
+   Data: Mollusca_subset
+
+REML criterion at convergence: 43.7
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.37222 -0.32686 -0.09382  0.43821  2.34871 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ species  (Intercept) 0.86457  0.9298  
+ Residual             0.03309  0.1819  
+Number of obs: 44, groups:  species, 16
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)   7.1728     0.5284  13.575
+log_temp     -1.5175     0.1592  -9.531
+
+Correlation of Fixed Effects:
+         (Intr)
+log_temp -0.896</code></pre>
+</div>
+</div>
+<ul>
+<li><p>the <code>fixed effects:</code> section in the output is the estimate for the fixed slope, and the grand mean of the intercept. in the fixed effects section the intercept here is the random effect, and you can see this</p></li>
+<li><p>in the <code>Random effects</code> section in this output, in this case our random effect was specified in the the <code>Names</code> sections, which tells us the parameter is the intercept.</p></li>
+<li><p>the <code>Group</code> section tells us we have a random intercept for each species. We also have the variance and standard deviation for the random effects (as well as the residuals)</p></li>
+</ul>
+<p>Since we have a random effect at the individual level, we can subset this section out so it is clear to see that these organism will have a random intercept and fixed slope.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># subset of the coefficients for random intercept and fixed slop</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(RandIntModel_Mollusca)<span class="sc">$</span>species</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      (Intercept) log_temp
+Chlamys.hastata          7.612748 -1.51751
+Crassostrea.virginica    7.592515 -1.51751
+Crepidula.fornicata.     8.045609 -1.51751
+Crepidula.plana          8.063220 -1.51751
+Haliotis.asinina         5.807247 -1.51751
+Haliotis.fulgens         6.083069 -1.51751
+Haliotis.sorenseni.      6.688210 -1.51751
+Mactra.solidissima       7.589660 -1.51751
+Mopalia.muscosa          7.061086 -1.51751
+Mytilus.edulis           7.141801 -1.51751
+Nassarius.obsoletus      7.370159 -1.51751
+Ostrea.lurida            6.967626 -1.51751
+Perna.viridis            8.144314 -1.51751
+Strombus.gigas           8.048942 -1.51751
+Tivela.mactroides        7.677603 -1.51751
+Tonicella.lineata        4.871674 -1.51751</code></pre>
+</div>
+</div>
+<p>So now we can see that in the <code>Mollusca</code> subset, we have all random intercepts for individual specifies, but the same slope.</p>
+</section>
+<section id="inter-class-correlation-coefficient-icc" class="level3" data-number="15.9.2">
+<h3 data-number="15.9.2" class="anchored" data-anchor-id="inter-class-correlation-coefficient-icc"><span class="header-section-number">15.9.2</span> Inter class correlation coefficient (ICC)</h3>
+<p>for a random intercept model, we can run a diagnostic called the inter-class correlation coefficient (ICC), which lets us know how much group specific information is available for the random effect. this is somewhat similar to the ANOVA, in which it looks at the variability within groups compared to the variability between groups. Low ICC means that observation within group don’t really cluster.</p>
+<p><span class="math display">\[ ICC = {\sigma^2_{\alpha} \over \sigma^2 + \sigma^2_\alpha} \]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creating data frame</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>var <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">VarCorr</span>(RandIntModel_Mollusca))</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#check our data frame</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>var</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       grp        var1 var2       vcov     sdcor
+1  species (Intercept) &lt;NA&gt; 0.86457141 0.9298233
+2 Residual        &lt;NA&gt; &lt;NA&gt; 0.03309183 0.1819116</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ICC equation</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>ICC <span class="ot">&lt;-</span> var<span class="sc">$</span>vcov[<span class="dv">1</span>] <span class="sc">/</span> (var<span class="sc">$</span>vcov[<span class="dv">1</span>] <span class="sc">+</span> var<span class="sc">$</span>vcov[<span class="dv">2</span>])</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ICC value </span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>ICC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9631356</code></pre>
+</div>
+</div>
+<p>In our model, the <span class="math inline">\(\sigma^2_{\alpha}\)</span> is 0.8645 (also the vcov part) and the <span class="math inline">\(\sigma^2\)</span> is 0.033. so once we do the mathematics we get <code>0.9631.</code> Which is the proportion of the total variance in Y that is accounted for by clustering. This is a high value and therefore, suggesting we have within-group variability, so it might be good we are running this random effects model.</p>
+</section>
+</section>
+<section id="interpretation-of-results" class="level2" data-number="15.10">
+<h2 data-number="15.10" class="anchored" data-anchor-id="interpretation-of-results"><span class="header-section-number">15.10</span> Interpretation of results</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(RandIntModel_Mollusca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: log_pld ~ log_temp + (1 | species)
+   Data: Mollusca_subset
+
+REML criterion at convergence: 43.7
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.37222 -0.32686 -0.09382  0.43821  2.34871 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ species  (Intercept) 0.86457  0.9298  
+ Residual             0.03309  0.1819  
+Number of obs: 44, groups:  species, 16
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)   7.1728     0.5284  13.575
+log_temp     -1.5175     0.1592  -9.531
+
+Correlation of Fixed Effects:
+         (Intr)
+log_temp -0.896</code></pre>
+</div>
+</div>
+<p><strong>Interpretation:</strong> Summary of this PLD data includes information about the random effects. Here we can see that the column <em>groups</em> shows the random effect variable. in the <code>name</code> section, you can see that the random effect is our intercept. so we have the variation due to the species. in the <code>Residuals</code> section, this is the variation that cannot be explained by the model (the error). As you will notice our <code>Standard error</code> is smaller compared to the ordinary regression we ran in the previous one. Standard error for this model is <code>0.15</code> and the previous standard error for the first model we ran was <code>0.18.</code></p>
+<p>So 0.86 / 0.86 + 0.03 = 0.96 , so the difference between between species can explain 96% of the variance that is is left over after the variance is explained by our fixed effect. since the random effects of the species explain most.</p>
+<p>there is a very long description on the why the <code>lmer()</code> function doesn’t include the p-value that can be found <a href="https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html">here.</a></p>
+<p><strong>interpretation of temp variable</strong> for the fixed part, we can interpret this parameter the same as a single-level regression model, <span style="background-color:yellow">so <span class="math inline">\(\beta_1\)</span> is the increase/decrease in response for 1 unit increase/decrease in <span class="math inline">\(x.\)</span></span> In other words, for one unit increase in the degrees of temperature, there is a -1.5 decrease in Planktonic larval duration. (or, as the temperature increase, the plankton duration is lower.)</p>
+</section>
+<section id="conclusion" class="level2" data-number="15.11">
+<h2 data-number="15.11" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">15.11</span> Conclusion</h2>
+<p>In this lecture you learned about the importance of a random intercept model, when it is appropriate to use a random intercept model, the difference between an ordinary single-level model, and a random intercept model, the assumptions of the random intercept model, hypothesis testing for the variation, the Interclass correlation coefficient (ICC) and finally, how to interpret results from the fixed part and the random part of a random intercept model.</p>
+</section>
+<section id="references" class="level2" data-number="15.12">
+<h2 data-number="15.12" class="anchored" data-anchor-id="references"><span class="header-section-number">15.12</span> References</h2>
+<ol type="1">
+<li><p>Abedin, Jaynal, and Kishor Kumar Das. 2015. Data Manipulation with r. Packt Publishing Ltd.</p></li>
+<li><p>Annesley, Thomas M. 2010. “Bars and Pies Make Better Desserts Than Figures.” Clinical Chemistry 56 (9): 1394–1400.</p></li>
+<li><p>Anscombe, Francis J. 1973. “Graphs in Statistical Analysis.” The American Statistician 27 (1): 17–21.</p></li>
+<li><p>Borer, Elizabeth T, Eric W Seabloom, Matthew B Jones, and Mark Schildhauer. 2009. “Some Simple Guidelines for Effective Data Management.” The Bulletin of the Ecological Society of America 90 (2): 205–14.</p></li>
+<li><p>Borghi, John, Stephen Abrams, Daniella Lowenberg, Stephanie Simms, and John Chodacki. 2018. “Support Your Data: A Research Data Management Guide for Researchers.” Research Ideas and Outcomes 4: e26439.</p></li>
+<li><p>Broman, Karl W, and Kara H Woo. 2018. “Data Organization in Spreadsheets.” The American Statistician 72 (1): 2–10.</p></li>
+<li><p>Chamberlin, Thomas C. 1890. “The Method of Multiple Working Hypotheses.” Science 15 (366): 92–96.</p></li>
+<li><p>supplementary material for Tom Snijders and Roel Bosker textbook - Shjders, T Bosker R, 1999. <em>Multilevel analysis: an introduction to basic and advanced mltilevel modeling,</em> London, Sage, including updates and corrections data set examples <a href="http://stat.gamma.rug.nl/multilevel.htm" class="uri">http://stat.gamma.rug.nl/multilevel.htm</a></p></li>
+<li><p>University of Bristol, Random Intercept model, (2018). <a href="http://www.bristol.ac.uk/cmm/learning/videos/random-intercepts.html" class="uri">http://www.bristol.ac.uk/cmm/learning/videos/random-intercepts.html</a></p></li>
+<li><p>Midway, S. (2019). “Data Analysis in R.” <a href="https://bookdown.org/steve_midway/DAR/random-effects.html" class="uri">https://bookdown.org/steve_midway/DAR/random-effects.html</a></p></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/gabrielodom\.github\.io\/PHC6099_rBiostat\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../lessons_original/04_anova_kruskal_wallis.html" class="pagination-link" aria-label="Non-Parametric ANOVA: The Kruskal-Wallis Test">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../lessons_original/04_correlation.html" class="pagination-link" aria-label="Correlation and Covariance Matrices">
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/04_anova_random_intercept.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
