@@ -61,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../lessons_original/05_glm_ordinal_logistic.html" rel="next">
+<link href="../05_header_generalized-linear-models.html" rel="next">
 <link href="../lessons_original/04_regression_mls.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -320,8 +320,8 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
- <span class="menu-text">05_header_generalized_linear_models.qmd</span></a>
+            <a href="../05_header_generalized-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generalized Linear Models</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -399,12 +399,8 @@ window.Quarto = {
   <li><a href="#bonus-step-visualize-the-final-model" id="toc-bonus-step-visualize-the-final-model" class="nav-link" data-scroll-target="#bonus-step-visualize-the-final-model"><span class="header-section-number">19.2.8</span> Bonus Step: Visualize the Final Model</a></li>
   </ul>
 </li>
-  <li>
-<a href="#further-discussion" id="toc-further-discussion" class="nav-link" data-scroll-target="#further-discussion"><span class="header-section-number">19.3</span> Further Discussion</a>
-  <ul class="collapse">
-<li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">19.3.1</span> References</a></li>
-  </ul>
-</li>
+  <li><a href="#further-discussion" id="toc-further-discussion" class="nav-link" data-scroll-target="#further-discussion"><span class="header-section-number">19.3</span> Further Discussion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">19.4</span> References</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/04_regression_polynomial.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
@@ -650,16 +646,15 @@ F-statistic: 65.64 on 2 and 29 DF,  p-value: 1.715e-11</code></pre>
 <strong>Piecewise polynomials</strong>: Instead of fitting a high-degree polynomial over the entire range of X, piece- wise polynomial regression involves fitting separate low-degree polynomials over different regions of X. The coefficients βi differ in different parts of the range of X. The points where the coefficients change are called knots. Using more knots leads to a more flexible piecewise polynomial<sup><strong>2</strong></sup>.</li>
 <li>
 <strong>Constraints and spline</strong>: the technique of reduce the number of degree of freedom on piecewise polynomial to produce a continuous and naturally smooth fit model on data<sup><strong>2</strong></sup>.</li>
-</ul>
-<section id="references" class="level3" data-number="19.3.1"><h3 data-number="19.3.1" class="anchored" data-anchor-id="references">
-<span class="header-section-number">19.3.1</span> References</h3>
+</ul></section><section id="references" class="level2" data-number="19.4"><h2 data-number="19.4" class="anchored" data-anchor-id="references">
+<span class="header-section-number">19.4</span> References</h2>
 <ol type="1">
 <li><p>Field, A. (2013). Discovering Statistics Using IBM SPSS Statistics. (4th ed.). Sage Publications.</p></li>
 <li><p>James, G., Witten, D., Hastie, T., &amp; Tibshirani, R. (2013). An Introduction to Statistical Learning with Applications in R. (2nd ed.). Publisher. (pp.&nbsp;290-300)</p></li>
 </ol>
 
 
-</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1073,8 +1068,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../lessons_original/05_glm_ordinal_logistic.html" class="pagination-link" aria-label="Ordinal Logistic Regression">
-        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../05_header_generalized-linear-models.html" class="pagination-link" aria-label="Generalized Linear Models">
+        <span class="nav-page-text">Generalized Linear Models</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
