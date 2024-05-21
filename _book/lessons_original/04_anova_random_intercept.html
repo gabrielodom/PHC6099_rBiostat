@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Gabriel Odom">
-<meta name="dcterms.date" content="2024-05-20">
+<meta name="dcterms.date" content="2024-05-21">
 
 <title>An R Cookbook for Public Health - 15&nbsp; Random Intercept Model</title>
 <style>
@@ -146,7 +146,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/00_part_headers.html">New Part</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_anova_random_intercept.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_anova_random_intercept.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -193,8 +193,8 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../lessons/00_part_headers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">New Part</span></a>
+            <a href="../01_header_EDA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exploratory Data Analysis</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -228,8 +228,8 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../lessons/00_part_headers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">New Part</span></a>
+            <a href="../02_header_one-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">One-Sample Tests</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -251,8 +251,8 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../lessons/00_part_headers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">New Part</span></a>
+            <a href="../03_header_two-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Two-Sample Tests</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -261,7 +261,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Two sample t test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -286,8 +286,8 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../lessons/00_part_headers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">New Part</span></a>
+            <a href="../04_header_anova-and-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ANOVA and Regression</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -339,8 +339,8 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../lessons/00_part_headers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">New Part</span></a>
+            <a href="../05_header_generalized-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generalized Linear Models</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -356,8 +356,8 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../lessons/00_part_headers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">New Part</span></a>
+            <a href="../06_header_special-topics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Special Topics in Statistical Modelling</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -365,8 +365,25 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/06_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+  <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../07_header_power.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Power and Sample Size Determination</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -414,7 +431,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/00_part_headers.html">New Part</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_anova_random_intercept.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_anova_random_intercept.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></h1>
 <p class="subtitle lead">Learning how to use Random Intercept Models in R</p>
@@ -444,7 +461,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 20, 2024</p>
+      <p class="date">May 21, 2024</p>
     </div>
   </div>
   
@@ -734,23 +751,23 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="vwxfafcknm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vwxfafcknm table {
+<div id="dfmblcoirc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dfmblcoirc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vwxfafcknm thead, #vwxfafcknm tbody, #vwxfafcknm tfoot, #vwxfafcknm tr, #vwxfafcknm td, #vwxfafcknm th {
+#dfmblcoirc thead, #dfmblcoirc tbody, #dfmblcoirc tfoot, #dfmblcoirc tr, #dfmblcoirc td, #dfmblcoirc th {
   border-style: none;
 }
 
-#vwxfafcknm p {
+#dfmblcoirc p {
   margin: 0;
   padding: 0;
 }
 
-#vwxfafcknm .gt_table {
+#dfmblcoirc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -776,12 +793,12 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#vwxfafcknm .gt_caption {
+#dfmblcoirc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vwxfafcknm .gt_title {
+#dfmblcoirc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -793,7 +810,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-bottom-width: 0;
 }
 
-#vwxfafcknm .gt_subtitle {
+#dfmblcoirc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -805,7 +822,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-top-width: 0;
 }
 
-#vwxfafcknm .gt_heading {
+#dfmblcoirc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -817,13 +834,13 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#vwxfafcknm .gt_bottom_border {
+#dfmblcoirc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vwxfafcknm .gt_col_headings {
+#dfmblcoirc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -838,7 +855,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#vwxfafcknm .gt_col_heading {
+#dfmblcoirc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -858,7 +875,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   overflow-x: hidden;
 }
 
-#vwxfafcknm .gt_column_spanner_outer {
+#dfmblcoirc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -870,15 +887,15 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   padding-right: 4px;
 }
 
-#vwxfafcknm .gt_column_spanner_outer:first-child {
+#dfmblcoirc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vwxfafcknm .gt_column_spanner_outer:last-child {
+#dfmblcoirc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vwxfafcknm .gt_column_spanner {
+#dfmblcoirc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -890,11 +907,11 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   width: 100%;
 }
 
-#vwxfafcknm .gt_spanner_row {
+#dfmblcoirc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vwxfafcknm .gt_group_heading {
+#dfmblcoirc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -920,7 +937,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   text-align: left;
 }
 
-#vwxfafcknm .gt_empty_group_heading {
+#dfmblcoirc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -935,15 +952,15 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   vertical-align: middle;
 }
 
-#vwxfafcknm .gt_from_md > :first-child {
+#dfmblcoirc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vwxfafcknm .gt_from_md > :last-child {
+#dfmblcoirc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vwxfafcknm .gt_row {
+#dfmblcoirc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -962,7 +979,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   overflow-x: hidden;
 }
 
-#vwxfafcknm .gt_stub {
+#dfmblcoirc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -975,7 +992,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   padding-right: 5px;
 }
 
-#vwxfafcknm .gt_stub_row_group {
+#dfmblcoirc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -989,15 +1006,15 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   vertical-align: top;
 }
 
-#vwxfafcknm .gt_row_group_first td {
+#dfmblcoirc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vwxfafcknm .gt_row_group_first th {
+#dfmblcoirc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vwxfafcknm .gt_summary_row {
+#dfmblcoirc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1007,16 +1024,16 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   padding-right: 5px;
 }
 
-#vwxfafcknm .gt_first_summary_row {
+#dfmblcoirc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vwxfafcknm .gt_first_summary_row.thick {
+#dfmblcoirc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vwxfafcknm .gt_last_summary_row {
+#dfmblcoirc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1026,7 +1043,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#vwxfafcknm .gt_grand_summary_row {
+#dfmblcoirc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1036,7 +1053,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   padding-right: 5px;
 }
 
-#vwxfafcknm .gt_first_grand_summary_row {
+#dfmblcoirc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1046,7 +1063,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#vwxfafcknm .gt_last_grand_summary_row_top {
+#dfmblcoirc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1056,11 +1073,11 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#vwxfafcknm .gt_striped {
+#dfmblcoirc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vwxfafcknm .gt_table_body {
+#dfmblcoirc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1069,7 +1086,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#vwxfafcknm .gt_footnotes {
+#dfmblcoirc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1083,7 +1100,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#vwxfafcknm .gt_footnote {
+#dfmblcoirc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1092,7 +1109,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   padding-right: 5px;
 }
 
-#vwxfafcknm .gt_sourcenotes {
+#dfmblcoirc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1106,7 +1123,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#vwxfafcknm .gt_sourcenote {
+#dfmblcoirc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1114,63 +1131,63 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   padding-right: 5px;
 }
 
-#vwxfafcknm .gt_left {
+#dfmblcoirc .gt_left {
   text-align: left;
 }
 
-#vwxfafcknm .gt_center {
+#dfmblcoirc .gt_center {
   text-align: center;
 }
 
-#vwxfafcknm .gt_right {
+#dfmblcoirc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vwxfafcknm .gt_font_normal {
+#dfmblcoirc .gt_font_normal {
   font-weight: normal;
 }
 
-#vwxfafcknm .gt_font_bold {
+#dfmblcoirc .gt_font_bold {
   font-weight: bold;
 }
 
-#vwxfafcknm .gt_font_italic {
+#dfmblcoirc .gt_font_italic {
   font-style: italic;
 }
 
-#vwxfafcknm .gt_super {
+#dfmblcoirc .gt_super {
   font-size: 65%;
 }
 
-#vwxfafcknm .gt_footnote_marks {
+#dfmblcoirc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vwxfafcknm .gt_asterisk {
+#dfmblcoirc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vwxfafcknm .gt_indent_1 {
+#dfmblcoirc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vwxfafcknm .gt_indent_2 {
+#dfmblcoirc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vwxfafcknm .gt_indent_3 {
+#dfmblcoirc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vwxfafcknm .gt_indent_4 {
+#dfmblcoirc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vwxfafcknm .gt_indent_5 {
+#dfmblcoirc .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

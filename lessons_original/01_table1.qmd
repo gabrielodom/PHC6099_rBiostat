@@ -7,7 +7,7 @@ number-sections: true
 format: html
 embed-resources: false
 
-bibliography: [bib/06_power_ols_references.bib, bib/packages.bib]
+bibliography: [bib/07_power_ols_references.bib, bib/packages.bib]
 csl: bib/the-new-england-journal-of-medicine.csl
 ---
 
