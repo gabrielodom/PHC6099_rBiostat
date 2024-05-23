@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<title>An R Cookbook for Public Health - 19&nbsp; Introduction to Polynomial Regression</title>
+<title>An R Cookbook for Public Health - 20&nbsp; Introduction to Polynomial Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,7 +131,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_regression_polynomial.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_regression_polynomial.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -224,8 +224,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_wilcoxon_one_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons_original/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -242,25 +248,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -277,43 +283,43 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_polynomial.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -330,7 +336,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -347,7 +353,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
   </div>
 </li>
       </ul>
@@ -364,7 +370,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -378,35 +384,35 @@ window.Quarto = {
    
   <ul>
 <li>
-<a href="#what-is-a-polynomial-regression" id="toc-what-is-a-polynomial-regression" class="nav-link active" data-scroll-target="#what-is-a-polynomial-regression"><span class="header-section-number">19.1</span> What is a Polynomial Regression?</a>
+<a href="#what-is-a-polynomial-regression" id="toc-what-is-a-polynomial-regression" class="nav-link active" data-scroll-target="#what-is-a-polynomial-regression"><span class="header-section-number">20.1</span> What is a Polynomial Regression?</a>
   <ul class="collapse">
-<li><a href="#when-is-a-polynomial-regression-used" id="toc-when-is-a-polynomial-regression-used" class="nav-link" data-scroll-target="#when-is-a-polynomial-regression-used"><span class="header-section-number">19.1.1</span> When is a Polynomial Regression Used?</a></li>
-  <li><a href="#assumptions-of-polynomial-regression" id="toc-assumptions-of-polynomial-regression" class="nav-link" data-scroll-target="#assumptions-of-polynomial-regression"><span class="header-section-number">19.1.2</span> Assumptions of Polynomial Regression</a></li>
-  <li><a href="#mathematical-equation" id="toc-mathematical-equation" class="nav-link" data-scroll-target="#mathematical-equation"><span class="header-section-number">19.1.3</span> Mathematical Equation</a></li>
-  <li><a href="#performing-a-polynomial-regression-in-r" id="toc-performing-a-polynomial-regression-in-r" class="nav-link" data-scroll-target="#performing-a-polynomial-regression-in-r"><span class="header-section-number">19.1.4</span> Performing a Polynomial Regression in R</a></li>
+<li><a href="#when-is-a-polynomial-regression-used" id="toc-when-is-a-polynomial-regression-used" class="nav-link" data-scroll-target="#when-is-a-polynomial-regression-used"><span class="header-section-number">20.1.1</span> When is a Polynomial Regression Used?</a></li>
+  <li><a href="#assumptions-of-polynomial-regression" id="toc-assumptions-of-polynomial-regression" class="nav-link" data-scroll-target="#assumptions-of-polynomial-regression"><span class="header-section-number">20.1.2</span> Assumptions of Polynomial Regression</a></li>
+  <li><a href="#mathematical-equation" id="toc-mathematical-equation" class="nav-link" data-scroll-target="#mathematical-equation"><span class="header-section-number">20.1.3</span> Mathematical Equation</a></li>
+  <li><a href="#performing-a-polynomial-regression-in-r" id="toc-performing-a-polynomial-regression-in-r" class="nav-link" data-scroll-target="#performing-a-polynomial-regression-in-r"><span class="header-section-number">20.1.4</span> Performing a Polynomial Regression in R</a></li>
   </ul>
 </li>
   <li>
-<a href="#lets-practice" id="toc-lets-practice" class="nav-link" data-scroll-target="#lets-practice"><span class="header-section-number">19.2</span> Let’s Practice!</a>
+<a href="#lets-practice" id="toc-lets-practice" class="nav-link" data-scroll-target="#lets-practice"><span class="header-section-number">20.2</span> Let’s Practice!</a>
   <ul class="collapse">
-<li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><span class="header-section-number">19.2.1</span> Hypotheses</a></li>
-  <li><a href="#step-0-install-and-load-required-package" id="toc-step-0-install-and-load-required-package" class="nav-link" data-scroll-target="#step-0-install-and-load-required-package"><span class="header-section-number">19.2.2</span> Step 0: Install and load required package</a></li>
-  <li><a href="#step-1-load-and-inspect-the-data" id="toc-step-1-load-and-inspect-the-data" class="nav-link" data-scroll-target="#step-1-load-and-inspect-the-data"><span class="header-section-number">19.2.3</span> Step 1: Load and inspect the data</a></li>
-  <li><a href="#step-2-visualize-the-data" id="toc-step-2-visualize-the-data" class="nav-link" data-scroll-target="#step-2-visualize-the-data"><span class="header-section-number">19.2.4</span> Step 2: Visualize the data</a></li>
-  <li><a href="#step-3-fit-models" id="toc-step-3-fit-models" class="nav-link" data-scroll-target="#step-3-fit-models"><span class="header-section-number">19.2.5</span> Step 3: Fit Models</a></li>
-  <li><a href="#step-4-assess-assumptions" id="toc-step-4-assess-assumptions" class="nav-link" data-scroll-target="#step-4-assess-assumptions"><span class="header-section-number">19.2.6</span> Step 4: Assess Assumptions</a></li>
-  <li><a href="#step-5.-describe-model-output" id="toc-step-5.-describe-model-output" class="nav-link" data-scroll-target="#step-5.-describe-model-output"><span class="header-section-number">19.2.7</span> Step 5. Describe Model Output</a></li>
-  <li><a href="#bonus-step-visualize-the-final-model" id="toc-bonus-step-visualize-the-final-model" class="nav-link" data-scroll-target="#bonus-step-visualize-the-final-model"><span class="header-section-number">19.2.8</span> Bonus Step: Visualize the Final Model</a></li>
+<li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><span class="header-section-number">20.2.1</span> Hypotheses</a></li>
+  <li><a href="#step-0-install-and-load-required-package" id="toc-step-0-install-and-load-required-package" class="nav-link" data-scroll-target="#step-0-install-and-load-required-package"><span class="header-section-number">20.2.2</span> Step 0: Install and load required package</a></li>
+  <li><a href="#step-1-load-and-inspect-the-data" id="toc-step-1-load-and-inspect-the-data" class="nav-link" data-scroll-target="#step-1-load-and-inspect-the-data"><span class="header-section-number">20.2.3</span> Step 1: Load and inspect the data</a></li>
+  <li><a href="#step-2-visualize-the-data" id="toc-step-2-visualize-the-data" class="nav-link" data-scroll-target="#step-2-visualize-the-data"><span class="header-section-number">20.2.4</span> Step 2: Visualize the data</a></li>
+  <li><a href="#step-3-fit-models" id="toc-step-3-fit-models" class="nav-link" data-scroll-target="#step-3-fit-models"><span class="header-section-number">20.2.5</span> Step 3: Fit Models</a></li>
+  <li><a href="#step-4-assess-assumptions" id="toc-step-4-assess-assumptions" class="nav-link" data-scroll-target="#step-4-assess-assumptions"><span class="header-section-number">20.2.6</span> Step 4: Assess Assumptions</a></li>
+  <li><a href="#step-5.-describe-model-output" id="toc-step-5.-describe-model-output" class="nav-link" data-scroll-target="#step-5.-describe-model-output"><span class="header-section-number">20.2.7</span> Step 5. Describe Model Output</a></li>
+  <li><a href="#bonus-step-visualize-the-final-model" id="toc-bonus-step-visualize-the-final-model" class="nav-link" data-scroll-target="#bonus-step-visualize-the-final-model"><span class="header-section-number">20.2.8</span> Bonus Step: Visualize the Final Model</a></li>
   </ul>
 </li>
-  <li><a href="#further-discussion" id="toc-further-discussion" class="nav-link" data-scroll-target="#further-discussion"><span class="header-section-number">19.3</span> Further Discussion</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">19.4</span> References</a></li>
+  <li><a href="#further-discussion" id="toc-further-discussion" class="nav-link" data-scroll-target="#further-discussion"><span class="header-section-number">20.3</span> Further Discussion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">20.4</span> References</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/04_regression_polynomial.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_regression_polynomial.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_regression_polynomial.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span>
+<span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span>
 </h1>
 <p class="subtitle lead">Understanding and Coding in R</p>
 </div>
@@ -428,16 +434,16 @@ window.Quarto = {
   
 
 
-</header><section id="what-is-a-polynomial-regression" class="level2" data-number="19.1"><h2 data-number="19.1" class="anchored" data-anchor-id="what-is-a-polynomial-regression">
-<span class="header-section-number">19.1</span> What is a Polynomial Regression?</h2>
+</header><section id="what-is-a-polynomial-regression" class="level2" data-number="20.1"><h2 data-number="20.1" class="anchored" data-anchor-id="what-is-a-polynomial-regression">
+<span class="header-section-number">20.1</span> What is a Polynomial Regression?</h2>
 <p>Polynomial regression is a type of regression analysis that models the non-linear relationship between the predictor variable(s) and response variable<sup><strong>1</strong></sup>. It is an extension of simple linear regression that allows for more complex relationships between predictor and response variables<sup><strong>1</strong></sup>.</p>
 <p>In simple terms, it allows us to fit a <u>curve</u> to our data instead of a straight line.</p>
-<section id="when-is-a-polynomial-regression-used" class="level3" data-number="19.1.1"><h3 data-number="19.1.1" class="anchored" data-anchor-id="when-is-a-polynomial-regression-used">
-<span class="header-section-number">19.1.1</span> When is a Polynomial Regression Used?</h3>
+<section id="when-is-a-polynomial-regression-used" class="level3" data-number="20.1.1"><h3 data-number="20.1.1" class="anchored" data-anchor-id="when-is-a-polynomial-regression-used">
+<span class="header-section-number">20.1.1</span> When is a Polynomial Regression Used?</h3>
 <p>Polynomial regression is useful when the relationship between the independent and dependent variables is <strong>nonlinear</strong>.</p>
 <p>It can capture more complex relationships than linear regression, making it suitable for cases where the data exhibits <u>curvature</u>.</p>
-</section><section id="assumptions-of-polynomial-regression" class="level3" data-number="19.1.2"><h3 data-number="19.1.2" class="anchored" data-anchor-id="assumptions-of-polynomial-regression">
-<span class="header-section-number">19.1.2</span> Assumptions of Polynomial Regression</h3>
+</section><section id="assumptions-of-polynomial-regression" class="level3" data-number="20.1.2"><h3 data-number="20.1.2" class="anchored" data-anchor-id="assumptions-of-polynomial-regression">
+<span class="header-section-number">20.1.2</span> Assumptions of Polynomial Regression</h3>
 <ol type="1">
 <li>
 <strong>Linearity</strong>: There is a curvilinear relationship between the independent variable(s) and the dependent variable.</li>
@@ -447,8 +453,8 @@ window.Quarto = {
 <strong>Homoscedasticity</strong>: The variance of the errors should be constant across all levels of the independent variable(s).</li>
 <li>
 <strong>Normality</strong>: The errors should be normally distributed with mean zero and a constant variance.</li>
-</ol></section><section id="mathematical-equation" class="level3" data-number="19.1.3"><h3 data-number="19.1.3" class="anchored" data-anchor-id="mathematical-equation">
-<span class="header-section-number">19.1.3</span> Mathematical Equation</h3>
+</ol></section><section id="mathematical-equation" class="level3" data-number="20.1.3"><h3 data-number="20.1.3" class="anchored" data-anchor-id="mathematical-equation">
+<span class="header-section-number">20.1.3</span> Mathematical Equation</h3>
 <p>Consider independent samples <span class="math inline">\(i = 1, \ldots, n\)</span>. The general formula for a polynomial regression representing the relationship between the response variable (<span class="math inline">\(y\)</span>) and the predictor variable (<span class="math inline">\(x\)</span>) as a polynomial function of degree <span class="math inline">\(d\)</span> is:</p>
 <p><span class="math display">\[
 y_i = \beta_0 + \beta_1x_i + \beta_2x_i^2 + \beta_3x_i^3 + ... \beta_dx_i^d + \epsilon_i,
@@ -466,8 +472,8 @@ y_i = \beta_0 + \beta_1x_i + \beta_2x_i^2 + \beta_3x_i^3 + ... \beta_dx_i^d + \e
 </ul>
 <p>For large degree <span class="math inline">\(d\)</span>, polynomial regression allows us to produce an extremely non-linear curve. Therefore, it is not common to use <span class="math inline">\(d &gt; 3\)</span> because the larger value of <span class="math inline">\(d\)</span>, the more overly flexible polynomial curve becomes, which can lead to overfitting them model to the data.</p>
 <p>The coefficients in polynomial function can be estimated using least square linear regression because it can be viewed as a standard linear model with predictors <span class="math inline">\(x_i, \,x_i^2, \,x_i^3, ..., x_i^d\)</span>. Hence, polynomial regression is also known as <em>polynomial linear regression</em>.</p>
-</section><section id="performing-a-polynomial-regression-in-r" class="level3" data-number="19.1.4"><h3 data-number="19.1.4" class="anchored" data-anchor-id="performing-a-polynomial-regression-in-r">
-<span class="header-section-number">19.1.4</span> Performing a Polynomial Regression in R</h3>
+</section><section id="performing-a-polynomial-regression-in-r" class="level3" data-number="20.1.4"><h3 data-number="20.1.4" class="anchored" data-anchor-id="performing-a-polynomial-regression-in-r">
+<span class="header-section-number">20.1.4</span> Performing a Polynomial Regression in R</h3>
 <ul>
 <li>Step 0: Load required packages</li>
 <li>Step 1: Load and inspect the data</li>
@@ -475,11 +481,11 @@ y_i = \beta_0 + \beta_1x_i + \beta_2x_i^2 + \beta_3x_i^3 + ... \beta_dx_i^d + \e
 <li>Step 3: Fit the model</li>
 <li>Step 4: Assess Assumptions</li>
 <li>Step 5: Describe model output</li>
-</ul></section></section><section id="lets-practice" class="level2" data-number="19.2"><h2 data-number="19.2" class="anchored" data-anchor-id="lets-practice">
-<span class="header-section-number">19.2</span> Let’s Practice!</h2>
+</ul></section></section><section id="lets-practice" class="level2" data-number="20.2"><h2 data-number="20.2" class="anchored" data-anchor-id="lets-practice">
+<span class="header-section-number">20.2</span> Let’s Practice!</h2>
 <p>Now let’s go through the steps to perform a polynomial regression in R. We’ll be using the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function to fit the polynomial regression model. This function comes standard in base R.</p>
-<section id="hypotheses" class="level3" data-number="19.2.1"><h3 data-number="19.2.1" class="anchored" data-anchor-id="hypotheses">
-<span class="header-section-number">19.2.1</span> Hypotheses</h3>
+<section id="hypotheses" class="level3" data-number="20.2.1"><h3 data-number="20.2.1" class="anchored" data-anchor-id="hypotheses">
+<span class="header-section-number">20.2.1</span> Hypotheses</h3>
 <p>For this example, we are investigating the following:</p>
 <ul>
 <li>
@@ -491,16 +497,16 @@ y_i = \beta_0 + \beta_1x_i + \beta_2x_i^2 + \beta_3x_i^3 + ... \beta_dx_i^d + \e
 </ul>
 <p>In this case, the null hypothesis assumes that the coefficients of the quadratic polynomial terms are zero, indicating no relationship between the weight of the car and miles per gallon. The alternative hypothesis, on the other hand, suggests that at least one of the quadratic polynomial terms is non-zero, indicating a significant relationship between the weight of the car and miles per gallon.</p>
 <p>By performing the polynomial regression analysis and examining the model summary and coefficients, we can evaluate the statistical significance of the relationship and determine whether to reject or fail to reject the null hypothesis.</p>
-</section><section id="step-0-install-and-load-required-package" class="level3" data-number="19.2.2"><h3 data-number="19.2.2" class="anchored" data-anchor-id="step-0-install-and-load-required-package">
-<span class="header-section-number">19.2.2</span> Step 0: Install and load required package</h3>
+</section><section id="step-0-install-and-load-required-package" class="level3" data-number="20.2.2"><h3 data-number="20.2.2" class="anchored" data-anchor-id="step-0-install-and-load-required-package">
+<span class="header-section-number">20.2.2</span> Step 0: Install and load required package</h3>
 <p>In R, we’ll use the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function from the base package to perform polynomial regression. Also, since we want to visualize our data, we will be loading the <code>ggplot2</code> package for use.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># For data visualization purposes</span></span>
 <span><span class="co"># install.packages("ggplot2")</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="step-1-load-and-inspect-the-data" class="level3" data-number="19.2.3"><h3 data-number="19.2.3" class="anchored" data-anchor-id="step-1-load-and-inspect-the-data">
-<span class="header-section-number">19.2.3</span> Step 1: Load and inspect the data</h3>
+</section><section id="step-1-load-and-inspect-the-data" class="level3" data-number="20.2.3"><h3 data-number="20.2.3" class="anchored" data-anchor-id="step-1-load-and-inspect-the-data">
+<span class="header-section-number">20.2.3</span> Step 1: Load and inspect the data</h3>
 <p>For this example, we will use the built-in <code>mtcars</code> dataset (from the standard R package <code>datasets</code>) which is publicly available and contains information about various car models.</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Load mtcars dataset</span></span>
@@ -519,8 +525,8 @@ Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
 Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
 </div>
 </div>
-</section><section id="step-2-visualize-the-data" class="level3" data-number="19.2.4"><h3 data-number="19.2.4" class="anchored" data-anchor-id="step-2-visualize-the-data">
-<span class="header-section-number">19.2.4</span> Step 2: Visualize the data</h3>
+</section><section id="step-2-visualize-the-data" class="level3" data-number="20.2.4"><h3 data-number="20.2.4" class="anchored" data-anchor-id="step-2-visualize-the-data">
+<span class="header-section-number">20.2.4</span> Step 2: Visualize the data</h3>
 <p>Before fitting a polynomial regression model, it’s helpful to visualize the data to identify any <u>non-linear</u> patterns. For our example, we will use a scatter plot to visualize the relationship between the independent and dependent variables:</p>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Scatter plot of mpg (dependent variable) vs. wt (independent variable)</span></span>
@@ -536,8 +542,8 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 </div>
 </div>
 </div>
-</section><section id="step-3-fit-models" class="level3" data-number="19.2.5"><h3 data-number="19.2.5" class="anchored" data-anchor-id="step-3-fit-models">
-<span class="header-section-number">19.2.5</span> Step 3: Fit Models</h3>
+</section><section id="step-3-fit-models" class="level3" data-number="20.2.5"><h3 data-number="20.2.5" class="anchored" data-anchor-id="step-3-fit-models">
+<span class="header-section-number">20.2.5</span> Step 3: Fit Models</h3>
 <p>Let’s create a function so we can build multiple models. We will build a standard linear model and a quadratic model (degrees 1 and 2, respectively).</p>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Function to fit and evaluate polynomial regression models</span></span>
@@ -551,8 +557,8 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 <span><span class="va">model_2</span> <span class="op">&lt;-</span> <span class="fu">fit_poly_regression</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To fit a polynomial regression model, we’ll use the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function and create polynomial terms using the <code><a href="https://rdrr.io/r/stats/poly.html">poly()</a></code> function. In this example, we’ll fit a standard linear (degree = 1) and a quadratic polynomial (degree = 2) to the <code>mtcars</code> dataset.</p>
-</section><section id="step-4-assess-assumptions" class="level3" data-number="19.2.6"><h3 data-number="19.2.6" class="anchored" data-anchor-id="step-4-assess-assumptions">
-<span class="header-section-number">19.2.6</span> Step 4: Assess Assumptions</h3>
+</section><section id="step-4-assess-assumptions" class="level3" data-number="20.2.6"><h3 data-number="20.2.6" class="anchored" data-anchor-id="step-4-assess-assumptions">
+<span class="header-section-number">20.2.6</span> Step 4: Assess Assumptions</h3>
 <p>Before we can interpret the model, we have to check the assumptions. We will check these assumptions via plots:</p>
 <ol type="1">
 <li>Residuals vs.&nbsp;Fitted values (used to check the linearity assumption),</li>
@@ -579,8 +585,8 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We see that Model 2 (the quadratic one) satisfies the “linearity” assumption, because the red line in the “Residuals vs Fitted” graph is flat. However, the Q-Q plot shows that the residuals are not normally distributed, so we should take additional steps to transform the response feature (such as via a square root or log transformation, or something similar).</p>
-</section><section id="step-5.-describe-model-output" class="level3" data-number="19.2.7"><h3 data-number="19.2.7" class="anchored" data-anchor-id="step-5.-describe-model-output">
-<span class="header-section-number">19.2.7</span> Step 5. Describe Model Output</h3>
+</section><section id="step-5.-describe-model-output" class="level3" data-number="20.2.7"><h3 data-number="20.2.7" class="anchored" data-anchor-id="step-5.-describe-model-output">
+<span class="header-section-number">20.2.7</span> Step 5. Describe Model Output</h3>
 <p>Although we recognize that this model is not correct (because the residuals are not approximately normal), we will give an example of how to interpret this output.</p>
 <div class="cell">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">model_2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -606,8 +612,8 @@ Multiple R-squared:  0.8191,    Adjusted R-squared:  0.8066
 F-statistic: 65.64 on 2 and 29 DF,  p-value: 1.715e-11</code></pre>
 </div>
 </div>
-</section><section id="bonus-step-visualize-the-final-model" class="level3" data-number="19.2.8"><h3 data-number="19.2.8" class="anchored" data-anchor-id="bonus-step-visualize-the-final-model">
-<span class="header-section-number">19.2.8</span> Bonus Step: Visualize the Final Model</h3>
+</section><section id="bonus-step-visualize-the-final-model" class="level3" data-number="20.2.8"><h3 data-number="20.2.8" class="anchored" data-anchor-id="bonus-step-visualize-the-final-model">
+<span class="header-section-number">20.2.8</span> Bonus Step: Visualize the Final Model</h3>
 <p>Finally, let’s plot the scatter plot with the polynomial regression line to visualize the fit:</p>
 <div class="cell">
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Create a data frame with data points and predictions </span></span>
@@ -639,15 +645,15 @@ F-statistic: 65.64 on 2 and 29 DF,  p-value: 1.715e-11</code></pre>
 </div>
 </div>
 </div>
-</section></section><section id="further-discussion" class="level2" data-number="19.3"><h2 data-number="19.3" class="anchored" data-anchor-id="further-discussion">
-<span class="header-section-number">19.3</span> Further Discussion</h2>
+</section></section><section id="further-discussion" class="level2" data-number="20.3"><h2 data-number="20.3" class="anchored" data-anchor-id="further-discussion">
+<span class="header-section-number">20.3</span> Further Discussion</h2>
 <ul>
 <li>
 <strong>Piecewise polynomials</strong>: Instead of fitting a high-degree polynomial over the entire range of X, piece- wise polynomial regression involves fitting separate low-degree polynomials over different regions of X. The coefficients βi differ in different parts of the range of X. The points where the coefficients change are called knots. Using more knots leads to a more flexible piecewise polynomial<sup><strong>2</strong></sup>.</li>
 <li>
 <strong>Constraints and spline</strong>: the technique of reduce the number of degree of freedom on piecewise polynomial to produce a continuous and naturally smooth fit model on data<sup><strong>2</strong></sup>.</li>
-</ul></section><section id="references" class="level2" data-number="19.4"><h2 data-number="19.4" class="anchored" data-anchor-id="references">
-<span class="header-section-number">19.4</span> References</h2>
+</ul></section><section id="references" class="level2" data-number="20.4"><h2 data-number="20.4" class="anchored" data-anchor-id="references">
+<span class="header-section-number">20.4</span> References</h2>
 <ol type="1">
 <li><p>Field, A. (2013). Discovering Statistics Using IBM SPSS Statistics. (4th ed.). Sage Publications.</p></li>
 <li><p>James, G., Witten, D., Hastie, T., &amp; Tibshirani, R. (2013). An Introduction to Statistical Learning with Applications in R. (2nd ed.). Publisher. (pp.&nbsp;290-300)</p></li>
@@ -1064,7 +1070,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../lessons_original/04_regression_mls.html" class="pagination-link" aria-label="Multiple Linear Regression">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

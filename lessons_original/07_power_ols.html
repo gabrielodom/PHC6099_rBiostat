@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
 <meta name="dcterms.date" content="2023-07-27">
-<title>An R Cookbook for Public Health - 22&nbsp; Power Analysis for OLS Regression</title>
+<title>An R Cookbook for Public Health - 23&nbsp; Power Analysis for OLS Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -150,7 +150,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../07_header_power.html">Statistical Power and Sample Size Determination</a></li><li class="breadcrumb-item"><a href="../lessons_original/07_power_ols.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../07_header_power.html">Statistical Power and Sample Size Determination</a></li><li class="breadcrumb-item"><a href="../lessons_original/07_power_ols.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -243,8 +243,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_wilcoxon_one_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons_original/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -261,25 +267,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -296,43 +302,43 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -349,7 +355,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -366,7 +372,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
   </div>
 </li>
       </ul>
@@ -383,7 +389,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -396,22 +402,22 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">22.1</span> Introduction</a></li>
+<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">23.1</span> Introduction</a></li>
   <li>
-<a href="#power-analysis-ols-regression" id="toc-power-analysis-ols-regression" class="nav-link" data-scroll-target="#power-analysis-ols-regression"><span class="header-section-number">22.2</span> Power Analysis: OLS Regression</a>
+<a href="#power-analysis-ols-regression" id="toc-power-analysis-ols-regression" class="nav-link" data-scroll-target="#power-analysis-ols-regression"><span class="header-section-number">23.2</span> Power Analysis: OLS Regression</a>
   <ul class="collapse">
-<li><a href="#the-pwrss.f.reg-function" id="toc-the-pwrss.f.reg-function" class="nav-link" data-scroll-target="#the-pwrss.f.reg-function"><span class="header-section-number">22.2.1</span> The <code>pwrss.f.reg</code> function</a></li>
-  <li><a href="#the-pwr.f2.test-function" id="toc-the-pwr.f2.test-function" class="nav-link" data-scroll-target="#the-pwr.f2.test-function"><span class="header-section-number">22.2.2</span> The <code>pwr.f2.test</code> function</a></li>
-  <li><a href="#the-wp.regression-function" id="toc-the-wp.regression-function" class="nav-link" data-scroll-target="#the-wp.regression-function"><span class="header-section-number">22.2.3</span> The <code>wp.regression</code> function</a></li>
+<li><a href="#the-pwrss.f.reg-function" id="toc-the-pwrss.f.reg-function" class="nav-link" data-scroll-target="#the-pwrss.f.reg-function"><span class="header-section-number">23.2.1</span> The <code>pwrss.f.reg</code> function</a></li>
+  <li><a href="#the-pwr.f2.test-function" id="toc-the-pwr.f2.test-function" class="nav-link" data-scroll-target="#the-pwr.f2.test-function"><span class="header-section-number">23.2.2</span> The <code>pwr.f2.test</code> function</a></li>
+  <li><a href="#the-wp.regression-function" id="toc-the-wp.regression-function" class="nav-link" data-scroll-target="#the-wp.regression-function"><span class="header-section-number">23.2.3</span> The <code>wp.regression</code> function</a></li>
   </ul>
 </li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/07_power_ols.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../07_header_power.html">Statistical Power and Sample Size Determination</a></li><li class="breadcrumb-item"><a href="../lessons_original/07_power_ols.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../07_header_power.html">Statistical Power and Sample Size Determination</a></li><li class="breadcrumb-item"><a href="../lessons_original/07_power_ols.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span>
+<span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span>
 </h1>
 </div>
 
@@ -486,8 +492,8 @@ lavaan is FREE software! Please report any bugs.</code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">pwrss</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="introduction" class="level2" data-number="22.1"><h2 data-number="22.1" class="anchored" data-anchor-id="introduction">
-<span class="header-section-number">22.1</span> Introduction</h2>
+<section id="introduction" class="level2" data-number="23.1"><h2 data-number="23.1" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">23.1</span> Introduction</h2>
 <p>The power of a hypothesis test is the probability of correctly rejecting the null hypothesis or the probability that the test will correctly support the alternative hypothesis (detecting an effect when there actually is one)<span class="citation" data-cites="cohen1988"><sup><a href="#ref-cohen1988" role="doc-biblioref">1</a></sup></span>. Then,</p>
 <ul>
 <li>High power: large chance of a test detecting a true effect.</li>
@@ -502,8 +508,8 @@ Power = 1-\beta
 <figcaption>Visual view of beta</figcaption></figure>
 </div>
 <p>Power is mainly influenced by sample size, effect size, and significance level.</p>
-</section><section id="power-analysis-ols-regression" class="level2" data-number="22.2"><h2 data-number="22.2" class="anchored" data-anchor-id="power-analysis-ols-regression">
-<span class="header-section-number">22.2</span> Power Analysis: OLS Regression</h2>
+</section><section id="power-analysis-ols-regression" class="level2" data-number="23.2"><h2 data-number="23.2" class="anchored" data-anchor-id="power-analysis-ols-regression">
+<span class="header-section-number">23.2</span> Power Analysis: OLS Regression</h2>
 <p>For this power analysis we will use the univariate (simple) OLS regression example of our last presentation examining the relationship between a vehicle’s weight (WT) and its miles per gallon or fuel efficiency (MPG).</p>
 <p>When performed, the paired correlation provided us with a pearson’s correlation coefficient of r(30) = -.868, p&lt;0.05, (n = 32). When we ran this regression we got an (<span class="math inline">\(R^2\)</span> = .75) Therefore for the r2 value (effect size) for a power analysis we will begin with an r2 value of .75 and an n = 32 to account for the observations already collected. However, the power analysis should occur before collecting samples so that we can have an appropriate number of observations required for our hypothesized effect size. In our example, we are also assuming that the variables are normally distributed. Based on our correlation analysis, weight likely needs a cubic transformation, This would mean that our model would have three coefficients of interest.</p>
 <p>Formula for a univariate Ordinary Least Squares (OLS) Regression:</p>
@@ -522,8 +528,8 @@ Power = 1-\beta
 <li>The <code>pwr.f2.test</code> function in the <code>pwr</code> package</li>
 <li>The <code>wp.regression</code> function in the <code>WebPower</code> package</li>
 </ol>
-<section id="the-pwrss.f.reg-function" class="level3" data-number="22.2.1"><h3 data-number="22.2.1" class="anchored" data-anchor-id="the-pwrss.f.reg-function">
-<span class="header-section-number">22.2.1</span> The <code>pwrss.f.reg</code> function</h3>
+<section id="the-pwrss.f.reg-function" class="level3" data-number="23.2.1"><h3 data-number="23.2.1" class="anchored" data-anchor-id="the-pwrss.f.reg-function">
+<span class="header-section-number">23.2.1</span> The <code>pwrss.f.reg</code> function</h3>
 <p>We will start our power analysis using the The <code>pwrss.f.reg</code> function for one predictor in an OLS regression, with our given observations of n = 32 and <span class="math inline">\(R^2\)</span> = .75. Given these values, we are expecting that one variable (WT) explains 75% of the variance in the outcome or Miles per gallon (R2=0.75 or r2 = 0.75 in the code)<span class="citation" data-cites="apracti"><sup><a href="#ref-apracti" role="doc-biblioref">2</a></sup></span>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">RegOne_lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pwrss/man/4-Linear-Regression-Rsquared.html">pwrss.f.reg</a></span><span class="op">(</span></span>
@@ -650,8 +656,8 @@ Power = 1-\beta
 </div>
 </div>
 <p>Given the graph, we notice that given n = 32, a power of 80% and higher is achieved when the effect size is at least approximately r2 = 0.20.</p>
-</section><section id="the-pwr.f2.test-function" class="level3" data-number="22.2.2"><h3 data-number="22.2.2" class="anchored" data-anchor-id="the-pwr.f2.test-function">
-<span class="header-section-number">22.2.2</span> The <code>pwr.f2.test</code> function</h3>
+</section><section id="the-pwr.f2.test-function" class="level3" data-number="23.2.2"><h3 data-number="23.2.2" class="anchored" data-anchor-id="the-pwr.f2.test-function">
+<span class="header-section-number">23.2.2</span> The <code>pwr.f2.test</code> function</h3>
 <p>Power analysis using the <code>pwr.f2.test</code>: where, u = 1, The F numerator degrees of freedom (u=1) or the number of coefficients(independent variables) in the model</p>
 <p>and we will use Cohen’s criteria for effect sizes and first provide analyses for a medium effect size of 0.15 [<span class="citation" data-cites="cohen1988a"><sup><a href="#ref-cohen1988a" role="doc-biblioref">3</a></sup></span>]<span class="citation" data-cites="powerin"><sup><a href="#ref-powerin" role="doc-biblioref">4</a></sup></span><span class="citation" data-cites="statistia"><sup><a href="#ref-statistia" role="doc-biblioref">5</a></sup></span></p>
 <div class="cell">
@@ -821,8 +827,8 @@ $ sample_sizes &lt;dbl&gt; 20, 40, 60, 80, 100, 20, 40, 60, 80, 100, 20, 40, 60,
 </div>
 </div>
 <p>Based on the graph, if we have an effect size of 0.15, we need approximately 50 or more observations (recall n = v + 1 + 1)</p>
-</section><section id="the-wp.regression-function" class="level3" data-number="22.2.3"><h3 data-number="22.2.3" class="anchored" data-anchor-id="the-wp.regression-function">
-<span class="header-section-number">22.2.3</span> The <code>wp.regression</code> function</h3>
+</section><section id="the-wp.regression-function" class="level3" data-number="23.2.3"><h3 data-number="23.2.3" class="anchored" data-anchor-id="the-wp.regression-function">
+<span class="header-section-number">23.2.3</span> The <code>wp.regression</code> function</h3>
 <p>Lastly, we use the <code>wp.regression</code> function to examine the appropriate sample size given an effect size of 0.15 to achieve a power of 80% or higher [<span class="citation" data-cites="zhang2017"><sup><a href="#ref-zhang2017" role="doc-biblioref">6</a></sup></span>]<span class="citation" data-cites="wp.regre"><sup><a href="#ref-wp.regre" role="doc-biblioref">7</a></sup></span></p>
 <div class="cell">
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Using webpower </span></span>

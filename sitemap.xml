@@ -6,7 +6,7 @@
   </url>
   <url>
     <loc>https://gabrielodom.github.io/PHC6099_rBiostat/about.html</loc>
-    <lastmod>2024-02-07T14:43:30.729Z</lastmod>
+    <lastmod>2024-05-21T17:09:54.976Z</lastmod>
   </url>
   <url>
     <loc>https://gabrielodom.github.io/PHC6099_rBiostat/01_header_EDA.html</loc>
@@ -35,6 +35,10 @@
   <url>
     <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons/02_z-test_one_prop.html</loc>
     <lastmod>2024-05-20T23:54:14.348Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons/02_wilcoxon_one_samp.html</loc>
+    <lastmod>2024-05-23T15:46:11.596Z</lastmod>
   </url>
   <url>
     <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/02_fisher_exact_test.html</loc>

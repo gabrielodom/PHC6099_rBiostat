@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<title>An R Cookbook for Public Health - 8&nbsp; Fisher’s Exact Test</title>
+<title>An R Cookbook for Public Health - 9&nbsp; Fisher’s Exact Test</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -62,7 +62,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../03_header_two-sample.html" rel="next">
-<link href="../lessons/02_z-test_one_prop.html" rel="prev">
+<link href="../lessons/02_wilcoxon_one_samp.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -131,7 +131,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons_original/02_fisher_exact_test.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons_original/02_fisher_exact_test.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -224,8 +224,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_wilcoxon_one_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons_original/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -242,25 +248,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -277,43 +283,43 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -330,7 +336,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -347,7 +353,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
   </div>
 </li>
       </ul>
@@ -364,7 +370,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -378,37 +384,37 @@ window.Quarto = {
    
   <ul>
 <li>
-<a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">8.1</span> Introduction</a>
+<a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">9.1</span> Introduction</a>
   <ul class="collapse">
-<li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">8.1.1</span> Assumptions</a></li>
-  <li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><span class="header-section-number">8.1.2</span> Hypotheses</a></li>
+<li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">9.1.1</span> Assumptions</a></li>
+  <li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><span class="header-section-number">9.1.2</span> Hypotheses</a></li>
   </ul>
 </li>
   <li>
-<a href="#fishers-exact-test-equation" id="toc-fishers-exact-test-equation" class="nav-link" data-scroll-target="#fishers-exact-test-equation"><span class="header-section-number">8.2</span> Fisher’s Exact Test Equation</a>
+<a href="#fishers-exact-test-equation" id="toc-fishers-exact-test-equation" class="nav-link" data-scroll-target="#fishers-exact-test-equation"><span class="header-section-number">9.2</span> Fisher’s Exact Test Equation</a>
   <ul class="collapse">
-<li><a href="#formula-description" id="toc-formula-description" class="nav-link" data-scroll-target="#formula-description"><span class="header-section-number">8.2.1</span> Formula description</a></li>
-  <li><a href="#what-is-a-contingency-table" id="toc-what-is-a-contingency-table" class="nav-link" data-scroll-target="#what-is-a-contingency-table"><span class="header-section-number">8.2.2</span> What is a contingency table?</a></li>
-  <li><a href="#performing-fishers-exact-test-in-r" id="toc-performing-fishers-exact-test-in-r" class="nav-link" data-scroll-target="#performing-fishers-exact-test-in-r"><span class="header-section-number">8.2.3</span> Performing Fisher’s Exact Test in R</a></li>
-  <li><a href="#data-source-gmp2017" id="toc-data-source-gmp2017" class="nav-link" data-scroll-target="#data-source-gmp2017"><span class="header-section-number">8.2.4</span> Data Source: GMP2017</a></li>
-  <li><a href="#load-in-libraries" id="toc-load-in-libraries" class="nav-link" data-scroll-target="#load-in-libraries"><span class="header-section-number">8.2.5</span> Load in libraries</a></li>
-  <li><a href="#descriptive-summary" id="toc-descriptive-summary" class="nav-link" data-scroll-target="#descriptive-summary"><span class="header-section-number">8.2.6</span> Descriptive summary</a></li>
-  <li><a href="#assessing-frequencies-to-answer-research-question" id="toc-assessing-frequencies-to-answer-research-question" class="nav-link" data-scroll-target="#assessing-frequencies-to-answer-research-question"><span class="header-section-number">8.2.7</span> Assessing frequencies to answer research question</a></li>
-  <li><a href="#visualizing-data-using-mosaic-plot" id="toc-visualizing-data-using-mosaic-plot" class="nav-link" data-scroll-target="#visualizing-data-using-mosaic-plot"><span class="header-section-number">8.2.8</span> Visualizing data using mosaic plot</a></li>
-  <li><a href="#running-the-fishers-exact-test-using-fisher.test" id="toc-running-the-fishers-exact-test-using-fisher.test" class="nav-link" data-scroll-target="#running-the-fishers-exact-test-using-fisher.test"><span class="header-section-number">8.2.9</span> Running the Fisher’s exact test using fisher.test()</a></li>
-  <li><a href="#running-the-test" id="toc-running-the-test" class="nav-link" data-scroll-target="#running-the-test"><span class="header-section-number">8.2.10</span> Running the test</a></li>
-  <li><a href="#interpretation-of-results" id="toc-interpretation-of-results" class="nav-link" data-scroll-target="#interpretation-of-results"><span class="header-section-number">8.2.11</span> Interpretation of results</a></li>
-  <li><a href="#visualizing-statistical-results-with-plots-using-ggstatsplot" id="toc-visualizing-statistical-results-with-plots-using-ggstatsplot" class="nav-link" data-scroll-target="#visualizing-statistical-results-with-plots-using-ggstatsplot"><span class="header-section-number">8.2.12</span> Visualizing statistical results with plots using ggstatsplot</a></li>
+<li><a href="#formula-description" id="toc-formula-description" class="nav-link" data-scroll-target="#formula-description"><span class="header-section-number">9.2.1</span> Formula description</a></li>
+  <li><a href="#what-is-a-contingency-table" id="toc-what-is-a-contingency-table" class="nav-link" data-scroll-target="#what-is-a-contingency-table"><span class="header-section-number">9.2.2</span> What is a contingency table?</a></li>
+  <li><a href="#performing-fishers-exact-test-in-r" id="toc-performing-fishers-exact-test-in-r" class="nav-link" data-scroll-target="#performing-fishers-exact-test-in-r"><span class="header-section-number">9.2.3</span> Performing Fisher’s Exact Test in R</a></li>
+  <li><a href="#data-source-gmp2017" id="toc-data-source-gmp2017" class="nav-link" data-scroll-target="#data-source-gmp2017"><span class="header-section-number">9.2.4</span> Data Source: GMP2017</a></li>
+  <li><a href="#load-in-libraries" id="toc-load-in-libraries" class="nav-link" data-scroll-target="#load-in-libraries"><span class="header-section-number">9.2.5</span> Load in libraries</a></li>
+  <li><a href="#descriptive-summary" id="toc-descriptive-summary" class="nav-link" data-scroll-target="#descriptive-summary"><span class="header-section-number">9.2.6</span> Descriptive summary</a></li>
+  <li><a href="#assessing-frequencies-to-answer-research-question" id="toc-assessing-frequencies-to-answer-research-question" class="nav-link" data-scroll-target="#assessing-frequencies-to-answer-research-question"><span class="header-section-number">9.2.7</span> Assessing frequencies to answer research question</a></li>
+  <li><a href="#visualizing-data-using-mosaic-plot" id="toc-visualizing-data-using-mosaic-plot" class="nav-link" data-scroll-target="#visualizing-data-using-mosaic-plot"><span class="header-section-number">9.2.8</span> Visualizing data using mosaic plot</a></li>
+  <li><a href="#running-the-fishers-exact-test-using-fisher.test" id="toc-running-the-fishers-exact-test-using-fisher.test" class="nav-link" data-scroll-target="#running-the-fishers-exact-test-using-fisher.test"><span class="header-section-number">9.2.9</span> Running the Fisher’s exact test using fisher.test()</a></li>
+  <li><a href="#running-the-test" id="toc-running-the-test" class="nav-link" data-scroll-target="#running-the-test"><span class="header-section-number">9.2.10</span> Running the test</a></li>
+  <li><a href="#interpretation-of-results" id="toc-interpretation-of-results" class="nav-link" data-scroll-target="#interpretation-of-results"><span class="header-section-number">9.2.11</span> Interpretation of results</a></li>
+  <li><a href="#visualizing-statistical-results-with-plots-using-ggstatsplot" id="toc-visualizing-statistical-results-with-plots-using-ggstatsplot" class="nav-link" data-scroll-target="#visualizing-statistical-results-with-plots-using-ggstatsplot"><span class="header-section-number">9.2.12</span> Visualizing statistical results with plots using ggstatsplot</a></li>
   </ul>
 </li>
-  <li><a href="#what-if-we-have-more-than-two-levels" id="toc-what-if-we-have-more-than-two-levels" class="nav-link" data-scroll-target="#what-if-we-have-more-than-two-levels"><span class="header-section-number">8.3</span> What if we have more than two levels?</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">8.4</span> References</a></li>
+  <li><a href="#what-if-we-have-more-than-two-levels" id="toc-what-if-we-have-more-than-two-levels" class="nav-link" data-scroll-target="#what-if-we-have-more-than-two-levels"><span class="header-section-number">9.3</span> What if we have more than two levels?</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">9.4</span> References</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/02_fisher_exact_test.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons_original/02_fisher_exact_test.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons_original/02_fisher_exact_test.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span>
+<span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span>
 </h1>
 <p class="subtitle lead">Explaining Fisher’s Exact Test, how to run it in R and it’s interpretation.</p>
 </div>
@@ -431,8 +437,8 @@ window.Quarto = {
   
 
 
-</header><section id="introduction" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="introduction">
-<span class="header-section-number">8.1</span> Introduction</h2>
+</header><section id="introduction" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">9.1</span> Introduction</h2>
 <ul>
 <li><p>Fisher’s exact test is an independent test used to determine if there is a relationship between categorical (non-parametric) variables with a small sample size.</p></li>
 <li><p>Used to assess whether proportions of one variable are different among values of another table.</p></li>
@@ -440,33 +446,33 @@ window.Quarto = {
 <li><p>The rules of Chi distribution do not apply when the frequency count is &lt;5 for more than 20% of the cells in a contingency table (Bower 2003).</p></li>
 <li><p>Data is easily manipulated by using a contingency table.</p></li>
 </ul>
-<section id="assumptions" class="level3" data-number="8.1.1"><h3 data-number="8.1.1" class="anchored" data-anchor-id="assumptions">
-<span class="header-section-number">8.1.1</span> Assumptions</h3>
+<section id="assumptions" class="level3" data-number="9.1.1"><h3 data-number="9.1.1" class="anchored" data-anchor-id="assumptions">
+<span class="header-section-number">9.1.1</span> Assumptions</h3>
 <ol type="1">
 <li>Assumes that the individual observations are independent.</li>
 <li>Assumes that the row and column totals are fixed or conditioned.</li>
 <li>The variables are categorical and randomly sampled.</li>
 <li>Observations are count data.</li>
-</ol></section><section id="hypotheses" class="level3" data-number="8.1.2"><h3 data-number="8.1.2" class="anchored" data-anchor-id="hypotheses">
-<span class="header-section-number">8.1.2</span> Hypotheses</h3>
+</ol></section><section id="hypotheses" class="level3" data-number="9.1.2"><h3 data-number="9.1.2" class="anchored" data-anchor-id="hypotheses">
+<span class="header-section-number">9.1.2</span> Hypotheses</h3>
 <p>The hypotheses of Fisher’s exact test are similar to Chi-square test:</p>
 <p>Null hypothesis:<span class="math inline">\((H_0)\)</span> There is no relationship between the categorical variables, the variables are independent.</p>
 <p>Alternative hypothesis: <span class="math inline">\((H_1)\)</span> There is a relationship between the categorical variables, the variables are dependent.</p>
-</section></section><section id="fishers-exact-test-equation" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="fishers-exact-test-equation">
-<span class="header-section-number">8.2</span> Fisher’s Exact Test Equation</h2>
+</section></section><section id="fishers-exact-test-equation" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="fishers-exact-test-equation">
+<span class="header-section-number">9.2</span> Fisher’s Exact Test Equation</h2>
 <p>Fisher’s exact test for a one-tailed p-value is calculated using the following formula:</p>
 <p><span class="math display">\[   p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!} \]</span> - n = population size/ total frequency</p>
 <p>- a + b = “successes” values in the contingency table</p>
 <p>- a + c = sample size / draws from the population</p>
 <p>- a = sample successes</p>
-<section id="formula-description" class="level3" data-number="8.2.1"><h3 data-number="8.2.1" class="anchored" data-anchor-id="formula-description">
-<span class="header-section-number">8.2.1</span> Formula description</h3>
+<section id="formula-description" class="level3" data-number="9.2.1"><h3 data-number="9.2.1" class="anchored" data-anchor-id="formula-description">
+<span class="header-section-number">9.2.1</span> Formula description</h3>
 <p>this test is usually used as a one-tailed test but it can also be used as a two tailed test as well, <span class="math inline">\(a\)</span>,<span class="math inline">\(b\)</span>,<span class="math inline">\(c\)</span>, and <span class="math inline">\(d\)</span> are the individual frequencies on the 2x2 contingency table and <span class="math inline">\(n\)</span> is our total frequency. This particular test is used to obtain the probability of the combination of frequencies that we can actually obtain.</p>
-</section><section id="what-is-a-contingency-table" class="level3" data-number="8.2.2"><h3 data-number="8.2.2" class="anchored" data-anchor-id="what-is-a-contingency-table">
-<span class="header-section-number">8.2.2</span> What is a contingency table?</h3>
+</section><section id="what-is-a-contingency-table" class="level3" data-number="9.2.2"><h3 data-number="9.2.2" class="anchored" data-anchor-id="what-is-a-contingency-table">
+<span class="header-section-number">9.2.2</span> What is a contingency table?</h3>
 <p>This is a table that shows the distribution of a variable in the rows and columns. Sometimes referred to as a 2x2 table. They are useful in summarizing categorical variables. The table() function is used to create a contingency table in R. When the variables of interest are summarized in a contingency table it is easier to run the Fisher’s Exact test.</p>
-<section id="example-creating-a-contingency-table" class="level4" data-number="8.2.2.1"><h4 data-number="8.2.2.1" class="anchored" data-anchor-id="example-creating-a-contingency-table">
-<span class="header-section-number">8.2.2.1</span> Example: Creating a contingency table</h4>
+<section id="example-creating-a-contingency-table" class="level4" data-number="9.2.2.1"><h4 data-number="9.2.2.1" class="anchored" data-anchor-id="example-creating-a-contingency-table">
+<span class="header-section-number">9.2.2.1</span> Example: Creating a contingency table</h4>
 <p>Lets say we have information on the gender of participants in a clinical trial and the type of drug administered to them we can create the following contingency table for further analysis.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Example R code to create a contingency table</span></span>
@@ -487,8 +493,8 @@ Drug     Female Male
   Drug B      0    1</code></pre>
 </div>
 </div>
-</section></section><section id="performing-fishers-exact-test-in-r" class="level3" data-number="8.2.3"><h3 data-number="8.2.3" class="anchored" data-anchor-id="performing-fishers-exact-test-in-r">
-<span class="header-section-number">8.2.3</span> Performing Fisher’s Exact Test in R</h3>
+</section></section><section id="performing-fishers-exact-test-in-r" class="level3" data-number="9.2.3"><h3 data-number="9.2.3" class="anchored" data-anchor-id="performing-fishers-exact-test-in-r">
+<span class="header-section-number">9.2.3</span> Performing Fisher’s Exact Test in R</h3>
 <p>We will need to install the <code>ggstatplot</code> package to visualize the statistical results.</p>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># install.packages("ggstatplot") </span></span>
@@ -496,16 +502,16 @@ Drug     Female Male
 <span><span class="co"># install.packages("gmodels")</span></span>
 <span><span class="co"># install.packages(tidyverse)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="data-source-gmp2017" class="level3" data-number="8.2.4"><h3 data-number="8.2.4" class="anchored" data-anchor-id="data-source-gmp2017">
-<span class="header-section-number">8.2.4</span> Data Source: GMP2017</h3>
+</section><section id="data-source-gmp2017" class="level3" data-number="9.2.4"><h3 data-number="9.2.4" class="anchored" data-anchor-id="data-source-gmp2017">
+<span class="header-section-number">9.2.4</span> Data Source: GMP2017</h3>
 <p>For this example we will be using the Greater Manchester Police’s UK stop and search data from 2017(December) sourced from the Sage Research Methods Dataset Part 2 (<a href="https://methods.sagepub.com/dataset/fishers-exact-gmss-2017" class="uri">https://methods.sagepub.com/dataset/fishers-exact-gmss-2017</a>). This data has information on stop and search events, gender and ethnicity. For this example we would like to access whether there is a significant relationship between gender and stop and search events (having controlled drugs vs harmful weapons)?</p>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">GMP17</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span></span>
 <span>  <span class="st">"../data/02_dataset-gmss-2017-subset1_jittered_20240503.csv"</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="load-in-libraries" class="level3" data-number="8.2.5"><h3 data-number="8.2.5" class="anchored" data-anchor-id="load-in-libraries">
-<span class="header-section-number">8.2.5</span> Load in libraries</h3>
+</section><section id="load-in-libraries" class="level3" data-number="9.2.5"><h3 data-number="9.2.5" class="anchored" data-anchor-id="load-in-libraries">
+<span class="header-section-number">9.2.5</span> Load in libraries</h3>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-gregmisc/gmodels">gmodels</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://indrajeetpatil.github.io/ggstatsplot/">ggstatsplot</a></span><span class="op">)</span></span>
@@ -514,8 +520,8 @@ Drug     Female Male
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/katex/">katex</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="descriptive-summary" class="level3" data-number="8.2.6"><h3 data-number="8.2.6" class="anchored" data-anchor-id="descriptive-summary">
-<span class="header-section-number">8.2.6</span> Descriptive summary</h3>
+</section><section id="descriptive-summary" class="level3" data-number="9.2.6"><h3 data-number="9.2.6" class="anchored" data-anchor-id="descriptive-summary">
+<span class="header-section-number">9.2.6</span> Descriptive summary</h3>
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">GMP17</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
@@ -540,8 +546,8 @@ Drug     Female Male
 <pre><code>[1] 186</code></pre>
 </div>
 </div>
-</section><section id="assessing-frequencies-to-answer-research-question" class="level3" data-number="8.2.7"><h3 data-number="8.2.7" class="anchored" data-anchor-id="assessing-frequencies-to-answer-research-question">
-<span class="header-section-number">8.2.7</span> Assessing frequencies to answer research question</h3>
+</section><section id="assessing-frequencies-to-answer-research-question" class="level3" data-number="9.2.7"><h3 data-number="9.2.7" class="anchored" data-anchor-id="assessing-frequencies-to-answer-research-question">
+<span class="header-section-number">9.2.7</span> Assessing frequencies to answer research question</h3>
 <p>For this analysis we will use the Gender variable and the ObjectSearch variable</p>
 <div class="cell">
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Dropping the Ethnicity variable to remain with variables of interest for for the 2x2 table</span></span>
@@ -605,8 +611,8 @@ Gender   Controlled_Drugs Harmful_Objects
   Female                2               4</code></pre>
 </div>
 </div>
-</section><section id="visualizing-data-using-mosaic-plot" class="level3" data-number="8.2.8"><h3 data-number="8.2.8" class="anchored" data-anchor-id="visualizing-data-using-mosaic-plot">
-<span class="header-section-number">8.2.8</span> Visualizing data using mosaic plot</h3>
+</section><section id="visualizing-data-using-mosaic-plot" class="level3" data-number="9.2.8"><h3 data-number="9.2.8" class="anchored" data-anchor-id="visualizing-data-using-mosaic-plot">
+<span class="header-section-number">9.2.8</span> Visualizing data using mosaic plot</h3>
 <ul>
 <li>we can use the mosaic plot to represent the data.</li>
 </ul>
@@ -623,8 +629,8 @@ Gender   Controlled_Drugs Harmful_Objects
 </div>
 </div>
 </div>
-</section><section id="running-the-fishers-exact-test-using-fisher.test" class="level3" data-number="8.2.9"><h3 data-number="8.2.9" class="anchored" data-anchor-id="running-the-fishers-exact-test-using-fisher.test">
-<span class="header-section-number">8.2.9</span> Running the Fisher’s exact test using fisher.test()</h3>
+</section><section id="running-the-fishers-exact-test-using-fisher.test" class="level3" data-number="9.2.9"><h3 data-number="9.2.9" class="anchored" data-anchor-id="running-the-fishers-exact-test-using-fisher.test">
+<span class="header-section-number">9.2.9</span> Running the Fisher’s exact test using fisher.test()</h3>
 <p><strong>What if we just run a Chi-square test?</strong></p>
 <p>Using our GMP17 dataset we can try to run a Chi-square test instead of the Fisher’s Exact test and see what happens.</p>
 <p>The R output gives us a warning that the Chi Square is not appropriate hence we should use another test in this case the Fisher’s Exact Test.</p>
@@ -640,8 +646,8 @@ Gender   Controlled_Drugs Harmful_Objects
   Female         4.396552        1.603448</code></pre>
 </div>
 </div>
-</section><section id="running-the-test" class="level3" data-number="8.2.10"><h3 data-number="8.2.10" class="anchored" data-anchor-id="running-the-test">
-<span class="header-section-number">8.2.10</span> Running the test</h3>
+</section><section id="running-the-test" class="level3" data-number="9.2.10"><h3 data-number="9.2.10" class="anchored" data-anchor-id="running-the-test">
+<span class="header-section-number">9.2.10</span> Running the test</h3>
 <div class="cell">
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># running the fisher's exact test</span></span>
 <span></span>
@@ -669,23 +675,23 @@ odds ratio
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_overall.html">add_overall</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="txfhmceayw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#txfhmceayw table {
+<div id="gsgconbnwg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gsgconbnwg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#txfhmceayw thead, #txfhmceayw tbody, #txfhmceayw tfoot, #txfhmceayw tr, #txfhmceayw td, #txfhmceayw th {
+#gsgconbnwg thead, #gsgconbnwg tbody, #gsgconbnwg tfoot, #gsgconbnwg tr, #gsgconbnwg td, #gsgconbnwg th {
   border-style: none;
 }
 
-#txfhmceayw p {
+#gsgconbnwg p {
   margin: 0;
   padding: 0;
 }
 
-#txfhmceayw .gt_table {
+#gsgconbnwg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -711,12 +717,12 @@ odds ratio
   border-left-color: #D3D3D3;
 }
 
-#txfhmceayw .gt_caption {
+#gsgconbnwg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#txfhmceayw .gt_title {
+#gsgconbnwg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -728,7 +734,7 @@ odds ratio
   border-bottom-width: 0;
 }
 
-#txfhmceayw .gt_subtitle {
+#gsgconbnwg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -740,7 +746,7 @@ odds ratio
   border-top-width: 0;
 }
 
-#txfhmceayw .gt_heading {
+#gsgconbnwg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -752,13 +758,13 @@ odds ratio
   border-right-color: #D3D3D3;
 }
 
-#txfhmceayw .gt_bottom_border {
+#gsgconbnwg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#txfhmceayw .gt_col_headings {
+#gsgconbnwg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -773,7 +779,7 @@ odds ratio
   border-right-color: #D3D3D3;
 }
 
-#txfhmceayw .gt_col_heading {
+#gsgconbnwg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -793,7 +799,7 @@ odds ratio
   overflow-x: hidden;
 }
 
-#txfhmceayw .gt_column_spanner_outer {
+#gsgconbnwg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -805,15 +811,15 @@ odds ratio
   padding-right: 4px;
 }
 
-#txfhmceayw .gt_column_spanner_outer:first-child {
+#gsgconbnwg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#txfhmceayw .gt_column_spanner_outer:last-child {
+#gsgconbnwg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#txfhmceayw .gt_column_spanner {
+#gsgconbnwg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -825,11 +831,11 @@ odds ratio
   width: 100%;
 }
 
-#txfhmceayw .gt_spanner_row {
+#gsgconbnwg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#txfhmceayw .gt_group_heading {
+#gsgconbnwg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -855,7 +861,7 @@ odds ratio
   text-align: left;
 }
 
-#txfhmceayw .gt_empty_group_heading {
+#gsgconbnwg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -870,15 +876,15 @@ odds ratio
   vertical-align: middle;
 }
 
-#txfhmceayw .gt_from_md > :first-child {
+#gsgconbnwg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#txfhmceayw .gt_from_md > :last-child {
+#gsgconbnwg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#txfhmceayw .gt_row {
+#gsgconbnwg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -897,7 +903,7 @@ odds ratio
   overflow-x: hidden;
 }
 
-#txfhmceayw .gt_stub {
+#gsgconbnwg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -910,7 +916,7 @@ odds ratio
   padding-right: 5px;
 }
 
-#txfhmceayw .gt_stub_row_group {
+#gsgconbnwg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -924,15 +930,15 @@ odds ratio
   vertical-align: top;
 }
 
-#txfhmceayw .gt_row_group_first td {
+#gsgconbnwg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#txfhmceayw .gt_row_group_first th {
+#gsgconbnwg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#txfhmceayw .gt_summary_row {
+#gsgconbnwg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -942,16 +948,16 @@ odds ratio
   padding-right: 5px;
 }
 
-#txfhmceayw .gt_first_summary_row {
+#gsgconbnwg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#txfhmceayw .gt_first_summary_row.thick {
+#gsgconbnwg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#txfhmceayw .gt_last_summary_row {
+#gsgconbnwg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -961,7 +967,7 @@ odds ratio
   border-bottom-color: #D3D3D3;
 }
 
-#txfhmceayw .gt_grand_summary_row {
+#gsgconbnwg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -971,7 +977,7 @@ odds ratio
   padding-right: 5px;
 }
 
-#txfhmceayw .gt_first_grand_summary_row {
+#gsgconbnwg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -981,7 +987,7 @@ odds ratio
   border-top-color: #D3D3D3;
 }
 
-#txfhmceayw .gt_last_grand_summary_row_top {
+#gsgconbnwg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -991,11 +997,11 @@ odds ratio
   border-bottom-color: #D3D3D3;
 }
 
-#txfhmceayw .gt_striped {
+#gsgconbnwg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#txfhmceayw .gt_table_body {
+#gsgconbnwg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1004,7 +1010,7 @@ odds ratio
   border-bottom-color: #D3D3D3;
 }
 
-#txfhmceayw .gt_footnotes {
+#gsgconbnwg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1018,7 +1024,7 @@ odds ratio
   border-right-color: #D3D3D3;
 }
 
-#txfhmceayw .gt_footnote {
+#gsgconbnwg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1027,7 +1033,7 @@ odds ratio
   padding-right: 5px;
 }
 
-#txfhmceayw .gt_sourcenotes {
+#gsgconbnwg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1041,7 +1047,7 @@ odds ratio
   border-right-color: #D3D3D3;
 }
 
-#txfhmceayw .gt_sourcenote {
+#gsgconbnwg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1049,63 +1055,63 @@ odds ratio
   padding-right: 5px;
 }
 
-#txfhmceayw .gt_left {
+#gsgconbnwg .gt_left {
   text-align: left;
 }
 
-#txfhmceayw .gt_center {
+#gsgconbnwg .gt_center {
   text-align: center;
 }
 
-#txfhmceayw .gt_right {
+#gsgconbnwg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#txfhmceayw .gt_font_normal {
+#gsgconbnwg .gt_font_normal {
   font-weight: normal;
 }
 
-#txfhmceayw .gt_font_bold {
+#gsgconbnwg .gt_font_bold {
   font-weight: bold;
 }
 
-#txfhmceayw .gt_font_italic {
+#gsgconbnwg .gt_font_italic {
   font-style: italic;
 }
 
-#txfhmceayw .gt_super {
+#gsgconbnwg .gt_super {
   font-size: 65%;
 }
 
-#txfhmceayw .gt_footnote_marks {
+#gsgconbnwg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#txfhmceayw .gt_asterisk {
+#gsgconbnwg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#txfhmceayw .gt_indent_1 {
+#gsgconbnwg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#txfhmceayw .gt_indent_2 {
+#gsgconbnwg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#txfhmceayw .gt_indent_3 {
+#gsgconbnwg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#txfhmceayw .gt_indent_4 {
+#gsgconbnwg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#txfhmceayw .gt_indent_5 {
+#gsgconbnwg .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1170,8 +1176,8 @@ odds ratio
 </div>
 </div>
 </div>
-</section><section id="interpretation-of-results" class="level3" data-number="8.2.11"><h3 data-number="8.2.11" class="anchored" data-anchor-id="interpretation-of-results">
-<span class="header-section-number">8.2.11</span> Interpretation of results</h3>
+</section><section id="interpretation-of-results" class="level3" data-number="9.2.11"><h3 data-number="9.2.11" class="anchored" data-anchor-id="interpretation-of-results">
+<span class="header-section-number">9.2.11</span> Interpretation of results</h3>
 <p>The most important test statistic is the p - value therefore we can retrieve the specific result using the following code;</p>
 <div class="cell">
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">test</span><span class="op">$</span><span class="va">p.value</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1181,8 +1187,8 @@ odds ratio
 </div>
 <p>Odds ratio = 6.33, 95% CI = 0.85-73.59], we reject the null hypothesis (<em>p</em> &lt; 0.05) and conclude that there is a strong association between the two categorical independent variables (gender and object search events)</p>
 <p>Therefore the odds ratio indicates that the odds of having controlled drugs at a stop and search is 6.33 times as likely for males compared to females. In other words, males are more likely of having controlled drugs at a stop and search than females.</p>
-</section><section id="visualizing-statistical-results-with-plots-using-ggstatsplot" class="level3" data-number="8.2.12"><h3 data-number="8.2.12" class="anchored" data-anchor-id="visualizing-statistical-results-with-plots-using-ggstatsplot">
-<span class="header-section-number">8.2.12</span> Visualizing statistical results with plots using ggstatsplot</h3>
+</section><section id="visualizing-statistical-results-with-plots-using-ggstatsplot" class="level3" data-number="9.2.12"><h3 data-number="9.2.12" class="anchored" data-anchor-id="visualizing-statistical-results-with-plots-using-ggstatsplot">
+<span class="header-section-number">9.2.12</span> Visualizing statistical results with plots using ggstatsplot</h3>
 <ul>
 <li>we download the ggsattsplot package to visualize the results in a plot.</li>
 </ul>
@@ -1210,8 +1216,8 @@ odds ratio
 </div>
 <p>From the plot, it is clear that the proportion of males among object search events is higher compared to females, suggesting that there is a relationship between the two variables.</p>
 <p>This is confirmed thanks to the p-value displayed in the subtitle of the plot. As previously, we reject the null hypothesis and we conclude that the variables gender and stop and search events are not independent (p-value = 0.038).</p>
-</section></section><section id="what-if-we-have-more-than-two-levels" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="what-if-we-have-more-than-two-levels">
-<span class="header-section-number">8.3</span> What if we have more than two levels?</h2>
+</section></section><section id="what-if-we-have-more-than-two-levels" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="what-if-we-have-more-than-two-levels">
+<span class="header-section-number">9.3</span> What if we have more than two levels?</h2>
 <p>Using the drug example used previously lets say we have 3 drugs ‘Drug A, Drug B or Drug C’ and we want to see if there is any relationship with gender ‘Male/Female’.</p>
 <div class="cell">
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Creating a data frame</span></span>
@@ -1246,8 +1252,8 @@ alternative hypothesis: two.sided</code></pre>
 <p>The p-value is non-significant [<em>p</em>&nbsp;= 0.6], we fail to reject the null hypothesis (<em>p</em>&nbsp;&lt; 0.05) and conclude that there is no association between the drug treatments and gender. If the results had been significant we would have gone ahead and conducted a post hoc analysis using pairwise_fisher_test to asses each combination.</p>
 <p><strong>Summary</strong></p>
 <p>This article describe the assumptions and hypotheses of the Fisher’s Exact test. It also provides examples on how it can be applied.</p>
-<hr></section><section id="references" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="references">
-<span class="header-section-number">8.4</span> References</h2>
+<hr></section><section id="references" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="references">
+<span class="header-section-number">9.4</span> References</h2>
 <ol type="1">
 <li>Bower, Keith M. 2003. “When to Use Fisher’s Exact Test.” In <em>American Society for Quality, Six Sigma Forum Magazine</em>, 2:35–37. 4.</li>
 <li>McCrum-Gardner, Evie. 2008. “Which Is the Correct Statistical Test to Use?” <em>British Journal of Oral and Maxillofacial Surgery</em> 46 (1): 38–41.</li>
@@ -1667,8 +1673,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../lessons/02_z-test_one_prop.html" class="pagination-link" aria-label="Z-Test for One Proportion">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span></span>
+      <a href="../lessons/02_wilcoxon_one_samp.html" class="pagination-link" aria-label="Wilcoxon Signed Rank Test for One Sample">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
