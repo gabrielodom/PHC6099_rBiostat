@@ -1,0 +1,95 @@
+---
+title: "Wilcoxon Signed Rank Test for One Sample"
+author:
+  - name: Gabriel J. Odom
+    affiliations:
+      - Florida International University
+      - Robert Stempel College of Public Health and Social Work
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+---
+
+## Introduction to Wilcoxson Signed Rank Test
+The one-sample Wilcoxson Signed Rank Test is used to compare a sample proportion to a population proportion.
+
+
+## Mathematical definition of the Wilcoxson Signed Rank Test
+See the maths here: <https://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test>
+
+
+## Data source and description
+We will use gene-level $p$-values from the Golub and Van Loan (1999) data set from the R package `multtest::` (<https://rdrr.io/bioc/multtest/man/golub.html>); the original is a data set of data set of gene expression values for leukemia, but we have gene-specific $p$-values from a gene-level hypothesis test. We created these $p$-values in the script `R/create_golub_data_20240523.R`, *but they do not represent any real analysis results*.
+```{r}
+#| label: load-packages
+#| message: false
+
+library(tidyverse)
+```
+
+
+
+## Cleaning the data to create a model data frame
+Because our method requires only one sample, we have very little work to do. We import the data set of $p$-values.
+```{r}
+golub_pVals_num <- readRDS(file = "../data/02_golub_pVals_20240523.rds")
+```
+
+There are `r length(golub_pVals_num)` $p$-values. The null hypothesis would be that there is no statistically significant effects in the data, so the distribution of these $p$-values should be a Uniform distribution. Our hypothesis is that the population mean is then 0.5 (the average value of a Uniform distribution).
+
+
+
+## Assumptions of the Wilcoxson Signed Rank Test
+To use a one-sample Wilcoxson Signed Rank Test, we make the following assumptions:
+
+1. The data are from a random sample
+2. Each observation in the data are independent
+3. The values can be "ranked"
+
+If these assumptions hold, then the test statistic is asymptotically normal.
+
+
+## Checking the assumptions
+
+### Independence and Randomness
+These are gene-level $p$-values, so we do not have "independence". However, because this is a pedagogical example, we will take a random sample of these genes to test (and this random sample should be independent enough, but we have no guarantee of this).
+```{r}
+#| label: random-sample-of-genes
+
+# Create random sample of genes to test
+set.seed(20150516)
+gene_sample <- sample(
+  x = golub_pVals_num,
+  size = 200,
+  replace = FALSE
+)
+```
+
+What does the data distribution look like?
+```{r}
+#| label: sample-hist
+hist(gene_sample)
+```
+
+Remember, this is a "fake" analysis (all 38 samples in this data are leukemia cases, and I tested one half against the other---there should absolutely NOT be any real biological signal in this data).
+
+### Type of Data
+These values are $p$-values, so they can be ranked.
+
+
+## Code to run a Wilcoxson Signed Rank Test
+Now that we have checked our assumptions, we can perform the Wilcoxson Signed Rank Test on random samples of the genes to test if they have an average value of 0.5.
+```{r}
+wilcox.test(
+  x = gene_sample,
+  mu = 0.5, # average from all theoretical p-values under H0
+  alternative = "less" # H1: random p-values < 0.5
+)
+```
+
+
+
+## Brief interpretation of the output
+The $p$-value for this test is less than 0.05, so we reject the hypothesis that the average gene-specific $p$-value for this set of results is greater than or equal to 0.5 (the theoretical average of $p$-values under the null hypothesis).
+
