@@ -5,8 +5,8 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<meta name="dcterms.date" content="2024-05-23">
-<title>An R Cookbook for Public Health - 14&nbsp; Two-Way ANOVA</title>
+<meta name="dcterms.date" content="2024-05-28">
+<title>An R Cookbook for Public Health - 15&nbsp; Two-Way ANOVA</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -132,7 +132,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_anova_two_way.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_anova_two_way.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -170,7 +170,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../about.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">PHC 6099: R Computing for Health Sciences</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">About this Book</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -202,8 +202,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/01_table1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Demographics table with table1</span></span></a>
+  <a href="../lessons/01_table1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Demographics Table With Table1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_gtsummary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Table by gtsummary</span></span></a>
   </div>
 </li>
       </ul>
@@ -220,19 +226,19 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_z-test_one_prop.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_wilcoxon_one_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -249,25 +255,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -284,43 +290,43 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_two_way.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -337,7 +343,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -354,7 +360,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
   </div>
 </li>
       </ul>
@@ -371,7 +377,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -384,33 +390,33 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#two-way-anova" id="toc-two-way-anova" class="nav-link active" data-scroll-target="#two-way-anova"><span class="header-section-number">14.1</span> Two-way ANOVA</a></li>
+<li><a href="#two-way-anova" id="toc-two-way-anova" class="nav-link active" data-scroll-target="#two-way-anova"><span class="header-section-number">15.1</span> Two-way ANOVA</a></li>
   <li>
-<a href="#how-does-it-work" id="toc-how-does-it-work" class="nav-link" data-scroll-target="#how-does-it-work"><span class="header-section-number">14.2</span> How does it work?</a>
+<a href="#how-does-it-work" id="toc-how-does-it-work" class="nav-link" data-scroll-target="#how-does-it-work"><span class="header-section-number">15.2</span> How does it work?</a>
   <ul class="collapse">
-<li><a href="#assumptions-needed" id="toc-assumptions-needed" class="nav-link" data-scroll-target="#assumptions-needed"><span class="header-section-number">14.2.1</span> Assumptions needed</a></li>
+<li><a href="#assumptions-needed" id="toc-assumptions-needed" class="nav-link" data-scroll-target="#assumptions-needed"><span class="header-section-number">15.2.1</span> Assumptions needed</a></li>
   </ul>
 </li>
   <li>
-<a href="#two-way-anova-table" id="toc-two-way-anova-table" class="nav-link" data-scroll-target="#two-way-anova-table"><span class="header-section-number">14.3</span> Two-Way ANOVA Table</a>
+<a href="#two-way-anova-table" id="toc-two-way-anova-table" class="nav-link" data-scroll-target="#two-way-anova-table"><span class="header-section-number">15.3</span> Two-Way ANOVA Table</a>
   <ul class="collapse">
-<li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">14.3.1</span> Example</a></li>
-  <li><a href="#checking-for-homoscedasticity" id="toc-checking-for-homoscedasticity" class="nav-link" data-scroll-target="#checking-for-homoscedasticity"><span class="header-section-number">14.3.2</span> Checking for homoscedasticity</a></li>
+<li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">15.3.1</span> Example</a></li>
+  <li><a href="#checking-for-homoscedasticity" id="toc-checking-for-homoscedasticity" class="nav-link" data-scroll-target="#checking-for-homoscedasticity"><span class="header-section-number">15.3.2</span> Checking for homoscedasticity</a></li>
   </ul>
 </li>
   <li>
-<a href="#post-hoc-testing-tukey-hsd" id="toc-post-hoc-testing-tukey-hsd" class="nav-link" data-scroll-target="#post-hoc-testing-tukey-hsd"><span class="header-section-number">14.4</span> Post-hoc testing (Tukey HSD)</a>
+<a href="#post-hoc-testing-tukey-hsd" id="toc-post-hoc-testing-tukey-hsd" class="nav-link" data-scroll-target="#post-hoc-testing-tukey-hsd"><span class="header-section-number">15.4</span> Post-hoc testing (Tukey HSD)</a>
   <ul class="collapse">
-<li><a href="#summary-chart-of-crop-yield-data" id="toc-summary-chart-of-crop-yield-data" class="nav-link" data-scroll-target="#summary-chart-of-crop-yield-data"><span class="header-section-number">14.4.1</span> Summary Chart of Crop yield data</a></li>
+<li><a href="#summary-chart-of-crop-yield-data" id="toc-summary-chart-of-crop-yield-data" class="nav-link" data-scroll-target="#summary-chart-of-crop-yield-data"><span class="header-section-number">15.4.1</span> Summary Chart of Crop yield data</a></li>
   </ul>
 </li>
-  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions"><span class="header-section-number">14.5</span> Conclusions</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions"><span class="header-section-number">15.5</span> Conclusions</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/04_anova_two_way.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_anova_two_way.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_anova_two_way.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span>
+<span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span>
 </h1>
 </div>
 
@@ -428,7 +434,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 23, 2024</p>
+      <p class="date">May 28, 2024</p>
     </div>
   </div>
   
@@ -437,14 +443,14 @@ window.Quarto = {
   
 
 
-</header><section id="two-way-anova" class="level2" data-number="14.1"><h2 data-number="14.1" class="anchored" data-anchor-id="two-way-anova">
-<span class="header-section-number">14.1</span> Two-way ANOVA</h2>
+</header><section id="two-way-anova" class="level2" data-number="15.1"><h2 data-number="15.1" class="anchored" data-anchor-id="two-way-anova">
+<span class="header-section-number">15.1</span> Two-way ANOVA</h2>
 <p>A two-way ANOVA is used to estimate how the mean of a quantitative variable changes according to the levels of two categorical variables.</p>
 <ul>
 <li><p>It is used to determine how independent (grouping) variables, in combination, affect a dependent (response) variable.</p></li>
 <li><p>Grouping variables are also called factors. Levels are the categories of each component.</p></li>
-</ul></section><section id="how-does-it-work" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="how-does-it-work">
-<span class="header-section-number">14.2</span> How does it work?</h2>
+</ul></section><section id="how-does-it-work" class="level2" data-number="15.2"><h2 data-number="15.2" class="anchored" data-anchor-id="how-does-it-work">
+<span class="header-section-number">15.2</span> How does it work?</h2>
 <p>The F test is used in ANOVA to determine statistical significance. The F test compares the variance in each group mean to the overall variance in the dependent variable because it is a group-wise comparison test.</p>
 <p>When the variance is higher between groups than within the groups, the F test value will be greater, and therefore a higher likelihood that the difference observed is real and not due to chance.</p>
 <p>There are three null hypotheses tested while doing a two-way ANOVA:</p>
@@ -453,8 +459,8 @@ window.Quarto = {
 <li><p>There is no difference between the group means at any level of the second independent variable.</p></li>
 <li><p>The effect of one independent variable does not depend on the effect of the other independent variable (also viewed as no interaction effect),</p></li>
 </ul>
-<section id="assumptions-needed" class="level3" data-number="14.2.1"><h3 data-number="14.2.1" class="anchored" data-anchor-id="assumptions-needed">
-<span class="header-section-number">14.2.1</span> Assumptions needed</h3>
+<section id="assumptions-needed" class="level3" data-number="15.2.1"><h3 data-number="15.2.1" class="anchored" data-anchor-id="assumptions-needed">
+<span class="header-section-number">15.2.1</span> Assumptions needed</h3>
 <p>There are certain assumptions that must be considered before using a two-way ANOVA.</p>
 <ul>
 <li><p>Homogenuity of variance: The variances for each group should be roughly equal.</p></li>
@@ -462,8 +468,8 @@ window.Quarto = {
 <li><p>Normally distributed: The response variable is approximately normally distributed for each group.</p></li>
 </ul>
 <p>Below we will see an example on how to test for these assumptions and how to conduct a two-way ANOVA test once we know they have been met.</p>
-</section></section><section id="two-way-anova-table" class="level2" data-number="14.3"><h2 data-number="14.3" class="anchored" data-anchor-id="two-way-anova-table">
-<span class="header-section-number">14.3</span> Two-Way ANOVA Table</h2>
+</section></section><section id="two-way-anova-table" class="level2" data-number="15.3"><h2 data-number="15.3" class="anchored" data-anchor-id="two-way-anova-table">
+<span class="header-section-number">15.3</span> Two-Way ANOVA Table</h2>
 <table class="table">
 <colgroup>
 <col style="width: 25%">
@@ -542,8 +548,8 @@ window.Quarto = {
 <span class="math inline">\(SS_T\)</span>: Total sums of squares, associated with df <span class="math inline">\(klm-1\)</span>
 </li>
 </ul>
-<section id="example" class="level3" data-number="14.3.1"><h3 data-number="14.3.1" class="anchored" data-anchor-id="example">
-<span class="header-section-number">14.3.1</span> Example</h3>
+<section id="example" class="level3" data-number="15.3.1"><h3 data-number="15.3.1" class="anchored" data-anchor-id="example">
+<span class="header-section-number">15.3.1</span> Example</h3>
 <p>For this example, an agricultural crop yield dataset was sourced from <a href="https://www.scribbr.com/wp-content/uploads//2020/03/crop.data_.anova_.zip">Scribbr</a>.</p>
 <p>The dataset contains:</p>
 <ol type="1">
@@ -552,8 +558,8 @@ window.Quarto = {
 <li>Block number in the field (1,2,3,4)</li>
 </ol>
 <p>This two-way ANOVA will examine whether the type of fertilizer and planting density (independent variables) have an effect on the average crop yield (dependent variable).</p>
-<section id="loading-libraries-and-data" class="level4" data-number="14.3.1.1"><h4 data-number="14.3.1.1" class="anchored" data-anchor-id="loading-libraries-and-data">
-<span class="header-section-number">14.3.1.1</span> Loading Libraries and Data</h4>
+<section id="loading-libraries-and-data" class="level4" data-number="15.3.1.1"><h4 data-number="15.3.1.1" class="anchored" data-anchor-id="loading-libraries-and-data">
+<span class="header-section-number">15.3.1.1</span> Loading Libraries and Data</h4>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># needed to create presentation ready table </span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
@@ -566,8 +572,8 @@ window.Quarto = {
 <span></span>
 <span><span class="va">crop_data_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"../data/04_crop_data.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="data-exploration" class="level4" data-number="14.3.1.2"><h4 data-number="14.3.1.2" class="anchored" data-anchor-id="data-exploration">
-<span class="header-section-number">14.3.1.2</span> Data Exploration</h4>
+</section><section id="data-exploration" class="level4" data-number="15.3.1.2"><h4 data-number="15.3.1.2" class="anchored" data-anchor-id="data-exploration">
+<span class="header-section-number">15.3.1.2</span> Data Exploration</h4>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># show first six rows of the dataset</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">crop_data_df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -594,8 +600,8 @@ window.Quarto = {
  Max.   :2.0   Max.   :4.00   Max.   :3    Max.   :179.1  </code></pre>
 </div>
 </div>
-<section id="boxplots" class="level5" data-number="14.3.1.2.1"><h5 data-number="14.3.1.2.1" class="anchored" data-anchor-id="boxplots">
-<span class="header-section-number">14.3.1.2.1</span> Boxplots</h5>
+<section id="boxplots" class="level5" data-number="15.3.1.2.1"><h5 data-number="15.3.1.2.1" class="anchored" data-anchor-id="boxplots">
+<span class="header-section-number">15.3.1.2.1</span> Boxplots</h5>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">plot_fertilizer</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">crop_data_df</span><span class="op">)</span> <span class="op">+</span></span>
@@ -638,20 +644,20 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</section></section><section id="null" class="level4" data-number="14.3.1.3"><h4 data-number="14.3.1.3" class="anchored" data-anchor-id="null">
-<span class="header-section-number">14.3.1.3</span> Null</h4>
+</section></section><section id="null" class="level4" data-number="15.3.1.3"><h4 data-number="15.3.1.3" class="anchored" data-anchor-id="null">
+<span class="header-section-number">15.3.1.3</span> Null</h4>
 <ul>
 <li><p>H0<sub>1</sub>: <em>There is no statistical difference in average yield for any fertilizer type</em></p></li>
 <li><p>H0<sub>2</sub>: <em>There is no difference in average yield between either planting density</em></p></li>
 <li><p>H0<sub>3</sub>: <em>The effect of fertilizer type on average yield is not dependent on the effect of planting density - no interaction effect</em></p></li>
-</ul></section><section id="alternative" class="level4" data-number="14.3.1.4"><h4 data-number="14.3.1.4" class="anchored" data-anchor-id="alternative">
-<span class="header-section-number">14.3.1.4</span> Alternative</h4>
+</ul></section><section id="alternative" class="level4" data-number="15.3.1.4"><h4 data-number="15.3.1.4" class="anchored" data-anchor-id="alternative">
+<span class="header-section-number">15.3.1.4</span> Alternative</h4>
 <ul>
 <li><p>H1<sub>1</sub>: <em>There is a difference in the average yield for fertilizer types</em></p></li>
 <li><p>H1<sub>2</sub>: <em>There is a difference in the average yield based on planting</em> density</p></li>
 <li><p>H1<sub>3</sub>: <em>There is an interaction effect between planting density and fertilizer type average yield</em></p></li>
-</ul></section><section id="performing-the-two-way-anova" class="level4" data-number="14.3.1.5"><h4 data-number="14.3.1.5" class="anchored" data-anchor-id="performing-the-two-way-anova">
-<span class="header-section-number">14.3.1.5</span> Performing the two-way ANOVA</h4>
+</ul></section><section id="performing-the-two-way-anova" class="level4" data-number="15.3.1.5"><h4 data-number="15.3.1.5" class="anchored" data-anchor-id="performing-the-two-way-anova">
+<span class="header-section-number">15.3.1.5</span> Performing the two-way ANOVA</h4>
 <p>First we want to test without interaction between the two independent variables for our first model. The code below is</p>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># converting into a factor for post-hoc assessment </span></span>
@@ -675,23 +681,23 @@ window.Quarto = {
 <span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="ufmyzsevwm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ufmyzsevwm table {
+<div id="gbykomduvs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gbykomduvs table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ufmyzsevwm thead, #ufmyzsevwm tbody, #ufmyzsevwm tfoot, #ufmyzsevwm tr, #ufmyzsevwm td, #ufmyzsevwm th {
+#gbykomduvs thead, #gbykomduvs tbody, #gbykomduvs tfoot, #gbykomduvs tr, #gbykomduvs td, #gbykomduvs th {
   border-style: none;
 }
 
-#ufmyzsevwm p {
+#gbykomduvs p {
   margin: 0;
   padding: 0;
 }
 
-#ufmyzsevwm .gt_table {
+#gbykomduvs .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -717,12 +723,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#ufmyzsevwm .gt_caption {
+#gbykomduvs .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ufmyzsevwm .gt_title {
+#gbykomduvs .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -734,7 +740,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#ufmyzsevwm .gt_subtitle {
+#gbykomduvs .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -746,7 +752,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#ufmyzsevwm .gt_heading {
+#gbykomduvs .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -758,13 +764,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ufmyzsevwm .gt_bottom_border {
+#gbykomduvs .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ufmyzsevwm .gt_col_headings {
+#gbykomduvs .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -779,7 +785,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ufmyzsevwm .gt_col_heading {
+#gbykomduvs .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -799,7 +805,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ufmyzsevwm .gt_column_spanner_outer {
+#gbykomduvs .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -811,15 +817,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#ufmyzsevwm .gt_column_spanner_outer:first-child {
+#gbykomduvs .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ufmyzsevwm .gt_column_spanner_outer:last-child {
+#gbykomduvs .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ufmyzsevwm .gt_column_spanner {
+#gbykomduvs .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -831,11 +837,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#ufmyzsevwm .gt_spanner_row {
+#gbykomduvs .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ufmyzsevwm .gt_group_heading {
+#gbykomduvs .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -861,7 +867,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#ufmyzsevwm .gt_empty_group_heading {
+#gbykomduvs .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -876,15 +882,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#ufmyzsevwm .gt_from_md > :first-child {
+#gbykomduvs .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ufmyzsevwm .gt_from_md > :last-child {
+#gbykomduvs .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ufmyzsevwm .gt_row {
+#gbykomduvs .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -903,7 +909,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ufmyzsevwm .gt_stub {
+#gbykomduvs .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -916,7 +922,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ufmyzsevwm .gt_stub_row_group {
+#gbykomduvs .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -930,15 +936,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#ufmyzsevwm .gt_row_group_first td {
+#gbykomduvs .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ufmyzsevwm .gt_row_group_first th {
+#gbykomduvs .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ufmyzsevwm .gt_summary_row {
+#gbykomduvs .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -948,16 +954,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ufmyzsevwm .gt_first_summary_row {
+#gbykomduvs .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ufmyzsevwm .gt_first_summary_row.thick {
+#gbykomduvs .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ufmyzsevwm .gt_last_summary_row {
+#gbykomduvs .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -967,7 +973,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ufmyzsevwm .gt_grand_summary_row {
+#gbykomduvs .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -977,7 +983,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ufmyzsevwm .gt_first_grand_summary_row {
+#gbykomduvs .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -987,7 +993,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#ufmyzsevwm .gt_last_grand_summary_row_top {
+#gbykomduvs .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -997,11 +1003,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ufmyzsevwm .gt_striped {
+#gbykomduvs .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ufmyzsevwm .gt_table_body {
+#gbykomduvs .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1010,7 +1016,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ufmyzsevwm .gt_footnotes {
+#gbykomduvs .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1024,7 +1030,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ufmyzsevwm .gt_footnote {
+#gbykomduvs .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1033,7 +1039,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ufmyzsevwm .gt_sourcenotes {
+#gbykomduvs .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1047,7 +1053,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ufmyzsevwm .gt_sourcenote {
+#gbykomduvs .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1055,63 +1061,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ufmyzsevwm .gt_left {
+#gbykomduvs .gt_left {
   text-align: left;
 }
 
-#ufmyzsevwm .gt_center {
+#gbykomduvs .gt_center {
   text-align: center;
 }
 
-#ufmyzsevwm .gt_right {
+#gbykomduvs .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ufmyzsevwm .gt_font_normal {
+#gbykomduvs .gt_font_normal {
   font-weight: normal;
 }
 
-#ufmyzsevwm .gt_font_bold {
+#gbykomduvs .gt_font_bold {
   font-weight: bold;
 }
 
-#ufmyzsevwm .gt_font_italic {
+#gbykomduvs .gt_font_italic {
   font-style: italic;
 }
 
-#ufmyzsevwm .gt_super {
+#gbykomduvs .gt_super {
   font-size: 65%;
 }
 
-#ufmyzsevwm .gt_footnote_marks {
+#gbykomduvs .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ufmyzsevwm .gt_asterisk {
+#gbykomduvs .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ufmyzsevwm .gt_indent_1 {
+#gbykomduvs .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ufmyzsevwm .gt_indent_2 {
+#gbykomduvs .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ufmyzsevwm .gt_indent_3 {
+#gbykomduvs .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ufmyzsevwm .gt_indent_4 {
+#gbykomduvs .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ufmyzsevwm .gt_indent_5 {
+#gbykomduvs .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1182,23 +1188,23 @@ window.Quarto = {
 <span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="uprpewdioi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#uprpewdioi table {
+<div id="jvlimiwust" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jvlimiwust table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#uprpewdioi thead, #uprpewdioi tbody, #uprpewdioi tfoot, #uprpewdioi tr, #uprpewdioi td, #uprpewdioi th {
+#jvlimiwust thead, #jvlimiwust tbody, #jvlimiwust tfoot, #jvlimiwust tr, #jvlimiwust td, #jvlimiwust th {
   border-style: none;
 }
 
-#uprpewdioi p {
+#jvlimiwust p {
   margin: 0;
   padding: 0;
 }
 
-#uprpewdioi .gt_table {
+#jvlimiwust .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1224,12 +1230,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#uprpewdioi .gt_caption {
+#jvlimiwust .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#uprpewdioi .gt_title {
+#jvlimiwust .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1241,7 +1247,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#uprpewdioi .gt_subtitle {
+#jvlimiwust .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1253,7 +1259,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#uprpewdioi .gt_heading {
+#jvlimiwust .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1265,13 +1271,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#uprpewdioi .gt_bottom_border {
+#jvlimiwust .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#uprpewdioi .gt_col_headings {
+#jvlimiwust .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1286,7 +1292,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#uprpewdioi .gt_col_heading {
+#jvlimiwust .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1306,7 +1312,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#uprpewdioi .gt_column_spanner_outer {
+#jvlimiwust .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1318,15 +1324,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#uprpewdioi .gt_column_spanner_outer:first-child {
+#jvlimiwust .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uprpewdioi .gt_column_spanner_outer:last-child {
+#jvlimiwust .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uprpewdioi .gt_column_spanner {
+#jvlimiwust .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1338,11 +1344,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#uprpewdioi .gt_spanner_row {
+#jvlimiwust .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#uprpewdioi .gt_group_heading {
+#jvlimiwust .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1368,7 +1374,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#uprpewdioi .gt_empty_group_heading {
+#jvlimiwust .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1383,15 +1389,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#uprpewdioi .gt_from_md > :first-child {
+#jvlimiwust .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uprpewdioi .gt_from_md > :last-child {
+#jvlimiwust .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uprpewdioi .gt_row {
+#jvlimiwust .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1410,7 +1416,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#uprpewdioi .gt_stub {
+#jvlimiwust .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1423,7 +1429,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#uprpewdioi .gt_stub_row_group {
+#jvlimiwust .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1437,15 +1443,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#uprpewdioi .gt_row_group_first td {
+#jvlimiwust .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#uprpewdioi .gt_row_group_first th {
+#jvlimiwust .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#uprpewdioi .gt_summary_row {
+#jvlimiwust .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1455,16 +1461,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#uprpewdioi .gt_first_summary_row {
+#jvlimiwust .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#uprpewdioi .gt_first_summary_row.thick {
+#jvlimiwust .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#uprpewdioi .gt_last_summary_row {
+#jvlimiwust .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1474,7 +1480,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#uprpewdioi .gt_grand_summary_row {
+#jvlimiwust .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1484,7 +1490,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#uprpewdioi .gt_first_grand_summary_row {
+#jvlimiwust .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1494,7 +1500,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#uprpewdioi .gt_last_grand_summary_row_top {
+#jvlimiwust .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1504,11 +1510,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#uprpewdioi .gt_striped {
+#jvlimiwust .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uprpewdioi .gt_table_body {
+#jvlimiwust .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1517,7 +1523,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#uprpewdioi .gt_footnotes {
+#jvlimiwust .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1531,7 +1537,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#uprpewdioi .gt_footnote {
+#jvlimiwust .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1540,7 +1546,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#uprpewdioi .gt_sourcenotes {
+#jvlimiwust .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1554,7 +1560,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#uprpewdioi .gt_sourcenote {
+#jvlimiwust .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1562,63 +1568,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#uprpewdioi .gt_left {
+#jvlimiwust .gt_left {
   text-align: left;
 }
 
-#uprpewdioi .gt_center {
+#jvlimiwust .gt_center {
   text-align: center;
 }
 
-#uprpewdioi .gt_right {
+#jvlimiwust .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uprpewdioi .gt_font_normal {
+#jvlimiwust .gt_font_normal {
   font-weight: normal;
 }
 
-#uprpewdioi .gt_font_bold {
+#jvlimiwust .gt_font_bold {
   font-weight: bold;
 }
 
-#uprpewdioi .gt_font_italic {
+#jvlimiwust .gt_font_italic {
   font-style: italic;
 }
 
-#uprpewdioi .gt_super {
+#jvlimiwust .gt_super {
   font-size: 65%;
 }
 
-#uprpewdioi .gt_footnote_marks {
+#jvlimiwust .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#uprpewdioi .gt_asterisk {
+#jvlimiwust .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#uprpewdioi .gt_indent_1 {
+#jvlimiwust .gt_indent_1 {
   text-indent: 5px;
 }
 
-#uprpewdioi .gt_indent_2 {
+#jvlimiwust .gt_indent_2 {
   text-indent: 10px;
 }
 
-#uprpewdioi .gt_indent_3 {
+#jvlimiwust .gt_indent_3 {
   text-indent: 15px;
 }
 
-#uprpewdioi .gt_indent_4 {
+#jvlimiwust .gt_indent_4 {
   text-indent: 20px;
 }
 
-#uprpewdioi .gt_indent_5 {
+#jvlimiwust .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1680,8 +1686,8 @@ window.Quarto = {
 </div>
 <p>The p-value for both independent variables are less than 0.05, therefore we reject the null hypotheses (H0<sub>1</sub> and H0<sub>2</sub>).</p>
 <p>The p value for the interaction term is greater than 0.05, hence we fail to reject the null hypothesis (H0<sub>3</sub>). Hence not much variation can be explained by the interaction term.</p>
-</section><section id="blocking-variable---3rd-model" class="level4" data-number="14.3.1.6"><h4 data-number="14.3.1.6" class="anchored" data-anchor-id="blocking-variable---3rd-model">
-<span class="header-section-number">14.3.1.6</span> Blocking Variable - 3rd Model</h4>
+</section><section id="blocking-variable---3rd-model" class="level4" data-number="15.3.1.6"><h4 data-number="15.3.1.6" class="anchored" data-anchor-id="blocking-variable---3rd-model">
+<span class="header-section-number">15.3.1.6</span> Blocking Variable - 3rd Model</h4>
 <p>The crops were planted in across various <code>blocks</code> that may differ in other factors such as sunlight, moisture etc. This could possibly lead to confounding. Therefore it is important to control for the effect of differences between blocks by adding the third variable to our tests.</p>
 <div class="cell">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># performing two-way anova with interaction and blocking</span></span>
@@ -1701,23 +1707,23 @@ window.Quarto = {
 <span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="rxcstmqepl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rxcstmqepl table {
+<div id="lvlwmgdcny" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lvlwmgdcny table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rxcstmqepl thead, #rxcstmqepl tbody, #rxcstmqepl tfoot, #rxcstmqepl tr, #rxcstmqepl td, #rxcstmqepl th {
+#lvlwmgdcny thead, #lvlwmgdcny tbody, #lvlwmgdcny tfoot, #lvlwmgdcny tr, #lvlwmgdcny td, #lvlwmgdcny th {
   border-style: none;
 }
 
-#rxcstmqepl p {
+#lvlwmgdcny p {
   margin: 0;
   padding: 0;
 }
 
-#rxcstmqepl .gt_table {
+#lvlwmgdcny .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1743,12 +1749,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#rxcstmqepl .gt_caption {
+#lvlwmgdcny .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rxcstmqepl .gt_title {
+#lvlwmgdcny .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1760,7 +1766,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#rxcstmqepl .gt_subtitle {
+#lvlwmgdcny .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1772,7 +1778,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#rxcstmqepl .gt_heading {
+#lvlwmgdcny .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1784,13 +1790,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rxcstmqepl .gt_bottom_border {
+#lvlwmgdcny .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rxcstmqepl .gt_col_headings {
+#lvlwmgdcny .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1805,7 +1811,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rxcstmqepl .gt_col_heading {
+#lvlwmgdcny .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1825,7 +1831,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#rxcstmqepl .gt_column_spanner_outer {
+#lvlwmgdcny .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1837,15 +1843,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#rxcstmqepl .gt_column_spanner_outer:first-child {
+#lvlwmgdcny .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rxcstmqepl .gt_column_spanner_outer:last-child {
+#lvlwmgdcny .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rxcstmqepl .gt_column_spanner {
+#lvlwmgdcny .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1857,11 +1863,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#rxcstmqepl .gt_spanner_row {
+#lvlwmgdcny .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rxcstmqepl .gt_group_heading {
+#lvlwmgdcny .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1887,7 +1893,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#rxcstmqepl .gt_empty_group_heading {
+#lvlwmgdcny .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1902,15 +1908,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#rxcstmqepl .gt_from_md > :first-child {
+#lvlwmgdcny .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rxcstmqepl .gt_from_md > :last-child {
+#lvlwmgdcny .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rxcstmqepl .gt_row {
+#lvlwmgdcny .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1929,7 +1935,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#rxcstmqepl .gt_stub {
+#lvlwmgdcny .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1942,7 +1948,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rxcstmqepl .gt_stub_row_group {
+#lvlwmgdcny .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1956,15 +1962,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#rxcstmqepl .gt_row_group_first td {
+#lvlwmgdcny .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rxcstmqepl .gt_row_group_first th {
+#lvlwmgdcny .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rxcstmqepl .gt_summary_row {
+#lvlwmgdcny .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1974,16 +1980,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rxcstmqepl .gt_first_summary_row {
+#lvlwmgdcny .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rxcstmqepl .gt_first_summary_row.thick {
+#lvlwmgdcny .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rxcstmqepl .gt_last_summary_row {
+#lvlwmgdcny .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1993,7 +1999,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#rxcstmqepl .gt_grand_summary_row {
+#lvlwmgdcny .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2003,7 +2009,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rxcstmqepl .gt_first_grand_summary_row {
+#lvlwmgdcny .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2013,7 +2019,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#rxcstmqepl .gt_last_grand_summary_row_top {
+#lvlwmgdcny .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2023,11 +2029,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#rxcstmqepl .gt_striped {
+#lvlwmgdcny .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rxcstmqepl .gt_table_body {
+#lvlwmgdcny .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2036,7 +2042,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#rxcstmqepl .gt_footnotes {
+#lvlwmgdcny .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2050,7 +2056,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rxcstmqepl .gt_footnote {
+#lvlwmgdcny .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2059,7 +2065,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rxcstmqepl .gt_sourcenotes {
+#lvlwmgdcny .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2073,7 +2079,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rxcstmqepl .gt_sourcenote {
+#lvlwmgdcny .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2081,63 +2087,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rxcstmqepl .gt_left {
+#lvlwmgdcny .gt_left {
   text-align: left;
 }
 
-#rxcstmqepl .gt_center {
+#lvlwmgdcny .gt_center {
   text-align: center;
 }
 
-#rxcstmqepl .gt_right {
+#lvlwmgdcny .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rxcstmqepl .gt_font_normal {
+#lvlwmgdcny .gt_font_normal {
   font-weight: normal;
 }
 
-#rxcstmqepl .gt_font_bold {
+#lvlwmgdcny .gt_font_bold {
   font-weight: bold;
 }
 
-#rxcstmqepl .gt_font_italic {
+#lvlwmgdcny .gt_font_italic {
   font-style: italic;
 }
 
-#rxcstmqepl .gt_super {
+#lvlwmgdcny .gt_super {
   font-size: 65%;
 }
 
-#rxcstmqepl .gt_footnote_marks {
+#lvlwmgdcny .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rxcstmqepl .gt_asterisk {
+#lvlwmgdcny .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rxcstmqepl .gt_indent_1 {
+#lvlwmgdcny .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rxcstmqepl .gt_indent_2 {
+#lvlwmgdcny .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rxcstmqepl .gt_indent_3 {
+#lvlwmgdcny .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rxcstmqepl .gt_indent_4 {
+#lvlwmgdcny .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rxcstmqepl .gt_indent_5 {
+#lvlwmgdcny .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2206,8 +2212,8 @@ window.Quarto = {
 </div>
 </div>
 <p>For the block variable the sum of squares is low and the p value is greater than 0.05. Hence not much information is added to the model. The sum of square for both independent variables also remain unchanged.</p>
-</section><section id="determining-the-best-fit-model" class="level4" data-number="14.3.1.7"><h4 data-number="14.3.1.7" class="anchored" data-anchor-id="determining-the-best-fit-model">
-<span class="header-section-number">14.3.1.7</span> Determining the Best Fit Model</h4>
+</section><section id="determining-the-best-fit-model" class="level4" data-number="15.3.1.7"><h4 data-number="15.3.1.7" class="anchored" data-anchor-id="determining-the-best-fit-model">
+<span class="header-section-number">15.3.1.7</span> Determining the Best Fit Model</h4>
 <p>The Akaike information criterion (AIC) can be used to determine the best model. AIC balances the variation explained by the number of parameters used to calculate the information value of each model. The lower the AIC value, the more information explained.</p>
 <div class="cell">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">model_set</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">two_way</span>, <span class="va">interaction</span>, <span class="va">blocking</span><span class="op">)</span></span>
@@ -2222,23 +2228,23 @@ window.Quarto = {
 <span><span class="va">gt_print</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="viatvnogwx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#viatvnogwx table {
+<div id="kgmiohyqmt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kgmiohyqmt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#viatvnogwx thead, #viatvnogwx tbody, #viatvnogwx tfoot, #viatvnogwx tr, #viatvnogwx td, #viatvnogwx th {
+#kgmiohyqmt thead, #kgmiohyqmt tbody, #kgmiohyqmt tfoot, #kgmiohyqmt tr, #kgmiohyqmt td, #kgmiohyqmt th {
   border-style: none;
 }
 
-#viatvnogwx p {
+#kgmiohyqmt p {
   margin: 0;
   padding: 0;
 }
 
-#viatvnogwx .gt_table {
+#kgmiohyqmt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2264,12 +2270,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#viatvnogwx .gt_caption {
+#kgmiohyqmt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#viatvnogwx .gt_title {
+#kgmiohyqmt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2281,7 +2287,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#viatvnogwx .gt_subtitle {
+#kgmiohyqmt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2293,7 +2299,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#viatvnogwx .gt_heading {
+#kgmiohyqmt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2305,13 +2311,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#viatvnogwx .gt_bottom_border {
+#kgmiohyqmt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#viatvnogwx .gt_col_headings {
+#kgmiohyqmt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2326,7 +2332,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#viatvnogwx .gt_col_heading {
+#kgmiohyqmt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2346,7 +2352,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#viatvnogwx .gt_column_spanner_outer {
+#kgmiohyqmt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2358,15 +2364,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#viatvnogwx .gt_column_spanner_outer:first-child {
+#kgmiohyqmt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#viatvnogwx .gt_column_spanner_outer:last-child {
+#kgmiohyqmt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#viatvnogwx .gt_column_spanner {
+#kgmiohyqmt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2378,11 +2384,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#viatvnogwx .gt_spanner_row {
+#kgmiohyqmt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#viatvnogwx .gt_group_heading {
+#kgmiohyqmt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2408,7 +2414,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#viatvnogwx .gt_empty_group_heading {
+#kgmiohyqmt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2423,15 +2429,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#viatvnogwx .gt_from_md > :first-child {
+#kgmiohyqmt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#viatvnogwx .gt_from_md > :last-child {
+#kgmiohyqmt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#viatvnogwx .gt_row {
+#kgmiohyqmt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2450,7 +2456,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#viatvnogwx .gt_stub {
+#kgmiohyqmt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2463,7 +2469,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#viatvnogwx .gt_stub_row_group {
+#kgmiohyqmt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2477,15 +2483,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#viatvnogwx .gt_row_group_first td {
+#kgmiohyqmt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#viatvnogwx .gt_row_group_first th {
+#kgmiohyqmt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#viatvnogwx .gt_summary_row {
+#kgmiohyqmt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2495,16 +2501,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#viatvnogwx .gt_first_summary_row {
+#kgmiohyqmt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#viatvnogwx .gt_first_summary_row.thick {
+#kgmiohyqmt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#viatvnogwx .gt_last_summary_row {
+#kgmiohyqmt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2514,7 +2520,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#viatvnogwx .gt_grand_summary_row {
+#kgmiohyqmt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2524,7 +2530,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#viatvnogwx .gt_first_grand_summary_row {
+#kgmiohyqmt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2534,7 +2540,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#viatvnogwx .gt_last_grand_summary_row_top {
+#kgmiohyqmt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2544,11 +2550,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#viatvnogwx .gt_striped {
+#kgmiohyqmt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#viatvnogwx .gt_table_body {
+#kgmiohyqmt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2557,7 +2563,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#viatvnogwx .gt_footnotes {
+#kgmiohyqmt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2571,7 +2577,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#viatvnogwx .gt_footnote {
+#kgmiohyqmt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2580,7 +2586,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#viatvnogwx .gt_sourcenotes {
+#kgmiohyqmt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2594,7 +2600,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#viatvnogwx .gt_sourcenote {
+#kgmiohyqmt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2602,63 +2608,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#viatvnogwx .gt_left {
+#kgmiohyqmt .gt_left {
   text-align: left;
 }
 
-#viatvnogwx .gt_center {
+#kgmiohyqmt .gt_center {
   text-align: center;
 }
 
-#viatvnogwx .gt_right {
+#kgmiohyqmt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#viatvnogwx .gt_font_normal {
+#kgmiohyqmt .gt_font_normal {
   font-weight: normal;
 }
 
-#viatvnogwx .gt_font_bold {
+#kgmiohyqmt .gt_font_bold {
   font-weight: bold;
 }
 
-#viatvnogwx .gt_font_italic {
+#kgmiohyqmt .gt_font_italic {
   font-style: italic;
 }
 
-#viatvnogwx .gt_super {
+#kgmiohyqmt .gt_super {
   font-size: 65%;
 }
 
-#viatvnogwx .gt_footnote_marks {
+#kgmiohyqmt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#viatvnogwx .gt_asterisk {
+#kgmiohyqmt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#viatvnogwx .gt_indent_1 {
+#kgmiohyqmt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#viatvnogwx .gt_indent_2 {
+#kgmiohyqmt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#viatvnogwx .gt_indent_3 {
+#kgmiohyqmt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#viatvnogwx .gt_indent_4 {
+#kgmiohyqmt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#viatvnogwx .gt_indent_5 {
+#kgmiohyqmt .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2711,8 +2717,8 @@ window.Quarto = {
 </div>
 </div>
 <p>As shown in this table, the two_way model is the best fit for our crop data analysis.</p>
-</section></section><section id="checking-for-homoscedasticity" class="level3" data-number="14.3.2"><h3 data-number="14.3.2" class="anchored" data-anchor-id="checking-for-homoscedasticity">
-<span class="header-section-number">14.3.2</span> Checking for homoscedasticity</h3>
+</section></section><section id="checking-for-homoscedasticity" class="level3" data-number="15.3.2"><h3 data-number="15.3.2" class="anchored" data-anchor-id="checking-for-homoscedasticity">
+<span class="header-section-number">15.3.2</span> Checking for homoscedasticity</h3>
 <div class="cell">
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">two_way</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2725,8 +2731,8 @@ window.Quarto = {
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The output of the residual means shows no large outliers that could possibly skew the data. Hence we can assume equal variances. The Q-Q plot also depicts normality.</p>
-</section></section><section id="post-hoc-testing-tukey-hsd" class="level2" data-number="14.4"><h2 data-number="14.4" class="anchored" data-anchor-id="post-hoc-testing-tukey-hsd">
-<span class="header-section-number">14.4</span> Post-hoc testing (Tukey HSD)</h2>
+</section></section><section id="post-hoc-testing-tukey-hsd" class="level2" data-number="15.4"><h2 data-number="15.4" class="anchored" data-anchor-id="post-hoc-testing-tukey-hsd">
+<span class="header-section-number">15.4</span> Post-hoc testing (Tukey HSD)</h2>
 <p>In order to determine how the levels differ from one another the Tukey’s Honestly-Significant-difference test can be used.</p>
 <div class="cell">
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tukey_crop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="va">two_way</span><span class="op">)</span>  </span>
@@ -2740,23 +2746,23 @@ window.Quarto = {
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="ldrgqxxvss" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ldrgqxxvss table {
+<div id="awdxmtekyd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#awdxmtekyd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ldrgqxxvss thead, #ldrgqxxvss tbody, #ldrgqxxvss tfoot, #ldrgqxxvss tr, #ldrgqxxvss td, #ldrgqxxvss th {
+#awdxmtekyd thead, #awdxmtekyd tbody, #awdxmtekyd tfoot, #awdxmtekyd tr, #awdxmtekyd td, #awdxmtekyd th {
   border-style: none;
 }
 
-#ldrgqxxvss p {
+#awdxmtekyd p {
   margin: 0;
   padding: 0;
 }
 
-#ldrgqxxvss .gt_table {
+#awdxmtekyd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2782,12 +2788,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#ldrgqxxvss .gt_caption {
+#awdxmtekyd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ldrgqxxvss .gt_title {
+#awdxmtekyd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2799,7 +2805,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#ldrgqxxvss .gt_subtitle {
+#awdxmtekyd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2811,7 +2817,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#ldrgqxxvss .gt_heading {
+#awdxmtekyd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2823,13 +2829,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ldrgqxxvss .gt_bottom_border {
+#awdxmtekyd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ldrgqxxvss .gt_col_headings {
+#awdxmtekyd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2844,7 +2850,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ldrgqxxvss .gt_col_heading {
+#awdxmtekyd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2864,7 +2870,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ldrgqxxvss .gt_column_spanner_outer {
+#awdxmtekyd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2876,15 +2882,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#ldrgqxxvss .gt_column_spanner_outer:first-child {
+#awdxmtekyd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ldrgqxxvss .gt_column_spanner_outer:last-child {
+#awdxmtekyd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ldrgqxxvss .gt_column_spanner {
+#awdxmtekyd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2896,11 +2902,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#ldrgqxxvss .gt_spanner_row {
+#awdxmtekyd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ldrgqxxvss .gt_group_heading {
+#awdxmtekyd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2926,7 +2932,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#ldrgqxxvss .gt_empty_group_heading {
+#awdxmtekyd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2941,15 +2947,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#ldrgqxxvss .gt_from_md > :first-child {
+#awdxmtekyd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ldrgqxxvss .gt_from_md > :last-child {
+#awdxmtekyd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ldrgqxxvss .gt_row {
+#awdxmtekyd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2968,7 +2974,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ldrgqxxvss .gt_stub {
+#awdxmtekyd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2981,7 +2987,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ldrgqxxvss .gt_stub_row_group {
+#awdxmtekyd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2995,15 +3001,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#ldrgqxxvss .gt_row_group_first td {
+#awdxmtekyd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ldrgqxxvss .gt_row_group_first th {
+#awdxmtekyd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ldrgqxxvss .gt_summary_row {
+#awdxmtekyd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3013,16 +3019,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ldrgqxxvss .gt_first_summary_row {
+#awdxmtekyd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ldrgqxxvss .gt_first_summary_row.thick {
+#awdxmtekyd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ldrgqxxvss .gt_last_summary_row {
+#awdxmtekyd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3032,7 +3038,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ldrgqxxvss .gt_grand_summary_row {
+#awdxmtekyd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3042,7 +3048,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ldrgqxxvss .gt_first_grand_summary_row {
+#awdxmtekyd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3052,7 +3058,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#ldrgqxxvss .gt_last_grand_summary_row_top {
+#awdxmtekyd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3062,11 +3068,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ldrgqxxvss .gt_striped {
+#awdxmtekyd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ldrgqxxvss .gt_table_body {
+#awdxmtekyd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3075,7 +3081,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ldrgqxxvss .gt_footnotes {
+#awdxmtekyd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3089,7 +3095,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ldrgqxxvss .gt_footnote {
+#awdxmtekyd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3098,7 +3104,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ldrgqxxvss .gt_sourcenotes {
+#awdxmtekyd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3112,7 +3118,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ldrgqxxvss .gt_sourcenote {
+#awdxmtekyd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3120,63 +3126,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ldrgqxxvss .gt_left {
+#awdxmtekyd .gt_left {
   text-align: left;
 }
 
-#ldrgqxxvss .gt_center {
+#awdxmtekyd .gt_center {
   text-align: center;
 }
 
-#ldrgqxxvss .gt_right {
+#awdxmtekyd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ldrgqxxvss .gt_font_normal {
+#awdxmtekyd .gt_font_normal {
   font-weight: normal;
 }
 
-#ldrgqxxvss .gt_font_bold {
+#awdxmtekyd .gt_font_bold {
   font-weight: bold;
 }
 
-#ldrgqxxvss .gt_font_italic {
+#awdxmtekyd .gt_font_italic {
   font-style: italic;
 }
 
-#ldrgqxxvss .gt_super {
+#awdxmtekyd .gt_super {
   font-size: 65%;
 }
 
-#ldrgqxxvss .gt_footnote_marks {
+#awdxmtekyd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ldrgqxxvss .gt_asterisk {
+#awdxmtekyd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ldrgqxxvss .gt_indent_1 {
+#awdxmtekyd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ldrgqxxvss .gt_indent_2 {
+#awdxmtekyd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ldrgqxxvss .gt_indent_3 {
+#awdxmtekyd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ldrgqxxvss .gt_indent_4 {
+#awdxmtekyd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ldrgqxxvss .gt_indent_5 {
+#awdxmtekyd .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3265,8 +3271,8 @@ window.Quarto = {
 <ul>
 <li>Only the fertilizer comparison of type 1 &amp; 2 confidence interval includes 0; no significant statistical difference</li>
 </ul>
-<section id="summary-chart-of-crop-yield-data" class="level3" data-number="14.4.1"><h3 data-number="14.4.1" class="anchored" data-anchor-id="summary-chart-of-crop-yield-data">
-<span class="header-section-number">14.4.1</span> Summary Chart of Crop yield data</h3>
+<section id="summary-chart-of-crop-yield-data" class="level3" data-number="15.4.1"><h3 data-number="15.4.1" class="anchored" data-anchor-id="summary-chart-of-crop-yield-data">
+<span class="header-section-number">15.4.1</span> Summary Chart of Crop yield data</h3>
 <div class="cell">
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">anova_plot</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">crop_data_df</span>,</span>
@@ -3304,8 +3310,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</section></section><section id="conclusions" class="level2" data-number="14.5"><h2 data-number="14.5" class="anchored" data-anchor-id="conclusions">
-<span class="header-section-number">14.5</span> Conclusions</h2>
+</section></section><section id="conclusions" class="level2" data-number="15.5"><h2 data-number="15.5" class="anchored" data-anchor-id="conclusions">
+<span class="header-section-number">15.5</span> Conclusions</h2>
 <p>There is a statistically-significant difference in average crop yield by both the fertilizer type and planting density variables with F values of 9.018 (p &lt; 0.001) and 15.316 (p &lt; 0.001) respectively. The interaction between these two terms was not significant.</p>
 <p>The Tukey post-hoc test showed significant pairwise differences between fertilizer types 1 &amp; 3, and 2 &amp; 3. It also depicted significant differences between the two types of planting densities (low &amp; high).</p>
 
@@ -3725,7 +3731,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="../lessons_original/04_anova_kruskal_wallis.html" class="pagination-link" aria-label="Non-Parametric ANOVA: The Kruskal-Wallis Test">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

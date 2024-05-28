@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<title>An R Cookbook for Public Health - 7&nbsp; Z-Test for One Proportion</title>
+<title>An R Cookbook for Public Health - 8&nbsp; Z-Test for One Proportion</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,7 +131,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_z-test_one_prop.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_z-test_one_prop.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -169,7 +169,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../about.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">PHC 6099: R Computing for Health Sciences</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">About this Book</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -201,8 +201,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/01_table1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Demographics table with table1</span></span></a>
+  <a href="../lessons/01_table1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Demographics Table With Table1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_gtsummary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Table by gtsummary</span></span></a>
   </div>
 </li>
       </ul>
@@ -219,19 +225,19 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_z-test_one_prop.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_wilcoxon_one_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -248,25 +254,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -283,43 +289,43 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -336,7 +342,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -353,7 +359,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
   </div>
 </li>
       </ul>
@@ -370,7 +376,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -383,27 +389,27 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction-to-one-sample-z-tests" id="toc-introduction-to-one-sample-z-tests" class="nav-link active" data-scroll-target="#introduction-to-one-sample-z-tests"><span class="header-section-number">7.1</span> Introduction to One-Sample <span class="math inline">\(Z\)</span>-Tests</a></li>
-  <li><a href="#mathematical-definition-of-the-one-sample-z-test" id="toc-mathematical-definition-of-the-one-sample-z-test" class="nav-link" data-scroll-target="#mathematical-definition-of-the-one-sample-z-test"><span class="header-section-number">7.2</span> Mathematical definition of the One-Sample <span class="math inline">\(Z\)</span>-Test</a></li>
-  <li><a href="#data-source-and-description" id="toc-data-source-and-description" class="nav-link" data-scroll-target="#data-source-and-description"><span class="header-section-number">7.3</span> Data source and description</a></li>
-  <li><a href="#cleaning-the-data-to-create-a-model-data-frame" id="toc-cleaning-the-data-to-create-a-model-data-frame" class="nav-link" data-scroll-target="#cleaning-the-data-to-create-a-model-data-frame"><span class="header-section-number">7.4</span> Cleaning the data to create a model data frame</a></li>
-  <li><a href="#assumptions-of-the-one-sample-z-test" id="toc-assumptions-of-the-one-sample-z-test" class="nav-link" data-scroll-target="#assumptions-of-the-one-sample-z-test"><span class="header-section-number">7.5</span> Assumptions of the One-Sample <span class="math inline">\(Z\)</span>-Test</a></li>
+<li><a href="#introduction-to-one-sample-z-tests" id="toc-introduction-to-one-sample-z-tests" class="nav-link active" data-scroll-target="#introduction-to-one-sample-z-tests"><span class="header-section-number">8.1</span> Introduction to One-Sample <span class="math inline">\(Z\)</span>-Tests</a></li>
+  <li><a href="#mathematical-definition-of-the-one-sample-z-test" id="toc-mathematical-definition-of-the-one-sample-z-test" class="nav-link" data-scroll-target="#mathematical-definition-of-the-one-sample-z-test"><span class="header-section-number">8.2</span> Mathematical definition of the One-Sample <span class="math inline">\(Z\)</span>-Test</a></li>
+  <li><a href="#data-source-and-description" id="toc-data-source-and-description" class="nav-link" data-scroll-target="#data-source-and-description"><span class="header-section-number">8.3</span> Data source and description</a></li>
+  <li><a href="#cleaning-the-data-to-create-a-model-data-frame" id="toc-cleaning-the-data-to-create-a-model-data-frame" class="nav-link" data-scroll-target="#cleaning-the-data-to-create-a-model-data-frame"><span class="header-section-number">8.4</span> Cleaning the data to create a model data frame</a></li>
+  <li><a href="#assumptions-of-the-one-sample-z-test" id="toc-assumptions-of-the-one-sample-z-test" class="nav-link" data-scroll-target="#assumptions-of-the-one-sample-z-test"><span class="header-section-number">8.5</span> Assumptions of the One-Sample <span class="math inline">\(Z\)</span>-Test</a></li>
   <li>
-<a href="#checking-the-assumptions-with-plots" id="toc-checking-the-assumptions-with-plots" class="nav-link" data-scroll-target="#checking-the-assumptions-with-plots"><span class="header-section-number">7.6</span> Checking the assumptions with plots</a>
+<a href="#checking-the-assumptions-with-plots" id="toc-checking-the-assumptions-with-plots" class="nav-link" data-scroll-target="#checking-the-assumptions-with-plots"><span class="header-section-number">8.6</span> Checking the assumptions with plots</a>
   <ul class="collapse">
-<li><a href="#independence-and-randomness" id="toc-independence-and-randomness" class="nav-link" data-scroll-target="#independence-and-randomness"><span class="header-section-number">7.6.1</span> Independence and Randomness</a></li>
-  <li><a href="#extreme-proportions" id="toc-extreme-proportions" class="nav-link" data-scroll-target="#extreme-proportions"><span class="header-section-number">7.6.2</span> “Extreme” Proportions</a></li>
-  <li><a href="#type-and-counts-of-data" id="toc-type-and-counts-of-data" class="nav-link" data-scroll-target="#type-and-counts-of-data"><span class="header-section-number">7.6.3</span> Type and Counts of Data</a></li>
+<li><a href="#independence-and-randomness" id="toc-independence-and-randomness" class="nav-link" data-scroll-target="#independence-and-randomness"><span class="header-section-number">8.6.1</span> Independence and Randomness</a></li>
+  <li><a href="#extreme-proportions" id="toc-extreme-proportions" class="nav-link" data-scroll-target="#extreme-proportions"><span class="header-section-number">8.6.2</span> “Extreme” Proportions</a></li>
+  <li><a href="#type-and-counts-of-data" id="toc-type-and-counts-of-data" class="nav-link" data-scroll-target="#type-and-counts-of-data"><span class="header-section-number">8.6.3</span> Type and Counts of Data</a></li>
   </ul>
 </li>
-  <li><a href="#code-to-run-a-one-sample-z-test" id="toc-code-to-run-a-one-sample-z-test" class="nav-link" data-scroll-target="#code-to-run-a-one-sample-z-test"><span class="header-section-number">7.7</span> Code to run a One-Sample <span class="math inline">\(Z\)</span>-Test</a></li>
-  <li><a href="#brief-interpretation-of-the-output" id="toc-brief-interpretation-of-the-output" class="nav-link" data-scroll-target="#brief-interpretation-of-the-output"><span class="header-section-number">7.8</span> Brief interpretation of the output</a></li>
+  <li><a href="#code-to-run-a-one-sample-z-test" id="toc-code-to-run-a-one-sample-z-test" class="nav-link" data-scroll-target="#code-to-run-a-one-sample-z-test"><span class="header-section-number">8.7</span> Code to run a One-Sample <span class="math inline">\(Z\)</span>-Test</a></li>
+  <li><a href="#brief-interpretation-of-the-output" id="toc-brief-interpretation-of-the-output" class="nav-link" data-scroll-target="#brief-interpretation-of-the-output"><span class="header-section-number">8.8</span> Brief interpretation of the output</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/02_z-test_one_prop.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_z-test_one_prop.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_z-test_one_prop.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span>
+<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span>
 </h1>
 </div>
 
@@ -434,11 +440,11 @@ window.Quarto = {
   
 
 
-</header><section id="introduction-to-one-sample-z-tests" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="introduction-to-one-sample-z-tests">
-<span class="header-section-number">7.1</span> Introduction to One-Sample <span class="math inline">\(Z\)</span>-Tests</h2>
+</header><section id="introduction-to-one-sample-z-tests" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="introduction-to-one-sample-z-tests">
+<span class="header-section-number">8.1</span> Introduction to One-Sample <span class="math inline">\(Z\)</span>-Tests</h2>
 <p>The one-sample <span class="math inline">\(Z\)</span>-test is used to compare a sample proportion to a population proportion.</p>
-</section><section id="mathematical-definition-of-the-one-sample-z-test" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="mathematical-definition-of-the-one-sample-z-test">
-<span class="header-section-number">7.2</span> Mathematical definition of the One-Sample <span class="math inline">\(Z\)</span>-Test</h2>
+</section><section id="mathematical-definition-of-the-one-sample-z-test" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="mathematical-definition-of-the-one-sample-z-test">
+<span class="header-section-number">8.2</span> Mathematical definition of the One-Sample <span class="math inline">\(Z\)</span>-Test</h2>
 <p>Consider a sample of size <span class="math inline">\(n\)</span> with binary values (such as “true” or “false”). Let <span class="math inline">\(p_{s}\)</span> and <span class="math inline">\(p_{E}\)</span> be the observed sample and expected (population) proportions, respectively. The formula to calculate the <span class="math inline">\(z\)</span> statistic is</p>
 <p><span class="math display">\[
 z \equiv \frac{
@@ -449,8 +455,8 @@ z \equiv \frac{
   }
 }.
 \]</span></p>
-</section><section id="data-source-and-description" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="data-source-and-description">
-<span class="header-section-number">7.3</span> Data source and description</h2>
+</section><section id="data-source-and-description" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="data-source-and-description">
+<span class="header-section-number">8.3</span> Data source and description</h2>
 <p>We will use the CTN-0094 data set, a data set of harmonized clinical trials for opioid use disorder. The full database is in <code>public.ctn0094data::</code>, engineered features are in <code>public.ctn0094extra::</code>, and clinical trial outcomes (wrangled dependent variables) are in <code>CTNote::</code>. We will install all three packages, but only use <code>CTNote::</code> for now.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># install.packages("public.ctn0094data")</span></span>
@@ -460,8 +466,8 @@ z \equiv \frac{
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ctn-0094.github.io/CTNote/">CTNote</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="cleaning-the-data-to-create-a-model-data-frame" class="level2" data-number="7.4"><h2 data-number="7.4" class="anchored" data-anchor-id="cleaning-the-data-to-create-a-model-data-frame">
-<span class="header-section-number">7.4</span> Cleaning the data to create a model data frame</h2>
+</section><section id="cleaning-the-data-to-create-a-model-data-frame" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="cleaning-the-data-to-create-a-model-data-frame">
+<span class="header-section-number">8.4</span> Cleaning the data to create a model data frame</h2>
 <p>Because our method requires only one sample, we have very little work to do. We will use the <a href="https://journals.lww.com/jonmd/abstract/1993/06000/buprenorphine_versus_methadone_maintenance_for.4.aspx">Kosten et al.&nbsp;(1993)</a> definition of opioid abstinence, provided in the data set <code>outcomesCTN0094</code> as the column <code>kosten1993_isAbs</code>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># What do the values look like?</span></span>
@@ -477,8 +483,8 @@ logical    2158    1402 </code></pre>
 </div>
 </div>
 <p>There are 3560 logical values, and <code>TRUE</code> indicates that the trial participant achieved abstinence according to the definition used in Kosten et al.&nbsp;(1993).</p>
-</section><section id="assumptions-of-the-one-sample-z-test" class="level2" data-number="7.5"><h2 data-number="7.5" class="anchored" data-anchor-id="assumptions-of-the-one-sample-z-test">
-<span class="header-section-number">7.5</span> Assumptions of the One-Sample <span class="math inline">\(Z\)</span>-Test</h2>
+</section><section id="assumptions-of-the-one-sample-z-test" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="assumptions-of-the-one-sample-z-test">
+<span class="header-section-number">8.5</span> Assumptions of the One-Sample <span class="math inline">\(Z\)</span>-Test</h2>
 <p>To use a one-sample <span class="math inline">\(Z\)</span>-test, we make the following assumptions:</p>
 <ol type="1">
 <li>The data are from a random sample</li>
@@ -489,13 +495,13 @@ logical    2158    1402 </code></pre>
 <p>If these assumptions hold, then <span class="math display">\[
 z \sim N(0, 1).
 \]</span></p>
-</section><section id="checking-the-assumptions-with-plots" class="level2" data-number="7.6"><h2 data-number="7.6" class="anchored" data-anchor-id="checking-the-assumptions-with-plots">
-<span class="header-section-number">7.6</span> Checking the assumptions with plots</h2>
-<section id="independence-and-randomness" class="level3" data-number="7.6.1"><h3 data-number="7.6.1" class="anchored" data-anchor-id="independence-and-randomness">
-<span class="header-section-number">7.6.1</span> Independence and Randomness</h3>
+</section><section id="checking-the-assumptions-with-plots" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="checking-the-assumptions-with-plots">
+<span class="header-section-number">8.6</span> Checking the assumptions with plots</h2>
+<section id="independence-and-randomness" class="level3" data-number="8.6.1"><h3 data-number="8.6.1" class="anchored" data-anchor-id="independence-and-randomness">
+<span class="header-section-number">8.6.1</span> Independence and Randomness</h3>
 <p>Because the samples were collected at random via an FDA approved clinical trial protocol, we assume that all the participants were randomly selected and are independent of each other.</p>
-</section><section id="extreme-proportions" class="level3" data-number="7.6.2"><h3 data-number="7.6.2" class="anchored" data-anchor-id="extreme-proportions">
-<span class="header-section-number">7.6.2</span> “Extreme” Proportions</h3>
+</section><section id="extreme-proportions" class="level3" data-number="8.6.2"><h3 data-number="8.6.2" class="anchored" data-anchor-id="extreme-proportions">
+<span class="header-section-number">8.6.2</span> “Extreme” Proportions</h3>
 <p>According to <a href="https://doi.org/10.1097/ADM.0000000000000647">Ling et al.&nbsp;(2020)</a>, the 12-month abstinence proportion of all 533 participants in their study was 40.5 percent. As we can see here, our abstinence rates are 39.4. Neither these proportions are smaller than 5% or greater than 95%.</p>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">pExpected</span> <span class="op">&lt;-</span> <span class="fl">0.508</span> <span class="op">*</span> <span class="op">(</span><span class="fl">425</span><span class="op">/</span><span class="fl">533</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -508,11 +514,11 @@ z \sim N(0, 1).
 <pre><code>[1] 1402</code></pre>
 </div>
 </div>
-</section><section id="type-and-counts-of-data" class="level3" data-number="7.6.3"><h3 data-number="7.6.3" class="anchored" data-anchor-id="type-and-counts-of-data">
-<span class="header-section-number">7.6.3</span> Type and Counts of Data</h3>
+</section><section id="type-and-counts-of-data" class="level3" data-number="8.6.3"><h3 data-number="8.6.3" class="anchored" data-anchor-id="type-and-counts-of-data">
+<span class="header-section-number">8.6.3</span> Type and Counts of Data</h3>
 <p>We observe binary data, and we see at least 10 successes and at least 10 failures.</p>
-</section></section><section id="code-to-run-a-one-sample-z-test" class="level2" data-number="7.7"><h2 data-number="7.7" class="anchored" data-anchor-id="code-to-run-a-one-sample-z-test">
-<span class="header-section-number">7.7</span> Code to run a One-Sample <span class="math inline">\(Z\)</span>-Test</h2>
+</section></section><section id="code-to-run-a-one-sample-z-test" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="code-to-run-a-one-sample-z-test">
+<span class="header-section-number">8.7</span> Code to run a One-Sample <span class="math inline">\(Z\)</span>-Test</h2>
 <p>Now that we have checked our assumptions, we can perform the one-sample <span class="math inline">\(Z\)</span>-test for proportions.</p>
 <div class="cell">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/prop.test.html">prop.test</a></span><span class="op">(</span></span>
@@ -534,8 +540,8 @@ sample estimates:
 0.3938202 </code></pre>
 </div>
 </div>
-</section><section id="brief-interpretation-of-the-output" class="level2" data-number="7.8"><h2 data-number="7.8" class="anchored" data-anchor-id="brief-interpretation-of-the-output">
-<span class="header-section-number">7.8</span> Brief interpretation of the output</h2>
+</section><section id="brief-interpretation-of-the-output" class="level2" data-number="8.8"><h2 data-number="8.8" class="anchored" data-anchor-id="brief-interpretation-of-the-output">
+<span class="header-section-number">8.8</span> Brief interpretation of the output</h2>
 <p>The 95% confidence interval contains the population proportion, so we fail to reject the hypothesis that the patients from these clinical trials achieve different abstinence rates than the general population.</p>
 
 
@@ -954,7 +960,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="../lessons/02_wilcoxon_one_samp.html" class="pagination-link" aria-label="Wilcoxon Signed Rank Test for One Sample">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
