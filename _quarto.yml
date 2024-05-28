@@ -27,7 +27,8 @@ book:
         - lessons/01_mosaic_violin.qmd
         - lessons/01_scatterplots.qmd
         - lessons_original/01_skimr.qmd
-        - lessons_original/01_table1.qmd
+        - lessons/01_table1.qmd
+        - lessons/01_gtsummary.qmd
         # - lessons_original/01_rayshader.qmd
 
     - part: 02_header_one-sample.qmd

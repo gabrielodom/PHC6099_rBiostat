@@ -1,7 +1,15 @@
 ---
-title: "PHC 6099: R Computing for Health Sciences"
+title: "About this Book"
 author: "Gabriel J. Odom, PhD, ThD"
 ---
 
-## About
-These are the written lecture materials for the class PHC 6099 at Florida International University's Stempel College of Public Health. This is the second semester of the "R" course sequence (the first semester is PHC6701; the text for that class is available here: <https://gabrielodom.github.io/PHC6701_r4ds/>) The source code and data sets for this book are available here: <https://github.com/gabrielodom/PHC6099_rBiostat>.
+## About these Chapters
+These are the written lecture materials for the class PHC 6099 at Florida International University's Stempel College of Public Health. Each of the lessons were written by students, so we don't guarantee that they are always mathematically/statistically accurate. You should use this material as a simple place to start to use these methods, but always read more about these methods when you use them to give yourself a better understanding of their theoretical foundations. This material **should not** be used to replace a traditional textbook in applied biostatistics. Here are some rather standard books on applied biostatistics (there are free/cheap versions on the internet for most of these texts, but I trust you to find them yourself):
+
+- **Biostatistical Analysis.** Jerrold H. Zar. <https://www.pearson.com/en-us/subject-catalog/p/biostatistical-analysis/P200000006419/9780134995441>. 
+- **Regression Modelling Strategies.** Frank E. Harrell, Jr. <https://link.springer.com/book/10.1007/978-3-319-19425-7>
+- **Categorical Data Analysis.** Alan Agresti. <https://onlinelibrary.wiley.com/doi/book/10.1002/0471249688>
+
+
+## Getting Help in R
+This is the second semester of the "R" course sequence at FIU, so we spend very little time explaining the basics of the R language (the first semester is PHC6701; the text for that class is available here: <https://gabrielodom.github.io/PHC6701_r4ds/>). If you are new to R, please go back to the previous semester's material and work through that first. If you want to see how we made this book, the source code and data sets for this book are available here: <https://github.com/gabrielodom/PHC6099_rBiostat>.

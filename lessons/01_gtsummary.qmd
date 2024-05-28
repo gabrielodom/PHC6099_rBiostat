@@ -1,0 +1,474 @@
+---
+title: "Table by gtsummary"
+authors: "Tarana Ferdous"
+date: "`r Sys.Date()`" 
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+---
+
+
+## Packages for this Lesson
+```{r}
+#| label: load-packages
+#| message: false
+
+# Installing Required Packages
+# install.packages("public.ctn0094data")
+# install.packages("tidyverse")
+# install.packages("gtsummary")
+
+# Loading Required Packages
+library(public.ctn0094data)
+library(tidyverse)
+library(gtsummary)
+library(dplyr) # for re-coding
+```
+
+
+## Introduction to 'gtsummary'
+
+The `gtsummary` package is useful mainly for creating publication-ready tables (i.e.demographic table, simple summary table, contingency-table, regression table, etc.). The best feature of this package is it can automatically detect if the data is continuous, dichotomous or categorical, and which descriptive statistics needs to apply. 
+
+
+## Data Source and Description
+
+The `public.ctn0094data` package provides harmonized and normalized data sets from the CTN-0094 clinical trial. These data sets describe the experiences of care-seeking individuals suffering from opioid use disorder (OUD). The trial is part of the Clinical Trials Network (CTN) protocol number 0094, funded by the US National Institute of Drug Abuse (NIDA). It is used by the NIDA to develop, validate, refine, and deliver new treatment options to patients. 
+
+In this lesson, I used the `demographics`, and `fagerstrom` data sets from the `{public.ctn0094data}` package to demonstrate the `gtsummary` function. The `demographics` part contains the demographic variables such as age, sex, race, marital status etc. The `fagerstrom` part contains data on smoking habit (smoker/non-smoker, Fagerstrom Test for Nicotine Dependence Score (ranging from 0 to 10) ~ FTND, Number of cigarettes smoked per day.). The FTND is a questionnaire that assesses the physical dependence of adults on nicotine. The test uses yes/no questions scored from 0 to 1 and multiple-choice questions scored from 0 to 3, and the total score ranges from 0 to 10. The higher the score, the more intense the patient's nicotine dependence is. The score categories are: 8+: High dependence, 7–5: Moderate dependence, 4–3: Low to moderate dependence and 0–2: Low dependence. 
+```{r}
+#| label: data-searching
+#| message: false
+
+# Searching suitable data sets: You can skip 
+data(package = "public.ctn0094data")
+#data(demographics, package = "public.ctn0094data")
+#names(demographics)
+#data(fagerstrom, package = "public.ctn0094data")
+#names(fagerstrom)
+#table(fagerstrom$ftnd)
+```
+
+
+## Creating Model Data Frames
+
+The `demographics` and `fagerstrom` data sets within the `{public.ctn0094data}` package were joined by ID (`who` variable) and a new dta frame `smoking_df` is created. 
+```{r}
+#| label: fetching smoking-data set
+#| message: false
+
+# Joining data sets: 
+smoking_df <- demographics %>% 
+  left_join(fagerstrom, by = "who") 
+```
+
+
+## Demographic Table with `tbl_summary` Function
+
+### Creating Table 1: Demographic Characteristic
+
+In order to create a basic demographic table, I will now select which variables I want to show in the table and then use the `tbl_summary` function to create the table. I am also adding the description of the variables I included in my table. 
+
+1.  `age`: an integer variable that indicates the Age of the patient.
+2.  `race:` a factor variable with levels ‘Black’, ‘Other Refused/missing’, and ‘White’, which represents the Self-reported race of the patient.
+3.  `education`: a factor variable denotes the Education level at intake, with levels ‘HS/GED’ for high school graduate or equivalent, ‘Less than HS’ for less than high school education, ‘More than HS’ for some education beyond high school, and ‘Missing’ if the information is not provided.
+4.  `is_male`: a factor variable with levels ‘No’ and ‘Yes’, describing the Sex (not gender) of the patient, where ‘Yes’ indicates male.
+5.  `marital:` a factor variable indicating the Marital status at intake, with levels ‘Married or Partnered’, ‘Never married’, ‘Separated/Divorced/Widowed’, and ‘Not answered’ if the question was not asked during intake.
+6.  `is_smoker`: a factor indicating whether the patient is a smoker or not. Levels include “No” (not a smoker) and “Yes” (a smoker).
+
+```{r}
+#| label: table-summary-demo
+#| message: false
+#| warning: false
+
+# Selecting variables in a new data frame `table_1df` for table 1
+table_1df <- smoking_df %>% 
+  select(age, race, education, is_male, marital, is_smoker)
+
+# Table 1
+table_1 <- table_1df  %>% tbl_summary()
+
+table_1
+```
+
+### Customizing Table 1: Changing the Label
+
+I am using `label` function to change the label of all variables. 
+Other customization will be shown in the next contingency table.
+```{r}
+#| label: table-summary-demo-label
+#| message: false
+#| warning: false
+
+# Changing the Label
+
+table_1 <-
+  table_1df %>% 
+  tbl_summary(
+    label = list(
+      age = "Age",
+      race = "Race",
+      education = "Education level",
+      is_male = "Male",
+      marital = "Marital status",
+      is_smoker = "Smoker"
+    )
+  )
+
+table_1
+```
+
+
+## Contingency Table with `tbl_summary` Function
+
+### Creating Table 2: Demographic Variables by Smoking Status
+
+I will now show the table 1 demographic variables by smoking habit 
+status (`is_smoker`, `Yes` = smoker and `No` = non-smokers) 
+```{r}
+#| label: table-summary-by-variable
+#| message: false
+#| warning: false
+
+# Contingency table 
+table_2 <- table_1df %>% tbl_summary(by = is_smoker) 
+
+table_2
+```
+
+### Removing Missing Data
+
+If I do not want to show the missing data in my table, I will use `missing = "no"`.
+```{r}
+#| label: table-summary-by-variable_no-missing
+#| message: false
+#| warning: false
+
+# Removing Missing Data
+table_2nm <- table_1df %>% tbl_summary(by = is_smoker,
+                                   missing = "no") 
+table_2nm
+```
+
+### Applying Statistical Tests
+
+I will use `add_p` function to show the statistical analysis. This will 
+automatically detect if data in each variable is continuous, dichotomous or categorical, 
+and apply the appropriate descriptive statistics accordingly. 
+```{r}
+#| label: table-summary-by-variable-p-value
+#| message: false
+#| warning: false
+
+# Adding p-value
+table_2 <- table_1df %>% tbl_summary(by = is_smoker,
+                                   missing = "no") %>% 
+  add_p()
+
+table_2
+```
+Note: The footnote 2 shows all the statistical tests applied to this table. 
+It can be understandable from the table that for categorical variable it 
+applied Pearson’s Chi-squared test, for continuous non-normal distributed variable it 
+applied Wilcoxon rank sum test; and for small sample data, it applied Fisher’s exact test. 
+It would be great to see different footnotes for each of the test next to each p-value,
+however, I did not find a way to do that. 
+
+### Customizing Table 2(a)
+
+I will now customize the table 2 to show total number and overall number and
+show missing values by using the following functions:
+```{r}
+#| label: table-summary-by-variable-customization-a
+#| message: false
+#| warning: false
+
+# Adding total and overall number 
+table_2 <- table_1df %>% tbl_summary(by = is_smoker,
+                                   label = list(
+                                     age = "Age",
+                                     race = "Race",
+                                     education = "Education level",
+                                     is_male = "Male",
+                                     marital = "Marital status"
+                                   ),
+                                   missing_text = "(Missing)"
+                                  ) %>% 
+  add_p() %>%
+  add_n() %>%
+  add_overall() 
+
+table_2
+```
+
+### Customizing Table 2(b)
+
+I will now customize the title, caption and header and made the variable names 
+bold of table 2 by using the following functions:
+```{r}
+#| label: table-summary-by-variable-customization-b
+#| message: false
+#| warning: false
+
+# Adding title, caption and header 
+table_2 <- table_1df %>% tbl_summary(by = is_smoker,
+                                   label = list(
+                                     age = "Age",
+                                     race = "Race",
+                                     education = "Education level",
+                                     is_male = "Male",
+                                     marital = "Marital status"
+                                   ),
+                                   missing_text = "(Missing)"
+                                  ) %>% 
+  add_p() %>%
+  add_n() %>%
+  add_overall() %>%
+  bold_labels() %>%
+  modify_caption("Table 2. Demographic characteristics according to smoking status") %>%
+  modify_header(label ~ "**Demographic characteristics**") %>%
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Smoking status**") 
+  
+table_2
+```
+
+### Customizing Table 2(c)
+
+Here, I am keeping only those customization that I prefer to have in my final table 2.
+```{r}
+#| label: table-summary-by-variable-customization-c
+#| message: false
+#| warning: false
+
+# Final table
+table_2 <- table_1df %>% tbl_summary(by = is_smoker,
+                                   label = list(
+                                     age = "Age",
+                                     race = "Race",
+                                     education = "Education level",
+                                     is_male = "Male",
+                                     marital = "Marital status"
+                                   ),
+                                   missing = "no"
+                                  ) %>% 
+  add_p() %>%
+  #add_n() %>%
+  #add_overall() %>%
+  bold_labels() %>%
+  modify_caption("Table 2. Demographic characteristics according to smoking status") %>%
+  modify_header(label ~ "**Characteristics**") %>%
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Smoking Status**") %>%
+  modify_footnote(all_stat_cols() ~ "Median (IQR) for Age; n (%) for all other variables") 
+  
+table_2
+```
+
+### Interpretation of Table 2
+
+Interpreting the variable `Education level`:
+
+`Null Hypothesis (H₀)`: There is no association between education level and smoking status.
+
+`Alternative Hypothesis (H₁)`: There is an association between education level and smoking status.
+
+Since the p-value is less than 0.001, we reject the null hypothesis. 
+This indicates that there is a statistically significant association between 
+education level and smoking status. However, to understand the nature of this 
+association (whether education level affects smoking status or vice versa), 
+further analysis would be needed.
+
+### Missing value distribution in Table 2 
+We often want to see the missing value distribution among the the demographic variables.
+For example, we want to see the missing value distribution for the smoking status variable. 
+First, we need to re-code the `NA` into a new category for `is_smoker` variable and recreate the table.
+
+#### Missing value data creation
+```{r}
+#| label: table-creating-missing-distribution
+#| message: false
+#| warning: false
+
+# Recoding `is_smoker` variable into `is_smoker_new`
+table_1df <- table_1df %>% 
+  mutate(is_smoker_new = ifelse(is.na(is_smoker), 99, is_smoker))  # converting all NA to 99
+
+# Convert into factor
+table_1df$is_smoker_new <- factor(table_1df$is_smoker_new,
+                                  levels = c(1, 2, 99),
+                                  labels = c("No", "Yes", "Missing"))
+
+# New data frame 
+table_1df_new <- table_1df %>% 
+  select(age, race, education, is_male, marital, is_smoker_new)
+```
+
+#### Missing value table creation
+```{r}
+#| label: table-summary-by-missing-distribution
+#| message: false
+#| warning: false
+
+# Final table
+table_2miss <- table_1df_new %>% tbl_summary(by = is_smoker_new,
+                                   label = list(
+                                     age = "Age",
+                                     race = "Race",
+                                     education = "Education level",
+                                     is_male = "Male",
+                                     marital = "Marital status"
+                                   ),
+                                   missing = "no"
+                                  ) %>% 
+  add_p() %>%
+  #add_n() %>%
+  #add_overall() %>%
+  bold_labels() %>%
+  modify_caption("Table 2. Demographic characteristics according to smoking status") %>%
+  modify_header(label ~ "**Characteristics**") %>%
+  modify_spanning_header(c("stat_1", "stat_2", "stat_3") ~ "**Smoking Status**") %>%
+  modify_footnote(all_stat_cols() ~ "Median (IQR) for Age; n (%) for all other variables") 
+  
+table_2miss
+```
+
+
+## Regression Table with `tbl_regression()` Function
+
+### Creating Regression Model
+
+Here, we are creating a logistic regression model where smoking status is the
+response variable, education is exploratory variable and age, race and sex are 
+considered as confounders.
+```{r}
+#| label: creating-regression-model1
+#| message: false
+#| warning: false
+
+# Building the Multivariable logistic model
+m1 <- glm(is_smoker ~  education + age + race + is_male, 
+          table_1df, 
+          family = binomial)
+
+# View raw model results
+summary(m1)$coefficients
+```
+
+### Creating Table 3: Regression Table 
+
+Here, I am using `tbl_regression` function to see the regression results in the table.
+The `exponentiate = TRUE` shows the data as Odds Ratio after exponentiation of the beta values.
+```{r}
+#| label: table-regression-model1 
+#| message: false
+#| warning: false
+
+# Creating Regression Table 
+table_3 <- tbl_regression(m1, exponentiate = TRUE)
+
+table_3
+```
+
+### Customizing Table 3
+
+Here, I have customized the table 3 by using functions I applied in table 1.
+```{r}
+#| label: table-regression-model1-customizing 
+#| message: false
+#| warning: false
+
+# Customizing Regression Table 
+table_3 <- tbl_regression(m1, exponentiate = TRUE,
+                           label = list(
+                             age = "Age",
+                             race = "Race",
+                             education = "Education level",
+                             is_male = "Male"
+                             ),
+                          missing = "no"
+                          ) %>% 
+  bold_labels() %>%
+  bold_p(t = 0.10) %>%  
+  italicize_levels() %>%
+  modify_caption("Table 3. Logistic Regression for smoking status as response varialbe (n=3014)")
+
+table_3
+```
+
+### Interpreting Table 3
+
+Interpreting the variable `Education level`:
+
+For individuals with less than high school education, the odds of being a smoker 
+are 2.75 times higher compared to those with HS/GED, after adjusting for age, race, and sex. 
+
+Conversely, for individuals with more than high school education, the odds of being a smoker are 0.54 times lower compared to those with HS/GED, after adjusting for age, race, and sex.
+
+Interpreting the variable `Age`:
+
+For each unit increase in age, the odds of being a smoker decrease by a factor of 0.96 (or 4%),
+after adjusting for education, race, and sex.
+
+In R, for interpreting categorical variables, reference level is selected by alphabetic order, 
+therefore, the `HS/GED` is selected as reference level (`H`), next one is `Less than HS` (`L`) and 
+then `More than HS` (`M`). 
+
+### Changing the Reference Level in Table 3
+
+Often, we need to change the reference level as per our analysis need or aim of the study. 
+We can select the specific reference level and run the table 3. First step is to check
+if the variable is in factor format. If it is not in factor format, we need to convert it
+into factor. Next, we can use the following codes to refer and use in table 3. 
+
+#### New Model with New Reference Level 
+
+Here I am creating model 2 (m2) wit the new reference as `Less than HS` for the `education` variable.
+```{r}
+#| label: creating-regression-model2
+#| message: false
+#| warning: false
+
+# Check factor format
+str(table_1df$education) # It shows that it is in factor format.
+
+# Building the glm model with specific reference level for education  = "Less than HS".
+m2 <- glm(is_smoker ~  relevel(factor(education), ref = "Less than HS")  + age + race + is_male, 
+          table_1df, 
+          family = binomial)
+
+# View raw model results
+summary(m2)$coefficients
+```
+
+#### Creating and Customizing New Table 3 with New Reference Level  
+
+Here, I have created the new table 3 for m2 model and customized it accordingly.
+```{r}
+#| label: table-regression-model2-customizing 
+#| message: false
+#| warning: false
+
+# Customizing Regression Table 
+table_3n <- tbl_regression(m2, exponentiate = TRUE,  # Creating the table
+                           label = list(
+                             age = "Age",
+                             race = "Race",
+                             education = "Education level",
+                             is_male = "Male"
+                             ),
+                          missing = "no"
+                          ) %>% 
+  bold_labels() %>%
+  bold_p(t = 0.10) %>%  
+  italicize_levels() %>%
+  modify_caption("Table 3. Logistic Regression for smoking status as response varialbe (n=3014)")
+
+table_3n
+```
+
+
+## Conclusion (Take Home Message)
+
+1. We can use `gtsummary` package for creating publication-ready tables.
+2. The `tbl_summary()` and  the `tbl_regression()` are the frequently used functions in this package.
+3. Multiple other functions can be used to customize the table and can address the journal requirements. 

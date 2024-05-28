@@ -1,0 +1,341 @@
+---
+title: "Demographics Table With Table1"
+author:
+  - name: "Lea Nehme, Zhayda Reilly and Melanie Freire"
+    affiliations:
+      - Florida International University
+      - Robert Stempel College of Public Health and Social Work
+toc: true
+number-sections: true
+embed-resources: false
+format:
+  html:
+    bibliography: [bib/07_power_ols_references.bib, bib/packages.bib]
+csl: bib/the-new-england-journal-of-medicine.csl
+---
+
+```{r}
+#| label: load-packages
+#| message: false
+
+#install.packages("tidyverse")
+library(tidyverse)
+```
+
+
+
+## Introduction
+
+
+
+In most scientific research journals, the first included table is often referred to as **Table1**. It is a table that presents descriptive statistics of baseline characteristics of the study population stratified by exposure. This package makes it fairly straightforward to produce such a table using R. Table1 includes descriptive statistics for the total study sample, with the rows (explanatory variables) consisting of the key study variables that are often included in the final analysis[@hayes-larson2019]. Then within the columns (outcome of interest/response variable), you will find cells given as an (%) for categorical variables, whereas a mean, SD, or the median will be provided for continuous variables. Additionally, there will be a total column provided which can help in the assessment of the overall sample.
+
+
+
+## Necessary Packages
+
+
+
+The `htmlTable` package allows for the usage of the `table1()` function to create a table 1, while also making life easy when attempting to copy this table into a Word document.
+
+The `boot` package was created to aid in performing bootstrapping analysis. With it comes numerous data sets, specifically clinical trial data sets to make this possible. However, there is no code book provided within the package when the data is downloaded as a csv file. This is a link on Github that explains and elaborates on every data within the package itself [@boot1997].
+
+```{r}
+#| label: libraries
+#| message: false
+
+
+#install.packages("htmlTable")
+#install.packages("boot")
+
+# Load libraries
+library(htmlTable)
+library(table1)
+library(boot)
+
+```
+
+
+
+## Data source and description
+
+
+
+Today, we will be using the `melanoma` data set which consists of malignant melanoma measurements of patients. Each patient had their tumor surgically removed between the years of 1962 and 1977 at the Department of Plastic Surgery, University Hospital of Odense located in Denamrk. Each surgery consisted of the complete removal of the tumor with an additional removal of about 2.5cm of the surrounding skin. When this was completed, the thickness of the tumor was recorded along with the physical appearance of ulceration vs no ulceration, as it is an important prognostic indication of those with a thick/ulcerated tumor to have an increased chance of death as a consequence of melanoma.
+
+```{r}
+#| label: Data-Import-And-Exploration
+#| warning: false
+#| code-fold: false
+
+data(melanoma, package = "boot")
+melanoma_data <- melanoma
+
+#Now that we loaded the raw data set, we will conduct a visual exploration before wrangling #the data and applying any functions, while also considering the requirements involved in #the construction of a table1.
+
+summary(melanoma_data)
+
+```
+
+
+
+## Cleaning the data to create a model data frame
+
+
+
+Let us now explore the type of variables within the data set.
+
+```{r}
+#| label: Typeof-Variable
+#| code-fold: false
+
+typeof(melanoma_data$status) 
+
+```
+
+We will first provide a basic `table1` to illustrate how the function works. Currently, all the variables are in numeric/double formats, however for the creation of a basic `table1`, it is of importance to convert the dependent/response variable of interest to reflect categories (factor).
+
+Our main variable of interest (dependent/response) is the **status**. According to the code book found in Github, status is coded into three levels that indicate the patients status at the end of the study. **Level 1** indicates that they had died from melanoma, **Level 2** indicates that they were still alive at the conclusion of the study, and **Level 3** indicates that they had died from causes unrelated to their melanoma. As such, we will factor the "status" variable into three levels. With this in mind, let us go ahead and convert melanoma into a factor variable with three levels. For ease of analysis we will use **2 = "Alive"** as the **reference level**. This can be done in two ways:
+
+1.  Although more time consuming, it is highly recommended that beginners utilize the function `as.factor()` and then utilize the `recode_factor()` function to minimize the errors.
+
+2.  When you become more skilled and are able to understand how the factor function works, it is possible to do everything in one step with the `factor()` function. In this function you can put levels and labels all in one function instead of having to break it up into more than one function.
+
+For our example we will use `as.factor` then `recode_factor()` using **2 = "Alive"** as our **reference group**.
+
+```{r}
+#| label: recoding-of-status-variable
+#| code-fold: false
+
+melanoma_data$status <-
+  as.factor(melanoma_data$status)
+
+# print the first six observations
+head(melanoma_data$status)
+
+# Recode
+melanoma_data$status <- recode_factor(
+  melanoma_data$status, 
+  "2" =	"Alive", # this is the reference group
+  "1" =	"Died from melanoma",
+  "3" = "Non-Melanoma death"
+)
+
+# Print the first six observations
+head(melanoma_data$status)
+```
+
+As you can see in the variable levels, "Alive" is the reference level. It is extremely important to pick a reference level to lay the foundation of the table along with highlighting the outcome of interest of your hypothesis. In summary, this lays the foundation of a well organized table.
+
+
+
+## Creation of basic table 1
+
+
+
+Now that our main variable of interest is a factor with three levels, we will run a basic table1 with the independent/explanatory variables of interest: **sex**, **age**, **ulcer**, and **thickness**.
+
+Recall that the explanatory variables of interest are still in "double" formats. Conveniently, to analyze data before the independent variables are converted to factors and labeled, the table1 provides the ability to highlight level results. This only applies for independent variables that are in numeric/double formats in which each number represents a group. For instance 0 although is a number format we know it has a group meaning such as male.
+
+For the independent variables, if they have factors in the front, it provides the number of cases (aka observations). If they are a continuous variable, we will get the mean, the SD, the minimum and the maximum amounts.
+
+```{r}
+#| label: basic-table-1
+#| code-fold: false
+
+basic_table1 <- table1( 
+  ~ factor(sex) + age + factor(ulcer) + thickness | status, 
+  data = melanoma_data
+)
+
+basic_table1
+```
+
+Note that the `table1` package uses a familiar formula interface, where the variables to include in the table are separated by ‘+’ symbols, the “stratification” variable (which creates the columns) appears to the right of a “conditioning” symbol ‘\|’, and the data argument specifies a `data.frame` that contains the variables in the formula.
+
+If we do not put factor for a grouped variable then the following will happen:
+
+```{r}
+#| label: Incorrect-Example 
+#| code-fold: false
+
+wrong_table1 <- table1(
+  ~ sex + age + ulcer + thickness | status, 
+  data = melanoma_data
+)
+
+wrong_table1
+
+```
+
+As you can see above, we have the incorrect values provided of the explanatory variables. For example, in the variable of sex, we expect to see the number of individuals who identify as male or female, but instead we observe the mean, which is not a proper descriptive statistic as sex is a categorical variable.
+
+To avoid this issue as well as problems in other procedures (like logistic regressions), it is crucial that we remember to factor the variables before we run any function. But because we don’t have nice labels for the variables and categories, it doesn’t look great. To improve things, we can create factors with descriptive labels for the categorical variables (`sex` and `ulcer`), label each variable the way we want, and specify units for the continuous variables (`age` and `thickness`). According to the code book, the patient's **sex**: 1 = male, 0 = female, and **ulcer** is an indicator of ulceration : 1 = present, 0 = absent. We also specify that the overall column to be labeled “Total” and be positioned on the left, and add a caption and footnote:
+
+```{r}
+#| label: Data-wrangling-independent-variable-Sex
+#| code-fold: false
+
+melanoma_data$sex <- as.factor(melanoma_data$sex)
+
+# print the first six observations
+head(melanoma_data$sex)
+
+# Recode
+melanoma_data$sex <- recode_factor(
+  melanoma_data$sex, 
+  "0" =	"Female",
+  "1" =	"Male"
+)
+
+# Print the first six observations
+head(melanoma_data$sex)
+
+```
+
+```{r}
+#| label: Data-wrangling-independent-variable-Ulcer
+#| code-fold: false
+
+typeof(melanoma_data$ulcer)
+
+melanoma_data$ulcer <- as.factor(melanoma_data$ulcer)
+
+# print the first six observations
+head(melanoma_data$ulcer)
+
+# Recode
+melanoma_data$ulcer <- recode_factor(
+  melanoma_data$ulcer, 
+  "0" =	"Absent",
+  "1" =	"Present"
+)
+
+# Print the first six observations
+head(melanoma_data$ulcer)
+
+```
+
+In addition, we need to add units to the two continuous variables **age** and **thickness**. According to the code book, **age** is the patient's age measured in years and **thickness** corresponds to the tumor's thickness in millimeters (mm). The package `table1` provides an easy way to demonstrate measurement information:
+
+```{r}
+#| label: Continuous-Variables
+#| code-fold: false 
+
+units(melanoma_data$age) <- "years"
+units(melanoma_data$thickness) <- "mm"
+
+```
+
+Additionally, for visual and descriptive purposes, the function `table1` is able to easily provide labels for the variables that will be shown in the final table using the `label()` function. Also, `(caption \<-)` provides a title for the table and `(footnote \<-)` provides any footnote information.
+
+```{r}
+#| label: Visual-Dsecriptives 
+#| code-fold: false
+
+label(melanoma_data$sex) <- "Sex"
+label(melanoma_data$age) <- "Age"
+label(melanoma_data$ulcer) <- "Ulceration"
+label(melanoma_data$thickness) <-"Thickness*"
+
+caption_char <- "Table 1. Melanoma Dataset Descriptive Statistics"
+footnote_char <- "*Also known as Breslow thickness"
+```
+
+Below, we can demonstrate the final `table1` layout. As you can see, you no longer use `factor()` in front of the variable as we already factorized it in the previous steps.
+
+```{r}
+#| label: Formatted-table-1
+#| code-fold: false
+
+table1(
+  ~ sex + age + ulcer + thickness | status, 
+  data = melanoma_data,
+  overall = c(left = "Total"), 
+  caption = caption_char, 
+  footnote = footnote_char
+)
+
+```
+
+
+
+## Changing the table’s appearance
+
+
+
+The default style of `table1` uses an Arial font, and resembles the [booktabs](https://ctan.org/pkg/booktabs) style commonly used in LaTeX. While this default style is not ugly, inevitably there will be a desire to customize the visual appearance of the table (fonts, colors, gridlines, etc). The package provides a limited number of built-in options for changing the style, while further customization can be achieved in [R Markdown](https://rmarkdown.rstudio.com/) documents using CSS. [@cohen1988a]
+
+
+### Using built-in styles
+
+
+The package includes a limited number of built-in styles including:
+
+-   zebra: alternating shaded and unshaded rows (zebra stripes)
+
+-   grid: show all grid lines
+
+-   shade: shade the header row(s) in gray
+
+-   times: use a serif font
+
+These styles can be selected using the `topclass` argument of `table1`. Some examples follow:
+
+```{r}
+#| label: built-in-styles-zebra
+#| #| code-fold: false
+
+table1(~ sex + age + ulcer + thickness | status, 
+       data = melanoma_data,
+       overall = c(left = "Total"), 
+       caption = caption_char, 
+       footnote = footnote_char, 
+       topclass="Rtable1-zebra"
+)
+
+```
+
+```{r}
+#| label: built-in-styles-grid
+#| #| code-fold: false
+
+table1(~ sex + age + ulcer + thickness | status, 
+       data = melanoma_data,
+       overall = c(left = "Total"), 
+       caption = caption_char, 
+       footnote = footnote_char, 
+       topclass="Rtable1-grid"
+)
+
+```
+
+```{r}
+#| label: built-in-styles-shade-times
+#| #| code-fold: false
+
+table1(~ sex + age + ulcer + thickness | status, 
+       data = melanoma_data,
+       overall = c(left = "Total"), 
+       caption = caption_char, 
+       footnote = footnote_char, 
+       topclass="Rtable1-grid Rtable1-shade Rtable1-times"
+)
+
+```
+
+Note that the style name needs to be preceded by the prefix `Rtable1-`. Multiple styles can be applied in combination by separating them with a space.
+
+
+
+## Conclusion
+
+
+
+In conclusion, `table1` is one of the most utilized tools in the scientific research field. Understanding how to use the table1 package in R can be of benefit to many. It is important to note that this presentation is just a brief summary with what is possible with this package. For example, you can add extra columns to the table, other than descriptive statistics. This can be accomplished using the `extra.col` option. In addition, you can also stratify the response variable to highlight two of the responses, like dead or alive in our example.
+
+
+
+## References {.unnumbered}
+
+
