@@ -1,0 +1,312 @@
+---
+title: "Fisher's Exact Test"
+authors:
+  - name: Tendai Gwanzura, Ana Bravo & Ekpereka Sandra Nawfal
+    affiliations:
+      - Florida International University
+      - Robert Stempel College of Public Health and Social Work
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+---
+
+
+## Introduction to Fisher's Exact test
+
+- Fisher's exact test is a non-parametric statistical test used to 
+test an association between categorical variables.
+- It is analogous to Chi-square test, but Fisher's exact test is conducted when 
+rule of Chi-square test cannot be applied, such as when the sample size in small  and more than 20% of cells have expected frequency count of  \<5 in a contingency table (Bower 2003).
+- Used to assess whether the proportions of categories in two group variables significantly differ from each other.
+- Uses (hypergeometric) marginal distribution to compute exact p-values which 
+are not approximated, which are also somewhat conservative.
+- This particular test is used to obtain the probability of observing the combination of frequencies that we can actually see.
+
+
+## Assumptions
+
+1. Assumes that the individual observations are independent - variable are not paired or related.
+2. Assumes that the row and column totals are fixed or conditioned.
+3. The variables are categorical and randomly sampled.
+4. Observations are count data.
+
+
+## Hypotheses
+
+The hypotheses of Fisher's exact test are similar to Chi-square test:
+
+- Null hypothesis:$(H_0)$ There is no significant relationship between the categorical variables (variables are independent).
+- Alternative hypothesis: $(H_1)$ There is a significant relationship between 
+the categorical variables (variables are dependent).
+
+
+## Mathematical definition of Fisher's Exact test
+This test is usually used as a one-tailed test. It can also be used as a two tailed test. Fisher's exact test for a one-tailed $p$-value is calculated using the following formula:
+
+$$
+p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
+$$ 
+where $a$,$b$,$c$, and $d$ are the individual frequencies on the 2x2 contingency 
+table and $n$ is the population size (total frequency). 
+
+
+## Intalling required packages 
+First, we installed and loaded the packages needed for this presentation.
+
+```{r}
+#| label: load-packages
+#| message: false
+
+#Installing Required Packages
+#install.packages("public.ctn0094data")
+#install.packages("gtsummary")
+#Install ggstatsplot package
+#install.packages("ggstatsplot")
+#install.packages("ggmosaic")
+#install.packages("tidyverse")
+
+# Loading Required Packages
+library(public.ctn0094data)
+library(gtsummary)
+library(ggstatsplot)
+library(ggmosaic) 
+library(tidyverse) 
+```
+
+
+## Data source and description
+
+For this demonstration of the Fisher's Exact test , we utilized the  `demographics`, and `psychiatric` data sets from the `{public.ctn0094data}` 
+package the  `public.ctn0094data` package. The public.ctn0094data package 
+contains de-identified and harmonized datasets from the Clinical Trials Network (CTN) protocol number 0094. This project, funded by the US National Institute on Drug Abuse (NIDA), focuses on opioid use disorder (OUD) and includes data from three clinical trials: CTN-0027, CTN-0030, and CTN-0051.The data describe the experiences of patients seeking care for opoid use disorder (OUD).  
+
+The `demographics` dataset contains the demographic variables such as age, sex, race, living condition, marital status etc. The `psychiatric` dataset contains data on different mental health issues and susbstance use, including bipolar, depression, schizophrenia, cocaine use etc. 
+
+```{r}
+#| label: datasets 
+#| message: false
+
+# Search for suitable data sets; this lists of all datasets in package
+data(package = "public.ctn0094data") 
+
+data(demographics, package = "public.ctn0094data")
+colnames(demographics)
+
+data(psychiatric, package = "public.ctn0094data")
+colnames(psychiatric) 
+```
+
+### Create a model data frame
+We joined the `demographics` and `psychiatric` data sets within the `{public.ctn0094data}` package by participants ID (`who` variable) to create new data frame. 
+
+```{r}
+#| label: selected-datasets
+#| message: false
+
+# Joining data sets: 
+model_df <- 
+  demographics %>% 
+  left_join(psychiatric, by = "who") %>% 
+  # Selecting variables of interest for our analysis
+  select(
+    age, race, education, is_male, marital, is_living_stable, has_schizophrenia
+  )
+```
+
+### Participants characteristics Summary table
+Here, we want to view the frequency of the variables in our dataset using the
+table summary function `tbl_summary ()`.
+
+```{r}
+#| label: table-summary
+#| message: false
+#| warning: false
+
+
+# Create Table 1, change the Label using the label function and also view the missing values
+model_df %>% 
+  tbl_summary(
+    label = list(
+      age = "Age",
+      race = "Race",
+      education = "Education_Level",
+      is_male = "Male",
+      marital = "Marital_Status",
+      is_living_stable = "Living_Condition",
+      has_schizophrenia = "Schizophrenia"
+    ),
+    missing_text = "(Missing)"
+  )
+```
+
+### Recode to indicate variable factor levels
+
+```{r}
+#| label: factor-levels-of-interest
+#| message: false 
+#| warning: false
+
+# Recoding `is_living_stable` and has_schizophrenia`converting all NA to 99
+model_df <- 
+  model_df %>% 
+  mutate(
+    Living_stable = ifelse(is.na(is_living_stable), 99, is_living_stable),
+    Living_stable = factor(
+      Living_stable, levels = c(1, 2, 99), labels = c("No", "Yes", "Missing")
+    )
+  ) %>% 
+  mutate(
+    schizophrenia = ifelse(is.na(has_schizophrenia), 99, has_schizophrenia),
+    schizophrenia = factor(
+      schizophrenia, levels = c(1, 2, 99), labels = c("No", "Yes", "Missing")
+    )
+  ) 
+
+model_df 
+```
+
+
+## Contingency Table with `tbl_summary` Function
+
+- This is a table that shows the distribution of a variable in the rows and columns. Sometimes referred to as a 2x2 table. They are useful in summarizing categorical variables. 
+- We want to create a contingency table of the demographic variable by 
+`living_stable` to Check the distribution of the frequency count of  variables (`is_living_stable`, `Yes` = `stable` and `No` = `unstable` `has_schizophrenia`, `Yes` = schizophrenia diagnosed and `No` = no schizophrenia).
+
+```{r}
+#| label: contigency-table-summary
+#| message: false
+#| warning: false
+
+# creating new data frame keeping only the categorical variable of interest
+#   for our contingency table in the next section
+
+finalModel_df <- select(model_df, schizophrenia, Living_stable)
+
+# Adding label and overall number 
+
+finalModel_df %>% 
+  tbl_summary(by = Living_stable) %>%
+  #add_n() %>%
+  add_overall() %>%
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Living_stable**")
+```
+
+From the table, it seems like the patients who were homeless (answered `no` to `living_stable`) were less likely to be diagnosed with schizophrenia. However, this is not conclusive as we cannot tell if this relationship was a true correlation or it was due to random sampling error. So we will perform the Fisher's Exact test to confirm the relationship.
+
+
+## Performing the Fisher's exact test using the function fisher.test()
+
+- A priori, we hypothesized that people who are diagnosed as being schizophrenic are more likely to homeless (unstable living). So we conducted a one-tailed Fisher's Exact test and specify the direction of the test as "greater".
+- For a two-tailed test, the `alternative` argument has a default value of `"two.sided"`. 
+
+```{r}
+#| label: Fisher-test
+#| message: false
+#| warning: false
+
+# running one-tailed fisher's exact test
+fModelGreater_ls <- fisher.test(
+  x = model_df$is_living_stable, 
+  y = model_df$has_schizophrenia, 
+  alternative = "greater"
+)
+fModelGreater_ls
+
+# running two-tailed Fisher's exact test
+fisher.test(
+  x = model_df$is_living_stable, 
+  y = model_df$has_schizophrenia
+)
+```
+
+
+## Interpretation of results
+
+### One-Tailed test
+
+- Null Hypothesis, $H_0$: people who reported unstable living (homeless) are not
+more often diagnosed with schizophrenia.
+- Alternative Hypothesis, $H_A$: people who reported unstable living(homeless) are more often diagnosed with schizophrenia.
+
+The $p$ value is greater than 0.05 ($p$ = 0.9429), so we fail to reject the null hypothesis. We conclude that people who reported unstable living are not significantly more likely to be diagnosed with schizophrenia than those who reported stable living.
+
+### Two-tailed analysis
+
+- Null Hypothesis, $H_0$: There is no association between living-stable and schizophrenia diagnosis variable
+- Alternative Hypothesis, $H_A$: There is an association between living condition and schizophrenia diagnosis.
+
+Our $p$-value = 0.2246, so we fail to reject the null hypothesis, indicating that there is no statistically significant association between living condition and schizophrenia diagnosis. 
+
+
+## Visualization of the statistical test output 
+
+We would like to have a visual representation of the distribution of the 
+categories of our analysis. As shown in the Fisher's Exact test, there was no statistical significant  association between living-stability and schizophrenia diagnosis. Hence, the interpretation of the plots below is based on description of the charts. 
+
+### Barplots
+We will first construct a barplot using `ggstatsplot::` (for statistical details).
+```{r}
+#| label: ggbarstats
+#| message: false
+#| warning: false
+
+displayP_char <- ifelse(
+  test = fModelGreater_ls$p.value < 0.001,
+  yes = "< 0.001",
+  no = as.character(round(fModelGreater_ls$p.value, 3))
+)
+
+# combine plot and statistical test with ggbarstats
+ggbarstats( 
+  data = finalModel_df,
+  x = Living_stable,
+  y = schizophrenia,
+  results.subtitle = FALSE,
+  subtitle = paste0("Fisher's exact test, p-value = ", displayP_char)
+)
+```
+
+Patients who indicated living_stable (not homeless) had the highest proportion of not having being diagnosed with schizophrenia. Patients who indicated not having stable living (homeless) had the highest proportion of being diagnosed with schizophrenia.
+
+### Mosaic plots
+```{r}
+#| label: figure-mosaic-basic
+#| message: false
+#| warning: false
+
+# Basic Mosaic Plot
+mosaic_basic <- finalModel_df %>% 
+  ggplot() +
+  geom_mosaic(
+    aes(
+      x = product(schizophrenia),
+      fill = Living_stable
+    )
+  ) +
+  labs(
+    #y = "Living_stable",
+    #x = "schizophrenia",
+    title = "Mosaic Plot of schizophrenia by living_stability") +
+  # Specifies default `geom_mosaic` aesthetics, e.g white panel background, 
+  # removes grid lines, adjusts widths and heights of rows and columns to 
+  # reflect frequencies
+  theme_mosaic() +
+  theme(legend.position = "None") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1, vjust = 1))
+  
+mosaic_basic
+
+```
+
+Compared to those who are not homeless, those who are homeless had the highest proportion of  being diagnosed with schizophrenia.
+
+
+## References
+
+1.  Bower, Keith M. 2003. "When to Use Fisher's Exact Test." In *American Society for Quality, Six Sigma Forum Magazine*, 2:35--37. 4.
+2.  McCrum-Gardner, Evie. 2008. "Which Is the Correct Statistical Test to Use?" *British Journal of Oral and Maxillofacial Surgery* 46 (1): 38--41.
+3.  Wong KC. [Chi squared test versus Fisher's exact test](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5426219/). Hong Kong Med J. 2011 Oct;17(5):427
+4.  Patil, I. (2021). Visualizations with statistical details: The 'ggstatsplot' approach. Journal of Open Source Software, 6(61), 3167, doi:10.21105/joss.03167
+5.  Zach Bobbit. (2021). [Fisher's Exact Test: Definition, Formula, and Example](https://www.statology.org/fishers-exact-test/)
+
