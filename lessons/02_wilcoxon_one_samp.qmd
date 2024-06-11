@@ -16,11 +16,67 @@ The one-sample Wilcoxson Signed Rank Test is used to compare a sample proportion
 
 
 ## Mathematical definition of the Wilcoxson Signed Rank Test
-See the maths here: <https://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test>
+Let's assume that we have one sample of size $n$, $x_1, x_2, \ldots, x_n$, which cannot be approximated by a normal distribution. Because of this, we are no longer comparing $\bar{x}$ to $\mu$, but we are instead asking if the sample median is equal to a population median, $M$. For more detail, see the maths here: <https://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test>.
+
+Here are the steps to calculate this test statistic manually:
+
+1. Subtract the population median from each sample: $x^*_i := x_1 - M$
+2. Take the absolute value of the shifted samples, $|x^*_i|$.
+3. Rank these absolute values.
+4. Multiply the signs of the shifted samples by the ranks of the absolute values.
+5. Sum these products and compare them to a normal distribution with mean 0 and $\sigma^2 = \frac{1}{6}(2n+1)(n+1)n$. (We will not explain the maths here to show why this can be approximately normal, or why this is the estimated variance.)
+
+Consider a simple example: we want to ask if the number of people visiting a local clinic per hour is different from the county median of 2.9 visits per hour. Here is a small sample of simulated (non-normal) data:
+```{r}
+set.seed(123)
+
+N <- 15
+nClinicVisits <- rpois(n = N, lambda = 4)
+
+# Plot the data and visually compare to the county median.
+hist(nClinicVisits)
+abline(v = 2.9, lwd = 2, col = "red")
+```
+
+Now let's go through our steps:
+```{r}
+steps_df <- tibble::tibble(x = nClinicVisits)
+
+# 1. shift the sample by the population median
+steps_df$xStar <- steps_df$x - 2.9
+
+# 2. absolute value
+steps_df$absXStar <- abs(steps_df$xStar)
+
+# 3. ranks
+steps_df$xRank <- rank(steps_df$absXStar)
+
+# 4. signs x ranks
+steps_df$signRank <- sign(steps_df$xStar) * steps_df$xRank
+
+# Inspect our steps
+steps_df
+```
+
+Now we can calculate the Wilcoxon Signed Rank test statisic and compare it to its asymptotic $p$-value.
+```{r}
+# 5. Compare sum to normal distribution and calculate the p-value
+oneTailP <- pnorm(
+  q = sum(steps_df$signRank),
+  mean = 0,
+  sd = sqrt((2 * N + 1) * (N + 1) * N / 6)
+)
+(1 - oneTailP) / 2
+```
+
+How does this compare to the exact distribution $p$-value?
+```{r}
+wilcox.test(x = nClinicVisits, mu = 2.9)
+```
 
 
 ## Data source and description
-We will use gene-level $p$-values from the Golub and Van Loan (1999) data set from the R package `multtest::` (<https://rdrr.io/bioc/multtest/man/golub.html>); the original is a data set of data set of gene expression values for leukemia, but we have gene-specific $p$-values from a gene-level hypothesis test. We created these $p$-values in the script `R/create_golub_data_20240523.R`, *but they do not represent any real analysis results*.
+Now that we have seen how the test works, we will apply it to a real data scenario. We will use gene-level $p$-values from the Golub and Van Loan (1999) data set from the R package `multtest::` (<https://rdrr.io/bioc/multtest/man/golub.html>); the original is a data set of data set of gene expression values for leukemia, but we have gene-specific $p$-values from a gene-level hypothesis test. We created these $p$-values in the script `R/create_golub_data_20240523.R`, *but they do not represent any real analysis results*.
 ```{r}
 #| label: load-packages
 #| message: false
@@ -45,9 +101,9 @@ To use a one-sample Wilcoxson Signed Rank Test, we make the following assumption
 
 1. The data are from a random sample
 2. Each observation in the data are independent
-3. The values can be "ranked"
+3. The values can be "ranked" (this assumption gets fuzzy when you have discrete data, because it's possible to get ties or values that are exactly 0 in those cases)
 
-If these assumptions hold, then the test statistic is asymptotically normal.
+If these assumptions hold, then the test statistic is asymptotically normal. If your data has lots of zeros or equal values (which would result in tied ranks), then use this method with caution. 
 
 
 ## Checking the assumptions

@@ -35,6 +35,7 @@ book:
       chapters:
         - lessons/02_z-test_one_prop.qmd
         - lessons/02_wilcoxon_one_samp.qmd
+        - lessons/02_transformations.qmd
         - lessons_original/02_fisher_exact_test.qmd
 
     - part: 03_header_two-sample.qmd

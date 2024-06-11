@@ -444,18 +444,112 @@ window.Quarto = {
 <p>The one-sample Wilcoxson Signed Rank Test is used to compare a sample proportion to a population proportion.</p>
 </section><section id="mathematical-definition-of-the-wilcoxson-signed-rank-test" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="mathematical-definition-of-the-wilcoxson-signed-rank-test">
 <span class="header-section-number">9.2</span> Mathematical definition of the Wilcoxson Signed Rank Test</h2>
-<p>See the maths here: <a href="https://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test" class="uri">https://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test</a></p>
+<p>Let’s assume that we have one sample of size <span class="math inline">\(n\)</span>, <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span>, which cannot be approximated by a normal distribution. Because of this, we are no longer comparing <span class="math inline">\(\bar{x}\)</span> to <span class="math inline">\(\mu\)</span>, but we are instead asking if the sample median is equal to a population median, <span class="math inline">\(M\)</span>. For more detail, see the maths here: <a href="https://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test" class="uri">https://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test</a>.</p>
+<p>Here are the steps to calculate this test statistic manually:</p>
+<ol type="1">
+<li>Subtract the population median from each sample: <span class="math inline">\(x^*_i := x_1 - M\)</span>
+</li>
+<li>Take the absolute value of the shifted samples, <span class="math inline">\(|x^*_i|\)</span>.</li>
+<li>Rank these absolute values.</li>
+<li>Multiply the signs of the shifted samples by the ranks of the absolute values.</li>
+<li>Sum these products and compare them to a normal distribution with mean 0 and <span class="math inline">\(\sigma^2 = \frac{1}{6}(2n+1)(n+1)n\)</span>. (We will not explain the maths here to show why this can be approximately normal, or why this is the estimated variance.)</li>
+</ol>
+<p>Consider a simple example: we want to ask if the number of people visiting a local clinic per hour is different from the county median of 2.9 visits per hour. Here is a small sample of simulated (non-normal) data:</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">15</span></span>
+<span><span class="va">nClinicVisits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">rpois</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">N</span>, lambda <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot the data and visually compare to the county median.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">nClinicVisits</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fl">2.9</span>, lwd <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="02_wilcoxon_one_samp_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now let’s go through our steps:</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">steps_df</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">nClinicVisits</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 1. shift the sample by the population median</span></span>
+<span><span class="va">steps_df</span><span class="op">$</span><span class="va">xStar</span> <span class="op">&lt;-</span> <span class="va">steps_df</span><span class="op">$</span><span class="va">x</span> <span class="op">-</span> <span class="fl">2.9</span></span>
+<span></span>
+<span><span class="co"># 2. absolute value</span></span>
+<span><span class="va">steps_df</span><span class="op">$</span><span class="va">absXStar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">steps_df</span><span class="op">$</span><span class="va">xStar</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 3. ranks</span></span>
+<span><span class="va">steps_df</span><span class="op">$</span><span class="va">xRank</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rank.html">rank</a></span><span class="op">(</span><span class="va">steps_df</span><span class="op">$</span><span class="va">absXStar</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 4. signs x ranks</span></span>
+<span><span class="va">steps_df</span><span class="op">$</span><span class="va">signRank</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sign.html">sign</a></span><span class="op">(</span><span class="va">steps_df</span><span class="op">$</span><span class="va">xStar</span><span class="op">)</span> <span class="op">*</span> <span class="va">steps_df</span><span class="op">$</span><span class="va">xRank</span></span>
+<span></span>
+<span><span class="co"># Inspect our steps</span></span>
+<span><span class="va">steps_df</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 15 × 5
+       x  xStar absXStar xRank signRank
+   &lt;int&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+ 1     3  0.100    0.100   1.5      1.5
+ 2     6  3.1      3.1    11.5     11.5
+ 3     3  0.100    0.100   1.5      1.5
+ 4     6  3.1      3.1    11.5     11.5
+ 5     7  4.1      4.1    13.5     13.5
+ 6     1 -1.9      1.9     9       -9  
+ 7     4  1.1      1.1     6        6  
+ 8     7  4.1      4.1    13.5     13.5
+ 9     4  1.1      1.1     6        6  
+10     4  1.1      1.1     6        6  
+11     8  5.1      5.1    15       15  
+12     4  1.1      1.1     6        6  
+13     5  2.1      2.1    10       10  
+14     4  1.1      1.1     6        6  
+15     2 -0.9      0.9     3       -3  </code></pre>
+</div>
+</div>
+<p>Now we can calculate the Wilcoxon Signed Rank test statisic and compare it to its asymptotic <span class="math inline">\(p\)</span>-value.</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 5. Compare sum to normal distribution and calculate the p-value</span></span>
+<span><span class="va">oneTailP</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span></span>
+<span>  q <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">steps_df</span><span class="op">$</span><span class="va">signRank</span><span class="op">)</span>,</span>
+<span>  mean <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">N</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="va">N</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="va">N</span> <span class="op">/</span> <span class="fl">6</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">oneTailP</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.001601623</code></pre>
+</div>
+</div>
+<p>How does this compare to the exact distribution <span class="math inline">\(p\)</span>-value?</p>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">nClinicVisits</span>, mu <span class="op">=</span> <span class="fl">2.9</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in wilcox.test.default(x = nClinicVisits, mu = 2.9): cannot compute
+exact p-value with ties</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon signed rank test with continuity correction
+
+data:  nClinicVisits
+V = 108, p-value = 0.00672
+alternative hypothesis: true location is not equal to 2.9</code></pre>
+</div>
+</div>
 </section><section id="data-source-and-description" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="data-source-and-description">
 <span class="header-section-number">9.3</span> Data source and description</h2>
-<p>We will use gene-level <span class="math inline">\(p\)</span>-values from the Golub and Van Loan (1999) data set from the R package <code>multtest::</code> (<a href="https://rdrr.io/bioc/multtest/man/golub.html" class="uri">https://rdrr.io/bioc/multtest/man/golub.html</a>); the original is a data set of data set of gene expression values for leukemia, but we have gene-specific <span class="math inline">\(p\)</span>-values from a gene-level hypothesis test. We created these <span class="math inline">\(p\)</span>-values in the script <code>R/create_golub_data_20240523.R</code>, <em>but they do not represent any real analysis results</em>.</p>
+<p>Now that we have seen how the test works, we will apply it to a real data scenario. We will use gene-level <span class="math inline">\(p\)</span>-values from the Golub and Van Loan (1999) data set from the R package <code>multtest::</code> (<a href="https://rdrr.io/bioc/multtest/man/golub.html" class="uri">https://rdrr.io/bioc/multtest/man/golub.html</a>); the original is a data set of data set of gene expression values for leukemia, but we have gene-specific <span class="math inline">\(p\)</span>-values from a gene-level hypothesis test. We created these <span class="math inline">\(p\)</span>-values in the script <code>R/create_golub_data_20240523.R</code>, <em>but they do not represent any real analysis results</em>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="cleaning-the-data-to-create-a-model-data-frame" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="cleaning-the-data-to-create-a-model-data-frame">
 <span class="header-section-number">9.4</span> Cleaning the data to create a model data frame</h2>
 <p>Because our method requires only one sample, we have very little work to do. We import the data set of <span class="math inline">\(p\)</span>-values.</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">golub_pVals_num</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"../data/02_golub_pVals_20240523.rds"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">golub_pVals_num</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"../data/02_golub_pVals_20240523.rds"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>There are 3051 <span class="math inline">\(p\)</span>-values. The null hypothesis would be that there is no statistically significant effects in the data, so the distribution of these <span class="math inline">\(p\)</span>-values should be a Uniform distribution. Our hypothesis is that the population mean is then 0.5 (the average value of a Uniform distribution).</p>
 </section><section id="assumptions-of-the-wilcoxson-signed-rank-test" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="assumptions-of-the-wilcoxson-signed-rank-test">
@@ -473,7 +567,7 @@ window.Quarto = {
 <span class="header-section-number">9.6.1</span> Independence and Randomness</h3>
 <p>These are gene-level <span class="math inline">\(p\)</span>-values, so we do not have “independence”. However, because this is a pedagogical example, we will take a random sample of these genes to test (and this random sample should be independent enough, but we have no guarantee of this).</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Create random sample of genes to test</span></span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Create random sample of genes to test</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">20150516</span><span class="op">)</span></span>
 <span><span class="va">gene_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="va">golub_pVals_num</span>,</span>
@@ -483,7 +577,7 @@ window.Quarto = {
 </div>
 <p>What does the data distribution look like?</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">gene_sample</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">gene_sample</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="02_wilcoxon_one_samp_files/figure-html/sample-hist-1.png" class="img-fluid figure-img" width="672"></p>
@@ -499,7 +593,7 @@ window.Quarto = {
 <span class="header-section-number">9.7</span> Code to run a Wilcoxson Signed Rank Test</h2>
 <p>Now that we have checked our assumptions, we can perform the Wilcoxson Signed Rank Test on random samples of the genes to test if they have an average value of 0.5.</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="va">gene_sample</span>,</span>
 <span>  mu <span class="op">=</span> <span class="fl">0.5</span>, <span class="co"># average from all theoretical p-values under H0</span></span>
 <span>  alternative <span class="op">=</span> <span class="st">"less"</span> <span class="co"># H1: random p-values &lt; 0.5</span></span>

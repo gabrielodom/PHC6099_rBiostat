@@ -1,0 +1,539 @@
+---
+title: "Transformations to Normality"
+author: 
+  - name: "Freeman Lewis, MPH"
+    affiliation: "Florida International University Robert Stempel College of Public Health and Social Work"
+  - name: "Gabriel Odom"
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+---
+
+
+
+## Introduction
+
+The pattern of values obtained when a variable is measured in a large number of individuals is called a distribution. Distributions can be broadly classified as normal and non-normal. The normal distribution is also called ‘Gaussian distribution’ as it was first described by K.F. Gauss. This chapter outlines the process of transforming data to achieve a normal distribution in R. Parametric methods, such as t-tests and ANOVA, require that the dependent (outcome) variable is approximately normally distributed within each group being compared. When the normality assumption is not satisfied, transforming the data can correct the non-normal distributions. For t-tests and ANOVA, it is sufficient to transform the dependent variable. However, for linear regression, transformations may be applied to the independent variable, the dependent variable, or both to achieve a linear relationship between variables and ensure homoscedasticity.
+
+Here are the libraries we will use for this material:
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+
+library(ggplot2)
+library(gridExtra)
+library(GGally)
+library(moments)
+library(knitr)
+library(MASS)
+```
+
+
+
+## When to Apply Transformations to Normality
+
+One of the critical assumptions of statistical hypothesis testing is that the data are samples from a normal distribution. Therefore, it is essential to identify whether distributions are skewed or normal. There are several straightforward methods to detect skewness. Firstly, if the mean is less than twice the standard deviation, the distribution is likely skewed. Additionally, in a normally distributed population, the mean and standard deviation of the samples are independent. This characteristic can be used to detect skewness; if the standard deviation increases as the mean increases across groups from a population, the distribution is skewed. Beyond these simple methods, normality can be verified using statistical tests such as the Shapiro-Wilk test, the Kolmogorov-Smirnov test, and the Anderson-Darling test. Additionally, the `moments` package in R can be used to calculate skewness quantitatively. The skewness is determined using the third standardized moment, providing a measure of the asymmetry of the data distribution. If skewness is identified, efforts should be made to transform the data to achieve a normal distribution. This transformation is crucial for applying robust parametric tests in the analysis.
+
+Transformations can also be employed to facilitate comparison and interpretation. A classical example of a variable commonly reported after logarithmic transformation is the hydrogen ion concentration (pH). Another instance where transformation aids in data comparison is the logarithmic transformation of a dose-response curve. When plotted, the dose-response relationship is curvilinear; however, plotting the response against the logarithm of the dose (log dose-response plot) results in an elongated S-shaped curve. The middle portion of this curve forms a straight line, making it easier to compare two straight lines by measuring their slopes than to compare two curves. Thus, transformation can significantly enhance data comparison.
+
+In summary, transformations can be applied to normalize data distribution or to simplify interpretation and comparison.
+
+
+
+## Types of Transformations to Normality
+
+Often, the transformation that normalizes the distribution also equalizes the variance. While there are several types of transformations available, such as logarithmic, square root, reciprocal, cube root, and Box-Cox, the first three are the most commonly used. Among the transformations discussed in this section, the logarithmic transformation is the most often used. The following guidelines can help in selecting the appropriate method of transformation:
+
+
+### Logarithmic Transformation
+If the standard deviation is proportional to the mean, the distribution is positively skewed, making logarithmic transformation ideal. Note that when using a log transformation, a constant should be added to all values to ensure they are positive before transformation. The log tranformation is 
+$$
+y' = \log(y + c),
+$$
+where $y$ is the original value and $c$ is a constant added to ensure all values are positive.
+    
+<div style="display: flex; justify-content: center;">
+
+```{r}
+#| label: log_transform_histogram
+#| echo: false
+#| warning: false
+#| message: false
+
+set.seed(123)
+
+
+###  Original data histogram  ###
+# Generate data from a log-normal distribution
+lNormSamp_num <- rlnorm(1000, meanlog = 0, sdlog = 1)
+
+original_gg <- 
+  ggplot(data.frame(x = lNormSamp_num)) +
+  aes(x = x) +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 12, hjust = 0.5)) +
+  labs(
+    title = "Original Data (Right-Skewed)",
+    x = "Value",
+    y = "Frequency"
+  ) +
+  geom_histogram(binwidth = 0.5, fill = "blue", color = "black")
+
+
+###  Log-transformed data histogram  ###
+# Log transform the log-normal data
+lNormSampTr_num <- log(lNormSamp_num) 
+
+transformed_gg <- 
+  ggplot(data.frame(x = lNormSampTr_num)) + 
+  aes(x = x) +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 12, hjust = 0.5)) +
+  labs(
+    title = "Log-Transformed (Normalized)",
+    x = "Log(Value)",
+    y = "Frequency"
+  ) +
+  geom_histogram(binwidth = 0.2, fill = "blue", color = "black")
+
+
+# Arrange plots side by side
+grid.arrange(original_gg, transformed_gg, ncol = 2)
+```
+</div>
+
+
+### Square Root Transformation
+When the variance is proportional to the mean, square root transformation is preferred. This is particularly applicable to variables measured as counts, such as the number of malignant cells in a microscopic field or the number of deaths from swine flu. The square root transformation is:
+$$
+y' = \sqrt{y}.
+$$
+    
+<div style="display: flex; justify-content: center;">
+```{r}
+#| label: sqrt_transform_histogram
+#| echo: false
+#| warning: false
+#| message: false
+
+
+###  Original data histogram  ###
+# Generate data from a chi-squared distribution
+chiSqSamp_num <- rchisq(1000, df = 4) 
+
+original_gg <- 
+  ggplot(data.frame(x = chiSqSamp_num)) +
+  aes(x = x) +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 12, hjust = 0.5)) +
+  labs(
+    title = "Original Data (Right-Skewed)",
+    x = "Value",
+    y = "Frequency"
+  ) +
+  geom_histogram(binwidth = 1, fill = "blue", color = "black")
+
+
+###  Square-Root-transformed data histogram  ###
+# Square root transform the chi-squared data
+chiSqSampTr_num <- sqrt(chiSqSamp_num) 
+
+transformed_gg <- 
+  ggplot(data.frame(x = chiSqSampTr_num)) + 
+  aes(x = x) +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 12, hjust = 0.5)) +
+  labs(
+    title = "Square Root Transformed (Normalized)",
+    x = "Square Root(Value)",
+    y = "Frequency"
+  ) +
+  geom_histogram(binwidth = 0.5, fill = "blue", color = "black")
+
+
+# Arrange plots side by side
+grid.arrange(original_gg, transformed_gg, ncol = 2)
+```
+</div>
+
+
+### Arithmetic Reciprocal Transformation
+If the observations are truncated on the right (such as often the case for academic grade distributions), then one preliminary transformation is to "reverse" the values by subtracting each value from the maximum of all observed values (or from the maximum possible value for observations on a defined scale). This operation "flips" the data distribution from having a heavy left tail to having a heavy right tail, which allows us to perform a secondary transformation (such as a log or square root). This transformation is:
+$$
+y' = \max(y) - y.
+$$
+
+```{r}
+#| label: arith_recip_transform_histogram
+#| echo: false
+#| warning: false
+#| message: false
+
+
+###  Original data histogram  ###
+# Generate data from a beta distribution
+betaSamp_num <- 4 * rbeta(1000, shape1 = 15, shape2 = 1.1) 
+
+original_gg <- 
+  ggplot(data.frame(x = betaSamp_num)) +
+  aes(x = x) +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 12, hjust = 0.5)) +
+  labs(
+    title = "Original Data (Left-Skewed)",
+    x = "Value",
+    y = "Frequency"
+  ) +
+  geom_histogram(binwidth = 0.1, fill = "blue", color = "black")
+
+
+###  Arithmetic-Inverse-transformed data histogram  ###
+# Square root transform the chi-squared data
+betaSampTr_num <- max(betaSamp_num) - betaSamp_num
+
+transformed_gg <- 
+  ggplot(data.frame(x = betaSampTr_num)) + 
+  aes(x = x) +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 12, hjust = 0.5)) +
+  labs(
+    title = "Arithmetic Inverse Transformed",
+    x = "Max(Value) - Value",
+    y = "Frequency"
+  ) +
+  geom_histogram(binwidth = 0.1, fill = "blue", color = "black")
+
+# Arrange plots side by side
+grid.arrange(original_gg, transformed_gg, ncol = 2)
+```
+
+**NOTE: now that the data are right-skewed, other transformations can be applied as usual.**
+
+
+### Geometric Reciprocal Transformation
+If the standard deviation is proportional to the mean squared, a reciprocal transformation is appropriate. This is typically used for highly variable quantities, such as serum creatinine levels. Note that this transformation requires all values to be positive or all values to be negative before applying it.
+$$
+y' = \frac{1}{y \pm c},
+$$
+where $y$ is the original value and $c$ is a constant added (subtracted) to ensure all values are positive (negative).
+   
+<div style="display: flex; justify-content: center;">
+```{r}
+#| label: geom_recip_transform_histogram
+#| echo: false
+#| warning: false
+#| message: false
+
+
+###  Original data histogram  ###
+# Generate data from a negatively skewed distribution
+normSamp_num <- rnorm(1000, mean = 10, sd = 2)
+invNormSamp_num <- 1 / normSamp_num
+
+original_gg <- 
+  ggplot(data.frame(x = invNormSamp_num)) +
+  aes(x = x) +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 12, hjust = 0.5)) +
+  labs(
+    title = "Original Data (Right-Skewed)",
+    x = "Value",
+    y = "Frequency"
+  ) +
+  geom_histogram(binwidth = 0.01, fill = "blue", color = "black")
+
+
+###  Geometric-Inverse-transformed data histogram  ###
+
+transformed_gg <- 
+  ggplot(data.frame(x = 1 / invNormSamp_num)) + 
+  aes(x = x) +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 12, hjust = 0.5)) +
+  labs(
+    title = "Geometric Reciprocal Transformed",
+    x = "1 / Value",
+    y = "Frequency"
+  ) +
+  geom_histogram(binwidth = 0.5, fill = "blue", color = "black")
+
+# Arrange plots side by side
+grid.arrange(original_gg, transformed_gg, ncol = 2)
+```
+</div>
+
+
+### Box-Cox Transformation
+The Box-Cox transformation is a family of power transformations that can be used to stabilize variance and make the data more closely conform to a normal distribution, especially when the best power transformation (e.g., square root, logarithmic) is uncertain. By estimating an optimal parameter $\lambda$ from the data, the Box-Cox transformation tailors the transformation to the specific dataset's needs. The transformation is defined as:
+
+$$
+y(\lambda) = \begin{cases} 
+  \frac{y^\lambda - 1}{\lambda} & \text{if } \lambda \neq 0 \\
+  \log(y) & \text{if } \lambda = 0 
+\end{cases}
+$$
+Here, $\lambda$ is a parameter that is estimated from the data. The Box-Cox transformation is particularly useful because it includes many of the other transformations (such as the logarithmic and square root transformations) as special cases.
+
+<div style="display: flex; justify-content: center;">
+```{r}
+#| label: boxcox_transform_histogram
+#| echo: false
+#| warning: false
+#| message: false
+
+
+###  Original data histogram  ###
+# Generate data from a gamma distribution
+gammaSamp_num <- rgamma(1000, shape = 2, scale = 2) 
+
+original_gg <- 
+  ggplot(data.frame(x = gammaSamp_num)) +
+  aes(x = x) +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 12, hjust = 0.5)) +
+  labs(
+    title = "Original Data (Right-Skewed)",
+    x = "Value",
+    y = "Frequency"
+  ) +
+  geom_histogram(binwidth = 1, fill = "blue", color = "black")
+
+
+###  Perform Box-Cox transformation  ###
+sampBoxCox_ls <- boxcox(
+  gammaSamp_num ~ 1,
+  lambda = seq(-5, 5, by = 0.1)
+)
+lambda_opt <- sampBoxCox_ls$x[which.max(sampBoxCox_ls$y)]
+gammaSampBoxCox_num <- (gammaSamp_num ^ lambda_opt - 1) / lambda_opt
+
+
+###  BoxCox-transformed data histogram  ###
+transformed_gg <- 
+  ggplot(data.frame(x = gammaSampBoxCox_num)) + 
+  aes(x = x) +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 12, hjust = 0.5)) +
+  labs(
+    title = "Box-Cox Transformed (Normalized)",
+    x = "(Value^L* - 1) / L*",
+    y = "Frequency"
+  ) +
+  geom_histogram(binwidth = 0.5, fill = "blue", color = "black")
+
+# Arrange plots side by side
+grid.arrange(original_gg, transformed_gg, ncol = 2)
+```
+</div>
+
+
+
+## Examples of Transformations to Normality
+
+
+### Data Source and Description
+The `USJudgeRatings` dataset is a built-in dataset in R that contains ratings of 43 judges in the US Superior Court. The ratings are based on the evaluations from lawyers who have had cases before these judges. The dataset includes multiple variables that represent different aspects of the judges' performance.
+
+#### Variables in the Dataset
+
+- `CONT`: Judicial "controlling" or authoritative nature.
+- `INTG`: Judicial integrity.
+- `DMNR`: Judicial demeanor.
+- `DILG`: Judicial diligence.
+- `CFMG`: Case flow management.
+- `DECI`: Judicial decision-making.
+- `PREP`: Judicial preparation.
+- `FAMI`: Familiarity with the law.
+- `ORAL`: Oral skills.
+- `WRIT`: Written skills.
+- `PHYS`: Physical ability.
+- `RTEN`: Willingness to follow trends.
+
+This dataset is useful for analyzing various performance metrics of judges and can be used to explore relationships between different aspects of judicial performance. In the following examples, we’ll consider two variables:
+
+- `CONT`: Number of contacts of lawyer with judge. Positively skewed.
+- `PHYS`: Physical ability. Negatively skewed
+
+
+### Loading the Data
+```{r load-data, echo=TRUE}
+
+# Load the USJudgeRatings dataset
+data("USJudgeRatings")
+df <- USJudgeRatings
+
+# Display the first few rows of the dataset
+head(df)
+```
+
+
+### Visualizations of `CONT` and `PHYS` Variables
+```{r}
+#| label: fig-plot-cont
+#| fig-cap: "Distribution of CONT Variable"
+
+ggplot(df) + 
+  aes(x = CONT) + 
+  scale_x_continuous(limits = c(3, 12))+
+  labs(title = "Density Plot of CONT", x = "CONT", y = "Density") +
+  geom_density(fill = "lightgray") +
+  stat_function(
+    fun = dnorm,
+    args = list(mean = mean(df$CONT), sd = sd(df$CONT)),
+    color = "red",
+    linetype = "dashed"
+  ) 
+```
+
+```{r}
+#| label: fig-plot-phys
+#| fig-cap: "Distribution of PHYS Variable"
+
+ggplot(df) +
+  aes(x = PHYS) + 
+  scale_x_continuous(limits = c(3, 12)) +
+  labs(title = "Density Plot of PHYS", x = "PHYS", y = "Density") +
+  geom_density(fill = "lightgray") +
+  stat_function(
+    fun = dnorm,
+    args = list(mean = mean(df$PHYS), sd = sd(df$PHYS)),
+    color = "red",
+    linetype = "dashed"
+  )
+```
+
+
+### Summary Statistics for `CONT` and `PHYS` Variables
+```{r}
+#| label: tbl-summary-stats
+#| tbl-cap: "Summary Statistics for CONT and PHYS Variables"
+
+# Get the summary statistics for CONT and PHYS variables; note that the
+#   summary() function returns a named numeric vector, so to preserve the names
+#   we transform this vector to a matrix first (before creating the data frame).
+summary_df <- data.frame(
+  CONT = as.matrix(summary(df$CONT)),
+  PHYS = as.matrix(summary(df$PHYS))
+)
+
+# Display summary statistics as a table
+kable(summary_df)
+```
+
+
+### Skewness and Kurtosis for `CONT` and `PHYS` Variables
+```{r}
+#| label: tbl-skewness-kurtosis
+#| tbl-cap: "Skewness and Kurtosis for CONT and PHYS Variables"
+
+# Calculate skewness and kurtosis for CONT and PHYS variables with moments:: 
+skewness_vals <- sapply(df[, c("CONT", "PHYS")], moments::skewness)
+kurtosis_vals <- sapply(df[, c("CONT", "PHYS")], moments::kurtosis)
+
+# Create a data frame to display skewness and kurtosis
+skew_kurt_df <- data.frame(
+  Skewness = skewness_vals,
+  Kurtosis = kurtosis_vals
+)
+
+# Display the data frame as a table
+kable(skew_kurt_df)
+```
+
+
+### Visualizations of Transformed `CONT` and `PHYS` Variables
+We will first apply a natural log transformation to the "controlling/authoritarian" variable.
+```{r}
+#| label: fig-plot-transformed-cont
+#| fig-cap: "Distribution of log transformed CONT Variable"
+
+# Apply log transformation to CONT variable
+df$LOG_CONT <- log(df$CONT)
+
+# Plot density of log-transformed CONT variable
+ggplot(df) + 
+  aes(x = LOG_CONT) +
+  geom_density(fill = "lightgray") +
+  labs(
+    title = "Density Plot of Log-Transformed CONT",
+    x = "Log-Transformed CONT",
+    y = "Density"
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(mean = mean(df$LOG_CONT), sd = sd(df$LOG_CONT)),
+    color = "red",
+    linetype = "dashed"
+  )
+```
+
+Now we will apply a Box-Cox transformation to the "physical ability" variable.
+```{r}
+#| label: fig-plot-boxcox-lambda-phys
+#| fig-cap: "Distribution of optimal lambda determined by the `boxcox` function"
+
+# Apply Box-Cox transformation to PHYS using MASS:: package
+bc <- MASS::boxcox(df$PHYS ~ 1, lambda = seq(-5, 5, 0.1), plotit = TRUE)
+lambda <- bc$x[which.max(bc$y)]
+df$BOX_COX_PHYS <- (df$PHYS^lambda - 1) / lambda
+```
+
+```{r}
+#| label: fig-plot-boxcox-phys
+#| fig-cap: "Distribution of Box-Cox transformed PHYS Variable"
+
+# Plot density of Box-Cox transformed PHYS variable
+ggplot(df) +
+  aes(x = BOX_COX_PHYS) +
+  labs(
+    title = "Density Plot of Box-Cox Transformed PHYS",
+    x = "Box-Cox Transformed PHYS",
+    y = "Density"
+  ) + 
+  geom_density(fill = "lightgray") +
+  stat_function(
+    fun = dnorm,
+    args = list(mean = mean(df$BOX_COX_PHYS), sd = sd(df$BOX_COX_PHYS)),
+    color = "red",
+    linetype = "dashed"
+  )
+```
+
+
+### Skewness and Kurtosis for Transformed `CONT` and `PHYS` Variables
+```{r}
+#| label: tbl-skewness-kurtosis_transformed
+#| tbl-cap: "Skewness and Kurtosis for Transformed Variables (LOG_CONT and BOX_COX_PHYS)"
+
+# Calculate skewness and kurtosis for transformed variables
+skewness_vals_trans <- sapply(df[, c("LOG_CONT", "BOX_COX_PHYS")], skewness)
+kurtosis_vals_trans <- sapply(df[, c("LOG_CONT", "BOX_COX_PHYS")], kurtosis)
+
+# Create a data frame to display skewness and kurtosis for transformed variables
+skew_kurt_df_trans <- data.frame(
+  Skewness = skewness_vals_trans,
+  Kurtosis = kurtosis_vals_trans
+)
+
+# Display the data frame as a table
+kable(skew_kurt_df_trans)
+```
+
+
+## Results
+
+The application of log and Box-Cox transformations has effectively improved the normality of the `CONT` and `PHYS` variables, respectively. For the `CONT` variable, the original distribution exhibited a positive skewness of 1.086 and a kurtosis of 4.730, indicating a right-skewed distribution with heavy tails and a sharp peak. The log transformation reduced the skewness to 0.656 and the kurtosis to 3.758, demonstrating a significant move towards normality, though the distribution still retains some right-skewness and heavier tails compared to a normal distribution. The `PHYS` variable originally had a negative skewness of -1.558 and a kurtosis of 5.408, reflecting a left-skewed distribution with heavy tails and a pronounced peak. Following the Box-Cox transformation, the skewness was reduced to -0.381 and the kurtosis to 2.502. These results indicate that the transformed `PHYS` distribution is much closer to normality, with reduced skewness and lighter tails, achieving a more symmetric distribution. In summary, the transformations have substantially mitigated the skewness and kurtosis of both variables, enhancing their suitability for statistical analyses that assume normality. This adjustment ensures more reliable and valid results in subsequent analyses.
+
+
+## Conclusion and Discussion
+
+The transformations applied to the CONT and PHYS variables demonstrate the effectiveness of data transformation techniques in improving the normality of distributions. By addressing skewness and kurtosis, transformations like the log and Box-Cox methods help in stabilizing variance and making data more symmetric. This enhancement is crucial for statistical analyses that rely on the assumption of normality, ensuring more accurate and reliable results. Overall, the use of appropriate transformations is a vital step in data preprocessing, significantly enhancing the suitability of data for various analytical procedures and improving the robustness of statistical inferences. However, caution is warranted in the interpretation of results after transformation. Transformed data can sometimes complicate the understanding of results and their real-world implications, as the transformed scale may not directly relate to the original measurements. It is essential to back-transform results when interpreting findings to ensure they are meaningful and relevant to the original context.
+
+
+## References
+
+1.  Manikandan S. (2010). Data transformation. *Journal of pharmacology & pharmacotherapeutics*, *1*(2), 126–127. https://doi.org/10.4103/0976-500X.72373
+2.  West R. M. (2022). Best practice in statistics: The use of log transformation. *Annals of clinical biochemistry*, *59*(3), 162–165. https://doi.org/10.1177/00045632211050531
+3.  Lee D. K. (2020). Data transformation: a focus on the interpretation. *Korean journal of anesthesiology*, *73*(6), 503–508. https://doi.org/10.4097/kja.20137

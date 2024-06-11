@@ -393,7 +393,7 @@ window.Quarto = {
   <li><a href="#introduction-to-mosaic-and-boxviolin-plots" id="toc-introduction-to-mosaic-and-boxviolin-plots" class="nav-link" data-scroll-target="#introduction-to-mosaic-and-boxviolin-plots"><span class="header-section-number">3.2</span> Introduction to Mosaic and Box/Violin Plots</a></li>
   <li><a href="#data-source-and-description" id="toc-data-source-and-description" class="nav-link" data-scroll-target="#data-source-and-description"><span class="header-section-number">3.3</span> Data Source and Description</a></li>
   <li><a href="#cleaning-the-data-to-create-a-model-data-frame" id="toc-cleaning-the-data-to-create-a-model-data-frame" class="nav-link" data-scroll-target="#cleaning-the-data-to-create-a-model-data-frame"><span class="header-section-number">3.4</span> Cleaning the Data to Create a Model Data Frame</a></li>
-  <li><a href="#assumptions-with-plots" id="toc-assumptions-with-plots" class="nav-link" data-scroll-target="#assumptions-with-plots"><span class="header-section-number">3.5</span> Assumptions with Plots</a></li>
+  <li><a href="#assumptions-with-mosaic-boxviolin-plots" id="toc-assumptions-with-mosaic-boxviolin-plots" class="nav-link" data-scroll-target="#assumptions-with-mosaic-boxviolin-plots"><span class="header-section-number">3.5</span> Assumptions with Mosaic &amp; Box/Violin Plots</a></li>
   <li>
 <a href="#code-to-run-mosaic-boxviolin-plots-output" id="toc-code-to-run-mosaic-boxviolin-plots-output" class="nav-link" data-scroll-target="#code-to-run-mosaic-boxviolin-plots-output"><span class="header-section-number">3.6</span> Code to Run Mosaic &amp; Box/Violin Plots &amp; output</a>
   <ul class="collapse">
@@ -478,8 +478,8 @@ window.Quarto = {
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">everybody</span>, by <span class="op">=</span> <span class="st">"who"</span><span class="op">)</span>  <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">age</span>, <span class="va">race</span>, <span class="va">project</span>, <span class="va">is_male</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="assumptions-with-plots" class="level2" data-number="3.5"><h2 data-number="3.5" class="anchored" data-anchor-id="assumptions-with-plots">
-<span class="header-section-number">3.5</span> Assumptions with Plots</h2>
+</section><section id="assumptions-with-mosaic-boxviolin-plots" class="level2" data-number="3.5"><h2 data-number="3.5" class="anchored" data-anchor-id="assumptions-with-mosaic-boxviolin-plots">
+<span class="header-section-number">3.5</span> Assumptions with Mosaic &amp; Box/Violin Plots</h2>
 <p>In mosaic plots, two categorical variables are plotted along the horizontal (x) and vertical (y) axis. Each combination of categories forms a rectangle or tile within the plot.</p>
 <p>In box and violin plots, a categorical variable is plotted along the horizontal or x-axis, while a continuous variable is plotted along the vertical or y-axis. Violin plots can be limiting if symmetry, skew, or other shape and variability characteristics are different between groups because precise comparison cannot be easily interpreted between density curves. For this reason, violin plots are typically rendered with another overlaid chart type, like box plot quartiles.</p>
 </section><section id="code-to-run-mosaic-boxviolin-plots-output" class="level2" data-number="3.6"><h2 data-number="3.6" class="anchored" data-anchor-id="code-to-run-mosaic-boxviolin-plots-output">
@@ -549,9 +549,13 @@ window.Quarto = {
 <span>  </span>
 <span><span class="va">mosaic_basic</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="01_mosaic_violin_files/figure-html/figure-mosaic-basic-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div id="fig-mosaic-basic" class="quarto-figure quarto-figure-center quarto-float anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-mosaic-basic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="01_mosaic_violin_files/figure-html/fig-mosaic-basic-1.png" id="fig-mosaic-basic" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-mosaic-basic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -585,9 +589,13 @@ window.Quarto = {
 <span>  </span>
 <span><span class="va">mosaic_advanced</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="01_mosaic_violin_files/figure-html/figure-mosaic-advanced-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div id="fig-mosaic-advanced" class="quarto-figure quarto-figure-center quarto-float anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-mosaic-advanced-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="01_mosaic_violin_files/figure-html/fig-mosaic-advanced-1.png" id="fig-mosaic-advanced" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-mosaic-advanced-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.2
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -647,15 +655,19 @@ window.Quarto = {
 <span></span>
 <span><span class="va">box_basic</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="01_mosaic_violin_files/figure-html/figure-box-basic-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div id="fig-box-basic" class="quarto-figure quarto-figure-center quarto-float anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-box-basic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="01_mosaic_violin_files/figure-html/fig-box-basic-1.png" id="fig-box-basic" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-box-basic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.3
+</figcaption></figure>
 </div>
 </div>
 </div>
 </section><section id="more-advanced-box-plot" class="level4" data-number="3.6.2.2"><h4 data-number="3.6.2.2" class="anchored" data-anchor-id="more-advanced-box-plot">
 <span class="header-section-number">3.6.2.2</span> More Advanced Box Plot</h4>
-<p>With <code>geom_box()</code>, you can also specify a additional categorical variable (different from you x and y variables) to break up your plot by that variable. For example, the following plot takes the previous plot of <code>race</code> and <code>age</code> and adds information by gender (<code>is_male</code>)</p>
+<p>With <code>geom_box()</code>, you can also specify a additional categorical variable (different from your x and y variables) to break up your plot by that variable. For example, the following plot takes the previous plot of <code>race</code> and <code>age</code> and adds information side-by-side by gender (<code>is_male</code>).</p>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Box Plot</span></span>
 <span><span class="va">box_advanced</span> <span class="op">&lt;-</span> <span class="va">demographics_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -677,15 +689,19 @@ window.Quarto = {
 <span></span>
 <span><span class="va">box_advanced</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="01_mosaic_violin_files/figure-html/figure-box-advanced-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div id="fig-box-advanced" class="quarto-figure quarto-figure-center quarto-float anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-box-advanced-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="01_mosaic_violin_files/figure-html/fig-box-advanced-1.png" id="fig-box-advanced" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-box-advanced-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.4
+</figcaption></figure>
 </div>
 </div>
 </div>
 </section></section><section id="violin-plot" class="level3" data-number="3.6.3"><h3 data-number="3.6.3" class="anchored" data-anchor-id="violin-plot">
 <span class="header-section-number">3.6.3</span> Violin Plot</h3>
-<p>In order to create a Violin plot, you must specify what data object you will be using within the <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> function. Then you will set aesthetic mapping options within the <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code> or aesthetic layer. The <code><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin()</a></code> layer specifies the violin plot. An additional call for <code><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot()</a></code> will overlay box quartiles on the violin plot.</p>
+<p>In order to create a Violin plot, you must specify what data object you will be using within the <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> function. Then you will set aesthetic mapping options within the <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code> or aesthetic layer. The <code><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin()</a></code> layer specifies the violin plot. An additional call for <code><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot()</a></code> will overlay box quartiles on the violin plot to display summary statistics.</p>
 <p>The following aesthetics are understood by <code><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin()</a></code>:</p>
 <ol type="1">
 <li>
@@ -712,6 +728,9 @@ window.Quarto = {
 <span><span class="va">violin_basic</span> <span class="op">&lt;-</span> <span class="va">demographics_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">race</span>, y <span class="op">=</span> <span class="va">age</span>, color <span class="op">=</span> <span class="va">race</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span></span>
+<span>    values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"coral1"</span>, <span class="st">"darkgreen"</span>, <span class="st">"deepskyblue2"</span>, <span class="st">"darkorchid2"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
 <span>    x <span class="op">=</span> <span class="st">"Race"</span>,</span>
 <span>    y <span class="op">=</span> <span class="st">"Age"</span>,</span>
@@ -725,9 +744,13 @@ window.Quarto = {
 <span></span>
 <span><span class="va">violin_basic</span>                        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="01_mosaic_violin_files/figure-html/figure-violin-basic-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div id="fig-violin" class="quarto-figure quarto-figure-center quarto-float anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-violin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="01_mosaic_violin_files/figure-html/fig-violin-1.png" id="fig-violin" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-violin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.5
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -746,12 +769,14 @@ window.Quarto = {
 <li>Participants who indicated that their race is ‘White’ exhibited the lowest median age at approximately 31 years old.</li>
 </ul></section><section id="violin-plot-1" class="level3" data-number="3.7.3"><h3 data-number="3.7.3" class="anchored" data-anchor-id="violin-plot-1">
 <span class="header-section-number">3.7.3</span> Violin Plot</h3>
+<p>This plot more clearly shows the bimodality of age by race among Black and ‘Other’ participants in CTN. It also shows the skewness of age in the White participants. Specifically:</p>
 <ul>
 <li>Participants who indicated that their race is ‘White’ exhibited peak density around mid-20s compared to those who indicated that their race is ‘Black’, where peak density is exhibited around late-40s.</li>
 <li>Participants who indicated that their race is ‘White’ had the lowest median age at approximately 31 years old, where participants who indicated that their race is ‘Black’ had the highest median age at approximately 45 years old.</li>
 </ul></section></section><section id="conclusion" class="level2" data-number="3.8"><h2 data-number="3.8" class="anchored" data-anchor-id="conclusion">
 <span class="header-section-number">3.8</span> Conclusion</h2>
-<p>Going to update this</p>
+<p>This lesson discusses three different plots for one-dimensional data: the Mosaic, Box, and Violin plots. <a href="#fig-mosaic-basic" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> is a basic mosaic plots that shows race by CTN project. In <a href="#fig-mosaic-advanced" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>, we added a third variable to the visualization: gender. The box plots, <a href="#fig-box-basic" class="quarto-xref">Figure&nbsp;<span>3.3</span></a> and <a href="#fig-box-advanced" class="quarto-xref">Figure&nbsp;<span>3.4</span></a> we plotted age (continuous) by race and age by race and gender, respectively. Finally, <a href="#fig-violin" class="quarto-xref">Figure&nbsp;<span>3.5</span></a> shows a violin plot with an overlaid box plot for age by race in the CTN projects.</p>
+<p>Mosaic plots are useful for proportionally visualizing the observations of two or more categorical variables. Box and violin plots can be used to visualize a continuous variable by one, or two in the case of box plots, categorical variables. Violin plots build on box plots in that they are able to provide quick information on the potential multimodal distribution(s) and skewness of a continuous variable across categories, as we saw in <a href="#fig-violin" class="quarto-xref">Figure&nbsp;<span>3.5</span></a>.</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
