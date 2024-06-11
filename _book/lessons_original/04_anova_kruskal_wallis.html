@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Gabriel Odom">
-<meta name="dcterms.date" content="2024-05-28">
+<meta name="dcterms.date" content="2024-06-11">
 
-<title>An R Cookbook for Public Health - 16&nbsp; Non-Parametric ANOVA: The Kruskal-Wallis Test</title>
+<title>An R Cookbook for Public Health - 17&nbsp; Non-Parametric ANOVA: The Kruskal-Wallis Test</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -146,7 +146,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_anova_kruskal_wallis.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_anova_kruskal_wallis.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -255,8 +255,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons_original/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -273,25 +279,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -308,43 +314,43 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -361,7 +367,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -378,7 +384,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
   </div>
 </li>
       </ul>
@@ -395,7 +401,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -410,24 +416,24 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">16.1</span> Introduction</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">17.1</span> Introduction</a>
   <ul class="collapse">
-  <li><a href="#mathematical-equation" id="toc-mathematical-equation" class="nav-link" data-scroll-target="#mathematical-equation"><span class="header-section-number">16.1.1</span> Mathematical Equation</a></li>
-  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">16.1.2</span> Assumptions</a></li>
-  <li><a href="#hypothesis" id="toc-hypothesis" class="nav-link" data-scroll-target="#hypothesis"><span class="header-section-number">16.1.3</span> Hypothesis</a></li>
+  <li><a href="#mathematical-equation" id="toc-mathematical-equation" class="nav-link" data-scroll-target="#mathematical-equation"><span class="header-section-number">17.1.1</span> Mathematical Equation</a></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">17.1.2</span> Assumptions</a></li>
+  <li><a href="#hypothesis" id="toc-hypothesis" class="nav-link" data-scroll-target="#hypothesis"><span class="header-section-number">17.1.3</span> Hypothesis</a></li>
   </ul></li>
-  <li><a href="#running-kruskal-wallis-in-r" id="toc-running-kruskal-wallis-in-r" class="nav-link" data-scroll-target="#running-kruskal-wallis-in-r"><span class="header-section-number">16.2</span> Running Kruskal-Wallis in R</a>
+  <li><a href="#running-kruskal-wallis-in-r" id="toc-running-kruskal-wallis-in-r" class="nav-link" data-scroll-target="#running-kruskal-wallis-in-r"><span class="header-section-number">17.2</span> Running Kruskal-Wallis in R</a>
   <ul class="collapse">
-  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">16.2.1</span> Packages</a></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">16.2.2</span> Data</a></li>
-  <li><a href="#computing-summary-statistics-by-group" id="toc-computing-summary-statistics-by-group" class="nav-link" data-scroll-target="#computing-summary-statistics-by-group"><span class="header-section-number">16.2.3</span> Computing summary statistics by group</a></li>
-  <li><a href="#box-plot" id="toc-box-plot" class="nav-link" data-scroll-target="#box-plot"><span class="header-section-number">16.2.4</span> Box Plot</a></li>
-  <li><a href="#kruskal-wallis-test" id="toc-kruskal-wallis-test" class="nav-link" data-scroll-target="#kruskal-wallis-test"><span class="header-section-number">16.2.5</span> Kruskal-Wallis Test</a></li>
-  <li><a href="#tabulating-the-result" id="toc-tabulating-the-result" class="nav-link" data-scroll-target="#tabulating-the-result"><span class="header-section-number">16.2.6</span> Tabulating the result</a></li>
-  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">16.2.7</span> Interpretation</a></li>
-  <li><a href="#alternative-method" id="toc-alternative-method" class="nav-link" data-scroll-target="#alternative-method"><span class="header-section-number">16.2.8</span> Alternative method</a></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">17.2.1</span> Packages</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">17.2.2</span> Data</a></li>
+  <li><a href="#computing-summary-statistics-by-group" id="toc-computing-summary-statistics-by-group" class="nav-link" data-scroll-target="#computing-summary-statistics-by-group"><span class="header-section-number">17.2.3</span> Computing summary statistics by group</a></li>
+  <li><a href="#box-plot" id="toc-box-plot" class="nav-link" data-scroll-target="#box-plot"><span class="header-section-number">17.2.4</span> Box Plot</a></li>
+  <li><a href="#kruskal-wallis-test" id="toc-kruskal-wallis-test" class="nav-link" data-scroll-target="#kruskal-wallis-test"><span class="header-section-number">17.2.5</span> Kruskal-Wallis Test</a></li>
+  <li><a href="#tabulating-the-result" id="toc-tabulating-the-result" class="nav-link" data-scroll-target="#tabulating-the-result"><span class="header-section-number">17.2.6</span> Tabulating the result</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">17.2.7</span> Interpretation</a></li>
+  <li><a href="#alternative-method" id="toc-alternative-method" class="nav-link" data-scroll-target="#alternative-method"><span class="header-section-number">17.2.8</span> Alternative method</a></li>
   </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">16.3</span> Conclusion</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">17.3</span> Conclusion</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/04_anova_kruskal_wallis.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -435,9 +441,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_anova_kruskal_wallis.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_anova_kruskal_wallis.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></h1>
+<h1 class="title"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></h1>
 </div>
 
 
@@ -455,7 +461,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 28, 2024</p>
+      <p class="date">June 11, 2024</p>
     </div>
   </div>
   
@@ -467,11 +473,11 @@ window.Quarto = {
 </header>
 
 
-<section id="introduction" class="level2" data-number="16.1">
-<h2 data-number="16.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">16.1</span> Introduction</h2>
+<section id="introduction" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">17.1</span> Introduction</h2>
 <p>The Kruskal-Wallis test (H-test) <strong>is a hypothesis test</strong> for multiple <strong>independent samples</strong>, which is used when the assumptions for a one factor analysis of variance are violated. In other word, it is the <strong>non-parametric alternative</strong> to the One Way ANOVA. Non-parametric means that the <strong><em>data does</em></strong> <strong><em>not follow normal distribution</em></strong>. It is sometimes called the <strong><em>one-way ANOVA on ranks</em></strong>, as the ranks of the data values are used in the test rather <strong>than the actual data points.</strong></p>
-<section id="mathematical-equation" class="level3" data-number="16.1.1">
-<h3 data-number="16.1.1" class="anchored" data-anchor-id="mathematical-equation"><span class="header-section-number">16.1.1</span> Mathematical Equation</h3>
+<section id="mathematical-equation" class="level3" data-number="17.1.1">
+<h3 data-number="17.1.1" class="anchored" data-anchor-id="mathematical-equation"><span class="header-section-number">17.1.1</span> Mathematical Equation</h3>
 <p><span class="math display">\[H = \frac{{n-1}}{{n}}\sum^k_{i=1}\frac{n_i({\bar{R_i} - E})^2}{{σ^2_R}}\]</span></p>
 <p>Where:</p>
 <ul>
@@ -501,14 +507,14 @@ window.Quarto = {
 </figure>
 </div>
 </section>
-<section id="assumptions" class="level3" data-number="16.1.2">
-<h3 data-number="16.1.2" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">16.1.2</span> Assumptions</h3>
+<section id="assumptions" class="level3" data-number="17.1.2">
+<h3 data-number="17.1.2" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">17.1.2</span> Assumptions</h3>
 <p><strong>1. Ordinal or Continuous Response Variable</strong> – the response variable should be an ordinal or continuous variable.</p>
 <p><strong>2. Independence</strong> – the observations in each group need to be independent of each other.</p>
 <p><strong>3. Sample Size and distribution</strong> – each group must have a sample size of 5 or more and the distributions in each group need to have a similar shape but groups does not follow normal distribution.</p>
 </section>
-<section id="hypothesis" class="level3" data-number="16.1.3">
-<h3 data-number="16.1.3" class="anchored" data-anchor-id="hypothesis"><span class="header-section-number">16.1.3</span> Hypothesis</h3>
+<section id="hypothesis" class="level3" data-number="17.1.3">
+<h3 data-number="17.1.3" class="anchored" data-anchor-id="hypothesis"><span class="header-section-number">17.1.3</span> Hypothesis</h3>
 <p>The test determines whether two or more independent groups have same central tendency.</p>
 <ul>
 <li><p>H<sub>0</sub>: population rank sum average are equal for independent group and therefore come from same population.</p></li>
@@ -516,10 +522,10 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="running-kruskal-wallis-in-r" class="level2" data-number="16.2">
-<h2 data-number="16.2" class="anchored" data-anchor-id="running-kruskal-wallis-in-r"><span class="header-section-number">16.2</span> Running Kruskal-Wallis in R</h2>
-<section id="packages" class="level3" data-number="16.2.1">
-<h3 data-number="16.2.1" class="anchored" data-anchor-id="packages"><span class="header-section-number">16.2.1</span> Packages</h3>
+<section id="running-kruskal-wallis-in-r" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="running-kruskal-wallis-in-r"><span class="header-section-number">17.2</span> Running Kruskal-Wallis in R</h2>
+<section id="packages" class="level3" data-number="17.2.1">
+<h3 data-number="17.2.1" class="anchored" data-anchor-id="packages"><span class="header-section-number">17.2.1</span> Packages</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("FSA") # Houses dunnTest for pair wise comparison</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("ggpubr")  # For density plot and for creating and customizing 'ggplot2'- based publication ready plots</span></span>
@@ -545,8 +551,8 @@ window.Quarto = {
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="data" class="level3" data-number="16.2.2">
-<h3 data-number="16.2.2" class="anchored" data-anchor-id="data"><span class="header-section-number">16.2.2</span> Data</h3>
+<section id="data" class="level3" data-number="17.2.2">
+<h3 data-number="17.2.2" class="anchored" data-anchor-id="data"><span class="header-section-number">17.2.2</span> Data</h3>
 <p>As an example we will manually create a data, details of which can be found <a href="https://data.library.virginia.edu/getting-started-with-the-kruskal-wallis-test/">Here</a>.</p>
 <p>The data represents antibody production after receiving a vaccine. A hospital administered one of three <strong>different vaccines - A, B, or C to 6 individuals per group</strong> and measured the <strong>antibody presence (</strong><span class="math inline">\(\mu\)</span>g/mL) in their blood after a chosen time period. The data is as follows: The goal of this exercise will be to determine how the three vaccines performed compared to each other. Essentially, we are looking to determine if the antibody data for each vaccine originates from the same distribution. The sample size is small and normal distribution cannot be assumed. Therefore, we will be conducting the Kruskal-Wallis test.</p>
 <p><strong>Null Hypothesis (<em>H<sub>0</sub></em>)</strong>: The vaccines induce equal amounts of antibody production. (all three groups originate from the same distribution and have the same median)</p>
@@ -616,8 +622,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="computing-summary-statistics-by-group" class="level3" data-number="16.2.3">
-<h3 data-number="16.2.3" class="anchored" data-anchor-id="computing-summary-statistics-by-group"><span class="header-section-number">16.2.3</span> Computing summary statistics by group</h3>
+<section id="computing-summary-statistics-by-group" class="level3" data-number="17.2.3">
+<h3 data-number="17.2.3" class="anchored" data-anchor-id="computing-summary-statistics-by-group"><span class="header-section-number">17.2.3</span> Computing summary statistics by group</h3>
 <p>The first step is to inspect the data and calculate a summary of statistics. This can be done by using the <code>summarise</code> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(vaccine_efficacy, Vaccines) <span class="sc">%&gt;%</span></span>
@@ -638,8 +644,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="box-plot" class="level3" data-number="16.2.4">
-<h3 data-number="16.2.4" class="anchored" data-anchor-id="box-plot"><span class="header-section-number">16.2.4</span> Box Plot</h3>
+<section id="box-plot" class="level3" data-number="17.2.4">
+<h3 data-number="17.2.4" class="anchored" data-anchor-id="box-plot"><span class="header-section-number">17.2.4</span> Box Plot</h3>
 <p>The next step will be to visualize the dataset using a box plot. This will allow us to estimate differences in distribution.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>vaccine_efficacy <span class="sc">%&gt;%</span> </span>
@@ -656,8 +662,8 @@ window.Quarto = {
 </div>
 </div>
 <p>Based on the box plot, we see that there is similarity in distribution of A and C while B looks to be different. We can also add the individual data points and connect the boxes to visually see the density distribution and compare with normal distribution for each vaccines.</p>
-<section id="adding-error-bars-mean_se" class="level4" data-number="16.2.4.1">
-<h4 data-number="16.2.4.1" class="anchored" data-anchor-id="adding-error-bars-mean_se"><span class="header-section-number">16.2.4.1</span> Adding error bars: mean_se</h4>
+<section id="adding-error-bars-mean_se" class="level4" data-number="17.2.4.1">
+<h4 data-number="17.2.4.1" class="anchored" data-anchor-id="adding-error-bars-mean_se"><span class="header-section-number">17.2.4.1</span> Adding error bars: mean_se</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggline</span>(vaccine_efficacy, <span class="at">x =</span> <span class="st">"Vaccines"</span>, <span class="at">y =</span> <span class="st">"Antibody"</span>,</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">add =</span> <span class="fu">c</span>(<span class="st">"mean_se"</span>, <span class="st">"jitter"</span>),</span>
@@ -672,8 +678,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="density-plot-with-overlaid-normal-plot" class="level4" data-number="16.2.4.2">
-<h4 data-number="16.2.4.2" class="anchored" data-anchor-id="density-plot-with-overlaid-normal-plot"><span class="header-section-number">16.2.4.2</span> Density plot with overlaid normal plot</h4>
+<section id="density-plot-with-overlaid-normal-plot" class="level4" data-number="17.2.4.2">
+<h4 data-number="17.2.4.2" class="anchored" data-anchor-id="density-plot-with-overlaid-normal-plot"><span class="header-section-number">17.2.4.2</span> Density plot with overlaid normal plot</h4>
 <p>Next, we want to create a density plot to further visualize the data and compare it to what a normal distribution of these data should look like. This can be done by using the <code>ggdensity</code> function as seen below.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the distribution of the antibodies for vaccine </span></span>
@@ -720,8 +726,8 @@ window.Quarto = {
 <p>From these density plots, we see that our data is not normally distributed and distribution shape for two vaccines looks similar while one vaccine deviates. As our data is not normally distributed and has small sample size, we will now perform Kruskal-Wallis test to find out whether there are any significant differences between the three vaccines in terms of their efficacy (antibodies production in the body).</p>
 </section>
 </section>
-<section id="kruskal-wallis-test" class="level3" data-number="16.2.5">
-<h3 data-number="16.2.5" class="anchored" data-anchor-id="kruskal-wallis-test"><span class="header-section-number">16.2.5</span> Kruskal-Wallis Test</h3>
+<section id="kruskal-wallis-test" class="level3" data-number="17.2.5">
+<h3 data-number="17.2.5" class="anchored" data-anchor-id="kruskal-wallis-test"><span class="header-section-number">17.2.5</span> Kruskal-Wallis Test</h3>
 <p>The Kruskal-Wallis test can be done in R using the <code>kruskal.test</code> function as seen below.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(Antibody <span class="sc">~</span> Vaccines, <span class="at">data =</span> vaccine_efficacy)</span>
@@ -736,8 +742,8 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
 </div>
 </div>
 </section>
-<section id="tabulating-the-result" class="level3" data-number="16.2.6">
-<h3 data-number="16.2.6" class="anchored" data-anchor-id="tabulating-the-result"><span class="header-section-number">16.2.6</span> Tabulating the result</h3>
+<section id="tabulating-the-result" class="level3" data-number="17.2.6">
+<h3 data-number="17.2.6" class="anchored" data-anchor-id="tabulating-the-result"><span class="header-section-number">17.2.6</span> Tabulating the result</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>table1 <span class="ot">&lt;-</span>   </span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
@@ -752,23 +758,23 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
 <span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>table1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="cuisudidpd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cuisudidpd table {
+<div id="jrqlcjyxtm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jrqlcjyxtm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cuisudidpd thead, #cuisudidpd tbody, #cuisudidpd tfoot, #cuisudidpd tr, #cuisudidpd td, #cuisudidpd th {
+#jrqlcjyxtm thead, #jrqlcjyxtm tbody, #jrqlcjyxtm tfoot, #jrqlcjyxtm tr, #jrqlcjyxtm td, #jrqlcjyxtm th {
   border-style: none;
 }
 
-#cuisudidpd p {
+#jrqlcjyxtm p {
   margin: 0;
   padding: 0;
 }
 
-#cuisudidpd .gt_table {
+#jrqlcjyxtm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -794,12 +800,12 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#cuisudidpd .gt_caption {
+#jrqlcjyxtm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cuisudidpd .gt_title {
+#jrqlcjyxtm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -811,7 +817,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-bottom-width: 0;
 }
 
-#cuisudidpd .gt_subtitle {
+#jrqlcjyxtm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -823,7 +829,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-top-width: 0;
 }
 
-#cuisudidpd .gt_heading {
+#jrqlcjyxtm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -835,13 +841,13 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#cuisudidpd .gt_bottom_border {
+#jrqlcjyxtm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cuisudidpd .gt_col_headings {
+#jrqlcjyxtm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -856,7 +862,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#cuisudidpd .gt_col_heading {
+#jrqlcjyxtm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -876,7 +882,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   overflow-x: hidden;
 }
 
-#cuisudidpd .gt_column_spanner_outer {
+#jrqlcjyxtm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -888,15 +894,15 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   padding-right: 4px;
 }
 
-#cuisudidpd .gt_column_spanner_outer:first-child {
+#jrqlcjyxtm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cuisudidpd .gt_column_spanner_outer:last-child {
+#jrqlcjyxtm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cuisudidpd .gt_column_spanner {
+#jrqlcjyxtm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -908,11 +914,11 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   width: 100%;
 }
 
-#cuisudidpd .gt_spanner_row {
+#jrqlcjyxtm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cuisudidpd .gt_group_heading {
+#jrqlcjyxtm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -938,7 +944,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   text-align: left;
 }
 
-#cuisudidpd .gt_empty_group_heading {
+#jrqlcjyxtm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -953,15 +959,15 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   vertical-align: middle;
 }
 
-#cuisudidpd .gt_from_md > :first-child {
+#jrqlcjyxtm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cuisudidpd .gt_from_md > :last-child {
+#jrqlcjyxtm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cuisudidpd .gt_row {
+#jrqlcjyxtm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -980,7 +986,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   overflow-x: hidden;
 }
 
-#cuisudidpd .gt_stub {
+#jrqlcjyxtm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -993,7 +999,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   padding-right: 5px;
 }
 
-#cuisudidpd .gt_stub_row_group {
+#jrqlcjyxtm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1007,15 +1013,15 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   vertical-align: top;
 }
 
-#cuisudidpd .gt_row_group_first td {
+#jrqlcjyxtm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cuisudidpd .gt_row_group_first th {
+#jrqlcjyxtm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cuisudidpd .gt_summary_row {
+#jrqlcjyxtm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1025,16 +1031,16 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   padding-right: 5px;
 }
 
-#cuisudidpd .gt_first_summary_row {
+#jrqlcjyxtm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cuisudidpd .gt_first_summary_row.thick {
+#jrqlcjyxtm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cuisudidpd .gt_last_summary_row {
+#jrqlcjyxtm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1044,7 +1050,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#cuisudidpd .gt_grand_summary_row {
+#jrqlcjyxtm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1054,7 +1060,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   padding-right: 5px;
 }
 
-#cuisudidpd .gt_first_grand_summary_row {
+#jrqlcjyxtm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1064,7 +1070,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#cuisudidpd .gt_last_grand_summary_row_top {
+#jrqlcjyxtm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1074,11 +1080,11 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#cuisudidpd .gt_striped {
+#jrqlcjyxtm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cuisudidpd .gt_table_body {
+#jrqlcjyxtm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1087,7 +1093,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#cuisudidpd .gt_footnotes {
+#jrqlcjyxtm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1101,7 +1107,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#cuisudidpd .gt_footnote {
+#jrqlcjyxtm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1110,7 +1116,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   padding-right: 5px;
 }
 
-#cuisudidpd .gt_sourcenotes {
+#jrqlcjyxtm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1124,7 +1130,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#cuisudidpd .gt_sourcenote {
+#jrqlcjyxtm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1132,63 +1138,63 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   padding-right: 5px;
 }
 
-#cuisudidpd .gt_left {
+#jrqlcjyxtm .gt_left {
   text-align: left;
 }
 
-#cuisudidpd .gt_center {
+#jrqlcjyxtm .gt_center {
   text-align: center;
 }
 
-#cuisudidpd .gt_right {
+#jrqlcjyxtm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cuisudidpd .gt_font_normal {
+#jrqlcjyxtm .gt_font_normal {
   font-weight: normal;
 }
 
-#cuisudidpd .gt_font_bold {
+#jrqlcjyxtm .gt_font_bold {
   font-weight: bold;
 }
 
-#cuisudidpd .gt_font_italic {
+#jrqlcjyxtm .gt_font_italic {
   font-style: italic;
 }
 
-#cuisudidpd .gt_super {
+#jrqlcjyxtm .gt_super {
   font-size: 65%;
 }
 
-#cuisudidpd .gt_footnote_marks {
+#jrqlcjyxtm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cuisudidpd .gt_asterisk {
+#jrqlcjyxtm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cuisudidpd .gt_indent_1 {
+#jrqlcjyxtm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cuisudidpd .gt_indent_2 {
+#jrqlcjyxtm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cuisudidpd .gt_indent_3 {
+#jrqlcjyxtm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cuisudidpd .gt_indent_4 {
+#jrqlcjyxtm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cuisudidpd .gt_indent_5 {
+#jrqlcjyxtm .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1228,11 +1234,11 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
 </div>
 </div>
 </section>
-<section id="interpretation" class="level3" data-number="16.2.7">
-<h3 data-number="16.2.7" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">16.2.7</span> Interpretation</h3>
+<section id="interpretation" class="level3" data-number="17.2.7">
+<h3 data-number="17.2.7" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">17.2.7</span> Interpretation</h3>
 <p>From the Kruskal-Wallis test, we get that our test statistic is 26.63 with <code>p-value</code> 0.026, which is smaller than our level of significance 0.05. This gives us enough evidence to reject the null hypothesis. Therefore, we conclude that there is a significant difference in the efficacy of at least two of the three vaccines.</p>
-<section id="post-hoc-test" class="level4" data-number="16.2.7.1">
-<h4 data-number="16.2.7.1" class="anchored" data-anchor-id="post-hoc-test"><span class="header-section-number">16.2.7.1</span> Post-hoc-Test</h4>
+<section id="post-hoc-test" class="level4" data-number="17.2.7.1">
+<h4 data-number="17.2.7.1" class="anchored" data-anchor-id="post-hoc-test"><span class="header-section-number">17.2.7.1</span> Post-hoc-Test</h4>
 <p>The Kruskal-Wallis test helps to determine whether at least two groups differ from each other but it does not specify where in which groups the significance lies. We need to conduct a post-hoc test for this. For this purpose, the Dunn test is the appropriate nonparametric test for the pairwise multiple comparison. We will use Holm adjustment method for multiple comparison. You can read about various adjustment methods for multiple comparison <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5506159/">here</a><span class="citation" data-cites="chen2017"><sup><a href="#ref-chen2017" role="doc-biblioref"><strong>chen2017?</strong></a></sup></span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>pair_wise_compare <span class="ot">&lt;-</span> <span class="fu">dunnTest</span>(Antibody<span class="sc">~</span>Vaccines, </span>
@@ -1258,8 +1264,8 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
 <p>When looking at the adjusted p-values in the last column for each pairwise comparison, we can see that only the A-B vaccine comparison has a p-value that is less than our level of significance of 0.05. Therefore, we conclude that there is significant difference in vaccine A-B while there is no significant difference between vaccines A-C, and B-C.</p>
 </section>
 </section>
-<section id="alternative-method" class="level3" data-number="16.2.8">
-<h3 data-number="16.2.8" class="anchored" data-anchor-id="alternative-method"><span class="header-section-number">16.2.8</span> Alternative method</h3>
+<section id="alternative-method" class="level3" data-number="17.2.8">
+<h3 data-number="17.2.8" class="anchored" data-anchor-id="alternative-method"><span class="header-section-number">17.2.8</span> Alternative method</h3>
 <p>A very good alternative for performing a Kruskal-Wallis and the post-hoc tests in R is with the ggbetweenstats() function from the {ggstatsplot} package: It provides a combination of box and violin plots along with jittered data points for between-subjects designs with statistical details included in the plot as a subtitle.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(</span>
@@ -1285,8 +1291,8 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
 <p>The results of the Kruskal-Wallis test are shown in the subtitle above the plot (the p-value is after p =). Moreover, the results of the post-hoc test are displayed between each group via accolades, and the boxplots allow to visualize the distribution for each species.</p>
 </section>
 </section>
-<section id="conclusion" class="level2" data-number="16.3">
-<h2 data-number="16.3" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">16.3</span> Conclusion</h2>
+<section id="conclusion" class="level2" data-number="17.3">
+<h2 data-number="17.3" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">17.3</span> Conclusion</h2>
 <p>In conclusion, the Kruskal-Wallace test is a non-parametric hypothesis test that can be used to determine if there are significant differences between two or more groups using the ranks of the data values. The first step involves visualizing the data to confirm it violates the rules of normality. Next, you conduct the Kruskal-Wallis test to determine if there are significant differences. Finally, you run a post-hoc test to calculate pairwise comparisons and determine which specific groups are significantly different.</p>
 </section>
 <section id="references" class="level2 unnumbered">
@@ -1708,12 +1714,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../lessons_original/04_anova_two_way.html" class="pagination-link" aria-label="Two-Way ANOVA">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../lessons_original/04_anova_random_intercept.html" class="pagination-link" aria-label="Random Intercept Model">
-        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

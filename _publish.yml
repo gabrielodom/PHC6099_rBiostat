@@ -1,0 +1,4 @@
+- source: project
+  quarto-pub:
+    - id: 496d3a9a-4578-4ef7-92ca-4f73bdd93aa4
+      url: 'https://gabriel.quarto.pub/an-r-cookbook-for-public-health'

@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Gabriel Odom">
+<title>An R Cookbook for Public Health - 10&nbsp; Transformations to Normality</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../lessons_original/02_fisher_exact_test.html" rel="next">
+<link href="../lessons/02_wilcoxon_one_samp.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_transformations.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">An R Cookbook for Public Health</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/gabrielodom/PHC6099_rBiostat" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Course Materials for PHC 6099: ‘R Computing for Health Sciences’</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">About this Book</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../01_header_EDA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exploratory Data Analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_mosaic_violin.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Mosaic &amp; Box/Violin Plots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_scatterplots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">How to Create a Scatterplot</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/01_skimr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Skimr Package</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_table1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Demographics Table With Table1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_gtsummary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Table by gtsummary</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../02_header_one-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">One-Sample Tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_z-test_one_prop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_wilcoxon_one_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../03_header_two-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Two-Sample Tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../04_header_anova-and-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ANOVA and Regression</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../05_header_generalized-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generalized Linear Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../06_header_special-topics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Special Topics in Statistical Modelling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../07_header_power.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Power and Sample Size Determination</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">10.1</span> Introduction</a></li>
+  <li><a href="#when-to-apply-transformations-to-normality" id="toc-when-to-apply-transformations-to-normality" class="nav-link" data-scroll-target="#when-to-apply-transformations-to-normality"><span class="header-section-number">10.2</span> When to Apply Transformations to Normality</a></li>
+  <li>
+<a href="#types-of-transformations-to-normality" id="toc-types-of-transformations-to-normality" class="nav-link" data-scroll-target="#types-of-transformations-to-normality"><span class="header-section-number">10.3</span> Types of Transformations to Normality</a>
+  <ul class="collapse">
+<li><a href="#logarithmic-transformation" id="toc-logarithmic-transformation" class="nav-link" data-scroll-target="#logarithmic-transformation"><span class="header-section-number">10.3.1</span> Logarithmic Transformation</a></li>
+  <li><a href="#square-root-transformation" id="toc-square-root-transformation" class="nav-link" data-scroll-target="#square-root-transformation"><span class="header-section-number">10.3.2</span> Square Root Transformation</a></li>
+  <li><a href="#arithmetic-reciprocal-transformation" id="toc-arithmetic-reciprocal-transformation" class="nav-link" data-scroll-target="#arithmetic-reciprocal-transformation"><span class="header-section-number">10.3.3</span> Arithmetic Reciprocal Transformation</a></li>
+  <li><a href="#geometric-reciprocal-transformation" id="toc-geometric-reciprocal-transformation" class="nav-link" data-scroll-target="#geometric-reciprocal-transformation"><span class="header-section-number">10.3.4</span> Geometric Reciprocal Transformation</a></li>
+  <li><a href="#box-cox-transformation" id="toc-box-cox-transformation" class="nav-link" data-scroll-target="#box-cox-transformation"><span class="header-section-number">10.3.5</span> Box-Cox Transformation</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#examples-of-transformations-to-normality" id="toc-examples-of-transformations-to-normality" class="nav-link" data-scroll-target="#examples-of-transformations-to-normality"><span class="header-section-number">10.4</span> Examples of Transformations to Normality</a>
+  <ul class="collapse">
+<li><a href="#data-source-and-description" id="toc-data-source-and-description" class="nav-link" data-scroll-target="#data-source-and-description"><span class="header-section-number">10.4.1</span> Data Source and Description</a></li>
+  <li><a href="#loading-the-data" id="toc-loading-the-data" class="nav-link" data-scroll-target="#loading-the-data"><span class="header-section-number">10.4.2</span> Loading the Data</a></li>
+  <li><a href="#visualizations-of-cont-and-phys-variables" id="toc-visualizations-of-cont-and-phys-variables" class="nav-link" data-scroll-target="#visualizations-of-cont-and-phys-variables"><span class="header-section-number">10.4.3</span> Visualizations of <code>CONT</code> and <code>PHYS</code> Variables</a></li>
+  <li><a href="#summary-statistics-for-cont-and-phys-variables" id="toc-summary-statistics-for-cont-and-phys-variables" class="nav-link" data-scroll-target="#summary-statistics-for-cont-and-phys-variables"><span class="header-section-number">10.4.4</span> Summary Statistics for <code>CONT</code> and <code>PHYS</code> Variables</a></li>
+  <li><a href="#skewness-and-kurtosis-for-cont-and-phys-variables" id="toc-skewness-and-kurtosis-for-cont-and-phys-variables" class="nav-link" data-scroll-target="#skewness-and-kurtosis-for-cont-and-phys-variables"><span class="header-section-number">10.4.5</span> Skewness and Kurtosis for <code>CONT</code> and <code>PHYS</code> Variables</a></li>
+  <li><a href="#visualizations-of-transformed-cont-and-phys-variables" id="toc-visualizations-of-transformed-cont-and-phys-variables" class="nav-link" data-scroll-target="#visualizations-of-transformed-cont-and-phys-variables"><span class="header-section-number">10.4.6</span> Visualizations of Transformed <code>CONT</code> and <code>PHYS</code> Variables</a></li>
+  <li><a href="#skewness-and-kurtosis-for-transformed-cont-and-phys-variables" id="toc-skewness-and-kurtosis-for-transformed-cont-and-phys-variables" class="nav-link" data-scroll-target="#skewness-and-kurtosis-for-transformed-cont-and-phys-variables"><span class="header-section-number">10.4.7</span> Skewness and Kurtosis for Transformed <code>CONT</code> and <code>PHYS</code> Variables</a></li>
+  </ul>
+</li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">10.5</span> Results</a></li>
+  <li><a href="#conclusion-and-discussion" id="toc-conclusion-and-discussion" class="nav-link" data-scroll-target="#conclusion-and-discussion"><span class="header-section-number">10.6</span> Conclusion and Discussion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">10.7</span> References</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/02_transformations.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_transformations.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Transformations to Normality</span>
+</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Freeman Lewis, MPH </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Florida International University Robert Stempel College of Public Health and Social Work
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Gabriel Odom </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+
+</header><section id="introduction" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">10.1</span> Introduction</h2>
+<p>The pattern of values obtained when a variable is measured in a large number of individuals is called a distribution. Distributions can be broadly classified as normal and non-normal. The normal distribution is also called ‘Gaussian distribution’ as it was first described by K.F. Gauss. This chapter outlines the process of transforming data to achieve a normal distribution in R. Parametric methods, such as t-tests and ANOVA, require that the dependent (outcome) variable is approximately normally distributed within each group being compared. When the normality assumption is not satisfied, transforming the data can correct the non-normal distributions. For t-tests and ANOVA, it is sufficient to transform the dependent variable. However, for linear regression, transformations may be applied to the independent variable, the dependent variable, or both to achieve a linear relationship between variables and ensure homoscedasticity.</p>
+<p>Here are the libraries we will use for this material:</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">moments</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="when-to-apply-transformations-to-normality" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="when-to-apply-transformations-to-normality">
+<span class="header-section-number">10.2</span> When to Apply Transformations to Normality</h2>
+<p>One of the critical assumptions of statistical hypothesis testing is that the data are samples from a normal distribution. Therefore, it is essential to identify whether distributions are skewed or normal. There are several straightforward methods to detect skewness. Firstly, if the mean is less than twice the standard deviation, the distribution is likely skewed. Additionally, in a normally distributed population, the mean and standard deviation of the samples are independent. This characteristic can be used to detect skewness; if the standard deviation increases as the mean increases across groups from a population, the distribution is skewed. Beyond these simple methods, normality can be verified using statistical tests such as the Shapiro-Wilk test, the Kolmogorov-Smirnov test, and the Anderson-Darling test. Additionally, the <code>moments</code> package in R can be used to calculate skewness quantitatively. The skewness is determined using the third standardized moment, providing a measure of the asymmetry of the data distribution. If skewness is identified, efforts should be made to transform the data to achieve a normal distribution. This transformation is crucial for applying robust parametric tests in the analysis.</p>
+<p>Transformations can also be employed to facilitate comparison and interpretation. A classical example of a variable commonly reported after logarithmic transformation is the hydrogen ion concentration (pH). Another instance where transformation aids in data comparison is the logarithmic transformation of a dose-response curve. When plotted, the dose-response relationship is curvilinear; however, plotting the response against the logarithm of the dose (log dose-response plot) results in an elongated S-shaped curve. The middle portion of this curve forms a straight line, making it easier to compare two straight lines by measuring their slopes than to compare two curves. Thus, transformation can significantly enhance data comparison.</p>
+<p>In summary, transformations can be applied to normalize data distribution or to simplify interpretation and comparison.</p>
+</section><section id="types-of-transformations-to-normality" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="types-of-transformations-to-normality">
+<span class="header-section-number">10.3</span> Types of Transformations to Normality</h2>
+<p>Often, the transformation that normalizes the distribution also equalizes the variance. While there are several types of transformations available, such as logarithmic, square root, reciprocal, cube root, and Box-Cox, the first three are the most commonly used. Among the transformations discussed in this section, the logarithmic transformation is the most often used. The following guidelines can help in selecting the appropriate method of transformation:</p>
+<section id="logarithmic-transformation" class="level3" data-number="10.3.1"><h3 data-number="10.3.1" class="anchored" data-anchor-id="logarithmic-transformation">
+<span class="header-section-number">10.3.1</span> Logarithmic Transformation</h3>
+<p>If the standard deviation is proportional to the mean, the distribution is positively skewed, making logarithmic transformation ideal. Note that when using a log transformation, a constant should be added to all values to ensure they are positive before transformation. The log tranformation is <span class="math display">\[
+y' = \log(y + c),
+\]</span> where <span class="math inline">\(y\)</span> is the original value and <span class="math inline">\(c\)</span> is a constant added to ensure all values are positive.</p>
+<div style="display: flex; justify-content: center;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="02_transformations_files/figure-html/log_transform_histogram-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section><section id="square-root-transformation" class="level3" data-number="10.3.2"><h3 data-number="10.3.2" class="anchored" data-anchor-id="square-root-transformation">
+<span class="header-section-number">10.3.2</span> Square Root Transformation</h3>
+<p>When the variance is proportional to the mean, square root transformation is preferred. This is particularly applicable to variables measured as counts, such as the number of malignant cells in a microscopic field or the number of deaths from swine flu. The square root transformation is: <span class="math display">\[
+y' = \sqrt{y}.
+\]</span></p>
+<div style="display: flex; justify-content: center;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="02_transformations_files/figure-html/sqrt_transform_histogram-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section><section id="arithmetic-reciprocal-transformation" class="level3" data-number="10.3.3"><h3 data-number="10.3.3" class="anchored" data-anchor-id="arithmetic-reciprocal-transformation">
+<span class="header-section-number">10.3.3</span> Arithmetic Reciprocal Transformation</h3>
+<p>If the observations are truncated on the right (such as often the case for academic grade distributions), then one preliminary transformation is to “reverse” the values by subtracting each value from the maximum of all observed values (or from the maximum possible value for observations on a defined scale). This operation “flips” the data distribution from having a heavy left tail to having a heavy right tail, which allows us to perform a secondary transformation (such as a log or square root). This transformation is: <span class="math display">\[
+y' = \max(y) - y.
+\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="02_transformations_files/figure-html/arith_recip_transform_histogram-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>NOTE: now that the data are right-skewed, other transformations can be applied as usual.</strong></p>
+</section><section id="geometric-reciprocal-transformation" class="level3" data-number="10.3.4"><h3 data-number="10.3.4" class="anchored" data-anchor-id="geometric-reciprocal-transformation">
+<span class="header-section-number">10.3.4</span> Geometric Reciprocal Transformation</h3>
+<p>If the standard deviation is proportional to the mean squared, a reciprocal transformation is appropriate. This is typically used for highly variable quantities, such as serum creatinine levels. Note that this transformation requires all values to be positive or all values to be negative before applying it. <span class="math display">\[
+y' = \frac{1}{y \pm c},
+\]</span> where <span class="math inline">\(y\)</span> is the original value and <span class="math inline">\(c\)</span> is a constant added (subtracted) to ensure all values are positive (negative).</p>
+<div style="display: flex; justify-content: center;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="02_transformations_files/figure-html/geom_recip_transform_histogram-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section><section id="box-cox-transformation" class="level3" data-number="10.3.5"><h3 data-number="10.3.5" class="anchored" data-anchor-id="box-cox-transformation">
+<span class="header-section-number">10.3.5</span> Box-Cox Transformation</h3>
+<p>The Box-Cox transformation is a family of power transformations that can be used to stabilize variance and make the data more closely conform to a normal distribution, especially when the best power transformation (e.g., square root, logarithmic) is uncertain. By estimating an optimal parameter <span class="math inline">\(\lambda\)</span> from the data, the Box-Cox transformation tailors the transformation to the specific dataset’s needs. The transformation is defined as:</p>
+<p><span class="math display">\[
+y(\lambda) = \begin{cases}
+  \frac{y^\lambda - 1}{\lambda} &amp; \text{if } \lambda \neq 0 \\
+  \log(y) &amp; \text{if } \lambda = 0
+\end{cases}
+\]</span> Here, <span class="math inline">\(\lambda\)</span> is a parameter that is estimated from the data. The Box-Cox transformation is particularly useful because it includes many of the other transformations (such as the logarithmic and square root transformations) as special cases.</p>
+<div style="display: flex; justify-content: center;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="02_transformations_files/figure-html/boxcox_transform_histogram-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="02_transformations_files/figure-html/boxcox_transform_histogram-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section></section><section id="examples-of-transformations-to-normality" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="examples-of-transformations-to-normality">
+<span class="header-section-number">10.4</span> Examples of Transformations to Normality</h2>
+<section id="data-source-and-description" class="level3" data-number="10.4.1"><h3 data-number="10.4.1" class="anchored" data-anchor-id="data-source-and-description">
+<span class="header-section-number">10.4.1</span> Data Source and Description</h3>
+<p>The <code>USJudgeRatings</code> dataset is a built-in dataset in R that contains ratings of 43 judges in the US Superior Court. The ratings are based on the evaluations from lawyers who have had cases before these judges. The dataset includes multiple variables that represent different aspects of the judges’ performance.</p>
+<section id="variables-in-the-dataset" class="level4" data-number="10.4.1.1"><h4 data-number="10.4.1.1" class="anchored" data-anchor-id="variables-in-the-dataset">
+<span class="header-section-number">10.4.1.1</span> Variables in the Dataset</h4>
+<ul>
+<li>
+<code>CONT</code>: Judicial “controlling” or authoritative nature.</li>
+<li>
+<code>INTG</code>: Judicial integrity.</li>
+<li>
+<code>DMNR</code>: Judicial demeanor.</li>
+<li>
+<code>DILG</code>: Judicial diligence.</li>
+<li>
+<code>CFMG</code>: Case flow management.</li>
+<li>
+<code>DECI</code>: Judicial decision-making.</li>
+<li>
+<code>PREP</code>: Judicial preparation.</li>
+<li>
+<code>FAMI</code>: Familiarity with the law.</li>
+<li>
+<code>ORAL</code>: Oral skills.</li>
+<li>
+<code>WRIT</code>: Written skills.</li>
+<li>
+<code>PHYS</code>: Physical ability.</li>
+<li>
+<code>RTEN</code>: Willingness to follow trends.</li>
+</ul>
+<p>This dataset is useful for analyzing various performance metrics of judges and can be used to explore relationships between different aspects of judicial performance. In the following examples, we’ll consider two variables:</p>
+<ul>
+<li>
+<code>CONT</code>: Number of contacts of lawyer with judge. Positively skewed.</li>
+<li>
+<code>PHYS</code>: Physical ability. Negatively skewed</li>
+</ul></section></section><section id="loading-the-data" class="level3" data-number="10.4.2"><h3 data-number="10.4.2" class="anchored" data-anchor-id="loading-the-data">
+<span class="header-section-number">10.4.2</span> Loading the Data</h3>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Load the USJudgeRatings dataset</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USJudgeRatings"</span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">USJudgeRatings</span></span>
+<span></span>
+<span><span class="co"># Display the first few rows of the dataset</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               CONT INTG DMNR DILG CFMG DECI PREP FAMI ORAL WRIT PHYS RTEN
+AARONSON,L.H.   5.7  7.9  7.7  7.3  7.1  7.4  7.1  7.1  7.1  7.0  8.3  7.8
+ALEXANDER,J.M.  6.8  8.9  8.8  8.5  7.8  8.1  8.0  8.0  7.8  7.9  8.5  8.7
+ARMENTANO,A.J.  7.2  8.1  7.8  7.8  7.5  7.6  7.5  7.5  7.3  7.4  7.9  7.8
+BERDON,R.I.     6.8  8.8  8.5  8.8  8.3  8.5  8.7  8.7  8.4  8.5  8.8  8.7
+BRACKEN,J.J.    7.3  6.4  4.3  6.5  6.0  6.2  5.7  5.7  5.1  5.3  5.5  4.8
+BURNS,E.B.      6.2  8.8  8.7  8.5  7.9  8.0  8.1  8.0  8.0  8.0  8.6  8.6</code></pre>
+</div>
+</div>
+</section><section id="visualizations-of-cont-and-phys-variables" class="level3" data-number="10.4.3"><h3 data-number="10.4.3" class="anchored" data-anchor-id="visualizations-of-cont-and-phys-variables">
+<span class="header-section-number">10.4.3</span> Visualizations of <code>CONT</code> and <code>PHYS</code> Variables</h3>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">CONT</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">12</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Density Plot of CONT"</span>, x <span class="op">=</span> <span class="st">"CONT"</span>, y <span class="op">=</span> <span class="st">"Density"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"lightgray"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">stat_function</a></span><span class="op">(</span></span>
+<span>    fun <span class="op">=</span> <span class="va">dnorm</span>,</span>
+<span>    args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">CONT</span><span class="op">)</span>, sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">CONT</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"red"</span>,</span>
+<span>    linetype <span class="op">=</span> <span class="st">"dashed"</span></span>
+<span>  <span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-plot-cont" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-plot-cont-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="02_transformations_files/figure-html/fig-plot-cont-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-cont-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.1: Distribution of CONT Variable
+</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">PHYS</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">12</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Density Plot of PHYS"</span>, x <span class="op">=</span> <span class="st">"PHYS"</span>, y <span class="op">=</span> <span class="st">"Density"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"lightgray"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">stat_function</a></span><span class="op">(</span></span>
+<span>    fun <span class="op">=</span> <span class="va">dnorm</span>,</span>
+<span>    args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">PHYS</span><span class="op">)</span>, sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">PHYS</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"red"</span>,</span>
+<span>    linetype <span class="op">=</span> <span class="st">"dashed"</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-plot-phys" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-plot-phys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="02_transformations_files/figure-html/fig-plot-phys-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-phys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.2: Distribution of PHYS Variable
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="summary-statistics-for-cont-and-phys-variables" class="level3" data-number="10.4.4"><h3 data-number="10.4.4" class="anchored" data-anchor-id="summary-statistics-for-cont-and-phys-variables">
+<span class="header-section-number">10.4.4</span> Summary Statistics for <code>CONT</code> and <code>PHYS</code> Variables</h3>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Get the summary statistics for CONT and PHYS variables; note that the</span></span>
+<span><span class="co">#   summary() function returns a named numeric vector, so to preserve the names</span></span>
+<span><span class="co">#   we transform this vector to a matrix first (before creating the data frame).</span></span>
+<span><span class="va">summary_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  CONT <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">CONT</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  PHYS <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">PHYS</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Display summary statistics as a table</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">summary_df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-summary-stats" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summary-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.1: Summary Statistics for CONT and PHYS Variables
+</figcaption><div aria-describedby="tbl-summary-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">CONT</th>
+<th style="text-align: right;">PHYS</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Min.</td>
+<td style="text-align: right;">5.700000</td>
+<td style="text-align: right;">4.700000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1st Qu.</td>
+<td style="text-align: right;">6.850000</td>
+<td style="text-align: right;">7.700000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Median</td>
+<td style="text-align: right;">7.300000</td>
+<td style="text-align: right;">8.100000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mean</td>
+<td style="text-align: right;">7.437209</td>
+<td style="text-align: right;">7.934884</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3rd Qu.</td>
+<td style="text-align: right;">7.900000</td>
+<td style="text-align: right;">8.500000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Max.</td>
+<td style="text-align: right;">10.600000</td>
+<td style="text-align: right;">9.100000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section><section id="skewness-and-kurtosis-for-cont-and-phys-variables" class="level3" data-number="10.4.5"><h3 data-number="10.4.5" class="anchored" data-anchor-id="skewness-and-kurtosis-for-cont-and-phys-variables">
+<span class="header-section-number">10.4.5</span> Skewness and Kurtosis for <code>CONT</code> and <code>PHYS</code> Variables</h3>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calculate skewness and kurtosis for CONT and PHYS variables with moments:: </span></span>
+<span><span class="va">skewness_vals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CONT"</span>, <span class="st">"PHYS"</span><span class="op">)</span><span class="op">]</span>, <span class="fu">moments</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">)</span></span>
+<span><span class="va">kurtosis_vals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CONT"</span>, <span class="st">"PHYS"</span><span class="op">)</span><span class="op">]</span>, <span class="fu">moments</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/moments/man/kurtosis.html">kurtosis</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create a data frame to display skewness and kurtosis</span></span>
+<span><span class="va">skew_kurt_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  Skewness <span class="op">=</span> <span class="va">skewness_vals</span>,</span>
+<span>  Kurtosis <span class="op">=</span> <span class="va">kurtosis_vals</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Display the data frame as a table</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">skew_kurt_df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-skewness-kurtosis" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-skewness-kurtosis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.2: Skewness and Kurtosis for CONT and PHYS Variables
+</figcaption><div aria-describedby="tbl-skewness-kurtosis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Skewness</th>
+<th style="text-align: right;">Kurtosis</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CONT</td>
+<td style="text-align: right;">1.085973</td>
+<td style="text-align: right;">4.729637</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PHYS</td>
+<td style="text-align: right;">-1.558215</td>
+<td style="text-align: right;">5.408086</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section><section id="visualizations-of-transformed-cont-and-phys-variables" class="level3" data-number="10.4.6"><h3 data-number="10.4.6" class="anchored" data-anchor-id="visualizations-of-transformed-cont-and-phys-variables">
+<span class="header-section-number">10.4.6</span> Visualizations of Transformed <code>CONT</code> and <code>PHYS</code> Variables</h3>
+<p>We will first apply a natural log transformation to the “controlling/authoritarian” variable.</p>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Apply log transformation to CONT variable</span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">LOG_CONT</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">CONT</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot density of log-transformed CONT variable</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">LOG_CONT</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"lightgray"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Density Plot of Log-Transformed CONT"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Log-Transformed CONT"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Density"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">stat_function</a></span><span class="op">(</span></span>
+<span>    fun <span class="op">=</span> <span class="va">dnorm</span>,</span>
+<span>    args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">LOG_CONT</span><span class="op">)</span>, sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">LOG_CONT</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"red"</span>,</span>
+<span>    linetype <span class="op">=</span> <span class="st">"dashed"</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-plot-transformed-cont" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-plot-transformed-cont-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="02_transformations_files/figure-html/fig-plot-transformed-cont-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-transformed-cont-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.3: Distribution of log transformed CONT Variable
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Now we will apply a Box-Cox transformation to the “physical ability” variable.</p>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Apply Box-Cox transformation to PHYS using MASS:: package</span></span>
+<span><span class="va">bc</span> <span class="op">&lt;-</span> <span class="fu">MASS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MASS/man/boxcox.html">boxcox</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">PHYS</span> <span class="op">~</span> <span class="fl">1</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">0.1</span><span class="op">)</span>, plotit <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="va">bc</span><span class="op">$</span><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="va">bc</span><span class="op">$</span><span class="va">y</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">BOX_COX_PHYS</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">PHYS</span><span class="op">^</span><span class="va">lambda</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="va">lambda</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-plot-boxcox-lambda-phys" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-plot-boxcox-lambda-phys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="02_transformations_files/figure-html/fig-plot-boxcox-lambda-phys-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-boxcox-lambda-phys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.4: Distribution of optimal lambda determined by the <code>boxcox</code> function
+</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Plot density of Box-Cox transformed PHYS variable</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">BOX_COX_PHYS</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Density Plot of Box-Cox Transformed PHYS"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Box-Cox Transformed PHYS"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Density"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"lightgray"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">stat_function</a></span><span class="op">(</span></span>
+<span>    fun <span class="op">=</span> <span class="va">dnorm</span>,</span>
+<span>    args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">BOX_COX_PHYS</span><span class="op">)</span>, sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">BOX_COX_PHYS</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"red"</span>,</span>
+<span>    linetype <span class="op">=</span> <span class="st">"dashed"</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-plot-boxcox-phys" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-plot-boxcox-phys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="02_transformations_files/figure-html/fig-plot-boxcox-phys-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-boxcox-phys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10.5: Distribution of Box-Cox transformed PHYS Variable
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="skewness-and-kurtosis-for-transformed-cont-and-phys-variables" class="level3" data-number="10.4.7"><h3 data-number="10.4.7" class="anchored" data-anchor-id="skewness-and-kurtosis-for-transformed-cont-and-phys-variables">
+<span class="header-section-number">10.4.7</span> Skewness and Kurtosis for Transformed <code>CONT</code> and <code>PHYS</code> Variables</h3>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calculate skewness and kurtosis for transformed variables</span></span>
+<span><span class="va">skewness_vals_trans</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"LOG_CONT"</span>, <span class="st">"BOX_COX_PHYS"</span><span class="op">)</span><span class="op">]</span>, <span class="va">skewness</span><span class="op">)</span></span>
+<span><span class="va">kurtosis_vals_trans</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"LOG_CONT"</span>, <span class="st">"BOX_COX_PHYS"</span><span class="op">)</span><span class="op">]</span>, <span class="va">kurtosis</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create a data frame to display skewness and kurtosis for transformed variables</span></span>
+<span><span class="va">skew_kurt_df_trans</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  Skewness <span class="op">=</span> <span class="va">skewness_vals_trans</span>,</span>
+<span>  Kurtosis <span class="op">=</span> <span class="va">kurtosis_vals_trans</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Display the data frame as a table</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">skew_kurt_df_trans</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-skewness-kurtosis_transformed" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-skewness-kurtosis_transformed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.3: Skewness and Kurtosis for Transformed Variables (LOG_CONT and BOX_COX_PHYS)
+</figcaption><div aria-describedby="tbl-skewness-kurtosis_transformed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Skewness</th>
+<th style="text-align: right;">Kurtosis</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">LOG_CONT</td>
+<td style="text-align: right;">0.6555572</td>
+<td style="text-align: right;">3.758254</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BOX_COX_PHYS</td>
+<td style="text-align: right;">-0.3813574</td>
+<td style="text-align: right;">2.501916</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section></section><section id="results" class="level2" data-number="10.5"><h2 data-number="10.5" class="anchored" data-anchor-id="results">
+<span class="header-section-number">10.5</span> Results</h2>
+<p>The application of log and Box-Cox transformations has effectively improved the normality of the <code>CONT</code> and <code>PHYS</code> variables, respectively. For the <code>CONT</code> variable, the original distribution exhibited a positive skewness of 1.086 and a kurtosis of 4.730, indicating a right-skewed distribution with heavy tails and a sharp peak. The log transformation reduced the skewness to 0.656 and the kurtosis to 3.758, demonstrating a significant move towards normality, though the distribution still retains some right-skewness and heavier tails compared to a normal distribution. The <code>PHYS</code> variable originally had a negative skewness of -1.558 and a kurtosis of 5.408, reflecting a left-skewed distribution with heavy tails and a pronounced peak. Following the Box-Cox transformation, the skewness was reduced to -0.381 and the kurtosis to 2.502. These results indicate that the transformed <code>PHYS</code> distribution is much closer to normality, with reduced skewness and lighter tails, achieving a more symmetric distribution. In summary, the transformations have substantially mitigated the skewness and kurtosis of both variables, enhancing their suitability for statistical analyses that assume normality. This adjustment ensures more reliable and valid results in subsequent analyses.</p>
+</section><section id="conclusion-and-discussion" class="level2" data-number="10.6"><h2 data-number="10.6" class="anchored" data-anchor-id="conclusion-and-discussion">
+<span class="header-section-number">10.6</span> Conclusion and Discussion</h2>
+<p>The transformations applied to the CONT and PHYS variables demonstrate the effectiveness of data transformation techniques in improving the normality of distributions. By addressing skewness and kurtosis, transformations like the log and Box-Cox methods help in stabilizing variance and making data more symmetric. This enhancement is crucial for statistical analyses that rely on the assumption of normality, ensuring more accurate and reliable results. Overall, the use of appropriate transformations is a vital step in data preprocessing, significantly enhancing the suitability of data for various analytical procedures and improving the robustness of statistical inferences. However, caution is warranted in the interpretation of results after transformation. Transformed data can sometimes complicate the understanding of results and their real-world implications, as the transformed scale may not directly relate to the original measurements. It is essential to back-transform results when interpreting findings to ensure they are meaningful and relevant to the original context.</p>
+</section><section id="references" class="level2" data-number="10.7"><h2 data-number="10.7" class="anchored" data-anchor-id="references">
+<span class="header-section-number">10.7</span> References</h2>
+<ol type="1">
+<li>Manikandan S. (2010). Data transformation. <em>Journal of pharmacology &amp; pharmacotherapeutics</em>, <em>1</em>(2), 126–127. https://doi.org/10.4103/0976-500X.72373</li>
+<li>West R. M. (2022). Best practice in statistics: The use of log transformation. <em>Annals of clinical biochemistry</em>, <em>59</em>(3), 162–165. https://doi.org/10.1177/00045632211050531</li>
+<li>Lee D. K. (2020). Data transformation: a focus on the interpretation. <em>Korean journal of anesthesiology</em>, <em>73</em>(6), 503–508. https://doi.org/10.4097/kja.20137</li>
+</ol>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/gabrielodom\.github\.io\/PHC6099_rBiostat\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../lessons/02_wilcoxon_one_samp.html" class="pagination-link" aria-label="Wilcoxon Signed Rank Test for One Sample">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../lessons_original/02_fisher_exact_test.html" class="pagination-link" aria-label="Fisher's Exact Test">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/02_transformations.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+
+
+</body></html>

@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Gabriel Odom">
-<meta name="dcterms.date" content="2024-05-28">
+<meta name="dcterms.date" content="2024-06-11">
 
-<title>An R Cookbook for Public Health - 13&nbsp; Bootstrap Confidence Intervals</title>
+<title>An R Cookbook for Public Health - 14&nbsp; Bootstrap Confidence Intervals</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -166,7 +166,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons_original/03_two_sample_bootstrap_conf_int.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons_original/03_two_sample_bootstrap_conf_int.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -275,8 +275,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons_original/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -293,25 +299,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -328,43 +334,43 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -381,7 +387,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -398,7 +404,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
   </div>
 </li>
       </ul>
@@ -415,7 +421,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -430,28 +436,28 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#bootstrap" id="toc-bootstrap" class="nav-link active" data-scroll-target="#bootstrap"><span class="header-section-number">13.1</span> Bootstrap</a>
+  <li><a href="#bootstrap" id="toc-bootstrap" class="nav-link active" data-scroll-target="#bootstrap"><span class="header-section-number">14.1</span> Bootstrap</a>
   <ul class="collapse">
-  <li><a href="#when-to-use-bootstrapping" id="toc-when-to-use-bootstrapping" class="nav-link" data-scroll-target="#when-to-use-bootstrapping"><span class="header-section-number">13.1.1</span> When to use bootstrapping?</a></li>
+  <li><a href="#when-to-use-bootstrapping" id="toc-when-to-use-bootstrapping" class="nav-link" data-scroll-target="#when-to-use-bootstrapping"><span class="header-section-number">14.1.1</span> When to use bootstrapping?</a></li>
   </ul></li>
-  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">13.2</span> Packages</a></li>
-  <li><a href="#penguins" id="toc-penguins" class="nav-link" data-scroll-target="#penguins"><span class="header-section-number">13.3</span> Penguins</a>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">14.2</span> Packages</a></li>
+  <li><a href="#penguins" id="toc-penguins" class="nav-link" data-scroll-target="#penguins"><span class="header-section-number">14.3</span> Penguins</a>
   <ul class="collapse">
-  <li><a href="#distribution" id="toc-distribution" class="nav-link" data-scroll-target="#distribution"><span class="header-section-number">13.3.1</span> Distribution</a></li>
-  <li><a href="#bootstrapping-test" id="toc-bootstrapping-test" class="nav-link" data-scroll-target="#bootstrapping-test"><span class="header-section-number">13.3.2</span> Bootstrapping Test</a></li>
-  <li><a href="#building-confidence-intervals-for-various-statistics-example-1" id="toc-building-confidence-intervals-for-various-statistics-example-1" class="nav-link" data-scroll-target="#building-confidence-intervals-for-various-statistics-example-1"><span class="header-section-number">13.3.3</span> Building Confidence Intervals for Various Statistics: Example 1</a></li>
-  <li><a href="#building-confidence-intervals-for-various-statistics-example-2" id="toc-building-confidence-intervals-for-various-statistics-example-2" class="nav-link" data-scroll-target="#building-confidence-intervals-for-various-statistics-example-2"><span class="header-section-number">13.3.4</span> Building Confidence Intervals for Various Statistics: Example 2</a></li>
+  <li><a href="#distribution" id="toc-distribution" class="nav-link" data-scroll-target="#distribution"><span class="header-section-number">14.3.1</span> Distribution</a></li>
+  <li><a href="#bootstrapping-test" id="toc-bootstrapping-test" class="nav-link" data-scroll-target="#bootstrapping-test"><span class="header-section-number">14.3.2</span> Bootstrapping Test</a></li>
+  <li><a href="#building-confidence-intervals-for-various-statistics-example-1" id="toc-building-confidence-intervals-for-various-statistics-example-1" class="nav-link" data-scroll-target="#building-confidence-intervals-for-various-statistics-example-1"><span class="header-section-number">14.3.3</span> Building Confidence Intervals for Various Statistics: Example 1</a></li>
+  <li><a href="#building-confidence-intervals-for-various-statistics-example-2" id="toc-building-confidence-intervals-for-various-statistics-example-2" class="nav-link" data-scroll-target="#building-confidence-intervals-for-various-statistics-example-2"><span class="header-section-number">14.3.4</span> Building Confidence Intervals for Various Statistics: Example 2</a></li>
   </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">13.4</span> Conclusion</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">14.4</span> Conclusion</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/03_two_sample_bootstrap_conf_int.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons_original/03_two_sample_bootstrap_conf_int.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons_original/03_two_sample_bootstrap_conf_int.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></h1>
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></h1>
 </div>
 
 
@@ -468,7 +474,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 28, 2024</p>
+      <p class="date">June 11, 2024</p>
     </div>
   </div>
   
@@ -480,17 +486,17 @@ window.Quarto = {
 </header>
 
 
-<section id="bootstrap" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="bootstrap"><span class="header-section-number">13.1</span> Bootstrap</h2>
+<section id="bootstrap" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="bootstrap"><span class="header-section-number">14.1</span> Bootstrap</h2>
 <p>What is <strong>bootstrapping</strong>?</p>
 <p>Bootstrapping is a technique from Efron (1979) that is built on a simple idea: if the data we have is a sample from a population, why don’t we sample from our own data to make more samples? Now, because we don’t have access to any new data, we’re going to take samples of our data set <em>with replacement</em>.</p>
-<section id="when-to-use-bootstrapping" class="level3" data-number="13.1.1">
-<h3 data-number="13.1.1" class="anchored" data-anchor-id="when-to-use-bootstrapping"><span class="header-section-number">13.1.1</span> When to use bootstrapping?</h3>
+<section id="when-to-use-bootstrapping" class="level3" data-number="14.1.1">
+<h3 data-number="14.1.1" class="anchored" data-anchor-id="when-to-use-bootstrapping"><span class="header-section-number">14.1.1</span> When to use bootstrapping?</h3>
 <p>The purpose of bootstrapping is to increase the sample size for our analysis when the sample we have been given is small.</p>
 </section>
 </section>
-<section id="packages" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="packages"><span class="header-section-number">13.2</span> Packages</h2>
+<section id="packages" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="packages"><span class="header-section-number">14.2</span> Packages</h2>
 <p><code>palmerpenguins</code> - The dataset we will using in this Lesson.</p>
 <p><code>tidyverse</code> - includes the packages to be used for data wrangling.</p>
 <p><code>boot</code> - The R package boot generates bootstrap samples in R.</p>
@@ -515,8 +521,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="penguins" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="penguins"><span class="header-section-number">13.3</span> Penguins</h2>
+<section id="penguins" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="penguins"><span class="header-section-number">14.3</span> Penguins</h2>
 <p>This Data was collected and made available by Dr.&nbsp;Kristen Gorman and the Palmer Station, Antarctica. The palmerpenguins package contains two datasets. One is called penguins, and is a simplified version of the raw data.</p>
 <p>Penguins includes measurements for penguin species, island in Palmer Archipelago, size (flipper length, body mass, bill dimensions), and sex. The full dataset contains A tibble with 344 rows and 8 variables<span class="citation" data-cites="horst_palmerpenguins_2020">(<a href="#ref-horst_palmerpenguins_2020" role="doc-biblioref">Horst, Hill, and Gorman 2020</a>)</span>.</p>
 <blockquote class="blockquote">
@@ -561,8 +567,8 @@ window.Quarto = {
  $ flipper_length_mm: int [1:95] 174 180 189 185 180 187 183 187 172 180 ...</code></pre>
 </div>
 </div>
-<section id="distribution" class="level3" data-number="13.3.1">
-<h3 data-number="13.3.1" class="anchored" data-anchor-id="distribution"><span class="header-section-number">13.3.1</span> Distribution</h3>
+<section id="distribution" class="level3" data-number="14.3.1">
+<h3 data-number="14.3.1" class="anchored" data-anchor-id="distribution"><span class="header-section-number">14.3.1</span> Distribution</h3>
 <p>Boxplots and histograms will be useful to understand the distribution of the data.</p>
 <p>Our data is not normal based on the distribution.</p>
 <div class="cell">
@@ -601,8 +607,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="bootstrapping-test" class="level3" data-number="13.3.2">
-<h3 data-number="13.3.2" class="anchored" data-anchor-id="bootstrapping-test"><span class="header-section-number">13.3.2</span> Bootstrapping Test</h3>
+<section id="bootstrapping-test" class="level3" data-number="14.3.2">
+<h3 data-number="14.3.2" class="anchored" data-anchor-id="bootstrapping-test"><span class="header-section-number">14.3.2</span> Bootstrapping Test</h3>
 <p>We need the difference in means in order to conduct our permutation test. We will test whether the difference is significant so that we can reject the null. This indicates that there is a different in flipper length among the same species that come from different islands.</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -663,8 +669,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="building-confidence-intervals-for-various-statistics-example-1" class="level3" data-number="13.3.3">
-<h3 data-number="13.3.3" class="anchored" data-anchor-id="building-confidence-intervals-for-various-statistics-example-1"><span class="header-section-number">13.3.3</span> Building Confidence Intervals for Various Statistics: Example 1</h3>
+<section id="building-confidence-intervals-for-various-statistics-example-1" class="level3" data-number="14.3.3">
+<h3 data-number="14.3.3" class="anchored" data-anchor-id="building-confidence-intervals-for-various-statistics-example-1"><span class="header-section-number">14.3.3</span> Building Confidence Intervals for Various Statistics: Example 1</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The Sample Mean</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>bootMeans_num <span class="ot">&lt;-</span></span>
@@ -690,8 +696,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="building-confidence-intervals-for-various-statistics-example-2" class="level3" data-number="13.3.4">
-<h3 data-number="13.3.4" class="anchored" data-anchor-id="building-confidence-intervals-for-various-statistics-example-2"><span class="header-section-number">13.3.4</span> Building Confidence Intervals for Various Statistics: Example 2</h3>
+<section id="building-confidence-intervals-for-various-statistics-example-2" class="level3" data-number="14.3.4">
+<h3 data-number="14.3.4" class="anchored" data-anchor-id="building-confidence-intervals-for-various-statistics-example-2"><span class="header-section-number">14.3.4</span> Building Confidence Intervals for Various Statistics: Example 2</h3>
 <p>Source: <a href="https://www.geeksforgeeks.org/bootstrap-confidence-interval-with-r-programming/" class="uri">https://www.geeksforgeeks.org/bootstrap-confidence-interval-with-r-programming/</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Custom function to find correlation between the bill length and depth </span></span>
@@ -755,8 +761,8 @@ Calculations and Intervals on Original Scale</code></pre>
 </div>
 </section>
 </section>
-<section id="conclusion" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">13.4</span> Conclusion</h2>
+<section id="conclusion" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">14.4</span> Conclusion</h2>
 <p>The bootstrapping method is useful when working with data with relatively small samples in order to increase the sample size and normality of the data.</p>
 
 
@@ -1180,12 +1186,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../lessons_original/03_two_sample_mann_whitney.html" class="pagination-link" aria-label="Mann-Whittney-U Test Example">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="pagination-link" aria-label="Chi-Squared Independence">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
