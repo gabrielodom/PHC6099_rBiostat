@@ -1,0 +1,380 @@
+---
+title: "Mann-Whitney-U Test Example"
+author: 
+  - "Srijana Acharya"
+  - "Arturo Barahona"
+  - "Gemma Galvez"
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+---
+
+```{r}
+#| label: tidyverse
+#| echo: false
+
+# Install required packages
+library(conflicted)
+conflict_prefer("filter", "dplyr", quiet = TRUE)
+conflict_prefer("lag", "dplyr", quiet = TRUE)
+
+suppressPackageStartupMessages(library(tidyverse))
+
+# suppress "`summarise()` has grouped output by " messages
+options(dplyr.summarise.inform = FALSE)
+
+```
+
+## Introduction
+
+-   **Mann Whitney *U* test**, also known as the Wilcoxon Rank-Sum test, is a nonparametric statistical test of the null hypothesis, which is commonly used to compare the means or medians of **two independent** groups with the **assumption** that the at least one group **is not** normally distributed and when the sample size is small.
+
+    -   The Welch *U* test should be used when signs of skewness and variance of [heterogeneity.](https://pubmed.ncbi.nlm.nih.gov/19247980/)
+
+-   It is useful for **numerical/continuous variables**.
+
+    -   For example, if researchers want to compare the age or height of two different groups (as continuous variables) in a study with non-normally distributed [data.](https://pubmed.ncbi.nlm.nih.gov/32809534/)
+
+-   When conducting this test, aside from reporting the *p-value*, the spread and the shape of the data should be [described.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1120984/)
+
+**Overall goal:** Identify whether the distribution of two groups significantly differs.
+
+#### Assumptions
+
+1.  Samples are independent: Each dependent variable must be related to only one independent variable.
+
+2.  The response variable is ordinal or continuous.
+
+3.  At least one variable is not normally distributed.
+
+### Hypotheses
+
+Null Hypothesis **(*H~0~*):** *Distribution*~1~ = *Distribution*~2~
+
+-   Mean/Median Ranks of two levels are [equal.](https://www.r-tutor.com/content/r-tutorial-ebook)
+
+Alternate Hypothesis **(*H~1~*):** *Distribution*~1~ ≠ *Distribution*~2~
+
+-   Mean/Median Ranks of two levels are significantly [different.](https://www.r-tutor.com/content/r-tutorial-ebook)
+
+#### Mathematical Equation
+
+$U_1 = n_1n_2 + \frac{n_1 \cdot (n_1 + 1)}{2} - R_1$
+
+$U_2 = n_1n_2 + \frac{n_2 \cdot (n_2 + 1)}{2} - R_2$
+
+Where:
+
+-   $U_1$ and $U_2$ represent the test statistics for two groups (Male & Female).
+-   $R_1$ and $R_2$ represent the sum of the ranks of the observations for two groups.
+-   $n_1$ and $n_2$ are the sample sizes for two groups.
+
+## Performing **Mann-Whitney *U* Test** in R
+
+### Data Source
+
+In this example, we will perform the **Mann-Whitney *U* Test** using wave 8 (2012-2013) data of a longitudinal epidemiological study titled *Hispanic Established Populations For the Epidemiological Study of Elderly* (HEPESE).
+
+The HEPESE provides data on risk factors for mortality and morbidity in Mexican Americans in order to contrast how these factors operate differently in non-Hispanic White Americans, African Americans, and other major ethnic groups. The data is publicly available and can be obtained from the University of Michigan [website.](https://www.icpsr.umich.edu/web/NACDA/series/546) For the purposes of this report/chapter, the example in the analysis uses synthetic data. 
+Using this data, we want to explore whether there are significant gender differences in age when Type 2 diabetes mellitus (T2DM) is diagnosed. Type 2 diabetes is a chronic disease condition that has affected 37 million people living in the United States. Type 2 diabetes is the eighth leading cause of death and disability in US. Type 2 diabetes generally occurs among adults aged 45 or older, but may also occur amongst young adults and children. Diabetes and its complications are often preventable by following  lifestyle guidelines and taking medication in a timely manner. ***1 in 5 of US people don't know they have [diabetes.](https://www.cdc.gov/diabetes/basics/quick-facts.html)*** 
+
+Research has shown that men are more likely to develop type 2 diabetes, while women are more likely to experience complications from type 2 diabetes, including heart and kidney [disease.](https://www.medicalnewstoday.com/articles/diabetes-affects-men-women) 
+
+In this report, we want to test whether there are significant differences in age at which diabetes is diagnosed among males and females.
+
+[Dependent Response Variable]{.underline}: ageAtDx = Age_Diagnosed = Age at which diabetes is diagnosed.
+
+[Independent Variable]{.underline}: isMale = Gender
+
+**Research Question:** Does the age at which diabetes is diagnosed significantly differ among men and women?
+
+Null Hypothesis **(*H~0~*):** Mean rank of age at which diabetes is diagnosed [*is equal*]{.underline} among men and women.
+
+Alternate Hypothesis **(*H~1~*):** Mean rank of age at which diabetes is diagnosed [*is not equal*]{.underline} among men and women.
+
+### Packages
+
+-   **gmodels:** Helps to compute and display confidence intervals (CI) for model [estimates.](https://cran.r-project.org/web/packages/gmodels/gmodels.pdf) 
+
+-   **DescTools:** Provides tools for basic statistics e.g. to compute Median CI for an efficient data [description.](https://andrisignorell.github.io/DescTools/)
+
+-   **ggplot2:** Helps to create boxplots.
+
+-   **qqplotr:** Helps to create QQ plot.
+
+-   **dplyr:** Used to manipulate data and provide summary statistics.
+
+-   **haven:** Helps to import SPSS data into r.
+
+***Dependencies = TRUE*** : Indicates that while installing packages, it must also install all dependencies of the specified package.
+
+```{r}
+#| label: installing_packages
+#| echo: true
+
+# install.packages("gmodels", dependencies = TRUE)
+# install.packages("car", dependencies = TRUE)
+# install.packages("DescTools", dependencies = TRUE)
+# install.packages("ggplot2", dependencies = TRUE)
+# install.packages("qqplotr", dependencies = TRUE)
+# install.packages("gtsummary", dependencies = TRUE)
+```
+
+**Loading Library**
+
+```{r}
+
+suppressPackageStartupMessages(library(haven))
+suppressPackageStartupMessages(library(ggpubr))
+suppressPackageStartupMessages(library(gmodels))
+suppressPackageStartupMessages(library(DescTools))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(qqplotr))
+suppressPackageStartupMessages(library(gtsummary))
+suppressPackageStartupMessages(library(tidyverse))
+```
+
+**Data Importing**
+
+```{r importing-data}
+
+HEPESE <- read_csv("../data/03_HEPESE_synthetic_20240510.csv")
+
+```
+
+### Data Exploration
+
+```{r data-exploration}
+# str(HEPESE)
+str(HEPESE$isMale)
+str(HEPESE$ageAtDx)
+```
+
+After inspecting the data, we found that values of our dependent and independent variable values are in character format. We want them to be numerical and categorical, respectively. First, we will convert the dependent variable into numerical form, and our independent variable into categorical. Then, we will recode the factors as male and female. For simplicity's sake, we will also rename our dependent and independent variable.
+
+```{r data-wrangling}
+
+# convert to number and factor
+HEPESE$ageAtDx <- as.numeric(HEPESE$ageAtDx)
+class(HEPESE$ageAtDx)
+
+HEPESE$isMale <- as_factor(HEPESE$isMale)
+class(HEPESE$isMale)
+
+```
+
+The next step is to calculate some of the descriptive data to give us a better idea of the data that we are dealing with. This can be done using the `summarise` function.
+
+**Descriptive Data**
+
+```{r}
+Des <- 
+ HEPESE %>% 
+ select(isMale, ageAtDx) %>% 
+ group_by(isMale) %>%
+ summarise(
+   n = n(),
+   mean = mean(ageAtDx, na.rm = TRUE),
+   sd = sd(ageAtDx, na.rm = TRUE),
+   stderr = sd/sqrt(n),
+   LCL = mean - qt(1 - (0.05 / 2), n - 1) * stderr,
+   UCL = mean + qt(1 - (0.05 / 2), n - 1) * stderr,
+   median = median(ageAtDx, na.rm = TRUE),
+   min = min(ageAtDx, na.rm = TRUE), 
+   max = max(ageAtDx, na.rm = TRUE),
+   IQR = IQR(ageAtDx, na.rm = TRUE),
+   LCLmed = MedianCI(ageAtDx, na.rm = TRUE)[2],
+   UCLmed = MedianCI(ageAtDx, na.rm = TRUE)[3]
+ )
+
+Des
+```
+
+1.  **n:** The number of observations for each gender.
+
+2.  **mean:** The mean age when diabetes is diagnosed for each gender.
+
+3.  **sd:** The standard deviation of each gender.
+
+4.  **stderr:** The standard error of each gender level. That is the standard deviation / sqrt (n).
+
+5.  **LCL, UCL:** The upper and lower confidence intervals of the mean. This values indicates the range at which we can be 95% certain that the true mean falls between the lower and upper values specified for each gender group assuming a normal distribution.
+
+6.  **median:** The median value for each gender.
+
+7.  **min, max:** The minimum and maximum value for each gender.
+
+8.  **IQR:** The interquartile range of each gender. That is the 75th percentile -- 25th percentile.
+
+9.  **LCLmed, UCLmed:** The 95% confidence interval for the median.
+
+**Checking Assumptions and Visualizing the Data**
+
+The next step is to visualize the data. This can be done using different functions under the `ggplot` package. 
+
+**1) Box plot**
+
+```{r}
+ggplot(
+ HEPESE, 
+ aes(
+   x = isMale, 
+   y = ageAtDx, 
+   fill = isMale
+ )
+) +
+ stat_boxplot(
+   geom = "errorbar", 
+   width = 0.5
+ ) +
+ geom_boxplot(
+   fill = "light blue"
+ ) + 
+ stat_summary(
+   fun = mean, 
+   geom = "point", 
+   shape = 10, 
+   size = 3.5, 
+   color = "black"
+ ) + 
+ ggtitle(
+   "Boxplot of Gender"
+ ) + 
+ theme_bw() + 
+ theme(
+   legend.position = "none"
+ )
+```
+
+**2) QQ plot**
+
+```{r}
+ 
+library(conflicted)
+conflict_prefer("stat_qq_line", "qqplotr", quiet = TRUE)
+
+
+# Perform QQ plots by group
+QQ_Plot <- 
+ggplot(
+ data = HEPESE, 
+ aes(
+   sample = ageAtDx, 
+   color = isMale, 
+   fill = isMale
+ )
+) +
+ stat_qq_band(
+   alpha = 0.5, 
+   conf = 0.95, 
+   qtype = 1, 
+   bandType = "boot"
+ ) +
+ stat_qq_line(
+   identity = TRUE
+ ) +
+ stat_qq_point(
+   col = "black"
+ ) +
+ facet_wrap(
+   ~ isMale, scales = "free"
+ ) +
+ labs(
+   x = "Theoretical Quantiles", 
+   y = "Sample Quantiles"
+ ) + theme_bw()
+
+QQ_Plot
+```
+
+-   **stat_qq_line:** Draws a reference line based on the data quantiles.
+
+-   **Stat_qq_band:** Draws confidence bands based on three methods; "pointwise"/"boot","Ks" and "ts".
+
+    -   `"pointwise"` constructs simultaneous confidence bands based on the normal distribution;
+
+    -   `"boot"` creates pointwise confidence bands based on a parametric boostrap;
+
+    -   `"ks"` constructs simultaneous confidence bands based on an inversion of the Kolmogorov-Smirnov test;
+
+    -   `"ts"` constructs tail-sensitive confidence [bands](http://www.tandfonline.com/doi/abs/10.1080/00031305.2013.847865) 
+
+-   **Stat_qq_Point:** Is a modified version of ggplot: : stat_qq with some parameters adjustments and a new option to detrend the points.
+
+    **3) Histogram**
+
+    A histogram is the most commonly used graph to show frequency distributions.
+
+```{r}
+#| message: false
+ggplot(HEPESE) +
+  aes(x = ageAtDx, fill = isMale) +
+  geom_histogram() +
+  facet_wrap(~ isMale) 
+```
+
+    **3b) Density curve in Histogram**
+
+A density curve gives us a good idea of the "shape" of a distribution, including whether or not a distribution has one or more "peaks" of frequently occurring values and whether or not the distribution is skewed to the [left or the right.](https://www.statology.org/density-curves/) 
+
+```{r}
+ggplot(HEPESE) +
+  aes(
+    x = ageAtDx,
+    fill = isMale
+  ) +
+  labs(
+    x = "Age When diabetes is diagnosed",
+    y = "Density",
+    fill = "Gender",
+    title = "A Density Plot of Age when diabetes is diagnosed",
+    caption = "Data Source: HEPESE Wave 8 (ICPSR 36578)"
+  ) + 
+  geom_density() +
+  facet_wrap(~isMale)
+```
+
+This density curve shows that our data does not have a bell shaped distribution and it is slightly skewed towards the left.
+
+**4) Statistical test for normality**
+
+```{r}
+HEPESE %>%
+  group_by(isMale) %>%
+  summarise(
+    `W Stat` = shapiro.test(ageAtDx)$statistic,
+    p.value = shapiro.test(ageAtDx)$p.value
+  )
+```
+
+**Interpretation**
+
+From the above table, we see that the value of the Shapiro-Wilk Test is 0.0006 and 0.000002, which are both less than 0.05. Therefore we have enough evidence to reject the null hypothesis and confirm that the data significantly deviates from a normal distribution.
+
+### Mann Whitney *U* Test
+
+```{r}
+
+result <- wilcox.test(
+  ageAtDx ~ isMale, 
+  data = HEPESE, 
+  na.rm = TRUE, 
+  exact = FALSE, 
+  conf.int = TRUE
+)
+
+tibble(
+  Test_Statistic = result$statistic,
+  P_Value = result$p.value,
+  Method = result$method
+)
+```
+
+## Results
+
+While the analysis above is for synthetic data, we see that the mean age at which diabetes is diagnosed is not significantly different in males (69 years old) and females (66 years old). Of note, the Mann-Whitney U-Test applied in the real data (not shown in this report) showed that this difference is not statistically significant at 0.05 level of significance because the statistical p value (p=.155) is greater than the critical value (p=0.05). For the real data, the test statistic is W = 5040.
+
+## Conclusion
+
+From the above result, we can conclude that gender does not play a significant role in the age at which one is diagnosed with diabetes. Diabetes is the 8th leading cause of death and disability in the US, and 1 in 5 US adults are currently unaware of their diabetes condition. This urges the need for increased policy efforts towards timely diabetes testing and diagnosing. Although previous research has suggested that there are gender based differences in diabetes related severity of [inquiries,](https://doi.org/10.1210/er.2015-1137) our findings suggest that this difference is not due to age, and may be due to other gender based differences, such as willingness to seek medical care, underlying health issues, etc. There may not necessarily be a need for gender-based approaches to interventions aimed at increasing diabetes surveillance, and efforts should focus on targeting the population as a whole.

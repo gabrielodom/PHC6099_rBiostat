@@ -1,0 +1,198 @@
+---
+title: "Bootstrap Tests"
+author:
+  - name: Shelly Sinclair, Alvonee Penn, & Ivan Pachon
+    affiliations:
+      - Florida International University
+      - Robert Stempel College of Public Health and Social Work
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+---
+
+```{r}
+#| label: load-packages
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(palmerpenguins)
+library(boot)
+```
+
+
+
+## Introduction to Bootstrapping
+
+Bootstrapping, introduced by Brad Efron in 1979, is founded on a straightforward concept: when our data is a sample from a larger population, why not generate additional samples by resampling from our existing data? However, since we lack access to new data, we resort to repeatedly sampling from our dataset with replacement.
+
+The primary objective of bootstrapping is to augment the sample size for analysis, particularly in scenarios where the provided sample size is limited.
+
+
+
+## Mathematical definition
+
+Bootstrapping involves randomly selecting n observations from a sample with replacement to create a bootstrap sample. The process of sampling with replacement allows each observation in the original dataset to be selected multiple times or not at all in the bootstrap sample.
+
+Once a bootstrap sample is obtained, the statistic of interest (e.g., mean, median, standard deviation) is calculated from this sample. This process is repeated multiple times to generate a distribution of the statistic under the assumption that the original dataset is representative of the population.
+
+Bootstrapping can be used to construct confidence intervals for a population parameter (e.g., mean, median) by calculating the desired quantiles (e.g., percentiles) of the bootstrap distribution of the statistic.
+
+
+
+## `penguins` Data
+
+The `penguins` dataset contains measurements collected in the Palmer Archipelago of Antarctica, made available by Dr. Kristen Gorman and the Palmer Station Long Term Ecological Research (LTER) Program. This dataset, included in the `palmerpenguins` package, comprises observations on various attributes of penguins, including species, island of origin, physical measurements (such as flipper length, body mass, and bill dimensions), sex, and year of observation. In total, the dataset consists of 344 rows and 8 variables.
+
+In this tests we are going to obtain the 95% confidence interval for flipper length of the Adelie penguin from two different Islands.
+
+
+
+## Cleaning the data
+
+```{r}
+#| label: wrangle-data
+#| warning: false
+#| message: false
+#| code-fold: show
+
+new_penguins_df <- 
+  filter(penguins, species == "Adelie", island != "Dream") %>% 
+  select(species, island, flipper_length_mm) %>% 
+  arrange(island, .by_group = TRUE) %>% 
+  drop_na()
+
+view(new_penguins_df)
+```
+
+The island of Dream penguin population was excluded because their population size was much larger compared to Torgersen and Biscoe populations.
+
+
+
+## Assumptions of Bootstrap
+
+- The dataset is a random sample drawn representative of the population of interest.
+- Resampling with replacement accurately simulates the sampling process.
+- Observations in the dataset are independent and identically distributed
+
+
+
+## Checking Distribution
+
+```{r}
+#| label: check-distribution
+#| code-fold: show
+
+# check the boxplot of the data
+boxplot(
+  new_penguins_df$flipper_length_mm ~ new_penguins_df$island, las = 1, 
+  ylab = "Flipper Length (mm)",
+  xlab = "Island",
+  main = "Flipper Length by Island"
+)
+
+# check the histogram of the data
+hist(
+  x = new_penguins_df$flipper_length_mm,
+  main = "Distribution of Flipper Length (mm)",
+  xlab = "Flipper Length"
+)
+```
+
+
+
+## Code to run Bootstrap
+
+```{r}
+#| label: bootstrap-sample
+#| code-fold: show
+
+# set a seed so that our random results can be replicated by other people:
+set.seed(20150516)
+
+# take a random re-sample of the data that is the *same size*
+N <- length(new_penguins_df$flipper_length_mm)
+
+# a random sample:
+sample(new_penguins_df$flipper_length_mm, size = N, replace = TRUE)
+
+# number of bootstrap samples
+B_int <- 10000
+
+# create a list of these thousands of samples 
+bootstrapSamples_ls <- map(
+  .x = 1:B_int,
+  .f = ~{
+    sample(new_penguins_df$flipper_length_mm, size = N, replace = TRUE)
+  }
+)
+
+# subset of the random samples
+bootstrapSamples_ls[1:3]
+
+```
+
+```{r}
+#| label: bootstrap-means
+#| code-fold: show
+
+# The Sample Mean
+bootMeans_num <-
+  bootstrapSamples_ls %>%
+  # the map_dbl() function takes in a list and returns an atomic vector of type
+  #   double (numeric)
+  map_dbl(mean)
+
+# a normally distributed histogram using the samples from bootstrapping
+hist(bootMeans_num)
+
+# 95% confidence interval?
+quantile(bootMeans_num, probs = c(0.025, 0.975))
+```
+
+
+### Code for spearman correlation
+
+```{r}
+#| label: spearman-correlation
+#| code-fold: show
+
+# Custom function to find correlation between the bill length and depth 
+corr.fun <- function(data, idx) {
+  
+# vector of indices that the boot function uses
+  df <- data[idx, ]
+
+# Find the spearman correlation between
+# the 3rd (length) and 4th (depth) columns of dataset
+  cor(df[, 3], df[, 4], method = 'spearman')
+}
+
+# Setting the seed for reproducability of results
+set.seed(42)
+
+# Calling the boot function with the dataset
+bootstrap <- boot(iris, corr.fun, R = 1000)
+
+# Display the result of boot function
+bootstrap
+
+# Plot the bootstrap sampling distribution using ggplot
+plot(bootstrap)
+
+# Function to find the bootstrap CI
+boot.ci(
+  boot.out = bootstrap,
+	type = "perc"
+)
+
+```
+
+This code utilizes bootstrapping to estimate the sampling distribution and confidence interval of the Spearman correlation coefficient between bill length and depth in the iris dataset. The `boot()` function generates bootstrap samples, while the `boot.ci()` function calculates the bootstrap confidence interval. Visualizations are provided to aid in understanding the sampling distribution.
+
+
+
+## Conclusion
+
+In conclusion, bootstrap testing emerges as a valuable tool, particularly when confronted with small sample sizes. By leveraging resampling techniques, it offers a robust method to estimate parameters, assess uncertainty, and make reliable inferences about population statistics.

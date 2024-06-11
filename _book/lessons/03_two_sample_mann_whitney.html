@@ -5,8 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<meta name="dcterms.date" content="2024-06-11">
-<title>An R Cookbook for Public Health - 13&nbsp; Mann-Whittney-U Test Example</title>
+<title>An R Cookbook for Public Health - 13&nbsp; Mann-Whitney-U Test Example</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -62,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../lessons_original/03_two_sample_bootstrap_conf_int.html" rel="next">
+<link href="../lessons/03_two_sample_bootstrap_conf_int.html" rel="next">
 <link href="../lessons_original/03_two_sample_ttest.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -132,7 +131,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons_original/03_two_sample_mann_whitney.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/03_two_sample_mann_whitney.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -266,14 +265,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></span></a>
+  <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></span></a>
+  <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -405,7 +404,7 @@ window.Quarto = {
   <li>
 <a href="#performing-mann-whitney-u-test-in-r" id="toc-performing-mann-whitney-u-test-in-r" class="nav-link" data-scroll-target="#performing-mann-whitney-u-test-in-r"><span class="header-section-number">13.2</span> Performing <strong>Mann-Whitney <em>U</em> Test</strong> in R</a>
   <ul class="collapse">
-<li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">13.2.1</span> Data</a></li>
+<li><a href="#data-source" id="toc-data-source" class="nav-link" data-scroll-target="#data-source"><span class="header-section-number">13.2.1</span> Data Source</a></li>
   <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">13.2.2</span> Packages</a></li>
   <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration"><span class="header-section-number">13.2.3</span> Data Exploration</a></li>
   <li><a href="#mann-whitney-u-test" id="toc-mann-whitney-u-test" class="nav-link" data-scroll-target="#mann-whitney-u-test"><span class="header-section-number">13.2.4</span> Mann Whitney <em>U</em> Test</a></li>
@@ -413,13 +412,12 @@ window.Quarto = {
 </li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">13.3</span> Results</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">13.4</span> Conclusion</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/03_two_sample_mann_whitney.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/03_two_sample_mann_whitney.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons_original/03_two_sample_mann_whitney.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/03_two_sample_mann_whitney.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Mann-Whittney-U Test Example</span>
+<span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span>
 </h1>
 </div>
 
@@ -432,15 +430,10 @@ window.Quarto = {
     <div class="quarto-title-meta-contents">
              <p>Srijana Acharya </p>
              <p>Arturo Barahona </p>
+             <p>Gemma Galvez </p>
           </div>
   </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">June 11, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -451,32 +444,38 @@ window.Quarto = {
 <span class="header-section-number">13.1</span> Introduction</h2>
 <ul>
 <li>
-<p><strong>Mann Whitney <em>U</em> test</strong>, also known as the Wilcoxon Rank-Sum test, is commonly used to compare the means or medians of <strong>two independent</strong> groups with the <strong>assumption</strong> that the at least one group <strong>is not</strong> normally distributed and when sample size is small.</p>
+<p><strong>Mann Whitney <em>U</em> test</strong>, also known as the Wilcoxon Rank-Sum test, is a nonparametric statistical test of the null hypothesis, which is commonly used to compare the means or medians of <strong>two independent</strong> groups with the <strong>assumption</strong> that the at least one group <strong>is not</strong> normally distributed and when the sample size is small.</p>
 <ul>
-<li>The Welch <em>U</em> test should be used when there exists signs of skewness and variance of heterogeneity.<span class="citation" data-cites="fagerland2009"><sup><a href="#ref-fagerland2009" role="doc-biblioref"><strong>fagerland2009?</strong></a></sup></span>
+<li>The Welch <em>U</em> test should be used when signs of skewness and variance of <a href="https://pubmed.ncbi.nlm.nih.gov/19247980/">heterogeneity.</a>
 </li>
 </ul>
 </li>
 <li>
 <p>It is useful for <strong>numerical/continuous variables</strong>.</p>
 <ul>
-<li>For example, if researchers want to compare two different groups’ age or height (continuous variables)&nbsp;in a study with&nbsp;non-normally distributed data.<span class="citation" data-cites="sundjaja2023"><sup><a href="#ref-sundjaja2023" role="doc-biblioref"><strong>sundjaja2023?</strong></a></sup></span>
+<li>For example, if researchers want to compare the age or height of two different groups (as continuous variables) in a study with non-normally distributed <a href="https://pubmed.ncbi.nlm.nih.gov/32809534/">data.</a>
 </li>
 </ul>
 </li>
-<li><p>When conducting this test, aside from reporting the <em>p-value</em>, the spread, and the shape of the data should be described.<span class="citation" data-cites="hart2001"><sup><a href="#ref-hart2001" role="doc-biblioref"><strong>hart2001?</strong></a></sup></span></p></li>
+<li><p>When conducting this test, aside from reporting the <em>p-value</em>, the spread and the shape of the data should be <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1120984/">described.</a></p></li>
 </ul>
 <p><strong>Overall goal:</strong> Identify whether the distribution of two groups significantly differs.</p>
-<section id="hypotheses" class="level3" data-number="13.1.1"><h3 data-number="13.1.1" class="anchored" data-anchor-id="hypotheses">
+<section id="assumptions" class="level4" data-number="13.1.0.1"><h4 data-number="13.1.0.1" class="anchored" data-anchor-id="assumptions">
+<span class="header-section-number">13.1.0.1</span> Assumptions</h4>
+<ol type="1">
+<li><p>Samples are independent: Each dependent variable must be related to only one independent variable.</p></li>
+<li><p>The response variable is ordinal or continuous.</p></li>
+<li><p>At least one variable is not normally distributed.</p></li>
+</ol></section><section id="hypotheses" class="level3" data-number="13.1.1"><h3 data-number="13.1.1" class="anchored" data-anchor-id="hypotheses">
 <span class="header-section-number">13.1.1</span> Hypotheses</h3>
 <p>Null Hypothesis <strong>(<em>H<sub>0</sub></em>):</strong> <em>Distribution</em><sub>1</sub> = <em>Distribution</em><sub>2</sub></p>
 <ul>
-<li>Mean/Median Ranks of two levels are equal<span class="citation" data-cites="chiyau2020"><sup><a href="#ref-chiyau2020" role="doc-biblioref"><strong>chiyau2020?</strong></a></sup></span>
+<li>Mean/Median Ranks of two levels are <a href="https://www.r-tutor.com/content/r-tutorial-ebook">equal.</a>
 </li>
 </ul>
-<p>Alternate Hypothesis <strong>(<em>H<sub>1</sub></em>):</strong> <em>Distribution</em><sub>1</sub> ≠&nbsp;<em>Distribution</em><sub>2</sub></p>
+<p>Alternate Hypothesis <strong>(<em>H<sub>1</sub></em>):</strong> <em>Distribution</em><sub>1</sub> ≠ <em>Distribution</em><sub>2</sub></p>
 <ul>
-<li>Mean/Median Ranks of two levels are significantly different<span class="citation" data-cites="chiyau2020"><sup><a href="#ref-chiyau2020" role="doc-biblioref"><strong>chiyau2020?</strong></a></sup></span>
+<li>Mean/Median Ranks of two levels are significantly <a href="https://www.r-tutor.com/content/r-tutorial-ebook">different.</a>
 </li>
 </ul>
 <section id="mathematical-equation" class="level4" data-number="13.1.1.1"><h4 data-number="13.1.1.1" class="anchored" data-anchor-id="mathematical-equation">
@@ -486,47 +485,35 @@ window.Quarto = {
 <p>Where:</p>
 <ul>
 <li>
-<span class="math inline">\(U_1\)</span> and <span class="math inline">\(U_2\)</span> represent the test statistics for two groups;(Male &amp; Female).</li>
+<span class="math inline">\(U_1\)</span> and <span class="math inline">\(U_2\)</span> represent the test statistics for two groups (Male &amp; Female).</li>
 <li>
 <span class="math inline">\(R_1\)</span> and <span class="math inline">\(R_2\)</span> represent the sum of the ranks of the observations for two groups.</li>
 <li>
 <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> are the sample sizes for two groups.</li>
-</ul></section><section id="basic-criteria" class="level4" data-number="13.1.1.2"><h4 data-number="13.1.1.2" class="anchored" data-anchor-id="basic-criteria">
-<span class="header-section-number">13.1.1.2</span> Basic criteria</h4>
-<ol type="1">
-<li><p>Samples are independent: Each dependent variable must be related to only one independent variable.</p></li>
-<li><p>The response variable is ordinal or continuous.</p></li>
-<li><p>At least one variable is not normally distributed.</p></li>
-</ol></section></section></section><section id="performing-mann-whitney-u-test-in-r" class="level2" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="performing-mann-whitney-u-test-in-r">
+</ul></section></section></section><section id="performing-mann-whitney-u-test-in-r" class="level2" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="performing-mann-whitney-u-test-in-r">
 <span class="header-section-number">13.2</span> Performing <strong>Mann-Whitney <em>U</em> Test</strong> in R</h2>
-<section id="data" class="level3" data-number="13.2.1"><h3 data-number="13.2.1" class="anchored" data-anchor-id="data">
-<span class="header-section-number">13.2.1</span> Data</h3>
+<section id="data-source" class="level3" data-number="13.2.1"><h3 data-number="13.2.1" class="anchored" data-anchor-id="data-source">
+<span class="header-section-number">13.2.1</span> Data Source</h3>
 <p>In this example, we will perform the <strong>Mann-Whitney <em>U</em> Test</strong> using wave 8 (2012-2013) data of a longitudinal epidemiological study titled <em>Hispanic Established Populations For the Epidemiological Study of Elderly</em> (HEPESE).</p>
-<p>The HEPESE provides data on risk factors for mortality and morbidity in Mexican Americans in order to contrast how these factors operate differently in non-Hispanic White Americans, African Americans, and other major ethnic groups.The data is publicly available and can be obtained from the University of Michigan website.<span class="citation" data-cites="kyriakoss.markides2016"><sup><a href="#ref-kyriakoss.markides2016" role="doc-biblioref"><strong>kyriakoss.markides2016?</strong></a></sup></span></p>
-<p>Using this data, we want to explore whether there are significant gender differences in age when Type 2 diabetes mellitus (T2DM) is diagnosed. Type 2 diabetes is a chronic disease condition that has affected 37 million people living in the United States. Type 2 diabetes is the eighth leading cause of death and disability in US. Type 2 diabetes generally occurs among adults aged 45 or older although, young adults and children are also diagnosed with it these days. Diabetes and its complications are preventable when following proper lifestyles and timely medications. <strong><em>1 in 5 of US people don’t know they have diabetes.</em></strong><span class="citation" data-cites="national2020"><sup><a href="#ref-national2020" role="doc-biblioref"><strong>national2020?</strong></a></sup></span></p>
-<p>Research has shown that men are more likely to develop type 2 diabetes while women are more likely to experience complications, including heart and kidney disease.<span class="citation" data-cites="meissner2021"><sup><a href="#ref-meissner2021" role="doc-biblioref"><strong>meissner2021?</strong></a></sup></span></p>
+<p>The HEPESE provides data on risk factors for mortality and morbidity in Mexican Americans in order to contrast how these factors operate differently in non-Hispanic White Americans, African Americans, and other major ethnic groups. The data is publicly available and can be obtained from the University of Michigan <a href="https://www.icpsr.umich.edu/web/NACDA/series/546">website.</a> For the purposes of this report/chapter, the example in the analysis uses synthetic data. Using this data, we want to explore whether there are significant gender differences in age when Type 2 diabetes mellitus (T2DM) is diagnosed. Type 2 diabetes is a chronic disease condition that has affected 37 million people living in the United States. Type 2 diabetes is the eighth leading cause of death and disability in US. Type 2 diabetes generally occurs among adults aged 45 or older, but may also occur amongst young adults and children. Diabetes and its complications are often preventable by following lifestyle guidelines and taking medication in a timely manner. <strong><em>1 in 5 of US people don’t know they have <a href="https://www.cdc.gov/diabetes/basics/quick-facts.html">diabetes.</a></em></strong></p>
+<p>Research has shown that men are more likely to develop type 2 diabetes, while women are more likely to experience complications from type 2 diabetes, including heart and kidney <a href="https://www.medicalnewstoday.com/articles/diabetes-affects-men-women">disease.</a></p>
 <p>In this report, we want to test whether there are significant differences in age at which diabetes is diagnosed among males and females.</p>
-<p><u>Dependent Response Variable</u></p>
-<p>ageAtDx = Age_Diagnosed = Age at which diabetes is diagnosed.</p>
-<p><u>Independent Variable</u></p>
-<p>isMale = Gender</p>
-<p><strong>Research Question:</strong></p>
-<p><strong><em>Does the age at which diabetes is diagnosed significantly differ among Men and Women?</em></strong></p>
+<p><u>Dependent Response Variable</u>: ageAtDx = Age_Diagnosed = Age at which diabetes is diagnosed.</p>
+<p><u>Independent Variable</u>: isMale = Gender</p>
+<p><strong>Research Question:</strong> Does the age at which diabetes is diagnosed significantly differ among men and women?</p>
 <p>Null Hypothesis <strong>(<em>H<sub>0</sub></em>):</strong> Mean rank of age at which diabetes is diagnosed <u><em>is equal</em></u> among men and women.</p>
 <p>Alternate Hypothesis <strong>(<em>H<sub>1</sub></em>):</strong> Mean rank of age at which diabetes is diagnosed <u><em>is not equal</em></u> among men and women.</p>
 </section><section id="packages" class="level3" data-number="13.2.2"><h3 data-number="13.2.2" class="anchored" data-anchor-id="packages">
 <span class="header-section-number">13.2.2</span> Packages</h3>
 <ul>
-<li><p><strong>gmodels:</strong> It helps to compute and display confidence intervals (CI) for model estimates.<span class="citation" data-cites="warnes2022"><sup><a href="#ref-warnes2022" role="doc-biblioref"><strong>warnes2022?</strong></a></sup></span></p></li>
-<li><p><strong>DescTools:</strong> It provides tools for basic statistics e.g.&nbsp;to compute Median CI for an efficient data description.<span class="citation" data-cites="andrisignorell2023"><sup><a href="#ref-andrisignorell2023" role="doc-biblioref"><strong>andrisignorell2023?</strong></a></sup></span></p></li>
-<li><p><strong>ggplot2:</strong> It helps to create Boxplots.</p></li>
-<li><p><strong>qqplotr:</strong> It helps to create QQ plot.</p></li>
-<li><p><strong>dplyr:</strong> It is used to manipulate data and provide summary statistics.</p></li>
-<li>
-<p><strong>haven:</strong> It helps to import spss data into r.</p>
-<p><strong><em>Dependencies = TRUE</em></strong> : It indicates that while installing packages, it must also install all dependencies of the specified package.</p>
-</li>
+<li><p><strong>gmodels:</strong> Helps to compute and display confidence intervals (CI) for model <a href="https://cran.r-project.org/web/packages/gmodels/gmodels.pdf">estimates.</a></p></li>
+<li><p><strong>DescTools:</strong> Provides tools for basic statistics e.g.&nbsp;to compute Median CI for an efficient data <a href="https://andrisignorell.github.io/DescTools/">description.</a></p></li>
+<li><p><strong>ggplot2:</strong> Helps to create boxplots.</p></li>
+<li><p><strong>qqplotr:</strong> Helps to create QQ plot.</p></li>
+<li><p><strong>dplyr:</strong> Used to manipulate data and provide summary statistics.</p></li>
+<li><p><strong>haven:</strong> Helps to import SPSS data into r.</p></li>
 </ul>
+<p><strong><em>Dependencies = TRUE</em></strong> : Indicates that while installing packages, it must also install all dependencies of the specified package.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># install.packages("gmodels", dependencies = TRUE)</span></span>
 <span><span class="co"># install.packages("car", dependencies = TRUE)</span></span>
@@ -548,8 +535,7 @@ window.Quarto = {
 </div>
 <p><strong>Data Importing</strong></p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Mann_W_U &lt;- read_sav("data\\36578-0001-Data.sav")</span></span>
-<span><span class="va">Mann_W_U</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"../data/03_HEPESE_synthetic_20240510.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">HEPESE</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"../data/03_HEPESE_synthetic_20240510.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 744 Columns: 2
 ── Column specification ────────────────────────────────────────────────────────
@@ -564,26 +550,26 @@ lgl (1): isMale
 </section><section id="data-exploration" class="level3" data-number="13.2.3"><h3 data-number="13.2.3" class="anchored" data-anchor-id="data-exploration">
 <span class="header-section-number">13.2.3</span> Data Exploration</h3>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># str(Mann_W_U)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">Mann_W_U</span><span class="op">$</span><span class="va">isMale</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># str(HEPESE)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">HEPESE</span><span class="op">$</span><span class="va">isMale</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> logi [1:744] FALSE FALSE FALSE TRUE FALSE TRUE ...</code></pre>
 </div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">Mann_W_U</span><span class="op">$</span><span class="va">ageAtDx</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">HEPESE</span><span class="op">$</span><span class="va">ageAtDx</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> num [1:744] 87 70 68 60 55 33 38 65 50 68 ...</code></pre>
 </div>
 </div>
-<p>After inspecting the data, we found that values of our dependent and independent variable values are in character form. We want them to be numerical and categorical, respectively. First, we will convert dependent variable into numerical form and our independent variable into categorical. Next, we will recode the factors as male and female. Also for ease, we will rename our dependent and independent variable.</p>
+<p>After inspecting the data, we found that values of our dependent and independent variable values are in character format. We want them to be numerical and categorical, respectively. First, we will convert the dependent variable into numerical form, and our independent variable into categorical. Then, we will recode the factors as male and female. For simplicity’s sake, we will also rename our dependent and independent variable.</p>
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># convert to number and factor</span></span>
-<span><span class="va">Mann_W_U</span><span class="op">$</span><span class="va">ageAtDx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">Mann_W_U</span><span class="op">$</span><span class="va">ageAtDx</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">Mann_W_U</span><span class="op">$</span><span class="va">ageAtDx</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">HEPESE</span><span class="op">$</span><span class="va">ageAtDx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">HEPESE</span><span class="op">$</span><span class="va">ageAtDx</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">HEPESE</span><span class="op">$</span><span class="va">ageAtDx</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "numeric"</code></pre>
 </div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Mann_W_U</span><span class="op">$</span><span class="va">isMale</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="va">Mann_W_U</span><span class="op">$</span><span class="va">isMale</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">Mann_W_U</span><span class="op">$</span><span class="va">isMale</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">HEPESE</span><span class="op">$</span><span class="va">isMale</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="va">HEPESE</span><span class="op">$</span><span class="va">isMale</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">HEPESE</span><span class="op">$</span><span class="va">isMale</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "factor"</code></pre>
 </div>
@@ -592,7 +578,7 @@ lgl (1): isMale
 <p><strong>Descriptive Data</strong></p>
 <div class="cell">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Des</span> <span class="op">&lt;-</span> </span>
-<span> <span class="va">Mann_W_U</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span> <span class="va">HEPESE</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">isMale</span>, <span class="va">ageAtDx</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">isMale</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
@@ -624,19 +610,19 @@ lgl (1): isMale
 <li><p><strong>n:</strong> The number of observations for each gender.</p></li>
 <li><p><strong>mean:</strong> The mean age when diabetes is diagnosed for each gender.</p></li>
 <li><p><strong>sd:</strong> The standard deviation of each gender.</p></li>
-<li><p><strong>stderr:</strong> The standard error of each gender level.&nbsp; That is the standard deviation / sqrt (n).</p></li>
-<li><p><strong>LCL, UCL:</strong> The upper and lower confidence intervals of the mean.&nbsp; This values indicates the range at which we can be 95% certain that the true mean falls between the lower and upper values specified for each gender group assuming a normal distribution.&nbsp;</p></li>
+<li><p><strong>stderr:</strong> The standard error of each gender level. That is the standard deviation / sqrt (n).</p></li>
+<li><p><strong>LCL, UCL:</strong> The upper and lower confidence intervals of the mean. This values indicates the range at which we can be 95% certain that the true mean falls between the lower and upper values specified for each gender group assuming a normal distribution.</p></li>
 <li><p><strong>median:</strong> The median value for each gender.</p></li>
 <li><p><strong>min, max:</strong> The minimum and maximum value for each gender.</p></li>
-<li><p><strong>IQR:</strong> The interquartile range of each gender. That is the 75th percentile –&nbsp; 25th percentile.</p></li>
+<li><p><strong>IQR:</strong> The interquartile range of each gender. That is the 75th percentile – 25th percentile.</p></li>
 <li><p><strong>LCLmed, UCLmed:</strong> The 95% confidence interval for the median.</p></li>
 </ol>
-<p><strong>Visual exploration of data</strong></p>
+<p><strong>Checking Assumptions and Visualizing the Data</strong></p>
 <p>The next step is to visualize the data. This can be done using different functions under the <code>ggplot</code> package.</p>
 <p><strong>1) Box plot</strong></p>
 <div class="cell">
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span></span>
-<span> <span class="va">Mann_W_U</span>, </span>
+<span> <span class="va">HEPESE</span>, </span>
 <span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
 <span>   x <span class="op">=</span> <span class="va">isMale</span>, </span>
 <span>   y <span class="op">=</span> <span class="va">ageAtDx</span>, </span>
@@ -651,7 +637,7 @@ lgl (1): isMale
 <span>   fill <span class="op">=</span> <span class="st">"light blue"</span></span>
 <span> <span class="op">)</span> <span class="op">+</span> </span>
 <span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span></span>
-<span>   fun.y <span class="op">=</span> <span class="va">mean</span>, </span>
+<span>   fun <span class="op">=</span> <span class="va">mean</span>, </span>
 <span>   geom <span class="op">=</span> <span class="st">"point"</span>, </span>
 <span>   shape <span class="op">=</span> <span class="fl">10</span>, </span>
 <span>   size <span class="op">=</span> <span class="fl">3.5</span>, </span>
@@ -664,10 +650,6 @@ lgl (1): isMale
 <span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
 <span>   legend.position <span class="op">=</span> <span class="st">"none"</span></span>
 <span> <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: The `fun.y` argument of `stat_summary()` is deprecated as of ggplot2 3.3.0.
-ℹ Please use the `fun` argument instead.</code></pre>
-</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="03_two_sample_mann_whitney_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
@@ -677,14 +659,14 @@ lgl (1): isMale
 </div>
 <p><strong>2) QQ plot</strong></p>
 <div class="cell">
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://conflicted.r-lib.org/">conflicted</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://conflicted.r-lib.org/">conflicted</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://conflicted.r-lib.org/reference/conflict_prefer.html">conflict_prefer</a></span><span class="op">(</span><span class="st">"stat_qq_line"</span>, <span class="st">"qqplotr"</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span></span>
 <span><span class="co"># Perform QQ plots by group</span></span>
 <span><span class="va">QQ_Plot</span> <span class="op">&lt;-</span> </span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span></span>
-<span> data <span class="op">=</span> <span class="va">Mann_W_U</span>, </span>
+<span> data <span class="op">=</span> <span class="va">HEPESE</span>, </span>
 <span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
 <span>   sample <span class="op">=</span> <span class="va">ageAtDx</span>, </span>
 <span>   color <span class="op">=</span> <span class="va">isMale</span>, </span>
@@ -727,29 +709,20 @@ lgl (1): isMale
 <li><p><code>"pointwise"</code> constructs simultaneous confidence bands based on the normal distribution;</p></li>
 <li><p><code>"boot"</code> creates pointwise confidence bands based on a parametric boostrap;</p></li>
 <li><p><code>"ks"</code> constructs simultaneous confidence bands based on an inversion of the Kolmogorov-Smirnov test;</p></li>
-<li><p><code>"ts"</code> constructs tail-sensitive confidence bands<span class="citation" data-cites="aldor-noiman2013"><sup><a href="#ref-aldor-noiman2013" role="doc-biblioref"><strong>aldor-noiman2013?</strong></a></sup></span></p></li>
+<li><p><code>"ts"</code> constructs tail-sensitive confidence <a href="http://www.tandfonline.com/doi/abs/10.1080/00031305.2013.847865">bands</a></p></li>
 </ul>
 </li>
 <li>
-<p><strong>Stat_qq_Point:</strong> It is a modified version of ggplot: : stat_qq with some parameters adjustments and a new option to detrend the points.</p>
+<p><strong>Stat_qq_Point:</strong> Is a modified version of ggplot: : stat_qq with some parameters adjustments and a new option to detrend the points.</p>
 <p><strong>3) Histogram</strong></p>
 <p>A histogram is the most commonly used graph to show frequency distributions.</p>
+</li>
+</ul>
 <div class="cell">
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Hist</span> <span class="op">&lt;-</span> </span>
-<span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span></span>
-<span><span class="va">Mann_W_U</span>,</span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
-<span>  x <span class="op">=</span> <span class="va">ageAtDx</span>,</span>
-<span>  fill <span class="op">=</span> <span class="va">isMale</span></span>
-<span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">isMale</span><span class="op">)</span> </span>
-<span></span>
-<span><span class="va">Hist</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-</div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">HEPESE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ageAtDx</span>, fill <span class="op">=</span> <span class="va">isMale</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">isMale</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="03_two_sample_mann_whitney_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
@@ -757,26 +730,22 @@ lgl (1): isMale
 </div>
 </div>
 </div>
-<p><strong>3b) Density curve in Histogram</strong></p>
-</li>
-</ul>
-<p>A density curve gives us a good idea of the “shape” of a distribution, including whether or not a distribution has one or more “peaks” of frequently occurring values and whether or not the distribution is skewed to the left or the right.<span class="citation" data-cites="zach2020"><sup><a href="#ref-zach2020" role="doc-biblioref"><strong>zach2020?</strong></a></sup></span></p>
+<pre><code>**3b) Density curve in Histogram**</code></pre>
+<p>A density curve gives us a good idea of the “shape” of a distribution, including whether or not a distribution has one or more “peaks” of frequently occurring values and whether or not the distribution is skewed to the <a href="https://www.statology.org/density-curves/">left or the right.</a></p>
 <div class="cell">
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span></span>
-<span>  <span class="va">Mann_W_U</span>, </span>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">HEPESE</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
 <span>    x <span class="op">=</span> <span class="va">ageAtDx</span>,</span>
 <span>    fill <span class="op">=</span> <span class="va">isMale</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
 <span>    x <span class="op">=</span> <span class="st">"Age When diabetes is diagnosed"</span>,</span>
 <span>    y <span class="op">=</span> <span class="st">"Density"</span>,</span>
 <span>    fill <span class="op">=</span> <span class="st">"Gender"</span>,</span>
 <span>    title <span class="op">=</span> <span class="st">"A Density Plot of Age when diabetes is diagnosed"</span>,</span>
 <span>    caption <span class="op">=</span> <span class="st">"Data Source: HEPESE Wave 8 (ICPSR 36578)"</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">isMale</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
@@ -785,62 +754,41 @@ lgl (1): isMale
 </div>
 </div>
 </div>
-<p>The density curve provided us idea that our data do not have bell shaped distribution and it is slightly skewed towards left.</p>
+<p>This density curve shows that our data does not have a bell shaped distribution and it is slightly skewed towards the left.</p>
 <p><strong>4) Statistical test for normality</strong></p>
 <div class="cell">
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>   <span class="va">Mann_W_U</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span></span>
-<span>   <span class="va">isMale</span></span>
-<span> <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
-<span>   `W Stat` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">ageAtDx</span><span class="op">)</span><span class="op">$</span><span class="va">statistic</span>,</span>
-<span>    p.value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">ageAtDx</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span>,</span>
-<span>   <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>scipen <span class="op">=</span> <span class="fl">999</span><span class="op">)</span></span>
-<span> <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">HEPESE</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">isMale</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>    `W Stat` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">ageAtDx</span><span class="op">)</span><span class="op">$</span><span class="va">statistic</span>,</span>
+<span>    p.value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">ageAtDx</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 4
-  isMale `W Stat`  p.value `options(scipen = 999)`
-  &lt;fct&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;named list&gt;           
-1 FALSE     0.959 6.50e-10 &lt;dbl [1]&gt;              
-2 TRUE      0.937 9.99e-10 &lt;dbl [1]&gt;              </code></pre>
+<pre><code># A tibble: 2 × 3
+  isMale `W Stat`  p.value
+  &lt;fct&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 FALSE     0.959 6.50e-10
+2 TRUE      0.937 9.99e-10</code></pre>
 </div>
 </div>
 <p><strong>Interpretation</strong></p>
-<p>From the above table, we see that the value of the Shapiro-Wilk Test is 0.0006 and 0.000002 which are both less than 0.05, therefore we have enough evidence to reject the null hypothesis and confirm that the data significantly deviate from a normal distribution.</p>
+<p>From the above table, we see that the value of the Shapiro-Wilk Test is 0.0006 and 0.000002, which are both less than 0.05. Therefore we have enough evidence to reject the null hypothesis and confirm that the data significantly deviates from a normal distribution.</p>
 </section><section id="mann-whitney-u-test" class="level3" data-number="13.2.4"><h3 data-number="13.2.4" class="anchored" data-anchor-id="mann-whitney-u-test">
 <span class="header-section-number">13.2.4</span> Mann Whitney <em>U</em> Test</h3>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span></span>
 <span>  <span class="va">ageAtDx</span> <span class="op">~</span> <span class="va">isMale</span>, </span>
-<span>  data <span class="op">=</span> <span class="va">Mann_W_U</span>, </span>
+<span>  data <span class="op">=</span> <span class="va">HEPESE</span>, </span>
 <span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>  <span class="co"># paired = FALSE, </span></span>
 <span>  exact <span class="op">=</span> <span class="cn">FALSE</span>, </span>
 <span>  conf.int <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">test_statistics</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">$</span><span class="va">statistic</span></span>
-<span></span>
-<span><span class="va">p_values</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">$</span><span class="va">p.value</span></span>
-<span></span>
-<span><span class="va">method_used</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">$</span><span class="va">method</span></span>
-<span></span>
-<span><span class="va">result_df</span> <span class="op">&lt;-</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
-<span>    Test_Statistic <span class="op">=</span> <span class="va">test_statistics</span>,</span>
-<span>    P_Value <span class="op">=</span> <span class="va">p_values</span>,</span>
-<span>    Method <span class="op">=</span> <span class="va">method_used</span></span>
-<span>  <span class="op">)</span></span>
-<span></span>
-<span><span class="va">tbl</span> <span class="op">&lt;-</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl_df.html">tbl_df</a></span><span class="op">(</span></span>
-<span>    data <span class="op">=</span> <span class="va">result_df</span></span>
-<span>  <span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: `tbl_df()` was deprecated in dplyr 1.0.0.
-ℹ Please use `tibble::as_tibble()` instead.</code></pre>
-</div>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  Test_Statistic <span class="op">=</span> <span class="va">result</span><span class="op">$</span><span class="va">statistic</span>,</span>
+<span>  P_Value <span class="op">=</span> <span class="va">result</span><span class="op">$</span><span class="va">p.value</span>,</span>
+<span>  Method <span class="op">=</span> <span class="va">result</span><span class="op">$</span><span class="va">method</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   Test_Statistic P_Value Method                                           
@@ -850,11 +798,10 @@ lgl (1): isMale
 </div>
 </section></section><section id="results" class="level2" data-number="13.3"><h2 data-number="13.3" class="anchored" data-anchor-id="results">
 <span class="header-section-number">13.3</span> Results</h2>
-<p>The mean age at which diabetes is diagnosed is not significantly different in males (69 years old) and females (66 years old). The Mann-Whitney U-Test showed that this difference is not statistically significant at 0.05 level of significance because statistical p value (p=.155) is greater than critical value (p=0.05). The test statistic is W = 5040.</p>
+<p>While the analysis above is for synthetic data, we see that the mean age at which diabetes is diagnosed is not significantly different in males (69 years old) and females (66 years old). Of note, the Mann-Whitney U-Test applied in the real data (not shown in this report) showed that this difference is not statistically significant at 0.05 level of significance because the statistical p value (p=.155) is greater than the critical value (p=0.05). For the real data, the test statistic is W = 5040.</p>
 </section><section id="conclusion" class="level2" data-number="13.4"><h2 data-number="13.4" class="anchored" data-anchor-id="conclusion">
 <span class="header-section-number">13.4</span> Conclusion</h2>
-<p>From the above result, we can conclude that gender does not play a significant role in the age at which one is diagnosed with diabetes. Diabetes is the 8th leading cause of death and disability in the US, and 1 in 5 US adults are currently unaware of their diabetes condition. This urges the need for increased policy efforts towards timely diabetes testing and diagnosing. Although previous research has suggested that there are gender based differences in diabetes related severity of inquiries,<span class="citation" data-cites="kautzky-willer2016"><sup><a href="#ref-kautzky-willer2016" role="doc-biblioref"><strong>kautzky-willer2016?</strong></a></sup></span> Our findings suggest that this difference is not due to age and can be due to other gender based differences such as willingness to seek medical care, underlying health issues etc. We found that there is no need for gender-based approaches to interventions aimed at increasing diabetes surveillance, and efforts should focus on targeting the population as a whole.</p>
-</section><section id="references" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
+<p>From the above result, we can conclude that gender does not play a significant role in the age at which one is diagnosed with diabetes. Diabetes is the 8th leading cause of death and disability in the US, and 1 in 5 US adults are currently unaware of their diabetes condition. This urges the need for increased policy efforts towards timely diabetes testing and diagnosing. Although previous research has suggested that there are gender based differences in diabetes related severity of <a href="https://doi.org/10.1210/er.2015-1137">inquiries,</a> our findings suggest that this difference is not due to age, and may be due to other gender based differences, such as willingness to seek medical care, underlying health issues, etc. There may not necessarily be a need for gender-based approaches to interventions aimed at increasing diabetes surveillance, and efforts should focus on targeting the population as a whole.</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -1271,8 +1218,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../lessons_original/03_two_sample_bootstrap_conf_int.html" class="pagination-link" aria-label="Bootstrap Confidence Intervals">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bootstrap Confidence Intervals</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="pagination-link" aria-label="Bootstrap Tests">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1283,7 +1230,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/03_two_sample_mann_whitney.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/03_two_sample_mann_whitney.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>
