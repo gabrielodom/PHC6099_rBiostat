@@ -9,6 +9,7 @@ bibliography: lessons_original/bib/packages.bib
 book:
   title: "An R Cookbook for Public Health"
   subtitle: "Course Materials for PHC 6099: 'R Computing for Health Sciences'"
+  collection-editor: "Gabriel J. Odom, PhD, ThD"
   reader-mode: true
 
   page-footer:
