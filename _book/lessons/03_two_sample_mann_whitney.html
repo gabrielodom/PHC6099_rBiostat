@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<title>An R Cookbook for Public Health - 13&nbsp; Mann-Whitney-U Test Example</title>
+<title>An R Cookbook for Public Health - 14&nbsp; Mann-Whitney-U Test Example</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,7 +131,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/03_two_sample_mann_whitney.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/03_two_sample_mann_whitney.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -236,14 +236,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -260,25 +266,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -295,43 +301,43 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -348,7 +354,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -365,7 +371,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
   </div>
 </li>
       </ul>
@@ -382,7 +388,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -396,28 +402,28 @@ window.Quarto = {
    
   <ul>
 <li>
-<a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">13.1</span> Introduction</a>
+<a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">14.1</span> Introduction</a>
   <ul class="collapse">
-<li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><span class="header-section-number">13.1.1</span> Hypotheses</a></li>
+<li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><span class="header-section-number">14.1.1</span> Hypotheses</a></li>
   </ul>
 </li>
   <li>
-<a href="#performing-mann-whitney-u-test-in-r" id="toc-performing-mann-whitney-u-test-in-r" class="nav-link" data-scroll-target="#performing-mann-whitney-u-test-in-r"><span class="header-section-number">13.2</span> Performing <strong>Mann-Whitney <em>U</em> Test</strong> in R</a>
+<a href="#performing-mann-whitney-u-test-in-r" id="toc-performing-mann-whitney-u-test-in-r" class="nav-link" data-scroll-target="#performing-mann-whitney-u-test-in-r"><span class="header-section-number">14.2</span> Performing <strong>Mann-Whitney <em>U</em> Test</strong> in R</a>
   <ul class="collapse">
-<li><a href="#data-source" id="toc-data-source" class="nav-link" data-scroll-target="#data-source"><span class="header-section-number">13.2.1</span> Data Source</a></li>
-  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">13.2.2</span> Packages</a></li>
-  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration"><span class="header-section-number">13.2.3</span> Data Exploration</a></li>
-  <li><a href="#mann-whitney-u-test" id="toc-mann-whitney-u-test" class="nav-link" data-scroll-target="#mann-whitney-u-test"><span class="header-section-number">13.2.4</span> Mann Whitney <em>U</em> Test</a></li>
+<li><a href="#data-source" id="toc-data-source" class="nav-link" data-scroll-target="#data-source"><span class="header-section-number">14.2.1</span> Data Source</a></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">14.2.2</span> Packages</a></li>
+  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration"><span class="header-section-number">14.2.3</span> Data Exploration</a></li>
+  <li><a href="#mann-whitney-u-test" id="toc-mann-whitney-u-test" class="nav-link" data-scroll-target="#mann-whitney-u-test"><span class="header-section-number">14.2.4</span> Mann Whitney <em>U</em> Test</a></li>
   </ul>
 </li>
-  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">13.3</span> Results</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">13.4</span> Conclusion</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">14.3</span> Results</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">14.4</span> Conclusion</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/03_two_sample_mann_whitney.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/03_two_sample_mann_whitney.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/03_two_sample_mann_whitney.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span>
+<span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span>
 </h1>
 </div>
 
@@ -440,8 +446,8 @@ window.Quarto = {
   
 
 
-</header><section id="introduction" class="level2" data-number="13.1"><h2 data-number="13.1" class="anchored" data-anchor-id="introduction">
-<span class="header-section-number">13.1</span> Introduction</h2>
+</header><section id="introduction" class="level2" data-number="14.1"><h2 data-number="14.1" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">14.1</span> Introduction</h2>
 <ul>
 <li>
 <p><strong>Mann Whitney <em>U</em> test</strong>, also known as the Wilcoxon Rank-Sum test, is a nonparametric statistical test of the null hypothesis, which is commonly used to compare the means or medians of <strong>two independent</strong> groups with the <strong>assumption</strong> that the at least one group <strong>is not</strong> normally distributed and when the sample size is small.</p>
@@ -460,14 +466,14 @@ window.Quarto = {
 <li><p>When conducting this test, aside from reporting the <em>p-value</em>, the spread and the shape of the data should be <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1120984/">described.</a></p></li>
 </ul>
 <p><strong>Overall goal:</strong> Identify whether the distribution of two groups significantly differs.</p>
-<section id="assumptions" class="level4" data-number="13.1.0.1"><h4 data-number="13.1.0.1" class="anchored" data-anchor-id="assumptions">
-<span class="header-section-number">13.1.0.1</span> Assumptions</h4>
+<section id="assumptions" class="level4" data-number="14.1.0.1"><h4 data-number="14.1.0.1" class="anchored" data-anchor-id="assumptions">
+<span class="header-section-number">14.1.0.1</span> Assumptions</h4>
 <ol type="1">
 <li><p>Samples are independent: Each dependent variable must be related to only one independent variable.</p></li>
 <li><p>The response variable is ordinal or continuous.</p></li>
 <li><p>At least one variable is not normally distributed.</p></li>
-</ol></section><section id="hypotheses" class="level3" data-number="13.1.1"><h3 data-number="13.1.1" class="anchored" data-anchor-id="hypotheses">
-<span class="header-section-number">13.1.1</span> Hypotheses</h3>
+</ol></section><section id="hypotheses" class="level3" data-number="14.1.1"><h3 data-number="14.1.1" class="anchored" data-anchor-id="hypotheses">
+<span class="header-section-number">14.1.1</span> Hypotheses</h3>
 <p>Null Hypothesis <strong>(<em>H<sub>0</sub></em>):</strong> <em>Distribution</em><sub>1</sub> = <em>Distribution</em><sub>2</sub></p>
 <ul>
 <li>Mean/Median Ranks of two levels are <a href="https://www.r-tutor.com/content/r-tutorial-ebook">equal.</a>
@@ -478,8 +484,8 @@ window.Quarto = {
 <li>Mean/Median Ranks of two levels are significantly <a href="https://www.r-tutor.com/content/r-tutorial-ebook">different.</a>
 </li>
 </ul>
-<section id="mathematical-equation" class="level4" data-number="13.1.1.1"><h4 data-number="13.1.1.1" class="anchored" data-anchor-id="mathematical-equation">
-<span class="header-section-number">13.1.1.1</span> Mathematical Equation</h4>
+<section id="mathematical-equation" class="level4" data-number="14.1.1.1"><h4 data-number="14.1.1.1" class="anchored" data-anchor-id="mathematical-equation">
+<span class="header-section-number">14.1.1.1</span> Mathematical Equation</h4>
 <p><span class="math inline">\(U_1 = n_1n_2 + \frac{n_1 \cdot (n_1 + 1)}{2} - R_1\)</span></p>
 <p><span class="math inline">\(U_2 = n_1n_2 + \frac{n_2 \cdot (n_2 + 1)}{2} - R_2\)</span></p>
 <p>Where:</p>
@@ -490,10 +496,10 @@ window.Quarto = {
 <span class="math inline">\(R_1\)</span> and <span class="math inline">\(R_2\)</span> represent the sum of the ranks of the observations for two groups.</li>
 <li>
 <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> are the sample sizes for two groups.</li>
-</ul></section></section></section><section id="performing-mann-whitney-u-test-in-r" class="level2" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="performing-mann-whitney-u-test-in-r">
-<span class="header-section-number">13.2</span> Performing <strong>Mann-Whitney <em>U</em> Test</strong> in R</h2>
-<section id="data-source" class="level3" data-number="13.2.1"><h3 data-number="13.2.1" class="anchored" data-anchor-id="data-source">
-<span class="header-section-number">13.2.1</span> Data Source</h3>
+</ul></section></section></section><section id="performing-mann-whitney-u-test-in-r" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="performing-mann-whitney-u-test-in-r">
+<span class="header-section-number">14.2</span> Performing <strong>Mann-Whitney <em>U</em> Test</strong> in R</h2>
+<section id="data-source" class="level3" data-number="14.2.1"><h3 data-number="14.2.1" class="anchored" data-anchor-id="data-source">
+<span class="header-section-number">14.2.1</span> Data Source</h3>
 <p>In this example, we will perform the <strong>Mann-Whitney <em>U</em> Test</strong> using wave 8 (2012-2013) data of a longitudinal epidemiological study titled <em>Hispanic Established Populations For the Epidemiological Study of Elderly</em> (HEPESE).</p>
 <p>The HEPESE provides data on risk factors for mortality and morbidity in Mexican Americans in order to contrast how these factors operate differently in non-Hispanic White Americans, African Americans, and other major ethnic groups. The data is publicly available and can be obtained from the University of Michigan <a href="https://www.icpsr.umich.edu/web/NACDA/series/546">website.</a> For the purposes of this report/chapter, the example in the analysis uses synthetic data. Using this data, we want to explore whether there are significant gender differences in age when Type 2 diabetes mellitus (T2DM) is diagnosed. Type 2 diabetes is a chronic disease condition that has affected 37 million people living in the United States. Type 2 diabetes is the eighth leading cause of death and disability in US. Type 2 diabetes generally occurs among adults aged 45 or older, but may also occur amongst young adults and children. Diabetes and its complications are often preventable by following lifestyle guidelines and taking medication in a timely manner. <strong><em>1 in 5 of US people don’t know they have <a href="https://www.cdc.gov/diabetes/basics/quick-facts.html">diabetes.</a></em></strong></p>
 <p>Research has shown that men are more likely to develop type 2 diabetes, while women are more likely to experience complications from type 2 diabetes, including heart and kidney <a href="https://www.medicalnewstoday.com/articles/diabetes-affects-men-women">disease.</a></p>
@@ -503,8 +509,8 @@ window.Quarto = {
 <p><strong>Research Question:</strong> Does the age at which diabetes is diagnosed significantly differ among men and women?</p>
 <p>Null Hypothesis <strong>(<em>H<sub>0</sub></em>):</strong> Mean rank of age at which diabetes is diagnosed <u><em>is equal</em></u> among men and women.</p>
 <p>Alternate Hypothesis <strong>(<em>H<sub>1</sub></em>):</strong> Mean rank of age at which diabetes is diagnosed <u><em>is not equal</em></u> among men and women.</p>
-</section><section id="packages" class="level3" data-number="13.2.2"><h3 data-number="13.2.2" class="anchored" data-anchor-id="packages">
-<span class="header-section-number">13.2.2</span> Packages</h3>
+</section><section id="packages" class="level3" data-number="14.2.2"><h3 data-number="14.2.2" class="anchored" data-anchor-id="packages">
+<span class="header-section-number">14.2.2</span> Packages</h3>
 <ul>
 <li><p><strong>gmodels:</strong> Helps to compute and display confidence intervals (CI) for model <a href="https://cran.r-project.org/web/packages/gmodels/gmodels.pdf">estimates.</a></p></li>
 <li><p><strong>DescTools:</strong> Provides tools for basic statistics e.g.&nbsp;to compute Median CI for an efficient data <a href="https://andrisignorell.github.io/DescTools/">description.</a></p></li>
@@ -547,8 +553,8 @@ lgl (1): isMale
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-</section><section id="data-exploration" class="level3" data-number="13.2.3"><h3 data-number="13.2.3" class="anchored" data-anchor-id="data-exploration">
-<span class="header-section-number">13.2.3</span> Data Exploration</h3>
+</section><section id="data-exploration" class="level3" data-number="14.2.3"><h3 data-number="14.2.3" class="anchored" data-anchor-id="data-exploration">
+<span class="header-section-number">14.2.3</span> Data Exploration</h3>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># str(HEPESE)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">HEPESE</span><span class="op">$</span><span class="va">isMale</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -773,8 +779,8 @@ lgl (1): isMale
 </div>
 <p><strong>Interpretation</strong></p>
 <p>From the above table, we see that the value of the Shapiro-Wilk Test is 0.0006 and 0.000002, which are both less than 0.05. Therefore we have enough evidence to reject the null hypothesis and confirm that the data significantly deviates from a normal distribution.</p>
-</section><section id="mann-whitney-u-test" class="level3" data-number="13.2.4"><h3 data-number="13.2.4" class="anchored" data-anchor-id="mann-whitney-u-test">
-<span class="header-section-number">13.2.4</span> Mann Whitney <em>U</em> Test</h3>
+</section><section id="mann-whitney-u-test" class="level3" data-number="14.2.4"><h3 data-number="14.2.4" class="anchored" data-anchor-id="mann-whitney-u-test">
+<span class="header-section-number">14.2.4</span> Mann Whitney <em>U</em> Test</h3>
 <div class="cell">
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span></span>
 <span>  <span class="va">ageAtDx</span> <span class="op">~</span> <span class="va">isMale</span>, </span>
@@ -796,11 +802,11 @@ lgl (1): isMale
 1          66178   0.880 Wilcoxon rank sum test with continuity correction</code></pre>
 </div>
 </div>
-</section></section><section id="results" class="level2" data-number="13.3"><h2 data-number="13.3" class="anchored" data-anchor-id="results">
-<span class="header-section-number">13.3</span> Results</h2>
+</section></section><section id="results" class="level2" data-number="14.3"><h2 data-number="14.3" class="anchored" data-anchor-id="results">
+<span class="header-section-number">14.3</span> Results</h2>
 <p>While the analysis above is for synthetic data, we see that the mean age at which diabetes is diagnosed is not significantly different in males (69 years old) and females (66 years old). Of note, the Mann-Whitney U-Test applied in the real data (not shown in this report) showed that this difference is not statistically significant at 0.05 level of significance because the statistical p value (p=.155) is greater than the critical value (p=0.05). For the real data, the test statistic is W = 5040.</p>
-</section><section id="conclusion" class="level2" data-number="13.4"><h2 data-number="13.4" class="anchored" data-anchor-id="conclusion">
-<span class="header-section-number">13.4</span> Conclusion</h2>
+</section><section id="conclusion" class="level2" data-number="14.4"><h2 data-number="14.4" class="anchored" data-anchor-id="conclusion">
+<span class="header-section-number">14.4</span> Conclusion</h2>
 <p>From the above result, we can conclude that gender does not play a significant role in the age at which one is diagnosed with diabetes. Diabetes is the 8th leading cause of death and disability in the US, and 1 in 5 US adults are currently unaware of their diabetes condition. This urges the need for increased policy efforts towards timely diabetes testing and diagnosing. Although previous research has suggested that there are gender based differences in diabetes related severity of <a href="https://doi.org/10.1210/er.2015-1137">inquiries,</a> our findings suggest that this difference is not due to age, and may be due to other gender based differences, such as willingness to seek medical care, underlying health issues, etc. There may not necessarily be a need for gender-based approaches to interventions aimed at increasing diabetes surveillance, and efforts should focus on targeting the population as a whole.</p>
 
 
@@ -1214,12 +1220,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../lessons_original/03_two_sample_ttest.html" class="pagination-link" aria-label="Two sample $t$-test">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="pagination-link" aria-label="Bootstrap Tests">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
 <meta name="dcterms.date" content="2023-07-18">
-<title>An R Cookbook for Public Health - 19&nbsp; Correlation and Covariance Matrices</title>
+<title>An R Cookbook for Public Health - 20&nbsp; Correlation and Covariance Matrices</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -132,7 +132,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_correlation.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_correlation.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -237,14 +237,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -261,25 +267,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -296,43 +302,43 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_correlation.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -349,7 +355,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -366,7 +372,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
   </div>
 </li>
       </ul>
@@ -383,7 +389,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -396,44 +402,44 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">19.1</span> Introduction</a></li>
+<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">20.1</span> Introduction</a></li>
   <li>
-<a href="#about-covariance-and-correlation" id="toc-about-covariance-and-correlation" class="nav-link" data-scroll-target="#about-covariance-and-correlation"><span class="header-section-number">19.2</span> About Covariance and Correlation</a>
+<a href="#about-covariance-and-correlation" id="toc-about-covariance-and-correlation" class="nav-link" data-scroll-target="#about-covariance-and-correlation"><span class="header-section-number">20.2</span> About Covariance and Correlation</a>
   <ul class="collapse">
-<li><a href="#equations-properties-and-uses" id="toc-equations-properties-and-uses" class="nav-link" data-scroll-target="#equations-properties-and-uses"><span class="header-section-number">19.2.1</span> Equations, properties, and uses</a></li>
+<li><a href="#equations-properties-and-uses" id="toc-equations-properties-and-uses" class="nav-link" data-scroll-target="#equations-properties-and-uses"><span class="header-section-number">20.2.1</span> Equations, properties, and uses</a></li>
   </ul>
 </li>
-  <li><a href="#data-set-used" id="toc-data-set-used" class="nav-link" data-scroll-target="#data-set-used"><span class="header-section-number">19.3</span> Data set used</a></li>
-  <li><a href="#covariance-matrix-procedure" id="toc-covariance-matrix-procedure" class="nav-link" data-scroll-target="#covariance-matrix-procedure"><span class="header-section-number">19.4</span> Covariance Matrix Procedure</a></li>
+  <li><a href="#data-set-used" id="toc-data-set-used" class="nav-link" data-scroll-target="#data-set-used"><span class="header-section-number">20.3</span> Data set used</a></li>
+  <li><a href="#covariance-matrix-procedure" id="toc-covariance-matrix-procedure" class="nav-link" data-scroll-target="#covariance-matrix-procedure"><span class="header-section-number">20.4</span> Covariance Matrix Procedure</a></li>
   <li>
-<a href="#the-correlation-matrix-procedure" id="toc-the-correlation-matrix-procedure" class="nav-link" data-scroll-target="#the-correlation-matrix-procedure"><span class="header-section-number">19.5</span> The Correlation Matrix Procedure</a>
+<a href="#the-correlation-matrix-procedure" id="toc-the-correlation-matrix-procedure" class="nav-link" data-scroll-target="#the-correlation-matrix-procedure"><span class="header-section-number">20.5</span> The Correlation Matrix Procedure</a>
   <ul class="collapse">
-<li><a href="#hypothesis-testing-in-correlations" id="toc-hypothesis-testing-in-correlations" class="nav-link" data-scroll-target="#hypothesis-testing-in-correlations"><span class="header-section-number">19.5.1</span> Hypothesis testing in correlations</a></li>
-  <li><a href="#assumptions-of-a-correlation-matrix" id="toc-assumptions-of-a-correlation-matrix" class="nav-link" data-scroll-target="#assumptions-of-a-correlation-matrix"><span class="header-section-number">19.5.2</span> Assumptions of a Correlation Matrix:</a></li>
-  <li><a href="#checking-assumptions" id="toc-checking-assumptions" class="nav-link" data-scroll-target="#checking-assumptions"><span class="header-section-number">19.5.3</span> Checking Assumptions</a></li>
-  <li><a href="#computation-of-a-correlation-matrix" id="toc-computation-of-a-correlation-matrix" class="nav-link" data-scroll-target="#computation-of-a-correlation-matrix"><span class="header-section-number">19.5.4</span> Computation of a Correlation Matrix</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#other-correlation-types-spearman-and-partial" id="toc-other-correlation-types-spearman-and-partial" class="nav-link" data-scroll-target="#other-correlation-types-spearman-and-partial"><span class="header-section-number">19.6</span> Other Correlation Types (Spearman and Partial)</a>
-  <ul class="collapse">
-<li><a href="#spearman-ranking-of-variables-non-parametric" id="toc-spearman-ranking-of-variables-non-parametric" class="nav-link" data-scroll-target="#spearman-ranking-of-variables-non-parametric"><span class="header-section-number">19.6.1</span> Spearman (ranking of variables, non-parametric)</a></li>
-  <li><a href="#partial-correlation" id="toc-partial-correlation" class="nav-link" data-scroll-target="#partial-correlation"><span class="header-section-number">19.6.2</span> Partial Correlation</a></li>
+<li><a href="#hypothesis-testing-in-correlations" id="toc-hypothesis-testing-in-correlations" class="nav-link" data-scroll-target="#hypothesis-testing-in-correlations"><span class="header-section-number">20.5.1</span> Hypothesis testing in correlations</a></li>
+  <li><a href="#assumptions-of-a-correlation-matrix" id="toc-assumptions-of-a-correlation-matrix" class="nav-link" data-scroll-target="#assumptions-of-a-correlation-matrix"><span class="header-section-number">20.5.2</span> Assumptions of a Correlation Matrix:</a></li>
+  <li><a href="#checking-assumptions" id="toc-checking-assumptions" class="nav-link" data-scroll-target="#checking-assumptions"><span class="header-section-number">20.5.3</span> Checking Assumptions</a></li>
+  <li><a href="#computation-of-a-correlation-matrix" id="toc-computation-of-a-correlation-matrix" class="nav-link" data-scroll-target="#computation-of-a-correlation-matrix"><span class="header-section-number">20.5.4</span> Computation of a Correlation Matrix</a></li>
   </ul>
 </li>
   <li>
-<a href="#example-of-r-in-examining-the-relationship-in-a-pair-of-variables-using-the-pearson-correlation-coefficient-type-of-correlation" id="toc-example-of-r-in-examining-the-relationship-in-a-pair-of-variables-using-the-pearson-correlation-coefficient-type-of-correlation" class="nav-link" data-scroll-target="#example-of-r-in-examining-the-relationship-in-a-pair-of-variables-using-the-pearson-correlation-coefficient-type-of-correlation"><span class="header-section-number">19.7</span> Example of <em>r</em> in examining the relationship in a pair of variables using the Pearson Correlation Coefficient type of correlation</a>
+<a href="#other-correlation-types-spearman-and-partial" id="toc-other-correlation-types-spearman-and-partial" class="nav-link" data-scroll-target="#other-correlation-types-spearman-and-partial"><span class="header-section-number">20.6</span> Other Correlation Types (Spearman and Partial)</a>
   <ul class="collapse">
-<li><a href="#hypothesis-test-between-mpg-and-wt" id="toc-hypothesis-test-between-mpg-and-wt" class="nav-link" data-scroll-target="#hypothesis-test-between-mpg-and-wt"><span class="header-section-number">19.7.1</span> Hypothesis test between mpg and wt</a></li>
+<li><a href="#spearman-ranking-of-variables-non-parametric" id="toc-spearman-ranking-of-variables-non-parametric" class="nav-link" data-scroll-target="#spearman-ranking-of-variables-non-parametric"><span class="header-section-number">20.6.1</span> Spearman (ranking of variables, non-parametric)</a></li>
+  <li><a href="#partial-correlation" id="toc-partial-correlation" class="nav-link" data-scroll-target="#partial-correlation"><span class="header-section-number">20.6.2</span> Partial Correlation</a></li>
   </ul>
 </li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">19.8</span> References</a></li>
+  <li>
+<a href="#example-of-r-in-examining-the-relationship-in-a-pair-of-variables-using-the-pearson-correlation-coefficient-type-of-correlation" id="toc-example-of-r-in-examining-the-relationship-in-a-pair-of-variables-using-the-pearson-correlation-coefficient-type-of-correlation" class="nav-link" data-scroll-target="#example-of-r-in-examining-the-relationship-in-a-pair-of-variables-using-the-pearson-correlation-coefficient-type-of-correlation"><span class="header-section-number">20.7</span> Example of <em>r</em> in examining the relationship in a pair of variables using the Pearson Correlation Coefficient type of correlation</a>
+  <ul class="collapse">
+<li><a href="#hypothesis-test-between-mpg-and-wt" id="toc-hypothesis-test-between-mpg-and-wt" class="nav-link" data-scroll-target="#hypothesis-test-between-mpg-and-wt"><span class="header-section-number">20.7.1</span> Hypothesis test between mpg and wt</a></li>
+  </ul>
+</li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">20.8</span> References</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/04_correlation.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_correlation.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_correlation.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span>
+<span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span>
 </h1>
 </div>
 
@@ -577,8 +583,8 @@ Attaching package: 'MASS'</code></pre>
 <span><span class="co">#install.packages("conflicted")</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://conflicted.r-lib.org/">conflicted</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="introduction" class="level2" data-number="19.1"><h2 data-number="19.1" class="anchored" data-anchor-id="introduction">
-<span class="header-section-number">19.1</span> Introduction</h2>
+<section id="introduction" class="level2" data-number="20.1"><h2 data-number="20.1" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">20.1</span> Introduction</h2>
 <p>One of the general goals of statistics is to understand if there is a relationship between two variables.</p>
 <ol type="1">
 <li>
@@ -601,10 +607,10 @@ Attaching package: 'MASS'</code></pre>
 <blockquote class="blockquote">
 <p>In sum, a covariance and a correlation matrix sound similar because covariance is a measure of correlation, while correlation is a scaled version of covariance. This means correlation is a special case of covariance which can be achieved when the data is in standardized form.</p>
 </blockquote>
-</section><section id="about-covariance-and-correlation" class="level2" data-number="19.2"><h2 data-number="19.2" class="anchored" data-anchor-id="about-covariance-and-correlation">
-<span class="header-section-number">19.2</span> About Covariance and Correlation</h2>
-<section id="equations-properties-and-uses" class="level3" data-number="19.2.1"><h3 data-number="19.2.1" class="anchored" data-anchor-id="equations-properties-and-uses">
-<span class="header-section-number">19.2.1</span> Equations, properties, and uses</h3>
+</section><section id="about-covariance-and-correlation" class="level2" data-number="20.2"><h2 data-number="20.2" class="anchored" data-anchor-id="about-covariance-and-correlation">
+<span class="header-section-number">20.2</span> About Covariance and Correlation</h2>
+<section id="equations-properties-and-uses" class="level3" data-number="20.2.1"><h3 data-number="20.2.1" class="anchored" data-anchor-id="equations-properties-and-uses">
+<span class="header-section-number">20.2.1</span> Equations, properties, and uses</h3>
 <p><strong>Mathematical equations, properties, and uses</strong></p>
 <p>Remember the equation for the variance for one variable</p>
 <p><span class="math display">\[
@@ -614,8 +620,8 @@ var(x) = \frac{1}{n-1}{\sum_{i = 1}^{n}{(x_i - \bar{x})^2}}
 <p><span class="math display">\[
 Cov(x,y) = \frac{1}{n-1}{\sum_{i = 1}^{n}{(x_i - \bar{x})(y_i-\bar{y})}}
 \]</span></p>
-<section id="covariance-properties" class="level4" data-number="19.2.1.1"><h4 data-number="19.2.1.1" class="anchored" data-anchor-id="covariance-properties">
-<span class="header-section-number">19.2.1.1</span> Covariance Properties</h4>
+<section id="covariance-properties" class="level4" data-number="20.2.1.1"><h4 data-number="20.2.1.1" class="anchored" data-anchor-id="covariance-properties">
+<span class="header-section-number">20.2.1.1</span> Covariance Properties</h4>
 <ul>
 <li>
 <strong>(x, y) &gt; 0:</strong> the covariance for both variables is positive or moving in the same direction.</li>
@@ -654,8 +660,8 @@ C = \frac{1}{n-1}{\sum_{i = 1}^{n}{(X_i - \bar{X})(X_i-\bar{X})}^T}
 <p><span class="math display">\[
 r = \frac {Cov(x,y)}{(\sqrt{var(x)})(\sqrt{var(y)})}
 \]</span></p>
-</section><section id="correlation-matrix" class="level4" data-number="19.2.1.2"><h4 data-number="19.2.1.2" class="anchored" data-anchor-id="correlation-matrix">
-<span class="header-section-number">19.2.1.2</span> Correlation Matrix</h4>
+</section><section id="correlation-matrix" class="level4" data-number="20.2.1.2"><h4 data-number="20.2.1.2" class="anchored" data-anchor-id="correlation-matrix">
+<span class="header-section-number">20.2.1.2</span> Correlation Matrix</h4>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="04_correlation_matrix_example.png" class="img-fluid figure-img"></p>
 <figcaption>Sample correlation matrix</figcaption></figure>
@@ -695,8 +701,8 @@ r = \frac {Cov(x,y)}{(\sqrt{var(x)})(\sqrt{var(y)})}
 <figcaption>Visual contrast</figcaption></figure>
 </div>
 <p>We will concentrate on the <strong>Correlation Matrix</strong> which provides the Pearson Correlation Coefficient or (its variations for non-parametric data such as, spearman and kendall).</p>
-</section></section></section><section id="data-set-used" class="level2" data-number="19.3"><h2 data-number="19.3" class="anchored" data-anchor-id="data-set-used">
-<span class="header-section-number">19.3</span> Data set used</h2>
+</section></section></section><section id="data-set-used" class="level2" data-number="20.3"><h2 data-number="20.3" class="anchored" data-anchor-id="data-set-used">
+<span class="header-section-number">20.3</span> Data set used</h2>
 <p>We will use the R data set “mtcars” to provide examples on developing a <strong>Covariance Matrix</strong> and on checking the assumptions for and development of a <strong>Correlation Matrix</strong> using the pearson correlation coefficient.</p>
 <div class="cell">
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Load data</span></span>
@@ -828,8 +834,8 @@ r = \frac {Cov(x,y)}{(\sqrt{var(x)})(\sqrt{var(y)})}
 </table>
 </div>
 </div>
-</section><section id="covariance-matrix-procedure" class="level2" data-number="19.4"><h2 data-number="19.4" class="anchored" data-anchor-id="covariance-matrix-procedure">
-<span class="header-section-number">19.4</span> Covariance Matrix Procedure</h2>
+</section><section id="covariance-matrix-procedure" class="level2" data-number="20.4"><h2 data-number="20.4" class="anchored" data-anchor-id="covariance-matrix-procedure">
+<span class="header-section-number">20.4</span> Covariance Matrix Procedure</h2>
 <p>The procedure to develop a covariance matrix uses the cov() function. It takes the data frame as an argument and returns the covariance matrix as result. It is as follows:</p>
 <div class="cell">
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://conflicted.r-lib.org/reference/conflicts_prefer.html">conflicts_prefer</a></span><span class="op">(</span><span class="fu">rstatix</span><span class="fu">::</span><span class="va"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -938,16 +944,16 @@ r = \frac {Cov(x,y)}{(\sqrt{var(x)})(\sqrt{var(y)})}
 <li>The covariance between hp and wt is 44.19, this is a positive covariance indicating that as horse power increases, so does the weight of a vehicle.</li>
 </ul>
 </blockquote>
-</section><section id="the-correlation-matrix-procedure" class="level2" data-number="19.5"><h2 data-number="19.5" class="anchored" data-anchor-id="the-correlation-matrix-procedure">
-<span class="header-section-number">19.5</span> The Correlation Matrix Procedure</h2>
+</section><section id="the-correlation-matrix-procedure" class="level2" data-number="20.5"><h2 data-number="20.5" class="anchored" data-anchor-id="the-correlation-matrix-procedure">
+<span class="header-section-number">20.5</span> The Correlation Matrix Procedure</h2>
 <p>The <strong>Correlation Matrix</strong> procedure is of emphasis because it provides information on the linear relationship among variables (strength and direction). This analysis is of importance to build Regression and multivariate models, as it assists in:</p>
 <div class="border">
 <pre><code>1. The observation of patterns and associations in the data.
 2. To conduct or as the basis of other analyses (linear regression models)
 3. To conduct diagnostic checks (multicollinearity)</code></pre>
 </div>
-<section id="hypothesis-testing-in-correlations" class="level3" data-number="19.5.1"><h3 data-number="19.5.1" class="anchored" data-anchor-id="hypothesis-testing-in-correlations">
-<span class="header-section-number">19.5.1</span> Hypothesis testing in correlations</h3>
+<section id="hypothesis-testing-in-correlations" class="level3" data-number="20.5.1"><h3 data-number="20.5.1" class="anchored" data-anchor-id="hypothesis-testing-in-correlations">
+<span class="header-section-number">20.5.1</span> Hypothesis testing in correlations</h3>
 <p>The bivariate Pearson Correlation produces a sample correlation coefficient, <em>r</em>, which measures the strength and direction of linear relationships between pairs of continuous variables in a sample. By extension, the Pearson Correlation evaluates whether there is statistical evidence for a linear relationship among the same pairs of variables in the population, represented by a population correlation coefficient, ρ (“rho”), which is unknown. The sample pearson correlation coefficient, <em>r</em>, is the estimate of the unknown population coefficient (ρ). Therefore,</p>
 <blockquote class="blockquote">
 <p>The hypothesis test lets us decide whether the value of the population correlation coefficient ρ is “close to zero” or “significantly different from zero”. We decide this based on the sample correlation coefficient r and the sample size n .</p>
@@ -971,8 +977,8 @@ H_1: ρ &gt; 0
 H_1: ρ &lt; 0
 \]</span> which means that there is a negative relationship in the population.</p>
 <pre><code>These hypotheses are in terms of ρ.</code></pre>
-</section><section id="assumptions-of-a-correlation-matrix" class="level3" data-number="19.5.2"><h3 data-number="19.5.2" class="anchored" data-anchor-id="assumptions-of-a-correlation-matrix">
-<span class="header-section-number">19.5.2</span> Assumptions of a Correlation Matrix:</h3>
+</section><section id="assumptions-of-a-correlation-matrix" class="level3" data-number="20.5.2"><h3 data-number="20.5.2" class="anchored" data-anchor-id="assumptions-of-a-correlation-matrix">
+<span class="header-section-number">20.5.2</span> Assumptions of a Correlation Matrix:</h3>
 <p><strong>1.</strong> The two variables should be measured at the interval or ratio level (e.i., <strong><em>continuous</em></strong>).</p>
 <pre><code>a.  If interested in the relationship between two categorical variables or ranks (categorical is misleading) you can use "Spearman" as the type of correlation. But if you have two binary variables (i.e. living/dead, black/white, success/failure), then use a Phi Correlation coefficient.
 
@@ -983,10 +989,10 @@ c.  If interested in how the levels of a variable like male or female affect the
 <p><strong>3.</strong> Variables should be roughly <strong>normally distributed</strong>.</p>
 <p><strong>4.</strong> Each observation in the dataset should have a <strong>pair of values</strong>.</p>
 <p><strong>5.</strong> There should be <strong>no extreme outliers</strong> in the dataset.</p>
-</section><section id="checking-assumptions" class="level3" data-number="19.5.3"><h3 data-number="19.5.3" class="anchored" data-anchor-id="checking-assumptions">
-<span class="header-section-number">19.5.3</span> Checking Assumptions</h3>
-<section id="level-of-measurement" class="level5" data-number="19.5.3.0.1"><h5 data-number="19.5.3.0.1" class="anchored" data-anchor-id="level-of-measurement">
-<span class="header-section-number">19.5.3.0.1</span> Level of Measurement</h5>
+</section><section id="checking-assumptions" class="level3" data-number="20.5.3"><h3 data-number="20.5.3" class="anchored" data-anchor-id="checking-assumptions">
+<span class="header-section-number">20.5.3</span> Checking Assumptions</h3>
+<section id="level-of-measurement" class="level5" data-number="20.5.3.0.1"><h5 data-number="20.5.3.0.1" class="anchored" data-anchor-id="level-of-measurement">
+<span class="header-section-number">20.5.3.0.1</span> Level of Measurement</h5>
 <p>Using the <code>skimr</code> package, we will get data set information such as the distribution (histogram) of, and the type/level of measurement for the variables in the “mtcars” data set.</p>
 <div class="cell">
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1238,23 +1244,23 @@ c.  If interested in how the levels of a variable like male or female affect the
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify.html">modify_header</a></span><span class="op">(</span><span class="va">label</span> <span class="op">~</span> <span class="st">"**Variable**"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="aebcujagfk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#aebcujagfk table {
+<div id="tlrhddarku" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tlrhddarku table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#aebcujagfk thead, #aebcujagfk tbody, #aebcujagfk tfoot, #aebcujagfk tr, #aebcujagfk td, #aebcujagfk th {
+#tlrhddarku thead, #tlrhddarku tbody, #tlrhddarku tfoot, #tlrhddarku tr, #tlrhddarku td, #tlrhddarku th {
   border-style: none;
 }
 
-#aebcujagfk p {
+#tlrhddarku p {
   margin: 0;
   padding: 0;
 }
 
-#aebcujagfk .gt_table {
+#tlrhddarku .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1280,12 +1286,12 @@ c.  If interested in how the levels of a variable like male or female affect the
   border-left-color: #D3D3D3;
 }
 
-#aebcujagfk .gt_caption {
+#tlrhddarku .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#aebcujagfk .gt_title {
+#tlrhddarku .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1297,7 +1303,7 @@ c.  If interested in how the levels of a variable like male or female affect the
   border-bottom-width: 0;
 }
 
-#aebcujagfk .gt_subtitle {
+#tlrhddarku .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1309,7 +1315,7 @@ c.  If interested in how the levels of a variable like male or female affect the
   border-top-width: 0;
 }
 
-#aebcujagfk .gt_heading {
+#tlrhddarku .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1321,13 +1327,13 @@ c.  If interested in how the levels of a variable like male or female affect the
   border-right-color: #D3D3D3;
 }
 
-#aebcujagfk .gt_bottom_border {
+#tlrhddarku .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#aebcujagfk .gt_col_headings {
+#tlrhddarku .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1342,7 +1348,7 @@ c.  If interested in how the levels of a variable like male or female affect the
   border-right-color: #D3D3D3;
 }
 
-#aebcujagfk .gt_col_heading {
+#tlrhddarku .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1362,7 +1368,7 @@ c.  If interested in how the levels of a variable like male or female affect the
   overflow-x: hidden;
 }
 
-#aebcujagfk .gt_column_spanner_outer {
+#tlrhddarku .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1374,15 +1380,15 @@ c.  If interested in how the levels of a variable like male or female affect the
   padding-right: 4px;
 }
 
-#aebcujagfk .gt_column_spanner_outer:first-child {
+#tlrhddarku .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#aebcujagfk .gt_column_spanner_outer:last-child {
+#tlrhddarku .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#aebcujagfk .gt_column_spanner {
+#tlrhddarku .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1394,11 +1400,11 @@ c.  If interested in how the levels of a variable like male or female affect the
   width: 100%;
 }
 
-#aebcujagfk .gt_spanner_row {
+#tlrhddarku .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#aebcujagfk .gt_group_heading {
+#tlrhddarku .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1424,7 +1430,7 @@ c.  If interested in how the levels of a variable like male or female affect the
   text-align: left;
 }
 
-#aebcujagfk .gt_empty_group_heading {
+#tlrhddarku .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1439,15 +1445,15 @@ c.  If interested in how the levels of a variable like male or female affect the
   vertical-align: middle;
 }
 
-#aebcujagfk .gt_from_md > :first-child {
+#tlrhddarku .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#aebcujagfk .gt_from_md > :last-child {
+#tlrhddarku .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#aebcujagfk .gt_row {
+#tlrhddarku .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1466,7 +1472,7 @@ c.  If interested in how the levels of a variable like male or female affect the
   overflow-x: hidden;
 }
 
-#aebcujagfk .gt_stub {
+#tlrhddarku .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1479,7 +1485,7 @@ c.  If interested in how the levels of a variable like male or female affect the
   padding-right: 5px;
 }
 
-#aebcujagfk .gt_stub_row_group {
+#tlrhddarku .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1493,15 +1499,15 @@ c.  If interested in how the levels of a variable like male or female affect the
   vertical-align: top;
 }
 
-#aebcujagfk .gt_row_group_first td {
+#tlrhddarku .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#aebcujagfk .gt_row_group_first th {
+#tlrhddarku .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#aebcujagfk .gt_summary_row {
+#tlrhddarku .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1511,16 +1517,16 @@ c.  If interested in how the levels of a variable like male or female affect the
   padding-right: 5px;
 }
 
-#aebcujagfk .gt_first_summary_row {
+#tlrhddarku .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#aebcujagfk .gt_first_summary_row.thick {
+#tlrhddarku .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#aebcujagfk .gt_last_summary_row {
+#tlrhddarku .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1530,7 +1536,7 @@ c.  If interested in how the levels of a variable like male or female affect the
   border-bottom-color: #D3D3D3;
 }
 
-#aebcujagfk .gt_grand_summary_row {
+#tlrhddarku .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1540,7 +1546,7 @@ c.  If interested in how the levels of a variable like male or female affect the
   padding-right: 5px;
 }
 
-#aebcujagfk .gt_first_grand_summary_row {
+#tlrhddarku .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1550,7 +1556,7 @@ c.  If interested in how the levels of a variable like male or female affect the
   border-top-color: #D3D3D3;
 }
 
-#aebcujagfk .gt_last_grand_summary_row_top {
+#tlrhddarku .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1560,11 +1566,11 @@ c.  If interested in how the levels of a variable like male or female affect the
   border-bottom-color: #D3D3D3;
 }
 
-#aebcujagfk .gt_striped {
+#tlrhddarku .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#aebcujagfk .gt_table_body {
+#tlrhddarku .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1573,7 +1579,7 @@ c.  If interested in how the levels of a variable like male or female affect the
   border-bottom-color: #D3D3D3;
 }
 
-#aebcujagfk .gt_footnotes {
+#tlrhddarku .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1587,7 +1593,7 @@ c.  If interested in how the levels of a variable like male or female affect the
   border-right-color: #D3D3D3;
 }
 
-#aebcujagfk .gt_footnote {
+#tlrhddarku .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1596,7 +1602,7 @@ c.  If interested in how the levels of a variable like male or female affect the
   padding-right: 5px;
 }
 
-#aebcujagfk .gt_sourcenotes {
+#tlrhddarku .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1610,7 +1616,7 @@ c.  If interested in how the levels of a variable like male or female affect the
   border-right-color: #D3D3D3;
 }
 
-#aebcujagfk .gt_sourcenote {
+#tlrhddarku .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1618,63 +1624,63 @@ c.  If interested in how the levels of a variable like male or female affect the
   padding-right: 5px;
 }
 
-#aebcujagfk .gt_left {
+#tlrhddarku .gt_left {
   text-align: left;
 }
 
-#aebcujagfk .gt_center {
+#tlrhddarku .gt_center {
   text-align: center;
 }
 
-#aebcujagfk .gt_right {
+#tlrhddarku .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#aebcujagfk .gt_font_normal {
+#tlrhddarku .gt_font_normal {
   font-weight: normal;
 }
 
-#aebcujagfk .gt_font_bold {
+#tlrhddarku .gt_font_bold {
   font-weight: bold;
 }
 
-#aebcujagfk .gt_font_italic {
+#tlrhddarku .gt_font_italic {
   font-style: italic;
 }
 
-#aebcujagfk .gt_super {
+#tlrhddarku .gt_super {
   font-size: 65%;
 }
 
-#aebcujagfk .gt_footnote_marks {
+#tlrhddarku .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#aebcujagfk .gt_asterisk {
+#tlrhddarku .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#aebcujagfk .gt_indent_1 {
+#tlrhddarku .gt_indent_1 {
   text-indent: 5px;
 }
 
-#aebcujagfk .gt_indent_2 {
+#tlrhddarku .gt_indent_2 {
   text-indent: 10px;
 }
 
-#aebcujagfk .gt_indent_3 {
+#tlrhddarku .gt_indent_3 {
   text-indent: 15px;
 }
 
-#aebcujagfk .gt_indent_4 {
+#tlrhddarku .gt_indent_4 {
   text-indent: 20px;
 }
 
-#aebcujagfk .gt_indent_5 {
+#tlrhddarku .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1898,8 +1904,8 @@ c.  If interested in how the levels of a variable like male or female affect the
 </div>
 </div>
 <p>Now we will examine only the 6 variables meeting the measurement assumption.</p>
-</section><section id="linear-relationship" class="level4" data-number="19.5.3.1"><h4 data-number="19.5.3.1" class="anchored" data-anchor-id="linear-relationship">
-<span class="header-section-number">19.5.3.1</span> Linear Relationship</h4>
+</section><section id="linear-relationship" class="level4" data-number="20.5.3.1"><h4 data-number="20.5.3.1" class="anchored" data-anchor-id="linear-relationship">
+<span class="header-section-number">20.5.3.1</span> Linear Relationship</h4>
 <div class="cell">
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span></span>
 <span>  <span class="op">~</span><span class="va">mpg</span> <span class="op">+</span> <span class="va">disp</span> <span class="op">+</span> <span class="va">hp</span> <span class="op">+</span> <span class="va">drat</span> <span class="op">+</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">qsec</span>,</span>
@@ -1913,8 +1919,8 @@ c.  If interested in how the levels of a variable like male or female affect the
 </div>
 </div>
 <p>Based on this simple scatterplot matrix, all variables seem to follow a linear relationship, therefore, we will examine the normality and outliers assumption of these variables.</p>
-</section><section id="normality-distribution-and-extreme-outliers" class="level4" data-number="19.5.3.2"><h4 data-number="19.5.3.2" class="anchored" data-anchor-id="normality-distribution-and-extreme-outliers">
-<span class="header-section-number">19.5.3.2</span> Normality distribution and extreme outliers</h4>
+</section><section id="normality-distribution-and-extreme-outliers" class="level4" data-number="20.5.3.2"><h4 data-number="20.5.3.2" class="anchored" data-anchor-id="normality-distribution-and-extreme-outliers">
+<span class="header-section-number">20.5.3.2</span> Normality distribution and extreme outliers</h4>
 <div class="cell">
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -2053,8 +2059,8 @@ Important procedures
 </ul>
 </div>
 </div>
-</section></section><section id="computation-of-a-correlation-matrix" class="level3" data-number="19.5.4"><h3 data-number="19.5.4" class="anchored" data-anchor-id="computation-of-a-correlation-matrix">
-<span class="header-section-number">19.5.4</span> Computation of a Correlation Matrix</h3>
+</section></section><section id="computation-of-a-correlation-matrix" class="level3" data-number="20.5.4"><h3 data-number="20.5.4" class="anchored" data-anchor-id="computation-of-a-correlation-matrix">
+<span class="header-section-number">20.5.4</span> Computation of a Correlation Matrix</h3>
 <p>The function in R to create a basic correlation matrix is <strong>cor()</strong>. This function uses “pearson” as the default coefficient/method. The other two methods (for ranked correlation matrices) are “kendall” or “spearman”.</p>
 <p>If the data set has missing values, one can ask (use =) for “everything”, “all.obs”, “complete.obs”, “na.or.complete”, or “pairwise.complete.obs”. The easiest and most commonly used approach is “use = complete.obs” in which missing values are handled by case wise deletion (and if there are no complete cases, that gives an error).</p>
 <p>Our data set (mtcars2) is composed of only the 6 “continuous” variables of the data set ’mtcars”, and does not have missing values, therefore we can use the default method of “pearson” and do not need to specify a use for missing values.</p>
@@ -2220,16 +2226,16 @@ Important procedures
   
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>tinytable_xccpfajae5yyamzclqup</title>
+<title>tinytable_jnlimkrx51lkuw7esql3</title>
 <style>
-.table td.tinytable_css_uy88ydic09428smdvq55, .table th.tinytable_css_uy88ydic09428smdvq55 {    border-bottom: solid 0.1em #d3d8dc; }
-.table td.tinytable_css_lxpzeofbp55o3356jsau, .table th.tinytable_css_lxpzeofbp55o3356jsau {    text-align: left; }
-.table td.tinytable_css_kjotd92d0810ip9i6jj6, .table th.tinytable_css_kjotd92d0810ip9i6jj6 {    text-align: right; }
-.table td.tinytable_css_ll0iywtlqlaztzpzao85, .table th.tinytable_css_ll0iywtlqlaztzpzao85 {    text-align: right; }
-.table td.tinytable_css_hcsdjcwcop696a5udbxs, .table th.tinytable_css_hcsdjcwcop696a5udbxs {    text-align: right; }
-.table td.tinytable_css_ulxf3c51ns16kufgqzzz, .table th.tinytable_css_ulxf3c51ns16kufgqzzz {    text-align: right; }
-.table td.tinytable_css_kvzlsjyjwx2th5bkhah0, .table th.tinytable_css_kvzlsjyjwx2th5bkhah0 {    text-align: right; }
-.table td.tinytable_css_0rvdm5ybfxzzvbqogxio, .table th.tinytable_css_0rvdm5ybfxzzvbqogxio {    text-align: right; }
+.table td.tinytable_css_upvo100mqjz0u2kltyob, .table th.tinytable_css_upvo100mqjz0u2kltyob {    border-bottom: solid 0.1em #d3d8dc; }
+.table td.tinytable_css_0el796ar463ac7pqcwah, .table th.tinytable_css_0el796ar463ac7pqcwah {    text-align: left; }
+.table td.tinytable_css_d0anyi9dxdlrx9oisfr2, .table th.tinytable_css_d0anyi9dxdlrx9oisfr2 {    text-align: right; }
+.table td.tinytable_css_e0xd4kmge2dpjpyka36s, .table th.tinytable_css_e0xd4kmge2dpjpyka36s {    text-align: right; }
+.table td.tinytable_css_slqund7uubaz5cx3m17j, .table th.tinytable_css_slqund7uubaz5cx3m17j {    text-align: right; }
+.table td.tinytable_css_y4x28vtr9rt2a2ogm88l, .table th.tinytable_css_y4x28vtr9rt2a2ogm88l {    text-align: right; }
+.table td.tinytable_css_t4bmfe6gtknbks8g54fg, .table th.tinytable_css_t4bmfe6gtknbks8g54fg {    text-align: right; }
+.table td.tinytable_css_0cfkyy6004e41jpfe1k7, .table th.tinytable_css_0cfkyy6004e41jpfe1k7 {    text-align: right; }
     </style>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
     MathJax = {
@@ -2241,7 +2247,7 @@ Important procedures
       }
     };
     </script><div class="container">
-      <table class="table table-borderless" id="tinytable_xccpfajae5yyamzclqup" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_jnlimkrx51lkuw7esql3" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
 <thead><tr>
 <th scope="col"> </th>
                 <th scope="col">mpg</th>
@@ -2311,12 +2317,12 @@ Important procedures
 </div>
 
     <script>
-      function styleCell_tinytable_hcqhcs2iqv48jgcub61r(i, j, css_id) {
-        var table = document.getElementById("tinytable_xccpfajae5yyamzclqup");
+      function styleCell_tinytable_xideyn8t6lkvsycm5bmu(i, j, css_id) {
+        var table = document.getElementById("tinytable_jnlimkrx51lkuw7esql3");
         table.rows[i].cells[j].classList.add(css_id);
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_xccpfajae5yyamzclqup');
+        var table = document.getElementById('tinytable_jnlimkrx51lkuw7esql3');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -2324,8 +2330,8 @@ Important procedures
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_tinytable_hcqhcs2iqv48jgcub61r(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_xccpfajae5yyamzclqup");
+      function spanCell_tinytable_xideyn8t6lkvsycm5bmu(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_jnlimkrx51lkuw7esql3");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -2352,62 +2358,62 @@ Important procedures
         targetCell.colSpan = colspan;
       }
 
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(0, 0, 'tinytable_css_uy88ydic09428smdvq55') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(0, 1, 'tinytable_css_uy88ydic09428smdvq55') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(0, 2, 'tinytable_css_uy88ydic09428smdvq55') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(0, 3, 'tinytable_css_uy88ydic09428smdvq55') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(0, 4, 'tinytable_css_uy88ydic09428smdvq55') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(0, 5, 'tinytable_css_uy88ydic09428smdvq55') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(0, 6, 'tinytable_css_uy88ydic09428smdvq55') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(0, 0, 'tinytable_css_lxpzeofbp55o3356jsau') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(1, 0, 'tinytable_css_lxpzeofbp55o3356jsau') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(2, 0, 'tinytable_css_lxpzeofbp55o3356jsau') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(3, 0, 'tinytable_css_lxpzeofbp55o3356jsau') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(4, 0, 'tinytable_css_lxpzeofbp55o3356jsau') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(5, 0, 'tinytable_css_lxpzeofbp55o3356jsau') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(6, 0, 'tinytable_css_lxpzeofbp55o3356jsau') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(0, 1, 'tinytable_css_kjotd92d0810ip9i6jj6') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(1, 1, 'tinytable_css_kjotd92d0810ip9i6jj6') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(2, 1, 'tinytable_css_kjotd92d0810ip9i6jj6') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(3, 1, 'tinytable_css_kjotd92d0810ip9i6jj6') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(4, 1, 'tinytable_css_kjotd92d0810ip9i6jj6') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(5, 1, 'tinytable_css_kjotd92d0810ip9i6jj6') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(6, 1, 'tinytable_css_kjotd92d0810ip9i6jj6') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(0, 2, 'tinytable_css_ll0iywtlqlaztzpzao85') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(1, 2, 'tinytable_css_ll0iywtlqlaztzpzao85') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(2, 2, 'tinytable_css_ll0iywtlqlaztzpzao85') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(3, 2, 'tinytable_css_ll0iywtlqlaztzpzao85') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(4, 2, 'tinytable_css_ll0iywtlqlaztzpzao85') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(5, 2, 'tinytable_css_ll0iywtlqlaztzpzao85') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(6, 2, 'tinytable_css_ll0iywtlqlaztzpzao85') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(0, 3, 'tinytable_css_hcsdjcwcop696a5udbxs') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(1, 3, 'tinytable_css_hcsdjcwcop696a5udbxs') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(2, 3, 'tinytable_css_hcsdjcwcop696a5udbxs') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(3, 3, 'tinytable_css_hcsdjcwcop696a5udbxs') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(4, 3, 'tinytable_css_hcsdjcwcop696a5udbxs') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(5, 3, 'tinytable_css_hcsdjcwcop696a5udbxs') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(6, 3, 'tinytable_css_hcsdjcwcop696a5udbxs') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(0, 4, 'tinytable_css_ulxf3c51ns16kufgqzzz') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(1, 4, 'tinytable_css_ulxf3c51ns16kufgqzzz') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(2, 4, 'tinytable_css_ulxf3c51ns16kufgqzzz') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(3, 4, 'tinytable_css_ulxf3c51ns16kufgqzzz') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(4, 4, 'tinytable_css_ulxf3c51ns16kufgqzzz') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(5, 4, 'tinytable_css_ulxf3c51ns16kufgqzzz') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(6, 4, 'tinytable_css_ulxf3c51ns16kufgqzzz') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(0, 5, 'tinytable_css_kvzlsjyjwx2th5bkhah0') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(1, 5, 'tinytable_css_kvzlsjyjwx2th5bkhah0') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(2, 5, 'tinytable_css_kvzlsjyjwx2th5bkhah0') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(3, 5, 'tinytable_css_kvzlsjyjwx2th5bkhah0') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(4, 5, 'tinytable_css_kvzlsjyjwx2th5bkhah0') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(5, 5, 'tinytable_css_kvzlsjyjwx2th5bkhah0') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(6, 5, 'tinytable_css_kvzlsjyjwx2th5bkhah0') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(0, 6, 'tinytable_css_0rvdm5ybfxzzvbqogxio') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(1, 6, 'tinytable_css_0rvdm5ybfxzzvbqogxio') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(2, 6, 'tinytable_css_0rvdm5ybfxzzvbqogxio') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(3, 6, 'tinytable_css_0rvdm5ybfxzzvbqogxio') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(4, 6, 'tinytable_css_0rvdm5ybfxzzvbqogxio') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(5, 6, 'tinytable_css_0rvdm5ybfxzzvbqogxio') })
-window.addEventListener('load', function () { styleCell_tinytable_hcqhcs2iqv48jgcub61r(6, 6, 'tinytable_css_0rvdm5ybfxzzvbqogxio') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(0, 0, 'tinytable_css_upvo100mqjz0u2kltyob') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(0, 1, 'tinytable_css_upvo100mqjz0u2kltyob') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(0, 2, 'tinytable_css_upvo100mqjz0u2kltyob') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(0, 3, 'tinytable_css_upvo100mqjz0u2kltyob') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(0, 4, 'tinytable_css_upvo100mqjz0u2kltyob') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(0, 5, 'tinytable_css_upvo100mqjz0u2kltyob') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(0, 6, 'tinytable_css_upvo100mqjz0u2kltyob') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(0, 0, 'tinytable_css_0el796ar463ac7pqcwah') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(1, 0, 'tinytable_css_0el796ar463ac7pqcwah') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(2, 0, 'tinytable_css_0el796ar463ac7pqcwah') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(3, 0, 'tinytable_css_0el796ar463ac7pqcwah') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(4, 0, 'tinytable_css_0el796ar463ac7pqcwah') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(5, 0, 'tinytable_css_0el796ar463ac7pqcwah') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(6, 0, 'tinytable_css_0el796ar463ac7pqcwah') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(0, 1, 'tinytable_css_d0anyi9dxdlrx9oisfr2') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(1, 1, 'tinytable_css_d0anyi9dxdlrx9oisfr2') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(2, 1, 'tinytable_css_d0anyi9dxdlrx9oisfr2') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(3, 1, 'tinytable_css_d0anyi9dxdlrx9oisfr2') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(4, 1, 'tinytable_css_d0anyi9dxdlrx9oisfr2') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(5, 1, 'tinytable_css_d0anyi9dxdlrx9oisfr2') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(6, 1, 'tinytable_css_d0anyi9dxdlrx9oisfr2') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(0, 2, 'tinytable_css_e0xd4kmge2dpjpyka36s') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(1, 2, 'tinytable_css_e0xd4kmge2dpjpyka36s') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(2, 2, 'tinytable_css_e0xd4kmge2dpjpyka36s') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(3, 2, 'tinytable_css_e0xd4kmge2dpjpyka36s') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(4, 2, 'tinytable_css_e0xd4kmge2dpjpyka36s') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(5, 2, 'tinytable_css_e0xd4kmge2dpjpyka36s') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(6, 2, 'tinytable_css_e0xd4kmge2dpjpyka36s') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(0, 3, 'tinytable_css_slqund7uubaz5cx3m17j') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(1, 3, 'tinytable_css_slqund7uubaz5cx3m17j') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(2, 3, 'tinytable_css_slqund7uubaz5cx3m17j') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(3, 3, 'tinytable_css_slqund7uubaz5cx3m17j') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(4, 3, 'tinytable_css_slqund7uubaz5cx3m17j') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(5, 3, 'tinytable_css_slqund7uubaz5cx3m17j') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(6, 3, 'tinytable_css_slqund7uubaz5cx3m17j') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(0, 4, 'tinytable_css_y4x28vtr9rt2a2ogm88l') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(1, 4, 'tinytable_css_y4x28vtr9rt2a2ogm88l') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(2, 4, 'tinytable_css_y4x28vtr9rt2a2ogm88l') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(3, 4, 'tinytable_css_y4x28vtr9rt2a2ogm88l') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(4, 4, 'tinytable_css_y4x28vtr9rt2a2ogm88l') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(5, 4, 'tinytable_css_y4x28vtr9rt2a2ogm88l') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(6, 4, 'tinytable_css_y4x28vtr9rt2a2ogm88l') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(0, 5, 'tinytable_css_t4bmfe6gtknbks8g54fg') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(1, 5, 'tinytable_css_t4bmfe6gtknbks8g54fg') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(2, 5, 'tinytable_css_t4bmfe6gtknbks8g54fg') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(3, 5, 'tinytable_css_t4bmfe6gtknbks8g54fg') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(4, 5, 'tinytable_css_t4bmfe6gtknbks8g54fg') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(5, 5, 'tinytable_css_t4bmfe6gtknbks8g54fg') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(6, 5, 'tinytable_css_t4bmfe6gtknbks8g54fg') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(0, 6, 'tinytable_css_0cfkyy6004e41jpfe1k7') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(1, 6, 'tinytable_css_0cfkyy6004e41jpfe1k7') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(2, 6, 'tinytable_css_0cfkyy6004e41jpfe1k7') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(3, 6, 'tinytable_css_0cfkyy6004e41jpfe1k7') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(4, 6, 'tinytable_css_0cfkyy6004e41jpfe1k7') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(5, 6, 'tinytable_css_0cfkyy6004e41jpfe1k7') })
+window.addEventListener('load', function () { styleCell_tinytable_xideyn8t6lkvsycm5bmu(6, 6, 'tinytable_css_0cfkyy6004e41jpfe1k7') })
     </script>
 </div>
 </div>
@@ -2673,10 +2679,10 @@ Warning in par(usr): argument 1 does not name a graphical parameter</code></pre>
 </div>
 </div>
 </div>
-</section></section><section id="other-correlation-types-spearman-and-partial" class="level2" data-number="19.6"><h2 data-number="19.6" class="anchored" data-anchor-id="other-correlation-types-spearman-and-partial">
-<span class="header-section-number">19.6</span> Other Correlation Types (Spearman and Partial)</h2>
-<section id="spearman-ranking-of-variables-non-parametric" class="level3" data-number="19.6.1"><h3 data-number="19.6.1" class="anchored" data-anchor-id="spearman-ranking-of-variables-non-parametric">
-<span class="header-section-number">19.6.1</span> Spearman (ranking of variables, non-parametric)</h3>
+</section></section><section id="other-correlation-types-spearman-and-partial" class="level2" data-number="20.6"><h2 data-number="20.6" class="anchored" data-anchor-id="other-correlation-types-spearman-and-partial">
+<span class="header-section-number">20.6</span> Other Correlation Types (Spearman and Partial)</h2>
+<section id="spearman-ranking-of-variables-non-parametric" class="level3" data-number="20.6.1"><h3 data-number="20.6.1" class="anchored" data-anchor-id="spearman-ranking-of-variables-non-parametric">
+<span class="header-section-number">20.6.1</span> Spearman (ranking of variables, non-parametric)</h3>
 <div class="cell">
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Load data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"mtcars"</span><span class="op">)</span></span>
@@ -2690,8 +2696,8 @@ Cannot compute exact p-value with ties</code></pre>
 <span><span class="co"># use continuous variables, the exact p-value cannot be computed with ties. </span></span>
 <span><span class="co"># Therefore, it is better to use ranked data in order to compute the exact p-value. </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="partial-correlation" class="level3" data-number="19.6.2"><h3 data-number="19.6.2" class="anchored" data-anchor-id="partial-correlation">
-<span class="header-section-number">19.6.2</span> Partial Correlation</h3>
+</section><section id="partial-correlation" class="level3" data-number="20.6.2"><h3 data-number="20.6.2" class="anchored" data-anchor-id="partial-correlation">
+<span class="header-section-number">20.6.2</span> Partial Correlation</h3>
 <p>The Partial correlation is the correlation of two variables while controlling for a third or more other variables. The partial correlation coefficient is a measure of the strength of the linear relationship between two variables after entirely controlling for the effects of other variables.</p>
 <p>To conduct the <strong>partial correlation test</strong></p>
 <div class="cell">
@@ -2703,11 +2709,11 @@ Cannot compute exact p-value with ties</code></pre>
 </div>
 </div>
 <p>This is the calculation of the correlation between miles per gallon and weight while controlling the variable “am” = Transmission (0 = automatic, 1 = manual).</p>
-</section></section><section id="example-of-r-in-examining-the-relationship-in-a-pair-of-variables-using-the-pearson-correlation-coefficient-type-of-correlation" class="level2" data-number="19.7"><h2 data-number="19.7" class="anchored" data-anchor-id="example-of-r-in-examining-the-relationship-in-a-pair-of-variables-using-the-pearson-correlation-coefficient-type-of-correlation">
-<span class="header-section-number">19.7</span> Example of <em>r</em> in examining the relationship in a pair of variables using the Pearson Correlation Coefficient type of correlation</h2>
+</section></section><section id="example-of-r-in-examining-the-relationship-in-a-pair-of-variables-using-the-pearson-correlation-coefficient-type-of-correlation" class="level2" data-number="20.7"><h2 data-number="20.7" class="anchored" data-anchor-id="example-of-r-in-examining-the-relationship-in-a-pair-of-variables-using-the-pearson-correlation-coefficient-type-of-correlation">
+<span class="header-section-number">20.7</span> Example of <em>r</em> in examining the relationship in a pair of variables using the Pearson Correlation Coefficient type of correlation</h2>
 <p>Using the <strong>ggscatter</strong> function in the <code>ggpubr</code> package, we could examine the Pearson coefficient and the related p-value for a pair of variables we found of interest in the scatterplot matrix above. We will explore the relationship between the the number of miles per gallon and the weight of a vehicle.</p>
-<section id="hypothesis-test-between-mpg-and-wt" class="level3" data-number="19.7.1"><h3 data-number="19.7.1" class="anchored" data-anchor-id="hypothesis-test-between-mpg-and-wt">
-<span class="header-section-number">19.7.1</span> Hypothesis test between mpg and wt</h3>
+<section id="hypothesis-test-between-mpg-and-wt" class="level3" data-number="20.7.1"><h3 data-number="20.7.1" class="anchored" data-anchor-id="hypothesis-test-between-mpg-and-wt">
+<span class="header-section-number">20.7.1</span> Hypothesis test between mpg and wt</h3>
 <p>We will test if a vehicle’s weight is related to its fuel efficiency.</p>
 <p><span class="math display">\[
 H_0: ρ = 0,
@@ -2770,8 +2776,8 @@ t = \frac {-0.868}{\sqrt{\frac {0.2466}{30}}} = -9.574
 <li>The magnitude, or strength, of the association is approximately strong (5 &lt; | <em>r</em> |).</li>
 </ul>
 </blockquote>
-</section></section><section id="references" class="level2" data-number="19.8"><h2 data-number="19.8" class="anchored" data-anchor-id="references">
-<span class="header-section-number">19.8</span> References</h2>
+</section></section><section id="references" class="level2" data-number="20.8"><h2 data-number="20.8" class="anchored" data-anchor-id="references">
+<span class="header-section-number">20.8</span> References</h2>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -3184,12 +3190,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../lessons_original/04_anova_random_intercept.html" class="pagination-link" aria-label="Random Intercept Model">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../lessons_original/04_regression_ols.html" class="pagination-link" aria-label="Ordinary Least Squares Regression">
-        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

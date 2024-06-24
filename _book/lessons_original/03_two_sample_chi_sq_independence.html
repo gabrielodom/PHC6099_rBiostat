@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Gabriel Odom">
-<meta name="dcterms.date" content="2024-06-12">
+<meta name="dcterms.date" content="2024-06-24">
 
-<title>An R Cookbook for Public Health - 15&nbsp; Chi-Squared Independence</title>
+<title>An R Cookbook for Public Health - 16&nbsp; Chi-Squared Independence</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -146,7 +146,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons_original/03_two_sample_chi_sq_independence.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons_original/03_two_sample_chi_sq_independence.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -255,14 +255,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -279,25 +285,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -314,43 +320,43 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -367,7 +373,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -384,7 +390,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
   </div>
 </li>
       </ul>
@@ -401,7 +407,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -416,34 +422,34 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">15.1</span> Introduction</a></li>
-  <li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><span class="header-section-number">15.3</span> Hypotheses</a></li>
-  <li><a href="#chi-squared-independence-test-equation" id="toc-chi-squared-independence-test-equation" class="nav-link" data-scroll-target="#chi-squared-independence-test-equation"><span class="header-section-number">15.4</span> Chi-Squared Independence Test Equation</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">16.1</span> Introduction</a></li>
+  <li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><span class="header-section-number">16.3</span> Hypotheses</a></li>
+  <li><a href="#chi-squared-independence-test-equation" id="toc-chi-squared-independence-test-equation" class="nav-link" data-scroll-target="#chi-squared-independence-test-equation"><span class="header-section-number">16.4</span> Chi-Squared Independence Test Equation</a>
   <ul class="collapse">
-  <li><a href="#formula-description" id="toc-formula-description" class="nav-link" data-scroll-target="#formula-description"><span class="header-section-number">15.4.1</span> Formula Description</a></li>
+  <li><a href="#formula-description" id="toc-formula-description" class="nav-link" data-scroll-target="#formula-description"><span class="header-section-number">16.4.1</span> Formula Description</a></li>
   </ul></li>
-  <li><a href="#performing-chi-squared-independence-test-in-r" id="toc-performing-chi-squared-independence-test-in-r" class="nav-link" data-scroll-target="#performing-chi-squared-independence-test-in-r"><span class="header-section-number">15.5</span> Performing Chi-Squared Independence Test in R</a>
+  <li><a href="#performing-chi-squared-independence-test-in-r" id="toc-performing-chi-squared-independence-test-in-r" class="nav-link" data-scroll-target="#performing-chi-squared-independence-test-in-r"><span class="header-section-number">16.5</span> Performing Chi-Squared Independence Test in R</a>
   <ul class="collapse">
-  <li><a href="#data-source" id="toc-data-source" class="nav-link" data-scroll-target="#data-source"><span class="header-section-number">15.5.1</span> Data Source</a></li>
-  <li><a href="#contingency-tables" id="toc-contingency-tables" class="nav-link" data-scroll-target="#contingency-tables"><span class="header-section-number">15.5.2</span> Contingency Tables</a></li>
-  <li><a href="#mosaic-plots" id="toc-mosaic-plots" class="nav-link" data-scroll-target="#mosaic-plots"><span class="header-section-number">15.5.3</span> Mosaic Plots</a></li>
-  <li><a href="#running-the-chi-squared-test" id="toc-running-the-chi-squared-test" class="nav-link" data-scroll-target="#running-the-chi-squared-test"><span class="header-section-number">15.5.4</span> Running the Chi-Squared Test</a></li>
-  <li><a href="#test-options" id="toc-test-options" class="nav-link" data-scroll-target="#test-options"><span class="header-section-number">15.5.5</span> Test Options</a></li>
+  <li><a href="#data-source" id="toc-data-source" class="nav-link" data-scroll-target="#data-source"><span class="header-section-number">16.5.1</span> Data Source</a></li>
+  <li><a href="#contingency-tables" id="toc-contingency-tables" class="nav-link" data-scroll-target="#contingency-tables"><span class="header-section-number">16.5.2</span> Contingency Tables</a></li>
+  <li><a href="#mosaic-plots" id="toc-mosaic-plots" class="nav-link" data-scroll-target="#mosaic-plots"><span class="header-section-number">16.5.3</span> Mosaic Plots</a></li>
+  <li><a href="#running-the-chi-squared-test" id="toc-running-the-chi-squared-test" class="nav-link" data-scroll-target="#running-the-chi-squared-test"><span class="header-section-number">16.5.4</span> Running the Chi-Squared Test</a></li>
+  <li><a href="#test-options" id="toc-test-options" class="nav-link" data-scroll-target="#test-options"><span class="header-section-number">16.5.5</span> Test Options</a></li>
   </ul></li>
-  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">15.6</span> Interpretation</a>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">16.6</span> Interpretation</a>
   <ul class="collapse">
-  <li><a href="#post-hoc-test" id="toc-post-hoc-test" class="nav-link" data-scroll-target="#post-hoc-test"><span class="header-section-number">15.6.1</span> Post hoc test</a></li>
+  <li><a href="#post-hoc-test" id="toc-post-hoc-test" class="nav-link" data-scroll-target="#post-hoc-test"><span class="header-section-number">16.6.1</span> Post hoc test</a></li>
   </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">15.7</span> Conclusion</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">16.7</span> Conclusion</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/03_two_sample_chi_sq_independence.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons_original/03_two_sample_chi_sq_independence.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons_original/03_two_sample_chi_sq_independence.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></h1>
+<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></h1>
 <p class="subtitle lead">What it is and how to run it</p>
 </div>
 
@@ -462,7 +468,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 12, 2024</p>
+      <p class="date">June 24, 2024</p>
     </div>
   </div>
   
@@ -474,8 +480,8 @@ window.Quarto = {
 </header>
 
 
-<section id="introduction" class="level2" data-number="15.1">
-<h2 data-number="15.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">15.1</span> Introduction</h2>
+<section id="introduction" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">16.1</span> Introduction</h2>
 <p>The Chi-square test of independence (also known as the Pearson Chi-square test, or simply the Chi-square) is one of the most useful statistics for testing hypotheses when the variables are nominal. It is a non-parametric tool that does not require equality of variances among the study groups or homoscedasticity in the data.<span class="citation" data-cites="mchugh2013">(<a href="#ref-mchugh2013" role="doc-biblioref"><strong>mchugh2013?</strong></a>)</span></p>
 <p>Being a non-parametric test tool, Chi-square test can be used when any one of the following conditions pertains to the data:<span class="citation" data-cites="mchugh2013">(<a href="#ref-mchugh2013" role="doc-biblioref"><strong>mchugh2013?</strong></a>)</span></p>
 <ol type="1">
@@ -488,7 +494,7 @@ window.Quarto = {
 <li><p><em>The data violate the assumptions of equal variance or homoscedasticity.</em></p></li>
 <li><p><em>For any reasons , the continuous data were collapsed into a small number of categories, and thus the data are no longer interval or ratio.</em><span class="citation" data-cites="miller1982">(<a href="#ref-miller1982" role="doc-biblioref"><strong>miller1982?</strong></a>)</span></p></li>
 </ul>
-<h2 id="assumptionsmchugh2013" data-number="15.2" class="anchored"><span class="header-section-number">15.2</span> Assumptions<span class="citation" data-cites="mchugh2013">(<a href="#ref-mchugh2013" role="doc-biblioref"><strong>mchugh2013?</strong></a>)</span></h2>
+<h2 id="assumptionsmchugh2013" data-number="16.2" class="anchored"><span class="header-section-number">16.2</span> Assumptions<span class="citation" data-cites="mchugh2013">(<a href="#ref-mchugh2013" role="doc-biblioref"><strong>mchugh2013?</strong></a>)</span></h2>
 <ol type="1">
 <li><p>The data in the cells should be frequencies, or counts of cases rather than % or some other transformation of the data.</p></li>
 <li><p>The levels (or categories) of the variables are mutually exclusive.</p></li>
@@ -497,13 +503,13 @@ window.Quarto = {
 </ol></li>
 </ol>
 </section>
-<section id="hypotheses" class="level2" data-number="15.3">
-<h2 data-number="15.3" class="anchored" data-anchor-id="hypotheses"><span class="header-section-number">15.3</span> Hypotheses</h2>
+<section id="hypotheses" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="hypotheses"><span class="header-section-number">16.3</span> Hypotheses</h2>
 <p>Null Hypothesis <strong>(<em>H<sub>0</sub></em>):</strong> Outcome variable is independent of type of exposure variables. There is no significant difference in the association of group A/B with outcome variable.</p>
 <p>Alternate Hypothesis: <strong>(<em>H<sub>1</sub></em>)</strong> Outcome variable varies significantly depending upon the type of exposure variable. There is a significant difference in the association of group A/B with outcome variable.</p>
 </section>
-<section id="chi-squared-independence-test-equation" class="level2" data-number="15.4">
-<h2 data-number="15.4" class="anchored" data-anchor-id="chi-squared-independence-test-equation"><span class="header-section-number">15.4</span> Chi-Squared Independence Test Equation</h2>
+<section id="chi-squared-independence-test-equation" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="chi-squared-independence-test-equation"><span class="header-section-number">16.4</span> Chi-Squared Independence Test Equation</h2>
 <p><span class="math inline">\(\chi^2 = \sum \frac{{(O_{ij} - E_{ij})^2}}{{E_{ij}}}\)</span></p>
 <p>Where:</p>
 <ul>
@@ -522,8 +528,8 @@ window.Quarto = {
 <li><span class="math inline">\(M{c}\)</span> represents the column marginal for that cell, and</li>
 <li><span class="math inline">\(n\)</span> represents the total sample size.</li>
 </ul>
-<section id="formula-description" class="level3" data-number="15.4.1">
-<h3 data-number="15.4.1" class="anchored" data-anchor-id="formula-description"><span class="header-section-number">15.4.1</span> Formula Description</h3>
+<section id="formula-description" class="level3" data-number="16.4.1">
+<h3 data-number="16.4.1" class="anchored" data-anchor-id="formula-description"><span class="header-section-number">16.4.1</span> Formula Description</h3>
 <ul>
 <li><p>The first step in calculating a χ2&nbsp;is to calculate the sum of each row, and the sum of each column. These sums are called the “marginals” and there are row marginal values and column marginal values.&nbsp;</p></li>
 <li><p>The second step is to calculate the&nbsp;<em>expected</em>&nbsp;values for each cell. In the Chi-square statistic, the “expected” values represent an estimate of how the cases would be distributed if there were no effect of exposure variables.</p></li>
@@ -531,8 +537,8 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="performing-chi-squared-independence-test-in-r" class="level2" data-number="15.5">
-<h2 data-number="15.5" class="anchored" data-anchor-id="performing-chi-squared-independence-test-in-r"><span class="header-section-number">15.5</span> Performing Chi-Squared Independence Test in R</h2>
+<section id="performing-chi-squared-independence-test-in-r" class="level2" data-number="16.5">
+<h2 data-number="16.5" class="anchored" data-anchor-id="performing-chi-squared-independence-test-in-r"><span class="header-section-number">16.5</span> Performing Chi-Squared Independence Test in R</h2>
 <p>The first step is to load the required packages that will allow us to conduct the test statistic.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.package("openintro")</span></span>
@@ -583,8 +589,8 @@ Attaching package: 'rstatix'</code></pre>
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 </div>
-<section id="data-source" class="level3" data-number="15.5.1">
-<h3 data-number="15.5.1" class="anchored" data-anchor-id="data-source"><span class="header-section-number">15.5.1</span> Data Source</h3>
+<section id="data-source" class="level3" data-number="16.5.1">
+<h3 data-number="16.5.1" class="anchored" data-anchor-id="data-source"><span class="header-section-number">16.5.1</span> Data Source</h3>
 <p>The <code>openintro</code> package contains data sets used in open-source textbooks such as <em>Introduction to Modern Statistics (1st Ed)</em>. <span class="citation" data-cites="mineçetinkaya-rundel2023">(<a href="#ref-mineçetinkaya-rundel2023" role="doc-biblioref"><strong>mineçetinkaya-rundel2023?</strong></a>)</span> It is often used for teaching purposes and create examples for how to run various test statistics and functions using R. This package can be installed using the <code>install.packages("openintro")</code> feature. You can also find more information about this package <a href="http://openintrostat.github.io/openintro/">here</a>.</p>
 <p>For the purposes of this presentations we will be using the <em>diabetes2</em> dataset found within this package.</p>
 <p>In the data there are 699 diabetes patients. Each of the 699 patients in the experiment were randomized to one of the following treatments: (1) continued treatment with metformin (coded as met), (2) formin combined with rosiglitazone (coded as rosi), or or (3) a lifestyle-intervention program (coded as lifestyle).Three treatments were compared to test their relative efficacy (effectiveness) in treating Type 2 Diabetes in patients aged 10-17 who were being treated with metformin. The primary outcome was lack of glycemic control (or not); lacking glycemic control means the patient still needed insulin, which is not the preferred outcome for a patient.<span class="citation" data-cites="todaystudygroup2012">(<a href="#ref-todaystudygroup2012" role="doc-biblioref"><strong>todaystudygroup2012?</strong></a>)</span></p>
@@ -614,8 +620,8 @@ Attaching package: 'rstatix'</code></pre>
 </div>
 </div>
 </section>
-<section id="contingency-tables" class="level3" data-number="15.5.2">
-<h3 data-number="15.5.2" class="anchored" data-anchor-id="contingency-tables"><span class="header-section-number">15.5.2</span> Contingency Tables</h3>
+<section id="contingency-tables" class="level3" data-number="16.5.2">
+<h3 data-number="16.5.2" class="anchored" data-anchor-id="contingency-tables"><span class="header-section-number">16.5.2</span> Contingency Tables</h3>
 <p>The first step in a Chi-Squared Independence Test involves creating a contingency table that is used to calculate the expected frequencies for each variable. This will help us summarize the data and show the distribution of the variables. This is done using the <code>table()</code> function as seen in the code below.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the table</span></span>
@@ -633,8 +639,8 @@ Attaching package: 'rstatix'</code></pre>
 </div>
 </div>
 </section>
-<section id="mosaic-plots" class="level3" data-number="15.5.3">
-<h3 data-number="15.5.3" class="anchored" data-anchor-id="mosaic-plots"><span class="header-section-number">15.5.3</span> Mosaic Plots</h3>
+<section id="mosaic-plots" class="level3" data-number="16.5.3">
+<h3 data-number="16.5.3" class="anchored" data-anchor-id="mosaic-plots"><span class="header-section-number">16.5.3</span> Mosaic Plots</h3>
 <p>You can also use a mosaic plot to visualize the data better. Our data is in interger format so we first need to reformat it into factor form. This can we done with the code below.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#reformat treatment</span></span>
@@ -710,8 +716,8 @@ Levels: Failure Success</code></pre>
 </div>
 </div>
 </section>
-<section id="running-the-chi-squared-test" class="level3" data-number="15.5.4">
-<h3 data-number="15.5.4" class="anchored" data-anchor-id="running-the-chi-squared-test"><span class="header-section-number">15.5.4</span> Running the Chi-Squared Test</h3>
+<section id="running-the-chi-squared-test" class="level3" data-number="16.5.4">
+<h3 data-number="16.5.4" class="anchored" data-anchor-id="running-the-chi-squared-test"><span class="header-section-number">16.5.4</span> Running the Chi-Squared Test</h3>
 <p>The next step is to run our actual test statistic. This is done using the <code>chisq.test()</code> function as seen in the code below.The <code>correct</code> argument is used to indicate whether to apply continuity correction when computing the test. We are setting this to <code>TRUE</code> since we are dealing with a 2x2 contingency table where we have two categorical variables, each with two levels.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>chi_sq_result <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(diabetes_table, </span>
@@ -726,8 +732,8 @@ data:  diabetes_table
 X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
 </div>
 </div>
-<section id="tabulating-the-chisq-output-in-a-publishable-format-using-gt_summary" class="level4" data-number="15.5.4.1">
-<h4 data-number="15.5.4.1" class="anchored" data-anchor-id="tabulating-the-chisq-output-in-a-publishable-format-using-gt_summary"><span class="header-section-number">15.5.4.1</span> Tabulating the chisq output in a publishable format using gt_summary</h4>
+<section id="tabulating-the-chisq-output-in-a-publishable-format-using-gt_summary" class="level4" data-number="16.5.4.1">
+<h4 data-number="16.5.4.1" class="anchored" data-anchor-id="tabulating-the-chisq-output-in-a-publishable-format-using-gt_summary"><span class="header-section-number">16.5.4.1</span> Tabulating the chisq output in a publishable format using gt_summary</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>table1 <span class="ot">&lt;-</span>   </span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
@@ -742,23 +748,23 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
 <span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>table1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="kzkadwzfwd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kzkadwzfwd table {
+<div id="owtmnoefmt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#owtmnoefmt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kzkadwzfwd thead, #kzkadwzfwd tbody, #kzkadwzfwd tfoot, #kzkadwzfwd tr, #kzkadwzfwd td, #kzkadwzfwd th {
+#owtmnoefmt thead, #owtmnoefmt tbody, #owtmnoefmt tfoot, #owtmnoefmt tr, #owtmnoefmt td, #owtmnoefmt th {
   border-style: none;
 }
 
-#kzkadwzfwd p {
+#owtmnoefmt p {
   margin: 0;
   padding: 0;
 }
 
-#kzkadwzfwd .gt_table {
+#owtmnoefmt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -784,12 +790,12 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#kzkadwzfwd .gt_caption {
+#owtmnoefmt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kzkadwzfwd .gt_title {
+#owtmnoefmt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -801,7 +807,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-bottom-width: 0;
 }
 
-#kzkadwzfwd .gt_subtitle {
+#owtmnoefmt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -813,7 +819,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-top-width: 0;
 }
 
-#kzkadwzfwd .gt_heading {
+#owtmnoefmt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -825,13 +831,13 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#kzkadwzfwd .gt_bottom_border {
+#owtmnoefmt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kzkadwzfwd .gt_col_headings {
+#owtmnoefmt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -846,7 +852,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#kzkadwzfwd .gt_col_heading {
+#owtmnoefmt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -866,7 +872,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   overflow-x: hidden;
 }
 
-#kzkadwzfwd .gt_column_spanner_outer {
+#owtmnoefmt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -878,15 +884,15 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   padding-right: 4px;
 }
 
-#kzkadwzfwd .gt_column_spanner_outer:first-child {
+#owtmnoefmt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kzkadwzfwd .gt_column_spanner_outer:last-child {
+#owtmnoefmt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kzkadwzfwd .gt_column_spanner {
+#owtmnoefmt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -898,11 +904,11 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   width: 100%;
 }
 
-#kzkadwzfwd .gt_spanner_row {
+#owtmnoefmt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kzkadwzfwd .gt_group_heading {
+#owtmnoefmt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -928,7 +934,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   text-align: left;
 }
 
-#kzkadwzfwd .gt_empty_group_heading {
+#owtmnoefmt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -943,15 +949,15 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   vertical-align: middle;
 }
 
-#kzkadwzfwd .gt_from_md > :first-child {
+#owtmnoefmt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kzkadwzfwd .gt_from_md > :last-child {
+#owtmnoefmt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kzkadwzfwd .gt_row {
+#owtmnoefmt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -970,7 +976,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   overflow-x: hidden;
 }
 
-#kzkadwzfwd .gt_stub {
+#owtmnoefmt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -983,7 +989,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   padding-right: 5px;
 }
 
-#kzkadwzfwd .gt_stub_row_group {
+#owtmnoefmt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -997,15 +1003,15 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   vertical-align: top;
 }
 
-#kzkadwzfwd .gt_row_group_first td {
+#owtmnoefmt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kzkadwzfwd .gt_row_group_first th {
+#owtmnoefmt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kzkadwzfwd .gt_summary_row {
+#owtmnoefmt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1015,16 +1021,16 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   padding-right: 5px;
 }
 
-#kzkadwzfwd .gt_first_summary_row {
+#owtmnoefmt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kzkadwzfwd .gt_first_summary_row.thick {
+#owtmnoefmt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kzkadwzfwd .gt_last_summary_row {
+#owtmnoefmt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1034,7 +1040,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#kzkadwzfwd .gt_grand_summary_row {
+#owtmnoefmt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1044,7 +1050,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   padding-right: 5px;
 }
 
-#kzkadwzfwd .gt_first_grand_summary_row {
+#owtmnoefmt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1054,7 +1060,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#kzkadwzfwd .gt_last_grand_summary_row_top {
+#owtmnoefmt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1064,11 +1070,11 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#kzkadwzfwd .gt_striped {
+#owtmnoefmt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kzkadwzfwd .gt_table_body {
+#owtmnoefmt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1077,7 +1083,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#kzkadwzfwd .gt_footnotes {
+#owtmnoefmt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1091,7 +1097,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#kzkadwzfwd .gt_footnote {
+#owtmnoefmt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1100,7 +1106,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   padding-right: 5px;
 }
 
-#kzkadwzfwd .gt_sourcenotes {
+#owtmnoefmt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1114,7 +1120,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#kzkadwzfwd .gt_sourcenote {
+#owtmnoefmt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1122,63 +1128,63 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   padding-right: 5px;
 }
 
-#kzkadwzfwd .gt_left {
+#owtmnoefmt .gt_left {
   text-align: left;
 }
 
-#kzkadwzfwd .gt_center {
+#owtmnoefmt .gt_center {
   text-align: center;
 }
 
-#kzkadwzfwd .gt_right {
+#owtmnoefmt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kzkadwzfwd .gt_font_normal {
+#owtmnoefmt .gt_font_normal {
   font-weight: normal;
 }
 
-#kzkadwzfwd .gt_font_bold {
+#owtmnoefmt .gt_font_bold {
   font-weight: bold;
 }
 
-#kzkadwzfwd .gt_font_italic {
+#owtmnoefmt .gt_font_italic {
   font-style: italic;
 }
 
-#kzkadwzfwd .gt_super {
+#owtmnoefmt .gt_super {
   font-size: 65%;
 }
 
-#kzkadwzfwd .gt_footnote_marks {
+#owtmnoefmt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kzkadwzfwd .gt_asterisk {
+#owtmnoefmt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kzkadwzfwd .gt_indent_1 {
+#owtmnoefmt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kzkadwzfwd .gt_indent_2 {
+#owtmnoefmt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kzkadwzfwd .gt_indent_3 {
+#owtmnoefmt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kzkadwzfwd .gt_indent_4 {
+#owtmnoefmt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kzkadwzfwd .gt_indent_5 {
+#owtmnoefmt .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1245,8 +1251,8 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
 </div>
 </section>
 </section>
-<section id="test-options" class="level3" data-number="15.5.5">
-<h3 data-number="15.5.5" class="anchored" data-anchor-id="test-options"><span class="header-section-number">15.5.5</span> Test Options</h3>
+<section id="test-options" class="level3" data-number="16.5.5">
+<h3 data-number="16.5.5" class="anchored" data-anchor-id="test-options"><span class="header-section-number">16.5.5</span> Test Options</h3>
 <p>The Chi-Squared Independence test statistic has various options in R. A brief description of those options is summarized in the table below.</p>
 <table class="table">
 <colgroup>
@@ -1297,11 +1303,11 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
 <p>*The Monte Carlo test is a technique that involves simulation to estimate the p-value or test statistic for hypothesis testing. This is used when using complex models and exact p-values cannot be calculated or when the distribution assumptions are violated. <span class="citation" data-cites="christianp.robert2010">(<a href="#ref-christianp.robert2010" role="doc-biblioref"><strong>christianp.robert2010?</strong></a>)</span></p>
 </section>
 </section>
-<section id="interpretation" class="level2" data-number="15.6">
-<h2 data-number="15.6" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">15.6</span> Interpretation</h2>
+<section id="interpretation" class="level2" data-number="16.6">
+<h2 data-number="16.6" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">16.6</span> Interpretation</h2>
 <p>Our results give us a chi-squared test statistic of 8.1645 with a <code>p-value</code> of 0.017. Since p value is smaller than critical p value (0.05), we have enough evidence to reject the null hypothesis and conclude that there is a strong association between the type of treatment on Type 2 diabetes. However, we dont’t know which treatment option is significantly different so we are going to do a post hoc test in below code chunk.</p>
-<section id="post-hoc-test" class="level3" data-number="15.6.1">
-<h3 data-number="15.6.1" class="anchored" data-anchor-id="post-hoc-test"><span class="header-section-number">15.6.1</span> Post hoc test</h3>
+<section id="post-hoc-test" class="level3" data-number="16.6.1">
+<h3 data-number="16.6.1" class="anchored" data-anchor-id="post-hoc-test"><span class="header-section-number">16.6.1</span> Post hoc test</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>post_hoc_test <span class="ot">&lt;-</span> <span class="fu">pairwise_prop_test</span>(diabetes_table)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1317,8 +1323,8 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
 </div>
 </section>
 </section>
-<section id="conclusion" class="level2" data-number="15.7">
-<h2 data-number="15.7" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">15.7</span> Conclusion</h2>
+<section id="conclusion" class="level2" data-number="16.7">
+<h2 data-number="16.7" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">16.7</span> Conclusion</h2>
 <p>From our post hoc test result we see that there is a statistically significant difference between Met and Rosi. Given our data, we can conclude that Rosi is the better treatment option for the population tested.</p>
 
 
@@ -1737,7 +1743,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="pagination-link" aria-label="Bootstrap Tests">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
