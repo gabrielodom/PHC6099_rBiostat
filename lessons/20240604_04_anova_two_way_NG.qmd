@@ -10,36 +10,42 @@ embed-resources: false
 
 
 
-## Purpose
+## Introduction
 
-A two-way ANOVA examines the influence of two or more independent categorical variables, also known as **factors**, on a continuous dependent variable. Each factor must have at least two **levels**, which are the categories within each factor being analyzed. In this chapter, we will see an example of how to test for these assumptions and how to conduct a two-way ANOVA test once we know they have been met.
+The following two-way ANOVA lesson is based on ["Two-Way ANOVA | Examples & When to Use It"](https://www.scribbr.com/statistics/two-way-anova/), a tutorial by Rebecca Bevans.
+
+A two-way ANOVA examines the influence of two or more independent categorical variables, also known as **factors**, on a continuous dependent variable. Each factor must have at least two **levels**, which are the groups within each factor being analyzed. In this lesson, we will see an example of how to test for these assumptions and how to conduct a type I two-way ANOVA once we know they have been met.
 
 An **interaction** occurs when the effect of one factor depends on the level of another factor. The two-way ANOVA method allows us to measure:
 
 1. **Main Effects** - the individual effect of one factor on the dependent variable, and
 
-2. **Interaction Effects** - the extent to which the effects of one factor changes across different levels of another factor.
+2. **Interaction Effects** - the extent to which the effects of one factor change across different levels of another factor.
 
 
 
-## How does a two-way ANOVA work?
+## How Does a Two-Way ANOVA Work?
 
-The F test, a group-wise comparison test, is used in an ANOVA to determine statistical significance. The outcome of an F test, the *F* statistic, measures how different the two groups' variances are to the overall variance of the dependent variable. When the variance is higher between the groups than within the groups, the *F* statistic will be greater. A large *F* statistic suggests there's a low likelihood that the observed difference is due to chance, and thus, it is likely that the independent variable(s) have an effect on the outcome.
+The F test, a group-wise comparison test, is used in an ANOVA to determine statistical significance. The outcome of an F test, the *F* statistic, measures how different a groups' variances are to the overall variance of the dependent variable. When the variance is higher between groups than within the group, the *F* statistic will be greater. A large *F* statistic suggests there's a low likelihood that the observed difference is due to chance, and thus, the factor likely has an effect on the outcome.
 
-For comparison, a critical value is calculated based on the desired alpha (α) and degrees of freedom of all groups. If the *F* statistic is greater than the *F* critical value, the results are considered statistically significant. For example, if the *F* statistic is greater than the *F* critical value at α = 0.05, then the p-value will be less than 0.05.
-
+For comparison, a critical value is calculated based on the desired alpha (α) and degrees of freedom of all groups. If the *F* statistic is greater than the *F* critical value, the results are considered statistically significant. For example, if the *F* statistic is greater than the *F* critical value at α = 0.05, then the p-value will be less than 0.05. For a model with two factors, we can generate three *F* statistics and three associated p values to test three possible hypotheses:
 
 :::{.callout-tip}
-## Hypotheses
-
-There are three null hypotheses that can be tested by a two-way ANOVA:
+## Null Hypotheses
 
 -   H0~1~: *The population means of the first factor are equal.*
-
 -   H0~2~: *The population means of the second factor are equal.*
-
--   H0~3~: *There is no interaction effect, that is, the effect of one independent variable does not depend on the value of the other independent variable.*
+-   H0~3~: *There is no interaction effect, that is, the effect of one factor does not depend on the value of the other factor.*
 :::
+
+:::{.callout-tip}
+## Alternative Hypotheses
+
+-   HA~1~: *The population means of the first factor are not equal.*
+-   HA~2~: *The population means of the second factor are not equal.*
+-   HA~3~: *There is an interaction effect, that is, the effect of one factor depends on the value of the other factor.*
+:::
+
 
 ### Assumptions
 
@@ -47,9 +53,7 @@ Three assumptions must be met before conducting a two-way ANOVA:
 
 -   *Homogeneity of variance:* The variances for each group should be roughly equal. If the groups do not have equal variances, a non-parametric test, such as the Kruskal-Wallis test, may be used.
 
--   *Independence of observations:* The observations in each group are independent of each other and the observations within groups were obtained by a random sample. This can be assumed to be true so long as the experiment is properly designed.
-
-Furthermore, the observations of the dependent variable must be unique, not grouped within categories. If observations are grouped, this effect should be accounted for with the use of a blocking variable or a repeated-measures ANOVA.
+-   *Independence of observations:* The observations in each group are independent of each other and the observations within groups were obtained by a random sample. This can be assumed to be true so long as the experiment is properly designed. If observations are grouped in categories, this effect should be accounted for with the use of a blocking variable or a repeated-measures ANOVA.
 
 -   *Normally distributed dependent variable:* The values of the dependent variable should follow a normal distribution.
 
@@ -59,8 +63,7 @@ Furthermore, the observations of the dependent variable must be unique, not grou
 
 The following table includes the calculations used in a two-way ANOVA. For more detailed information on these calculations, please read [Models and Calculations for the Two-Way ANOVA]( https://www.itl.nist.gov/div898/handbook/prc/section4/prc438.htm), a lesson by the National Institute of Standards and Technology.
 
-***explain k , N is total sample size
-factor a has k groups, factor b has l groups 
+In the ANOVA table, the main effect A has *k* levels and the main effect B has *l* levels. N represents the total sample size.
 
 | Source of Variation | Sum of Squares | Degrees of freedom | Mean Squares | F value  |
 |---------------------|----------------|--------------------|--------------|----------|
@@ -89,10 +92,9 @@ We explain these components as:
 
 ## Crop Yield Two-Way ANOVA Example
 
-***move to top:
-The following two-way ANOVA example is based on the [Two-Way ANOVA lesson](https://www.scribbr.com/statistics/two-way-anova/) by Rebecca Bevans. We will use the agricultural crop yield dataset from this lesson in our example, which can be directly downloaded [here](https://www.scribbr.com/wp-content/uploads//2020/03/crop.data_.anova_.zip).
+We will use the agricultural crop yield dataset from the [Two-Way ANOVA lesson](https://www.scribbr.com/statistics/two-way-anova/) lesson in our example, which can be directly downloaded [here](https://www.scribbr.com/wp-content/uploads//2020/03/crop.data_.anova_.zip).
 
-In this example, corn crops were planted in one of four blocks within a field, in either high or low density, and fertilized with one of three types of fertilizer. Their yield in bushels was then measured. The three factors of this experiment with their associated levels are:
+In this example, corn was planted in one of four blocks within a field, in either high or low density, and fertilized with one of three types of fertilizer. Their yield in bushels per acre was then measured. The three factors of this experiment with their associated levels are:
 
 1.  Type of fertilizer (type 1, 2, or 3)
 2.  Planting density (1 = low, 2 = high)
@@ -107,9 +109,7 @@ Suppose we want to use a two-way ANOVA to examine whether the type of fertilizer
 ## Null Hypotheses
 
 -   H0~1~: *Fertilizer type has no effect on average crop yield*
-
 -   H0~2~: *Planting density has no effect on average crop yield*
-
 -   H0~3~: *The effects of fertilizer type and planting density on average yield are independent of each other (no interaction exists)*
 :::
 
@@ -117,27 +117,29 @@ Suppose we want to use a two-way ANOVA to examine whether the type of fertilizer
 ## Alternative Hypotheses
 
 -   H1~1~: *Fertilizer type has an effect on average crop yield*
-
 -   H1~2~: *Planting density has an effect on average crop yield*
-
 -   H1~3~: *The effects of fertilizer type and planting density on average yield are not independent of each other (no interaction occurs)*
 :::
 
+
 ### Loading Libraries and Data
 
-First, we will load the `tidyverse`, `gt`, `tidymodels`, `AICcmodavg`, and `ggplot2` packages and read in the crop yield dataset:
-*** explain what packages are and why we will use them
-```{r setup-data-download}
+First, we will load our required packages and read in the crop yield dataset. The `tidyverse` package will be used to transform the data. The `tidymodels` and `gt` packages are necessary for creating presentation-ready tables of results. Finally, the `AICcmodavg` package will be used to construct an AIC table with which to compare our models (more on this later).
+
+```{r}
+#| label: setup-data-download
 #| warning: false
 
 # Uncomment the following code to install required packages
 
-#   The gt and tidymodels packages were used to make a presentation-ready table:
+# gt and tidymodels used for presentation-ready table:
 # install.packages("gt")
 # install.packages("tidymodels")
-#   The AIC package was used to create AIC table to compare all three models:
+
+# AICcmodavg used for AIC table:
 # install.packages("AICcmodavg")
-#   The tidyverse package was used to harmonize the data:
+
+# tidyverse for data transformation:
 # install.packages("tidyverse")
 
 # Load the required packages
@@ -152,24 +154,14 @@ crop_data_df <- read_csv("data/04_crop_data.csv")
 
 ```
 
-### Transform Treatment Factors into R Factors
-```{r}
-#| label: trans-to-factor
-
-# converting into a factor 
-crop_data_df$fertilizer <- as.factor(crop_data_df$fertilizer)
-crop_data_df$density <- as.factor(crop_data_df$density)
-```
-
 
 ### Data Exploration
 
 The first few datapoints of the crop yield dataset were inspected and summary statistics were performed on the entire dataset to examine the structure, center, and spread of the data.
-```{r data-exploring}
-#*** is the above a chunk label, or should each chunk also have `#| label:`? wow
-# the comment turned blue that's crazy
+```{r}
+#| label: data-exploration
 #| warning: false
-#*** why set code-fold to false? do we not want to see this part?
+#| results: "hold"
 
 # show first six rows of the dataset
 head(crop_data_df)
@@ -179,18 +171,37 @@ summary(crop_data_df)
 
 ```
 
+
+### Transform Treatment Factors Into R Factors
+
+Note that the `fertilizer`, `density`, and `block` vectors are read in as `numeric` class objects, so we must convert them to the `factor` class. We will also specify the reference groups for each factor: fertilizer 1, low density, and block 1. If not specified, reference groups are automatically assigned in alphabetical order.
+```{r}
+#| label: trans-to-factor
+
+# transform numeric vectors to factors and assign reference groups
+crop_data_df$fertilizer <- as.factor(crop_data_df$fertilizer) %>% 
+  relevel(ref = 1)
+crop_data_df$density <- as.factor(crop_data_df$density) %>% 
+  relevel(ref = 1)
+crop_data_df$block <- as.factor(crop_data_df$block) %>% 
+  relevel(ref = 1)
+
+```
+
 #### Boxplots of Factors
 
-Box plots for each factor were created to further examine the spread and center of the data using ggplot. The data for each factor appear to be approximately normally distributed with few outliers.
-```{r box-plot}
+Box plots for each factor were created to further examine the spread and center of the data using `ggplot2`.
+```{r}
+#| label: factor-box-plots
+#| results: "hold"
 
-# Plotting Crop Yield by Fertilizer
+# create box plot of yield by fertilizer
 plot_fertilizer <- 
   ggplot(data = crop_data_df) +
     aes(
       x = as.factor(fertilizer),
       y = yield,
-      color = as.factor(fertilizer) 
+      color = fertilizer 
     ) +
   labs(
     title = "Crop Yield by Fertilizer Type",
@@ -201,13 +212,13 @@ plot_fertilizer <-
 
 plot_fertilizer
 
-# Plotting Crop Yield by Density
+# yield by density
 plot_density <- 
   ggplot(data = crop_data_df) +
     aes(
       x = as.factor(density),
       y = yield,
-      color = as.factor(density)
+      color = density
     ) +
   labs(
     title = "Crop Yield by Planting Density",
@@ -218,13 +229,13 @@ plot_density <-
 
 plot_density
 
-# Plotting Crop Yield by Block
+# yield by block
 plot_block <- 
   ggplot(data = crop_data_df) +
     aes(
       x = as.factor(block),
       y = yield,
-      color = as.factor(block) 
+      color = block 
     ) +
   labs(
     title = "Crop Yield by Block",
@@ -237,17 +248,14 @@ plot_block
 
 ```
 
+The data for each level appear to be approximately normally distributed with roughly equal variance and few outliers.
+
 #### Combined Boxplot of Crop Yield by Fertilizer and Density
 
-To help visualize the data, a box plot visualizing the effects of fertilizer and density on average crop yield was created. The y-axis indicates the average crop yield. The x-axis is divided by fertilizer type (labeled at the top of the graph) and indicates the planting density for each level of the fertilizer factor.
+To help visualize the data, a combined box plot visualizing the effects of fertilizer and density on average crop yield was created. The y-axis indicates the average crop yield. The x-axis is divided by fertilizer type (labeled at the top of the graph) and indicates the planting density for each level of the fertilizer factor.
 
-```{r crop-data-plot}
-
-#***why do the colors, legend, and x-axis breaks change when I relocate this 
-#   chunk (it was previously last)? I didn't make changes to this code, only 
-#   the formatting - Does it look good, or should geom_point() be inside 
-#   ggplot()?.
-#   Is it because of the gt package?
+```{r}
+#| label: combined-box-plot
 
 anova_plot <- 
   ggplot(crop_data_df) +
@@ -260,26 +268,28 @@ anova_plot <-
   geom_point(
     cex = 1.5, 
     pch = 1.0, 
+# set point positions to randomly jitter so points don't overlap
     position = position_jitter(w = 0.1, h = 0.1)
   )
 
 anova_plot <- anova_plot + 
-# summarize y values at unique x values
-# *** does this create error bars using mean_se?
+# compute summary stats to create error bars
   stat_summary(
-# calculate mean and se using mean_se function
+# set calculation for error bar parameters to mean_se
     fun.data = 'mean_se',
     geom = 'errorbar',
     width = 0.2,
     color = "grey50"
   ) +
+# create points for level means
   stat_summary(
+# set calculation for mean parameter to mean_se
     fun.data = 'mean_se',
-# ***why again?
     geom = 'pointrange'
   )
 
 anova_plot <- anova_plot +
+# create three boxplots side by side for each fertilizer level
   facet_wrap(~ fertilizer)
 
 anova_plot <- anova_plot +
@@ -294,47 +304,45 @@ anova_plot
 
 ```
 
-The differing spread of the box plots for each level of the two factors suggests that the factors have an effect on average yield. Before we can test whether these potential effects are statistically significant, we must first check that the data meet the ANOVA assumptions. To do this, we will generate a two-way ANOVA and run diagnostics on the model.
+The differing means for each level of fertilizer and density suggest that the factors have an effect on average yield. Before we can test whether these potential effects are statistically significant, we must first check that the data meet the ANOVA assumptions. To do this, we will generate a two-way ANOVA and run diagnostics on the model.
 
 
 
-## Performing the Two-Way ANOVA with Interaction and Blocking Variables
+### Performing the Two-Way ANOVA with Interaction and Blocking Variables
 
-Recall that the two-way ANOVA can account for more than two factors. The crops were planted across various `blocks` whose conditions may differ in terms sunlight, moisture, etc. This could possibly lead to confounding, so it is important to control for the possible effect of these differences between blocks by adding this third factor to our model.
+Recall that the two-way ANOVA can actually account for more than two factors. The crops were planted across various `blocks` whose conditions may differ in terms sunlight, moisture, etc. This could possibly lead to confounding, so it is important to control for the possible effect of these differences by adding this third factor to our model.
 
 A two-way ANOVA was created to model the effects of fertilizer, density, the interaction between fertilizer and density, and the blocking factor. In the following code, the argument `fertilizer * density` is equivalent to `fertilizer + density + fertilizer : density`, where `fertilizer : density` represents the interaction term.
 
 :::{.callout-warning}
 ## Are your data balanced?
 
-Because the crop data are **balanced** (the sample sizes across the levels within each factor are equal), we will use the base-R function `aov()`, which uses Type I sums of squares. If your data are **unbalanced**, use a Type II ANOVA (for data with no significant interaction) or Type III ANOVA (for data with significant interaction) to ensure your results have the highest possible power.
+Because the crop data are **balanced** (the sample sizes across the levels within each factor are equal), we will use the base-R function `aov()`, which uses Type I sums of squares. If your data are **unbalanced**, use a different function to conduct a Type II ANOVA (for data with no significant interaction) or Type III ANOVA (for data with significant interaction).
 :::
 
-```{r two-way-ANOVA-with-interaction-and-blocking}
+```{r}
+#| label: two-way-ANOVA-full-model
 
-# performing two-way anova with interaction and blocking
-blocking <- 
+# performing two-way anova with fertilizer, density, fertilizer:density 
+#   interaction and blocking factor
+full_model <- 
+# 'fertilizer * density' = fertilizer + density + fertilizer:density interaction
   aov(yield ~ fertilizer * density + block, data = crop_data_df)
 
 ```
 
 
-
 ### Checking ANOVA Assumptions
 
-We will now create diagnostic plots, which include a **residuals vs fitted plot, scale-location plot, Q-Q plot,** and **constant leverage plot**, to evaluate the normality and homoscedasticity of our data. Please read [Understanding Diagnostic Plots for Linear Regression Analysis](https://library.virginia.edu/data/articles/diagnostic-plots) for more information on diagnostic plots.
+We will now create diagnostic plots, which include a **residuals vs fitted plot, scale-location plot, Q-Q plot,** and **constant leverage plot**, to evaluate the homoscedasticity of our data. Please read [Understanding Diagnostic Plots for Linear Regression Analysis](https://library.virginia.edu/data/articles/diagnostic-plots) for more information on these plots.
 
-```{r Assumption-check}
+```{r}
+#| label: diagnostic-plots
 
-# ***why do we create the ANOVA before checking assumptions? Shouldn't we
-#   check the data before, and if so, how? I did check the literature - some 
-#   tutorials do the ANOVA first, some don't. Is the current format okay?
-# ***how can I tell which plot() function is used here? how does R know to make
-#   these specific diagnostic plots?
-
-# set plot parameter to display 2 x 2 pictures on one plot
+# set plot parameter to display 2 x 2 plots in output
 par(mfrow=c(2,2))
-plot(blocking)
+# plot default diagnostic plots of full_model
+plot(full_model)
 # set plot parameter back to 1 x 1 format
 par(mfrow=c(1,1))
 
@@ -342,57 +350,59 @@ par(mfrow=c(1,1))
 
 The **residual vs fitted plot** shows the data are randomly spread about the "0" line with no large outliers, so we can assume the factors have equal variances. Similarly, the **scale-location plot** shows an approximately horizontal line with randomly spread points, indicating equal variances. Thus, the homoscedasticity assumption is met.
 
-The points of the **Q-Q residuals plot** roughly follow the reference line, indicating the data are normally distributed.
+The points of the **Q-Q residuals plot** roughly follow the reference line, indicating the data are normally distributed. We can conclude the normality assumption is met.
 
 The **constant leverage plot** displays a horizontal "0" value line with points randomly spread around it, indicating the spread of the points are the same at different levels. No points lie outside of the critical value lines (not visible in the graph due to scale), indicating no outliers exist that could skew the data.
 
 
-### Two-way ANOVA - FUll Model Interpretation
+### Two-Way ANOVA - Full Model Interpretation
 
 Now that we have verified that the data satisfy the ANOVA assumptions, we may conduct the two-way ANOVA to test the hypotheses. Let's interpret the results of the ANOVA of the full model:
 
-```{r two-way-ANOVA-with-interaction-and-blocking-results}
+```{r}
+#| label: two-way-ANOVA-full-model-results
 
-# creating a tidy table of full model using gt 
-table_block <- blocking %>% 
-#*** why do we do tidy table on blocking ANOVA object? to make a table obv
-# but why this?
+table_full <- full_model %>% 
+# turn model into data.frame of parameters
   tidy() %>% 
+# create gt table
   gt()
 
 # customizing gt table header
-table_block |>
+table_full |>
    tab_header(
       title = "Two-Way ANOVA of Crop Yield - Full Model",
-      subtitle = "by fertilizer, density, fertilizer:density interaction, and blocking variable"
+      subtitle = "for main full model (y ~ fertilizer * density + block)"
     )
 
 ```
 
-For the block variable, the sum of squares is low and the p value of p = 0.23 is not significant at the α = 0.05 level. Hence, the block variable does not have a statistically significant effect on the crop yield. Because it does not add information to the model, it should be removed from the final model.
+The block variable's p value of p = 0.49 and the interaction term's p value of p = 0.53 are not significant at the α = 0.05 level. Hence, neither have a statistically significant effect on the crop yield. Because they do not add information to the model, They may be removed from the final model.
 
 
-### Two-way ANOVA - Density + Fertilizer + Interaction
+### Two-Way ANOVA - Density + Fertilizer + Interaction
 
-We will now run a two-way ANOVA on a new model using the density, fertilizer, and interaction variables to investigate whether these terms are significant.
+We will now run a two-way ANOVA on a new model using the density, fertilizer, and interaction factors to investigate whether these terms are significant.
 
-```{r Two-way-ANOVA-with-interaction-results}
+```{r}
+#| label: two-way-ANOVA-with-interaction-results
 
 # performing the two-way ANOVA with interaction
 interaction <- 
-# fertilizer * density = fertilizer + density + fertilizer:density
+# 'fertilizer * density' = fertilizer + density + fertilizer:density interaction
   aov(yield ~ fertilizer * density, data = crop_data_df)
 
-# creating a tidy table using gt
 table_int <- interaction %>%
+# turn model into data.frame of parameters
   tidy() %>% 
+# create gt table
   gt()
 
 # customizing table header
 table_int |>
    tab_header(
-      title = "Two-way ANOVA of Crop Yield with Interaction",
-      subtitle = "by fertilizer, density, and fertilizer:density interaction"
+      title = "Two-way ANOVA of Crop Yield - Interaction Model",
+      subtitle = "for interaction model (y ~ fertilizer * density)"
     )
 
 ```
@@ -400,27 +410,29 @@ table_int |>
 The p value for the interaction term is greater than 0.05, hence we fail to reject the null hypothesis (H0~3~) and conclude that there is no statistically significant interaction effect between fertilizer type and crop density on average yield. The interaction term should also be removed from the model.
 
 
-### Two-way ANOVA - Density + Fertilizer
+### Two-Way ANOVA - Density + Fertilizer
 
 Because the interaction term was not significant, we will remove it from our model and perform a two-way ANOVA on a model with only the density and fertilizer factors.
 
-```{r Two-way-ANOVA-without-interaction-results}
+```{r}
+#| label: two-way-ANOVA-main-effects-results
 
 # performing the two-way ANOVA without the interaction term
-two_way <- 
+main_effects <- 
   aov(yield ~ fertilizer + density, data = crop_data_df)
 
-# creating a tidy two-way ANOVA table using gt
-table_1 <- two_way %>% 
-  tidy() %>% 
+table_main <- main_effects %>% 
+# turn model into data.frame of parameters
+  tidy() %>%
+# create gt table
   gt()
 
 # customizing table header
-table_1 |>
+table_main |>
    tab_header(
-      title = "Two-Way ANOVA of Crop Yield Without Interaction",
-      subtitle = "by fertilizer and density"
-    )
+      title = "Two-Way ANOVA of Crop Yield - Main Effects Model",
+      subtitle = "for main effects model (y ~ fertilizer + density)"
+   )
 
 ```
 
@@ -428,15 +440,16 @@ Without the interaction term, we see that the p values for both fertilizer type 
 
 
 
-## Determining the Best-Fitting Model using AIC
+## Determining the Best-Fitting Model Using AIC
 
-The Akaike information criterion (AIC) is another method that can be used to determine the best model that best fits the data. The model that explains the greatest amount of the variation in the data using the fewest possible independent variables is considered the best-fitting model. The lower the AIC value, the more variation is explained by the model.
+The Akaike information criterion (AIC) is another method that can be used to determine the model that best fits the data. The model that explains the greatest amount of the variation in the data using the fewest possible independent variables is considered the best-fitting model. The lower the AIC value, the more variation is explained by the model.
 
 ```{r}
+#| label: AIC-test
 
 # creating a list of models to compare and their respective names
-model_set <- list(two_way, interaction, blocking)
-model_names <- c("two_way", "interaction", "blocking")
+model_set <- list(main_effects, interaction, full_model)
+model_names <- c("main_effects", "interaction", "full_model")
 
 # using AICtab to compare models 
 gt_fmt <-
@@ -450,38 +463,42 @@ gt_print
 
 ```
 
-As shown in this table, the two_way model, which only includes the fertilizer and density variables without their interaction term, has the lowest AIC and is therefore the best fit for our crop data analysis.
+As shown in this table, the main_effects model, which only includes the fertilizer and density variables without their interaction term, has the lowest AIC and is therefore the best fit for our crop data analysis.
 
 
 
 ## Post-Hoc Testing (Tukey HSD)
 
-We now know which parameters are significant, however, we are also interested in learning how the levels of the factors differ from each other. To quantify these differences, the Tukey's Honestly-Significant-Difference test can be used.
+We now know which parameters are significant, however, we are also interested in learning how the levels of the factors differ from each other. To quantify these differences, the [Tukey's Honestly-Significant-Difference](https://en.wikipedia.org/wiki/Tukey%27s_range_test) test can be used.
 
-```{r tukey-test}
+```{r}
+#| label: tukey-hsd-test
+
 # Performing Tukey HSD on the final model (yield ~ fertilizer + density)
-tukey_crop <- TukeyHSD(two_way)  
+tukey_crop <- TukeyHSD(main_effects)  
   
 tukey_crop %>% 
-#***
+# turn model into data.frame of parameters
   tidy %>% 
+# create gt table
   gt() %>% 
   tab_header(
       title = "Tukey Multiple Comparisons of Means",
-      subtitle = "for fertilizer and density"
+      subtitle = "for main effects model (y ~ fertilizer + density)"
   )
 
 ```
 
 This table shows the pairwise differences between each level of the factors. Comparisons with p values less than 0.05 are considered significant:
 
--   fertilizer types 1 and 3
--   fertilizer types 2 and 3
--   planting density groups (binary)
+-   fertilizer type 1 vs 3
+-   fertilizer type 2 vs 3
+-   low vs high density
 
 To visualize the differences between the levels of each factor, the 95% family-wise confidence intervals of the pairs for fertilizer and density were plotted below. The x-axes of the plots display the difference in means between the paired levels. The y-axis denotes the pair being compared.
 
-```{r tukey-plot}
+```{r}
+#| label: tukey-results
 
 # plot tukey confidence intervals and set tick marks to horizontal (las = 1)
 #   position
@@ -491,10 +508,27 @@ plot(tukey_crop, las = 1)
 
 Note that the significant confidence intervals do not include zero. From this plot, we see that only the fertilizer comparison of type 1 and 2 confidence interval includes 0. Thus, there is no statistically significant difference in the average crop yield produced by fertilizer 1 vs fertilizer 2. 95% family-wise confidence intervals for all other comparisons are statistically significant at the α = 0.05 level.
 
+## ANOVA vs. Linear Regression
+The model underlying the ANOVA we just performed is actually a linear regression. Let's see what results we would get if we used linear regression to model the same relationships:
+
+```{r}
+#| label: crop-regression
+
+# create linear regression model of yield ~ fertilizer + density
+crop_lm <- lm(yield ~ fertilizer + density, data = crop_data_df)
+
+summary(crop_lm)
+
+```
+
+The output from the linear regression model indicate a significant difference in average yield exists between crops fertilized with fertilizer 3 and 1 (p = 7.57 e-05) but not fertilizers 1 and 2 (p = 0.22). Furthermore, the average yield for high density acres is significantly different than low density acres (p < 0.001). These findings are consistent with the results of the Tukey's HSD tests. 
+
+Recall that the two-way ANOVA compares the variance within all levels of a factor to the total variation of the model. Similarly, the linear regression quantifies the variation of each group (or "level") from the mean using dummy variables. Both use the same computations and thus the sum of squares for the independent variables are the same in the outputs of both the two-way ANOVA and linear regression. Because the density variable consists of two groups, its p value (p = 0.00017) is also the same in both models. The p value(s) for fertilizer differs between the two, however, because the three fertilizer groups are split into three dummy variables in the linear regression and compared against the group mean individually. The two-way ANOVA, on the other hand, is only concerned with the total variance within the fertilizer factor. Read "[Common statistical tests are linear models](https://lindeloev.github.io/tests-as-linear/)" to learn more about how ANOVAs and many other statistical tests are simply different flavors of linear regression.
+
 
 
 ## Conclusions
 
 There is a statistically significant difference in average crop yield by both the fertilizer type and planting density variables with F values of 9.018 (p \< 0.001) and 15.316 (p \< 0.001) respectively. The interaction between these two terms was not significant.
 
-The Tukey post-hoc test showed significant pairwise differences between fertilizer types 1 and 3, and 2 and 3. It also depicted significant differences between the two types of planting densities (low and high).
+The Tukey post-hoc test showed significant pairwise differences in average yield between fertilizer types 1 and 3 and between type 2 and 3. It also depicted significant differences in average yield between low and high planting density. Therefore, corn fertilized with fertilizer type 3 produced significantly more bushels per acre than those with fertilizers type 1 and 2, and acres of corn planted at high density produced more bushels than those planted at low density.
