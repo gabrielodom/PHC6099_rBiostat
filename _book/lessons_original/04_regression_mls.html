@@ -5,8 +5,8 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<meta name="dcterms.date" content="2024-06-24">
-<title>An R Cookbook for Public Health - 22&nbsp; Multiple Linear Regression</title>
+<meta name="dcterms.date" content="2024-07-01">
+<title>An R Cookbook for Public Health - 24&nbsp; Multiple Linear Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -132,7 +132,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_regression_mls.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_regression_mls.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -237,20 +237,26 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_mcnemar_paired_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -267,25 +273,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -301,44 +307,50 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_one_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/04_correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+  <a href="../lessons/04_corr_cov.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -355,7 +367,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -372,7 +384,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
   </div>
 </li>
       </ul>
@@ -389,7 +401,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -403,23 +415,23 @@ window.Quarto = {
    
   <ul>
 <li>
-<a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link active" data-scroll-target="#multiple-linear-regression"><span class="header-section-number">22.1</span> Multiple Linear Regression</a>
+<a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link active" data-scroll-target="#multiple-linear-regression"><span class="header-section-number">24.1</span> Multiple Linear Regression</a>
   <ul class="collapse">
-<li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">22.1.1</span> Packages</a></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">22.1.2</span> Data</a></li>
-  <li><a href="#testing-the-assumptions" id="toc-testing-the-assumptions" class="nav-link" data-scroll-target="#testing-the-assumptions"><span class="header-section-number">22.1.3</span> Testing the Assumptions</a></li>
-  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing"><span class="header-section-number">22.1.4</span> Hypothesis Testing</a></li>
-  <li><a href="#likelihood-ratio-test" id="toc-likelihood-ratio-test" class="nav-link" data-scroll-target="#likelihood-ratio-test"><span class="header-section-number">22.1.5</span> Likelihood Ratio Test</a></li>
-  <li><a href="#model-accuracy" id="toc-model-accuracy" class="nav-link" data-scroll-target="#model-accuracy"><span class="header-section-number">22.1.6</span> Model Accuracy</a></li>
+<li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">24.1.1</span> Packages</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">24.1.2</span> Data</a></li>
+  <li><a href="#testing-the-assumptions" id="toc-testing-the-assumptions" class="nav-link" data-scroll-target="#testing-the-assumptions"><span class="header-section-number">24.1.3</span> Testing the Assumptions</a></li>
+  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing"><span class="header-section-number">24.1.4</span> Hypothesis Testing</a></li>
+  <li><a href="#likelihood-ratio-test" id="toc-likelihood-ratio-test" class="nav-link" data-scroll-target="#likelihood-ratio-test"><span class="header-section-number">24.1.5</span> Likelihood Ratio Test</a></li>
+  <li><a href="#model-accuracy" id="toc-model-accuracy" class="nav-link" data-scroll-target="#model-accuracy"><span class="header-section-number">24.1.6</span> Model Accuracy</a></li>
   </ul>
 </li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">22.2</span> Conclusion</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">24.2</span> Conclusion</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/04_regression_mls.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_regression_mls.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_regression_mls.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span>
+<span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span>
 </h1>
 </div>
 
@@ -437,7 +449,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 24, 2024</p>
+      <p class="date">July 1, 2024</p>
     </div>
   </div>
   
@@ -446,8 +458,8 @@ window.Quarto = {
   
 
 
-</header><section id="multiple-linear-regression" class="level2" data-number="22.1"><h2 data-number="22.1" class="anchored" data-anchor-id="multiple-linear-regression">
-<span class="header-section-number">22.1</span> Multiple Linear Regression</h2>
+</header><section id="multiple-linear-regression" class="level2" data-number="24.1"><h2 data-number="24.1" class="anchored" data-anchor-id="multiple-linear-regression">
+<span class="header-section-number">24.1</span> Multiple Linear Regression</h2>
 <p><strong>Multiple regression</strong> generally explains the relationship between multiple independent or predictor variables and one dependent or criterion variable. A dependent variable is modeled as a function of several independent variables with corresponding coefficients, along with the constant term. Multiple regression requires two or more predictor variables.</p>
 <p><strong>Equation</strong></p>
 <p><span class="math display">\[
@@ -467,8 +479,8 @@ window.Quarto = {
 <li><p>Normal Distribution: The residual values are normally distributed with mean zero.</p></li>
 <li><p>Multicollinearity: Multicollinearity cannot exist among the predictors (the variables are not correlated)</p></li>
 </ol>
-<section id="packages" class="level3" data-number="22.1.1"><h3 data-number="22.1.1" class="anchored" data-anchor-id="packages">
-<span class="header-section-number">22.1.1</span> Packages</h3>
+<section id="packages" class="level3" data-number="24.1.1"><h3 data-number="24.1.1" class="anchored" data-anchor-id="packages">
+<span class="header-section-number">24.1.1</span> Packages</h3>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
@@ -498,7 +510,7 @@ window.Quarto = {
 ✖ dplyr::recode()  masks car::recode()
 ✖ purrr::some()    masks car::some()
 ✖ recipes::step()  masks stats::step()
-• Use tidymodels_prefer() to resolve common conflicts.</code></pre>
+• Use suppressPackageStartupMessages() to eliminate package startup messages</code></pre>
 </div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">lmtest</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -532,8 +544,8 @@ Attaching package: 'zoo'</code></pre>
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 </div>
-</section><section id="data" class="level3" data-number="22.1.2"><h3 data-number="22.1.2" class="anchored" data-anchor-id="data">
-<span class="header-section-number">22.1.2</span> Data</h3>
+</section><section id="data" class="level3" data-number="24.1.2"><h3 data-number="24.1.2" class="anchored" data-anchor-id="data">
+<span class="header-section-number">24.1.2</span> Data</h3>
 <p>The miles/gallon a car takes (dependent) based on the gross horsepower and weight of the car.</p>
 <div class="cell">
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"mtcars"</span><span class="op">)</span></span>
@@ -548,10 +560,10 @@ Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
 Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
 </div>
 </div>
-</section><section id="testing-the-assumptions" class="level3" data-number="22.1.3"><h3 data-number="22.1.3" class="anchored" data-anchor-id="testing-the-assumptions">
-<span class="header-section-number">22.1.3</span> Testing the Assumptions</h3>
-<section id="linearity" class="level4" data-number="22.1.3.1"><h4 data-number="22.1.3.1" class="anchored" data-anchor-id="linearity">
-<span class="header-section-number">22.1.3.1</span> Linearity</h4>
+</section><section id="testing-the-assumptions" class="level3" data-number="24.1.3"><h3 data-number="24.1.3" class="anchored" data-anchor-id="testing-the-assumptions">
+<span class="header-section-number">24.1.3</span> Testing the Assumptions</h3>
+<section id="linearity" class="level4" data-number="24.1.3.1"><h4 data-number="24.1.3.1" class="anchored" data-anchor-id="linearity">
+<span class="header-section-number">24.1.3.1</span> Linearity</h4>
 <p>Is there a linear relationship between the dependent variable and each of the independent variables?</p>
 <div class="cell">
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># is there a linear relationship between MPG and HP?</span></span>
@@ -581,8 +593,8 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 </div>
 </div>
 </div>
-</section><section id="multicollinearity" class="level4" data-number="22.1.3.2"><h4 data-number="22.1.3.2" class="anchored" data-anchor-id="multicollinearity">
-<span class="header-section-number">22.1.3.2</span> Multicollinearity</h4>
+</section><section id="multicollinearity" class="level4" data-number="24.1.3.2"><h4 data-number="24.1.3.2" class="anchored" data-anchor-id="multicollinearity">
+<span class="header-section-number">24.1.3.2</span> Multicollinearity</h4>
 <p>Are the variables correlated? If the VIF score &gt; 10 then there is multicollinearity.</p>
 <div class="cell">
 <details open="" class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
@@ -599,8 +611,8 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 <pre><code>[1] 0.6587479</code></pre>
 </div>
 </div>
-</section><section id="homoscedasticity" class="level4" data-number="22.1.3.3"><h4 data-number="22.1.3.3" class="anchored" data-anchor-id="homoscedasticity">
-<span class="header-section-number">22.1.3.3</span> Homoscedasticity</h4>
+</section><section id="homoscedasticity" class="level4" data-number="24.1.3.3"><h4 data-number="24.1.3.3" class="anchored" data-anchor-id="homoscedasticity">
+<span class="header-section-number">24.1.3.3</span> Homoscedasticity</h4>
 <p>Checking the residual plots for homoscedasticity. The line below is relatively horizontal.</p>
 <div class="cell">
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mtcars_df</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -619,8 +631,8 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 </div>
 </div>
 </div>
-</section><section id="normality" class="level4" data-number="22.1.3.4"><h4 data-number="22.1.3.4" class="anchored" data-anchor-id="normality">
-<span class="header-section-number">22.1.3.4</span> Normality</h4>
+</section><section id="normality" class="level4" data-number="24.1.3.4"><h4 data-number="24.1.3.4" class="anchored" data-anchor-id="normality">
+<span class="header-section-number">24.1.3.4</span> Normality</h4>
 <p>Checking normality via histogram and QQ plot of the residuals.</p>
 <div class="cell">
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># histogram</span></span>
@@ -676,8 +688,8 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 <p>Since there are very few extreme values according to cook’s d values, we can assume they are not the driving force between the relationship of the predictor and outcome.</p>
 <p>Tentative model:</p>
 <p>mpg = <span class="math inline">\(b_0\)</span> + <span class="math inline">\(b_1\times\)</span>horsepower + <span class="math inline">\(b_2\times\)</span>weight + <span class="math inline">\(\epsilon\)</span></p>
-</section></section><section id="hypothesis-testing" class="level3" data-number="22.1.4"><h3 data-number="22.1.4" class="anchored" data-anchor-id="hypothesis-testing">
-<span class="header-section-number">22.1.4</span> Hypothesis Testing</h3>
+</section></section><section id="hypothesis-testing" class="level3" data-number="24.1.4"><h3 data-number="24.1.4" class="anchored" data-anchor-id="hypothesis-testing">
+<span class="header-section-number">24.1.4</span> Hypothesis Testing</h3>
 <p>Does the horsepower and weight of a car contribute significantly to the miles per gallon of the car?</p>
 <ul>
 <li>What is the relationship between horsepower and weight, with miles per gallon of the car?-</li>
@@ -720,23 +732,23 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<div id="ifrygyezvv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ifrygyezvv table {
+<div id="skljnpohdr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#skljnpohdr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ifrygyezvv thead, #ifrygyezvv tbody, #ifrygyezvv tfoot, #ifrygyezvv tr, #ifrygyezvv td, #ifrygyezvv th {
+#skljnpohdr thead, #skljnpohdr tbody, #skljnpohdr tfoot, #skljnpohdr tr, #skljnpohdr td, #skljnpohdr th {
   border-style: none;
 }
 
-#ifrygyezvv p {
+#skljnpohdr p {
   margin: 0;
   padding: 0;
 }
 
-#ifrygyezvv .gt_table {
+#skljnpohdr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -762,12 +774,12 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#ifrygyezvv .gt_caption {
+#skljnpohdr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ifrygyezvv .gt_title {
+#skljnpohdr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -779,7 +791,7 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   border-bottom-width: 0;
 }
 
-#ifrygyezvv .gt_subtitle {
+#skljnpohdr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -791,7 +803,7 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   border-top-width: 0;
 }
 
-#ifrygyezvv .gt_heading {
+#skljnpohdr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -803,13 +815,13 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ifrygyezvv .gt_bottom_border {
+#skljnpohdr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ifrygyezvv .gt_col_headings {
+#skljnpohdr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -824,7 +836,7 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ifrygyezvv .gt_col_heading {
+#skljnpohdr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -844,7 +856,7 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   overflow-x: hidden;
 }
 
-#ifrygyezvv .gt_column_spanner_outer {
+#skljnpohdr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -856,15 +868,15 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   padding-right: 4px;
 }
 
-#ifrygyezvv .gt_column_spanner_outer:first-child {
+#skljnpohdr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ifrygyezvv .gt_column_spanner_outer:last-child {
+#skljnpohdr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ifrygyezvv .gt_column_spanner {
+#skljnpohdr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -876,11 +888,11 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   width: 100%;
 }
 
-#ifrygyezvv .gt_spanner_row {
+#skljnpohdr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ifrygyezvv .gt_group_heading {
+#skljnpohdr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -906,7 +918,7 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   text-align: left;
 }
 
-#ifrygyezvv .gt_empty_group_heading {
+#skljnpohdr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -921,15 +933,15 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   vertical-align: middle;
 }
 
-#ifrygyezvv .gt_from_md > :first-child {
+#skljnpohdr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ifrygyezvv .gt_from_md > :last-child {
+#skljnpohdr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ifrygyezvv .gt_row {
+#skljnpohdr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -948,7 +960,7 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   overflow-x: hidden;
 }
 
-#ifrygyezvv .gt_stub {
+#skljnpohdr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -961,7 +973,7 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   padding-right: 5px;
 }
 
-#ifrygyezvv .gt_stub_row_group {
+#skljnpohdr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -975,15 +987,15 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   vertical-align: top;
 }
 
-#ifrygyezvv .gt_row_group_first td {
+#skljnpohdr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ifrygyezvv .gt_row_group_first th {
+#skljnpohdr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ifrygyezvv .gt_summary_row {
+#skljnpohdr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -993,16 +1005,16 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   padding-right: 5px;
 }
 
-#ifrygyezvv .gt_first_summary_row {
+#skljnpohdr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ifrygyezvv .gt_first_summary_row.thick {
+#skljnpohdr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ifrygyezvv .gt_last_summary_row {
+#skljnpohdr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1012,7 +1024,7 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ifrygyezvv .gt_grand_summary_row {
+#skljnpohdr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1022,7 +1034,7 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   padding-right: 5px;
 }
 
-#ifrygyezvv .gt_first_grand_summary_row {
+#skljnpohdr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1032,7 +1044,7 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#ifrygyezvv .gt_last_grand_summary_row_top {
+#skljnpohdr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1042,11 +1054,11 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ifrygyezvv .gt_striped {
+#skljnpohdr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ifrygyezvv .gt_table_body {
+#skljnpohdr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1055,7 +1067,7 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ifrygyezvv .gt_footnotes {
+#skljnpohdr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1069,7 +1081,7 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ifrygyezvv .gt_footnote {
+#skljnpohdr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1078,7 +1090,7 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   padding-right: 5px;
 }
 
-#ifrygyezvv .gt_sourcenotes {
+#skljnpohdr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1092,7 +1104,7 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ifrygyezvv .gt_sourcenote {
+#skljnpohdr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1100,63 +1112,63 @@ F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
   padding-right: 5px;
 }
 
-#ifrygyezvv .gt_left {
+#skljnpohdr .gt_left {
   text-align: left;
 }
 
-#ifrygyezvv .gt_center {
+#skljnpohdr .gt_center {
   text-align: center;
 }
 
-#ifrygyezvv .gt_right {
+#skljnpohdr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ifrygyezvv .gt_font_normal {
+#skljnpohdr .gt_font_normal {
   font-weight: normal;
 }
 
-#ifrygyezvv .gt_font_bold {
+#skljnpohdr .gt_font_bold {
   font-weight: bold;
 }
 
-#ifrygyezvv .gt_font_italic {
+#skljnpohdr .gt_font_italic {
   font-style: italic;
 }
 
-#ifrygyezvv .gt_super {
+#skljnpohdr .gt_super {
   font-size: 65%;
 }
 
-#ifrygyezvv .gt_footnote_marks {
+#skljnpohdr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ifrygyezvv .gt_asterisk {
+#skljnpohdr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ifrygyezvv .gt_indent_1 {
+#skljnpohdr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ifrygyezvv .gt_indent_2 {
+#skljnpohdr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ifrygyezvv .gt_indent_3 {
+#skljnpohdr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ifrygyezvv .gt_indent_4 {
+#skljnpohdr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ifrygyezvv .gt_indent_5 {
+#skljnpohdr .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1213,23 +1225,23 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<div id="nqgddrxpao" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nqgddrxpao table {
+<div id="nvgbskqyfc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nvgbskqyfc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nqgddrxpao thead, #nqgddrxpao tbody, #nqgddrxpao tfoot, #nqgddrxpao tr, #nqgddrxpao td, #nqgddrxpao th {
+#nvgbskqyfc thead, #nvgbskqyfc tbody, #nvgbskqyfc tfoot, #nvgbskqyfc tr, #nvgbskqyfc td, #nvgbskqyfc th {
   border-style: none;
 }
 
-#nqgddrxpao p {
+#nvgbskqyfc p {
   margin: 0;
   padding: 0;
 }
 
-#nqgddrxpao .gt_table {
+#nvgbskqyfc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1255,12 +1267,12 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#nqgddrxpao .gt_caption {
+#nvgbskqyfc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nqgddrxpao .gt_title {
+#nvgbskqyfc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1272,7 +1284,7 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   border-bottom-width: 0;
 }
 
-#nqgddrxpao .gt_subtitle {
+#nvgbskqyfc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1284,7 +1296,7 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   border-top-width: 0;
 }
 
-#nqgddrxpao .gt_heading {
+#nvgbskqyfc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1296,13 +1308,13 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#nqgddrxpao .gt_bottom_border {
+#nvgbskqyfc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nqgddrxpao .gt_col_headings {
+#nvgbskqyfc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1317,7 +1329,7 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#nqgddrxpao .gt_col_heading {
+#nvgbskqyfc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1337,7 +1349,7 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   overflow-x: hidden;
 }
 
-#nqgddrxpao .gt_column_spanner_outer {
+#nvgbskqyfc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1349,15 +1361,15 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   padding-right: 4px;
 }
 
-#nqgddrxpao .gt_column_spanner_outer:first-child {
+#nvgbskqyfc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nqgddrxpao .gt_column_spanner_outer:last-child {
+#nvgbskqyfc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nqgddrxpao .gt_column_spanner {
+#nvgbskqyfc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1369,11 +1381,11 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   width: 100%;
 }
 
-#nqgddrxpao .gt_spanner_row {
+#nvgbskqyfc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nqgddrxpao .gt_group_heading {
+#nvgbskqyfc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1399,7 +1411,7 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   text-align: left;
 }
 
-#nqgddrxpao .gt_empty_group_heading {
+#nvgbskqyfc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1414,15 +1426,15 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   vertical-align: middle;
 }
 
-#nqgddrxpao .gt_from_md > :first-child {
+#nvgbskqyfc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nqgddrxpao .gt_from_md > :last-child {
+#nvgbskqyfc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nqgddrxpao .gt_row {
+#nvgbskqyfc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1441,7 +1453,7 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   overflow-x: hidden;
 }
 
-#nqgddrxpao .gt_stub {
+#nvgbskqyfc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1454,7 +1466,7 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   padding-right: 5px;
 }
 
-#nqgddrxpao .gt_stub_row_group {
+#nvgbskqyfc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1468,15 +1480,15 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   vertical-align: top;
 }
 
-#nqgddrxpao .gt_row_group_first td {
+#nvgbskqyfc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nqgddrxpao .gt_row_group_first th {
+#nvgbskqyfc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nqgddrxpao .gt_summary_row {
+#nvgbskqyfc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1486,16 +1498,16 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   padding-right: 5px;
 }
 
-#nqgddrxpao .gt_first_summary_row {
+#nvgbskqyfc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nqgddrxpao .gt_first_summary_row.thick {
+#nvgbskqyfc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nqgddrxpao .gt_last_summary_row {
+#nvgbskqyfc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1505,7 +1517,7 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#nqgddrxpao .gt_grand_summary_row {
+#nvgbskqyfc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1515,7 +1527,7 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   padding-right: 5px;
 }
 
-#nqgddrxpao .gt_first_grand_summary_row {
+#nvgbskqyfc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1525,7 +1537,7 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#nqgddrxpao .gt_last_grand_summary_row_top {
+#nvgbskqyfc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1535,11 +1547,11 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#nqgddrxpao .gt_striped {
+#nvgbskqyfc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nqgddrxpao .gt_table_body {
+#nvgbskqyfc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1548,7 +1560,7 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#nqgddrxpao .gt_footnotes {
+#nvgbskqyfc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1562,7 +1574,7 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#nqgddrxpao .gt_footnote {
+#nvgbskqyfc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1571,7 +1583,7 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   padding-right: 5px;
 }
 
-#nqgddrxpao .gt_sourcenotes {
+#nvgbskqyfc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1585,7 +1597,7 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#nqgddrxpao .gt_sourcenote {
+#nvgbskqyfc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1593,63 +1605,63 @@ wt          -3.87783074 0.63273349 -6.128695 1.119647e-06</code></pre>
   padding-right: 5px;
 }
 
-#nqgddrxpao .gt_left {
+#nvgbskqyfc .gt_left {
   text-align: left;
 }
 
-#nqgddrxpao .gt_center {
+#nvgbskqyfc .gt_center {
   text-align: center;
 }
 
-#nqgddrxpao .gt_right {
+#nvgbskqyfc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nqgddrxpao .gt_font_normal {
+#nvgbskqyfc .gt_font_normal {
   font-weight: normal;
 }
 
-#nqgddrxpao .gt_font_bold {
+#nvgbskqyfc .gt_font_bold {
   font-weight: bold;
 }
 
-#nqgddrxpao .gt_font_italic {
+#nvgbskqyfc .gt_font_italic {
   font-style: italic;
 }
 
-#nqgddrxpao .gt_super {
+#nvgbskqyfc .gt_super {
   font-size: 65%;
 }
 
-#nqgddrxpao .gt_footnote_marks {
+#nvgbskqyfc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nqgddrxpao .gt_asterisk {
+#nvgbskqyfc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nqgddrxpao .gt_indent_1 {
+#nvgbskqyfc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nqgddrxpao .gt_indent_2 {
+#nvgbskqyfc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nqgddrxpao .gt_indent_3 {
+#nvgbskqyfc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nqgddrxpao .gt_indent_4 {
+#nvgbskqyfc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nqgddrxpao .gt_indent_5 {
+#nvgbskqyfc .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1707,23 +1719,23 @@ wt          -5.17191604 -2.58374544</code></pre>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<div id="zorwcptdsa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zorwcptdsa table {
+<div id="ejrwqnvvdd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ejrwqnvvdd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zorwcptdsa thead, #zorwcptdsa tbody, #zorwcptdsa tfoot, #zorwcptdsa tr, #zorwcptdsa td, #zorwcptdsa th {
+#ejrwqnvvdd thead, #ejrwqnvvdd tbody, #ejrwqnvvdd tfoot, #ejrwqnvvdd tr, #ejrwqnvvdd td, #ejrwqnvvdd th {
   border-style: none;
 }
 
-#zorwcptdsa p {
+#ejrwqnvvdd p {
   margin: 0;
   padding: 0;
 }
 
-#zorwcptdsa .gt_table {
+#ejrwqnvvdd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1749,12 +1761,12 @@ wt          -5.17191604 -2.58374544</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#zorwcptdsa .gt_caption {
+#ejrwqnvvdd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zorwcptdsa .gt_title {
+#ejrwqnvvdd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1766,7 +1778,7 @@ wt          -5.17191604 -2.58374544</code></pre>
   border-bottom-width: 0;
 }
 
-#zorwcptdsa .gt_subtitle {
+#ejrwqnvvdd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1778,7 +1790,7 @@ wt          -5.17191604 -2.58374544</code></pre>
   border-top-width: 0;
 }
 
-#zorwcptdsa .gt_heading {
+#ejrwqnvvdd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1790,13 +1802,13 @@ wt          -5.17191604 -2.58374544</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#zorwcptdsa .gt_bottom_border {
+#ejrwqnvvdd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zorwcptdsa .gt_col_headings {
+#ejrwqnvvdd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1811,7 +1823,7 @@ wt          -5.17191604 -2.58374544</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#zorwcptdsa .gt_col_heading {
+#ejrwqnvvdd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1831,7 +1843,7 @@ wt          -5.17191604 -2.58374544</code></pre>
   overflow-x: hidden;
 }
 
-#zorwcptdsa .gt_column_spanner_outer {
+#ejrwqnvvdd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1843,15 +1855,15 @@ wt          -5.17191604 -2.58374544</code></pre>
   padding-right: 4px;
 }
 
-#zorwcptdsa .gt_column_spanner_outer:first-child {
+#ejrwqnvvdd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zorwcptdsa .gt_column_spanner_outer:last-child {
+#ejrwqnvvdd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zorwcptdsa .gt_column_spanner {
+#ejrwqnvvdd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1863,11 +1875,11 @@ wt          -5.17191604 -2.58374544</code></pre>
   width: 100%;
 }
 
-#zorwcptdsa .gt_spanner_row {
+#ejrwqnvvdd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zorwcptdsa .gt_group_heading {
+#ejrwqnvvdd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1893,7 +1905,7 @@ wt          -5.17191604 -2.58374544</code></pre>
   text-align: left;
 }
 
-#zorwcptdsa .gt_empty_group_heading {
+#ejrwqnvvdd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1908,15 +1920,15 @@ wt          -5.17191604 -2.58374544</code></pre>
   vertical-align: middle;
 }
 
-#zorwcptdsa .gt_from_md > :first-child {
+#ejrwqnvvdd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zorwcptdsa .gt_from_md > :last-child {
+#ejrwqnvvdd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zorwcptdsa .gt_row {
+#ejrwqnvvdd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1935,7 +1947,7 @@ wt          -5.17191604 -2.58374544</code></pre>
   overflow-x: hidden;
 }
 
-#zorwcptdsa .gt_stub {
+#ejrwqnvvdd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1948,7 +1960,7 @@ wt          -5.17191604 -2.58374544</code></pre>
   padding-right: 5px;
 }
 
-#zorwcptdsa .gt_stub_row_group {
+#ejrwqnvvdd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1962,15 +1974,15 @@ wt          -5.17191604 -2.58374544</code></pre>
   vertical-align: top;
 }
 
-#zorwcptdsa .gt_row_group_first td {
+#ejrwqnvvdd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zorwcptdsa .gt_row_group_first th {
+#ejrwqnvvdd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zorwcptdsa .gt_summary_row {
+#ejrwqnvvdd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1980,16 +1992,16 @@ wt          -5.17191604 -2.58374544</code></pre>
   padding-right: 5px;
 }
 
-#zorwcptdsa .gt_first_summary_row {
+#ejrwqnvvdd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zorwcptdsa .gt_first_summary_row.thick {
+#ejrwqnvvdd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zorwcptdsa .gt_last_summary_row {
+#ejrwqnvvdd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1999,7 +2011,7 @@ wt          -5.17191604 -2.58374544</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#zorwcptdsa .gt_grand_summary_row {
+#ejrwqnvvdd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2009,7 +2021,7 @@ wt          -5.17191604 -2.58374544</code></pre>
   padding-right: 5px;
 }
 
-#zorwcptdsa .gt_first_grand_summary_row {
+#ejrwqnvvdd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2019,7 +2031,7 @@ wt          -5.17191604 -2.58374544</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#zorwcptdsa .gt_last_grand_summary_row_top {
+#ejrwqnvvdd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2029,11 +2041,11 @@ wt          -5.17191604 -2.58374544</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#zorwcptdsa .gt_striped {
+#ejrwqnvvdd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zorwcptdsa .gt_table_body {
+#ejrwqnvvdd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2042,7 +2054,7 @@ wt          -5.17191604 -2.58374544</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#zorwcptdsa .gt_footnotes {
+#ejrwqnvvdd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2056,7 +2068,7 @@ wt          -5.17191604 -2.58374544</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#zorwcptdsa .gt_footnote {
+#ejrwqnvvdd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2065,7 +2077,7 @@ wt          -5.17191604 -2.58374544</code></pre>
   padding-right: 5px;
 }
 
-#zorwcptdsa .gt_sourcenotes {
+#ejrwqnvvdd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2079,7 +2091,7 @@ wt          -5.17191604 -2.58374544</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#zorwcptdsa .gt_sourcenote {
+#ejrwqnvvdd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2087,63 +2099,63 @@ wt          -5.17191604 -2.58374544</code></pre>
   padding-right: 5px;
 }
 
-#zorwcptdsa .gt_left {
+#ejrwqnvvdd .gt_left {
   text-align: left;
 }
 
-#zorwcptdsa .gt_center {
+#ejrwqnvvdd .gt_center {
   text-align: center;
 }
 
-#zorwcptdsa .gt_right {
+#ejrwqnvvdd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zorwcptdsa .gt_font_normal {
+#ejrwqnvvdd .gt_font_normal {
   font-weight: normal;
 }
 
-#zorwcptdsa .gt_font_bold {
+#ejrwqnvvdd .gt_font_bold {
   font-weight: bold;
 }
 
-#zorwcptdsa .gt_font_italic {
+#ejrwqnvvdd .gt_font_italic {
   font-style: italic;
 }
 
-#zorwcptdsa .gt_super {
+#ejrwqnvvdd .gt_super {
   font-size: 65%;
 }
 
-#zorwcptdsa .gt_footnote_marks {
+#ejrwqnvvdd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zorwcptdsa .gt_asterisk {
+#ejrwqnvvdd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zorwcptdsa .gt_indent_1 {
+#ejrwqnvvdd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zorwcptdsa .gt_indent_2 {
+#ejrwqnvvdd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zorwcptdsa .gt_indent_3 {
+#ejrwqnvvdd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zorwcptdsa .gt_indent_4 {
+#ejrwqnvvdd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zorwcptdsa .gt_indent_5 {
+#ejrwqnvvdd .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2175,8 +2187,8 @@ wt          -5.17191604 -2.58374544</code></pre>
 </div>
 </div>
 </div>
-</section><section id="likelihood-ratio-test" class="level3" data-number="22.1.5"><h3 data-number="22.1.5" class="anchored" data-anchor-id="likelihood-ratio-test">
-<span class="header-section-number">22.1.5</span> Likelihood Ratio Test</h3>
+</section><section id="likelihood-ratio-test" class="level3" data-number="24.1.5"><h3 data-number="24.1.5" class="anchored" data-anchor-id="likelihood-ratio-test">
+<span class="header-section-number">24.1.5</span> Likelihood Ratio Test</h3>
 <p><span class="math inline">\(H_0\)</span>: The full model and the nested model fit the data equally well. Thus, you should use the nested model.</p>
 <p><span class="math inline">\(H_1\)</span>: The full model fits the data significantly better than the nested model. Thus, you should use the full model.</p>
 <p>A likelihood ratio test compares the goodness of fit of two nested regression models.</p>
@@ -2220,8 +2232,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <p>Our p-values are less than 0.05 for both Chi-squared values, suggesting that the full model offers significant improvement in fit over the model with just one of the predictors.</p>
-</section><section id="model-accuracy" class="level3" data-number="22.1.6"><h3 data-number="22.1.6" class="anchored" data-anchor-id="model-accuracy">
-<span class="header-section-number">22.1.6</span> Model Accuracy</h3>
+</section><section id="model-accuracy" class="level3" data-number="24.1.6"><h3 data-number="24.1.6" class="anchored" data-anchor-id="model-accuracy">
+<span class="header-section-number">24.1.6</span> Model Accuracy</h3>
 <p>In multiple linear regression, the <span class="math inline">\(R^2\)</span> represents the correlation coefficient between the observed values of the outcome variable (y) and the fitted (i.e., predicted) values of y. For this reason, the value of R will always be positive and will range from zero to one.</p>
 <p>An <span class="math inline">\(R^2\)</span> value close to 1 indicates that the model explains a large portion of the variance in the outcome variable.</p>
 <div class="cell">
@@ -2231,23 +2243,23 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<div id="rsprwpxkkr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rsprwpxkkr table {
+<div id="zmhdnhtons" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zmhdnhtons table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rsprwpxkkr thead, #rsprwpxkkr tbody, #rsprwpxkkr tfoot, #rsprwpxkkr tr, #rsprwpxkkr td, #rsprwpxkkr th {
+#zmhdnhtons thead, #zmhdnhtons tbody, #zmhdnhtons tfoot, #zmhdnhtons tr, #zmhdnhtons td, #zmhdnhtons th {
   border-style: none;
 }
 
-#rsprwpxkkr p {
+#zmhdnhtons p {
   margin: 0;
   padding: 0;
 }
 
-#rsprwpxkkr .gt_table {
+#zmhdnhtons .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2273,12 +2285,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#rsprwpxkkr .gt_caption {
+#zmhdnhtons .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rsprwpxkkr .gt_title {
+#zmhdnhtons .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2290,7 +2302,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-bottom-width: 0;
 }
 
-#rsprwpxkkr .gt_subtitle {
+#zmhdnhtons .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2302,7 +2314,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-top-width: 0;
 }
 
-#rsprwpxkkr .gt_heading {
+#zmhdnhtons .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2314,13 +2326,13 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#rsprwpxkkr .gt_bottom_border {
+#zmhdnhtons .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rsprwpxkkr .gt_col_headings {
+#zmhdnhtons .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2335,7 +2347,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#rsprwpxkkr .gt_col_heading {
+#zmhdnhtons .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2355,7 +2367,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   overflow-x: hidden;
 }
 
-#rsprwpxkkr .gt_column_spanner_outer {
+#zmhdnhtons .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2367,15 +2379,15 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 4px;
 }
 
-#rsprwpxkkr .gt_column_spanner_outer:first-child {
+#zmhdnhtons .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rsprwpxkkr .gt_column_spanner_outer:last-child {
+#zmhdnhtons .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rsprwpxkkr .gt_column_spanner {
+#zmhdnhtons .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2387,11 +2399,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   width: 100%;
 }
 
-#rsprwpxkkr .gt_spanner_row {
+#zmhdnhtons .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rsprwpxkkr .gt_group_heading {
+#zmhdnhtons .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2417,7 +2429,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   text-align: left;
 }
 
-#rsprwpxkkr .gt_empty_group_heading {
+#zmhdnhtons .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2432,15 +2444,15 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   vertical-align: middle;
 }
 
-#rsprwpxkkr .gt_from_md > :first-child {
+#zmhdnhtons .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rsprwpxkkr .gt_from_md > :last-child {
+#zmhdnhtons .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rsprwpxkkr .gt_row {
+#zmhdnhtons .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2459,7 +2471,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   overflow-x: hidden;
 }
 
-#rsprwpxkkr .gt_stub {
+#zmhdnhtons .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2472,7 +2484,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 5px;
 }
 
-#rsprwpxkkr .gt_stub_row_group {
+#zmhdnhtons .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2486,15 +2498,15 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   vertical-align: top;
 }
 
-#rsprwpxkkr .gt_row_group_first td {
+#zmhdnhtons .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rsprwpxkkr .gt_row_group_first th {
+#zmhdnhtons .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rsprwpxkkr .gt_summary_row {
+#zmhdnhtons .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2504,16 +2516,16 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 5px;
 }
 
-#rsprwpxkkr .gt_first_summary_row {
+#zmhdnhtons .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rsprwpxkkr .gt_first_summary_row.thick {
+#zmhdnhtons .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rsprwpxkkr .gt_last_summary_row {
+#zmhdnhtons .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2523,7 +2535,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#rsprwpxkkr .gt_grand_summary_row {
+#zmhdnhtons .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2533,7 +2545,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 5px;
 }
 
-#rsprwpxkkr .gt_first_grand_summary_row {
+#zmhdnhtons .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2543,7 +2555,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#rsprwpxkkr .gt_last_grand_summary_row_top {
+#zmhdnhtons .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2553,11 +2565,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#rsprwpxkkr .gt_striped {
+#zmhdnhtons .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rsprwpxkkr .gt_table_body {
+#zmhdnhtons .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2566,7 +2578,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#rsprwpxkkr .gt_footnotes {
+#zmhdnhtons .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2580,7 +2592,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#rsprwpxkkr .gt_footnote {
+#zmhdnhtons .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2589,7 +2601,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 5px;
 }
 
-#rsprwpxkkr .gt_sourcenotes {
+#zmhdnhtons .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2603,7 +2615,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#rsprwpxkkr .gt_sourcenote {
+#zmhdnhtons .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2611,63 +2623,63 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 5px;
 }
 
-#rsprwpxkkr .gt_left {
+#zmhdnhtons .gt_left {
   text-align: left;
 }
 
-#rsprwpxkkr .gt_center {
+#zmhdnhtons .gt_center {
   text-align: center;
 }
 
-#rsprwpxkkr .gt_right {
+#zmhdnhtons .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rsprwpxkkr .gt_font_normal {
+#zmhdnhtons .gt_font_normal {
   font-weight: normal;
 }
 
-#rsprwpxkkr .gt_font_bold {
+#zmhdnhtons .gt_font_bold {
   font-weight: bold;
 }
 
-#rsprwpxkkr .gt_font_italic {
+#zmhdnhtons .gt_font_italic {
   font-style: italic;
 }
 
-#rsprwpxkkr .gt_super {
+#zmhdnhtons .gt_super {
   font-size: 65%;
 }
 
-#rsprwpxkkr .gt_footnote_marks {
+#zmhdnhtons .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rsprwpxkkr .gt_asterisk {
+#zmhdnhtons .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rsprwpxkkr .gt_indent_1 {
+#zmhdnhtons .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rsprwpxkkr .gt_indent_2 {
+#zmhdnhtons .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rsprwpxkkr .gt_indent_3 {
+#zmhdnhtons .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rsprwpxkkr .gt_indent_4 {
+#zmhdnhtons .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rsprwpxkkr .gt_indent_5 {
+#zmhdnhtons .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2684,8 +2696,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <p>Our model explains 81% of the variation in mpg values caused by horsepower and weight values.</p>
-</section></section><section id="conclusion" class="level2" data-number="22.2"><h2 data-number="22.2" class="anchored" data-anchor-id="conclusion">
-<span class="header-section-number">22.2</span> Conclusion</h2>
+</section></section><section id="conclusion" class="level2" data-number="24.2"><h2 data-number="24.2" class="anchored" data-anchor-id="conclusion">
+<span class="header-section-number">24.2</span> Conclusion</h2>
 <div class="cell">
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/avPlots.html">avPlots</a></span><span class="op">(</span><span class="va">car_model</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -3109,12 +3121,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../lessons_original/04_regression_ols.html" class="pagination-link" aria-label="Ordinary Least Squares Regression">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../lessons_original/04_regression_polynomial.html" class="pagination-link" aria-label="Introduction to Polynomial Regression">
-        <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

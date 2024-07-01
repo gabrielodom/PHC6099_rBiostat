@@ -49,3 +49,9 @@ Gabriel Odom
     - created: 2020
     - curators: Rebecca Bevans for Scribbr; found by Patrice Lewis and Julissa Martinez
     - method: downloaded ZIP data from <https://www.scribbr.com/statistics/one-way-anova/> using the direct access link <https://www.scribbr.com/wp-content/uploads//2020/03/crop.data_.anova_.zip>; extracted the data and renamed the file from crop.data.csv to remove the extra period in the file name.
+    
+9. Wisconsin Breast Cancer Diagnosis:
+    - file: 02_wdbc.data
+    - created: 1993
+    - curators: Street et al.; found by Michaela Larson and Ashlee Perez
+    - method: downloaded from <https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic>

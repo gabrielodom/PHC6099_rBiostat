@@ -87,8 +87,8 @@ The `demographics` dataset contains the demographic variables such as age, sex, 
 #| label: datasets 
 #| message: false
 
-# Search for suitable data sets; this lists of all datasets in package
-data(package = "public.ctn0094data") 
+# # Search for suitable data sets; this lists of all datasets in package
+# data(package = "public.ctn0094data") 
 
 data(demographics, package = "public.ctn0094data")
 colnames(demographics)

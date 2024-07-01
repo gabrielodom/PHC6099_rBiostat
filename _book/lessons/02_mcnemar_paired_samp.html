@@ -5,8 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<meta name="dcterms.date" content="2023-07-18">
-<title>An R Cookbook for Public Health - 23&nbsp; Ordinary Least Squares Regression</title>
+<title>An R Cookbook for Public Health - 10&nbsp; McNemar’s Test</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -62,8 +61,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../lessons_original/04_regression_mls.html" rel="next">
-<link href="../lessons/04_corr_cov.html" rel="prev">
+<link href="../lessons/02_chiSq_GoF.html" rel="next">
+<link href="../lessons/02_wilcoxon_one_samp.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -132,7 +131,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_regression_ols.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_mcnemar_paired_samp.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -237,7 +236,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons/02_mcnemar_paired_samp.html" class="sidebar-item-text sidebar-link">
+  <a href="../lessons/02_mcnemar_paired_samp.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
   </div>
 </li>
@@ -337,7 +336,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link active">
+  <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
@@ -414,44 +413,50 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li>
-<a href="#ordinary-least-squares-ols-regression" id="toc-ordinary-least-squares-ols-regression" class="nav-link active" data-scroll-target="#ordinary-least-squares-ols-regression"><span class="header-section-number">23.1</span> Ordinary Least Squares (OLS) Regression</a>
+<li><a href="#introduction-to-mcnemars-test" id="toc-introduction-to-mcnemars-test" class="nav-link active" data-scroll-target="#introduction-to-mcnemars-test"><span class="header-section-number">10.1</span> Introduction to McNemar’s Test</a></li>
+  <li><a href="#mathematical-definition-of-mcnemars-test" id="toc-mathematical-definition-of-mcnemars-test" class="nav-link" data-scroll-target="#mathematical-definition-of-mcnemars-test"><span class="header-section-number">10.2</span> Mathematical definition of McNemar’s Test</a></li>
+  <li>
+<a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description"><span class="header-section-number">10.3</span> Data Description</a>
   <ul class="collapse">
-<li><a href="#how-to-develop-the-best-fitting-line" id="toc-how-to-develop-the-best-fitting-line" class="nav-link" data-scroll-target="#how-to-develop-the-best-fitting-line"><span class="header-section-number">23.1.1</span> How to develop the best fitting line?</a></li>
-  <li><a href="#example-of-an-ols-regression-in-r" id="toc-example-of-an-ols-regression-in-r" class="nav-link" data-scroll-target="#example-of-an-ols-regression-in-r"><span class="header-section-number">23.1.2</span> Example of an OLS regression in R</a></li>
-  <li><a href="#hypothesis-testing-in-ols-regression" id="toc-hypothesis-testing-in-ols-regression" class="nav-link" data-scroll-target="#hypothesis-testing-in-ols-regression"><span class="header-section-number">23.1.3</span> Hypothesis testing in OLS regression</a></li>
-  <li><a href="#r-squared-value" id="toc-r-squared-value" class="nav-link" data-scroll-target="#r-squared-value"><span class="header-section-number">23.1.4</span> R-Squared Value</a></li>
-  <li><a href="#f-statistic" id="toc-f-statistic" class="nav-link" data-scroll-target="#f-statistic"><span class="header-section-number">23.1.5</span> F-Statistic</a></li>
-  <li><a href="#visual-representation" id="toc-visual-representation" class="nav-link" data-scroll-target="#visual-representation"><span class="header-section-number">23.1.6</span> Visual representation</a></li>
+<li><a href="#cleaning-uds-data" id="toc-cleaning-uds-data" class="nav-link" data-scroll-target="#cleaning-uds-data"><span class="header-section-number">10.3.1</span> Cleaning UDS Data</a></li>
+  <li><a href="#creating-comparison-table-from-this-dataset" id="toc-creating-comparison-table-from-this-dataset" class="nav-link" data-scroll-target="#creating-comparison-table-from-this-dataset"><span class="header-section-number">10.3.2</span> Creating Comparison Table from this Dataset</a></li>
   </ul>
 </li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">23.2</span> References</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/04_regression_ols.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+  <li><a href="#assumptions-of-mcnemars-test" id="toc-assumptions-of-mcnemars-test" class="nav-link" data-scroll-target="#assumptions-of-mcnemars-test"><span class="header-section-number">10.4</span> Assumptions of McNemar’s Test</a></li>
+  <li><a href="#checking-the-assumptions-of-mcnemars-test" id="toc-checking-the-assumptions-of-mcnemars-test" class="nav-link" data-scroll-target="#checking-the-assumptions-of-mcnemars-test"><span class="header-section-number">10.5</span> Checking the Assumptions of McNemar’s Test</a></li>
+  <li><a href="#code-to-run-mcnemars-test" id="toc-code-to-run-mcnemars-test" class="nav-link" data-scroll-target="#code-to-run-mcnemars-test"><span class="header-section-number">10.6</span> Code to run McNemar’s Test</a></li>
+  <li><a href="#brief-interpretation-of-the-output" id="toc-brief-interpretation-of-the-output" class="nav-link" data-scroll-target="#brief-interpretation-of-the-output"><span class="header-section-number">10.7</span> Brief Interpretation of the Output</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">10.8</span> Conclusion</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/02_mcnemar_paired_samp.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_regression_ols.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_mcnemar_paired_samp.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span>
+<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">McNemar’s Test</span>
 </h1>
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliations</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Ashlee Perez, Michaela Larson, and Gabriel Odom </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Florida International University
+          </p>
+        <p class="affiliation">
+            Robert Stempel College of Public Health and Social Work
+          </p>
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Lea Nehme &amp; Zhayda Reilly </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">July 18, 2023</p>
-    </div>
-  </div>
+      
   
     
   </div>
@@ -459,348 +464,179 @@ window.Quarto = {
 
 
 </header><div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#install.packages("skimr")</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/skimr/">skimr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="co">#install.packages("ggpubr")</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op">)</span></span>
-<span><span class="co">#install.packages("patchwork")</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="co">#install.packages("gtsummary")</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddsjoberg/gtsummary">gtsummary</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://hbiostat.org/R/Hmisc/">Hmisc</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/taiyun/corrplot">corrplot</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>corrplot 0.92 loaded</code></pre>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># install.packages("public.ctn0094extra")</span></span>
+<span><span class="co"># install.packages("tidyverse")</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ctn-0094.github.io/public.ctn0094data/">public.ctn0094data</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ctn-0094.github.io/public.ctn0094extra/">public.ctn0094extra</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://xtable.r-forge.r-project.org/">xtable</a></span><span class="op">)</span></span>
-<span><span class="co">#install.packages("modelsummary")</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://modelsummary.com">modelsummary</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`modelsummary` 2.0.0 now uses `tinytable` as its default table-drawing
-  backend. Learn more at: https://vincentarelbundock.github.io/tinytable/
-
-Revert to `kableExtra` for one session:
-
-  options(modelsummary_factory_default = 'kableExtra')
-
-Change the default backend persistently:
-
-  config_modelsummary(factory_default = 'gt')
-
-Silence this message forever:
-
-  config_modelsummary(startup_message = FALSE)</code></pre>
-</div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://personality-project.org/r/psych/">psych</a></span><span class="op">)</span></span>
-<span><span class="co">#install.packages("rstatix")</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op">)</span></span>
-<span><span class="co">#install.packages("PerformanceAnalytics")</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/braverock/PerformanceAnalytics">PerformanceAnalytics</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: xts</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: zoo</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'zoo'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:base':
-
-    as.Date, as.Date.numeric</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-######################### Warning from 'xts' package ##########################
-#                                                                             #
-# The dplyr lag() function breaks how base R's lag() function is supposed to  #
-# work, which breaks lag(my_xts). Calls to lag(my_xts) that you type or       #
-# source() into this session won't work correctly.                            #
-#                                                                             #
-# Use stats::lag() to make sure you're not using dplyr::lag(), or you can add #
-# conflictRules('dplyr', exclude = 'lag') to your .Rprofile to stop           #
-# dplyr from breaking base R's lag() function.                                #
-#                                                                             #
-# Code in packages is not affected. It's protected by R's namespace mechanism #
-# Set `options(xts.warn_dplyr_breaks_lag = FALSE)` to suppress this warning.  #
-#                                                                             #
-###############################################################################</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'xts'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:dplyr':
-
-    first, last</code></pre>
-</div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#install.packages("ppcor")</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ppcor</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: MASS</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'MASS'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:rstatix':
-
-    select</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:gtsummary':
-
-    select</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:patchwork':
-
-    area</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:dplyr':
-
-    select</code></pre>
-</div>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#install.packages("remotes")</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org">remotes</a></span><span class="op">)</span></span>
-<span><span class="co">#install.packages("conflicted")</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://conflicted.r-lib.org/">conflicted</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="ordinary-least-squares-ols-regression" class="level2" data-number="23.1"><h2 data-number="23.1" class="anchored" data-anchor-id="ordinary-least-squares-ols-regression">
-<span class="header-section-number">23.1</span> Ordinary Least Squares (OLS) Regression</h2>
-<p>OLS is a “method that allows to find a line that best describes the relationship between one or more predictor variables and a response variable”<span class="citation" data-cites="howtop"><sup><a href="#ref-howtop" role="doc-biblioref"><strong>howtop?</strong></a></sup></span>, with our end result being:</p>
-<p><span class="math display">\[
-\hat{y} = b_0 + b_1x
-\]</span></p>
-<p>The best fitting line is typically calculated utilizing the least squares, which can be visually described as the deviation in the vertical direction.</p>
-<p>Now, we will examine the relationship between a vehicle’s weight (WT) and its miles per gallon or fuel efficiency (MPG).</p>
-<p>In a previous lesson, we found a Pearson’s correlation coefficient of r(30) = -0.868, p&lt;0.05. Based on this information, we concluded that there is a strong negative relationship between MPG and WT. Where, heavier vehicles are associated with lower miles per gallon. Essentially this means that heavier vehicles are less fuel efficient. We will use the interpretation of this correlation as the basis of building an OLS regression to predict the value of MPG for a vehicle based on its weight. An OLS regression could be described as a common method used in regression analysis due to its efficiency in fitting the best straight line through a set of points. Thus, an OLS regression model gives best approximate of true population regression line as it minimizes the total distance from all of the points to the line.</p>
-<p>The OLS model could be expressed as: <span class="math display">\[\hat{y}_i = \beta_0 + \beta_1x_i\]</span></p>
-<p>Then the OLS regression model line for our example is:</p>
-<p><span class="math display">\[\widehat{MPG_i} = \beta_0 +\beta_1*WT_i\]</span></p>
+<section id="introduction-to-mcnemars-test" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="introduction-to-mcnemars-test">
+<span class="header-section-number">10.1</span> Introduction to McNemar’s Test</h2>
+<p>McNemar’s Test is a non-parametric test used to analyze dichotomous data (in a 2 x 2) for <strong>paired</strong> samples. It is similar to a paired <span class="math inline">\(t\)</span>-test, but for dichotomous rather than continuous variables. It is also akin to a Fisher’s exact test, but for paired data rather than un-paired data. The test requires one nominal dependent variable with 2 categories, and one independent variable with 2 dependent, mutually exclusive, groups. It is important to note that a “pair” can also represent a single individual’s pre- and post-test/intervention results.</p>
+</section><section id="mathematical-definition-of-mcnemars-test" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="mathematical-definition-of-mcnemars-test">
+<span class="header-section-number">10.2</span> Mathematical definition of McNemar’s Test</h2>
+<p>Consider binary repeated measured data for <span class="math inline">\(n\)</span> observations; the observations come from <strong>one group</strong> under two conditions (e.g.&nbsp;“time period 1” vs “time period 2”, 0 vs.&nbsp;1), the samples are treated with some treatment within equally across each condition, and the outcome of interest is dichotomous (such as “success” or “failure”, 1 vs.&nbsp;0). If these restrictive assumptions are met, then the data can be compactly represented as a contingency table that looks like this:</p>
+<table class="table">
+<thead><tr class="header">
+<th></th>
+<th>Condition 2 + (1)</th>
+<th>Condition 2 - (0)</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><strong>Condition 1 + (1)</strong></td>
+<td>(a)</td>
+<td>(b)</td>
+</tr>
+<tr class="even">
+<td><strong>Condition 1 - (0)</strong></td>
+<td>(c)</td>
+<td>(d)</td>
+</tr>
+</tbody>
+</table>
+<p>Where:</p>
 <ul>
 <li>
-<p><strong>The line has the following properties:</strong></p>
-<blockquote class="blockquote">
-<p>The intercept (<span class="math inline">\(\beta_0\)</span>), its measure is defined by the units in Y. In our case, the units used in MPG. It is the predicted value of Y (MPG) when X (WT) is zero</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>The slope (<span class="math inline">\(\beta_1\)</span>), is the predicted change in Y for a one-unit increase in X. Like the correlation coefficient, it provides information on the relationship between X and Y. But unlike the correlation coefficient (unitless), it highlights the relationship in real terms of units. In our example this would look at how miles per gallon increase or decrease for a one unit increase in a vehicle’s weight (according to the R docummentation for the <code>mtcars</code> data set, weight is provided as a measure per every 1,000 pounds and miles per gallon are provided as Miles/(US) gallon), therefore the units are defined by the Y (MPG) and the X (WT).</p>
-</blockquote>
-<blockquote class="blockquote">
-<ul>
-<li>For example, the data for a vehicle that weighs 2,000 pounds the unit is given as “2”</li>
-<li>For example, a vehicle that spends one gallon of fuel per every 19 miles is given as “19”</li>
-</ul>
-</blockquote>
-</li>
-</ul>
-<section id="how-to-develop-the-best-fitting-line" class="level3" data-number="23.1.1"><h3 data-number="23.1.1" class="anchored" data-anchor-id="how-to-develop-the-best-fitting-line">
-<span class="header-section-number">23.1.1</span> How to develop the best fitting line?</h3>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="04_regression_residuals.jpg" class="img-fluid figure-img"></p>
-<figcaption>Sample residual/error terms plot</figcaption></figure>
-</div>
-<p>The best fitting line is one that minimizes errors in prediction or one with the Minimum sum of squared residuals (SSR). For more details, you can watch this video:<span class="citation" data-cites="khanacademy2018"><sup><a href="#ref-khanacademy2018" role="doc-biblioref"><strong>khanacademy2018?</strong></a></sup></span></p>
-<p><span class="math display">\[
-SSR = \sum_{i = 1}^{n}{(y_i - \hat{y_i})^2}
-\]</span></p>
-<p><span class="math inline">\(residual_i = y_i - \hat{y_i}\)</span></p>
-<p>It is important to note that prior to calculating the residuals, we must visualize and examine the data, which was done in the previous example. Then, we must run the regression line. We can utilize lm() to perform the OLS regression which will provide us with the model summary, including the following:</p>
-<blockquote class="blockquote">
-<p>Pr(&gt;|t|) Multiple R-Squared Adjusted R-Squared Residual Standard Error F-statistic P-value</p>
-</blockquote>
-<p>Once the model summary is given, we can then move on to creating the residual plots. When performing this step, we have to check the assumptions of homoscedasticity and normality.</p>
-<pre><code>* Residuals = error terms
-* $$ Residual = observed value - predicted value $$
-* The larger the error term in absolute value, the worse the prediction
-* Squaring residuals solve issues arising from some residuals being negative and some positive.</code></pre>
-<ul>
+<strong>a</strong>: is the number of <em>pairs</em> where both conditions are positive. E.g., the count of participants for whom the treatment was effective at time points 1 and 2.</li>
 <li>
-<strong>Assumptions</strong>
-<ol type="1">
-<li><p><strong><em>Linearity:</em></strong> Linear relationship between the dependent variable and the independent variables.</p></li>
-<li><p><strong><em>Independence:</em></strong> The observations must be independent of each other.</p></li>
-<li><p><strong><em>Homoscedasticity:</em></strong> The variance of the residuals should be constant across all levels of the independent variables.</p></li>
-<li><p><strong><em>Normality:</em></strong> The residuals / errors should be normally distributed.</p></li>
-<li><p><strong><em>No multicollinearity:</em></strong> In the case of multiple regression (2+ independent variables), the independent variables should not be highly correlated with each other.</p></li>
-</ol>
-</li>
+<strong>b</strong>: is the number of <em>pairs</em> where the first condition is positive and the second condition is negative. E.g., the count of participants for whom the treatment was effective at time 1 but not effective at time 2.</li>
+<li>
+<strong>c</strong>: is the number of <em>pairs</em> where the first condition is negative and the second condition is positive. E.g., the count of participants for whom the treatment was not effective at time 1 but was effective at time 2.</li>
+<li>
+<strong>d</strong>: is the number of <em>pairs</em> where both conditions are negative. E.g., the count of participants for whom the treatment was neither effective at time 1 nor at time 2.</li>
 </ul>
-<div class="callout callout-style-simple callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Be careful about outliers
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Outliers can influence the estimates of the relationship.</p>
-</div>
-</div>
-</section><section id="example-of-an-ols-regression-in-r" class="level3" data-number="23.1.2"><h3 data-number="23.1.2" class="anchored" data-anchor-id="example-of-an-ols-regression-in-r">
-<span class="header-section-number">23.1.2</span> Example of an OLS regression in R</h3>
-<p>In R, the <code>lm</code> function command allows us to develop an OLS regression.</p>
+<p>The test focuses on the discordant pairs, <strong>b</strong> and <strong>c</strong>, which are pairs that change from one condition to the other. With a sufficiently large number of discordant pairs, McNemar’s Test follows a Chi-squared distribution with 1 degree of freedom. The formula for the test statistic, <span class="math inline">\(\chi^{2}_{\text{Obs}}\)</span>, is as follows:</p>
+<p><span class="math inline">\(\chi^{2}_{\text{Obs}} := \frac{(b - c)^2}{b + c};\ \chi^{2}_{\text{Obs}} \sim \chi^{2}_{\nu = 1}.\)</span></p>
+</section><section id="data-description" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="data-description">
+<span class="header-section-number">10.3</span> Data Description</h2>
+<p>For this lesson, we will look at patients in treatment for opioid use disorder, We will measure abstinence a the start and end of treatment via weekly Urine Drug Screen (UDS). The abstinence measurements are in the <code><a href="https://ctn-0094.github.io/public.ctn0094extra/reference/derived_weeklyOpioidPattern.html">public.ctn0094extra::derived_weeklyOpioidPattern</a></code> data set. Our definition of abstinence will be “3 consecutive negative urine screens” from weeks 2-4 (start of treatment) and weeks 10-12 (end of treatment).</p>
+<section id="cleaning-uds-data" class="level3" data-number="10.3.1"><h3 data-number="10.3.1" class="anchored" data-anchor-id="cleaning-uds-data">
+<span class="header-section-number">10.3.1</span> Cleaning UDS Data</h3>
 <div class="cell">
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># model predicting mpg (fuel efficiency) using wt (weight)</span></span>
-<span><span class="va">MPGReg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">MPGReg</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">txSuccess_df</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="fu">public.ctn0094extra</span><span class="fu">::</span><span class="va"><a href="https://ctn-0094.github.io/public.ctn0094extra/reference/derived_weeklyOpioidPattern.html">derived_weeklyOpioidPattern</a></span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># Combine UDS across treatment phases</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>udsPattern <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">Phase_1</span>, <span class="va">Phase_2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># Extract the UDS patterns for the start and end of treatment</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    startTxPattern <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_sub.html">str_sub</a></span><span class="op">(</span><span class="va">udsPattern</span>, start <span class="op">=</span> <span class="fl">2</span>, end <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>,</span>
+<span>    endTxPattern <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_sub.html">str_sub</a></span><span class="op">(</span><span class="va">udsPattern</span>, start <span class="op">=</span> <span class="fl">10</span>, end <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># Check for abstinence during the start and end of treatment</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    startAbs <span class="op">=</span> <span class="va">startTxPattern</span> <span class="op">==</span> <span class="st">"---"</span>,</span>
+<span>    endAbs <span class="op">=</span> <span class="va">endTxPattern</span> <span class="op">==</span> <span class="st">"---"</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">who</span>, <span class="va">udsPattern</span>, <span class="va">startAbs</span>, <span class="va">endAbs</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="va">txSuccess_df</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,560 × 4
+     who udsPattern                startAbs endAbs
+   &lt;int&gt; &lt;chr&gt;                     &lt;lgl&gt;    &lt;lgl&gt; 
+ 1     1 ooooooooooooooo           FALSE    FALSE 
+ 2     2 ----oo-o-o-o+o            TRUE     FALSE 
+ 3     3 o-ooo-ooooooooooooooooo   FALSE    FALSE 
+ 4     4 --------------------o-oo  TRUE     TRUE  
+ 5     5 ooooooooooooooo           FALSE    FALSE 
+ 6     6 -ooooooooooooo            FALSE    FALSE 
+ 7     7 ----oooooooooooooooooooo  TRUE     FALSE 
+ 8     8 ooooooooooooooooooooooooo FALSE    FALSE 
+ 9     9 oooooooooooooooooooooo    FALSE    FALSE 
+10    10 --o--*++o-++++++++o+-o    FALSE    FALSE 
+# ℹ 3,550 more rows</code></pre>
+</div>
+</div>
+</section><section id="creating-comparison-table-from-this-dataset" class="level3" data-number="10.3.2"><h3 data-number="10.3.2" class="anchored" data-anchor-id="creating-comparison-table-from-this-dataset">
+<span class="header-section-number">10.3.2</span> Creating Comparison Table from this Dataset</h3>
+<p>Now that we have a binary measure of success at two time points (start and end of treatment), we can create a 2 x 2 contingency table:</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">txAbs_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span></span>
+<span>  <span class="co"># Rows of the table</span></span>
+<span>  <span class="va">txSuccess_df</span><span class="op">$</span><span class="va">startAbs</span>,</span>
+<span>  <span class="co"># Columns of the table</span></span>
+<span>  <span class="va">txSuccess_df</span><span class="op">$</span><span class="va">endAbs</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">txAbs_tbl</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       
+        FALSE TRUE
+  FALSE  2676  268
+  TRUE    395  221</code></pre>
+</div>
+</div>
+<p>Here are the categories for each of the states of the patients:</p>
+<ul>
+<li>
+<strong>a</strong> (<code>FALSE &amp; FALSE</code>) means that the subject was abstinent from opioids neither at the start nor end of the trial,</li>
+<li>
+<strong>b</strong> (<code>FALSE &amp; TRUE</code>) means that the subject was not abstinent from opioids at the start of the trial but abstinent at the end,</li>
+<li>
+<strong>c</strong> (<code>TRUE &amp; FALSE</code>) means that the subject was abstinent from opioids at the start of the trial but not abstinent at the end, and</li>
+<li>
+<strong>d</strong> (<code>TRUE &amp; TRUE</code>) means that the subject was abstinent from opioids both at the start and end of the trial.</li>
+</ul></section></section><section id="assumptions-of-mcnemars-test" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="assumptions-of-mcnemars-test">
+<span class="header-section-number">10.4</span> Assumptions of McNemar’s Test</h2>
+<p>The assumptions of McNemar’s Test are as follows:</p>
+<ul>
+<li>
+<strong>Assumption 1</strong>: You have one categorical dependent variable with <em>two categories</em> (i.e., a dichotomous variable) and one categorical independent variable with <em>two related groups</em>.</li>
+<li>
+<strong>Assumption 2</strong>: The two groups of the dependent variable are <em>mutually exclusive</em>, which means that the groups do not overlap—a participant can only be in one of the two groups.</li>
+<li>
+<strong>Assumption 3</strong>: The cases are a random sample from the population of interest.</li>
+<li>
+<strong>Assumption 4</strong>: At least 25 discordant pairs (<span class="math inline">\(c + b \geq 25\)</span>)</li>
+</ul></section><section id="checking-the-assumptions-of-mcnemars-test" class="level2" data-number="10.5"><h2 data-number="10.5" class="anchored" data-anchor-id="checking-the-assumptions-of-mcnemars-test">
+<span class="header-section-number">10.5</span> Checking the Assumptions of McNemar’s Test</h2>
+<p>To check our assumptions, we will review and inspect the contingency table with the two variables of interest.</p>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Printing the contigency table with margin totals and overal totals</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/addmargins.html">addmargins</a></span><span class="op">(</span><span class="va">txAbs_tbl</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       
+        FALSE TRUE  Sum
+  FALSE  2676  268 2944
+  TRUE    395  221  616
+  Sum    3071  489 3560</code></pre>
+</div>
+</div>
+<p>The categorical dependent variable is abstinence of opioids in urine samples (e.g positive or negative for the substance); we see that the dependent variable at the start of treatment is related to the dependent variable at the end of treatment because we are detecting opioids within the <em>same person</em>. The categorical independent variable is the two time periods (start and end of treatment). The two groups are mutually exclusive, as urine cannot be simultaneously positive and negative and the participant cannot simultaneously be at the start and end of treatment. Finally, we note that the sum of the off-diagonal cells is at least 25.</p>
+</section><section id="code-to-run-mcnemars-test" class="level2" data-number="10.6"><h2 data-number="10.6" class="anchored" data-anchor-id="code-to-run-mcnemars-test">
+<span class="header-section-number">10.6</span> Code to run McNemar’s Test</h2>
+<p>Recall that we created a 2x2 contingency table with the <code><a href="https://rdrr.io/r/base/table.html">table()</a></code> function above. This table object is one of the the data structures which can be supplied to the function <code><a href="https://rdrr.io/r/stats/mcnemar.test.html">mcnemar.test()</a></code>. The other is the two columns of binary values (which can be coercible to binary factors).</p>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Table Input Syntax</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/mcnemar.test.html">mcnemar.test</a></span><span class="op">(</span><span class="va">txAbs_tbl</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Call:
-lm(formula = mpg ~ wt, data = mtcars)
+    McNemar's Chi-squared test with continuity correction
 
-Residuals:
-    Min      1Q  Median      3Q     Max 
--4.5432 -2.3647 -0.1252  1.4096  6.8727 
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  37.2851     1.8776  19.858  &lt; 2e-16 ***
-wt           -5.3445     0.5591  -9.559 1.29e-10 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 3.046 on 30 degrees of freedom
-Multiple R-squared:  0.7528,    Adjusted R-squared:  0.7446 
-F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10</code></pre>
+data:  txAbs_tbl
+McNemar's chi-squared = 23.946, df = 1, p-value = 9.909e-07</code></pre>
 </div>
-</div>
-<p>The OLS regression model is then:</p>
-<p><span class="math inline">\(\widehat{MPG_i} = 37.285 - 5.344*WT_i\)</span></p>
-<ul>
-<li>
-<p><strong>Interpretation:</strong> <span class="math inline">\(\beta_0\)</span></p>
-<ul>
-<li><p>The model predicts that vehicles with no weight will have 37.285 miles per gallon, on average.</p></li>
-<li>
-<p>This is not a very meaningful intercept as vehicles with “0” weight do not exist. A meaningful intercept can be created by subtracting a constant from the <em>x</em> variable to move the intercept.In R as part of the <code>lm</code> command, this can be done by surrounding the independent variable with <code><a href="https://rdrr.io/r/base/AsIs.html">I()</a></code> which applies the function inside and treats it as a new variable. For our example we used the rounded lowest weight of the data (1.5) to predict miles per gallon.</p>
-<blockquote class="blockquote">
-<p>This procedure does not change the slope of the line</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<div class="cell">
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># model predicting mpg (fuel efficiency) using wt (weight)</span></span>
-<span><span class="va">MPGReg2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">wt</span><span class="op">-</span><span class="fl">1.5</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">MPGReg2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Factor Vector Input Syntax</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/mcnemar.test.html">mcnemar.test</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="va">txSuccess_df</span><span class="op">$</span><span class="va">startAbs</span>,</span>
+<span>  y <span class="op">=</span> <span class="va">txSuccess_df</span><span class="op">$</span><span class="va">endAbs</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Call:
-lm(formula = mpg ~ I(wt - 1.5), data = mtcars)
+    McNemar's Chi-squared test with continuity correction
 
-Residuals:
-    Min      1Q  Median      3Q     Max 
--4.5432 -2.3647 -0.1252  1.4096  6.8727 
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  29.2684     1.1008  26.589  &lt; 2e-16 ***
-I(wt - 1.5)  -5.3445     0.5591  -9.559 1.29e-10 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 3.046 on 30 degrees of freedom
-Multiple R-squared:  0.7528,    Adjusted R-squared:  0.7446 
-F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10</code></pre>
+data:  txSuccess_df$startAbs and txSuccess_df$endAbs
+McNemar's chi-squared = 23.946, df = 1, p-value = 9.909e-07</code></pre>
 </div>
 </div>
-<ul>
-<li><p>Then, the meaningful intercept model predicts that vehicles with a weight of 1500 pounds have 29.268 miles per gallon, on average.</p></li>
-<li>
-<p><strong>Interpretation:</strong> <span class="math inline">\(\beta_1\)</span></p>
-<ul>
-<li>The model predicts that on average, an increase of 1,000 pounds in the weight of a vehicle is associated with a decrease of 5.344 miles per gallon.</li>
-</ul>
-</li>
-</ul>
-<div class="cell">
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># define residuals </span></span>
-<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">resid</a></span><span class="op">(</span><span class="va">MPGReg</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># produce residual vs. fitted plot </span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">MPGReg</span><span class="op">)</span>, <span class="va">res</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># add a horizontal line at 0</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="04_regression_ols_files/figure-html/Creating Residual Plots-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># create Q-Q- plot for residuals</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># add a straight diagonal line to the plot</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="04_regression_ols_files/figure-html/Creating Residual Plots-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Based on the graph above, it is visually clear that normality may not be met due to some outliers. This means that we must explore our data even deeper as it is possible that transformation of our data utilizing one of the following methods must take place:</p>
-<blockquote class="blockquote">
-<p>Log transformation Square Root Transformation Cube Root Transformation</p>
-</blockquote>
-<p>Once the data is transformed, we can run the residual plot over again in order to achieve normality. For the sake of this presentation, we are only using an example with known limitations such as non-normality.</p>
-</section><section id="hypothesis-testing-in-ols-regression" class="level3" data-number="23.1.3"><h3 data-number="23.1.3" class="anchored" data-anchor-id="hypothesis-testing-in-ols-regression">
-<span class="header-section-number">23.1.3</span> Hypothesis testing in OLS regression</h3>
-<p>The null hypothesis in this case would be that the slope is zero indicating no relationship between x and y. Or in our example, we can state that there is no relationship between a vehicle’s weight and its miles per gallon. The alternative hypothesis is then that the slope is not zero.</p>
-<p><span class="math display">\[
-H_0: \beta_1 = 0
-\]</span></p>
-<p><span class="math display">\[
-H_1: \beta_1 ≠ 0
-\]</span></p>
-<p>We can test this hypothesis by using the <code>lm summary</code> printout which provides the p-value for the <code>wt</code> coefficient. This indicates that there is indeed a significant relationship between the weight of the car and its efficiency (miles per gallon used). R provides a t-value for the ‘wt’ coefficient which has a p-value of p &lt; 0.000 as seen below:</p>
-<pre><code>                  Estimate        Std. Error       t value      Pr(&gt;|t|)   
-    wt           -5.3445             0.5591       -9.559       1.29e-10</code></pre>
-</section><section id="r-squared-value" class="level3" data-number="23.1.4"><h3 data-number="23.1.4" class="anchored" data-anchor-id="r-squared-value">
-<span class="header-section-number">23.1.4</span> R-Squared Value</h3>
-<p>R-squared is “a measure of how much of the variation in the dependent variable is explained by the independent variables in the model. It ranges from 0 to 1, with higher values indicating a better fit”<span class="citation" data-cites="ordinary"><sup><a href="#ref-ordinary" role="doc-biblioref"><strong>ordinary?</strong></a></sup></span>.</p>
-<p>Adjusted R-squared is “similar to R-squared, but it takes into account the number of independent variables in the model. It is a more conservative estimate of the model’s fit, as it penalizes the addition of variables that do not improve the model’s performance”<span class="citation" data-cites="ordinary"><sup><a href="#ref-ordinary" role="doc-biblioref"><strong>ordinary?</strong></a></sup></span>.</p>
-</section><section id="f-statistic" class="level3" data-number="23.1.5"><h3 data-number="23.1.5" class="anchored" data-anchor-id="f-statistic">
-<span class="header-section-number">23.1.5</span> F-Statistic</h3>
-<p>The F-statistic “tests the overall significance of the model by comparing the variation in the dependent variable explained by the model to the variation not explained by the model. A large F-statistic indicates that the model as a whole is significant”<span class="citation" data-cites="interpre"><sup><a href="#ref-interpre" role="doc-biblioref"><strong>interpre?</strong></a></sup></span>.</p>
-</section><section id="visual-representation" class="level3" data-number="23.1.6"><h3 data-number="23.1.6" class="anchored" data-anchor-id="visual-representation">
-<span class="header-section-number">23.1.6</span> Visual representation</h3>
-<p>The visual representation of this model using <code>ggplot</code> is the following:</p>
-<div class="cell">
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">wt</span>, y <span class="op">=</span> <span class="va">mpg</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">+</span> <span class="co">#se is option for coinfidence bar</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span> <span class="st">"Weight (per 1,000 pounds)"</span>,</span>
-<span>       y <span class="op">=</span> <span class="st">"Miles per gallon"</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="04_regression_ols_files/figure-html/Visual representation of MPGReg-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>As shown in the figure above, we see the summary statistics represented in a visual manner with the line of best fit. As indicated previously, we see a steep negative correlation between weight of the car and the miles per gallon (efficiency) utilized.</p>
-</section></section><section id="references" class="level2" data-number="23.2"><h2 data-number="23.2" class="anchored" data-anchor-id="references">
-<span class="header-section-number">23.2</span> References</h2>
+<p>The output from the McNemar’s test will show the Chi-Squared value, degrees of freedom (expected to be 1 as both categories only have 2 possible values), and the <span class="math inline">\(p\)</span>-value.</p>
+</section><section id="brief-interpretation-of-the-output" class="level2" data-number="10.7"><h2 data-number="10.7" class="anchored" data-anchor-id="brief-interpretation-of-the-output">
+<span class="header-section-number">10.7</span> Brief Interpretation of the Output</h2>
+<p>The resulting <span class="math inline">\(p\)</span>-value in this case is below 0.05, which indicates that the marginal probabilities between <code>startAbs</code> and <code>endAbs</code> are different. What is curious is that the count for start of treatment abstinence is higher than the count for end of treatment abstinence.</p>
+</section><section id="conclusion" class="level2" data-number="10.8"><h2 data-number="10.8" class="anchored" data-anchor-id="conclusion">
+<span class="header-section-number">10.8</span> Conclusion</h2>
+<p>If you have <strong>paired</strong> samples, and the variable of interest is <strong>binary</strong>, then use McNemar’s test. The pairing could be within subject but across time or space, or it could represent different measures of success or failure on the same subject (of use in psychometrics). Regardless, it’s often that you’d like to include some covariate or additional factor, which this technique does not allow. In those cases, you may want Survival analysis (an event may occur or not within a time interval) or some other technique.</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -1212,13 +1048,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../lessons/04_corr_cov.html" class="pagination-link" aria-label="Correlation and Covariance Matrices">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span>
+      <a href="../lessons/02_wilcoxon_one_samp.html" class="pagination-link" aria-label="Wilcoxon Signed Rank Test for One Sample">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../lessons_original/04_regression_mls.html" class="pagination-link" aria-label="Multiple Linear Regression">
-        <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lessons/02_chiSq_GoF.html" class="pagination-link" aria-label="The Chi Squared Goodness-of-Fit Test">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1229,7 +1065,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/04_regression_ols.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/02_mcnemar_paired_samp.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>

@@ -1,0 +1,159 @@
+---
+title: "McNemar's Test"
+author:
+  - name: Ashlee Perez, Michaela Larson, and Gabriel Odom
+    affiliations:
+      - Florida International University
+      - Robert Stempel College of Public Health and Social Work
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+---
+
+```{r}
+#| label: load-packages
+#| message: false
+ 
+# install.packages("public.ctn0094extra")
+# install.packages("tidyverse")
+library(public.ctn0094data)
+library(public.ctn0094extra)
+library(tidyverse)
+```
+
+
+
+## Introduction to McNemar's Test
+
+McNemar's Test is a non-parametric test used to analyze dichotomous data (in a 2 x 2) for **paired** samples. It is similar to a paired $t$-test, but for dichotomous rather than continuous variables. It is also akin to a Fisher's exact test, but for paired data rather than un-paired data. The test requires one nominal dependent variable with 2 categories, and one independent variable with 2 dependent, mutually exclusive, groups. It is important to note that a "pair" can also represent a single individual's pre- and post-test/intervention results.
+
+
+
+## Mathematical definition of McNemar's Test
+
+Consider binary repeated measured data for $n$ observations; the observations come from **one group** under two conditions (e.g. "time period 1" vs "time period 2", 0 vs. 1), the samples are treated with some treatment within equally across each condition, and the outcome of interest is dichotomous (such as "success" or "failure", 1 vs. 0). If these restrictive assumptions are met, then the data can be compactly represented as a contingency table that looks like this:
+
+
+|                       | Condition 2 + (1) | Condition 2 - (0) |
+|-----------------------|-------------------|-------------------|
+| **Condition 1 + (1)** | \(a\)             | \(b\)             |
+| **Condition 1 - (0)** | \(c\)             | \(d\)             |
+
+
+Where:
+
+- **a**: is the number of *pairs* where both conditions are positive. E.g., the count of participants for whom the treatment was effective at time points 1 and 2.
+- **b**: is the number of *pairs* where the first condition is positive and the second condition is negative. E.g., the count of participants for whom the treatment was effective at time 1 but not effective at time 2.
+- **c**: is the number of *pairs* where the first condition is negative and the second condition is positive. E.g., the count of participants for whom the treatment was not effective at time 1 but was effective at time 2.
+- **d**: is the number of *pairs* where both conditions are negative. E.g., the count of participants for whom the treatment was neither effective at time 1 nor at time 2.
+
+The test focuses on the discordant pairs, **b** and **c**, which are pairs that change from one condition to the other. With a sufficiently large number of discordant pairs, McNemar's Test follows a Chi-squared distribution with 1 degree of freedom. The formula for the test statistic, $\chi^{2}_{\text{Obs}}$, is as follows:
+
+$\chi^{2}_{\text{Obs}} := \frac{(b - c)^2}{b + c};\ \chi^{2}_{\text{Obs}} \sim \chi^{2}_{\nu = 1}.$
+
+
+
+## Data Description
+For this lesson, we will look at patients in treatment for opioid use disorder, We will measure abstinence a the start and end of treatment via weekly Urine Drug Screen (UDS). The abstinence measurements are in the `public.ctn0094extra::derived_weeklyOpioidPattern` data set. Our definition of abstinence will be "3 consecutive negative urine screens" from weeks 2-4 (start of treatment) and weeks 10-12 (end of treatment).
+
+### Cleaning UDS Data
+```{r}
+#| label: treatment-abstinence
+
+txSuccess_df <- 
+  public.ctn0094extra::derived_weeklyOpioidPattern %>% 
+  # Combine UDS across treatment phases
+  mutate(udsPattern = paste0(Phase_1, Phase_2)) %>% 
+  # Extract the UDS patterns for the start and end of treatment
+  mutate(
+    startTxPattern = str_sub(udsPattern, start = 2, end = 4),
+    endTxPattern = str_sub(udsPattern, start = 10, end = 12)
+  ) %>% 
+  # Check for abstinence during the start and end of treatment
+  mutate(
+    startAbs = startTxPattern == "---",
+    endAbs = endTxPattern == "---"
+  ) %>% 
+  select(who, udsPattern, startAbs, endAbs) 
+
+txSuccess_df
+```
+
+
+### Creating Comparison Table from this Dataset
+Now that we have a binary measure of success at two time points (start and end of treatment), we can create a 2 x 2 contingency table:
+```{r}
+#| label: create-analysis-data
+
+txAbs_tbl <- table(
+  # Rows of the table
+  txSuccess_df$startAbs,
+  # Columns of the table
+  txSuccess_df$endAbs
+)
+
+txAbs_tbl
+```
+
+Here are the categories for each of the states of the patients:
+
+- **a** (`FALSE & FALSE`) means that the subject was abstinent from opioids neither at the start nor end of the trial,
+- **b** (`FALSE & TRUE`) means that the subject was not abstinent from opioids at the start of the trial but abstinent at the end,
+- **c** (`TRUE & FALSE`) means that the subject was abstinent from opioids at the start of the trial but not abstinent at the end, and
+- **d** (`TRUE & TRUE`) means that the subject was abstinent from opioids both at the start and end of the trial.
+
+
+## Assumptions of McNemar's Test
+
+The assumptions of McNemar's Test are as follows:
+
++ **Assumption 1**: You have one categorical dependent variable with *two categories* (i.e., a dichotomous variable) and one categorical independent variable with *two related groups*.
++ **Assumption 2**: The two groups of the dependent variable are *mutually exclusive*, which means that the groups do not overlap---a participant can only be in one of the two groups.
++ **Assumption 3**: The cases are a random sample from the population of interest.
++ **Assumption 4**: At least 25 discordant pairs ($c + b \geq 25$)
+
+
+
+## Checking the Assumptions of McNemar's Test
+
+To check our assumptions, we will review and inspect the contingency table with the two variables of interest.
+
+```{r}
+#| label: check-assumptions
+
+# Printing the contigency table with margin totals and overal totals
+addmargins(txAbs_tbl)
+```
+
+The categorical dependent variable is abstinence of opioids in urine samples (e.g positive or negative for the substance); we see that the dependent variable at the start of treatment is related to the dependent variable at the end of treatment because we are detecting opioids within the *same person*. The categorical independent variable is the two time periods (start and end of treatment). The two groups are mutually exclusive, as urine cannot be simultaneously positive and negative and the participant cannot simultaneously be at the start and end of treatment. Finally, we note that the sum of the off-diagonal cells is at least 25.
+
+
+
+## Code to run McNemar's Test
+Recall that we created a 2x2 contingency table with the `table()` function above. This table object is one of the the data structures which can be supplied to the function `mcnemar.test()`. The other is the two columns of binary values (which can be coercible to binary factors).
+```{r}
+#| label: mcnemar_test
+
+# Table Input Syntax
+mcnemar.test(txAbs_tbl)
+
+# Factor Vector Input Syntax
+mcnemar.test(
+  x = txSuccess_df$startAbs,
+  y = txSuccess_df$endAbs
+)
+```
+
+The output from the McNemar's test will show the Chi-Squared value, degrees of freedom (expected to be 1 as both categories only have 2 possible values), and the $p$-value.
+
+
+
+## Brief Interpretation of the Output
+
+The resulting $p$-value in this case is below 0.05, which indicates that the marginal probabilities between `startAbs` and `endAbs` are different. What is curious is that the count for start of treatment abstinence is higher than the count for end of treatment abstinence.
+
+
+
+## Conclusion
+If you have **paired** samples, and the variable of interest is **binary**, then use McNemar's test. The pairing could be within subject but across time or space, or it could represent different measures of success or failure on the same subject (of use in psychometrics). Regardless, it's often that you'd like to include some covariate or additional factor, which this technique does not allow. In those cases, you may want Survival analysis (an event may occur or not within a time interval) or some other technique.

@@ -1,0 +1,173 @@
+---
+title: "McNemar's Test"
+author:
+  - name: Ashlee Perez & Michaela Larson
+    affiliations:
+      - Florida International University
+      - Robert Stempel College of Public Health and Social Work
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+---
+
+```{r}
+#| label: load-packages
+#| message: false
+ 
+# install.packages("tidyverse")
+library(tidyverse)
+```
+
+
+
+## Introduction to McNemar's Test
+
+McNemar's Test is a non-parametric test used to analyze dichotomous data (in a 2 x 2) for paired samples. It is similar to a paired t-test, but for dichotomous rather than continuous variables. It is also akin to a Fisher's exact test, but for paired data rather than un-paired data. The test requires one nominal dependent variable with 2 categories, and one independent variable with 2 dependent, mutually exclusive, groups. It is important to note that a "pair" can also represent a single individual's pre- and post-test/intervention results.
+
+
+
+## Mathematical definition of McNemar's Test
+
+With a sufficiently large number of discordants, McNemar's Test follows a chi-squared distribution with 1 degree of freedom. The formula for the test statistic, $\chi^{2}$, is as follows:
+
+$\chi^{2}$ = $\frac{(b - c)^2}{b + c}$
+
+Based on a contingency table that looks like:
+
+
+|                         | Condition 2 Positive (1) | Condition 2 Negative (0) |
+|-------------------------|--------------------------|--------------------------|
+| **Condition 1 Positive (1)** |    \(a\)                   |    \(b\)                  |
+| **Condition 1 Negative (0)** |    \(c\)                   |    \(d\)                  |
+
+
+Where:
+
+- **a**: is the number of *pairs* where both conditions are positive.
+- **b**: is the number of *pairs* where the first condition is positive and the second condition is negative.
+- **c**: is the number of *pairs* where the first condition is negative and the second condition is positive.
+- **d**: is the number of *pairs* where both conditions are negative.
+
+The test focuses on the discordant pairs, **b** and **c**, which are pairs that change from one condition to the other.
+
+
+
+## Data Description
+
+For the pruposes of this lesson, we've utlized the Wisconsin Diagnostic Breast Cancer (WDBC) dataset, available from the [UC Irvine Machine Learning Repository](https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic) with the following citation:
+
+Wolberg,William, Mangasarian,Olvi, Street,Nick, and Street,W.. (1995). Breast Cancer Wisconsin (Diagnostic). UCI Machine Learning Repository. https://doi.org/10.24432/C5DW2B.
+
+The dataset consists of information collected on 569 tumors. The attributes of the dataset are as follows:
+
+1. `id_num`: The ID number of the tumor.
+2. `diadnosis`: The diagnosis (M = malignant, B = benign) of the tumor.
+3. `radius`, `radius_SE`, and `radius_worst`: The radius is defined as the distance from center to points on the perimeter. These values represent the mean, SE, and the worst measurement for the three largest radius measurements taken.
+4. `texture`, `texture_SE`, and `texture_worst`: The texture is defined as the standard deviation of gray-scale values. These values represent the mean, SE, and the worst measurement for the three largest texture measurements taken.
+5. `perimeter`, `perimeter_SE`, and `perimeter_worst`: The perimeter is defined as the length of the outer edge/boundary of the tumor. These values represent the mean, SE, and the worst measurement for the three largest perimeter measurements taken.
+6. `area`, `area_SE`, and `area_worst`: The area is defined as the tumor length x the maximum tumor depth. These values represent the mean, SE, and the worst measurement for the three largest area measurements taken.
+7. `smoothness`, `smoothness_SE`, and `smoothness_worst`: The smoothness is defined as the local variation in radius lengths. These values represent the mean, SE, and the worst measurement for the three largest smoothness measurements taken.
+8. `compactness`, `compactness_SE`, and `compactness_worst`: The compactness is defined with the following equation: $compactness = \frac{perimeter^2}{area - 1.0}$. These values represent the mean, SE, and the worst measurement for the three largest compactness measurements taken.
+9. `concavity`, `concavity_SE`, and `concavity_worst`: The concavity is defined as the severity of the concave portions of the contour. These values represent the mean, SE, and the worst measurement for the three largest concavity measurements taken.
+10. `concave_points`, `concave_points_SE`, and `concave points_worst`: Concave points is defined as the number of concave portions of the contour. These values represent the mean, SE, and the worst measurement for the three largest concave points measurements taken.
+11. `symmetry`, `symmetry_SE`, and `symmetry_worst`: The symmetry is defined as the difference in breast density compared to corresponding area in opposite breast. These values represent the mean, SE, and the worst measurement for the three largest symmetry measurements taken.
+12. `fractal_dim`, `fractal_dim_SE`, and `fractal_dim_worst`: Fractal dimension measures the self-similarity of cells. It is used to distinguish cancer cells from regular cells, and is calculated as the "coastline approximation" - 1. The coastline approximation is a measure of jaggedness/irregular border of a tumor. The `fractal_dim` values represent the mean, SE, and the worst measurement for the three largest fractal dimension measurements taken.
+
+In order for the data to be in proper format for McNemar's Test, we created a binary variable for radius, `radius_binary` to classify tumor radius as *high* or *low* compared to the median of all radiuses in the dataset. Our null hypothesis is that the marginal probabilities between the two measurements (`diagnosis` and `radius_binary`) are the same, while the alternative hypothesis states that the marginal probabilities are different.
+
+```{r}
+#| label: creating-data
+#| message: false
+
+# Creating column names for the dataset
+column_names_bc <- c(
+  "id_num", "diagnosis", "radius", "texture", "permineter", "area",
+  "smoothness", "compactness", "concavity", "concave_points", "symmetry",
+  "fractal_dim", "radius_SE", "texture_SE", "permineter_SE", "area_SE",
+  "smoothness_SE", "compactness_SE", "concavity_SE", "concave_points_SE", 
+  "symmetry_SE", "fractal_dim_SE", "radius_worst", "texture_worst",
+  "permineter_worst", "area_worst", "smoothness_worst", "compactness_worst",
+  "concavity_worst", "concave_points_worst", "symmetry_worst",
+  "fractal_dim_worst"
+)
+
+# Importing the data & specigying column names
+breast_cancer_df <- read_csv(
+  "/Users/michaelalarson/Documents/GitHub/AdvancedR/data/wdbc.data",
+  col_names = column_names_bc
+)
+
+# Creating a binary feature based on a threshold (here we are using median)
+threshold <- median(breast_cancer_df$radius)
+
+bc_binary_radius <- breast_cancer_df %>% 
+  mutate(
+    radius_binary = case_when(
+      radius > threshold ~ "High",
+      TRUE ~ "Low"
+    )
+  )
+
+# Examining the head of the dataset
+head(bc_binary_radius)
+```
+
+## Assumptions of McNemar's Test
+
+The assumptions of McNemar's Test are as follows:
+
++ **Assumption 1**: You have one categorical dependent variable with *two categories* (i.e., a dichotomous variable) and one categorical independent variable with *two related groups*.
++ **Assumption 2**: The two groups of the dependent variable are *mutually exclusive*, which means that the groups do not overlap - a participant can only be in one of the two groups.
++ **Assumption 3**: The cases are a random sample from the population of interest.
++ **Assumption 4**: At least 25 discordant pairs (c + b $\geq$ 25)
+
+
+
+## Checking the Assumptions of McNemar's Test
+
+To check our assumptions, we can create a table with the two variables of interest.
+
+```{r}
+#| label: check-assumptions
+
+# `glimpse()` allows for a quick superficial scan of the data set
+glimpse(bc_binary_radius)
+# summary(bc_binary_radius)
+
+# Create a `table` object to later use in the McNemar test
+contingency_table_bc <- table(
+  bc_binary_radius$diagnosis, bc_binary_radius$radius_binary
+)
+
+# Printing the contigency table with margin totals and overal totals
+print(addmargins(contingency_table_bc))
+```
+
+The categorical dependent variable is presence of illness before treatment (e.g positive or negative) on the vertical portion of the table. The categorical independent variable is the presence of illness after treatment (e.g positive or negative) on the horizontal portion of the table.
+
+The two groups are mutually exclusive, where each participant only appears in one of the two groups as seen through the `glimpse()` and `summary()` command, where 300 rows are seen with no missing values.
+
+
+
+## Code to run McNemar's Test
+
+```{r}
+#| label: mcnemar_test
+
+# Running McNemar's Test
+result_mcnemar <- mcnemar.test(contingency_table_bc)
+
+result_mcnemar
+
+# It can also be run directly with a `table` function call
+mcnemar.test(table(bc_binary_radius$diagnosis, bc_binary_radius$radius_binary))
+```
+
+The output from the McNemar's test will show the Chi-Squared value, degrees of freedom (expected to be 1 as both categories only have 2 possible values), and the p-value.
+
+
+
+## Brief interpretation of the output
+
+The resulting p-value in this case is below 0.05, which indicates that the marginal probabilities between `radius_binary` and `diagnosis` are different (tumor radius may have an impact on wheter or not a tumor is malignant or benign).

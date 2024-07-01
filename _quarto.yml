@@ -36,6 +36,7 @@ book:
       chapters:
         - lessons/02_z-test_one_prop.qmd
         - lessons/02_wilcoxon_one_samp.qmd
+        - lessons/02_mcnemar_paired_samp.qmd
         - lessons/02_chiSq_GoF.qmd
         - lessons/02_transformations.qmd
         - lessons/02_fisher_exact_test.qmd
@@ -49,10 +50,11 @@ book:
 
     - part: 04_header_anova-and-regression.qmd
       chapters:
+        - lessons/04_anova_one_way.qmd
         - lessons_original/04_anova_two_way.qmd
         - lessons_original/04_anova_kruskal_wallis.qmd
         - lessons_original/04_anova_random_intercept.qmd
-        - lessons_original/04_correlation.qmd
+        - lessons/04_corr_cov.qmd
         - lessons_original/04_regression_ols.qmd
         - lessons_original/04_regression_mls.qmd
         - lessons_original/04_regression_polynomial.qmd
