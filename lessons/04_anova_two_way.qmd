@@ -150,7 +150,7 @@ library(tidyverse)
 
 # read in the crop data dataset downloaded from
 # https://www.scribbr.com/wp-content/uploads//2020/03/crop.data_.anova_.zip
-crop_data_df <- read_csv("data/04_crop_data.csv")
+crop_data_df <- read_csv("../data/04_crop_data.csv")
 
 ```
 

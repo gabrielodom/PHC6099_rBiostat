@@ -132,7 +132,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_anova_two_way.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons/04_anova_two_way.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -272,7 +272,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
+  <a href="../lessons/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
   </div>
 </li>
@@ -313,7 +313,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/04_anova_two_way.html" class="sidebar-item-text sidebar-link active">
+  <a href="../lessons/04_anova_two_way.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
   </div>
 </li>
@@ -325,8 +325,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Random Intercept Model</span></span></a>
+  <a href="../lessons/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -414,31 +414,36 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#two-way-anova" id="toc-two-way-anova" class="nav-link active" data-scroll-target="#two-way-anova"><span class="header-section-number">19.1</span> Two-way ANOVA</a></li>
+<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">19.1</span> Introduction</a></li>
   <li>
-<a href="#how-does-it-work" id="toc-how-does-it-work" class="nav-link" data-scroll-target="#how-does-it-work"><span class="header-section-number">19.2</span> How does it work?</a>
+<a href="#how-does-a-two-way-anova-work" id="toc-how-does-a-two-way-anova-work" class="nav-link" data-scroll-target="#how-does-a-two-way-anova-work"><span class="header-section-number">19.2</span> How Does a Two-Way ANOVA Work?</a>
   <ul class="collapse">
-<li><a href="#assumptions-needed" id="toc-assumptions-needed" class="nav-link" data-scroll-target="#assumptions-needed"><span class="header-section-number">19.2.1</span> Assumptions needed</a></li>
+<li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">19.2.1</span> Assumptions</a></li>
   </ul>
 </li>
+  <li><a href="#two-way-anova-table" id="toc-two-way-anova-table" class="nav-link" data-scroll-target="#two-way-anova-table"><span class="header-section-number">19.3</span> Two-Way ANOVA Table</a></li>
   <li>
-<a href="#two-way-anova-table" id="toc-two-way-anova-table" class="nav-link" data-scroll-target="#two-way-anova-table"><span class="header-section-number">19.3</span> Two-Way ANOVA Table</a>
+<a href="#crop-yield-two-way-anova-example" id="toc-crop-yield-two-way-anova-example" class="nav-link" data-scroll-target="#crop-yield-two-way-anova-example"><span class="header-section-number">19.4</span> Crop Yield Two-Way ANOVA Example</a>
   <ul class="collapse">
-<li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">19.3.1</span> Example</a></li>
-  <li><a href="#checking-for-homoscedasticity" id="toc-checking-for-homoscedasticity" class="nav-link" data-scroll-target="#checking-for-homoscedasticity"><span class="header-section-number">19.3.2</span> Checking for homoscedasticity</a></li>
+<li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><span class="header-section-number">19.4.1</span> Hypotheses</a></li>
+  <li><a href="#loading-libraries-and-data" id="toc-loading-libraries-and-data" class="nav-link" data-scroll-target="#loading-libraries-and-data"><span class="header-section-number">19.4.2</span> Loading Libraries and Data</a></li>
+  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration"><span class="header-section-number">19.4.3</span> Data Exploration</a></li>
+  <li><a href="#transform-treatment-factors-into-r-factors" id="toc-transform-treatment-factors-into-r-factors" class="nav-link" data-scroll-target="#transform-treatment-factors-into-r-factors"><span class="header-section-number">19.4.4</span> Transform Treatment Factors Into R Factors</a></li>
+  <li><a href="#performing-the-two-way-anova-with-interaction-and-blocking-variables" id="toc-performing-the-two-way-anova-with-interaction-and-blocking-variables" class="nav-link" data-scroll-target="#performing-the-two-way-anova-with-interaction-and-blocking-variables"><span class="header-section-number">19.4.5</span> Performing the Two-Way ANOVA with Interaction and Blocking Variables</a></li>
+  <li><a href="#checking-anova-assumptions" id="toc-checking-anova-assumptions" class="nav-link" data-scroll-target="#checking-anova-assumptions"><span class="header-section-number">19.4.6</span> Checking ANOVA Assumptions</a></li>
+  <li><a href="#two-way-anova---full-model-interpretation" id="toc-two-way-anova---full-model-interpretation" class="nav-link" data-scroll-target="#two-way-anova---full-model-interpretation"><span class="header-section-number">19.4.7</span> Two-Way ANOVA - Full Model Interpretation</a></li>
+  <li><a href="#two-way-anova---density-fertilizer-interaction" id="toc-two-way-anova---density-fertilizer-interaction" class="nav-link" data-scroll-target="#two-way-anova---density-fertilizer-interaction"><span class="header-section-number">19.4.8</span> Two-Way ANOVA - Density + Fertilizer + Interaction</a></li>
+  <li><a href="#two-way-anova---density-fertilizer" id="toc-two-way-anova---density-fertilizer" class="nav-link" data-scroll-target="#two-way-anova---density-fertilizer"><span class="header-section-number">19.4.9</span> Two-Way ANOVA - Density + Fertilizer</a></li>
   </ul>
 </li>
-  <li>
-<a href="#post-hoc-testing-tukey-hsd" id="toc-post-hoc-testing-tukey-hsd" class="nav-link" data-scroll-target="#post-hoc-testing-tukey-hsd"><span class="header-section-number">19.4</span> Post-hoc testing (Tukey HSD)</a>
-  <ul class="collapse">
-<li><a href="#summary-chart-of-crop-yield-data" id="toc-summary-chart-of-crop-yield-data" class="nav-link" data-scroll-target="#summary-chart-of-crop-yield-data"><span class="header-section-number">19.4.1</span> Summary Chart of Crop yield data</a></li>
-  </ul>
-</li>
-  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions"><span class="header-section-number">19.5</span> Conclusions</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/04_anova_two_way.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+  <li><a href="#determining-the-best-fitting-model-using-aic" id="toc-determining-the-best-fitting-model-using-aic" class="nav-link" data-scroll-target="#determining-the-best-fitting-model-using-aic"><span class="header-section-number">19.5</span> Determining the Best-Fitting Model Using AIC</a></li>
+  <li><a href="#post-hoc-testing-tukey-hsd" id="toc-post-hoc-testing-tukey-hsd" class="nav-link" data-scroll-target="#post-hoc-testing-tukey-hsd"><span class="header-section-number">19.6</span> Post-Hoc Testing (Tukey HSD)</a></li>
+  <li><a href="#anova-vs.-linear-regression" id="toc-anova-vs.-linear-regression" class="nav-link" data-scroll-target="#anova-vs.-linear-regression"><span class="header-section-number">19.7</span> ANOVA vs.&nbsp;Linear Regression</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions"><span class="header-section-number">19.8</span> Conclusions</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/04_anova_two_way.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_anova_two_way.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons/04_anova_two_way.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
 <span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span>
 </h1>
@@ -451,7 +456,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Patrice Lewis &amp; Julissa Martinez </p>
+             <p>Patrice Lewis, Julissa Martinez, &amp; Natalie Goulett </p>
           </div>
   </div>
     
@@ -467,33 +472,69 @@ window.Quarto = {
   
 
 
-</header><section id="two-way-anova" class="level2" data-number="19.1"><h2 data-number="19.1" class="anchored" data-anchor-id="two-way-anova">
-<span class="header-section-number">19.1</span> Two-way ANOVA</h2>
-<p>A two-way ANOVA is used to estimate how the mean of a quantitative variable changes according to the levels of two categorical variables.</p>
+</header><section id="introduction" class="level2" data-number="19.1"><h2 data-number="19.1" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">19.1</span> Introduction</h2>
+<p>The following two-way ANOVA lesson is based on <a href="https://www.scribbr.com/statistics/two-way-anova/">“Two-Way ANOVA | Examples &amp; When to Use It”</a>, a tutorial by Rebecca Bevans.</p>
+<p>A two-way ANOVA examines the influence of two or more independent categorical variables, also known as <strong>factors</strong>, on a continuous dependent variable. Each factor must have at least two <strong>levels</strong>, which are the groups within each factor being analyzed. In this lesson, we will see an example of how to test for these assumptions and how to conduct a type I two-way ANOVA once we know they have been met.</p>
+<p>An <strong>interaction</strong> occurs when the effect of one factor depends on the level of another factor. The two-way ANOVA method allows us to measure:</p>
+<ol type="1">
+<li><p><strong>Main Effects</strong> - the individual effect of one factor on the dependent variable, and</p></li>
+<li><p><strong>Interaction Effects</strong> - the extent to which the effects of one factor change across different levels of another factor.</p></li>
+</ol></section><section id="how-does-a-two-way-anova-work" class="level2" data-number="19.2"><h2 data-number="19.2" class="anchored" data-anchor-id="how-does-a-two-way-anova-work">
+<span class="header-section-number">19.2</span> How Does a Two-Way ANOVA Work?</h2>
+<p>The F test, a group-wise comparison test, is used in an ANOVA to determine statistical significance. The outcome of an F test, the <em>F</em> statistic, measures how different a groups’ variances are to the overall variance of the dependent variable. When the variance is higher between groups than within the group, the <em>F</em> statistic will be greater. A large <em>F</em> statistic suggests there’s a low likelihood that the observed difference is due to chance, and thus, the factor likely has an effect on the outcome.</p>
+<p>For comparison, a critical value is calculated based on the desired alpha (α) and degrees of freedom of all groups. If the <em>F</em> statistic is greater than the <em>F</em> critical value, the results are considered statistically significant. For example, if the <em>F</em> statistic is greater than the <em>F</em> critical value at α = 0.05, then the p-value will be less than 0.05. For a model with two factors, we can generate three <em>F</em> statistics and three associated p values to test three possible hypotheses:</p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Null Hypotheses
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
-<li><p>It is used to determine how independent (grouping) variables, in combination, affect a dependent (response) variable.</p></li>
-<li><p>Grouping variables are also called factors. Levels are the categories of each component.</p></li>
-</ul></section><section id="how-does-it-work" class="level2" data-number="19.2"><h2 data-number="19.2" class="anchored" data-anchor-id="how-does-it-work">
-<span class="header-section-number">19.2</span> How does it work?</h2>
-<p>The F test is used in ANOVA to determine statistical significance. The F test compares the variance in each group mean to the overall variance in the dependent variable because it is a group-wise comparison test.</p>
-<p>When the variance is higher between groups than within the groups, the F test value will be greater, and therefore a higher likelihood that the difference observed is real and not due to chance.</p>
-<p>There are three null hypotheses tested while doing a two-way ANOVA:</p>
-<ul>
-<li><p>There is no difference between the group means at any level of the first independent variable.</p></li>
-<li><p>There is no difference between the group means at any level of the second independent variable.</p></li>
-<li><p>The effect of one independent variable does not depend on the effect of the other independent variable (also viewed as no interaction effect),</p></li>
+<li>H0<sub>1</sub>: <em>The population means of the first factor are equal.</em>
+</li>
+<li>H0<sub>2</sub>: <em>The population means of the second factor are equal.</em>
+</li>
+<li>H0<sub>3</sub>: <em>There is no interaction effect, that is, the effect of one factor does not depend on the value of the other factor.</em>
+</li>
 </ul>
-<section id="assumptions-needed" class="level3" data-number="19.2.1"><h3 data-number="19.2.1" class="anchored" data-anchor-id="assumptions-needed">
-<span class="header-section-number">19.2.1</span> Assumptions needed</h3>
-<p>There are certain assumptions that must be considered before using a two-way ANOVA.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Alternative Hypotheses
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
-<li><p>Homogenuity of variance: The variances for each group should be roughly equal.</p></li>
-<li><p>Independence of observations: The observations in each group are independent of each other and the observations within groups were obtained by a random sample.</p></li>
-<li><p>Normally distributed: The response variable is approximately normally distributed for each group.</p></li>
+<li>HA<sub>1</sub>: <em>The population means of the first factor are not equal.</em>
+</li>
+<li>HA<sub>2</sub>: <em>The population means of the second factor are not equal.</em>
+</li>
+<li>HA<sub>3</sub>: <em>There is an interaction effect, that is, the effect of one factor depends on the value of the other factor.</em>
+</li>
 </ul>
-<p>Below we will see an example on how to test for these assumptions and how to conduct a two-way ANOVA test once we know they have been met.</p>
-</section></section><section id="two-way-anova-table" class="level2" data-number="19.3"><h2 data-number="19.3" class="anchored" data-anchor-id="two-way-anova-table">
+</div>
+</div>
+<section id="assumptions" class="level3" data-number="19.2.1"><h3 data-number="19.2.1" class="anchored" data-anchor-id="assumptions">
+<span class="header-section-number">19.2.1</span> Assumptions</h3>
+<p>Three assumptions must be met before conducting a two-way ANOVA:</p>
+<ul>
+<li><p><em>Homogeneity of variance:</em> The variances for each group should be roughly equal. If the groups do not have equal variances, a non-parametric test, such as the Kruskal-Wallis test, may be used.</p></li>
+<li><p><em>Independence of observations:</em> The observations in each group are independent of each other and the observations within groups were obtained by a random sample. This can be assumed to be true so long as the experiment is properly designed. If observations are grouped in categories, this effect should be accounted for with the use of a blocking variable or a repeated-measures ANOVA.</p></li>
+<li><p><em>Normally distributed dependent variable:</em> The values of the dependent variable should follow a normal distribution.</p></li>
+</ul></section></section><section id="two-way-anova-table" class="level2" data-number="19.3"><h2 data-number="19.3" class="anchored" data-anchor-id="two-way-anova-table">
 <span class="header-section-number">19.3</span> Two-Way ANOVA Table</h2>
+<p>The following table includes the calculations used in a two-way ANOVA. For more detailed information on these calculations, please read <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc438.htm">Models and Calculations for the Two-Way ANOVA</a>, a lesson by the National Institute of Standards and Technology.</p>
+<p>In the ANOVA table, the main effect A has <em>k</em> levels and the main effect B has <em>l</em> levels. N represents the total sample size.</p>
 <table class="table">
 <colgroup>
 <col style="width: 25%">
@@ -534,14 +575,14 @@ window.Quarto = {
 <tr class="even">
 <td>Error</td>
 <td><span class="math inline">\(SS_E\)</span></td>
-<td><span class="math inline">\(kl(m-1)\)</span></td>
+<td><span class="math inline">\(N - kl\)</span></td>
 <td><span class="math inline">\(MS_E\)</span></td>
 <td></td>
 </tr>
 <tr class="odd">
 <td>Total</td>
 <td><span class="math inline">\(SS_T\)</span></td>
-<td><span class="math inline">\(klm-1\)</span></td>
+<td><span class="math inline">\(N-1\)</span></td>
 <td></td>
 <td></td>
 </tr>
@@ -549,7 +590,7 @@ window.Quarto = {
 </table>
 <p>Where</p>
 <ol type="1">
-<li><span class="math display">\[ MS_E := \frac{SS_E}{kl(m-1)} \]</span></li>
+<li><span class="math display">\[ MS_E := \frac{SS_E}{N-kl} \]</span></li>
 <li><span class="math display">\[ MS_A := \frac{SS_A}{k-1} \text{ and } F_A := \frac{MS_A}{MS_E} \]</span></li>
 <li><span class="math display">\[ MS_B := \frac{SS_B}{l-1} \text{ and } F_B := \frac{MS_B}{MS_E} \]</span></li>
 <li><span class="math display">\[ MS_{AB} := \frac{SS_{AB}}{(k-1)(l-1)} \text{ and } F_{AB} := \frac{MS_{AB}}{MS_E} \]</span></li>
@@ -557,50 +598,107 @@ window.Quarto = {
 <p>We explain these components as:</p>
 <ul>
 <li>
-<span class="math inline">\(SS_A\)</span>: Factor <span class="math inline">\(A\)</span> main effect sums of squares with associated df <span class="math inline">\(k-1\)</span>
+<span class="math inline">\(SS_A\)</span>: Factor <span class="math inline">\(A\)</span> main effect sums of squares, df = <span class="math inline">\(k-1\)</span>
 </li>
 <li>
-<span class="math inline">\(SS_B\)</span>: Factor <span class="math inline">\(B\)</span> main effect sums of squares, with associated df <span class="math inline">\(l-1\)</span>
+<span class="math inline">\(SS_B\)</span>: Factor <span class="math inline">\(B\)</span> main effect sums of squares, df = <span class="math inline">\(l-1\)</span>
 </li>
 <li>
-<span class="math inline">\(SS_{AB}\)</span>: interaction sum of squares, with associated df <span class="math inline">\((k-1)(l-1)\)</span>
+<span class="math inline">\(SS_{AB}\)</span>: interaction sum of squares, df = <span class="math inline">\((k-1)(l-1)\)</span>
 </li>
 <li>
-<span class="math inline">\(SS_E\)</span>: error sum of squares with associated df <span class="math inline">\(kl(m-1)\)</span>
+<span class="math inline">\(SS_E\)</span>: error sum of squares, df = <span class="math inline">\(N-kl\)</span>
 </li>
 <li>
-<span class="math inline">\(SS_T\)</span>: Total sums of squares, associated with df <span class="math inline">\(klm-1\)</span>
+<span class="math inline">\(SS_T\)</span>: Total sums of squares, df = <span class="math inline">\(N-1\)</span>
+</li>
+</ul></section><section id="crop-yield-two-way-anova-example" class="level2" data-number="19.4"><h2 data-number="19.4" class="anchored" data-anchor-id="crop-yield-two-way-anova-example">
+<span class="header-section-number">19.4</span> Crop Yield Two-Way ANOVA Example</h2>
+<p>We will use the agricultural crop yield dataset from the <a href="https://www.scribbr.com/statistics/two-way-anova/">Two-Way ANOVA lesson</a> lesson in our example, which can be directly downloaded <a href="https://www.scribbr.com/wp-content/uploads//2020/03/crop.data_.anova_.zip">here</a>.</p>
+<p>In this example, corn was planted in one of four blocks within a field, in either high or low density, and fertilized with one of three types of fertilizer. Their yield in bushels per acre was then measured. The three factors of this experiment with their associated levels are:</p>
+<ol type="1">
+<li>Type of fertilizer (type 1, 2, or 3)</li>
+<li>Planting density (1 = low, 2 = high)</li>
+<li>Block number in the field (block 1, 2, 3, or 4)</li>
+</ol>
+<section id="hypotheses" class="level3" data-number="19.4.1"><h3 data-number="19.4.1" class="anchored" data-anchor-id="hypotheses">
+<span class="header-section-number">19.4.1</span> Hypotheses</h3>
+<p>Suppose we want to use a two-way ANOVA to examine whether the type of fertilizer and planting density (factors) have an effect on the average crop yield (dependent variable). To answer this question, the following three hypotheses will be tested:</p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Null Hypotheses
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>H0<sub>1</sub>: <em>Fertilizer type has no effect on average crop yield</em>
+</li>
+<li>H0<sub>2</sub>: <em>Planting density has no effect on average crop yield</em>
+</li>
+<li>H0<sub>3</sub>: <em>The effects of fertilizer type and planting density on average yield are independent of each other (no interaction exists)</em>
 </li>
 </ul>
-<section id="example" class="level3" data-number="19.3.1"><h3 data-number="19.3.1" class="anchored" data-anchor-id="example">
-<span class="header-section-number">19.3.1</span> Example</h3>
-<p>For this example, an agricultural crop yield dataset was sourced from <a href="https://www.scribbr.com/wp-content/uploads//2020/03/crop.data_.anova_.zip">Scribbr</a>.</p>
-<p>The dataset contains:</p>
-<ol type="1">
-<li>Type of fertilizer (1,2,3)</li>
-<li>Planting density (1 = low, 2 = high)</li>
-<li>Block number in the field (1,2,3,4)</li>
-</ol>
-<p>This two-way ANOVA will examine whether the type of fertilizer and planting density (independent variables) have an effect on the average crop yield (dependent variable).</p>
-<section id="loading-libraries-and-data" class="level4" data-number="19.3.1.1"><h4 data-number="19.3.1.1" class="anchored" data-anchor-id="loading-libraries-and-data">
-<span class="header-section-number">19.3.1.1</span> Loading Libraries and Data</h4>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Alternative Hypotheses
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>H1<sub>1</sub>: <em>Fertilizer type has an effect on average crop yield</em>
+</li>
+<li>H1<sub>2</sub>: <em>Planting density has an effect on average crop yield</em>
+</li>
+<li>H1<sub>3</sub>: <em>The effects of fertilizer type and planting density on average yield are not independent of each other (no interaction occurs)</em>
+</li>
+</ul>
+</div>
+</div>
+</section><section id="loading-libraries-and-data" class="level3" data-number="19.4.2"><h3 data-number="19.4.2" class="anchored" data-anchor-id="loading-libraries-and-data">
+<span class="header-section-number">19.4.2</span> Loading Libraries and Data</h3>
+<p>First, we will load our required packages and read in the crop yield dataset. The <code>tidyverse</code> package will be used to transform the data. The <code>tidymodels</code> and <code>gt</code> packages are necessary for creating presentation-ready tables of results. Finally, the <code>AICcmodavg</code> package will be used to construct an AIC table with which to compare our models (more on this later).</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># needed to create presentation ready table </span></span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Uncomment the following code to install required packages</span></span>
+<span></span>
+<span><span class="co"># gt and tidymodels used for presentation-ready table:</span></span>
+<span><span class="co"># install.packages("gt")</span></span>
+<span><span class="co"># install.packages("tidymodels")</span></span>
+<span></span>
+<span><span class="co"># AICcmodavg used for AIC table:</span></span>
+<span><span class="co"># install.packages("AICcmodavg")</span></span>
+<span></span>
+<span><span class="co"># tidyverse for data transformation:</span></span>
+<span><span class="co"># install.packages("tidyverse")</span></span>
+<span></span>
+<span><span class="co"># Load the required packages</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
-<span><span class="co"># needed to create presentation ready table </span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidymodels.tidymodels.org">tidymodels</a></span><span class="op">)</span></span>
-<span><span class="co"># needed to create AIC table to compare all three models </span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">AICcmodavg</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># read in the crop data dataset downloaded from</span></span>
+<span><span class="co"># https://www.scribbr.com/wp-content/uploads//2020/03/crop.data_.anova_.zip</span></span>
 <span><span class="va">crop_data_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"../data/04_crop_data.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="data-exploration" class="level4" data-number="19.3.1.2"><h4 data-number="19.3.1.2" class="anchored" data-anchor-id="data-exploration">
-<span class="header-section-number">19.3.1.2</span> Data Exploration</h4>
+</section><section id="data-exploration" class="level3" data-number="19.4.3"><h3 data-number="19.4.3" class="anchored" data-anchor-id="data-exploration">
+<span class="header-section-number">19.4.3</span> Data Exploration</h3>
+<p>The first few datapoints of the crop yield dataset were inspected and summary statistics were performed on the entire dataset to examine the structure, center, and spread of the data.</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># show first six rows of the dataset</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">crop_data_df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">crop_data_df</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># overview of summary statistics</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">crop_data_df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
   density block fertilizer yield
@@ -610,12 +708,8 @@ window.Quarto = {
 3       1     3          1  176.
 4       2     4          1  178.
 5       1     1          1  177.
-6       2     2          1  177.</code></pre>
-</div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># overview of summary statistics</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">crop_data_df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    density        block        fertilizer     yield      
+6       2     2          1  177.
+    density        block        fertilizer     yield      
  Min.   :1.0   Min.   :1.00   Min.   :1    Min.   :175.4  
  1st Qu.:1.0   1st Qu.:1.75   1st Qu.:1    1st Qu.:176.5  
  Median :1.5   Median :2.50   Median :2    Median :177.1  
@@ -624,17 +718,32 @@ window.Quarto = {
  Max.   :2.0   Max.   :4.00   Max.   :3    Max.   :179.1  </code></pre>
 </div>
 </div>
-<section id="boxplots" class="level5" data-number="19.3.1.2.1"><h5 data-number="19.3.1.2.1" class="anchored" data-anchor-id="boxplots">
-<span class="header-section-number">19.3.1.2.1</span> Boxplots</h5>
+</section><section id="transform-treatment-factors-into-r-factors" class="level3" data-number="19.4.4"><h3 data-number="19.4.4" class="anchored" data-anchor-id="transform-treatment-factors-into-r-factors">
+<span class="header-section-number">19.4.4</span> Transform Treatment Factors Into R Factors</h3>
+<p>Note that the <code>fertilizer</code>, <code>density</code>, and <code>block</code> vectors are read in as <code>numeric</code> class objects, so we must convert them to the <code>factor</code> class. We will also specify the reference groups for each factor: fertilizer 1, low density, and block 1. If not specified, reference groups are automatically assigned in alphabetical order.</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">plot_fertilizer</span> <span class="op">&lt;-</span> </span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># transform numeric vectors to factors and assign reference groups</span></span>
+<span><span class="va">crop_data_df</span><span class="op">$</span><span class="va">fertilizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">crop_data_df</span><span class="op">$</span><span class="va">fertilizer</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/relevel.html">relevel</a></span><span class="op">(</span>ref <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">crop_data_df</span><span class="op">$</span><span class="va">density</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">crop_data_df</span><span class="op">$</span><span class="va">density</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/relevel.html">relevel</a></span><span class="op">(</span>ref <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">crop_data_df</span><span class="op">$</span><span class="va">block</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">crop_data_df</span><span class="op">$</span><span class="va">block</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/relevel.html">relevel</a></span><span class="op">(</span>ref <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="boxplots-of-factors" class="level4" data-number="19.4.4.1"><h4 data-number="19.4.4.1" class="anchored" data-anchor-id="boxplots-of-factors">
+<span class="header-section-number">19.4.4.1</span> Boxplots of Factors</h4>
+<p>Box plots for each factor were created to further examine the spread and center of the data using <code>ggplot2</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># create box plot of yield by fertilizer</span></span>
+<span><span class="va">plot_fertilizer</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">crop_data_df</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
 <span>      x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">fertilizer</span><span class="op">)</span>,</span>
 <span>      y <span class="op">=</span> <span class="va">yield</span>,</span>
-<span>      color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">fertilizer</span><span class="op">)</span> </span>
+<span>      color <span class="op">=</span> <span class="va">fertilizer</span> </span>
 <span>    <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Crop Yield by Fertilizer Type"</span>,</span>
 <span>    x <span class="op">=</span> <span class="st">"Fertilizer Type"</span>,</span>
 <span>    y <span class="op">=</span> <span class="st">"Crop Yield"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
@@ -643,18 +752,20 @@ window.Quarto = {
 <span><span class="va">plot_fertilizer</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="04_anova_two_way_files/figure-html/box-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="04_anova_two_way_files/figure-html/factor-box-plots-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">plot_density</span> <span class="op">&lt;-</span> </span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># yield by density</span></span>
+<span><span class="va">plot_density</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">crop_data_df</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
 <span>      x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">density</span><span class="op">)</span>,</span>
 <span>      y <span class="op">=</span> <span class="va">yield</span>,</span>
-<span>      color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">density</span><span class="op">)</span></span>
+<span>      color <span class="op">=</span> <span class="va">density</span></span>
 <span>    <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Crop Yield by Planting Density"</span>,</span>
 <span>    x <span class="op">=</span> <span class="st">"Planting Density"</span>,</span>
 <span>    y <span class="op">=</span> <span class="st">"Crop Yield"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
@@ -663,65 +774,169 @@ window.Quarto = {
 <span><span class="va">plot_density</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="04_anova_two_way_files/figure-html/box-plot-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="04_anova_two_way_files/figure-html/factor-box-plots-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># yield by block</span></span>
+<span><span class="va">plot_block</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">crop_data_df</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
+<span>      x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">block</span><span class="op">)</span>,</span>
+<span>      y <span class="op">=</span> <span class="va">yield</span>,</span>
+<span>      color <span class="op">=</span> <span class="va">block</span> </span>
+<span>    <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Crop Yield by Block"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Block"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Crop Yield"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">plot_block</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="04_anova_two_way_files/figure-html/factor-box-plots-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section></section><section id="null" class="level4" data-number="19.3.1.3"><h4 data-number="19.3.1.3" class="anchored" data-anchor-id="null">
-<span class="header-section-number">19.3.1.3</span> Null</h4>
-<ul>
-<li><p>H0<sub>1</sub>: <em>There is no statistical difference in average yield for any fertilizer type</em></p></li>
-<li><p>H0<sub>2</sub>: <em>There is no difference in average yield between either planting density</em></p></li>
-<li><p>H0<sub>3</sub>: <em>The effect of fertilizer type on average yield is not dependent on the effect of planting density - no interaction effect</em></p></li>
-</ul></section><section id="alternative" class="level4" data-number="19.3.1.4"><h4 data-number="19.3.1.4" class="anchored" data-anchor-id="alternative">
-<span class="header-section-number">19.3.1.4</span> Alternative</h4>
-<ul>
-<li><p>H1<sub>1</sub>: <em>There is a difference in the average yield for fertilizer types</em></p></li>
-<li><p>H1<sub>2</sub>: <em>There is a difference in the average yield based on planting</em> density</p></li>
-<li><p>H1<sub>3</sub>: <em>There is an interaction effect between planting density and fertilizer type average yield</em></p></li>
-</ul></section><section id="performing-the-two-way-anova" class="level4" data-number="19.3.1.5"><h4 data-number="19.3.1.5" class="anchored" data-anchor-id="performing-the-two-way-anova">
-<span class="header-section-number">19.3.1.5</span> Performing the two-way ANOVA</h4>
-<p>First we want to test without interaction between the two independent variables for our first model. The code below is</p>
+<p>The data for each level appear to be approximately normally distributed with roughly equal variance and few outliers.</p>
+</section><section id="combined-boxplot-of-crop-yield-by-fertilizer-and-density" class="level4" data-number="19.4.4.2"><h4 data-number="19.4.4.2" class="anchored" data-anchor-id="combined-boxplot-of-crop-yield-by-fertilizer-and-density">
+<span class="header-section-number">19.4.4.2</span> Combined Boxplot of Crop Yield by Fertilizer and Density</h4>
+<p>To help visualize the data, a combined box plot visualizing the effects of fertilizer and density on average crop yield was created. The y-axis indicates the average crop yield. The x-axis is divided by fertilizer type (labeled at the top of the graph) and indicates the planting density for each level of the fertilizer factor.</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># converting into a factor for post-hoc assessment </span></span>
-<span><span class="va">crop_data_df</span><span class="op">$</span><span class="va">fertilizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">crop_data_df</span><span class="op">$</span><span class="va">fertilizer</span><span class="op">)</span></span>
-<span><span class="va">crop_data_df</span><span class="op">$</span><span class="va">density</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">crop_data_df</span><span class="op">$</span><span class="va">density</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">anova_plot</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">crop_data_df</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="va">density</span>, </span>
+<span>    y <span class="op">=</span> <span class="va">yield</span>, </span>
+<span>    group <span class="op">=</span> <span class="va">fertilizer</span>,</span>
+<span>    color <span class="op">=</span> <span class="va">fertilizer</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span></span>
+<span>    cex <span class="op">=</span> <span class="fl">1.5</span>, </span>
+<span>    pch <span class="op">=</span> <span class="fl">1.0</span>, </span>
+<span><span class="co"># set point positions to randomly jitter so points don't overlap</span></span>
+<span>    position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_jitter.html">position_jitter</a></span><span class="op">(</span>w <span class="op">=</span> <span class="fl">0.1</span>, h <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
 <span></span>
-<span><span class="co"># performing the two-way ANOVA</span></span>
-<span><span class="va">two_way</span> <span class="op">&lt;-</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">yield</span> <span class="op">~</span> <span class="va">fertilizer</span> <span class="op">+</span> <span class="va">density</span>, data <span class="op">=</span> <span class="va">crop_data_df</span><span class="op">)</span></span>
+<span><span class="va">anova_plot</span> <span class="op">&lt;-</span> <span class="va">anova_plot</span> <span class="op">+</span> </span>
+<span><span class="co"># compute summary stats to create error bars</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span></span>
+<span><span class="co"># set calculation for error bar parameters to mean_se</span></span>
+<span>    fun.data <span class="op">=</span> <span class="st">'mean_se'</span>,</span>
+<span>    geom <span class="op">=</span> <span class="st">'errorbar'</span>,</span>
+<span>    width <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"grey50"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span><span class="co"># create points for level means</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span></span>
+<span><span class="co"># set calculation for mean parameter to mean_se</span></span>
+<span>    fun.data <span class="op">=</span> <span class="st">'mean_se'</span>,</span>
+<span>    geom <span class="op">=</span> <span class="st">'pointrange'</span></span>
+<span>  <span class="op">)</span></span>
 <span></span>
-<span><span class="co"># creating a tidy table using gt</span></span>
-<span><span class="va">table_1</span> <span class="op">&lt;-</span> <span class="va">two_way</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">anova_plot</span> <span class="op">&lt;-</span> <span class="va">anova_plot</span> <span class="op">+</span></span>
+<span><span class="co"># create three boxplots side by side for each fertilizer level</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">fertilizer</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">anova_plot</span> <span class="op">&lt;-</span> <span class="va">anova_plot</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Crop Yield Averages by Fertilizer Types and Planting Density"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Planting Density (1 = low density, 2 = high density)"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Average Yield"</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">anova_plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="04_anova_two_way_files/figure-html/combined-box-plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The differing means for each level of fertilizer and density suggest that the factors have an effect on average yield. Before we can test whether these potential effects are statistically significant, we must first check that the data meet the ANOVA assumptions. To do this, we will generate a two-way ANOVA and run diagnostics on the model.</p>
+</section></section><section id="performing-the-two-way-anova-with-interaction-and-blocking-variables" class="level3" data-number="19.4.5"><h3 data-number="19.4.5" class="anchored" data-anchor-id="performing-the-two-way-anova-with-interaction-and-blocking-variables">
+<span class="header-section-number">19.4.5</span> Performing the Two-Way ANOVA with Interaction and Blocking Variables</h3>
+<p>Recall that the two-way ANOVA can actually account for more than two factors. The crops were planted across various <code>blocks</code> whose conditions may differ in terms sunlight, moisture, etc. This could possibly lead to confounding, so it is important to control for the possible effect of these differences by adding this third factor to our model.</p>
+<p>A two-way ANOVA was created to model the effects of fertilizer, density, the interaction between fertilizer and density, and the blocking factor. In the following code, the argument <code>fertilizer * density</code> is equivalent to <code>fertilizer + density + fertilizer : density</code>, where <code>fertilizer : density</code> represents the interaction term.</p>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Are your data balanced?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Because the crop data are <strong>balanced</strong> (the sample sizes across the levels within each factor are equal), we will use the base-R function <code><a href="https://rdrr.io/r/stats/aov.html">aov()</a></code>, which uses Type I sums of squares. If your data are <strong>unbalanced</strong>, use a different function to conduct a Type II ANOVA (for data with no significant interaction) or Type III ANOVA (for data with significant interaction).</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># performing two-way anova with fertilizer, density, fertilizer:density </span></span>
+<span><span class="co">#   interaction and blocking factor</span></span>
+<span><span class="va">full_model</span> <span class="op">&lt;-</span> </span>
+<span><span class="co"># 'fertilizer * density' = fertilizer + density + fertilizer:density interaction</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">yield</span> <span class="op">~</span> <span class="va">fertilizer</span> <span class="op">*</span> <span class="va">density</span> <span class="op">+</span> <span class="va">block</span>, data <span class="op">=</span> <span class="va">crop_data_df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="checking-anova-assumptions" class="level3" data-number="19.4.6"><h3 data-number="19.4.6" class="anchored" data-anchor-id="checking-anova-assumptions">
+<span class="header-section-number">19.4.6</span> Checking ANOVA Assumptions</h3>
+<p>We will now create diagnostic plots, which include a <strong>residuals vs fitted plot, scale-location plot, Q-Q plot,</strong> and <strong>constant leverage plot</strong>, to evaluate the homoscedasticity of our data. Please read <a href="https://library.virginia.edu/data/articles/diagnostic-plots">Understanding Diagnostic Plots for Linear Regression Analysis</a> for more information on these plots.</p>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># set plot parameter to display 2 x 2 plots in output</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># plot default diagnostic plots of full_model</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">full_model</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="04_anova_two_way_files/figure-html/diagnostic-plots-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># set plot parameter back to 1 x 1 format</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <strong>residual vs fitted plot</strong> shows the data are randomly spread about the “0” line with no large outliers, so we can assume the factors have equal variances. Similarly, the <strong>scale-location plot</strong> shows an approximately horizontal line with randomly spread points, indicating equal variances. Thus, the homoscedasticity assumption is met.</p>
+<p>The points of the <strong>Q-Q residuals plot</strong> roughly follow the reference line, indicating the data are normally distributed. We can conclude the normality assumption is met.</p>
+<p>The <strong>constant leverage plot</strong> displays a horizontal “0” value line with points randomly spread around it, indicating the spread of the points are the same at different levels. No points lie outside of the critical value lines (not visible in the graph due to scale), indicating no outliers exist that could skew the data.</p>
+</section><section id="two-way-anova---full-model-interpretation" class="level3" data-number="19.4.7"><h3 data-number="19.4.7" class="anchored" data-anchor-id="two-way-anova---full-model-interpretation">
+<span class="header-section-number">19.4.7</span> Two-Way ANOVA - Full Model Interpretation</h3>
+<p>Now that we have verified that the data satisfy the ANOVA assumptions, we may conduct the two-way ANOVA to test the hypotheses. Let’s interpret the results of the ANOVA of the full model:</p>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">table_full</span> <span class="op">&lt;-</span> <span class="va">full_model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="co"># turn model into data.frame of parameters</span></span>
 <span>  <span class="fu">tidy</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="co"># create gt table</span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># customizing table </span></span>
-<span><span class="va">table_1</span> <span class="op">|&gt;</span></span>
+<span><span class="co"># customizing gt table header</span></span>
+<span><span class="va">table_full</span> <span class="op">|&gt;</span></span>
 <span>   <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span></span>
-<span>      title <span class="op">=</span> <span class="st">"ANOVA Results"</span>,</span>
-<span>      subtitle <span class="op">=</span> <span class="st">"Two-way ANOVA for yield"</span></span>
+<span>      title <span class="op">=</span> <span class="st">"Two-Way ANOVA of Crop Yield - Full Model"</span>,</span>
+<span>      subtitle <span class="op">=</span> <span class="st">"for main full model (y ~ fertilizer * density + block)"</span></span>
 <span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="khqowjcjmp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#khqowjcjmp table {
+<div id="rrwbadklzt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rrwbadklzt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#khqowjcjmp thead, #khqowjcjmp tbody, #khqowjcjmp tfoot, #khqowjcjmp tr, #khqowjcjmp td, #khqowjcjmp th {
+#rrwbadklzt thead, #rrwbadklzt tbody, #rrwbadklzt tfoot, #rrwbadklzt tr, #rrwbadklzt td, #rrwbadklzt th {
   border-style: none;
 }
 
-#khqowjcjmp p {
+#rrwbadklzt p {
   margin: 0;
   padding: 0;
 }
 
-#khqowjcjmp .gt_table {
+#rrwbadklzt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -747,12 +962,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#khqowjcjmp .gt_caption {
+#rrwbadklzt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#khqowjcjmp .gt_title {
+#rrwbadklzt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -764,7 +979,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#khqowjcjmp .gt_subtitle {
+#rrwbadklzt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -776,7 +991,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#khqowjcjmp .gt_heading {
+#rrwbadklzt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -788,13 +1003,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#khqowjcjmp .gt_bottom_border {
+#rrwbadklzt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#khqowjcjmp .gt_col_headings {
+#rrwbadklzt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -809,7 +1024,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#khqowjcjmp .gt_col_heading {
+#rrwbadklzt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -829,7 +1044,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#khqowjcjmp .gt_column_spanner_outer {
+#rrwbadklzt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -841,15 +1056,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#khqowjcjmp .gt_column_spanner_outer:first-child {
+#rrwbadklzt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#khqowjcjmp .gt_column_spanner_outer:last-child {
+#rrwbadklzt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#khqowjcjmp .gt_column_spanner {
+#rrwbadklzt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -861,11 +1076,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#khqowjcjmp .gt_spanner_row {
+#rrwbadklzt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#khqowjcjmp .gt_group_heading {
+#rrwbadklzt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -891,7 +1106,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#khqowjcjmp .gt_empty_group_heading {
+#rrwbadklzt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -906,15 +1121,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#khqowjcjmp .gt_from_md > :first-child {
+#rrwbadklzt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#khqowjcjmp .gt_from_md > :last-child {
+#rrwbadklzt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#khqowjcjmp .gt_row {
+#rrwbadklzt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -933,7 +1148,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#khqowjcjmp .gt_stub {
+#rrwbadklzt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -946,7 +1161,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#khqowjcjmp .gt_stub_row_group {
+#rrwbadklzt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -960,15 +1175,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#khqowjcjmp .gt_row_group_first td {
+#rrwbadklzt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#khqowjcjmp .gt_row_group_first th {
+#rrwbadklzt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#khqowjcjmp .gt_summary_row {
+#rrwbadklzt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -978,16 +1193,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#khqowjcjmp .gt_first_summary_row {
+#rrwbadklzt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#khqowjcjmp .gt_first_summary_row.thick {
+#rrwbadklzt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#khqowjcjmp .gt_last_summary_row {
+#rrwbadklzt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -997,7 +1212,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#khqowjcjmp .gt_grand_summary_row {
+#rrwbadklzt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1007,7 +1222,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#khqowjcjmp .gt_first_grand_summary_row {
+#rrwbadklzt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1017,7 +1232,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#khqowjcjmp .gt_last_grand_summary_row_top {
+#rrwbadklzt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1027,11 +1242,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#khqowjcjmp .gt_striped {
+#rrwbadklzt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#khqowjcjmp .gt_table_body {
+#rrwbadklzt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1040,7 +1255,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#khqowjcjmp .gt_footnotes {
+#rrwbadklzt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1054,7 +1269,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#khqowjcjmp .gt_footnote {
+#rrwbadklzt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1063,7 +1278,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#khqowjcjmp .gt_sourcenotes {
+#rrwbadklzt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1077,7 +1292,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#khqowjcjmp .gt_sourcenote {
+#rrwbadklzt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1085,73 +1300,73 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#khqowjcjmp .gt_left {
+#rrwbadklzt .gt_left {
   text-align: left;
 }
 
-#khqowjcjmp .gt_center {
+#rrwbadklzt .gt_center {
   text-align: center;
 }
 
-#khqowjcjmp .gt_right {
+#rrwbadklzt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#khqowjcjmp .gt_font_normal {
+#rrwbadklzt .gt_font_normal {
   font-weight: normal;
 }
 
-#khqowjcjmp .gt_font_bold {
+#rrwbadklzt .gt_font_bold {
   font-weight: bold;
 }
 
-#khqowjcjmp .gt_font_italic {
+#rrwbadklzt .gt_font_italic {
   font-style: italic;
 }
 
-#khqowjcjmp .gt_super {
+#rrwbadklzt .gt_super {
   font-size: 65%;
 }
 
-#khqowjcjmp .gt_footnote_marks {
+#rrwbadklzt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#khqowjcjmp .gt_asterisk {
+#rrwbadklzt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#khqowjcjmp .gt_indent_1 {
+#rrwbadklzt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#khqowjcjmp .gt_indent_2 {
+#rrwbadklzt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#khqowjcjmp .gt_indent_3 {
+#rrwbadklzt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#khqowjcjmp .gt_indent_4 {
+#rrwbadklzt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#khqowjcjmp .gt_indent_5 {
+#rrwbadklzt .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="header gt_heading">
-<th colspan="6" class="gt_heading gt_title gt_font_normal">ANOVA Results</th>
+<th colspan="6" class="gt_heading gt_title gt_font_normal">Two-Way ANOVA of Crop Yield - Full Model</th>
 </tr>
 <tr class="odd gt_heading">
-<th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Two-way ANOVA for yield</th>
+<th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">for main full model (y ~ fertilizer * density + block)</th>
 </tr>
 <tr class="header gt_col_headings">
 <th id="term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">term</th>
@@ -1166,24 +1381,40 @@ window.Quarto = {
 <tr class="odd">
 <td class="gt_row gt_left" headers="term">fertilizer</td>
 <td class="gt_row gt_right" headers="df">2</td>
-<td class="gt_row gt_right" headers="sumsq">6.068047</td>
+<td class="gt_row gt_right" headers="sumsq">6.0680466</td>
 <td class="gt_row gt_right" headers="meansq">3.0340233</td>
-<td class="gt_row gt_right" headers="statistic">9.073123</td>
-<td class="gt_row gt_right" headers="p.value">0.0002532992</td>
+<td class="gt_row gt_right" headers="statistic">8.9443603</td>
+<td class="gt_row gt_right" headers="p.value">0.0002909717</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="term">density</td>
 <td class="gt_row gt_right" headers="df">1</td>
-<td class="gt_row gt_right" headers="sumsq">5.121681</td>
+<td class="gt_row gt_right" headers="sumsq">5.1216812</td>
 <td class="gt_row gt_right" headers="meansq">5.1216812</td>
-<td class="gt_row gt_right" headers="statistic">15.316179</td>
-<td class="gt_row gt_right" headers="p.value">0.0001741418</td>
+<td class="gt_row gt_right" headers="statistic">15.0988167</td>
+<td class="gt_row gt_right" headers="p.value">0.0001972614</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="term">block</td>
+<td class="gt_row gt_right" headers="df">2</td>
+<td class="gt_row gt_right" headers="sumsq">0.4861389</td>
+<td class="gt_row gt_right" headers="meansq">0.2430695</td>
+<td class="gt_row gt_right" headers="statistic">0.7165735</td>
+<td class="gt_row gt_right" headers="p.value">0.4912504731</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="term">fertilizer:density</td>
+<td class="gt_row gt_right" headers="df">2</td>
+<td class="gt_row gt_right" headers="sumsq">0.4278183</td>
+<td class="gt_row gt_right" headers="meansq">0.2139091</td>
+<td class="gt_row gt_right" headers="statistic">0.6306083</td>
+<td class="gt_row gt_right" headers="p.value">0.5346558069</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="term">Residuals</td>
-<td class="gt_row gt_right" headers="df">92</td>
-<td class="gt_row gt_right" headers="sumsq">30.764505</td>
-<td class="gt_row gt_right" headers="meansq">0.3343968</td>
+<td class="gt_row gt_right" headers="df">88</td>
+<td class="gt_row gt_right" headers="sumsq">29.8505477</td>
+<td class="gt_row gt_right" headers="meansq">0.3392108</td>
 <td class="gt_row gt_right" headers="statistic">NA</td>
 <td class="gt_row gt_right" headers="p.value">NA</td>
 </tr>
@@ -1193,42 +1424,47 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>We also want to test a model that shows interaction between the two independent variables.</p>
+<p>The block variable’s p value of p = 0.49 and the interaction term’s p value of p = 0.53 are not significant at the α = 0.05 level. Hence, neither have a statistically significant effect on the crop yield. Because they do not add information to the model, They may be removed from the final model.</p>
+</section><section id="two-way-anova---density-fertilizer-interaction" class="level3" data-number="19.4.8"><h3 data-number="19.4.8" class="anchored" data-anchor-id="two-way-anova---density-fertilizer-interaction">
+<span class="header-section-number">19.4.8</span> Two-Way ANOVA - Density + Fertilizer + Interaction</h3>
+<p>We will now run a two-way ANOVA on a new model using the density, fertilizer, and interaction factors to investigate whether these terms are significant.</p>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># performing the two-way ANOVA with interaction </span></span>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># performing the two-way ANOVA with interaction</span></span>
 <span><span class="va">interaction</span> <span class="op">&lt;-</span> </span>
+<span><span class="co"># 'fertilizer * density' = fertilizer + density + fertilizer:density interaction</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">yield</span> <span class="op">~</span> <span class="va">fertilizer</span> <span class="op">*</span> <span class="va">density</span>, data <span class="op">=</span> <span class="va">crop_data_df</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># creating a tidy table using gt</span></span>
-<span><span class="va">table_int</span> <span class="op">&lt;-</span> <span class="va">interaction</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">table_int</span> <span class="op">&lt;-</span> <span class="va">interaction</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="co"># turn model into data.frame of parameters</span></span>
 <span>  <span class="fu">tidy</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="co"># create gt table</span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># customizing table </span></span>
+<span><span class="co"># customizing table header</span></span>
 <span><span class="va">table_int</span> <span class="op">|&gt;</span></span>
 <span>   <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span></span>
-<span>      title <span class="op">=</span> <span class="st">"ANOVA Results"</span>,</span>
-<span>      subtitle <span class="op">=</span> <span class="st">"Two-way ANOVA for yield with interaction term"</span></span>
+<span>      title <span class="op">=</span> <span class="st">"Two-way ANOVA of Crop Yield - Interaction Model"</span>,</span>
+<span>      subtitle <span class="op">=</span> <span class="st">"for interaction model (y ~ fertilizer * density)"</span></span>
 <span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="ajrfjlnjjw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ajrfjlnjjw table {
+<div id="fmyifedihe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fmyifedihe table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ajrfjlnjjw thead, #ajrfjlnjjw tbody, #ajrfjlnjjw tfoot, #ajrfjlnjjw tr, #ajrfjlnjjw td, #ajrfjlnjjw th {
+#fmyifedihe thead, #fmyifedihe tbody, #fmyifedihe tfoot, #fmyifedihe tr, #fmyifedihe td, #fmyifedihe th {
   border-style: none;
 }
 
-#ajrfjlnjjw p {
+#fmyifedihe p {
   margin: 0;
   padding: 0;
 }
 
-#ajrfjlnjjw .gt_table {
+#fmyifedihe .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1254,12 +1490,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#ajrfjlnjjw .gt_caption {
+#fmyifedihe .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ajrfjlnjjw .gt_title {
+#fmyifedihe .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1271,7 +1507,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#ajrfjlnjjw .gt_subtitle {
+#fmyifedihe .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1283,7 +1519,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#ajrfjlnjjw .gt_heading {
+#fmyifedihe .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1295,13 +1531,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ajrfjlnjjw .gt_bottom_border {
+#fmyifedihe .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ajrfjlnjjw .gt_col_headings {
+#fmyifedihe .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1316,7 +1552,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ajrfjlnjjw .gt_col_heading {
+#fmyifedihe .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1336,7 +1572,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ajrfjlnjjw .gt_column_spanner_outer {
+#fmyifedihe .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1348,15 +1584,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#ajrfjlnjjw .gt_column_spanner_outer:first-child {
+#fmyifedihe .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ajrfjlnjjw .gt_column_spanner_outer:last-child {
+#fmyifedihe .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ajrfjlnjjw .gt_column_spanner {
+#fmyifedihe .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1368,11 +1604,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#ajrfjlnjjw .gt_spanner_row {
+#fmyifedihe .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ajrfjlnjjw .gt_group_heading {
+#fmyifedihe .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1398,7 +1634,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#ajrfjlnjjw .gt_empty_group_heading {
+#fmyifedihe .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1413,15 +1649,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#ajrfjlnjjw .gt_from_md > :first-child {
+#fmyifedihe .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ajrfjlnjjw .gt_from_md > :last-child {
+#fmyifedihe .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ajrfjlnjjw .gt_row {
+#fmyifedihe .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1440,7 +1676,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ajrfjlnjjw .gt_stub {
+#fmyifedihe .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1453,7 +1689,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ajrfjlnjjw .gt_stub_row_group {
+#fmyifedihe .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1467,15 +1703,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#ajrfjlnjjw .gt_row_group_first td {
+#fmyifedihe .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ajrfjlnjjw .gt_row_group_first th {
+#fmyifedihe .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ajrfjlnjjw .gt_summary_row {
+#fmyifedihe .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1485,16 +1721,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ajrfjlnjjw .gt_first_summary_row {
+#fmyifedihe .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ajrfjlnjjw .gt_first_summary_row.thick {
+#fmyifedihe .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ajrfjlnjjw .gt_last_summary_row {
+#fmyifedihe .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1504,7 +1740,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ajrfjlnjjw .gt_grand_summary_row {
+#fmyifedihe .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1514,7 +1750,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ajrfjlnjjw .gt_first_grand_summary_row {
+#fmyifedihe .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1524,7 +1760,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#ajrfjlnjjw .gt_last_grand_summary_row_top {
+#fmyifedihe .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1534,11 +1770,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ajrfjlnjjw .gt_striped {
+#fmyifedihe .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ajrfjlnjjw .gt_table_body {
+#fmyifedihe .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1547,7 +1783,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ajrfjlnjjw .gt_footnotes {
+#fmyifedihe .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1561,7 +1797,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ajrfjlnjjw .gt_footnote {
+#fmyifedihe .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1570,7 +1806,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ajrfjlnjjw .gt_sourcenotes {
+#fmyifedihe .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1584,7 +1820,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ajrfjlnjjw .gt_sourcenote {
+#fmyifedihe .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1592,73 +1828,73 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ajrfjlnjjw .gt_left {
+#fmyifedihe .gt_left {
   text-align: left;
 }
 
-#ajrfjlnjjw .gt_center {
+#fmyifedihe .gt_center {
   text-align: center;
 }
 
-#ajrfjlnjjw .gt_right {
+#fmyifedihe .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ajrfjlnjjw .gt_font_normal {
+#fmyifedihe .gt_font_normal {
   font-weight: normal;
 }
 
-#ajrfjlnjjw .gt_font_bold {
+#fmyifedihe .gt_font_bold {
   font-weight: bold;
 }
 
-#ajrfjlnjjw .gt_font_italic {
+#fmyifedihe .gt_font_italic {
   font-style: italic;
 }
 
-#ajrfjlnjjw .gt_super {
+#fmyifedihe .gt_super {
   font-size: 65%;
 }
 
-#ajrfjlnjjw .gt_footnote_marks {
+#fmyifedihe .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ajrfjlnjjw .gt_asterisk {
+#fmyifedihe .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ajrfjlnjjw .gt_indent_1 {
+#fmyifedihe .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ajrfjlnjjw .gt_indent_2 {
+#fmyifedihe .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ajrfjlnjjw .gt_indent_3 {
+#fmyifedihe .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ajrfjlnjjw .gt_indent_4 {
+#fmyifedihe .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ajrfjlnjjw .gt_indent_5 {
+#fmyifedihe .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="header gt_heading">
-<th colspan="6" class="gt_heading gt_title gt_font_normal">ANOVA Results</th>
+<th colspan="6" class="gt_heading gt_title gt_font_normal">Two-way ANOVA of Crop Yield - Interaction Model</th>
 </tr>
 <tr class="odd gt_heading">
-<th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Two-way ANOVA for yield with interaction term</th>
+<th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">for interaction model (y ~ fertilizer * density)</th>
 </tr>
 <tr class="header gt_col_headings">
 <th id="term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">term</th>
@@ -1708,46 +1944,46 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>The p-value for both independent variables are less than 0.05, therefore we reject the null hypotheses (H0<sub>1</sub> and H0<sub>2</sub>).</p>
-<p>The p value for the interaction term is greater than 0.05, hence we fail to reject the null hypothesis (H0<sub>3</sub>). Hence not much variation can be explained by the interaction term.</p>
-</section><section id="blocking-variable---3rd-model" class="level4" data-number="19.3.1.6"><h4 data-number="19.3.1.6" class="anchored" data-anchor-id="blocking-variable---3rd-model">
-<span class="header-section-number">19.3.1.6</span> Blocking Variable - 3rd Model</h4>
-<p>The crops were planted in across various <code>blocks</code> that may differ in other factors such as sunlight, moisture etc. This could possibly lead to confounding. Therefore it is important to control for the effect of differences between blocks by adding the third variable to our tests.</p>
+<p>The p value for the interaction term is greater than 0.05, hence we fail to reject the null hypothesis (H0<sub>3</sub>) and conclude that there is no statistically significant interaction effect between fertilizer type and crop density on average yield. The interaction term should also be removed from the model.</p>
+</section><section id="two-way-anova---density-fertilizer" class="level3" data-number="19.4.9"><h3 data-number="19.4.9" class="anchored" data-anchor-id="two-way-anova---density-fertilizer">
+<span class="header-section-number">19.4.9</span> Two-Way ANOVA - Density + Fertilizer</h3>
+<p>Because the interaction term was not significant, we will remove it from our model and perform a two-way ANOVA on a model with only the density and fertilizer factors.</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># performing two-way anova with interaction and blocking</span></span>
-<span><span class="va">blocking</span> <span class="op">&lt;-</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">yield</span> <span class="op">~</span> <span class="va">fertilizer</span> <span class="op">*</span> <span class="va">density</span> <span class="op">+</span> <span class="va">block</span>, data <span class="op">=</span> <span class="va">crop_data_df</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># performing the two-way ANOVA without the interaction term</span></span>
+<span><span class="va">main_effects</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">yield</span> <span class="op">~</span> <span class="va">fertilizer</span> <span class="op">+</span> <span class="va">density</span>, data <span class="op">=</span> <span class="va">crop_data_df</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># creating a tidy table using gt </span></span>
-<span><span class="va">table_block</span> <span class="op">&lt;-</span> <span class="va">blocking</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu">tidy</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">table_main</span> <span class="op">&lt;-</span> <span class="va">main_effects</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="co"># turn model into data.frame of parameters</span></span>
+<span>  <span class="fu">tidy</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="co"># create gt table</span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># customizes gt table</span></span>
-<span><span class="va">table_block</span> <span class="op">|&gt;</span></span>
+<span><span class="co"># customizing table header</span></span>
+<span><span class="va">table_main</span> <span class="op">|&gt;</span></span>
 <span>   <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span></span>
-<span>      title <span class="op">=</span> <span class="st">"Two- way ANOVA Results"</span>,</span>
-<span>      subtitle <span class="op">=</span> <span class="st">"with interaction term &amp; blocking variable"</span></span>
-<span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>      title <span class="op">=</span> <span class="st">"Two-Way ANOVA of Crop Yield - Main Effects Model"</span>,</span>
+<span>      subtitle <span class="op">=</span> <span class="st">"for main effects model (y ~ fertilizer + density)"</span></span>
+<span>   <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="pgmivoyuop" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#pgmivoyuop table {
+<div id="bhdfgiylyx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bhdfgiylyx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pgmivoyuop thead, #pgmivoyuop tbody, #pgmivoyuop tfoot, #pgmivoyuop tr, #pgmivoyuop td, #pgmivoyuop th {
+#bhdfgiylyx thead, #bhdfgiylyx tbody, #bhdfgiylyx tfoot, #bhdfgiylyx tr, #bhdfgiylyx td, #bhdfgiylyx th {
   border-style: none;
 }
 
-#pgmivoyuop p {
+#bhdfgiylyx p {
   margin: 0;
   padding: 0;
 }
 
-#pgmivoyuop .gt_table {
+#bhdfgiylyx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1773,12 +2009,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#pgmivoyuop .gt_caption {
+#bhdfgiylyx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pgmivoyuop .gt_title {
+#bhdfgiylyx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1790,7 +2026,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#pgmivoyuop .gt_subtitle {
+#bhdfgiylyx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1802,7 +2038,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#pgmivoyuop .gt_heading {
+#bhdfgiylyx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1814,13 +2050,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#pgmivoyuop .gt_bottom_border {
+#bhdfgiylyx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pgmivoyuop .gt_col_headings {
+#bhdfgiylyx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1835,7 +2071,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#pgmivoyuop .gt_col_heading {
+#bhdfgiylyx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1855,7 +2091,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#pgmivoyuop .gt_column_spanner_outer {
+#bhdfgiylyx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1867,15 +2103,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#pgmivoyuop .gt_column_spanner_outer:first-child {
+#bhdfgiylyx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pgmivoyuop .gt_column_spanner_outer:last-child {
+#bhdfgiylyx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pgmivoyuop .gt_column_spanner {
+#bhdfgiylyx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1887,11 +2123,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#pgmivoyuop .gt_spanner_row {
+#bhdfgiylyx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pgmivoyuop .gt_group_heading {
+#bhdfgiylyx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1917,7 +2153,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#pgmivoyuop .gt_empty_group_heading {
+#bhdfgiylyx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1932,15 +2168,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#pgmivoyuop .gt_from_md > :first-child {
+#bhdfgiylyx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pgmivoyuop .gt_from_md > :last-child {
+#bhdfgiylyx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pgmivoyuop .gt_row {
+#bhdfgiylyx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1959,7 +2195,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#pgmivoyuop .gt_stub {
+#bhdfgiylyx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1972,7 +2208,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pgmivoyuop .gt_stub_row_group {
+#bhdfgiylyx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1986,15 +2222,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#pgmivoyuop .gt_row_group_first td {
+#bhdfgiylyx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pgmivoyuop .gt_row_group_first th {
+#bhdfgiylyx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pgmivoyuop .gt_summary_row {
+#bhdfgiylyx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2004,16 +2240,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pgmivoyuop .gt_first_summary_row {
+#bhdfgiylyx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pgmivoyuop .gt_first_summary_row.thick {
+#bhdfgiylyx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pgmivoyuop .gt_last_summary_row {
+#bhdfgiylyx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2023,7 +2259,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#pgmivoyuop .gt_grand_summary_row {
+#bhdfgiylyx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2033,7 +2269,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pgmivoyuop .gt_first_grand_summary_row {
+#bhdfgiylyx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2043,7 +2279,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#pgmivoyuop .gt_last_grand_summary_row_top {
+#bhdfgiylyx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2053,11 +2289,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#pgmivoyuop .gt_striped {
+#bhdfgiylyx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pgmivoyuop .gt_table_body {
+#bhdfgiylyx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2066,7 +2302,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#pgmivoyuop .gt_footnotes {
+#bhdfgiylyx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2080,7 +2316,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#pgmivoyuop .gt_footnote {
+#bhdfgiylyx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2089,7 +2325,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pgmivoyuop .gt_sourcenotes {
+#bhdfgiylyx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2103,7 +2339,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#pgmivoyuop .gt_sourcenote {
+#bhdfgiylyx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2111,73 +2347,73 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#pgmivoyuop .gt_left {
+#bhdfgiylyx .gt_left {
   text-align: left;
 }
 
-#pgmivoyuop .gt_center {
+#bhdfgiylyx .gt_center {
   text-align: center;
 }
 
-#pgmivoyuop .gt_right {
+#bhdfgiylyx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pgmivoyuop .gt_font_normal {
+#bhdfgiylyx .gt_font_normal {
   font-weight: normal;
 }
 
-#pgmivoyuop .gt_font_bold {
+#bhdfgiylyx .gt_font_bold {
   font-weight: bold;
 }
 
-#pgmivoyuop .gt_font_italic {
+#bhdfgiylyx .gt_font_italic {
   font-style: italic;
 }
 
-#pgmivoyuop .gt_super {
+#bhdfgiylyx .gt_super {
   font-size: 65%;
 }
 
-#pgmivoyuop .gt_footnote_marks {
+#bhdfgiylyx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pgmivoyuop .gt_asterisk {
+#bhdfgiylyx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pgmivoyuop .gt_indent_1 {
+#bhdfgiylyx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pgmivoyuop .gt_indent_2 {
+#bhdfgiylyx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pgmivoyuop .gt_indent_3 {
+#bhdfgiylyx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pgmivoyuop .gt_indent_4 {
+#bhdfgiylyx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pgmivoyuop .gt_indent_5 {
+#bhdfgiylyx .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="header gt_heading">
-<th colspan="6" class="gt_heading gt_title gt_font_normal">Two- way ANOVA Results</th>
+<th colspan="6" class="gt_heading gt_title gt_font_normal">Two-Way ANOVA of Crop Yield - Main Effects Model</th>
 </tr>
 <tr class="odd gt_heading">
-<th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">with interaction term &amp; blocking variable</th>
+<th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">for main effects model (y ~ fertilizer + density)</th>
 </tr>
 <tr class="header gt_col_headings">
 <th id="term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">term</th>
@@ -2192,40 +2428,24 @@ window.Quarto = {
 <tr class="odd">
 <td class="gt_row gt_left" headers="term">fertilizer</td>
 <td class="gt_row gt_right" headers="df">2</td>
-<td class="gt_row gt_right" headers="sumsq">6.0680466</td>
+<td class="gt_row gt_right" headers="sumsq">6.068047</td>
 <td class="gt_row gt_right" headers="meansq">3.0340233</td>
-<td class="gt_row gt_right" headers="statistic">9.0459852</td>
-<td class="gt_row gt_right" headers="p.value">0.0002652607</td>
+<td class="gt_row gt_right" headers="statistic">9.073123</td>
+<td class="gt_row gt_right" headers="p.value">0.0002532992</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="term">density</td>
 <td class="gt_row gt_right" headers="df">1</td>
-<td class="gt_row gt_right" headers="sumsq">5.1216812</td>
+<td class="gt_row gt_right" headers="sumsq">5.121681</td>
 <td class="gt_row gt_right" headers="meansq">5.1216812</td>
-<td class="gt_row gt_right" headers="statistic">15.2703680</td>
-<td class="gt_row gt_right" headers="p.value">0.0001813274</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="term">block</td>
-<td class="gt_row gt_right" headers="df">1</td>
-<td class="gt_row gt_right" headers="sumsq">0.4860877</td>
-<td class="gt_row gt_right" headers="meansq">0.4860877</td>
-<td class="gt_row gt_right" headers="statistic">1.4492776</td>
-<td class="gt_row gt_right" headers="p.value">0.2318360383</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="term">fertilizer:density</td>
-<td class="gt_row gt_right" headers="df">2</td>
-<td class="gt_row gt_right" headers="sumsq">0.4278183</td>
-<td class="gt_row gt_right" headers="meansq">0.2139091</td>
-<td class="gt_row gt_right" headers="statistic">0.6377732</td>
-<td class="gt_row gt_right" headers="p.value">0.5308657318</td>
+<td class="gt_row gt_right" headers="statistic">15.316179</td>
+<td class="gt_row gt_right" headers="p.value">0.0001741418</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="term">Residuals</td>
-<td class="gt_row gt_right" headers="df">89</td>
-<td class="gt_row gt_right" headers="sumsq">29.8505990</td>
-<td class="gt_row gt_right" headers="meansq">0.3354000</td>
+<td class="gt_row gt_right" headers="df">92</td>
+<td class="gt_row gt_right" headers="sumsq">30.764505</td>
+<td class="gt_row gt_right" headers="meansq">0.3343968</td>
 <td class="gt_row gt_right" headers="statistic">NA</td>
 <td class="gt_row gt_right" headers="p.value">NA</td>
 </tr>
@@ -2235,40 +2455,43 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>For the block variable the sum of squares is low and the p value is greater than 0.05. Hence not much information is added to the model. The sum of square for both independent variables also remain unchanged.</p>
-</section><section id="determining-the-best-fit-model" class="level4" data-number="19.3.1.7"><h4 data-number="19.3.1.7" class="anchored" data-anchor-id="determining-the-best-fit-model">
-<span class="header-section-number">19.3.1.7</span> Determining the Best Fit Model</h4>
-<p>The Akaike information criterion (AIC) can be used to determine the best model. AIC balances the variation explained by the number of parameters used to calculate the information value of each model. The lower the AIC value, the more information explained.</p>
+<p>Without the interaction term, we see that the p values for both fertilizer type and planting density are significant at the α = 0.05 level. Thus, we reject null hypotheses H0<sub>1</sub> and H0<sub>2</sub> and conclude that both fertilizer and density have a statistically significant main effect on crop yield.</p>
+</section></section><section id="determining-the-best-fitting-model-using-aic" class="level2" data-number="19.5"><h2 data-number="19.5" class="anchored" data-anchor-id="determining-the-best-fitting-model-using-aic">
+<span class="header-section-number">19.5</span> Determining the Best-Fitting Model Using AIC</h2>
+<p>The Akaike information criterion (AIC) is another method that can be used to determine the model that best fits the data. The model that explains the greatest amount of the variation in the data using the fewest possible independent variables is considered the best-fitting model. The lower the AIC value, the more variation is explained by the model.</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">model_set</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">two_way</span>, <span class="va">interaction</span>, <span class="va">blocking</span><span class="op">)</span></span>
-<span><span class="va">model_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"two_way"</span>, <span class="st">"interaction"</span>, <span class="st">"blocking"</span><span class="op">)</span></span>
-<span> </span>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># creating a list of models to compare and their respective names</span></span>
+<span><span class="va">model_set</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">main_effects</span>, <span class="va">interaction</span>, <span class="va">full_model</span><span class="op">)</span></span>
+<span><span class="va">model_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"main_effects"</span>, <span class="st">"interaction"</span>, <span class="st">"full_model"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># using AICtab to compare models </span></span>
 <span><span class="va">gt_fmt</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/AICcmodavg/man/aictab.html">aictab</a></span><span class="op">(</span><span class="va">model_set</span>, modnames <span class="op">=</span> <span class="va">model_names</span><span class="op">)</span> </span>
 <span></span>
+<span><span class="co"># create gt table using AIC</span></span>
 <span><span class="va">gt_print</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="va">gt_fmt</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">gt_print</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="ncywechsds" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ncywechsds table {
+<div id="zyrkytyhco" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zyrkytyhco table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ncywechsds thead, #ncywechsds tbody, #ncywechsds tfoot, #ncywechsds tr, #ncywechsds td, #ncywechsds th {
+#zyrkytyhco thead, #zyrkytyhco tbody, #zyrkytyhco tfoot, #zyrkytyhco tr, #zyrkytyhco td, #zyrkytyhco th {
   border-style: none;
 }
 
-#ncywechsds p {
+#zyrkytyhco p {
   margin: 0;
   padding: 0;
 }
 
-#ncywechsds .gt_table {
+#zyrkytyhco .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2294,12 +2517,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#ncywechsds .gt_caption {
+#zyrkytyhco .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ncywechsds .gt_title {
+#zyrkytyhco .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2311,7 +2534,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#ncywechsds .gt_subtitle {
+#zyrkytyhco .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2323,7 +2546,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#ncywechsds .gt_heading {
+#zyrkytyhco .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2335,13 +2558,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ncywechsds .gt_bottom_border {
+#zyrkytyhco .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ncywechsds .gt_col_headings {
+#zyrkytyhco .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2356,7 +2579,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ncywechsds .gt_col_heading {
+#zyrkytyhco .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2376,7 +2599,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ncywechsds .gt_column_spanner_outer {
+#zyrkytyhco .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2388,15 +2611,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#ncywechsds .gt_column_spanner_outer:first-child {
+#zyrkytyhco .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ncywechsds .gt_column_spanner_outer:last-child {
+#zyrkytyhco .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ncywechsds .gt_column_spanner {
+#zyrkytyhco .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2408,11 +2631,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#ncywechsds .gt_spanner_row {
+#zyrkytyhco .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ncywechsds .gt_group_heading {
+#zyrkytyhco .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2438,7 +2661,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#ncywechsds .gt_empty_group_heading {
+#zyrkytyhco .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2453,15 +2676,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#ncywechsds .gt_from_md > :first-child {
+#zyrkytyhco .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ncywechsds .gt_from_md > :last-child {
+#zyrkytyhco .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ncywechsds .gt_row {
+#zyrkytyhco .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2480,7 +2703,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ncywechsds .gt_stub {
+#zyrkytyhco .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2493,7 +2716,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ncywechsds .gt_stub_row_group {
+#zyrkytyhco .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2507,15 +2730,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#ncywechsds .gt_row_group_first td {
+#zyrkytyhco .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ncywechsds .gt_row_group_first th {
+#zyrkytyhco .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ncywechsds .gt_summary_row {
+#zyrkytyhco .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2525,16 +2748,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ncywechsds .gt_first_summary_row {
+#zyrkytyhco .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ncywechsds .gt_first_summary_row.thick {
+#zyrkytyhco .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ncywechsds .gt_last_summary_row {
+#zyrkytyhco .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2544,7 +2767,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ncywechsds .gt_grand_summary_row {
+#zyrkytyhco .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2554,7 +2777,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ncywechsds .gt_first_grand_summary_row {
+#zyrkytyhco .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2564,7 +2787,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#ncywechsds .gt_last_grand_summary_row_top {
+#zyrkytyhco .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2574,11 +2797,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ncywechsds .gt_striped {
+#zyrkytyhco .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ncywechsds .gt_table_body {
+#zyrkytyhco .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2587,7 +2810,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ncywechsds .gt_footnotes {
+#zyrkytyhco .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2601,7 +2824,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ncywechsds .gt_footnote {
+#zyrkytyhco .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2610,7 +2833,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ncywechsds .gt_sourcenotes {
+#zyrkytyhco .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2624,7 +2847,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ncywechsds .gt_sourcenote {
+#zyrkytyhco .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2632,63 +2855,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ncywechsds .gt_left {
+#zyrkytyhco .gt_left {
   text-align: left;
 }
 
-#ncywechsds .gt_center {
+#zyrkytyhco .gt_center {
   text-align: center;
 }
 
-#ncywechsds .gt_right {
+#zyrkytyhco .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ncywechsds .gt_font_normal {
+#zyrkytyhco .gt_font_normal {
   font-weight: normal;
 }
 
-#ncywechsds .gt_font_bold {
+#zyrkytyhco .gt_font_bold {
   font-weight: bold;
 }
 
-#ncywechsds .gt_font_italic {
+#zyrkytyhco .gt_font_italic {
   font-style: italic;
 }
 
-#ncywechsds .gt_super {
+#zyrkytyhco .gt_super {
   font-size: 65%;
 }
 
-#ncywechsds .gt_footnote_marks {
+#zyrkytyhco .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ncywechsds .gt_asterisk {
+#zyrkytyhco .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ncywechsds .gt_indent_1 {
+#zyrkytyhco .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ncywechsds .gt_indent_2 {
+#zyrkytyhco .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ncywechsds .gt_indent_3 {
+#zyrkytyhco .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ncywechsds .gt_indent_4 {
+#zyrkytyhco .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ncywechsds .gt_indent_5 {
+#zyrkytyhco .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2705,33 +2928,33 @@ window.Quarto = {
 </tr></thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_left" headers="Modnames">two_way</td>
+<td class="gt_row gt_left" headers="Modnames">main_effects</td>
 <td class="gt_row gt_right" headers="K">5</td>
 <td class="gt_row gt_right" headers="AICc">173.8562</td>
 <td class="gt_row gt_right" headers="Delta_AICc">0.000000</td>
-<td class="gt_row gt_right" headers="ModelLik">1.0000000</td>
-<td class="gt_row gt_right" headers="AICcWt">0.75476252</td>
+<td class="gt_row gt_right" headers="ModelLik">1.00000000</td>
+<td class="gt_row gt_right" headers="AICcWt">0.81041300</td>
 <td class="gt_row gt_right" headers="LL">-81.59474</td>
-<td class="gt_row gt_right" headers="Cum.Wt">0.7547625</td>
+<td class="gt_row gt_right" headers="Cum.Wt">0.8104130</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="Modnames">interaction</td>
 <td class="gt_row gt_right" headers="K">7</td>
 <td class="gt_row gt_right" headers="AICc">177.1178</td>
 <td class="gt_row gt_right" headers="Delta_AICc">3.261693</td>
-<td class="gt_row gt_right" headers="ModelLik">0.1957638</td>
-<td class="gt_row gt_right" headers="AICcWt">0.14775516</td>
+<td class="gt_row gt_right" headers="ModelLik">0.19576377</td>
+<td class="gt_row gt_right" headers="AICcWt">0.15864950</td>
 <td class="gt_row gt_right" headers="LL">-80.92256</td>
-<td class="gt_row gt_right" headers="Cum.Wt">0.9025177</td>
+<td class="gt_row gt_right" headers="Cum.Wt">0.9690625</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="Modnames">blocking</td>
-<td class="gt_row gt_right" headers="K">8</td>
-<td class="gt_row gt_right" headers="AICc">177.9496</td>
-<td class="gt_row gt_right" headers="Delta_AICc">4.093464</td>
-<td class="gt_row gt_right" headers="ModelLik">0.1291563</td>
-<td class="gt_row gt_right" headers="AICcWt">0.09748232</td>
-<td class="gt_row gt_right" headers="LL">-80.14722</td>
+<td class="gt_row gt_left" headers="Modnames">full_model</td>
+<td class="gt_row gt_right" headers="K">9</td>
+<td class="gt_row gt_right" headers="AICc">180.3873</td>
+<td class="gt_row gt_right" headers="Delta_AICc">6.531150</td>
+<td class="gt_row gt_right" headers="ModelLik">0.03817497</td>
+<td class="gt_row gt_right" headers="AICcWt">0.03093749</td>
+<td class="gt_row gt_right" headers="LL">-80.14714</td>
 <td class="gt_row gt_right" headers="Cum.Wt">1.0000000</td>
 </tr>
 </tbody>
@@ -2740,53 +2963,42 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>As shown in this table, the two_way model is the best fit for our crop data analysis.</p>
-</section></section><section id="checking-for-homoscedasticity" class="level3" data-number="19.3.2"><h3 data-number="19.3.2" class="anchored" data-anchor-id="checking-for-homoscedasticity">
-<span class="header-section-number">19.3.2</span> Checking for homoscedasticity</h3>
+<p>As shown in this table, the main_effects model, which only includes the fertilizer and density variables without their interaction term, has the lowest AIC and is therefore the best fit for our crop data analysis.</p>
+</section><section id="post-hoc-testing-tukey-hsd" class="level2" data-number="19.6"><h2 data-number="19.6" class="anchored" data-anchor-id="post-hoc-testing-tukey-hsd">
+<span class="header-section-number">19.6</span> Post-Hoc Testing (Tukey HSD)</h2>
+<p>We now know which parameters are significant, however, we are also interested in learning how the levels of the factors differ from each other. To quantify these differences, the <a href="https://en.wikipedia.org/wiki/Tukey%27s_range_test">Tukey’s Honestly-Significant-Difference</a> test can be used.</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">two_way</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="04_anova_two_way_files/figure-html/homoscedasticity-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The output of the residual means shows no large outliers that could possibly skew the data. Hence we can assume equal variances. The Q-Q plot also depicts normality.</p>
-</section></section><section id="post-hoc-testing-tukey-hsd" class="level2" data-number="19.4"><h2 data-number="19.4" class="anchored" data-anchor-id="post-hoc-testing-tukey-hsd">
-<span class="header-section-number">19.4</span> Post-hoc testing (Tukey HSD)</h2>
-<p>In order to determine how the levels differ from one another the Tukey’s Honestly-Significant-difference test can be used.</p>
-<div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tukey_crop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="va">two_way</span><span class="op">)</span>  </span>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Performing Tukey HSD on the final model (yield ~ fertilizer + density)</span></span>
+<span><span class="va">tukey_crop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="va">main_effects</span><span class="op">)</span>  </span>
 <span>  </span>
 <span><span class="va">tukey_crop</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="co"># turn model into data.frame of parameters</span></span>
 <span>  <span class="va">tidy</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="co"># create gt table</span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span></span>
-<span>      title <span class="op">=</span> <span class="st">"Tukey Multiple Comparisons of means"</span>,</span>
-<span>      subtitle <span class="op">=</span> <span class="st">"for fertilizer &amp; density"</span></span>
+<span>      title <span class="op">=</span> <span class="st">"Tukey Multiple Comparisons of Means"</span>,</span>
+<span>      subtitle <span class="op">=</span> <span class="st">"for main effects model (y ~ fertilizer + density)"</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="rhkfvqaath" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rhkfvqaath table {
+<div id="oasuqalzjn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#oasuqalzjn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rhkfvqaath thead, #rhkfvqaath tbody, #rhkfvqaath tfoot, #rhkfvqaath tr, #rhkfvqaath td, #rhkfvqaath th {
+#oasuqalzjn thead, #oasuqalzjn tbody, #oasuqalzjn tfoot, #oasuqalzjn tr, #oasuqalzjn td, #oasuqalzjn th {
   border-style: none;
 }
 
-#rhkfvqaath p {
+#oasuqalzjn p {
   margin: 0;
   padding: 0;
 }
 
-#rhkfvqaath .gt_table {
+#oasuqalzjn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2812,12 +3024,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#rhkfvqaath .gt_caption {
+#oasuqalzjn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rhkfvqaath .gt_title {
+#oasuqalzjn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2829,7 +3041,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#rhkfvqaath .gt_subtitle {
+#oasuqalzjn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2841,7 +3053,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#rhkfvqaath .gt_heading {
+#oasuqalzjn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2853,13 +3065,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rhkfvqaath .gt_bottom_border {
+#oasuqalzjn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rhkfvqaath .gt_col_headings {
+#oasuqalzjn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2874,7 +3086,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rhkfvqaath .gt_col_heading {
+#oasuqalzjn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2894,7 +3106,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#rhkfvqaath .gt_column_spanner_outer {
+#oasuqalzjn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2906,15 +3118,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#rhkfvqaath .gt_column_spanner_outer:first-child {
+#oasuqalzjn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rhkfvqaath .gt_column_spanner_outer:last-child {
+#oasuqalzjn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rhkfvqaath .gt_column_spanner {
+#oasuqalzjn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2926,11 +3138,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#rhkfvqaath .gt_spanner_row {
+#oasuqalzjn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rhkfvqaath .gt_group_heading {
+#oasuqalzjn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2956,7 +3168,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#rhkfvqaath .gt_empty_group_heading {
+#oasuqalzjn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2971,15 +3183,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#rhkfvqaath .gt_from_md > :first-child {
+#oasuqalzjn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rhkfvqaath .gt_from_md > :last-child {
+#oasuqalzjn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rhkfvqaath .gt_row {
+#oasuqalzjn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2998,7 +3210,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#rhkfvqaath .gt_stub {
+#oasuqalzjn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3011,7 +3223,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rhkfvqaath .gt_stub_row_group {
+#oasuqalzjn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3025,15 +3237,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#rhkfvqaath .gt_row_group_first td {
+#oasuqalzjn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rhkfvqaath .gt_row_group_first th {
+#oasuqalzjn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rhkfvqaath .gt_summary_row {
+#oasuqalzjn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3043,16 +3255,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rhkfvqaath .gt_first_summary_row {
+#oasuqalzjn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rhkfvqaath .gt_first_summary_row.thick {
+#oasuqalzjn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rhkfvqaath .gt_last_summary_row {
+#oasuqalzjn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3062,7 +3274,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#rhkfvqaath .gt_grand_summary_row {
+#oasuqalzjn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3072,7 +3284,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rhkfvqaath .gt_first_grand_summary_row {
+#oasuqalzjn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3082,7 +3294,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#rhkfvqaath .gt_last_grand_summary_row_top {
+#oasuqalzjn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3092,11 +3304,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#rhkfvqaath .gt_striped {
+#oasuqalzjn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rhkfvqaath .gt_table_body {
+#oasuqalzjn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3105,7 +3317,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#rhkfvqaath .gt_footnotes {
+#oasuqalzjn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3119,7 +3331,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rhkfvqaath .gt_footnote {
+#oasuqalzjn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3128,7 +3340,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rhkfvqaath .gt_sourcenotes {
+#oasuqalzjn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3142,7 +3354,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rhkfvqaath .gt_sourcenote {
+#oasuqalzjn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3150,73 +3362,73 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rhkfvqaath .gt_left {
+#oasuqalzjn .gt_left {
   text-align: left;
 }
 
-#rhkfvqaath .gt_center {
+#oasuqalzjn .gt_center {
   text-align: center;
 }
 
-#rhkfvqaath .gt_right {
+#oasuqalzjn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rhkfvqaath .gt_font_normal {
+#oasuqalzjn .gt_font_normal {
   font-weight: normal;
 }
 
-#rhkfvqaath .gt_font_bold {
+#oasuqalzjn .gt_font_bold {
   font-weight: bold;
 }
 
-#rhkfvqaath .gt_font_italic {
+#oasuqalzjn .gt_font_italic {
   font-style: italic;
 }
 
-#rhkfvqaath .gt_super {
+#oasuqalzjn .gt_super {
   font-size: 65%;
 }
 
-#rhkfvqaath .gt_footnote_marks {
+#oasuqalzjn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rhkfvqaath .gt_asterisk {
+#oasuqalzjn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rhkfvqaath .gt_indent_1 {
+#oasuqalzjn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rhkfvqaath .gt_indent_2 {
+#oasuqalzjn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rhkfvqaath .gt_indent_3 {
+#oasuqalzjn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rhkfvqaath .gt_indent_4 {
+#oasuqalzjn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rhkfvqaath .gt_indent_5 {
+#oasuqalzjn .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="header gt_heading">
-<th colspan="7" class="gt_heading gt_title gt_font_normal">Tukey Multiple Comparisons of means</th>
+<th colspan="7" class="gt_heading gt_title gt_font_normal">Tukey Multiple Comparisons of Means</th>
 </tr>
 <tr class="odd gt_heading">
-<th colspan="7" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">for fertilizer &amp; density</th>
+<th colspan="7" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">for main effects model (y ~ fertilizer + density)</th>
 </tr>
 <tr class="header gt_col_headings">
 <th id="term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">term</th>
@@ -3271,73 +3483,68 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>This table shows of pairwise differences between each level in the independent variables. Comparisons with p values less than 0.05 are termed significant;</p>
+<p>This table shows the pairwise differences between each level of the factors. Comparisons with p values less than 0.05 are considered significant:</p>
 <ul>
-<li>fertilizer types 1 and 3</li>
-<li>fertilizer types 2 and 3</li>
-<li>planting density groups (binary)</li>
+<li>fertilizer type 1 vs 3</li>
+<li>fertilizer type 2 vs 3</li>
+<li>low vs high density</li>
 </ul>
+<p>To visualize the differences between the levels of each factor, the 95% family-wise confidence intervals of the pairs for fertilizer and density were plotted below. The x-axes of the plots display the difference in means between the paired levels. The y-axis denotes the pair being compared.</p>
 <div class="cell">
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">tukey_crop</span>, las <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># plot tukey confidence intervals and set tick marks to horizontal (las = 1)</span></span>
+<span><span class="co">#   position</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">tukey_crop</span>, las <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="04_anova_two_way_files/figure-html/tukey-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="04_anova_two_way_files/figure-html/tukey-results-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="04_anova_two_way_files/figure-html/tukey-plot-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="04_anova_two_way_files/figure-html/tukey-results-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<ul>
-<li>Only the fertilizer comparison of type 1 &amp; 2 confidence interval includes 0; no significant statistical difference</li>
-</ul>
-<section id="summary-chart-of-crop-yield-data" class="level3" data-number="19.4.1"><h3 data-number="19.4.1" class="anchored" data-anchor-id="summary-chart-of-crop-yield-data">
-<span class="header-section-number">19.4.1</span> Summary Chart of Crop yield data</h3>
+<p>Note that the significant confidence intervals do not include zero. From this plot, we see that only the fertilizer comparison of type 1 and 2 confidence interval includes 0. Thus, there is no statistically significant difference in the average crop yield produced by fertilizer 1 vs fertilizer 2. 95% family-wise confidence intervals for all other comparisons are statistically significant at the α = 0.05 level.</p>
+</section><section id="anova-vs.-linear-regression" class="level2" data-number="19.7"><h2 data-number="19.7" class="anchored" data-anchor-id="anova-vs.-linear-regression">
+<span class="header-section-number">19.7</span> ANOVA vs.&nbsp;Linear Regression</h2>
+<p>The model underlying the ANOVA we just performed is actually a linear regression. Let’s see what results we would get if we used linear regression to model the same relationships:</p>
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">anova_plot</span> <span class="op">&lt;-</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">crop_data_df</span>,</span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
-<span>      x <span class="op">=</span> <span class="va">density</span>, </span>
-<span>      y <span class="op">=</span> <span class="va">yield</span>, </span>
-<span>      group <span class="op">=</span> <span class="va">fertilizer</span>, </span>
-<span>      color <span class="op">=</span> <span class="va">fertilizer</span></span>
-<span>    <span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span></span>
-<span>    cex <span class="op">=</span> <span class="fl">1.5</span>, </span>
-<span>    pch <span class="op">=</span> <span class="fl">1.0</span>, </span>
-<span>    position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_jitter.html">position_jitter</a></span><span class="op">(</span>w <span class="op">=</span> <span class="fl">0.1</span>, h <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># create linear regression model of yield ~ fertilizer + density</span></span>
+<span><span class="va">crop_lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">yield</span> <span class="op">~</span> <span class="va">fertilizer</span> <span class="op">+</span> <span class="va">density</span>, data <span class="op">=</span> <span class="va">crop_data_df</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">anova_plot</span> <span class="op">&lt;-</span> <span class="va">anova_plot</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span>fun.data <span class="op">=</span> <span class="st">'mean_se'</span>, geom <span class="op">=</span> <span class="st">'errorbar'</span>, width <span class="op">=</span> <span class="fl">0.2</span>, color <span class="op">=</span> <span class="st">"grey50"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span>fun.data <span class="op">=</span> <span class="st">'mean_se'</span>, geom <span class="op">=</span> <span class="st">'pointrange'</span><span class="op">)</span> </span>
-<span></span>
-<span><span class="va">anova_plot</span> <span class="op">&lt;-</span> <span class="va">anova_plot</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">fertilizer</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">anova_plot</span> <span class="op">&lt;-</span> <span class="va">anova_plot</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Crop yield averages based on fertilizer types and planting density"</span>,</span>
-<span>      x <span class="op">=</span> <span class="st">"Planting density (1 = low density, 2 = high density)"</span>,</span>
-<span>      y <span class="op">=</span> <span class="st">"Yield Average"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">anova_plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="04_anova_two_way_files/figure-html/crop-data-plot-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">crop_lm</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = yield ~ fertilizer + density, data = crop_data_df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.16523 -0.30208 -0.05802  0.42576  1.47375 
+
+Coefficients:
+            Estimate Std. Error  t value Pr(&gt;|t|)    
+(Intercept) 176.5261     0.1180 1495.490  &lt; 2e-16 ***
+fertilizer2   0.1762     0.1446    1.219 0.226115    
+fertilizer3   0.5991     0.1446    4.144 7.57e-05 ***
+density2      0.4620     0.1180    3.914 0.000174 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.5783 on 92 degrees of freedom
+Multiple R-squared:  0.2667,    Adjusted R-squared:  0.2428 
+F-statistic: 11.15 on 3 and 92 DF,  p-value: 2.601e-06</code></pre>
 </div>
 </div>
-</div>
-</section></section><section id="conclusions" class="level2" data-number="19.5"><h2 data-number="19.5" class="anchored" data-anchor-id="conclusions">
-<span class="header-section-number">19.5</span> Conclusions</h2>
-<p>There is a statistically-significant difference in average crop yield by both the fertilizer type and planting density variables with F values of 9.018 (p &lt; 0.001) and 15.316 (p &lt; 0.001) respectively. The interaction between these two terms was not significant.</p>
-<p>The Tukey post-hoc test showed significant pairwise differences between fertilizer types 1 &amp; 3, and 2 &amp; 3. It also depicted significant differences between the two types of planting densities (low &amp; high).</p>
+<p>The output from the linear regression model indicate a significant difference in average yield exists between crops fertilized with fertilizer 3 and 1 (p = 7.57 e-05) but not fertilizers 1 and 2 (p = 0.22). Furthermore, the average yield for high density acres is significantly different than low density acres (p &lt; 0.001). These findings are consistent with the results of the Tukey’s HSD tests.</p>
+<p>Recall that the two-way ANOVA compares the variance within all levels of a factor to the total variation of the model. Similarly, the linear regression quantifies the variation of each group (or “level”) from the mean using dummy variables. Both use the same computations and thus the sum of squares for the independent variables are the same in the outputs of both the two-way ANOVA and linear regression. Because the density variable consists of two groups, its p value (p = 0.00017) is also the same in both models. The p value(s) for fertilizer differs between the two, however, because the three fertilizer groups are split into three dummy variables in the linear regression and compared against the group mean individually. The two-way ANOVA, on the other hand, is only concerned with the total variance within the fertilizer factor. Read “<a href="https://lindeloev.github.io/tests-as-linear/">Common statistical tests are linear models</a>” to learn more about how ANOVAs and many other statistical tests are simply different flavors of linear regression.</p>
+</section><section id="conclusions" class="level2" data-number="19.8"><h2 data-number="19.8" class="anchored" data-anchor-id="conclusions">
+<span class="header-section-number">19.8</span> Conclusions</h2>
+<p>There is a statistically significant difference in average crop yield by both the fertilizer type and planting density variables with F values of 9.018 (p &lt; 0.001) and 15.316 (p &lt; 0.001) respectively. The interaction between these two terms was not significant.</p>
+<p>The Tukey post-hoc test showed significant pairwise differences in average yield between fertilizer types 1 and 3 and between type 2 and 3. It also depicted significant differences in average yield between low and high planting density. Therefore, corn fertilized with fertilizer type 3 produced significantly more bushels per acre than those with fertilizers type 1 and 2, and acres of corn planted at high density produced more bushels than those planted at low density.</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -3766,7 +3973,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/04_anova_two_way.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/04_anova_two_way.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>

@@ -1,0 +1,458 @@
+---
+title: "Two sample $t$-test"
+subtitle: "Explaining the Two sample $t$-test and how to run it in R"
+date: "`r Sys.Date()`"
+author:
+  - name: Tendai Gwanzura, Ana Bravo & Saurya Dhungel
+    affiliations:
+      - Florida International University
+      - Robert Stempel College of Public Health and Social Work
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+---
+
+## Two sample $t$-test
+
+This is also called the independent sample t test. It is used to see whether the population means of two groups are equal or different. This test requires one variable which can be the exposure *x* and another variable which can be the outcome *y*. If there are more than two groups, Analysis of Variance *(ANOVA)* would be more suitable. If data is nonparametric then an alternative test to use would be the *Mann Whitney U test*. [Cressie, N.A., 1986](https://onlinelibrary.wiley.com/doi/abs/10.1002/bimj.4710280202)
+
+There are two types of independent t tests: the first is the **Student's t test,** which assumes the variance of the two groups is equal, and the second being the **Welch's t test** (default in R), which assumes the variance in the two groups is different.
+
+In this article we will be discussing the **Student's t test**.
+
+### Assumptions
+
+-   Measurements for one observation do not affect measurements for any other observation (assumes independence).
+
+-   Data values in dependent variable are continuous.
+
+-   Data in each group are normally distributed.
+
+-   The variances for the two independent groups are equal in the **Student's t test**.
+
+-   There should be no significant outliers.
+
+### Hypotheses
+
+1.  $(H_0)$: the mean of group A $(m_A)$ is equal to the mean of group B $(m_B)$- two tailed test.
+
+2.  $(H_0)$: $(m_A)\ge (m_B)$- one tailed test.
+
+3.  $(H_0)$: $(m_A)\le (m_B)$- one tailed test.
+
+The corresponding alternative hypotheses would be as follows:
+
+1.  $(H_1)$: $(m_A)\neq(m_B)$- two tailed test.
+2.  $(H_1)$: $(m_A)<(m_B)$- one tailed test.
+3.  $(H_1)$: $(m_A)> (m_B)$- one tailed test.
+
+### Statistical hypotheses formula
+
+For the **Student's t test** which assumes equal variance, here is an example of how the \|t\| statistic may be calculated using groups A and B:
+
+$t ={ {m_{A} - m_{B}} \over \sqrt{ {S^2 \over n_{A} } + {S^2 \over n_{B}}   }}$
+
+This can be described as the sample mean difference divided by the sample standard deviation of the sample mean difference where:
+
+$m_A$ and $m_B$ are the mean values of A and B,
+
+$n_A$ and $n_B$ are the size of group A and B,
+
+$S^2$ is the estimator for the pooled variance, with the degrees of freedom (*df)* = $n_A + n_B - 2$,
+
+and $S^2$ is calculated as follows:
+
+$S^2 = { {\sum{ (x_A-m_{A})^2} + \sum{ (x_B-m_{B})^2}} \over {n_{A} + n_{B} - 2 }}$
+
+**What if the data is not independent?**
+
+If the data is not independent such as paired data in the form of matched pairs which are correlated, we use the *paired t test*. This test checks whether the means of two paired groups are different 
+from each other. It is  usually applied in clinical trial studies with a "before and after" or case 
+control studies with matched pairs. For this test we only assume the difference of each pair to be 
+normally distributed (the paired groups are the ones important for analysis) unlike the 
+*independent t test* which assumes that data from both samples are independent and variances 
+are equal. [Xu, M., 2017](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5579465/)
+
+------------------------------------------------------------------------
+
+### Example
+
+#### Prerequisites
+
+1.  `tidyverse`: data manipulation and visualization.
+2.  `rstatix`: providing pipe friendly R functions for easy statistical analysis.
+3.  `car`: providing variance tests.
+
+```{r, install }
+#| echo: true
+
+#install.packages("ggstatplot") 
+#install.packages("car")
+#install.packages("rstatix")
+#install.packages(tidyVerse)
+
+```
+
+#### Dataset
+
+This example dataset sourced from [kaggle](https://www.kaggle.com/datasets/uciml/student-alcohol-consumption/versions/2?resource=download) was obtained from surveys of students in Math and Portuguese classes in secondary school. It contains demographic information on gender, social and study information.
+
+```{r}
+#| label: load-libraries
+#| echo: true 
+#| message: false
+#| warning: false
+
+# load relevant libraries
+library(rcompanion)
+library(car)
+library (gt)
+library(gtsummary)
+library(ggpubr)
+library(rstatix)
+library(tidyverse)
+```
+
+```{r}
+#| label: import-dataset
+#| echo: true
+
+# load the dataset
+stu_math <- read_csv("../data/03_student-mat.csv")
+```
+
+**Checking the data**
+
+```{r}
+#| echo: true 
+
+# check the data
+glimpse(stu_math)
+
+```
+
+In total there are 395 observations and 33 variables. We will drop the variables we do not need and keep the variables that will help us answer the following: **Is there a difference between the finals grades of boys and girls in maths?**
+
+$H_0$: There is no statistical difference between the final grades between boys and girls.
+
+$H_1$: There is a statistically significant differencehe in the final grades between the two groups.
+
+```{r, creating-subset}
+#| echo: true 
+
+# creating a subset of the data 
+math <- stu_math %>% subset %>% select (sex, G3)
+glimpse(math)
+```
+
+**Summary statistics** 
+The dependent variable is continuous *(grades=G3)* and the independent variable is character but binary *(sex)*.
+
+```{r}
+#| echo: true 
+
+# summarizing our data
+ summary(math)
+```
+
+We see that data ranges from 0-20 with 0 being people who were absent and could not take the test therefore missing data. 
+
+**Identifying outliers** - 
+Outliers can also be identified through boxplot. 
+
+```{r}
+#| echo: true 
+
+# creating a boxplot to visualize the outliers (without removing score of zero)
+ggplot(data = math) + 
+  aes(
+    x = sex, 
+    y = G3
+  ) +
+  labs(
+    title = "Boxplot to visualize the outlier",
+    x  = "sex", 
+    y = "Maths Grades"
+  ) +
+  geom_boxplot()
+```
+
+```{r}
+#| echo: true 
+
+# creating a boxplot to visualize the data with no outliers
+math2 <- math %>% filter(G3>0)
+ggplot(data = math2) + 
+  aes(
+    x = sex, 
+    y = G3
+  ) +
+  labs(
+    title = "Boxplot without the outlier",
+    x  = "sex", 
+    y = "Maths Grades"
+  ) +
+  geom_boxplot()
+```
+
+The second box plot shows us that there are no outliers as students with a score of zero have been removed. This score is not truly reflective of the performance between boys and girls as a grade of 0 may represent absence or other reasons for the test not been taken. 
+
+We remove the outliers before running the t test. However, other models can be considered such as the zero inflated model to differentiate those who truly got a 0 and those who were not present to take test.
+
+```{r}
+#| echo: true 
+
+# finding the mean for the groups with outliers (score of zero included)
+mean(math$G3[math$sex=="F"])
+mean(math$G3[math$sex=="M"])
+
+# finding the mean for the groups without outliers (score of zero not included)
+mean(math2$G3[math2$sex=="F"])
+mean(math2$G3[math2$sex=="M"])
+```
+
+The mean has increased slightly in both groups and the difference in mean has been decreased in both groups after removing the outliers.
+
+**Visualizing the data** - 
+We can use barplots to look at the difference in sample sizes between the groups and histograms  check distribution of the data for normality. 
+
+```{r}
+#| echo: true 
+
+sample_size <- table(math2$sex)
+sample_size_df <- as.data.frame(sample_size)
+colnames(sample_size_df) <- c("sex", "count")
+
+# plotting bar plot to see the distribution in sample size
+ggplot(data = sample_size_df) + 
+  aes(
+    x = sex, 
+    y = count,
+  ) +
+  labs(
+    title = "Distribution of sample size by sex",
+    x = "Sex",
+    y = "Number of students"
+  ) +
+  geom_bar(stat = "identity")
+```
+
+The bar graph shows that there are slightly more females in the sample than males.
+
+```{r}
+#| echo: true 
+
+# Histograms for data by groups 
+
+male = math2$G3[math2$sex == "M"]
+female = math2$G3[math2$sex == "F"]
+
+# plotting distribution for males
+plotNormalHistogram(
+  male, 
+  breaks= 20,
+  xlim=c(0,20),
+  main="Distribution of the grades for males ", 
+  xlab= "Math Grades"
+  )
+```
+
+The final grades for males seem to be normally distributed. If it is difficult to be certain whether the data is normally distributed, the histogram of the square root transformed data can be plotted. It can help reveal underlying normality in skewed data by compressing the spread. 
+
+```{r}
+#| echo: true
+
+# plotting square root transformed distribution for males
+plotNormalHistogram(
+  sqrt(male), 
+  breaks= 20,
+  main="Distribution of the grades for males ", 
+  xlab= "Math Grades"
+  )
+```
+
+A highly skewed data might still not appear normal after square root transformation, so this is not a solution to a skewed data, but rather an approach to check normality more precisely. 
+
+```{r}
+#| echo: true 
+
+# plotting distribution for females
+plotNormalHistogram(
+  female, 
+  breaks= 20,
+  xlim=c(0,20),
+  main="Distribution of the grades for females ", 
+  xlab= "Math Grades"
+  )
+```
+Similar to males, looking at the square root transformed distribution for females
+
+```{r}
+#| echo: true
+
+# plotting square root transformed distribution for males
+plotNormalHistogram(
+  sqrt(female), 
+  breaks= 20,
+  main="Distribution of the grades for females ", 
+  xlab= "Math Grades"
+  )
+```
+
+Final grades for females also appear to be normally distributed. The final score across both is almost evenly distributed. 
+
+**Check the equality of variances (homogeneity)** - 
+By looking at the two box plots above for two groups, it does not appear that the variances are different between the two groups.  
+
+We can use the *Levene's test* or the *Bartlett's test* to check for homogeneity of variances. The former is in the `car` library and the later in the `rstatix` library. If the variances are homogeneous, the p value will be greater than 0.05.
+
+Other tests include *F test 2 sided*, *Brown-Forsythe* and *O'Brien* but we shall not cover these.
+
+```{r}
+#| echo: true 
+#| message: false
+#| warning: false
+
+# running the Levene's test to check equal variance
+math2 %>% levene_test(G3~sex)
+
+#don't do this unless worried about the data
+```
+
+```{r}
+#| echo: true 
+#| message: false
+#| warning: false
+
+# running the Bartlett's test to check equal variance
+bartlett.test(G3~sex, data=math2)
+
+#don't do this unless worried about the data
+```
+The p value is greater than 0.05 from both the test suggesting there is no difference between the variances of the two groups.
+
+#### Assessment
+
+1.  Data is continuous(G3)
+
+2.  Data is independent (males and females are distinct and not the same individual)
+
+3.  Data is normally distributed. We might still want to do a square root transformation.
+
+4.  No significant outliers.
+
+5.  There are equal variances.
+
+As the assumptions are met we go ahead to perform the **Student's** $t$-test.
+
+#### **Performing the two-sample** $t$-test
+
+Since the default is the **Welch t test** we use the $\color{blue}{\text{var.eqaul = TRUE }}$ code to signify a **Student's t test**. 
+
+```{r}
+#| echo: true 
+
+# perfoming the two sample t test
+stat.test <- math2 %>% 
+  #mutate(sqrt_G3 = sqrt(G3)) %>%
+  t_test(G3~ sex, var.equal=TRUE) %>%
+  add_significance()
+stat.test
+```
+
+```{r}
+stat.test$statistic
+```
+
+If you decided to work with square root transformed data, you could use the mutate function to create the 'sqrt_G3' variable in the 'stat.test' dataset, which produces quite similar  p-value and t test statistic. 
+
+The results are represented as follows;
+
+-   **y** - dependent variable
+
+-   **group1, group 2** - compared groups (independent variables)
+
+-   **df** - degrees of freedom
+
+-   **p** - p value
+
+`gtsummary` table of results
+
+```{r}
+#| echo: true 
+#| 
+ math2 |> 
+  tbl_summary(
+    by = sex,
+    statistic =
+      list(
+        all_continuous() ~ "{mean} ({sd})")
+    ) |> 
+   add_n() |> 
+  add_overall() |> 
+  add_difference()
+
+```
+
+**Interpretation of results**
+
+For the  Student's t test, the obtained t statistic of -1.940477 is greater than the critical value at 355 degree of freedom (n1+n2-2) i.e. -1.984, due to which it is not statistically significant. Also, the p-value is greater than alpha of 0.05, due to which we we fail to reject the null hypothesis and conclude that there is no statistical difference between the mean grades of boys and girls. *(A significant \|t\| would be equal to -1.984 or smaller; or equal to 1.984 or greater).*
+
+**Effect size**
+Note: Effect size should only be calculated if the null hypothesis is rejected. We are showing how to do this for pedagogical reasons. In practice, we would not calculate an effect size because we fail to reject the null hypothesis. 
+
+*Cohen's d* can be an used as an effect size statistic for the two sample t test. It is the difference between the means of each group divided by the pooled standard deviation.
+
+$d= {m_A-m_B \over SDpooled}$
+
+It ranges from 0 to infinity, with 0 indicating no effect where the means are equal. 0.5 means that the means differ by half the standard deviation of the data and 1 means they differ by 1 standard deviation. It is divided into small, medium or large using the following cut off points.
+
+-   ***small*** 0.2-\<0.5
+
+-   ***medium*** 0.5-\<0.8
+
+-   ***large*** \>=0.8
+
+For the above test the following is how we can find the effect size;
+
+```{r}
+#| echo: true 
+
+#perfoming cohen's d
+math2 %>% 
+  cohens_d(G3~sex,var.equal = TRUE)
+
+```
+
+The effect size is ***small*** d= -0.20.
+
+In conclusion, a two-samples t-test showed that the difference was not statistically significant, t(355) = -1.940477, p \< 0.0531, d = -0.20; where, t(355) is shorthand notation for a t-statistic that has 355 degrees of freedom and d is *Cohen's d*. We can conclude that the females mean final grade is greater than males final grade (d= -0.20) but this result is not significant.
+
+**What if it is one tailed t test?**
+
+Use the $\color{blue}{\text{alternative =}}$ option to determine if one group is $\color{blue}{\text{"less"}}$ or $\color{blue}{\text{"greater"}}$. For example if we want to check the null hypothesis whether the final grades for females are greater than or equal to males we can use the following code:
+
+```{r}
+#| echo: true 
+
+# perfoming the one tailed two sample t test
+stat.test <- math2 %>% 
+  t_test(G3~ sex, var.equal=TRUE, alternative = "less") %>%
+  add_significance()
+stat.test
+```
+
+Since, the p value is smaller than 0.05 (p=0.027), we reject the null hypothesis. We conclude that the final grades for females are significantly lesser than that for males.
+
+**What about running the paired sample t test?**
+
+We can simply add the syntax $\color{blue}{\text{paired= TRUE}}$ to the `t_test()` function to run the analysis for matched pairs data.
+
+## Conclusion
+
+This article covers the **Student's t test** and how we run it in R. It also shows how we find the effect size and how we can conclude the results.
+
+## References
+1. Cressie, N.A.C. and Whitford, H.J. (1986). How to Use the Two Sample t-Test. Biom. J., 28: 131-148. https://doi.org/10.1002/bimj.4710280202
+2. Xu, M., Fralick, D., Zheng, J. Z., Wang, B., Tu, X. M., & Feng, C. (2017). The Differences and Similarities Between Two-Sample T-Test and Paired T-Test. Shanghai archives of psychiatry, 29(3), 184–188. https://doi.org/10.11919/j.issn.1002-0829.217070
