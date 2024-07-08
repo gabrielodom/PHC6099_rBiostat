@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<meta name="dcterms.date" content="2024-07-01">
+<meta name="dcterms.date" content="2024-07-08">
 <title>An R Cookbook for Public Health - 14&nbsp; Two sample \(t\)-test</title>
 <style>
 code{white-space: pre-wrap;}
@@ -353,6 +353,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_regression_random_intercept.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -367,7 +373,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -384,7 +390,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
   </div>
 </li>
       </ul>
@@ -401,7 +407,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -459,7 +465,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 1, 2024</p>
+      <p class="date">July 8, 2024</p>
     </div>
   </div>
   
@@ -869,23 +875,23 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_difference.html">add_difference</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="sdtugeijon" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#sdtugeijon table {
+<div id="iwowzbryvk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iwowzbryvk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#sdtugeijon thead, #sdtugeijon tbody, #sdtugeijon tfoot, #sdtugeijon tr, #sdtugeijon td, #sdtugeijon th {
+#iwowzbryvk thead, #iwowzbryvk tbody, #iwowzbryvk tfoot, #iwowzbryvk tr, #iwowzbryvk td, #iwowzbryvk th {
   border-style: none;
 }
 
-#sdtugeijon p {
+#iwowzbryvk p {
   margin: 0;
   padding: 0;
 }
 
-#sdtugeijon .gt_table {
+#iwowzbryvk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -911,12 +917,12 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#sdtugeijon .gt_caption {
+#iwowzbryvk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#sdtugeijon .gt_title {
+#iwowzbryvk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -928,7 +934,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-bottom-width: 0;
 }
 
-#sdtugeijon .gt_subtitle {
+#iwowzbryvk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -940,7 +946,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-top-width: 0;
 }
 
-#sdtugeijon .gt_heading {
+#iwowzbryvk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -952,13 +958,13 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#sdtugeijon .gt_bottom_border {
+#iwowzbryvk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#sdtugeijon .gt_col_headings {
+#iwowzbryvk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -973,7 +979,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#sdtugeijon .gt_col_heading {
+#iwowzbryvk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -993,7 +999,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   overflow-x: hidden;
 }
 
-#sdtugeijon .gt_column_spanner_outer {
+#iwowzbryvk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1005,15 +1011,15 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   padding-right: 4px;
 }
 
-#sdtugeijon .gt_column_spanner_outer:first-child {
+#iwowzbryvk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#sdtugeijon .gt_column_spanner_outer:last-child {
+#iwowzbryvk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#sdtugeijon .gt_column_spanner {
+#iwowzbryvk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1025,11 +1031,11 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   width: 100%;
 }
 
-#sdtugeijon .gt_spanner_row {
+#iwowzbryvk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#sdtugeijon .gt_group_heading {
+#iwowzbryvk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1055,7 +1061,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   text-align: left;
 }
 
-#sdtugeijon .gt_empty_group_heading {
+#iwowzbryvk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1070,15 +1076,15 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   vertical-align: middle;
 }
 
-#sdtugeijon .gt_from_md > :first-child {
+#iwowzbryvk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#sdtugeijon .gt_from_md > :last-child {
+#iwowzbryvk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#sdtugeijon .gt_row {
+#iwowzbryvk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1097,7 +1103,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   overflow-x: hidden;
 }
 
-#sdtugeijon .gt_stub {
+#iwowzbryvk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1110,7 +1116,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   padding-right: 5px;
 }
 
-#sdtugeijon .gt_stub_row_group {
+#iwowzbryvk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1124,15 +1130,15 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   vertical-align: top;
 }
 
-#sdtugeijon .gt_row_group_first td {
+#iwowzbryvk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#sdtugeijon .gt_row_group_first th {
+#iwowzbryvk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#sdtugeijon .gt_summary_row {
+#iwowzbryvk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1142,16 +1148,16 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   padding-right: 5px;
 }
 
-#sdtugeijon .gt_first_summary_row {
+#iwowzbryvk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#sdtugeijon .gt_first_summary_row.thick {
+#iwowzbryvk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#sdtugeijon .gt_last_summary_row {
+#iwowzbryvk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1161,7 +1167,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#sdtugeijon .gt_grand_summary_row {
+#iwowzbryvk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1171,7 +1177,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   padding-right: 5px;
 }
 
-#sdtugeijon .gt_first_grand_summary_row {
+#iwowzbryvk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1181,7 +1187,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#sdtugeijon .gt_last_grand_summary_row_top {
+#iwowzbryvk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1191,11 +1197,11 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#sdtugeijon .gt_striped {
+#iwowzbryvk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#sdtugeijon .gt_table_body {
+#iwowzbryvk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1204,7 +1210,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#sdtugeijon .gt_footnotes {
+#iwowzbryvk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1218,7 +1224,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#sdtugeijon .gt_footnote {
+#iwowzbryvk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1227,7 +1233,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   padding-right: 5px;
 }
 
-#sdtugeijon .gt_sourcenotes {
+#iwowzbryvk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1241,7 +1247,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#sdtugeijon .gt_sourcenote {
+#iwowzbryvk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1249,63 +1255,63 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   padding-right: 5px;
 }
 
-#sdtugeijon .gt_left {
+#iwowzbryvk .gt_left {
   text-align: left;
 }
 
-#sdtugeijon .gt_center {
+#iwowzbryvk .gt_center {
   text-align: center;
 }
 
-#sdtugeijon .gt_right {
+#iwowzbryvk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#sdtugeijon .gt_font_normal {
+#iwowzbryvk .gt_font_normal {
   font-weight: normal;
 }
 
-#sdtugeijon .gt_font_bold {
+#iwowzbryvk .gt_font_bold {
   font-weight: bold;
 }
 
-#sdtugeijon .gt_font_italic {
+#iwowzbryvk .gt_font_italic {
   font-style: italic;
 }
 
-#sdtugeijon .gt_super {
+#iwowzbryvk .gt_super {
   font-size: 65%;
 }
 
-#sdtugeijon .gt_footnote_marks {
+#iwowzbryvk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#sdtugeijon .gt_asterisk {
+#iwowzbryvk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#sdtugeijon .gt_indent_1 {
+#iwowzbryvk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#sdtugeijon .gt_indent_2 {
+#iwowzbryvk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#sdtugeijon .gt_indent_3 {
+#iwowzbryvk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#sdtugeijon .gt_indent_4 {
+#iwowzbryvk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#sdtugeijon .gt_indent_5 {
+#iwowzbryvk .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

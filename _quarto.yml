@@ -58,6 +58,7 @@ book:
         - lessons_original/04_regression_ols.qmd
         - lessons_original/04_regression_mls.qmd
         - lessons_original/04_regression_polynomial.qmd
+        - lessons_original/04_regression_random_intercept.qmd
 
     - part: 05_header_generalized-linear-models.qmd
       chapters:

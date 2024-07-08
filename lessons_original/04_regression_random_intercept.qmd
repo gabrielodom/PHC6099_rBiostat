@@ -1,5 +1,5 @@
 ---
-title: "Random Intercept Model"
+title: "Random Intercept Regression"
 subtitle: "Learning how to use Random Intercept Models in R"
 date: "`r Sys.Date()`"
 author:

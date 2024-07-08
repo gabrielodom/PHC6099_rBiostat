@@ -352,6 +352,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_regression_random_intercept.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -366,7 +372,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -383,7 +389,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
   </div>
 </li>
       </ul>
@@ -400,7 +406,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -584,23 +590,23 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="ioisevoklp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ioisevoklp table {
+<div id="autfzostxd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#autfzostxd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ioisevoklp thead, #ioisevoklp tbody, #ioisevoklp tfoot, #ioisevoklp tr, #ioisevoklp td, #ioisevoklp th {
+#autfzostxd thead, #autfzostxd tbody, #autfzostxd tfoot, #autfzostxd tr, #autfzostxd td, #autfzostxd th {
   border-style: none;
 }
 
-#ioisevoklp p {
+#autfzostxd p {
   margin: 0;
   padding: 0;
 }
 
-#ioisevoklp .gt_table {
+#autfzostxd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -626,12 +632,12 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-left-color: #D3D3D3;
 }
 
-#ioisevoklp .gt_caption {
+#autfzostxd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ioisevoklp .gt_title {
+#autfzostxd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -643,7 +649,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-bottom-width: 0;
 }
 
-#ioisevoklp .gt_subtitle {
+#autfzostxd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -655,7 +661,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-top-width: 0;
 }
 
-#ioisevoklp .gt_heading {
+#autfzostxd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -667,13 +673,13 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-right-color: #D3D3D3;
 }
 
-#ioisevoklp .gt_bottom_border {
+#autfzostxd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ioisevoklp .gt_col_headings {
+#autfzostxd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -688,7 +694,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-right-color: #D3D3D3;
 }
 
-#ioisevoklp .gt_col_heading {
+#autfzostxd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -708,7 +714,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   overflow-x: hidden;
 }
 
-#ioisevoklp .gt_column_spanner_outer {
+#autfzostxd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -720,15 +726,15 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 4px;
 }
 
-#ioisevoklp .gt_column_spanner_outer:first-child {
+#autfzostxd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ioisevoklp .gt_column_spanner_outer:last-child {
+#autfzostxd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ioisevoklp .gt_column_spanner {
+#autfzostxd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -740,11 +746,11 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   width: 100%;
 }
 
-#ioisevoklp .gt_spanner_row {
+#autfzostxd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ioisevoklp .gt_group_heading {
+#autfzostxd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -770,7 +776,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   text-align: left;
 }
 
-#ioisevoklp .gt_empty_group_heading {
+#autfzostxd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -785,15 +791,15 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   vertical-align: middle;
 }
 
-#ioisevoklp .gt_from_md > :first-child {
+#autfzostxd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ioisevoklp .gt_from_md > :last-child {
+#autfzostxd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ioisevoklp .gt_row {
+#autfzostxd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -812,7 +818,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   overflow-x: hidden;
 }
 
-#ioisevoklp .gt_stub {
+#autfzostxd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -825,7 +831,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 5px;
 }
 
-#ioisevoklp .gt_stub_row_group {
+#autfzostxd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -839,15 +845,15 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   vertical-align: top;
 }
 
-#ioisevoklp .gt_row_group_first td {
+#autfzostxd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ioisevoklp .gt_row_group_first th {
+#autfzostxd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ioisevoklp .gt_summary_row {
+#autfzostxd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -857,16 +863,16 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 5px;
 }
 
-#ioisevoklp .gt_first_summary_row {
+#autfzostxd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ioisevoklp .gt_first_summary_row.thick {
+#autfzostxd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ioisevoklp .gt_last_summary_row {
+#autfzostxd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -876,7 +882,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-bottom-color: #D3D3D3;
 }
 
-#ioisevoklp .gt_grand_summary_row {
+#autfzostxd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -886,7 +892,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 5px;
 }
 
-#ioisevoklp .gt_first_grand_summary_row {
+#autfzostxd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -896,7 +902,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-top-color: #D3D3D3;
 }
 
-#ioisevoklp .gt_last_grand_summary_row_top {
+#autfzostxd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -906,11 +912,11 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-bottom-color: #D3D3D3;
 }
 
-#ioisevoklp .gt_striped {
+#autfzostxd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ioisevoklp .gt_table_body {
+#autfzostxd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -919,7 +925,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-bottom-color: #D3D3D3;
 }
 
-#ioisevoklp .gt_footnotes {
+#autfzostxd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -933,7 +939,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-right-color: #D3D3D3;
 }
 
-#ioisevoklp .gt_footnote {
+#autfzostxd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -942,7 +948,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 5px;
 }
 
-#ioisevoklp .gt_sourcenotes {
+#autfzostxd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -956,7 +962,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-right-color: #D3D3D3;
 }
 
-#ioisevoklp .gt_sourcenote {
+#autfzostxd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -964,63 +970,63 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 5px;
 }
 
-#ioisevoklp .gt_left {
+#autfzostxd .gt_left {
   text-align: left;
 }
 
-#ioisevoklp .gt_center {
+#autfzostxd .gt_center {
   text-align: center;
 }
 
-#ioisevoklp .gt_right {
+#autfzostxd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ioisevoklp .gt_font_normal {
+#autfzostxd .gt_font_normal {
   font-weight: normal;
 }
 
-#ioisevoklp .gt_font_bold {
+#autfzostxd .gt_font_bold {
   font-weight: bold;
 }
 
-#ioisevoklp .gt_font_italic {
+#autfzostxd .gt_font_italic {
   font-style: italic;
 }
 
-#ioisevoklp .gt_super {
+#autfzostxd .gt_super {
   font-size: 65%;
 }
 
-#ioisevoklp .gt_footnote_marks {
+#autfzostxd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ioisevoklp .gt_asterisk {
+#autfzostxd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ioisevoklp .gt_indent_1 {
+#autfzostxd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ioisevoklp .gt_indent_2 {
+#autfzostxd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ioisevoklp .gt_indent_3 {
+#autfzostxd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ioisevoklp .gt_indent_4 {
+#autfzostxd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ioisevoklp .gt_indent_5 {
+#autfzostxd .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1197,23 +1203,23 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify.html">modify_spanning_header</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stat_1"</span>, <span class="st">"stat_2"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"**Living_stable**"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="ujkpooaocw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ujkpooaocw table {
+<div id="qglhwupszd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qglhwupszd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ujkpooaocw thead, #ujkpooaocw tbody, #ujkpooaocw tfoot, #ujkpooaocw tr, #ujkpooaocw td, #ujkpooaocw th {
+#qglhwupszd thead, #qglhwupszd tbody, #qglhwupszd tfoot, #qglhwupszd tr, #qglhwupszd td, #qglhwupszd th {
   border-style: none;
 }
 
-#ujkpooaocw p {
+#qglhwupszd p {
   margin: 0;
   padding: 0;
 }
 
-#ujkpooaocw .gt_table {
+#qglhwupszd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1239,12 +1245,12 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-left-color: #D3D3D3;
 }
 
-#ujkpooaocw .gt_caption {
+#qglhwupszd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ujkpooaocw .gt_title {
+#qglhwupszd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1256,7 +1262,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-bottom-width: 0;
 }
 
-#ujkpooaocw .gt_subtitle {
+#qglhwupszd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1268,7 +1274,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-top-width: 0;
 }
 
-#ujkpooaocw .gt_heading {
+#qglhwupszd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1280,13 +1286,13 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-right-color: #D3D3D3;
 }
 
-#ujkpooaocw .gt_bottom_border {
+#qglhwupszd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ujkpooaocw .gt_col_headings {
+#qglhwupszd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1301,7 +1307,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-right-color: #D3D3D3;
 }
 
-#ujkpooaocw .gt_col_heading {
+#qglhwupszd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1321,7 +1327,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   overflow-x: hidden;
 }
 
-#ujkpooaocw .gt_column_spanner_outer {
+#qglhwupszd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1333,15 +1339,15 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 4px;
 }
 
-#ujkpooaocw .gt_column_spanner_outer:first-child {
+#qglhwupszd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ujkpooaocw .gt_column_spanner_outer:last-child {
+#qglhwupszd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ujkpooaocw .gt_column_spanner {
+#qglhwupszd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1353,11 +1359,11 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   width: 100%;
 }
 
-#ujkpooaocw .gt_spanner_row {
+#qglhwupszd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ujkpooaocw .gt_group_heading {
+#qglhwupszd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1383,7 +1389,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   text-align: left;
 }
 
-#ujkpooaocw .gt_empty_group_heading {
+#qglhwupszd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1398,15 +1404,15 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   vertical-align: middle;
 }
 
-#ujkpooaocw .gt_from_md > :first-child {
+#qglhwupszd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ujkpooaocw .gt_from_md > :last-child {
+#qglhwupszd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ujkpooaocw .gt_row {
+#qglhwupszd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1425,7 +1431,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   overflow-x: hidden;
 }
 
-#ujkpooaocw .gt_stub {
+#qglhwupszd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1438,7 +1444,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 5px;
 }
 
-#ujkpooaocw .gt_stub_row_group {
+#qglhwupszd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1452,15 +1458,15 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   vertical-align: top;
 }
 
-#ujkpooaocw .gt_row_group_first td {
+#qglhwupszd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ujkpooaocw .gt_row_group_first th {
+#qglhwupszd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ujkpooaocw .gt_summary_row {
+#qglhwupszd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1470,16 +1476,16 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 5px;
 }
 
-#ujkpooaocw .gt_first_summary_row {
+#qglhwupszd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ujkpooaocw .gt_first_summary_row.thick {
+#qglhwupszd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ujkpooaocw .gt_last_summary_row {
+#qglhwupszd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1489,7 +1495,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-bottom-color: #D3D3D3;
 }
 
-#ujkpooaocw .gt_grand_summary_row {
+#qglhwupszd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1499,7 +1505,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 5px;
 }
 
-#ujkpooaocw .gt_first_grand_summary_row {
+#qglhwupszd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1509,7 +1515,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-top-color: #D3D3D3;
 }
 
-#ujkpooaocw .gt_last_grand_summary_row_top {
+#qglhwupszd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1519,11 +1525,11 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-bottom-color: #D3D3D3;
 }
 
-#ujkpooaocw .gt_striped {
+#qglhwupszd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ujkpooaocw .gt_table_body {
+#qglhwupszd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1532,7 +1538,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-bottom-color: #D3D3D3;
 }
 
-#ujkpooaocw .gt_footnotes {
+#qglhwupszd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1546,7 +1552,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-right-color: #D3D3D3;
 }
 
-#ujkpooaocw .gt_footnote {
+#qglhwupszd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1555,7 +1561,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 5px;
 }
 
-#ujkpooaocw .gt_sourcenotes {
+#qglhwupszd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1569,7 +1575,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-right-color: #D3D3D3;
 }
 
-#ujkpooaocw .gt_sourcenote {
+#qglhwupszd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1577,63 +1583,63 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 5px;
 }
 
-#ujkpooaocw .gt_left {
+#qglhwupszd .gt_left {
   text-align: left;
 }
 
-#ujkpooaocw .gt_center {
+#qglhwupszd .gt_center {
   text-align: center;
 }
 
-#ujkpooaocw .gt_right {
+#qglhwupszd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ujkpooaocw .gt_font_normal {
+#qglhwupszd .gt_font_normal {
   font-weight: normal;
 }
 
-#ujkpooaocw .gt_font_bold {
+#qglhwupszd .gt_font_bold {
   font-weight: bold;
 }
 
-#ujkpooaocw .gt_font_italic {
+#qglhwupszd .gt_font_italic {
   font-style: italic;
 }
 
-#ujkpooaocw .gt_super {
+#qglhwupszd .gt_super {
   font-size: 65%;
 }
 
-#ujkpooaocw .gt_footnote_marks {
+#qglhwupszd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ujkpooaocw .gt_asterisk {
+#qglhwupszd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ujkpooaocw .gt_indent_1 {
+#qglhwupszd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ujkpooaocw .gt_indent_2 {
+#qglhwupszd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ujkpooaocw .gt_indent_3 {
+#qglhwupszd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ujkpooaocw .gt_indent_4 {
+#qglhwupszd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ujkpooaocw .gt_indent_5 {
+#qglhwupszd .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

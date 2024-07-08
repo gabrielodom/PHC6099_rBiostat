@@ -1,5 +1,6 @@
 ---
 title: "Repeated Measures ANOVA"
+subtitle: "Learning how to use Random Intercept ANOVA Models"
 author:
   - name: "Melanie Freire"
     affiliations:
@@ -10,7 +11,7 @@ number-sections: true
 format:
   html:
     self-contained: true
-bibliography: bib/packages.bib
+bibliography: [bib/packages.bib, bib/references.bib]
 ---
 
 
