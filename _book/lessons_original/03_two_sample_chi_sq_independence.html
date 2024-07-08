@@ -367,7 +367,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
+  <a href="../lessons/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
@@ -394,6 +394,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_poisson.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -408,7 +414,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
   </div>
 </li>
       </ul>
@@ -425,7 +431,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -766,23 +772,23 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
 <span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>table1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="glcienavwc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#glcienavwc table {
+<div id="bnwxnlslxm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bnwxnlslxm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#glcienavwc thead, #glcienavwc tbody, #glcienavwc tfoot, #glcienavwc tr, #glcienavwc td, #glcienavwc th {
+#bnwxnlslxm thead, #bnwxnlslxm tbody, #bnwxnlslxm tfoot, #bnwxnlslxm tr, #bnwxnlslxm td, #bnwxnlslxm th {
   border-style: none;
 }
 
-#glcienavwc p {
+#bnwxnlslxm p {
   margin: 0;
   padding: 0;
 }
 
-#glcienavwc .gt_table {
+#bnwxnlslxm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -808,12 +814,12 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#glcienavwc .gt_caption {
+#bnwxnlslxm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#glcienavwc .gt_title {
+#bnwxnlslxm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -825,7 +831,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-bottom-width: 0;
 }
 
-#glcienavwc .gt_subtitle {
+#bnwxnlslxm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -837,7 +843,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-top-width: 0;
 }
 
-#glcienavwc .gt_heading {
+#bnwxnlslxm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -849,13 +855,13 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#glcienavwc .gt_bottom_border {
+#bnwxnlslxm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#glcienavwc .gt_col_headings {
+#bnwxnlslxm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -870,7 +876,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#glcienavwc .gt_col_heading {
+#bnwxnlslxm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -890,7 +896,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   overflow-x: hidden;
 }
 
-#glcienavwc .gt_column_spanner_outer {
+#bnwxnlslxm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -902,15 +908,15 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   padding-right: 4px;
 }
 
-#glcienavwc .gt_column_spanner_outer:first-child {
+#bnwxnlslxm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#glcienavwc .gt_column_spanner_outer:last-child {
+#bnwxnlslxm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#glcienavwc .gt_column_spanner {
+#bnwxnlslxm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -922,11 +928,11 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   width: 100%;
 }
 
-#glcienavwc .gt_spanner_row {
+#bnwxnlslxm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#glcienavwc .gt_group_heading {
+#bnwxnlslxm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -952,7 +958,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   text-align: left;
 }
 
-#glcienavwc .gt_empty_group_heading {
+#bnwxnlslxm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -967,15 +973,15 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   vertical-align: middle;
 }
 
-#glcienavwc .gt_from_md > :first-child {
+#bnwxnlslxm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#glcienavwc .gt_from_md > :last-child {
+#bnwxnlslxm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#glcienavwc .gt_row {
+#bnwxnlslxm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -994,7 +1000,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   overflow-x: hidden;
 }
 
-#glcienavwc .gt_stub {
+#bnwxnlslxm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1007,7 +1013,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   padding-right: 5px;
 }
 
-#glcienavwc .gt_stub_row_group {
+#bnwxnlslxm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1021,15 +1027,15 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   vertical-align: top;
 }
 
-#glcienavwc .gt_row_group_first td {
+#bnwxnlslxm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#glcienavwc .gt_row_group_first th {
+#bnwxnlslxm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#glcienavwc .gt_summary_row {
+#bnwxnlslxm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1039,16 +1045,16 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   padding-right: 5px;
 }
 
-#glcienavwc .gt_first_summary_row {
+#bnwxnlslxm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#glcienavwc .gt_first_summary_row.thick {
+#bnwxnlslxm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#glcienavwc .gt_last_summary_row {
+#bnwxnlslxm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1058,7 +1064,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#glcienavwc .gt_grand_summary_row {
+#bnwxnlslxm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1068,7 +1074,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   padding-right: 5px;
 }
 
-#glcienavwc .gt_first_grand_summary_row {
+#bnwxnlslxm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1078,7 +1084,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#glcienavwc .gt_last_grand_summary_row_top {
+#bnwxnlslxm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1088,11 +1094,11 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#glcienavwc .gt_striped {
+#bnwxnlslxm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#glcienavwc .gt_table_body {
+#bnwxnlslxm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1101,7 +1107,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#glcienavwc .gt_footnotes {
+#bnwxnlslxm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1115,7 +1121,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#glcienavwc .gt_footnote {
+#bnwxnlslxm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1124,7 +1130,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   padding-right: 5px;
 }
 
-#glcienavwc .gt_sourcenotes {
+#bnwxnlslxm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1138,7 +1144,7 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#glcienavwc .gt_sourcenote {
+#bnwxnlslxm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1146,63 +1152,63 @@ X-squared = 8.1645, df = 2, p-value = 0.01687</code></pre>
   padding-right: 5px;
 }
 
-#glcienavwc .gt_left {
+#bnwxnlslxm .gt_left {
   text-align: left;
 }
 
-#glcienavwc .gt_center {
+#bnwxnlslxm .gt_center {
   text-align: center;
 }
 
-#glcienavwc .gt_right {
+#bnwxnlslxm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#glcienavwc .gt_font_normal {
+#bnwxnlslxm .gt_font_normal {
   font-weight: normal;
 }
 
-#glcienavwc .gt_font_bold {
+#bnwxnlslxm .gt_font_bold {
   font-weight: bold;
 }
 
-#glcienavwc .gt_font_italic {
+#bnwxnlslxm .gt_font_italic {
   font-style: italic;
 }
 
-#glcienavwc .gt_super {
+#bnwxnlslxm .gt_super {
   font-size: 65%;
 }
 
-#glcienavwc .gt_footnote_marks {
+#bnwxnlslxm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#glcienavwc .gt_asterisk {
+#bnwxnlslxm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#glcienavwc .gt_indent_1 {
+#bnwxnlslxm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#glcienavwc .gt_indent_2 {
+#bnwxnlslxm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#glcienavwc .gt_indent_3 {
+#bnwxnlslxm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#glcienavwc .gt_indent_4 {
+#bnwxnlslxm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#glcienavwc .gt_indent_5 {
+#bnwxnlslxm .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

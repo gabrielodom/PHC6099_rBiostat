@@ -1,0 +1,279 @@
+---
+title: "Introduction to Polynomial Regression"
+subtitle: "Understanding and Coding in R"
+author: "Linh Cao, Deidre Okeke, Saurya Dhungel, and Gabriel Odom"
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+---
+
+
+
+## What is a Polynomial Regression?
+
+Polynomial regression is a type of regression analysis that models the non-linear relationship between the predictor variable(s) and response variable. It is an extension of simple linear regression that allows for more complex relationships between predictor and response variables. [Field A, 2013](https://rauterberg.employee.id.tue.nl/lecturenotes/DBB150/references/Field-2013%20Discovering%20Statistics%20Using%20IBM%20SPSS-ed4.pdf)
+
+
+### When is a Polynomial Regression Used?
+
+Polynomial regression is useful when the relationship between the independent and dependent variables is **nonlinear**. It can capture more complex relationships than linear regression, making it suitable for cases where the data exhibits [curvature]{.underline}.
+
+
+### Assumptions of Polynomial Regression
+
+1.  **Linearity**: There is a curvilinear relationship between the independent variable(s) and the dependent variable.
+2.  **Homoscedasticity**: The variance of the errors should be constant across all levels of the independent variable(s).
+3.  **Normality**: The errors should be normally distributed with mean zero and a constant variance.
+4.  **Independence**:The predictor variables are independent of each other.
+
+
+### Mathematical Equation
+
+Consider independent samples $i = 1, \ldots, n$. The general formula for a polynomial regression representing the relationship between the response variable ($y$) and the predictor variable ($x$) as a polynomial function of degree $d$ is:
+
+$$
+y_i = \beta_0 + \beta_1x_i + \beta_2x_i^2 + \beta_3x_i^3 + ... \beta_dx_i^d + \epsilon_i,
+$$
+
+where:
+
+-   $y_i$ represents the response variable,
+-   $x_i$ represents the predictor variable,
+-   $\beta_0,\ \beta_1,\ \ldots,\ \beta_d$ are the coefficients to be estimated, and
+-   $\epsilon_i$ represents the errors.
+
+For large degree $d$, polynomial regression allows us to produce an extremely non-linear curve. Therefore, it is not common to use $d > 4$ because the larger value of $d$, the more overly flexible polynomial curve becomes, which can lead to overfitting the model to the data. [Jackson SE, 2024](https://bookdown.org/ssjackson300/Machine-Learning-Lecture-Notes/polynomial-regression.html#polynomial-regression)
+
+The coefficients in polynomial function can be estimated using least square linear regression because it can be viewed as a standard linear model with predictors $x_i, \,x_i^2, \,x_i^3, ..., x_i^d$. Hence, polynomial regression is also known as *polynomial linear regression*.
+
+
+### Performing a Polynomial Regression in R
+
+-   Step 0: Load required packages
+-   Step 1: Load and inspect the data
+-   Step 2: Visualize the data
+-   Step 3: Fit the model
+-   Step 4: Assess Assumptions
+-   Step 5: Describe model output
+
+
+
+## Let's Practice!
+
+Now let's go through the steps to perform a polynomial regression in R. We will be using the `lm()` function to fit the polynomial regression model. This function comes standard in base R.
+
+For this example, we will use the built-in `mtcars` dataset (from the standard R package `datasets`) which is publicly available and contains information about various car models.
+
+### Hypotheses
+For this example, we are investigating the following:
+
+-   **Research Question**: Is there a significant *quadratic relationship* between the weight of a car (`wt`) and its miles per gallon (`mpg`) in the `mtcars` dataset?
+-   **Null hypothesis ($H_0$)**: There is no significant relationship between the weight of a car (`wt`) and its miles per gallon (`mpg`).
+-   **Alternative hypothesis ($H_A$)**: There is a significant relationship between the weight of a car (`wt`) and its miles per gallon (`mpg`).
+
+In this case, the null hypothesis assumes that the coefficients of the quadratic polynomial terms are zero, indicating no relationship between the weight of the car and miles per gallon. The alternative hypothesis, on the other hand, suggests that at least one of the quadratic polynomial terms is non-zero, indicating a significant relationship between the weight of the car and miles per gallon.
+
+By performing the polynomial regression analysis and examining the model summary and coefficients, we can evaluate the statistical significance of the relationship and determine whether to reject or fail to reject the null hypothesis.
+
+
+### Step 0: Install and load required package
+As we want to visualize our data after fitting the model, we will be loading the `ggplot2` package.
+
+```{r, echo=TRUE}
+# For data visualization purposes
+# install.packages("ggplot2")
+library(ggplot2)
+```
+
+
+### Step 1: Load and inspect the data
+
+```{r, echo=TRUE}
+# Load mtcars dataset
+data(mtcars)
+```
+
+```{r, echo=TRUE}
+# Print the first few rows
+head(mtcars)
+```
+
+
+### Step 2: Visualize the data
+Before fitting a polynomial regression model, it's helpful to visualize the data to identify any [non-linear]{.underline} patterns. For our example, we will use a scatter plot to visualize the relationship between the independent and dependent variables:
+
+```{r, echo=TRUE}
+# Scatter plot of mpg (dependent variable) vs. wt (independent variable)
+ggplot(mtcars) +
+  theme_minimal() +
+  aes(x = wt, y = mpg) + 
+  labs(x = "Weight (lbs/1000)", y = "Miles per Gallon") +
+  geom_point()
+```
+
+
+### Step 3: Fit Models
+Let us create a function so we can build multiple models. We will fit a standard linear (degree = 1) and a quadratic polynomial (degree = 2) to the `mtcars` dataset.
+
+```{r, echo=TRUE}
+# Function to fit and evaluate polynomial regression models
+fit_poly_regression <- function(degree) { 
+  #argument specifies the degree of the polynomial for the regression
+  formula <- as.formula(paste("mpg ~ poly(wt, ", degree, ", raw = TRUE)")) 
+  #paste concatenates the components into a single string eg:`mpg ~ poly(wt, 2)`
+  #poly returns an orthogonal polynomials as default
+  #(If `raw = TRUE` calculates raw polynomial instead of orthogonal polynomial)  
+  #as.formula converts the constructed string into a formula object 
+  lm(formula, data = mtcars) #fitting the model
+}
+
+# Fit polynomial regression models with degrees 1 to 2
+model_1 <- fit_poly_regression(1)
+model_2 <- fit_poly_regression(2)
+```
+
+*Note 1: To learn more about orthogonal polynomial regression, follow: 
+a. [Orthogonal polynomial equation and explanation](https://stats.libretexts.org/Bookshelves/Advanced_Statistics/Analysis_of_Variance_and_Design_of_Experiments/10%3A_ANCOVA_Part_II/10.02%3A_Quantitative_Predictors_-_Orthogonal_Polynomials#:~:text=The%20orthogonal%20polynomial%20coding%20can,orthogonal%20polynomial%20contrasts%20or%20comparisons.)
+b. [Stackoverflow - difference between raw vs orthogonal polynomial](https://stackoverflow.com/questions/29999900/poly-in-lm-difference-between-raw-vs-orthogonal)
+c. [StackExchange - Interpreting coefficients from raw vs orthogonal polynomial](https://stats.stackexchange.com/questions/95939/how-to-interpret-coefficients-from-a-polynomial-model-fit)
+
+*Note 2: Using orthogonal polynomial regression would have also resulted in same plots  based on which the assumptions are assessed. Moreover, it produces exact same p-value for the quadratic term but the p-value for linear term and the estimates for intercept, linear and quadratic term would be different than using raw polynomial regression.  
+
+### Step 4: Assess Assumptions
+Before we can interpret the model, we have to check the assumptions. We will check these assumptions via plots:
+
+1) Residuals vs. Fitted values (used to check the linearity assumption),
+2) a Q-Q plot of the Residuals (used to check the normality of the residuals),
+3) a Scale-Location plot (used to check for heteroskedasticity), and
+4) Residuals vs. Leverage values (identifies overly influential values, if any exist). 
+
+```{r}
+par(mfrow = c(2, 2)) #sets graphical parameters
+plot(model_1, which = c(1, 2, 3, 5))
+plot(model_2, which = c(1, 2, 3, 5))
+par(mfrow = c(1, 1))
+```
+
+The residuals vs fitted graph in the linear model has a U-shape, which suggests that we need a quadratic polynomial component. The Q-Q plot shows that the residuals are not normally distributed, so we should take additional steps to transform the response feature (such as via a square root or log transformation, or something similar).
+
+ 
+
+### Conducting cube root transformation
+We will cube root transform the response variable to build the models again. 
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+#cube root transformation of response variable (mpg)
+library(dplyr)
+mtcars <- mtcars %>% mutate(mpg_cuberoot = mpg^(1/3))
+
+#Running model after cube root transformation
+fit_poly_regression_2 <- function(degree) { 
+  #argument specifies the degree of the polynomial for the regression
+  formula_2 <- as.formula(paste("mpg_cuberoot ~ poly(wt, ", degree, ", raw = TRUE)")) 
+  #paste concatenates the components into a single string eg:`mpg ~ poly(wt, 2)`
+  #poly returns an orthogonal polynomials as default
+  #(If `raw = TRUE` calculates raw polynomial instead of orthogonal polynomial)  
+  #as.formula converts the constructed string into a formula object 
+  lm(formula_2, data = mtcars) #fitting the model
+}
+
+# Fit polynomial regression models with degrees 1 to 2
+model_1_b <- fit_poly_regression_2(1)
+model_2_b <- fit_poly_regression_2(2)
+```
+
+
+### Assessing assumptions on cube root transformed data
+We will assess the assumption of the polynomial regression with the plots similar to non-transformed model.
+
+```{r}
+par(mfrow = c(2, 2)) #sets graphical parameters
+plot(model_1_b, which = c(1, 2, 3, 5))
+plot(model_2_b, which = c(1, 2, 3, 5))
+par(mfrow = c(1, 1))
+```
+
+After cube root transformation of the response variable, the residuals are seem to approximately normally distributed. Zoom in to see the difference between the Q-Q plots in the first quadratic model (model_2) and cube root transformed quadratic model (model_2_b). You can also draw the Q-Q plot again to see the difference more distinctly. 
+
+```{r}
+
+qqnorm(residuals(model_2))
+qqline(residuals(model_2))
+
+
+qqnorm(residuals(model_2_b))
+qqline(residuals(model_2_b))
+```
+
+
+### Step 5. Describe Model Output
+As the residuals of the cube root transformed model seem to be approximately normal, here is an example of how to interpret this output.
+
+```{r}
+summary(model_2)
+summary(model_2_b)
+```
+
+The model could be said as being highly significant as indicated by the p-value. The significant negative linear term and significant positive quadratic term imply that mpg decreases with weight initially, but the rate of decrease slows as weight increases.
+
+The purpose of checking the transformed response is to confirm that the confidence intervals are valid and the signs of the regression coefficients are going are correct (i.e. in the same direction) as the original model (non-transformed quadratic model). 
+
+
+### Bonus Step: Visualize the Final Model 
+
+Finally, we will build the scatter plot with the polynomial regression line to visualize the fit:
+
+```{r, echo=TRUE}
+# Create a data frame with data points and predictions 
+plot_data <- data.frame(
+  wt = mtcars$wt,
+  mpg = mtcars$mpg, 
+  mpg_predicted = predict(model_2, newdata = mtcars)
+)
+
+# Scatter plot with the polynomial regression line
+ggplot(plot_data) +
+  theme_minimal() + 
+  aes(x = wt, y = mpg) + 
+  labs(
+    title = "Scatter Plot with Polynomial Regression Line",
+    x = "Weight (wt)",
+    y = "Miles per Gallon (mpg)"
+  ) +
+  geom_point() +
+  geom_line(aes(y = mpg_predicted), color = "red", size = 1)
+
+plot_data_b <- data.frame(
+  wt = mtcars$wt,
+  mpg_cuberoot = mtcars$mpg_cuberoot, 
+  mpg_predicted = predict(model_2_b, newdata = mtcars)
+)
+
+# Scatter plot with the polynomial regression line
+ggplot(plot_data_b) +
+  theme_minimal() + 
+  aes(x = wt, y = mpg_cuberoot) + 
+  labs(
+    title = "Scatter Plot with Polynomial Regression Line (Cube transformed)",
+    x = "Weight (wt)",
+    y = "Cube transfomred Miles per Gallon (mpg)"
+  ) +
+  geom_point() +
+  geom_line(aes(y = mpg_predicted), color = "red", size = 1)
+```
+
+
+
+
+## References 
+
+1.  Field, A. (2013). Discovering Statistics Using IBM SPSS Statistics. (4th ed.). Sage Publications.
+
+2.  https://bookdown.org/ssjackson300/Machine-Learning-Lecture-Notes/#welcome
+
+3. https://stats.libretexts.org/Bookshelves/Advanced_Statistics/Analysis_of_Variance_and_Design_of_Experiments/10%3A_ANCOVA_Part_II/10.02%3A_Quantitative_Predictors_-_Orthogonal_Polynomials#
+

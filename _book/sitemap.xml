@@ -113,8 +113,8 @@
     <lastmod>2024-05-21T14:25:45.769Z</lastmod>
   </url>
   <url>
-    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/04_regression_polynomial.html</loc>
-    <lastmod>2024-05-21T14:41:43.895Z</lastmod>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons/04_regression_polynomial.html</loc>
+    <lastmod>2024-07-08T17:44:02.966Z</lastmod>
   </url>
   <url>
     <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/04_regression_random_intercept.html</loc>
@@ -127,6 +127,10 @@
   <url>
     <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/05_glm_ordinal_logistic.html</loc>
     <lastmod>2024-05-21T14:28:40.902Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons/05_glm_poisson.html</loc>
+    <lastmod>2024-07-08T18:03:36.525Z</lastmod>
   </url>
   <url>
     <loc>https://gabrielodom.github.io/PHC6099_rBiostat/06_header_special-topics.html</loc>

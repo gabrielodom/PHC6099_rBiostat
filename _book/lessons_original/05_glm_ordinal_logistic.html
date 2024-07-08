@@ -62,7 +62,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../06_header_special-topics.html" rel="next">
+<link href="../lessons/05_glm_poisson.html" rel="next">
 <link href="../05_header_generalized-linear-models.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -349,7 +349,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
+  <a href="../lessons/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
@@ -376,6 +376,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_poisson.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -390,7 +396,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
   </div>
 </li>
       </ul>
@@ -407,7 +413,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -781,23 +787,23 @@ Table&nbsp;27.1: Predictors by treatment group
 </figcaption><div aria-describedby="tbl-table1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <div>
-<div id="amcgooezru" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#amcgooezru table {
+<div id="rjatrwjpdo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rjatrwjpdo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#amcgooezru thead, #amcgooezru tbody, #amcgooezru tfoot, #amcgooezru tr, #amcgooezru td, #amcgooezru th {
+#rjatrwjpdo thead, #rjatrwjpdo tbody, #rjatrwjpdo tfoot, #rjatrwjpdo tr, #rjatrwjpdo td, #rjatrwjpdo th {
   border-style: none;
 }
 
-#amcgooezru p {
+#rjatrwjpdo p {
   margin: 0;
   padding: 0;
 }
 
-#amcgooezru .gt_table {
+#rjatrwjpdo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -823,12 +829,12 @@ Table&nbsp;27.1: Predictors by treatment group
   border-left-color: #D3D3D3;
 }
 
-#amcgooezru .gt_caption {
+#rjatrwjpdo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#amcgooezru .gt_title {
+#rjatrwjpdo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -840,7 +846,7 @@ Table&nbsp;27.1: Predictors by treatment group
   border-bottom-width: 0;
 }
 
-#amcgooezru .gt_subtitle {
+#rjatrwjpdo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -852,7 +858,7 @@ Table&nbsp;27.1: Predictors by treatment group
   border-top-width: 0;
 }
 
-#amcgooezru .gt_heading {
+#rjatrwjpdo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -864,13 +870,13 @@ Table&nbsp;27.1: Predictors by treatment group
   border-right-color: #D3D3D3;
 }
 
-#amcgooezru .gt_bottom_border {
+#rjatrwjpdo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#amcgooezru .gt_col_headings {
+#rjatrwjpdo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -885,7 +891,7 @@ Table&nbsp;27.1: Predictors by treatment group
   border-right-color: #D3D3D3;
 }
 
-#amcgooezru .gt_col_heading {
+#rjatrwjpdo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -905,7 +911,7 @@ Table&nbsp;27.1: Predictors by treatment group
   overflow-x: hidden;
 }
 
-#amcgooezru .gt_column_spanner_outer {
+#rjatrwjpdo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -917,15 +923,15 @@ Table&nbsp;27.1: Predictors by treatment group
   padding-right: 4px;
 }
 
-#amcgooezru .gt_column_spanner_outer:first-child {
+#rjatrwjpdo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#amcgooezru .gt_column_spanner_outer:last-child {
+#rjatrwjpdo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#amcgooezru .gt_column_spanner {
+#rjatrwjpdo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -937,11 +943,11 @@ Table&nbsp;27.1: Predictors by treatment group
   width: 100%;
 }
 
-#amcgooezru .gt_spanner_row {
+#rjatrwjpdo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#amcgooezru .gt_group_heading {
+#rjatrwjpdo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -967,7 +973,7 @@ Table&nbsp;27.1: Predictors by treatment group
   text-align: left;
 }
 
-#amcgooezru .gt_empty_group_heading {
+#rjatrwjpdo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -982,15 +988,15 @@ Table&nbsp;27.1: Predictors by treatment group
   vertical-align: middle;
 }
 
-#amcgooezru .gt_from_md > :first-child {
+#rjatrwjpdo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#amcgooezru .gt_from_md > :last-child {
+#rjatrwjpdo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#amcgooezru .gt_row {
+#rjatrwjpdo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1009,7 +1015,7 @@ Table&nbsp;27.1: Predictors by treatment group
   overflow-x: hidden;
 }
 
-#amcgooezru .gt_stub {
+#rjatrwjpdo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1022,7 +1028,7 @@ Table&nbsp;27.1: Predictors by treatment group
   padding-right: 5px;
 }
 
-#amcgooezru .gt_stub_row_group {
+#rjatrwjpdo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1036,15 +1042,15 @@ Table&nbsp;27.1: Predictors by treatment group
   vertical-align: top;
 }
 
-#amcgooezru .gt_row_group_first td {
+#rjatrwjpdo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#amcgooezru .gt_row_group_first th {
+#rjatrwjpdo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#amcgooezru .gt_summary_row {
+#rjatrwjpdo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1054,16 +1060,16 @@ Table&nbsp;27.1: Predictors by treatment group
   padding-right: 5px;
 }
 
-#amcgooezru .gt_first_summary_row {
+#rjatrwjpdo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#amcgooezru .gt_first_summary_row.thick {
+#rjatrwjpdo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#amcgooezru .gt_last_summary_row {
+#rjatrwjpdo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1073,7 +1079,7 @@ Table&nbsp;27.1: Predictors by treatment group
   border-bottom-color: #D3D3D3;
 }
 
-#amcgooezru .gt_grand_summary_row {
+#rjatrwjpdo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1083,7 +1089,7 @@ Table&nbsp;27.1: Predictors by treatment group
   padding-right: 5px;
 }
 
-#amcgooezru .gt_first_grand_summary_row {
+#rjatrwjpdo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1093,7 +1099,7 @@ Table&nbsp;27.1: Predictors by treatment group
   border-top-color: #D3D3D3;
 }
 
-#amcgooezru .gt_last_grand_summary_row_top {
+#rjatrwjpdo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1103,11 +1109,11 @@ Table&nbsp;27.1: Predictors by treatment group
   border-bottom-color: #D3D3D3;
 }
 
-#amcgooezru .gt_striped {
+#rjatrwjpdo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#amcgooezru .gt_table_body {
+#rjatrwjpdo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1116,7 +1122,7 @@ Table&nbsp;27.1: Predictors by treatment group
   border-bottom-color: #D3D3D3;
 }
 
-#amcgooezru .gt_footnotes {
+#rjatrwjpdo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1130,7 +1136,7 @@ Table&nbsp;27.1: Predictors by treatment group
   border-right-color: #D3D3D3;
 }
 
-#amcgooezru .gt_footnote {
+#rjatrwjpdo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1139,7 +1145,7 @@ Table&nbsp;27.1: Predictors by treatment group
   padding-right: 5px;
 }
 
-#amcgooezru .gt_sourcenotes {
+#rjatrwjpdo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1153,7 +1159,7 @@ Table&nbsp;27.1: Predictors by treatment group
   border-right-color: #D3D3D3;
 }
 
-#amcgooezru .gt_sourcenote {
+#rjatrwjpdo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1161,63 +1167,63 @@ Table&nbsp;27.1: Predictors by treatment group
   padding-right: 5px;
 }
 
-#amcgooezru .gt_left {
+#rjatrwjpdo .gt_left {
   text-align: left;
 }
 
-#amcgooezru .gt_center {
+#rjatrwjpdo .gt_center {
   text-align: center;
 }
 
-#amcgooezru .gt_right {
+#rjatrwjpdo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#amcgooezru .gt_font_normal {
+#rjatrwjpdo .gt_font_normal {
   font-weight: normal;
 }
 
-#amcgooezru .gt_font_bold {
+#rjatrwjpdo .gt_font_bold {
   font-weight: bold;
 }
 
-#amcgooezru .gt_font_italic {
+#rjatrwjpdo .gt_font_italic {
   font-style: italic;
 }
 
-#amcgooezru .gt_super {
+#rjatrwjpdo .gt_super {
   font-size: 65%;
 }
 
-#amcgooezru .gt_footnote_marks {
+#rjatrwjpdo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#amcgooezru .gt_asterisk {
+#rjatrwjpdo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#amcgooezru .gt_indent_1 {
+#rjatrwjpdo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#amcgooezru .gt_indent_2 {
+#rjatrwjpdo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#amcgooezru .gt_indent_3 {
+#rjatrwjpdo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#amcgooezru .gt_indent_4 {
+#rjatrwjpdo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#amcgooezru .gt_indent_5 {
+#rjatrwjpdo .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2088,8 +2094,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../06_header_special-topics.html" class="pagination-link" aria-label="Special Topics in Statistical Modelling">
-        <span class="nav-page-text">Special Topics in Statistical Modelling</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lessons/05_glm_poisson.html" class="pagination-link" aria-label="Poisson Regression Model">
+        <span class="nav-page-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

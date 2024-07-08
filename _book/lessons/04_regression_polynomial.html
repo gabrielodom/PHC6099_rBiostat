@@ -131,7 +131,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_regression_polynomial.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons/04_regression_polynomial.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -348,7 +348,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/04_regression_polynomial.html" class="sidebar-item-text sidebar-link active">
+  <a href="../lessons/04_regression_polynomial.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
@@ -375,6 +375,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_poisson.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -389,7 +395,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
   </div>
 </li>
       </ul>
@@ -406,7 +412,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -437,16 +443,17 @@ window.Quarto = {
   <li><a href="#step-2-visualize-the-data" id="toc-step-2-visualize-the-data" class="nav-link" data-scroll-target="#step-2-visualize-the-data"><span class="header-section-number">25.2.4</span> Step 2: Visualize the data</a></li>
   <li><a href="#step-3-fit-models" id="toc-step-3-fit-models" class="nav-link" data-scroll-target="#step-3-fit-models"><span class="header-section-number">25.2.5</span> Step 3: Fit Models</a></li>
   <li><a href="#step-4-assess-assumptions" id="toc-step-4-assess-assumptions" class="nav-link" data-scroll-target="#step-4-assess-assumptions"><span class="header-section-number">25.2.6</span> Step 4: Assess Assumptions</a></li>
-  <li><a href="#step-5.-describe-model-output" id="toc-step-5.-describe-model-output" class="nav-link" data-scroll-target="#step-5.-describe-model-output"><span class="header-section-number">25.2.7</span> Step 5. Describe Model Output</a></li>
-  <li><a href="#bonus-step-visualize-the-final-model" id="toc-bonus-step-visualize-the-final-model" class="nav-link" data-scroll-target="#bonus-step-visualize-the-final-model"><span class="header-section-number">25.2.8</span> Bonus Step: Visualize the Final Model</a></li>
+  <li><a href="#conducting-cube-root-transformation" id="toc-conducting-cube-root-transformation" class="nav-link" data-scroll-target="#conducting-cube-root-transformation"><span class="header-section-number">25.2.7</span> Conducting cube root transformation</a></li>
+  <li><a href="#assessing-assumptions-on-cube-root-transformed-data" id="toc-assessing-assumptions-on-cube-root-transformed-data" class="nav-link" data-scroll-target="#assessing-assumptions-on-cube-root-transformed-data"><span class="header-section-number">25.2.8</span> Assessing assumptions on cube root transformed data</a></li>
+  <li><a href="#step-5.-describe-model-output" id="toc-step-5.-describe-model-output" class="nav-link" data-scroll-target="#step-5.-describe-model-output"><span class="header-section-number">25.2.9</span> Step 5. Describe Model Output</a></li>
+  <li><a href="#bonus-step-visualize-the-final-model" id="toc-bonus-step-visualize-the-final-model" class="nav-link" data-scroll-target="#bonus-step-visualize-the-final-model"><span class="header-section-number">25.2.10</span> Bonus Step: Visualize the Final Model</a></li>
   </ul>
 </li>
-  <li><a href="#further-discussion" id="toc-further-discussion" class="nav-link" data-scroll-target="#further-discussion"><span class="header-section-number">25.3</span> Further Discussion</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">25.4</span> References</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/04_regression_polynomial.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">25.3</span> References</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/04_regression_polynomial.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons_original/04_regression_polynomial.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons/04_regression_polynomial.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
 <span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span>
 </h1>
@@ -460,7 +467,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Linh Cao, Deidre Okeke, and Gabriel Odom </p>
+             <p>Linh Cao, Deidre Okeke, Saurya Dhungel, and Gabriel Odom </p>
           </div>
   </div>
     
@@ -472,23 +479,21 @@ window.Quarto = {
 
 </header><section id="what-is-a-polynomial-regression" class="level2" data-number="25.1"><h2 data-number="25.1" class="anchored" data-anchor-id="what-is-a-polynomial-regression">
 <span class="header-section-number">25.1</span> What is a Polynomial Regression?</h2>
-<p>Polynomial regression is a type of regression analysis that models the non-linear relationship between the predictor variable(s) and response variable<sup><strong>1</strong></sup>. It is an extension of simple linear regression that allows for more complex relationships between predictor and response variables<sup><strong>1</strong></sup>.</p>
-<p>In simple terms, it allows us to fit a <u>curve</u> to our data instead of a straight line.</p>
+<p>Polynomial regression is a type of regression analysis that models the non-linear relationship between the predictor variable(s) and response variable. It is an extension of simple linear regression that allows for more complex relationships between predictor and response variables. <a href="https://rauterberg.employee.id.tue.nl/lecturenotes/DBB150/references/Field-2013%20Discovering%20Statistics%20Using%20IBM%20SPSS-ed4.pdf">Field A, 2013</a></p>
 <section id="when-is-a-polynomial-regression-used" class="level3" data-number="25.1.1"><h3 data-number="25.1.1" class="anchored" data-anchor-id="when-is-a-polynomial-regression-used">
 <span class="header-section-number">25.1.1</span> When is a Polynomial Regression Used?</h3>
-<p>Polynomial regression is useful when the relationship between the independent and dependent variables is <strong>nonlinear</strong>.</p>
-<p>It can capture more complex relationships than linear regression, making it suitable for cases where the data exhibits <u>curvature</u>.</p>
+<p>Polynomial regression is useful when the relationship between the independent and dependent variables is <strong>nonlinear</strong>. It can capture more complex relationships than linear regression, making it suitable for cases where the data exhibits <u>curvature</u>.</p>
 </section><section id="assumptions-of-polynomial-regression" class="level3" data-number="25.1.2"><h3 data-number="25.1.2" class="anchored" data-anchor-id="assumptions-of-polynomial-regression">
 <span class="header-section-number">25.1.2</span> Assumptions of Polynomial Regression</h3>
 <ol type="1">
 <li>
 <strong>Linearity</strong>: There is a curvilinear relationship between the independent variable(s) and the dependent variable.</li>
 <li>
-<strong>Independence</strong>: The predictor variables are independent of each other.</li>
-<li>
 <strong>Homoscedasticity</strong>: The variance of the errors should be constant across all levels of the independent variable(s).</li>
 <li>
 <strong>Normality</strong>: The errors should be normally distributed with mean zero and a constant variance.</li>
+<li>
+<strong>Independence</strong>:The predictor variables are independent of each other.</li>
 </ol></section><section id="mathematical-equation" class="level3" data-number="25.1.3"><h3 data-number="25.1.3" class="anchored" data-anchor-id="mathematical-equation">
 <span class="header-section-number">25.1.3</span> Mathematical Equation</h3>
 <p>Consider independent samples <span class="math inline">\(i = 1, \ldots, n\)</span>. The general formula for a polynomial regression representing the relationship between the response variable (<span class="math inline">\(y\)</span>) and the predictor variable (<span class="math inline">\(x\)</span>) as a polynomial function of degree <span class="math inline">\(d\)</span> is:</p>
@@ -506,7 +511,7 @@ y_i = \beta_0 + \beta_1x_i + \beta_2x_i^2 + \beta_3x_i^3 + ... \beta_dx_i^d + \e
 <li>
 <span class="math inline">\(\epsilon_i\)</span> represents the errors.</li>
 </ul>
-<p>For large degree <span class="math inline">\(d\)</span>, polynomial regression allows us to produce an extremely non-linear curve. Therefore, it is not common to use <span class="math inline">\(d &gt; 3\)</span> because the larger value of <span class="math inline">\(d\)</span>, the more overly flexible polynomial curve becomes, which can lead to overfitting them model to the data.</p>
+<p>For large degree <span class="math inline">\(d\)</span>, polynomial regression allows us to produce an extremely non-linear curve. Therefore, it is not common to use <span class="math inline">\(d &gt; 4\)</span> because the larger value of <span class="math inline">\(d\)</span>, the more overly flexible polynomial curve becomes, which can lead to overfitting the model to the data. <a href="https://bookdown.org/ssjackson300/Machine-Learning-Lecture-Notes/polynomial-regression.html#polynomial-regression">Jackson SE, 2024</a></p>
 <p>The coefficients in polynomial function can be estimated using least square linear regression because it can be viewed as a standard linear model with predictors <span class="math inline">\(x_i, \,x_i^2, \,x_i^3, ..., x_i^d\)</span>. Hence, polynomial regression is also known as <em>polynomial linear regression</em>.</p>
 </section><section id="performing-a-polynomial-regression-in-r" class="level3" data-number="25.1.4"><h3 data-number="25.1.4" class="anchored" data-anchor-id="performing-a-polynomial-regression-in-r">
 <span class="header-section-number">25.1.4</span> Performing a Polynomial Regression in R</h3>
@@ -519,7 +524,8 @@ y_i = \beta_0 + \beta_1x_i + \beta_2x_i^2 + \beta_3x_i^3 + ... \beta_dx_i^d + \e
 <li>Step 5: Describe model output</li>
 </ul></section></section><section id="lets-practice" class="level2" data-number="25.2"><h2 data-number="25.2" class="anchored" data-anchor-id="lets-practice">
 <span class="header-section-number">25.2</span> Let’s Practice!</h2>
-<p>Now let’s go through the steps to perform a polynomial regression in R. We’ll be using the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function to fit the polynomial regression model. This function comes standard in base R.</p>
+<p>Now let’s go through the steps to perform a polynomial regression in R. We will be using the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function to fit the polynomial regression model. This function comes standard in base R.</p>
+<p>For this example, we will use the built-in <code>mtcars</code> dataset (from the standard R package <code>datasets</code>) which is publicly available and contains information about various car models.</p>
 <section id="hypotheses" class="level3" data-number="25.2.1"><h3 data-number="25.2.1" class="anchored" data-anchor-id="hypotheses">
 <span class="header-section-number">25.2.1</span> Hypotheses</h3>
 <p>For this example, we are investigating the following:</p>
@@ -535,7 +541,7 @@ y_i = \beta_0 + \beta_1x_i + \beta_2x_i^2 + \beta_3x_i^3 + ... \beta_dx_i^d + \e
 <p>By performing the polynomial regression analysis and examining the model summary and coefficients, we can evaluate the statistical significance of the relationship and determine whether to reject or fail to reject the null hypothesis.</p>
 </section><section id="step-0-install-and-load-required-package" class="level3" data-number="25.2.2"><h3 data-number="25.2.2" class="anchored" data-anchor-id="step-0-install-and-load-required-package">
 <span class="header-section-number">25.2.2</span> Step 0: Install and load required package</h3>
-<p>In R, we’ll use the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function from the base package to perform polynomial regression. Also, since we want to visualize our data, we will be loading the <code>ggplot2</code> package for use.</p>
+<p>As we want to visualize our data after fitting the model, we will be loading the <code>ggplot2</code> package.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># For data visualization purposes</span></span>
 <span><span class="co"># install.packages("ggplot2")</span></span>
@@ -543,7 +549,6 @@ y_i = \beta_0 + \beta_1x_i + \beta_2x_i^2 + \beta_3x_i^3 + ... \beta_dx_i^d + \e
 </div>
 </section><section id="step-1-load-and-inspect-the-data" class="level3" data-number="25.2.3"><h3 data-number="25.2.3" class="anchored" data-anchor-id="step-1-load-and-inspect-the-data">
 <span class="header-section-number">25.2.3</span> Step 1: Load and inspect the data</h3>
-<p>For this example, we will use the built-in <code>mtcars</code> dataset (from the standard R package <code>datasets</code>) which is publicly available and contains information about various car models.</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Load mtcars dataset</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -580,19 +585,25 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 </div>
 </section><section id="step-3-fit-models" class="level3" data-number="25.2.5"><h3 data-number="25.2.5" class="anchored" data-anchor-id="step-3-fit-models">
 <span class="header-section-number">25.2.5</span> Step 3: Fit Models</h3>
-<p>Let’s create a function so we can build multiple models. We will build a standard linear model and a quadratic model (degrees 1 and 2, respectively).</p>
+<p>Let us create a function so we can build multiple models. We will fit a standard linear (degree = 1) and a quadratic polynomial (degree = 2) to the <code>mtcars</code> dataset.</p>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Function to fit and evaluate polynomial regression models</span></span>
-<span><span class="va">fit_poly_regression</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">degree</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">formula</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/formula.html">as.formula</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"mpg ~ poly(wt, "</span>, <span class="va">degree</span>, <span class="st">")"</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">formula</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="va">fit_poly_regression</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">degree</span><span class="op">)</span> <span class="op">{</span> </span>
+<span>  <span class="co">#argument specifies the degree of the polynomial for the regression</span></span>
+<span>  <span class="va">formula</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/formula.html">as.formula</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"mpg ~ poly(wt, "</span>, <span class="va">degree</span>, <span class="st">", raw = TRUE)"</span><span class="op">)</span><span class="op">)</span> </span>
+<span>  <span class="co">#paste concatenates the components into a single string eg:`mpg ~ poly(wt, 2)`</span></span>
+<span>  <span class="co">#poly returns an orthogonal polynomials as default</span></span>
+<span>  <span class="co">#(If `raw = TRUE` calculates raw polynomial instead of orthogonal polynomial)  </span></span>
+<span>  <span class="co">#as.formula converts the constructed string into a formula object </span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">formula</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span> <span class="co">#fitting the model</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># Fit polynomial regression models with degrees 1 to 2</span></span>
 <span><span class="va">model_1</span> <span class="op">&lt;-</span> <span class="fu">fit_poly_regression</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">model_2</span> <span class="op">&lt;-</span> <span class="fu">fit_poly_regression</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>To fit a polynomial regression model, we’ll use the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function and create polynomial terms using the <code><a href="https://rdrr.io/r/stats/poly.html">poly()</a></code> function. In this example, we’ll fit a standard linear (degree = 1) and a quadratic polynomial (degree = 2) to the <code>mtcars</code> dataset.</p>
+<p>*Note 1: To learn more about orthogonal polynomial regression, follow: a. <a href="https://stats.libretexts.org/Bookshelves/Advanced_Statistics/Analysis_of_Variance_and_Design_of_Experiments/10%3A_ANCOVA_Part_II/10.02%3A_Quantitative_Predictors_-_Orthogonal_Polynomials#:~:text=The%20orthogonal%20polynomial%20coding%20can,orthogonal%20polynomial%20contrasts%20or%20comparisons.">Orthogonal polynomial equation and explanation</a> b. <a href="https://stackoverflow.com/questions/29999900/poly-in-lm-difference-between-raw-vs-orthogonal">Stackoverflow - difference between raw vs orthogonal polynomial</a> c.&nbsp;<a href="https://stats.stackexchange.com/questions/95939/how-to-interpret-coefficients-from-a-polynomial-model-fit">StackExchange - Interpreting coefficients from raw vs orthogonal polynomial</a></p>
+<p>*Note 2: Using orthogonal polynomial regression would have also resulted in same plots based on which the assumptions are assessed. Moreover, it produces exact same p-value for the quadratic term but the p-value for linear term and the estimates for intercept, linear and quadratic term would be different than using raw polynomial regression.</p>
 </section><section id="step-4-assess-assumptions" class="level3" data-number="25.2.6"><h3 data-number="25.2.6" class="anchored" data-anchor-id="step-4-assess-assumptions">
 <span class="header-section-number">25.2.6</span> Step 4: Assess Assumptions</h3>
 <p>Before we can interpret the model, we have to check the assumptions. We will check these assumptions via plots:</p>
@@ -603,7 +614,7 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 <li>Residuals vs.&nbsp;Leverage values (identifies overly influential values, if any exist).</li>
 </ol>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="co">#sets graphical parameters</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">model_1</span>, which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
@@ -620,12 +631,75 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 </div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We see that Model 2 (the quadratic one) satisfies the “linearity” assumption, because the red line in the “Residuals vs Fitted” graph is flat. However, the Q-Q plot shows that the residuals are not normally distributed, so we should take additional steps to transform the response feature (such as via a square root or log transformation, or something similar).</p>
-</section><section id="step-5.-describe-model-output" class="level3" data-number="25.2.7"><h3 data-number="25.2.7" class="anchored" data-anchor-id="step-5.-describe-model-output">
-<span class="header-section-number">25.2.7</span> Step 5. Describe Model Output</h3>
-<p>Although we recognize that this model is not correct (because the residuals are not approximately normal), we will give an example of how to interpret this output.</p>
+<p>The residuals vs fitted graph in the linear model has a U-shape, which suggests that we need a quadratic polynomial component. The Q-Q plot shows that the residuals are not normally distributed, so we should take additional steps to transform the response feature (such as via a square root or log transformation, or something similar).</p>
+</section><section id="conducting-cube-root-transformation" class="level3" data-number="25.2.7"><h3 data-number="25.2.7" class="anchored" data-anchor-id="conducting-cube-root-transformation">
+<span class="header-section-number">25.2.7</span> Conducting cube root transformation</h3>
+<p>We will cube root transform the response variable to build the models again.</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">model_2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#cube root transformation of response variable (mpg)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="va">mtcars</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>mpg_cuberoot <span class="op">=</span> <span class="va">mpg</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#Running model after cube root transformation</span></span>
+<span><span class="va">fit_poly_regression_2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">degree</span><span class="op">)</span> <span class="op">{</span> </span>
+<span>  <span class="co">#argument specifies the degree of the polynomial for the regression</span></span>
+<span>  <span class="va">formula_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/formula.html">as.formula</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"mpg_cuberoot ~ poly(wt, "</span>, <span class="va">degree</span>, <span class="st">", raw = TRUE)"</span><span class="op">)</span><span class="op">)</span> </span>
+<span>  <span class="co">#paste concatenates the components into a single string eg:`mpg ~ poly(wt, 2)`</span></span>
+<span>  <span class="co">#poly returns an orthogonal polynomials as default</span></span>
+<span>  <span class="co">#(If `raw = TRUE` calculates raw polynomial instead of orthogonal polynomial)  </span></span>
+<span>  <span class="co">#as.formula converts the constructed string into a formula object </span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">formula_2</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span> <span class="co">#fitting the model</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Fit polynomial regression models with degrees 1 to 2</span></span>
+<span><span class="va">model_1_b</span> <span class="op">&lt;-</span> <span class="fu">fit_poly_regression_2</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">model_2_b</span> <span class="op">&lt;-</span> <span class="fu">fit_poly_regression_2</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="assessing-assumptions-on-cube-root-transformed-data" class="level3" data-number="25.2.8"><h3 data-number="25.2.8" class="anchored" data-anchor-id="assessing-assumptions-on-cube-root-transformed-data">
+<span class="header-section-number">25.2.8</span> Assessing assumptions on cube root transformed data</h3>
+<p>We will assess the assumption of the polynomial regression with the plots similar to non-transformed model.</p>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="co">#sets graphical parameters</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">model_1_b</span>, which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="04_regression_polynomial_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">model_2_b</span>, which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="04_regression_polynomial_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After cube root transformation of the response variable, the residuals are seem to approximately normally distributed. Zoom in to see the difference between the Q-Q plots in the first quadratic model (model_2) and cube root transformed quadratic model (model_2_b). You can also draw the Q-Q plot again to see the difference more distinctly.</p>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">model_2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">model_2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="04_regression_polynomial_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">model_2_b</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">model_2_b</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="04_regression_polynomial_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="step-5.-describe-model-output" class="level3" data-number="25.2.9"><h3 data-number="25.2.9" class="anchored" data-anchor-id="step-5.-describe-model-output">
+<span class="header-section-number">25.2.9</span> Step 5. Describe Model Output</h3>
+<p>As the residuals of the cube root transformed model seem to be approximately normal, here is an example of how to interpret this output.</p>
+<div class="cell">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">model_2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -636,10 +710,10 @@ Residuals:
 -3.483 -1.998 -0.773  1.462  6.238 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   20.0906     0.4686  42.877  &lt; 2e-16 ***
-poly(wt, 2)1 -29.1157     2.6506 -10.985 7.52e-12 ***
-poly(wt, 2)2   8.6358     2.6506   3.258  0.00286 ** 
+                         Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)               49.9308     4.2113  11.856 1.21e-12 ***
+poly(wt, 2, raw = TRUE)1 -13.3803     2.5140  -5.322 1.04e-05 ***
+poly(wt, 2, raw = TRUE)2   1.1711     0.3594   3.258  0.00286 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -647,12 +721,36 @@ Residual standard error: 2.651 on 29 degrees of freedom
 Multiple R-squared:  0.8191,    Adjusted R-squared:  0.8066 
 F-statistic: 65.64 on 2 and 29 DF,  p-value: 1.715e-11</code></pre>
 </div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">model_2_b</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = formula_2, data = mtcars)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.16361 -0.08607 -0.02612  0.07303  0.23272 
+
+Coefficients:
+                         Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)               3.84775    0.18784  20.484  &lt; 2e-16 ***
+poly(wt, 2, raw = TRUE)1 -0.48063    0.11214  -4.286 0.000183 ***
+poly(wt, 2, raw = TRUE)2  0.03471    0.01603   2.165 0.038777 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.1182 on 29 degrees of freedom
+Multiple R-squared:  0.8171,    Adjusted R-squared:  0.8044 
+F-statistic: 64.76 on 2 and 29 DF,  p-value: 2.012e-11</code></pre>
 </div>
-</section><section id="bonus-step-visualize-the-final-model" class="level3" data-number="25.2.8"><h3 data-number="25.2.8" class="anchored" data-anchor-id="bonus-step-visualize-the-final-model">
-<span class="header-section-number">25.2.8</span> Bonus Step: Visualize the Final Model</h3>
-<p>Finally, let’s plot the scatter plot with the polynomial regression line to visualize the fit:</p>
+</div>
+<p>The model could be said as being highly significant as indicated by the p-value. The significant negative linear term and significant positive quadratic term imply that mpg decreases with weight initially, but the rate of decrease slows as weight increases.</p>
+<p>The purpose of checking the transformed response is to confirm that the confidence intervals are valid and the signs of the regression coefficients are going are correct (i.e.&nbsp;in the same direction) as the original model (non-transformed quadratic model).</p>
+</section><section id="bonus-step-visualize-the-final-model" class="level3" data-number="25.2.10"><h3 data-number="25.2.10" class="anchored" data-anchor-id="bonus-step-visualize-the-final-model">
+<span class="header-section-number">25.2.10</span> Bonus Step: Visualize the Final Model</h3>
+<p>Finally, we will build the scatter plot with the polynomial regression line to visualize the fit:</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Create a data frame with data points and predictions </span></span>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Create a data frame with data points and predictions </span></span>
 <span><span class="va">plot_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>  wt <span class="op">=</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">wt</span>,</span>
 <span>  mpg <span class="op">=</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, </span>
@@ -676,23 +774,40 @@ F-statistic: 65.64 on 2 and 29 DF,  p-value: 1.715e-11</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="04_regression_polynomial_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="04_regression_polynomial_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">plot_data_b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  wt <span class="op">=</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">wt</span>,</span>
+<span>  mpg_cuberoot <span class="op">=</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">mpg_cuberoot</span>, </span>
+<span>  mpg_predicted <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">model_2_b</span>, newdata <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Scatter plot with the polynomial regression line</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">plot_data_b</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">wt</span>, y <span class="op">=</span> <span class="va">mpg_cuberoot</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Scatter Plot with Polynomial Regression Line (Cube transformed)"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Weight (wt)"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Cube transfomred Miles per Gallon (mpg)"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">mpg_predicted</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"red"</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="04_regression_polynomial_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section></section><section id="further-discussion" class="level2" data-number="25.3"><h2 data-number="25.3" class="anchored" data-anchor-id="further-discussion">
-<span class="header-section-number">25.3</span> Further Discussion</h2>
-<ul>
-<li>
-<strong>Piecewise polynomials</strong>: Instead of fitting a high-degree polynomial over the entire range of X, piece- wise polynomial regression involves fitting separate low-degree polynomials over different regions of X. The coefficients βi differ in different parts of the range of X. The points where the coefficients change are called knots. Using more knots leads to a more flexible piecewise polynomial<sup><strong>2</strong></sup>.</li>
-<li>
-<strong>Constraints and spline</strong>: the technique of reduce the number of degree of freedom on piecewise polynomial to produce a continuous and naturally smooth fit model on data<sup><strong>2</strong></sup>.</li>
-</ul></section><section id="references" class="level2" data-number="25.4"><h2 data-number="25.4" class="anchored" data-anchor-id="references">
-<span class="header-section-number">25.4</span> References</h2>
+</section></section><section id="references" class="level2" data-number="25.3"><h2 data-number="25.3" class="anchored" data-anchor-id="references">
+<span class="header-section-number">25.3</span> References</h2>
 <ol type="1">
 <li><p>Field, A. (2013). Discovering Statistics Using IBM SPSS Statistics. (4th ed.). Sage Publications.</p></li>
-<li><p>James, G., Witten, D., Hastie, T., &amp; Tibshirani, R. (2013). An Introduction to Statistical Learning with Applications in R. (2nd ed.). Publisher. (pp.&nbsp;290-300)</p></li>
+<li><p>https://bookdown.org/ssjackson300/Machine-Learning-Lecture-Notes/#welcome</p></li>
+<li><p>https://stats.libretexts.org/Bookshelves/Advanced_Statistics/Analysis_of_Variance_and_Design_of_Experiments/10%3A_ANCOVA_Part_II/10.02%3A_Quantitative_Predictors_-_Orthogonal_Polynomials#</p></li>
 </ol>
 
 
@@ -1122,7 +1237,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons_original/04_regression_polynomial.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/04_regression_polynomial.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>

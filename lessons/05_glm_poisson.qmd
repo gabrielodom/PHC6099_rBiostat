@@ -1,0 +1,335 @@
+---
+title: "Poisson Regression Model"
+author:
+  - name: Md Ariful Hoque
+    affiliations:
+      - Florida International University
+      - Robert Stempel College of Public Health and Social Work
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+---
+
+
+## Libraries for this lesson
+
+
+```{r}
+#| label: load-packages
+#| message: false
+#| warning: false
+
+# Installing Required Packages
+# intsall.packages(readxl)
+# install.packages(skimr)
+# intsall.packages(gtsummary)
+# intsall.packages(GGally)
+# install.packages(epiDisplay)
+# install.packages(broom)
+# install.packages(tidyverse)
+
+# Loading Required Packages
+library(readxl)
+library(skimr)
+library(gtsummary)
+library(GGally)
+library(epiDisplay)
+library(broom)
+library(tidyverse)
+```
+
+
+## Introduction to Poisson Regression Model
+
+
+The Poisson regression model (PRM) is an appropriate model for studying counts response variable, which follows the Poisson distribution. Thus, the values of the response variable are non-negative integers. It is a type of Generalized linear models (GLM) whenever the outcome is count. It also accommodates rate data as we will see shortly. Although count and rate data are very common in medical and health sciences. For instance, how the colony counts of bacteria are associated with different environmental conditions and dilutions. Another example related to vital statistics, which is related to infant mortality or cancer incidence among groups with different demographics. In such scenarios, the benchmark model PRM is more appropriate than the linear regression model (LRM).
+
+Basically, Poisson regression models the linear relationship between:
+
+- `outcome`: count variable (e.g. the number of hospital admissions, parity, cancerous lesions, asthmatic attacks). This is transformed into the natural log scale. 
+- `predictors/independent variables`: numerical variables (e.g. age, blood pressure, income) and categorical variables (e.g. gender, race, education level).
+
+For example, we might be interested in knowing the relationship between the number of asthmatic attacks in the past one year with sociodemographic factors. This relationship can be explored by a Poisson regression analysis.
+
+We know that logistic regression allows us to obtain the odds ratio, which is approximately the relative risk given a predictor. For Poisson regression, by taking the exponent of the coefficient, we obtain the rate ratio RR (also known as incidence rate ratio IRR),
+
+$$
+RR = \exp(b_p)
+$$
+ 
+for the coefficient  $b_p$ of the p’s predictor. This is interpreted in similar way to the odds ratio for logistic regression, which is approximately the relative risk given a predictor.
+
+
+## Mathematical Formulation of the Model
+
+
+The Poisson distribution for a random variable `Y` has the following probability mass function for a given value `Y = y`
+$$
+P(Y|y=\lambda) = \frac{e^{-\lambda}\lambda^y}{y!},
+$$
+for $y = 0, 1, 2, \dots$. The Poisson distribution is characterized by the single parameter $\lambda$, which is the mean rate of occurrence for the event being measured. For the Poisson distribution, it is assumed that large counts (with respect to the value of $\lambda$) are rare. And the rate $\lambda$ is determined by a set of $k$  predictors $X = (X_1,\dots, X_k)$. The expression relating these quantities is
+$$
+\lambda = \exp(\beta)
+$$
+
+Thus, for observation `i` the simple model model for Poisson rate parameter $\lambda_i$ is given by
+
+$$
+\log \lambda_i = \beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip}
+$$
+
+or equivalently 
+
+$$
+\lambda_i = e^{\beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip}}
+$$
+
+Together with the distributional assumption $Y_i ∼ Poisson(\lambda_i)$, this is also called the Poisson log-linear model,
+
+In Generalized Linear Model, response variable usually originates in the form of pdf which generally fits to the exponential family (EF) of distribution. Since Poisson distribution is the member of EF. So, we define the density function of EF as
+
+$$
+f(y_i, \theta_i, \lambda) = 
+  \exp\left[\frac{y_i\theta_i - b(\theta_i)}{\alpha(\lambda)} + c(y_i, \lambda)\right], i = 1, 2, \dots,n
+$$
+Here,
+
+- $\theta_i$ represents the link function
+- $b(\theta_i)$ is the cumulant
+- $\alpha(\lambda)$ is the dispersion parameter
+- $c(y_i, \lambda)$ is the normalization term
+
+Since the value of dispersion parameter for the Poisson distribution is one. The PRM is generally applied in the situations, when the response $y_i$ is in the form of counts, that is, $y_i = 0, 1, 2, \dots$ and distributed as $P(\mu_i)$, where $\mu_i = exp ( x^T_i \beta)$ and $log (\mu_i) = x^T_i \beta$, while $x_i$ denotes the $i$th row of design matrix $X$ having order $n \times r$ while $\beta$ is a coefficient vector of order $r \times 1$, where $r = p + 1$ are the explanatory variables.
+
+
+## Example
+
+
+To demonstrate the method of PRM, we consider the asthma attack data set(<https://github.com/drkamarul/multivar_data_analysis/tree/main/data>). The data on the number of asthmatic attacks per year among a sample of 120 patients and the associated factors are given in `05_asthma.csv`.
+
+The dataset contains four variables:
+
+- `gender`: Gender of the subjects (categorical) {male, female}.
+- `res_inf`: Recurrent respiratory infection (categorical) {no, yes}.
+- `ghq12`: General Health Questionnare 12 (GHQ-12) score of psychological well being (numerical) {0 to 36}.
+- `attack`: Number of athmatic attack per year (count).
+
+### Exploring the data
+
+Let's begin by looking at the data.
+
+```{r}
+#| label: loading data
+
+asthma <- 
+  read_csv("../data/05_asthma.csv")
+
+asthma %>%
+  head(n = 10)
+```
+#### Structure of the dataset
+```{r}
+str(asthma)
+```
+#### Summary
+```{r}
+skim(asthma)
+```
+#### Descriptives
+```{r}
+#| label: tbl-table1
+#| tbl-cap: Asthma Data 
+asthma %>%
+  tbl_summary()
+```
+#### Pairs
+```{r}
+#| label: pairs-plot
+#| message: false
+#| warning: false
+
+ggpairs(asthma)
+```
+
+### Fitting the Poisson Regression Model
+
+Using the `glm()` function to fit a Poisson regression model. The model formula specified `attack` as the response variable and gender(`gender`), recurrent respiratory infection (`res_inf`) and, GHQ12 (`ghq12`) as predictor variables.
+
+#### Univariate Analysis
+```{r}
+#| label: Gender
+pois_attack1 <-  glm(attack ~ gender, data = asthma, family = "poisson")
+summary(pois_attack1)
+```
+
+```{r}
+#| label: rec_res_inf
+pois_attack2 <- glm(attack ~ res_inf, data = asthma, family = "poisson")
+summary(pois_attack2)
+```
+
+```{r}
+#| label: General-Health-Questionnare-12
+pois_attack3 <- glm(attack ~ ghq12, data = asthma, family = "poisson")
+summary(pois_attack3)
+```
+From the outputs, all variables are important with p < .05. These variables are the candidates for inclusion in the multivariable analysis. However, as a reminder, in the context of confirmatory research, the variables that we want to include must consider expert judgement.
+
+#### Multivariate Analysis
+For the multivariable analysis, we included all variables as predictors of attack. Here we use dot `.` as a shortcut for all variables when specifying the right-hand side of the formula of the `glm`.
+
+```{r}
+pois_attack_all <- glm(attack ~ ., data = asthma, family = "poisson")
+summary(pois_attack_all)
+```
+
+From the output, we noted that `gender` is not significant with P > 0.05, although it was significant at the univariable analysis.
+
+From the above `pairs` graph, we can see that there is a relation ship between varibale `gender` and `ghq12`. The left side of the graph shows that high density between 20 and 30 but when change the gender and go to the right side, we can see that there is high density between 0 and 10. So both variables are related here and we can keep only one and `R` choose the variable `ghq12` and remove the `gender` variable.
+
+Now, we fit a model excluding `gender`,
+
+```{r}
+#| label: Remove-gender
+pois_attack_reduced <- glm(
+  attack ~ res_inf + ghq12, data = asthma, family = "poisson"
+)
+summary(pois_attack_reduced)
+```
+
+From the output, both variables are significant predictors of asthmatic attack (or more accurately the natural log of the count of asthmatic attack). This serves as our preliminary model.
+
+### Model Fit Assessment
+
+For Poisson regression, we assess the model fit by chi-square goodness-of-fit test, model-to-model AIC comparison and scaled Pearson chi-square statistic. We also assess the regression diagnostics using standardized residuals.
+
+#### Chi-square goodness-of-fit
+Chi-square goodness-of-fit test can be performed using `poisgof()` function in `epiDisplay` package. Note that, instead of using Pearson chi-square statistic, it utilizes residual deviance with its respective degrees of freedom (df) (e.g. from the output of `summary(pois_attack_reduced)` above). A p-value > 0.05 indicates good model fit.
+
+```{r}
+poisgof(pois_attack_reduced)
+```
+#### Model-to-model AIC comparison
+We may also compare the models that we fit so far by Akaike information criterion (AIC). Recall that R uses `AIC` for stepwise automatic variable selection, which was explained in Linear Regression chapter.
+
+```{r}
+AIC(
+  pois_attack1, pois_attack2, pois_attack3,
+  pois_attack_all, pois_attack_reduced
+)
+```
+
+The best model is the one with the lowest AIC, which is the model model with the multivariate analysis without gender. 
+
+### Interpreting the Results
+
+After all these assumption check points, we decide on the final model and rename the model for easier reference.
+
+```{r}
+pois_attack_final <- pois_attack_reduced
+```
+
+We use `tbl_regression()` to come up with a table for the results. Here, for interpretation, we exponent the coefficients to obtain the incidence rate ratio, IRR.
+
+```{r}
+tbl_regression(pois_attack_final, exponentiate = TRUE)
+```
+
+Based on this table, we may interpret the results as follows:
+
+- Those with recurrent respiratory infection are at higher risk of having an asthmatic attack with an IRR of 1.53 (95% CI: 1.14, 2.08), while controlling for the effect of GHQ-12 score.
+- An increase in GHQ-12 score by one mark increases the risk of having an asthmatic attack by 1.05 (95% CI: 1.04, 1.07), while controlling for the effect of recurrent respiratory infection.
+
+We can also view and save the output in a format suitable for exporting to the spreadsheet format for later use. We use `tidy()` function for the job,
+
+```{r}
+tib_pois_attack <- tidy(
+  pois_attack_final, exponentiate = TRUE, conf.int = TRUE
+)
+tib_pois_attack
+```
+
+Then, we display the coefficients (i.e. without the exponent) and transfer the values into an equation,
+
+```{r}
+round(summary(pois_attack_final)$coefficients, 2)
+```
+
+$$
+\ln(\text{attack}) = - 0.34 + 0.43 \text{res} + 0.05 \text{ghq12}
+$$
+
+- **intercept:** when all predictors are zero, the expected count of the response variable is $\exp(-0.34) \approx 0.711$.
+- **res_inf:** when variable changes (holding `ghq12` constant), the expected count of the response variable is multiplied by $\exp(0.43) \approx 1.53$. This means that the presence of `res_inf` when (`res_inf` = Yes) increases the expected count by approximately 53% compared to when `res_inf` is absent (when `res_inf` = No).
+- **ghq12:** For each one unit increase in `ghq12` (holding `res_inf` constant), the expected count of the response variable is multiplied by $\exp(0.05) \approx 1.05$. This indicates that each unit increase in `ghq12` is associated with a 5% increase in the expected count.
+
+### Prediction
+
+We can use the final model above for prediction. Relevant to our data set, we may want to know the expected number of asthmatic attacks per year for a patient with recurrent respiratory infection and GHQ-12 score of 8,
+
+```{r}
+pred <- predict(
+  pois_attack_final, list(res_inf = "yes", ghq12 = 8), type = "response"
+)
+round(pred, 1)
+```
+
+Now, let’s say we want to know the expected number of asthmatic attacks per year for those with and without recurrent respiratory infection for each 12-mark increase in GHQ-12 score.
+
+```{r}
+new_data <- tibble(
+  res_inf = rep(c("yes", "no"), each = 4),
+  ghq12   = rep(c(0, 12, 24, 36), 2)
+)
+new_data$attack_pred <- round(
+  predict(pois_attack_final, new_data, type = "response"),
+  digits = 1
+)
+new_data
+```
+
+We can also check using the histogram,
+
+```{r}
+lambda_fun <- function(ghq12, currRespInf = c(0, 1)){
+  exp(-0.34 + 0.43 * currRespInf + 0.05 * ghq12)
+}
+
+par(mfrow = c(1, 2))
+hist(
+  rpois(n = 10000, lambda = lambda_fun(ghq12 = 6, currRespInf = 0)),
+  main = "Dist of Pred Asthma Attacks for Healthy Participant"
+)
+
+hist(
+  rpois(n = 10000, lambda = lambda_fun(ghq12 = 28, currRespInf = 1)),
+  main = "Dist of Pred Asthma Attacks for Sick Participant"
+)
+par(mfrow = c(1, 1))
+```
+
+We can see that the histogram supports the relationship we saw in the pairs grpah above.
+
+We can also predict the probability of number of ashma attacks.
+
+```{r}
+# Pr(nAttacks >= 3|healthy)
+1 - ppois(q = 2, lambda_fun(ghq12 = 6, currRespInf = 0))
+```
+
+A healthy person has approximately 7% chance of experiencing 3 or more asthma attacks in the specified time interval.
+
+```{r}
+# Pr(nAttacks >= 3|sick)
+1 - ppois(q = 2, lambda_fun(ghq12 = 28, currRespInf = 1))
+```
+A sick person has approximately 82% chance of experiencing 3 or more asthma attacks in the specified time interval.
+
+
+## Summary
+
+
+In this lecture, we went through the basics about Poisson regression for count data. We performed the analysis for each and learned how to assess the model fit for the regression models. We learned how to nicely present and interpret the results. In addition, we also learned how to utilize the model for prediction.
+
+

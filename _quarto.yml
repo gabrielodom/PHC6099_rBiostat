@@ -57,12 +57,13 @@ book:
         - lessons/04_corr_cov.qmd
         - lessons_original/04_regression_ols.qmd
         - lessons_original/04_regression_mls.qmd
-        - lessons_original/04_regression_polynomial.qmd
+        - lessons/04_regression_polynomial.qmd
         - lessons_original/04_regression_random_intercept.qmd
 
     - part: 05_header_generalized-linear-models.qmd
       chapters:
         - lessons_original/05_glm_ordinal_logistic.qmd
+        - lessons/05_glm_poisson.qmd
 
     - part: 06_header_special-topics.qmd
       chapters:

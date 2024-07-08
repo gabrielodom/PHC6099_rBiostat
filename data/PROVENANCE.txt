@@ -55,3 +55,9 @@ Gabriel Odom
     - created: 1993
     - curators: Street et al.; found by Michaela Larson and Ashlee Perez
     - method: downloaded from <https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic>
+    
+10. Asthma Attacks per Year:
+    - file: 05_asthma.csv
+    - created: Unknown
+    - curators: Unknown; found by Md. Ariful Hoque
+    - method: downloaded from <https://github.com/drkamarul/multivar_data_analysis/tree/main/data>
