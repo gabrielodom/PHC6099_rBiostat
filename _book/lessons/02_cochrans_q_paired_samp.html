@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<title>An R Cookbook for Public Health - 8&nbsp; Z-Test for One Proportion</title>
+<title>An R Cookbook for Public Health - 11&nbsp; Cochran’s Q Test</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,8 +61,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../lessons/02_wilcoxon_one_samp.html" rel="next">
-<link href="../02_header_one-sample.html" rel="prev">
+<link href="../lessons/02_chiSq_GoF.html" rel="next">
+<link href="../lessons/02_mcnemar_paired_samp.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -131,7 +131,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_z-test_one_prop.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_cochrans_q_paired_samp.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -224,7 +224,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons/02_z-test_one_prop.html" class="sidebar-item-text sidebar-link active">
+  <a href="../lessons/02_z-test_one_prop.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span></span></a>
   </div>
 </li>
@@ -242,7 +242,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons/02_cochrans_q_paired_samp.html" class="sidebar-item-text sidebar-link">
+  <a href="../lessons/02_cochrans_q_paired_samp.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
   </div>
 </li>
@@ -431,27 +431,26 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction-to-one-sample-z-tests" id="toc-introduction-to-one-sample-z-tests" class="nav-link active" data-scroll-target="#introduction-to-one-sample-z-tests"><span class="header-section-number">8.1</span> Introduction to One-Sample <span class="math inline">\(Z\)</span>-Tests</a></li>
-  <li><a href="#mathematical-definition-of-the-one-sample-z-test" id="toc-mathematical-definition-of-the-one-sample-z-test" class="nav-link" data-scroll-target="#mathematical-definition-of-the-one-sample-z-test"><span class="header-section-number">8.2</span> Mathematical definition of the One-Sample <span class="math inline">\(Z\)</span>-Test</a></li>
-  <li><a href="#data-source-and-description" id="toc-data-source-and-description" class="nav-link" data-scroll-target="#data-source-and-description"><span class="header-section-number">8.3</span> Data source and description</a></li>
-  <li><a href="#cleaning-the-data-to-create-a-model-data-frame" id="toc-cleaning-the-data-to-create-a-model-data-frame" class="nav-link" data-scroll-target="#cleaning-the-data-to-create-a-model-data-frame"><span class="header-section-number">8.4</span> Cleaning the data to create a model data frame</a></li>
-  <li><a href="#assumptions-of-the-one-sample-z-test" id="toc-assumptions-of-the-one-sample-z-test" class="nav-link" data-scroll-target="#assumptions-of-the-one-sample-z-test"><span class="header-section-number">8.5</span> Assumptions of the One-Sample <span class="math inline">\(Z\)</span>-Test</a></li>
+<li><a href="#introduction-to-the-cochrans-q-test" id="toc-introduction-to-the-cochrans-q-test" class="nav-link active" data-scroll-target="#introduction-to-the-cochrans-q-test"><span class="header-section-number">11.1</span> Introduction to the Cochran’s <span class="math inline">\(Q\)</span> Test</a></li>
+  <li><a href="#mathematical-definition-of-cochrans-q-test" id="toc-mathematical-definition-of-cochrans-q-test" class="nav-link" data-scroll-target="#mathematical-definition-of-cochrans-q-test"><span class="header-section-number">11.2</span> Mathematical definition of Cochran’s <span class="math inline">\(Q\)</span> Test</a></li>
   <li>
-<a href="#checking-the-assumptions-with-plots" id="toc-checking-the-assumptions-with-plots" class="nav-link" data-scroll-target="#checking-the-assumptions-with-plots"><span class="header-section-number">8.6</span> Checking the assumptions with plots</a>
+<a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description"><span class="header-section-number">11.3</span> Data Description</a>
   <ul class="collapse">
-<li><a href="#independence-and-randomness" id="toc-independence-and-randomness" class="nav-link" data-scroll-target="#independence-and-randomness"><span class="header-section-number">8.6.1</span> Independence and Randomness</a></li>
-  <li><a href="#extreme-proportions" id="toc-extreme-proportions" class="nav-link" data-scroll-target="#extreme-proportions"><span class="header-section-number">8.6.2</span> “Extreme” Proportions</a></li>
-  <li><a href="#type-and-counts-of-data" id="toc-type-and-counts-of-data" class="nav-link" data-scroll-target="#type-and-counts-of-data"><span class="header-section-number">8.6.3</span> Type and Counts of Data</a></li>
+<li><a href="#cleaning-uds-data" id="toc-cleaning-uds-data" class="nav-link" data-scroll-target="#cleaning-uds-data"><span class="header-section-number">11.3.1</span> Cleaning UDS Data</a></li>
+  <li><a href="#creating-comparison-table-from-this-dataset" id="toc-creating-comparison-table-from-this-dataset" class="nav-link" data-scroll-target="#creating-comparison-table-from-this-dataset"><span class="header-section-number">11.3.2</span> Creating Comparison Table from this Dataset</a></li>
   </ul>
 </li>
-  <li><a href="#code-to-run-a-one-sample-z-test" id="toc-code-to-run-a-one-sample-z-test" class="nav-link" data-scroll-target="#code-to-run-a-one-sample-z-test"><span class="header-section-number">8.7</span> Code to run a One-Sample <span class="math inline">\(Z\)</span>-Test</a></li>
-  <li><a href="#brief-interpretation-of-the-output" id="toc-brief-interpretation-of-the-output" class="nav-link" data-scroll-target="#brief-interpretation-of-the-output"><span class="header-section-number">8.8</span> Brief interpretation of the output</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/02_z-test_one_prop.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+  <li><a href="#assumptions-of-cochrans-q-test" id="toc-assumptions-of-cochrans-q-test" class="nav-link" data-scroll-target="#assumptions-of-cochrans-q-test"><span class="header-section-number">11.4</span> Assumptions of Cochran’s <span class="math inline">\(Q\)</span> Test</a></li>
+  <li><a href="#checking-the-assumptions-of-cochrans-q-test" id="toc-checking-the-assumptions-of-cochrans-q-test" class="nav-link" data-scroll-target="#checking-the-assumptions-of-cochrans-q-test"><span class="header-section-number">11.5</span> Checking the Assumptions of Cochran’s <span class="math inline">\(Q\)</span> Test</a></li>
+  <li><a href="#code-to-run-cochrans-q-test" id="toc-code-to-run-cochrans-q-test" class="nav-link" data-scroll-target="#code-to-run-cochrans-q-test"><span class="header-section-number">11.6</span> Code to run Cochran’s <span class="math inline">\(Q\)</span> Test</a></li>
+  <li><a href="#brief-interpretation-of-the-output" id="toc-brief-interpretation-of-the-output" class="nav-link" data-scroll-target="#brief-interpretation-of-the-output"><span class="header-section-number">11.7</span> Brief Interpretation of the Output</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">11.8</span> Conclusion</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/02_cochrans_q_paired_samp.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_z-test_one_prop.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_cochrans_q_paired_samp.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span>
+<span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span>
 </h1>
 </div>
 
@@ -461,7 +460,7 @@ window.Quarto = {
   <div class="quarto-title-meta-heading">Affiliations</div>
   
     <div class="quarto-title-meta-contents">
-    <p class="author">Gabriel J. Odom </p>
+    <p class="author">Gabriel Odom </p>
   </div>
   <div class="quarto-title-meta-contents">
         <p class="affiliation">
@@ -482,109 +481,229 @@ window.Quarto = {
   
 
 
-</header><section id="introduction-to-one-sample-z-tests" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="introduction-to-one-sample-z-tests">
-<span class="header-section-number">8.1</span> Introduction to One-Sample <span class="math inline">\(Z\)</span>-Tests</h2>
-<p>The one-sample <span class="math inline">\(Z\)</span>-test is used to compare a sample proportion to a population proportion.</p>
-</section><section id="mathematical-definition-of-the-one-sample-z-test" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="mathematical-definition-of-the-one-sample-z-test">
-<span class="header-section-number">8.2</span> Mathematical definition of the One-Sample <span class="math inline">\(Z\)</span>-Test</h2>
-<p>Consider a sample of size <span class="math inline">\(n\)</span> with binary values (such as “true” or “false”). Let <span class="math inline">\(p_{s}\)</span> and <span class="math inline">\(p_{E}\)</span> be the observed sample and expected (population) proportions, respectively. The formula to calculate the <span class="math inline">\(z\)</span> statistic is</p>
-<p><span class="math display">\[
-z \equiv \frac{
-  p_s - p_E
-}{
-  \sqrt{
-    \frac{1}{n}p_s(1 - p_s)
-  }
-}.
-\]</span></p>
-</section><section id="data-source-and-description" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="data-source-and-description">
-<span class="header-section-number">8.3</span> Data source and description</h2>
-<p>We will use the CTN-0094 data set, a data set of harmonized clinical trials for opioid use disorder. The full database is in <code>public.ctn0094data::</code>, engineered features are in <code>public.ctn0094extra::</code>, and clinical trial outcomes (wrangled dependent variables) are in <code>CTNote::</code>. We will install all three packages, but only use <code>CTNote::</code> for now.</p>
-<div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># install.packages("public.ctn0094data")</span></span>
-<span><span class="co"># install.packages("public.ctn0094extra")</span></span>
-<span><span class="co"># install.packages("CTNote")</span></span>
-<span></span>
+</header><div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># install.packages("public.ctn0094extra")</span></span>
+<span><span class="co"># install.packages("tidyverse")</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ctn-0094.github.io/public.ctn0094data/">public.ctn0094data</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ctn-0094.github.io/public.ctn0094extra/">public.ctn0094extra</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ctn-0094.github.io/CTNote/">CTNote</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="cleaning-the-data-to-create-a-model-data-frame" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="cleaning-the-data-to-create-a-model-data-frame">
-<span class="header-section-number">8.4</span> Cleaning the data to create a model data frame</h2>
-<p>Because our method requires only one sample, we have very little work to do. We will use the <a href="https://journals.lww.com/jonmd/abstract/1993/06000/buprenorphine_versus_methadone_maintenance_for.4.aspx">Kosten et al.&nbsp;(1993)</a> definition of opioid abstinence, provided in the data set <code>outcomesCTN0094</code> as the column <code>kosten1993_isAbs</code>.</p>
+<section id="introduction-to-the-cochrans-q-test" class="level2" data-number="11.1"><h2 data-number="11.1" class="anchored" data-anchor-id="introduction-to-the-cochrans-q-test">
+<span class="header-section-number">11.1</span> Introduction to the Cochran’s <span class="math inline">\(Q\)</span> Test</h2>
+<p>An extension of McNemar’s Test (a non-parametric test used to analyze dichotomous data (in a 2 x 2) for <strong>paired</strong> samples) is Cochran’s <span class="math inline">\(Q\)</span> Test, which is a non-parametric test to analyze dichotomous data in a repeated measures design. Whereas McNemar’s Test would look at a binary outcome for the same individuals measured at only two time points, Cochran’s <span class="math inline">\(Q\)</span> Test deals with binary outcomes for the same individuals at three or more time points. The test requires one nominal dependent variable with 2 categories, and one independent variable with 3 or more dependent, mutually exclusive, groups. Common data examples include presence/absence of a condition for a single individual at various time points in treatment, or positive/negative results for a single individual from various potentially-competing assessment instruments. It can also be used to evaluate “inter-observer variability” (where different judges of the same event/phenomenon measure success or failure) or “inter-instrument/concurrent validity” (where multiple instruments applied to the same subject measure success or failure).</p>
+</section><section id="mathematical-definition-of-cochrans-q-test" class="level2" data-number="11.2"><h2 data-number="11.2" class="anchored" data-anchor-id="mathematical-definition-of-cochrans-q-test">
+<span class="header-section-number">11.2</span> Mathematical definition of Cochran’s <span class="math inline">\(Q\)</span> Test</h2>
+<p>Consider binary repeated measured data for <span class="math inline">\(n\)</span> observations; the observations come from <strong>one group</strong> under three or more conditions (e.g.&nbsp;“time period 1”, “time period 2”, “time period 3”, or “instrument 1” vs.&nbsp;“instrument 2” vs.&nbsp;“instrument 3”), the samples are treated with some treatment within equally across each condition, and the outcome of interest is dichotomous (such as “success” or “failure”, 1 vs.&nbsp;0). The data then can be “wrangled” into a form that looks like this:</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># What do the values look like?</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">outcomesCTN0094</span><span class="op">$</span><span class="va">kosten1993_isAbs</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   Mode   FALSE    TRUE 
-logical    2158    1402 </code></pre>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eg_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  SubjectID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Bob"</span>, <span class="st">"Larry"</span>, <span class="st">"Junior"</span>, <span class="st">"Archibald"</span>, <span class="st">"Lunt"</span><span class="op">)</span>,</span>
+<span>  test1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0L</span>, <span class="fl">1L</span>, <span class="fl">1L</span>, <span class="fl">0L</span>, <span class="fl">0L</span><span class="op">)</span>,</span>
+<span>  test2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0L</span>, <span class="fl">1L</span>, <span class="fl">1L</span>, <span class="fl">0L</span>, <span class="fl">1L</span><span class="op">)</span>,</span>
+<span>  test3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">1L</span>, <span class="fl">1L</span>, <span class="fl">0L</span>, <span class="fl">1L</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">eg_df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">SubjectID</th>
+<th style="text-align: right;">test1</th>
+<th style="text-align: right;">test2</th>
+<th style="text-align: right;">test3</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Bob</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Larry</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Junior</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Archibald</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lunt</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># How many samples are there?</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">outcomesCTN0094</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3560</code></pre>
 </div>
-</div>
-<p>There are 3560 logical values, and <code>TRUE</code> indicates that the trial participant achieved abstinence according to the definition used in Kosten et al.&nbsp;(1993).</p>
-</section><section id="assumptions-of-the-one-sample-z-test" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="assumptions-of-the-one-sample-z-test">
-<span class="header-section-number">8.5</span> Assumptions of the One-Sample <span class="math inline">\(Z\)</span>-Test</h2>
-<p>To use a one-sample <span class="math inline">\(Z\)</span>-test, we make the following assumptions:</p>
-<ol type="1">
-<li>The data are from a random sample</li>
-<li>Each observation in the data are independent</li>
-<li>Neither the sample proportion nor population proportions are “extreme”; usually we apply this method if these proportions are between 5% and 95%.</li>
-<li>The data can be described as “successes” and “failures”, and there are at least 10 samples in each category.</li>
-</ol>
-<p>If these assumptions hold, then <span class="math display">\[
-z \sim N(0, 1).
+<p>This is a simple example, but notice the structure of the data:</p>
+<ul>
+<li>There are <span class="math inline">\(B = 5\)</span> “blocks” (subjects, organisms, experimental units, etc.)</li>
+<li>There are <span class="math inline">\(K = 3\)</span> “experiments” (treatments, assessments, time points, exams, interviews, instruments, etc.)</li>
+<li>The outcome of each “experiment” for each “block” is only ever binary (True/False, success/failure, presence/absence, etc.)</li>
+<li>This data is in a <span class="math inline">\(B \times K\)</span> matrix.</li>
+</ul>
+<p>Before we define the test statistic, we need some mathematical notation. Let <span class="math inline">\(S(X_b)\)</span> be the <strong>row sum</strong> for row <span class="math inline">\(b \in 1, \ldots, B\)</span> of the binary data matrix <span class="math inline">\(X\)</span>. Similarly let <span class="math inline">\(S(X_k)\)</span> be the <strong>column sum</strong> for column <span class="math inline">\(k \in 1, \ldots, K\)</span> of the binary data matrix <span class="math inline">\(X\)</span>. Finally, we define <span class="math inline">\(N := S(X)\)</span> be the sum of <strong>all rows and columns</strong>. Using this notation, the formula for the test statistic is as follows:</p>
+<p><span class="math display">\[
+\chi^{2}_{\text{Obs}} := k(k - 1) \times
+\frac{
+  \sum\limits_{k = 1}^K \left[ S(X_k) -N/k \right]^2
+}{
+  \sum\limits_{b = 1}^B S(X_b) \left( k - S(X_b) \right)
+},
 \]</span></p>
-</section><section id="checking-the-assumptions-with-plots" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="checking-the-assumptions-with-plots">
-<span class="header-section-number">8.6</span> Checking the assumptions with plots</h2>
-<section id="independence-and-randomness" class="level3" data-number="8.6.1"><h3 data-number="8.6.1" class="anchored" data-anchor-id="independence-and-randomness">
-<span class="header-section-number">8.6.1</span> Independence and Randomness</h3>
-<p>Because the samples were collected at random via an FDA approved clinical trial protocol, we assume that all the participants were randomly selected and are independent of each other.</p>
-</section><section id="extreme-proportions" class="level3" data-number="8.6.2"><h3 data-number="8.6.2" class="anchored" data-anchor-id="extreme-proportions">
-<span class="header-section-number">8.6.2</span> “Extreme” Proportions</h3>
-<p>According to <a href="https://doi.org/10.1097/ADM.0000000000000647">Ling et al.&nbsp;(2020)</a>, the 12-month abstinence proportion of all 533 participants in their study was 40.5 percent. As we can see here, our abstinence rates are 39.4. Neither these proportions are smaller than 5% or greater than 95%.</p>
+<p>where If the assumptions are met, then Cochran’s <span class="math inline">\(Q\)</span> Test follows a Chi-squared distribution with <span class="math inline">\(k - 1\)</span> degrees of freedom; that is, <span class="math inline">\(\chi^{2}_{\text{Obs}} \sim \chi^{2}_{\nu = k - 1}\)</span>.</p>
+</section><section id="data-description" class="level2" data-number="11.3"><h2 data-number="11.3" class="anchored" data-anchor-id="data-description">
+<span class="header-section-number">11.3</span> Data Description</h2>
+<p>For this lesson, we will look at patients in treatment for opioid use disorder, We will measure abstinence within each month (4-week period) via weekly Urine Drug Screen (UDS). The abstinence measurements are in the <code><a href="https://ctn-0094.github.io/public.ctn0094extra/reference/derived_weeklyOpioidPattern.html">public.ctn0094extra::derived_weeklyOpioidPattern</a></code> data set. Our definition of abstinence will be “75% negative urine screens” from weeks 1-4 (start of treatment), weeks 5-8 (mid-treatment), and weeks 9-12 (end of treatment).</p>
+<section id="cleaning-uds-data" class="level3" data-number="11.3.1"><h3 data-number="11.3.1" class="anchored" data-anchor-id="cleaning-uds-data">
+<span class="header-section-number">11.3.1</span> Cleaning UDS Data</h3>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">pExpected</span> <span class="op">&lt;-</span> <span class="fl">0.508</span> <span class="op">*</span> <span class="op">(</span><span class="fl">425</span><span class="op">/</span><span class="fl">533</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">txSuccess_df</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="fu">public.ctn0094extra</span><span class="fu">::</span><span class="va"><a href="https://ctn-0094.github.io/public.ctn0094extra/reference/derived_weeklyOpioidPattern.html">derived_weeklyOpioidPattern</a></span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># Combine UDS across treatment phases</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>udsPattern <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">Phase_1</span>, <span class="va">Phase_2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># The CTNote outcome builder functions are not vectorized, so we need to</span></span>
+<span>  <span class="co">#   use rowwise() to call them</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># Count negative UDS in each phase of treatment</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    nStartTxNeg <span class="op">=</span> <span class="fu">CTNote</span><span class="fu">::</span><span class="fu"><a href="https://ctn-0094.github.io/CTNote/reference/count_matches.html">count_matches</a></span><span class="op">(</span></span>
+<span>      <span class="va">udsPattern</span>, match_is <span class="op">=</span> <span class="st">"-"</span>, start <span class="op">=</span> <span class="fl">1</span>, end <span class="op">=</span> <span class="fl">4</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    nMidTxNeg <span class="op">=</span> <span class="fu">CTNote</span><span class="fu">::</span><span class="fu"><a href="https://ctn-0094.github.io/CTNote/reference/count_matches.html">count_matches</a></span><span class="op">(</span></span>
+<span>      <span class="va">udsPattern</span>, match_is <span class="op">=</span> <span class="st">"-"</span>, start <span class="op">=</span> <span class="fl">5</span>, end <span class="op">=</span> <span class="fl">8</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    nEndTxNeg <span class="op">=</span> <span class="fu">CTNote</span><span class="fu">::</span><span class="fu"><a href="https://ctn-0094.github.io/CTNote/reference/count_matches.html">count_matches</a></span><span class="op">(</span></span>
+<span>      <span class="va">udsPattern</span>, match_is <span class="op">=</span> <span class="st">"-"</span>, start <span class="op">=</span> <span class="fl">9</span>, end <span class="op">=</span> <span class="fl">12</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># Check for abstinence during the start and end of treatment</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    startAbs <span class="op">=</span> <span class="va">nStartTxNeg</span> <span class="op">&gt;=</span> <span class="fl">3</span>,</span>
+<span>    midAbs <span class="op">=</span> <span class="va">nMidTxNeg</span> <span class="op">&gt;=</span> <span class="fl">3</span>,</span>
+<span>    endAbs <span class="op">=</span> <span class="va">nEndTxNeg</span> <span class="op">&gt;=</span> <span class="fl">3</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">who</span>, <span class="va">udsPattern</span>, <span class="va">startAbs</span>, <span class="va">midAbs</span>, <span class="va">endAbs</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">txSuccess_df</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4050657</code></pre>
+<pre><code># A tibble: 3,560 × 5
+     who udsPattern                startAbs midAbs endAbs
+   &lt;int&gt; &lt;chr&gt;                     &lt;lgl&gt;    &lt;lgl&gt;  &lt;lgl&gt; 
+ 1     1 ooooooooooooooo           FALSE    FALSE  FALSE 
+ 2     2 ----oo-o-o-o+o            TRUE     FALSE  FALSE 
+ 3     3 o-ooo-ooooooooooooooooo   FALSE    FALSE  FALSE 
+ 4     4 --------------------o-oo  TRUE     TRUE   TRUE  
+ 5     5 ooooooooooooooo           FALSE    FALSE  FALSE 
+ 6     6 -ooooooooooooo            FALSE    FALSE  FALSE 
+ 7     7 ----oooooooooooooooooooo  TRUE     FALSE  FALSE 
+ 8     8 ooooooooooooooooooooooooo FALSE    FALSE  FALSE 
+ 9     9 oooooooooooooooooooooo    FALSE    FALSE  FALSE 
+10    10 --o--*++o-++++++++o+-o    TRUE     FALSE  FALSE 
+# ℹ 3,550 more rows</code></pre>
 </div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Count the number of TRUE values</span></span>
-<span><span class="op">(</span><span class="va">nAbstinent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">outcomesCTN0094</span><span class="op">$</span><span class="va">kosten1993_isAbs</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1402</code></pre>
 </div>
-</div>
-</section><section id="type-and-counts-of-data" class="level3" data-number="8.6.3"><h3 data-number="8.6.3" class="anchored" data-anchor-id="type-and-counts-of-data">
-<span class="header-section-number">8.6.3</span> Type and Counts of Data</h3>
-<p>We observe binary data, and we see at least 10 successes and at least 10 failures.</p>
-</section></section><section id="code-to-run-a-one-sample-z-test" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="code-to-run-a-one-sample-z-test">
-<span class="header-section-number">8.7</span> Code to run a One-Sample <span class="math inline">\(Z\)</span>-Test</h2>
-<p>Now that we have checked our assumptions, we can perform the one-sample <span class="math inline">\(Z\)</span>-test for proportions.</p>
+</section><section id="creating-comparison-table-from-this-dataset" class="level3" data-number="11.3.2"><h3 data-number="11.3.2" class="anchored" data-anchor-id="creating-comparison-table-from-this-dataset">
+<span class="header-section-number">11.3.2</span> Creating Comparison Table from this Dataset</h3>
+<p>We now have a binary measure of success at three time points (start, middle, and end of treatment). Our first step is to pivot the data so that we have 3 columns: <code>who</code>, <code>when</code> (start, middle, end), and <code>value</code> (“treatment success” measured as abstinence or not). Note that we also need to save the <code>when</code> column as an ordered factor so that the levels aren’t sorted alphabetically.</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/prop.test.html">prop.test</a></span><span class="op">(</span></span>
-<span>  x <span class="op">=</span> <span class="va">nAbstinent</span>,</span>
-<span>  n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">outcomesCTN0094</span><span class="op">)</span>,</span>
-<span>  p <span class="op">=</span> <span class="va">pExpected</span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">txSuccessLong_df</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="va">txSuccess_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">udsPattern</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span></span>
+<span>    cols <span class="op">=</span> <span class="va">startAbs</span><span class="op">:</span><span class="va">endAbs</span>,</span>
+<span>    names_to <span class="op">=</span> <span class="st">"when"</span>,</span>
+<span>    values_to <span class="op">=</span> <span class="st">"abstinent"</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    when <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html">str_remove</a></span><span class="op">(</span><span class="va">when</span>, pattern <span class="op">=</span> <span class="st">"Abs"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    when <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">when</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"start"</span>, <span class="st">"mid"</span>, <span class="st">"end"</span><span class="op">)</span>, ordered <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">txSuccessLong_df</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10,680 × 3
+     who when  abstinent
+   &lt;int&gt; &lt;ord&gt; &lt;lgl&gt;    
+ 1     1 start FALSE    
+ 2     1 mid   FALSE    
+ 3     1 end   FALSE    
+ 4     2 start TRUE     
+ 5     2 mid   FALSE    
+ 6     2 end   FALSE    
+ 7     3 start FALSE    
+ 8     3 mid   FALSE    
+ 9     3 end   FALSE    
+10     4 start TRUE     
+# ℹ 10,670 more rows</code></pre>
+</div>
+</div>
+<p>Now, we can create a 2 x 3 contingency table:</p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">txAbs_tbl</span> <span class="op">&lt;-</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/xtabs.html">xtabs</a></span><span class="op">(</span></span>
+<span>  <span class="op">~</span><span class="va">abstinent</span> <span class="op">+</span> <span class="va">when</span>, data <span class="op">=</span> <span class="va">txSuccessLong_df</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">txAbs_tbl</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         when
+abstinent start  mid  end
+    FALSE  2599 2825 2765
+    TRUE    961  735  795</code></pre>
+</div>
+</div>
+</section></section><section id="assumptions-of-cochrans-q-test" class="level2" data-number="11.4"><h2 data-number="11.4" class="anchored" data-anchor-id="assumptions-of-cochrans-q-test">
+<span class="header-section-number">11.4</span> Assumptions of Cochran’s <span class="math inline">\(Q\)</span> Test</h2>
+<p>The assumptions of Cochran’s <span class="math inline">\(Q\)</span> Test are as follows:</p>
+<ul>
+<li>
+<strong>Assumption 1</strong>: You have one categorical dependent variable with <em>two categories</em> (i.e., a dichotomous variable) and one categorical independent variable with <span class="math inline">\(K \ge 3\)</span> <em>related groups</em>.</li>
+<li>
+<strong>Assumption 2</strong>: The two groups of the dependent variable are <em>mutually exclusive</em>, which means that the groups do not overlap—a participant can only be in one of the two groups.</li>
+<li>
+<strong>Assumption 3</strong>: The cases are a random sample from the population of interest.</li>
+<li>
+<strong>Assumption 4</strong>: There are a sufficiently large number of independent subjects, <span class="math inline">\(B\)</span> (also called “blocks”); note that there is no definition of exactly how many samples are needed to be considered “large”.</li>
+</ul></section><section id="checking-the-assumptions-of-cochrans-q-test" class="level2" data-number="11.5"><h2 data-number="11.5" class="anchored" data-anchor-id="checking-the-assumptions-of-cochrans-q-test">
+<span class="header-section-number">11.5</span> Checking the Assumptions of Cochran’s <span class="math inline">\(Q\)</span> Test</h2>
+<p>To check our assumptions, we will review and inspect the contingency table with the two variables of interest. The categorical dependent variable is abstinence of opioids in urine samples (e.g positive or negative for the substance); we see that the dependent variable at the start of treatment is related to the dependent variable in the middle and at the end of treatment because we are detecting opioids within the <em>same person</em>. The categorical independent variable is the three time periods (start, middle, and end of treatment). The two groups are mutually exclusive, as urine cannot be simultaneously positive and negative and the participant cannot simultaneously be at the start and end of treatment. Finally, we note that there are 3560 samples, which counts as <span class="math inline">\(B\)</span> being “large”.</p>
+</section><section id="code-to-run-cochrans-q-test" class="level2" data-number="11.6"><h2 data-number="11.6" class="anchored" data-anchor-id="code-to-run-cochrans-q-test">
+<span class="header-section-number">11.6</span> Code to run Cochran’s <span class="math inline">\(Q\)</span> Test</h2>
+<p>Recall that we created a 2x3 contingency table with the <code>xtab()</code> function (from the <code>stats::</code> package) above. This table object is helpful for us to check assumptions, but it is not a required data structure for the <code>cochran_qtest()</code> function (from the <code>rstatix::</code> package). We can supply our pivoted “long” data to this function, but we have to use a creative <code>formula</code> object to define the experimental design. From the help documentation, this formula looks like <code>a ~ b | c</code>, where <code>a</code> is the outcome variable name (<code>abstinent</code> for us); <code>b</code> is the within-subjects factor variables (<code>when</code>); and <code>c</code> is the column name containing individuals/subjects identifier (<code>who</code>).</p>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rstatix</span><span class="fu">::</span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cochran_qtest.html">cochran_qtest</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">txSuccessLong_df</span>,</span>
+<span>  formula <span class="op">=</span> <span class="va">abstinent</span> <span class="op">~</span> <span class="va">when</span> <span class="op">|</span> <span class="va">who</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-    1-sample proportions test with continuity correction
-
-data:  nAbstinent out of nrow(outcomesCTN0094), null probability pExpected
-X-squared = 1.8218, df = 1, p-value = 0.1771
-alternative hypothesis: true p is not equal to 0.4050657
-95 percent confidence interval:
- 0.3777537 0.4101176
-sample estimates:
-        p 
-0.3938202 </code></pre>
+<pre><code># A tibble: 1 × 6
+  .y.           n statistic    df        p method          
+* &lt;chr&gt;     &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;           
+1 abstinent  3560      84.4     2 4.64e-19 Cochran's Q test</code></pre>
 </div>
 </div>
-</section><section id="brief-interpretation-of-the-output" class="level2" data-number="8.8"><h2 data-number="8.8" class="anchored" data-anchor-id="brief-interpretation-of-the-output">
-<span class="header-section-number">8.8</span> Brief interpretation of the output</h2>
-<p>The 95% confidence interval contains the population proportion, so we fail to reject the hypothesis that the patients from these clinical trials achieve different abstinence rates than the general population.</p>
+<p>The output from the Cochran’s <span class="math inline">\(Q\)</span> Test will show the Chi-Squared test statistic, degrees of freedom (expected to be <span class="math inline">\(3 - 1 = 2\)</span> as there are only 3 time points), and the <span class="math inline">\(p\)</span>-value.</p>
+</section><section id="brief-interpretation-of-the-output" class="level2" data-number="11.7"><h2 data-number="11.7" class="anchored" data-anchor-id="brief-interpretation-of-the-output">
+<span class="header-section-number">11.7</span> Brief Interpretation of the Output</h2>
+<p>The resulting <span class="math inline">\(p\)</span>-value in this case is below 0.05, which indicates that the marginal probabilities between <code>start</code>, <code>mid</code>, and <code>end</code> measures of abstinent are different. Going back to review <code>txAbs_tbl</code>, we see that the count for start of treatment abstinence is higher than the counts for middle and end of treatment abstinence. Note that there is no “post-hoc” test for Cochran’s <span class="math inline">\(Q\)</span> test, so if you really need to know which groups are different, then you have to use <span class="math inline">\(k(k - 1)\)</span> pairwise McNemar tests (which is not a great idea).</p>
+</section><section id="conclusion" class="level2" data-number="11.8"><h2 data-number="11.8" class="anchored" data-anchor-id="conclusion">
+<span class="header-section-number">11.8</span> Conclusion</h2>
+<p>If you have <strong>repeated paired</strong> samples, and the variable of interest is <strong>binary</strong>, then use Cochran’s <span class="math inline">\(Q\)</span> Test. The pairing could be within subject but across time or space, or it could represent different measures of success or failure on the same subject (of use in psychometrics). Regardless, it’s often that you’d like to include some covariate or additional factor, which this technique does not allow. Also, you probably want to know which time points or which interventions are different. In those cases, you may want Survival analysis (an event may occur or not within a time interval) or some other more sophisticated technique.</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -996,13 +1115,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../02_header_one-sample.html" class="pagination-link" aria-label="One-Sample Tests">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">One-Sample Tests</span>
+      <a href="../lessons/02_mcnemar_paired_samp.html" class="pagination-link" aria-label="McNemar's Test">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../lessons/02_wilcoxon_one_samp.html" class="pagination-link" aria-label="Wilcoxon Signed Rank Test for One Sample">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lessons/02_chiSq_GoF.html" class="pagination-link" aria-label="The Chi Squared Goodness-of-Fit Test">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1013,7 +1132,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/02_z-test_one_prop.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/02_cochrans_q_paired_samp.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>

@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<title>An R Cookbook for Public Health - 18&nbsp; One-Way ANOVA</title>
+<title>An R Cookbook for Public Health - 19&nbsp; One-Way ANOVA</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,7 +131,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons/04_anova_one_way.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons/04_anova_one_way.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -242,20 +242,26 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_cochrans_q_paired_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -272,25 +278,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -307,55 +313,55 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_one_way.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_corr_cov.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -372,13 +378,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_poisson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
   </div>
 </li>
       </ul>
@@ -395,7 +401,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
   </div>
 </li>
       </ul>
@@ -412,7 +418,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -425,25 +431,25 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction-to-one-way-anova" id="toc-introduction-to-one-way-anova" class="nav-link active" data-scroll-target="#introduction-to-one-way-anova"><span class="header-section-number">18.1</span> Introduction to one-way ANOVA</a></li>
-  <li><a href="#mathematical-definition-of-one-way-anova" id="toc-mathematical-definition-of-one-way-anova" class="nav-link" data-scroll-target="#mathematical-definition-of-one-way-anova"><span class="header-section-number">18.2</span> Mathematical definition of one-way ANOVA</a></li>
-  <li><a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description"><span class="header-section-number">18.3</span> Data Description</a></li>
-  <li><a href="#assumptions-of-one-way-anova" id="toc-assumptions-of-one-way-anova" class="nav-link" data-scroll-target="#assumptions-of-one-way-anova"><span class="header-section-number">18.4</span> Assumptions of One-Way ANOVA</a></li>
-  <li><a href="#checking-the-assumptions-of-the-one-way-anova" id="toc-checking-the-assumptions-of-the-one-way-anova" class="nav-link" data-scroll-target="#checking-the-assumptions-of-the-one-way-anova"><span class="header-section-number">18.5</span> Checking the Assumptions of the One-Way ANOVA</a></li>
+<li><a href="#introduction-to-one-way-anova" id="toc-introduction-to-one-way-anova" class="nav-link active" data-scroll-target="#introduction-to-one-way-anova"><span class="header-section-number">19.1</span> Introduction to one-way ANOVA</a></li>
+  <li><a href="#mathematical-definition-of-one-way-anova" id="toc-mathematical-definition-of-one-way-anova" class="nav-link" data-scroll-target="#mathematical-definition-of-one-way-anova"><span class="header-section-number">19.2</span> Mathematical definition of one-way ANOVA</a></li>
+  <li><a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description"><span class="header-section-number">19.3</span> Data Description</a></li>
+  <li><a href="#assumptions-of-one-way-anova" id="toc-assumptions-of-one-way-anova" class="nav-link" data-scroll-target="#assumptions-of-one-way-anova"><span class="header-section-number">19.4</span> Assumptions of One-Way ANOVA</a></li>
+  <li><a href="#checking-the-assumptions-of-the-one-way-anova" id="toc-checking-the-assumptions-of-the-one-way-anova" class="nav-link" data-scroll-target="#checking-the-assumptions-of-the-one-way-anova"><span class="header-section-number">19.5</span> Checking the Assumptions of the One-Way ANOVA</a></li>
   <li>
-<a href="#code-to-run-one-way-anova" id="toc-code-to-run-one-way-anova" class="nav-link" data-scroll-target="#code-to-run-one-way-anova"><span class="header-section-number">18.6</span> Code to Run One-Way ANOVA</a>
+<a href="#code-to-run-one-way-anova" id="toc-code-to-run-one-way-anova" class="nav-link" data-scroll-target="#code-to-run-one-way-anova"><span class="header-section-number">19.6</span> Code to Run One-Way ANOVA</a>
   <ul class="collapse">
-<li><a href="#post-hoc-test-for-pairwise-comparisons" id="toc-post-hoc-test-for-pairwise-comparisons" class="nav-link" data-scroll-target="#post-hoc-test-for-pairwise-comparisons"><span class="header-section-number">18.6.1</span> Post-Hoc Test for Pairwise Comparisons</a></li>
-  <li><a href="#regression-for-comparison" id="toc-regression-for-comparison" class="nav-link" data-scroll-target="#regression-for-comparison"><span class="header-section-number">18.6.2</span> Regression for Comparison</a></li>
+<li><a href="#post-hoc-test-for-pairwise-comparisons" id="toc-post-hoc-test-for-pairwise-comparisons" class="nav-link" data-scroll-target="#post-hoc-test-for-pairwise-comparisons"><span class="header-section-number">19.6.1</span> Post-Hoc Test for Pairwise Comparisons</a></li>
+  <li><a href="#regression-for-comparison" id="toc-regression-for-comparison" class="nav-link" data-scroll-target="#regression-for-comparison"><span class="header-section-number">19.6.2</span> Regression for Comparison</a></li>
   </ul>
 </li>
-  <li><a href="#brief-interpretation-of-the-output" id="toc-brief-interpretation-of-the-output" class="nav-link" data-scroll-target="#brief-interpretation-of-the-output"><span class="header-section-number">18.7</span> Brief Interpretation of the Output</a></li>
+  <li><a href="#brief-interpretation-of-the-output" id="toc-brief-interpretation-of-the-output" class="nav-link" data-scroll-target="#brief-interpretation-of-the-output"><span class="header-section-number">19.7</span> Brief Interpretation of the Output</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/04_anova_one_way.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons/04_anova_one_way.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons/04_anova_one_way.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">18</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span>
+<span class="chapter-number">19</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span>
 </h1>
 </div>
 
@@ -480,8 +486,8 @@ window.Quarto = {
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="introduction-to-one-way-anova" class="level2" data-number="18.1"><h2 data-number="18.1" class="anchored" data-anchor-id="introduction-to-one-way-anova">
-<span class="header-section-number">18.1</span> Introduction to one-way ANOVA</h2>
+<section id="introduction-to-one-way-anova" class="level2" data-number="19.1"><h2 data-number="19.1" class="anchored" data-anchor-id="introduction-to-one-way-anova">
+<span class="header-section-number">19.1</span> Introduction to one-way ANOVA</h2>
 <p>One-way analysis of variance (ANOVA) is an extension of a two-samples t-test for comparing means between three or more independent groups. A single factor variable is employed to categorize the data into several groups.</p>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -496,8 +502,8 @@ Hypothesis Testing
 <p>Null Hypothesis <span class="math inline">\((H_0)\)</span> the means between groups are not statistically different (they ARE the same).  Alternative Hypothesis <span class="math inline">\((H_a)\)</span> the means between groups are statistically different (they ARE NOT the same).</p>
 </div>
 </div>
-</section><section id="mathematical-definition-of-one-way-anova" class="level2" data-number="18.2"><h2 data-number="18.2" class="anchored" data-anchor-id="mathematical-definition-of-one-way-anova">
-<span class="header-section-number">18.2</span> Mathematical definition of one-way ANOVA</h2>
+</section><section id="mathematical-definition-of-one-way-anova" class="level2" data-number="19.2"><h2 data-number="19.2" class="anchored" data-anchor-id="mathematical-definition-of-one-way-anova">
+<span class="header-section-number">19.2</span> Mathematical definition of one-way ANOVA</h2>
 <p><span class="math display">\[
 Y_{ij} = \mu + \tau_{i} + \epsilon_{ij}
 \]</span></p>
@@ -515,8 +521,8 @@ Y_{ij} = \mu + \tau_{i} + \epsilon_{ij}
 <span class="math inline">\(\tau_{i}\)</span> represents the <em>i</em>-th treatment effect.</li>
 <li>
 <span class="math inline">\(\epsilon_{ij}\)</span> represents the random error present in the <em>j</em>-th observation on the <em>i</em>-th treatment.</li>
-</ul></section><section id="data-description" class="level2" data-number="18.3"><h2 data-number="18.3" class="anchored" data-anchor-id="data-description">
-<span class="header-section-number">18.3</span> Data Description</h2>
+</ul></section><section id="data-description" class="level2" data-number="19.3"><h2 data-number="19.3" class="anchored" data-anchor-id="data-description">
+<span class="header-section-number">19.3</span> Data Description</h2>
 <p>The <code>PlantGrowth</code> data set is already included in <code>{base R}</code> within the <code>{datasets}</code> package. The <code>PlantGrowth</code> data set includes results from an experiment to compare yield obtained under a control condition and two different treatment conditions. The measurements were obtained through the dried weight of each plant.</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Call the data set into the Global environment</span></span>
@@ -570,8 +576,8 @@ Y_{ij} = \mu + \tau_{i} + \epsilon_{ij}
 Levels: ctrl trt1 trt2</code></pre>
 </div>
 </div>
-</section><section id="assumptions-of-one-way-anova" class="level2" data-number="18.4"><h2 data-number="18.4" class="anchored" data-anchor-id="assumptions-of-one-way-anova">
-<span class="header-section-number">18.4</span> Assumptions of One-Way ANOVA</h2>
+</section><section id="assumptions-of-one-way-anova" class="level2" data-number="19.4"><h2 data-number="19.4" class="anchored" data-anchor-id="assumptions-of-one-way-anova">
+<span class="header-section-number">19.4</span> Assumptions of One-Way ANOVA</h2>
 <p>The assumptions of one-way ANOVA are as follows:</p>
 <ul>
 <li>
@@ -580,8 +586,8 @@ Levels: ctrl trt1 trt2</code></pre>
 <strong>Assumption 2</strong>: The data within each factor level are approximately normally distributed.</li>
 <li>
 <strong>Assumption 3</strong>: The variance of the data of interest is similar across each factor level (aka: Homogeneity of variance).</li>
-</ul></section><section id="checking-the-assumptions-of-the-one-way-anova" class="level2" data-number="18.5"><h2 data-number="18.5" class="anchored" data-anchor-id="checking-the-assumptions-of-the-one-way-anova">
-<span class="header-section-number">18.5</span> Checking the Assumptions of the One-Way ANOVA</h2>
+</ul></section><section id="checking-the-assumptions-of-the-one-way-anova" class="level2" data-number="19.5"><h2 data-number="19.5" class="anchored" data-anchor-id="checking-the-assumptions-of-the-one-way-anova">
+<span class="header-section-number">19.5</span> Checking the Assumptions of the One-Way ANOVA</h2>
 <p><strong>Assumption 2</strong>: The data within each factor level are approximately normally distributed.</p>
 <p>To check this assumption, we can examine if the data are approximately normally distributed across groups with 2 plots, the Q-Q plot or histograms, or with the Shapiro-Wilk test.</p>
 <p>First, we will look at the Q-Q plot:</p>
@@ -679,8 +685,8 @@ Levels: ctrl trt1 trt2</code></pre>
 </div>
 </div>
 <p>To compare the box plot visually, we take a look at the interquartile range between each three plots. All three have approximately similar size and length, which satisfies our assumption homogeneity of variance.</p>
-</section><section id="code-to-run-one-way-anova" class="level2" data-number="18.6"><h2 data-number="18.6" class="anchored" data-anchor-id="code-to-run-one-way-anova">
-<span class="header-section-number">18.6</span> Code to Run One-Way ANOVA</h2>
+</section><section id="code-to-run-one-way-anova" class="level2" data-number="19.6"><h2 data-number="19.6" class="anchored" data-anchor-id="code-to-run-one-way-anova">
+<span class="header-section-number">19.6</span> Code to Run One-Way ANOVA</h2>
 <div class="cell">
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Include an outcome variable, `weight`, and predictor(s), `group`. as well as </span></span>
 <span><span class="co"># which data set to pull variables from with `data = ` argument</span></span>
@@ -705,8 +711,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li>The <code>Pr(&gt;F)</code> column is the resulting p-value of the F statistic. Remember: the p-value shows how likely it is that the calculated F value would have occurred if the null hypothesis were true.</li>
 </ul>
 <p>The p value of the fertilizer variable is low (p &lt; 0.01), so it appears that the type of fertilizer used (<code>group</code>) has a real impact on the final crop yield (<code>weight</code>).</p>
-<section id="post-hoc-test-for-pairwise-comparisons" class="level3" data-number="18.6.1"><h3 data-number="18.6.1" class="anchored" data-anchor-id="post-hoc-test-for-pairwise-comparisons">
-<span class="header-section-number">18.6.1</span> Post-Hoc Test for Pairwise Comparisons</h3>
+<section id="post-hoc-test-for-pairwise-comparisons" class="level3" data-number="19.6.1"><h3 data-number="19.6.1" class="anchored" data-anchor-id="post-hoc-test-for-pairwise-comparisons">
+<span class="header-section-number">19.6.1</span> Post-Hoc Test for Pairwise Comparisons</h3>
 <p>To compare the group means directly, we can conduct a post-hoc test to see which group means are different from one another. One post-hoc test is Tukey’s Test.</p>
 <div class="cell">
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># perform Tukey's Test for multiple comparisons</span></span>
@@ -734,8 +740,8 @@ trt2-trt1  0.865  0.1737839 1.5562161 0.0120064</code></pre>
 <code>trt2-ctrl:</code> P-value is approximately 0.198 when comparing treatment 2 (trt2) and control (ctrl), which is greater than 0.05. This indicates there is not a statistically significant difference in mean between these groups. Their means are the SAME.</li>
 <li>
 <code>trt2-trt1:</code> P-value is 0.012 when comparing treatment 1 (trt1) and treatment 2 (trt2), which is less than 0.05. This indicates there is a statistically significant difference in mean between these groups. Their means are NOT the SAME.</li>
-</ul></section><section id="regression-for-comparison" class="level3" data-number="18.6.2"><h3 data-number="18.6.2" class="anchored" data-anchor-id="regression-for-comparison">
-<span class="header-section-number">18.6.2</span> Regression for Comparison</h3>
+</ul></section><section id="regression-for-comparison" class="level3" data-number="19.6.2"><h3 data-number="19.6.2" class="anchored" data-anchor-id="regression-for-comparison">
+<span class="header-section-number">19.6.2</span> Regression for Comparison</h3>
 <p>To compare the ANOVA results with those of a simple linear regression, we can run a regression model to examine if there are differences between the control group and the two treatment groups.</p>
 <div class="cell">
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Simple linear regression</span></span>
@@ -771,8 +777,8 @@ F-statistic: 4.846 on 2 and 27 DF,  p-value: 0.01591</code></pre>
 <li>The degrees of freedom for the ANOVA and linear model are also the same (2 and 27).</li>
 <li>The Multiple R-squared value from the regression (0.2641) is related to the Sum of Squares for our factor and the Sum of Squares for the residual in the following way: <span class="math inline">\(R^{2} = \frac{SS_{factor}}{(SS_{factor} + SS_{residuals})}\)</span>.</li>
 <li>The linear model confirms that there is no difference in the treatment groups compared to the control group since the p-values for the treatment groups are larger than 0.05 (0.194 and 0.088 for treatment 1 and treatment 2 versus control, respectively).</li>
-</ul></section></section><section id="brief-interpretation-of-the-output" class="level2" data-number="18.7"><h2 data-number="18.7" class="anchored" data-anchor-id="brief-interpretation-of-the-output">
-<span class="header-section-number">18.7</span> Brief Interpretation of the Output</h2>
+</ul></section></section><section id="brief-interpretation-of-the-output" class="level2" data-number="19.7"><h2 data-number="19.7" class="anchored" data-anchor-id="brief-interpretation-of-the-output">
+<span class="header-section-number">19.7</span> Brief Interpretation of the Output</h2>
 <p>The resulting p-value of the one-way ANOVA is 0.0159, which is less than our significance level of 0.05. Therefore we must reject our null hypothesis as the data supports that the mean weight between groups is statistically different. In other words, the mean weight(s) are NOT the same between group (ctrl, trt1, trt2).</p>
 <p>The Tukey test results illustrate a true difference that only exists between treatment groups 1 and 2 (trt1 and trt2), and not between the control group and either of the treatment groups. This is confirmed by the output from the simple linear regression model.</p>
 
@@ -1192,7 +1198,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="../lessons/04_anova_two_way.html" class="pagination-link" aria-label="Two-Way ANOVA">
-        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

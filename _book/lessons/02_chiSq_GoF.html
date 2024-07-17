@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<title>An R Cookbook for Public Health - 11&nbsp; The Chi Squared Goodness-of-Fit Test</title>
+<title>An R Cookbook for Public Health - 12&nbsp; The Chi Squared Goodness-of-Fit Test</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -62,7 +62,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../lessons/02_transformations.html" rel="next">
-<link href="../lessons/02_mcnemar_paired_samp.html" rel="prev">
+<link href="../lessons/02_cochrans_q_paired_samp.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -131,7 +131,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_chiSq_GoF.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_chiSq_GoF.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -242,20 +242,26 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_cochrans_q_paired_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -272,25 +278,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -307,55 +313,55 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_one_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_corr_cov.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -372,13 +378,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_poisson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
   </div>
 </li>
       </ul>
@@ -395,7 +401,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
   </div>
 </li>
       </ul>
@@ -412,7 +418,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -425,34 +431,34 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction-to-the-chi2-goodness-of-fit-gof-test" id="toc-introduction-to-the-chi2-goodness-of-fit-gof-test" class="nav-link active" data-scroll-target="#introduction-to-the-chi2-goodness-of-fit-gof-test"><span class="header-section-number">11.1</span> Introduction to the <span class="math inline">\(\chi^2\)</span> Goodness of Fit (GoF) Test</a></li>
-  <li><a href="#mathematical-definition-of-the-chi2-goodness-of-fit-gof-test" id="toc-mathematical-definition-of-the-chi2-goodness-of-fit-gof-test" class="nav-link" data-scroll-target="#mathematical-definition-of-the-chi2-goodness-of-fit-gof-test"><span class="header-section-number">11.2</span> Mathematical definition of the <span class="math inline">\(\chi^2\)</span> Goodness of Fit (GoF) Test</a></li>
-  <li><a href="#data-source-and-description" id="toc-data-source-and-description" class="nav-link" data-scroll-target="#data-source-and-description"><span class="header-section-number">11.3</span> Data source and description</a></li>
-  <li><a href="#cleaning-the-data-to-create-a-model-data-frame" id="toc-cleaning-the-data-to-create-a-model-data-frame" class="nav-link" data-scroll-target="#cleaning-the-data-to-create-a-model-data-frame"><span class="header-section-number">11.4</span> Cleaning the data to create a model data frame</a></li>
-  <li><a href="#assumptions-of-the-chi2-goodness-of-fit-gof-test" id="toc-assumptions-of-the-chi2-goodness-of-fit-gof-test" class="nav-link" data-scroll-target="#assumptions-of-the-chi2-goodness-of-fit-gof-test"><span class="header-section-number">11.5</span> Assumptions of the <span class="math inline">\(\chi^2\)</span> Goodness of Fit (GoF) Test</a></li>
+<li><a href="#introduction-to-the-chi2-goodness-of-fit-gof-test" id="toc-introduction-to-the-chi2-goodness-of-fit-gof-test" class="nav-link active" data-scroll-target="#introduction-to-the-chi2-goodness-of-fit-gof-test"><span class="header-section-number">12.1</span> Introduction to the <span class="math inline">\(\chi^2\)</span> Goodness of Fit (GoF) Test</a></li>
+  <li><a href="#mathematical-definition-of-the-chi2-goodness-of-fit-gof-test" id="toc-mathematical-definition-of-the-chi2-goodness-of-fit-gof-test" class="nav-link" data-scroll-target="#mathematical-definition-of-the-chi2-goodness-of-fit-gof-test"><span class="header-section-number">12.2</span> Mathematical definition of the <span class="math inline">\(\chi^2\)</span> Goodness of Fit (GoF) Test</a></li>
+  <li><a href="#data-source-and-description" id="toc-data-source-and-description" class="nav-link" data-scroll-target="#data-source-and-description"><span class="header-section-number">12.3</span> Data source and description</a></li>
+  <li><a href="#cleaning-the-data-to-create-a-model-data-frame" id="toc-cleaning-the-data-to-create-a-model-data-frame" class="nav-link" data-scroll-target="#cleaning-the-data-to-create-a-model-data-frame"><span class="header-section-number">12.4</span> Cleaning the data to create a model data frame</a></li>
+  <li><a href="#assumptions-of-the-chi2-goodness-of-fit-gof-test" id="toc-assumptions-of-the-chi2-goodness-of-fit-gof-test" class="nav-link" data-scroll-target="#assumptions-of-the-chi2-goodness-of-fit-gof-test"><span class="header-section-number">12.5</span> Assumptions of the <span class="math inline">\(\chi^2\)</span> Goodness of Fit (GoF) Test</a></li>
   <li>
-<a href="#choosing-the-correct-number-of-bins" id="toc-choosing-the-correct-number-of-bins" class="nav-link" data-scroll-target="#choosing-the-correct-number-of-bins"><span class="header-section-number">11.6</span> Choosing the Correct Number of Bins</a>
+<a href="#choosing-the-correct-number-of-bins" id="toc-choosing-the-correct-number-of-bins" class="nav-link" data-scroll-target="#choosing-the-correct-number-of-bins"><span class="header-section-number">12.6</span> Choosing the Correct Number of Bins</a>
   <ul class="collapse">
-<li><a href="#bins-by-decile" id="toc-bins-by-decile" class="nav-link" data-scroll-target="#bins-by-decile"><span class="header-section-number">11.6.1</span> Bins by Decile</a></li>
-  <li><a href="#a-bin-for-each-unique-count" id="toc-a-bin-for-each-unique-count" class="nav-link" data-scroll-target="#a-bin-for-each-unique-count"><span class="header-section-number">11.6.2</span> A Bin for Each Unique Count</a></li>
-  <li><a href="#sturges-breaks" id="toc-sturges-breaks" class="nav-link" data-scroll-target="#sturges-breaks"><span class="header-section-number">11.6.3</span> Sturges Breaks</a></li>
-  <li><a href="#other-rules-to-calculate-the-breaks" id="toc-other-rules-to-calculate-the-breaks" class="nav-link" data-scroll-target="#other-rules-to-calculate-the-breaks"><span class="header-section-number">11.6.4</span> Other Rules to Calculate the Breaks</a></li>
+<li><a href="#bins-by-decile" id="toc-bins-by-decile" class="nav-link" data-scroll-target="#bins-by-decile"><span class="header-section-number">12.6.1</span> Bins by Decile</a></li>
+  <li><a href="#a-bin-for-each-unique-count" id="toc-a-bin-for-each-unique-count" class="nav-link" data-scroll-target="#a-bin-for-each-unique-count"><span class="header-section-number">12.6.2</span> A Bin for Each Unique Count</a></li>
+  <li><a href="#sturges-breaks" id="toc-sturges-breaks" class="nav-link" data-scroll-target="#sturges-breaks"><span class="header-section-number">12.6.3</span> Sturges Breaks</a></li>
+  <li><a href="#other-rules-to-calculate-the-breaks" id="toc-other-rules-to-calculate-the-breaks" class="nav-link" data-scroll-target="#other-rules-to-calculate-the-breaks"><span class="header-section-number">12.6.4</span> Other Rules to Calculate the Breaks</a></li>
   </ul>
 </li>
-  <li><a href="#code-to-run-the-chi2-goodness-of-fit-gof-test" id="toc-code-to-run-the-chi2-goodness-of-fit-gof-test" class="nav-link" data-scroll-target="#code-to-run-the-chi2-goodness-of-fit-gof-test"><span class="header-section-number">11.7</span> Code to run the <span class="math inline">\(\chi^2\)</span> Goodness of Fit (GoF) Test</a></li>
+  <li><a href="#code-to-run-the-chi2-goodness-of-fit-gof-test" id="toc-code-to-run-the-chi2-goodness-of-fit-gof-test" class="nav-link" data-scroll-target="#code-to-run-the-chi2-goodness-of-fit-gof-test"><span class="header-section-number">12.7</span> Code to run the <span class="math inline">\(\chi^2\)</span> Goodness of Fit (GoF) Test</a></li>
   <li>
-<a href="#brief-interpretation-of-the-output" id="toc-brief-interpretation-of-the-output" class="nav-link" data-scroll-target="#brief-interpretation-of-the-output"><span class="header-section-number">11.8</span> Brief interpretation of the output</a>
+<a href="#brief-interpretation-of-the-output" id="toc-brief-interpretation-of-the-output" class="nav-link" data-scroll-target="#brief-interpretation-of-the-output"><span class="header-section-number">12.8</span> Brief interpretation of the output</a>
   <ul class="collapse">
-<li><a href="#brief-aside-simple-normality-tests" id="toc-brief-aside-simple-normality-tests" class="nav-link" data-scroll-target="#brief-aside-simple-normality-tests"><span class="header-section-number">11.8.1</span> Brief Aside: Simple Normality Tests</a></li>
+<li><a href="#brief-aside-simple-normality-tests" id="toc-brief-aside-simple-normality-tests" class="nav-link" data-scroll-target="#brief-aside-simple-normality-tests"><span class="header-section-number">12.8.1</span> Brief Aside: Simple Normality Tests</a></li>
   </ul>
 </li>
-  <li><a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up"><span class="header-section-number">11.9</span> Wrapping Up</a></li>
+  <li><a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up"><span class="header-section-number">12.9</span> Wrapping Up</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/02_chiSq_GoF.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_chiSq_GoF.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_chiSq_GoF.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">11</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span>
+<span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span>
 </h1>
 </div>
 
@@ -491,11 +497,11 @@ window.Quarto = {
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ctn-0094.github.io/public.ctn0094extra/">public.ctn0094extra</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="introduction-to-the-chi2-goodness-of-fit-gof-test" class="level2" data-number="11.1"><h2 data-number="11.1" class="anchored" data-anchor-id="introduction-to-the-chi2-goodness-of-fit-gof-test">
-<span class="header-section-number">11.1</span> Introduction to the <span class="math inline">\(\chi^2\)</span> Goodness of Fit (GoF) Test</h2>
+<section id="introduction-to-the-chi2-goodness-of-fit-gof-test" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="introduction-to-the-chi2-goodness-of-fit-gof-test">
+<span class="header-section-number">12.1</span> Introduction to the <span class="math inline">\(\chi^2\)</span> Goodness of Fit (GoF) Test</h2>
 <p>Non-parametric tests and robust tests often have lower statistical power than their traditional counterparts. These more traditional hypothesis tests make <em>distributional assumptions</em>. For instance, a test may assume that the original observations are approximately normal or that counts follow a Poisson distribution. <strong>While we most commonly assess distributional assumptions visually</strong>, for instance with a Q-Q plot or histogram, there are some instances where we need to test adherence of data to a specified distribution with a proper statistical hypothesis test. One such test is the <span class="math inline">\(\chi^2\)</span> <em>Goodness of Fit</em> (GoF) test, published in the textbook <em>Statistical Methods</em> (Snedecor and Cochran, 1989). We draw some of our formulation and examples from this US NIST handbook: <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda35f.htm" class="uri">https://www.itl.nist.gov/div898/handbook/eda/section3/eda35f.htm</a>.</p>
-</section><section id="mathematical-definition-of-the-chi2-goodness-of-fit-gof-test" class="level2" data-number="11.2"><h2 data-number="11.2" class="anchored" data-anchor-id="mathematical-definition-of-the-chi2-goodness-of-fit-gof-test">
-<span class="header-section-number">11.2</span> Mathematical definition of the <span class="math inline">\(\chi^2\)</span> Goodness of Fit (GoF) Test</h2>
+</section><section id="mathematical-definition-of-the-chi2-goodness-of-fit-gof-test" class="level2" data-number="12.2"><h2 data-number="12.2" class="anchored" data-anchor-id="mathematical-definition-of-the-chi2-goodness-of-fit-gof-test">
+<span class="header-section-number">12.2</span> Mathematical definition of the <span class="math inline">\(\chi^2\)</span> Goodness of Fit (GoF) Test</h2>
 <p>The idea of this test is to “bin” all the observations (think histogram) and then test the counts of the observations in each bin (<strong>observed</strong>) against the number of counts in the same bins from the target distribution (<strong>expected</strong>).</p>
 <p>Consider a sample of <span class="math inline">\(n\)</span> observations, <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span>, from an unknown distribution with cumulative distribution function (CDF) <span class="math inline">\(\mathcal{F}_0\)</span> with support <span class="math inline">\((-\infty, \infty)\)</span>. Let <span class="math inline">\(\mathcal{F}_A\)</span> denote the CDF distribution to compare against (such as a Normal distribution, Gamma distribution, Negative Binomial distribution, or whatever distribution you think best describes the population data). Partition the <span class="math inline">\(n\)</span> observations into <span class="math inline">\(k+1\)</span> bins using <span class="math inline">\(k\)</span> cut points <span class="math inline">\(T_1, T_2, \ldots, T_k\)</span>, creating the non-intersecting intervals <span class="math inline">\(\{ {(-\infty, T_1]},\ (T_1, T_2],\ \ldots,\ (T_k, \infty)\}\)</span> which span the support of <span class="math inline">\(\mathcal{F}_0\)</span>. For the sake of notation, let <span class="math inline">\(T_0 = -\infty\)</span> and <span class="math inline">\(T_{k+1} = \infty\)</span>.</p>
 <p>Once we have the data partitions, we then tally the <strong>observed count</strong> in each bin, <span class="math inline">\(O_1, O_2, \ldots, O_{k+1}\)</span>. We also find the probabilities of being in each bin <span class="math inline">\((T_{i-1}, T_i],\ i \in 1, 2, \ldots, k+1\)</span> from the target distribution <span class="math inline">\(\mathcal{F}_A\)</span>. That is, calculate <span class="math inline">\(p_i \equiv \mathcal{F}_A(T_i) - \mathcal{F}_A(T_{i-1})\)</span>, noting that <span class="math inline">\(\sum_{i = 1}^{k+1} p_i = 1\)</span>. Multiply the probabilities for each bin, <span class="math inline">\(p_i\)</span>, by the total sample size, <span class="math inline">\(n\)</span>, to generate the <strong>expected count</strong> for each bin, <span class="math inline">\(E_1, E_2, \ldots, E_{k+1}\)</span>.</p>
@@ -503,11 +509,11 @@ window.Quarto = {
 \chi^2_{\text{Obs}} \equiv \sum\limits_{i = 1}^{k+1} \frac{(O_i - E_i)^2}{E_i}.
 \]</span></p>
 <p>The distribution of this test statistic is approximately <span class="math inline">\(\chi^2\)</span> with <span class="math inline">\(k^* + (p + 1)\)</span> degrees of freedom, where <span class="math inline">\(k^*\)</span> is the number of <strong>non-empty</strong> bins and <span class="math inline">\(p\)</span> is the number of parameters of <span class="math inline">\(\mathcal{F}_A\)</span>. For example, let’s assume that we are comparing the data against a Beta distribution with two parameters <span class="math inline">\(\{\alpha,\beta\}\)</span>. Further, assume we choose to bin the observed data into deciles so that we have at least one observation in each bin. Thus, we would have <span class="math inline">\(k^* = 10\)</span> bins and <span class="math inline">\(p = 2\)</span> parameters. So, we would compare the test statistic <span class="math inline">\(\chi^2_{\text{Obs}}\)</span> against a <span class="math inline">\(\chi^2\)</span> distribution with <span class="math inline">\(k^* + (p + 1) = (10) + (2 + 1) = 13\)</span> degrees of freedom.</p>
-</section><section id="data-source-and-description" class="level2" data-number="11.3"><h2 data-number="11.3" class="anchored" data-anchor-id="data-source-and-description">
-<span class="header-section-number">11.3</span> Data source and description</h2>
+</section><section id="data-source-and-description" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="data-source-and-description">
+<span class="header-section-number">12.3</span> Data source and description</h2>
 <p>When we treat people who are addicted to licit and/or illicit substances, one potential predictor of recovery is baseline “risky health behaviours”; the <a href="https://adai.uw.edu/">Addictions, Drug, and Alcohol Institute</a> hosts a copy of the Risk Behavior Survey questionnaire: <a href="https://adai.uw.edu/instruments/pdf/Risk_Behavior_Survey_209.pdf" class="uri">https://adai.uw.edu/instruments/pdf/Risk_Behavior_Survey_209.pdf</a>. While exploring the results of this questionnaire among patients in treatment, we might want to know if the total number of sexual partners (column <code>txx_frq</code> in the data set <code>sex</code>) follow a Poisson distribution.</p>
-</section><section id="cleaning-the-data-to-create-a-model-data-frame" class="level2" data-number="11.4"><h2 data-number="11.4" class="anchored" data-anchor-id="cleaning-the-data-to-create-a-model-data-frame">
-<span class="header-section-number">11.4</span> Cleaning the data to create a model data frame</h2>
+</section><section id="cleaning-the-data-to-create-a-model-data-frame" class="level2" data-number="12.4"><h2 data-number="12.4" class="anchored" data-anchor-id="cleaning-the-data-to-create-a-model-data-frame">
+<span class="header-section-number">12.4</span> Cleaning the data to create a model data frame</h2>
 <p>This data is already relatively clean, other than the missing values. Let’s remove them.</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu">public.ctn0094data</span><span class="fu">::</span><span class="va"><a href="https://ctn-0094.github.io/public.ctn0094data/reference/sex.html">sex</a></span><span class="op">$</span><span class="va">txx_frq</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -534,14 +540,14 @@ window.Quarto = {
 <img src="02_chiSq_GoF_files/figure-html/fig-hist-of-count-of-partners-1.png" id="fig-hist-of-count-of-partners" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-hist-of-count-of-partners-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11.1
+Figure&nbsp;12.1
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p>It does not appear that this data follows a Poisson distribution. That said, a journal reviewer may still ask for a <span class="math inline">\(p\)</span>-value as evidence.</p>
-</section><section id="assumptions-of-the-chi2-goodness-of-fit-gof-test" class="level2" data-number="11.5"><h2 data-number="11.5" class="anchored" data-anchor-id="assumptions-of-the-chi2-goodness-of-fit-gof-test">
-<span class="header-section-number">11.5</span> Assumptions of the <span class="math inline">\(\chi^2\)</span> Goodness of Fit (GoF) Test</h2>
+</section><section id="assumptions-of-the-chi2-goodness-of-fit-gof-test" class="level2" data-number="12.5"><h2 data-number="12.5" class="anchored" data-anchor-id="assumptions-of-the-chi2-goodness-of-fit-gof-test">
+<span class="header-section-number">12.5</span> Assumptions of the <span class="math inline">\(\chi^2\)</span> Goodness of Fit (GoF) Test</h2>
 <p>Recall that the <span class="math inline">\(k^*\)</span> parameter counts only the number of non-empty bins, so we should choose a small enough number of bins to ensure that all bins have at least a couple data points. I don’t actually know for sure what the minimum should be, but I’d say at least 5 per bin, but the traditional <span class="math inline">\(\chi^2\)</span> Test of Independence assumes at least 10 values per bin. The more bins you use (up to a point), the better the empirical CDF can approximate the shape of the distributional CDF. However, two things work against you: 1) more bins require more samples, and 2) more bins mean that you’re more likely to reject the null hypothesis even when you shouldn’t.</p>
 <p><strong>Summary of Assumptions</strong>:</p>
 <ol type="1">
@@ -549,8 +555,8 @@ Figure&nbsp;11.1
 <li>Your sample was taken at random</li>
 <li>Your samples are (or can be represented as) count data</li>
 <li>You have enough samples to have a few per bin (at least 5-10)</li>
-</ol></section><section id="choosing-the-correct-number-of-bins" class="level2" data-number="11.6"><h2 data-number="11.6" class="anchored" data-anchor-id="choosing-the-correct-number-of-bins">
-<span class="header-section-number">11.6</span> Choosing the Correct Number of Bins</h2>
+</ol></section><section id="choosing-the-correct-number-of-bins" class="level2" data-number="12.6"><h2 data-number="12.6" class="anchored" data-anchor-id="choosing-the-correct-number-of-bins">
+<span class="header-section-number">12.6</span> Choosing the Correct Number of Bins</h2>
 <p>For a test that depends on the number of bins, we would expect there to be some “correct” number. This is a reasonably important question. Unfortunately, as best as these authors are aware, there isn’t one best rule for selecting the correct number of bins. Thankfully, there has been some research done on the optimal number of bins for histograms (which is very similar). We can apply these various “rules” to the <span class="math inline">\(\chi^2\)</span> GoF test as well.</p>
 <p>The standard method to accomplish this is to set <code>breaks = k+1</code> in the <code><a href="https://rdrr.io/r/graphics/hist.html">hist()</a></code> call. However, this number of bins doesn’t always change when you want it to: the help file says that if you give a number of bins for the <code>breaks</code> argument, that “the number is a suggestion only”. In order to “force” the number of bins to be what you want, you have to create a sequence of cut points yourself, using the <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code> function. But note that the cut points include the minimum and the maximum of the data (<span class="math inline">\(T_0\)</span> and <span class="math inline">\(T_{k+1}\)</span>); so if you want 10 bins, you’ll need a vector of “cuts” with length 11. An example of this code is:</p>
 <div class="cell">
@@ -564,8 +570,8 @@ Figure&nbsp;11.1
 <pre><code> [1]  1.0  5.3  9.6 13.9 18.2 22.5 26.8 31.1 35.4 39.7 44.0</code></pre>
 </div>
 </div>
-<section id="bins-by-decile" class="level3" data-number="11.6.1"><h3 data-number="11.6.1" class="anchored" data-anchor-id="bins-by-decile">
-<span class="header-section-number">11.6.1</span> Bins by Decile</h3>
+<section id="bins-by-decile" class="level3" data-number="12.6.1"><h3 data-number="12.6.1" class="anchored" data-anchor-id="bins-by-decile">
+<span class="header-section-number">12.6.1</span> Bins by Decile</h3>
 <p>We could divide the observations by into bins at every 10th percentile of the data; this would yield 197.2 participants per bin, on average. It would work pretty well for this data set, but that’s purely a coincidence (<em>but see the odd trivia below the Sturge’s Rule section</em>). This would yield the same default histogram as above.</p>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span></span>
@@ -584,13 +590,13 @@ Figure&nbsp;11.1
 <img src="02_chiSq_GoF_files/figure-html/fig-hist-of-count-of-partners-decile-bins-1.png" id="fig-hist-of-count-of-partners-decile-bins" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-hist-of-count-of-partners-decile-bins-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11.2
+Figure&nbsp;12.2
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section><section id="a-bin-for-each-unique-count" class="level3" data-number="11.6.2"><h3 data-number="11.6.2" class="anchored" data-anchor-id="a-bin-for-each-unique-count">
-<span class="header-section-number">11.6.2</span> A Bin for Each Unique Count</h3>
+</section><section id="a-bin-for-each-unique-count" class="level3" data-number="12.6.2"><h3 data-number="12.6.2" class="anchored" data-anchor-id="a-bin-for-each-unique-count">
+<span class="header-section-number">12.6.2</span> A Bin for Each Unique Count</h3>
 <p>A simple rule for discrete data would be a bin for each unique value. In our example, the most number of bins which make sense are all the observed counts (in our case, 44 bins). Let’s rebuild the above histogram with a bin for each unique count value.</p>
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span></span>
@@ -609,14 +615,14 @@ Figure&nbsp;11.2
 <img src="02_chiSq_GoF_files/figure-html/fig-hist-of-count-of-partners-unique-bins-1.png" id="fig-hist-of-count-of-partners-unique-bins" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-hist-of-count-of-partners-unique-bins-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11.3
+Figure&nbsp;12.3
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p>This retains some of the shape of the data we saw with 10 bins, but it’s very “noisy”. This is probably <strong>not</strong> a good option to use.</p>
-</section><section id="sturges-breaks" class="level3" data-number="11.6.3"><h3 data-number="11.6.3" class="anchored" data-anchor-id="sturges-breaks">
-<span class="header-section-number">11.6.3</span> Sturges Breaks</h3>
+</section><section id="sturges-breaks" class="level3" data-number="12.6.3"><h3 data-number="12.6.3" class="anchored" data-anchor-id="sturges-breaks">
+<span class="header-section-number">12.6.3</span> Sturges Breaks</h3>
 <p>We should recall that in the first histogram, we changed the number of breaks from the default. The default number of histogram breaks in R is an option called <code>"Sturges"</code>. <a href="https://www.statology.org/sturges-rule/">Sturge’s Rule</a> states that an optimal number of bins for a histogram (and subsequently, a <span class="math inline">\(\chi^2\)</span> GoF test) is <span class="math inline">\(\log_2(n) + 1\)</span>, rounded up. For our example, this would be 12 breaks:</p>
 <div class="cell">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Sample size</span></span>
@@ -644,7 +650,7 @@ Figure&nbsp;11.3
 <img src="02_chiSq_GoF_files/figure-html/fig-hist-of-count-of-partners-Sturges-bins-1.png" id="fig-hist-of-count-of-partners-Sturges-bins" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-hist-of-count-of-partners-Sturges-bins-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11.4
+Figure&nbsp;12.4
 </figcaption></figure>
 </div>
 </div>
@@ -652,8 +658,8 @@ Figure&nbsp;11.4
 <blockquote class="blockquote">
 <p>Aside: why does using decile bins work here? According to Sturge’s rule, for any data set with number of samples between 70 and 2000, 10 bins is reasonably close to the optimal number calculated by Sturge’s rule (for 70 samples, the optimal Sturge’s bins is 8; for 2000, it’s 12). So while it’s purely coincidence for our data set, using decile-based bins will work for many of the data sets that students will encounter in their statistics and methods classes.</p>
 </blockquote>
-</section><section id="other-rules-to-calculate-the-breaks" class="level3" data-number="11.6.4"><h3 data-number="11.6.4" class="anchored" data-anchor-id="other-rules-to-calculate-the-breaks">
-<span class="header-section-number">11.6.4</span> Other Rules to Calculate the Breaks</h3>
+</section><section id="other-rules-to-calculate-the-breaks" class="level3" data-number="12.6.4"><h3 data-number="12.6.4" class="anchored" data-anchor-id="other-rules-to-calculate-the-breaks">
+<span class="header-section-number">12.6.4</span> Other Rules to Calculate the Breaks</h3>
 <p>There are <a href="https://www.statisticshowto.com/choose-bin-sizes-statistics/">a few other rules</a> to calculate the number of bins, all rounded up:</p>
 <ul>
 <li>The Square Root rule: <span class="math inline">\(\sqrt{n}\)</span>
@@ -751,13 +757,13 @@ Figure&nbsp;11.4
 <img src="02_chiSq_GoF_files/figure-html/fig-4-histograms-compare-1.png" id="fig-4-histograms-compare" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-4-histograms-compare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11.5
+Figure&nbsp;12.5
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section></section><section id="code-to-run-the-chi2-goodness-of-fit-gof-test" class="level2" data-number="11.7"><h2 data-number="11.7" class="anchored" data-anchor-id="code-to-run-the-chi2-goodness-of-fit-gof-test">
-<span class="header-section-number">11.7</span> Code to run the <span class="math inline">\(\chi^2\)</span> Goodness of Fit (GoF) Test</h2>
+</section></section><section id="code-to-run-the-chi2-goodness-of-fit-gof-test" class="level2" data-number="12.7"><h2 data-number="12.7" class="anchored" data-anchor-id="code-to-run-the-chi2-goodness-of-fit-gof-test">
+<span class="header-section-number">12.7</span> Code to run the <span class="math inline">\(\chi^2\)</span> Goodness of Fit (GoF) Test</h2>
 <p>The Sturge and Freedman-Diaconis rules both yielded 12 bins, so we will use this number. Here is a list of the information we need:</p>
 <ul>
 <li>the original observed tally of sexual partners per patient</li>
@@ -880,11 +886,11 @@ Figure&nbsp;11.5
 <pre><code>[1] 0</code></pre>
 </div>
 </div>
-</section><section id="brief-interpretation-of-the-output" class="level2" data-number="11.8"><h2 data-number="11.8" class="anchored" data-anchor-id="brief-interpretation-of-the-output">
-<span class="header-section-number">11.8</span> Brief interpretation of the output</h2>
+</section><section id="brief-interpretation-of-the-output" class="level2" data-number="12.8"><h2 data-number="12.8" class="anchored" data-anchor-id="brief-interpretation-of-the-output">
+<span class="header-section-number">12.8</span> Brief interpretation of the output</h2>
 <p>Shockingly (this is sarcasm), the data that had two distinct peaks and looked nothing like a Poisson distribution <em>can not</em> actually be approximated by a Poisson distribution. Go figure. Regardless, this process can be replicated for your own data as well. We are showing off the <span class="math inline">\(\chi^2\)</span> GoF version because it works for ANY distribution you can think of.</p>
-<section id="brief-aside-simple-normality-tests" class="level3" data-number="11.8.1"><h3 data-number="11.8.1" class="anchored" data-anchor-id="brief-aside-simple-normality-tests">
-<span class="header-section-number">11.8.1</span> Brief Aside: Simple Normality Tests</h3>
+<section id="brief-aside-simple-normality-tests" class="level3" data-number="12.8.1"><h3 data-number="12.8.1" class="anchored" data-anchor-id="brief-aside-simple-normality-tests">
+<span class="header-section-number">12.8.1</span> Brief Aside: Simple Normality Tests</h3>
 <p>However, this all gets much simpler if you only care about testing for normality (<a href="https://towardsdatascience.com/stop-testing-for-normality-dba96bb73f90">which is usually a dumb thing to do anyway</a>, but I digress). If your data are continuous and “normal-ish”, just use the Kolmogorov-Smirnov test, Shapiro-Wilk test, or the Anderson-Darling test instead. Our data are NOT “normal-ish”, so these results are invalid (but I’m showing you the code anyway).</p>
 <div class="cell">
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Kolmogorov-Smirnov test</span></span>
@@ -921,8 +927,8 @@ A = 102.73, p-value &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Look at those magical tiny <span class="math inline">\(p\)</span>-values! So we’ve learned that non-normal data isn’t normal. How surprising (again, sarcasm).</p>
-</section></section><section id="wrapping-up" class="level2" data-number="11.9"><h2 data-number="11.9" class="anchored" data-anchor-id="wrapping-up">
-<span class="header-section-number">11.9</span> Wrapping Up</h2>
+</section></section><section id="wrapping-up" class="level2" data-number="12.9"><h2 data-number="12.9" class="anchored" data-anchor-id="wrapping-up">
+<span class="header-section-number">12.9</span> Wrapping Up</h2>
 <p>If you need to check if your data are approximately normal, or approximately any other distribution, just <strong>plot the data</strong>. Use a density, Q-Q plot, or even a histogram. The material in this lesson is to help you when you run into a pesky reviewer / boss / collaborator (who just happens to be addicted to <span class="math inline">\(p\)</span>-values) and they want to perform a test for distributional assumptions.</p>
 
 
@@ -1335,13 +1341,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../lessons/02_mcnemar_paired_samp.html" class="pagination-link" aria-label="McNemar's Test">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span>
+      <a href="../lessons/02_cochrans_q_paired_samp.html" class="pagination-link" aria-label="Cochran's Q Test">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../lessons/02_transformations.html" class="pagination-link" aria-label="Transformations to Normality">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

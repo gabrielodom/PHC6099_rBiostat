@@ -8,7 +8,7 @@
 
 <meta name="author" content="Gabriel Odom">
 
-<title>An R Cookbook for Public Health - 28&nbsp; Poisson Regression Model</title>
+<title>An R Cookbook for Public Health - 29&nbsp; Poisson Regression Model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -145,7 +145,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../05_header_generalized-linear-models.html">Generalized Linear Models</a></li><li class="breadcrumb-item"><a href="../lessons/05_glm_poisson.html"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../05_header_generalized-linear-models.html">Generalized Linear Models</a></li><li class="breadcrumb-item"><a href="../lessons/05_glm_poisson.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -260,20 +260,26 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_cochrans_q_paired_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -290,25 +296,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -325,55 +331,55 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_one_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_corr_cov.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -390,13 +396,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_poisson.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
   </div>
 </li>
       </ul>
@@ -413,7 +419,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
   </div>
 </li>
       </ul>
@@ -430,7 +436,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -445,27 +451,27 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#libraries-for-this-lesson" id="toc-libraries-for-this-lesson" class="nav-link active" data-scroll-target="#libraries-for-this-lesson"><span class="header-section-number">28.1</span> Libraries for this lesson</a></li>
-  <li><a href="#introduction-to-poisson-regression-model" id="toc-introduction-to-poisson-regression-model" class="nav-link" data-scroll-target="#introduction-to-poisson-regression-model"><span class="header-section-number">28.2</span> Introduction to Poisson Regression Model</a></li>
-  <li><a href="#mathematical-formulation-of-the-model" id="toc-mathematical-formulation-of-the-model" class="nav-link" data-scroll-target="#mathematical-formulation-of-the-model"><span class="header-section-number">28.3</span> Mathematical Formulation of the Model</a></li>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">28.4</span> Example</a>
+  <li><a href="#libraries-for-this-lesson" id="toc-libraries-for-this-lesson" class="nav-link active" data-scroll-target="#libraries-for-this-lesson"><span class="header-section-number">29.1</span> Libraries for this lesson</a></li>
+  <li><a href="#introduction-to-poisson-regression-model" id="toc-introduction-to-poisson-regression-model" class="nav-link" data-scroll-target="#introduction-to-poisson-regression-model"><span class="header-section-number">29.2</span> Introduction to Poisson Regression Model</a></li>
+  <li><a href="#mathematical-formulation-of-the-model" id="toc-mathematical-formulation-of-the-model" class="nav-link" data-scroll-target="#mathematical-formulation-of-the-model"><span class="header-section-number">29.3</span> Mathematical Formulation of the Model</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">29.4</span> Example</a>
   <ul class="collapse">
-  <li><a href="#exploring-the-data" id="toc-exploring-the-data" class="nav-link" data-scroll-target="#exploring-the-data"><span class="header-section-number">28.4.1</span> Exploring the data</a></li>
-  <li><a href="#fitting-the-poisson-regression-model" id="toc-fitting-the-poisson-regression-model" class="nav-link" data-scroll-target="#fitting-the-poisson-regression-model"><span class="header-section-number">28.4.2</span> Fitting the Poisson Regression Model</a></li>
-  <li><a href="#model-fit-assessment" id="toc-model-fit-assessment" class="nav-link" data-scroll-target="#model-fit-assessment"><span class="header-section-number">28.4.3</span> Model Fit Assessment</a></li>
-  <li><a href="#interpreting-the-results" id="toc-interpreting-the-results" class="nav-link" data-scroll-target="#interpreting-the-results"><span class="header-section-number">28.4.4</span> Interpreting the Results</a></li>
-  <li><a href="#prediction" id="toc-prediction" class="nav-link" data-scroll-target="#prediction"><span class="header-section-number">28.4.5</span> Prediction</a></li>
+  <li><a href="#exploring-the-data" id="toc-exploring-the-data" class="nav-link" data-scroll-target="#exploring-the-data"><span class="header-section-number">29.4.1</span> Exploring the data</a></li>
+  <li><a href="#fitting-the-poisson-regression-model" id="toc-fitting-the-poisson-regression-model" class="nav-link" data-scroll-target="#fitting-the-poisson-regression-model"><span class="header-section-number">29.4.2</span> Fitting the Poisson Regression Model</a></li>
+  <li><a href="#model-fit-assessment" id="toc-model-fit-assessment" class="nav-link" data-scroll-target="#model-fit-assessment"><span class="header-section-number">29.4.3</span> Model Fit Assessment</a></li>
+  <li><a href="#interpreting-the-results" id="toc-interpreting-the-results" class="nav-link" data-scroll-target="#interpreting-the-results"><span class="header-section-number">29.4.4</span> Interpreting the Results</a></li>
+  <li><a href="#prediction" id="toc-prediction" class="nav-link" data-scroll-target="#prediction"><span class="header-section-number">29.4.5</span> Prediction</a></li>
   </ul></li>
-  <li><a href="#summary-1" id="toc-summary-1" class="nav-link" data-scroll-target="#summary-1"><span class="header-section-number">28.5</span> Summary</a></li>
+  <li><a href="#summary-1" id="toc-summary-1" class="nav-link" data-scroll-target="#summary-1"><span class="header-section-number">29.5</span> Summary</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/05_glm_poisson.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../05_header_generalized-linear-models.html">Generalized Linear Models</a></li><li class="breadcrumb-item"><a href="../lessons/05_glm_poisson.html"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../05_header_generalized-linear-models.html">Generalized Linear Models</a></li><li class="breadcrumb-item"><a href="../lessons/05_glm_poisson.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></h1>
+<h1 class="title"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></h1>
 </div>
 
 
@@ -498,8 +504,8 @@ window.Quarto = {
 </header>
 
 
-<section id="libraries-for-this-lesson" class="level2" data-number="28.1">
-<h2 data-number="28.1" class="anchored" data-anchor-id="libraries-for-this-lesson"><span class="header-section-number">28.1</span> Libraries for this lesson</h2>
+<section id="libraries-for-this-lesson" class="level2" data-number="29.1">
+<h2 data-number="29.1" class="anchored" data-anchor-id="libraries-for-this-lesson"><span class="header-section-number">29.1</span> Libraries for this lesson</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Installing Required Packages</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># intsall.packages(readxl)</span></span>
@@ -520,8 +526,8 @@ window.Quarto = {
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="introduction-to-poisson-regression-model" class="level2" data-number="28.2">
-<h2 data-number="28.2" class="anchored" data-anchor-id="introduction-to-poisson-regression-model"><span class="header-section-number">28.2</span> Introduction to Poisson Regression Model</h2>
+<section id="introduction-to-poisson-regression-model" class="level2" data-number="29.2">
+<h2 data-number="29.2" class="anchored" data-anchor-id="introduction-to-poisson-regression-model"><span class="header-section-number">29.2</span> Introduction to Poisson Regression Model</h2>
 <p>The Poisson regression model (PRM) is an appropriate model for studying counts response variable, which follows the Poisson distribution. Thus, the values of the response variable are non-negative integers. It is a type of Generalized linear models (GLM) whenever the outcome is count. It also accommodates rate data as we will see shortly. Although count and rate data are very common in medical and health sciences. For instance, how the colony counts of bacteria are associated with different environmental conditions and dilutions. Another example related to vital statistics, which is related to infant mortality or cancer incidence among groups with different demographics. In such scenarios, the benchmark model PRM is more appropriate than the linear regression model (LRM).</p>
 <p>Basically, Poisson regression models the linear relationship between:</p>
 <ul>
@@ -535,8 +541,8 @@ RR = \exp(b_p)
 \]</span></p>
 <p>for the coefficient <span class="math inline">\(b_p\)</span> of the p’s predictor. This is interpreted in similar way to the odds ratio for logistic regression, which is approximately the relative risk given a predictor.</p>
 </section>
-<section id="mathematical-formulation-of-the-model" class="level2" data-number="28.3">
-<h2 data-number="28.3" class="anchored" data-anchor-id="mathematical-formulation-of-the-model"><span class="header-section-number">28.3</span> Mathematical Formulation of the Model</h2>
+<section id="mathematical-formulation-of-the-model" class="level2" data-number="29.3">
+<h2 data-number="29.3" class="anchored" data-anchor-id="mathematical-formulation-of-the-model"><span class="header-section-number">29.3</span> Mathematical Formulation of the Model</h2>
 <p>The Poisson distribution for a random variable <code>Y</code> has the following probability mass function for a given value <code>Y = y</code> <span class="math display">\[
 P(Y|y=\lambda) = \frac{e^{-\lambda}\lambda^y}{y!},
 \]</span> for <span class="math inline">\(y = 0, 1, 2, \dots\)</span>. The Poisson distribution is characterized by the single parameter <span class="math inline">\(\lambda\)</span>, which is the mean rate of occurrence for the event being measured. For the Poisson distribution, it is assumed that large counts (with respect to the value of <span class="math inline">\(\lambda\)</span>) are rare. And the rate <span class="math inline">\(\lambda\)</span> is determined by a set of <span class="math inline">\(k\)</span> predictors <span class="math inline">\(X = (X_1,\dots, X_k)\)</span>. The expression relating these quantities is <span class="math display">\[
@@ -564,8 +570,8 @@ f(y_i, \theta_i, \lambda) =
 </ul>
 <p>Since the value of dispersion parameter for the Poisson distribution is one. The PRM is generally applied in the situations, when the response <span class="math inline">\(y_i\)</span> is in the form of counts, that is, <span class="math inline">\(y_i = 0, 1, 2, \dots\)</span> and distributed as <span class="math inline">\(P(\mu_i)\)</span>, where <span class="math inline">\(\mu_i = exp ( x^T_i \beta)\)</span> and <span class="math inline">\(log (\mu_i) = x^T_i \beta\)</span>, while <span class="math inline">\(x_i\)</span> denotes the <span class="math inline">\(i\)</span>th row of design matrix <span class="math inline">\(X\)</span> having order <span class="math inline">\(n \times r\)</span> while <span class="math inline">\(\beta\)</span> is a coefficient vector of order <span class="math inline">\(r \times 1\)</span>, where <span class="math inline">\(r = p + 1\)</span> are the explanatory variables.</p>
 </section>
-<section id="example" class="level2" data-number="28.4">
-<h2 data-number="28.4" class="anchored" data-anchor-id="example"><span class="header-section-number">28.4</span> Example</h2>
+<section id="example" class="level2" data-number="29.4">
+<h2 data-number="29.4" class="anchored" data-anchor-id="example"><span class="header-section-number">29.4</span> Example</h2>
 <p>To demonstrate the method of PRM, we consider the asthma attack data set(<a href="https://github.com/drkamarul/multivar_data_analysis/tree/main/data" class="uri">https://github.com/drkamarul/multivar_data_analysis/tree/main/data</a>). The data on the number of asthmatic attacks per year among a sample of 120 patients and the associated factors are given in <code>05_asthma.csv</code>.</p>
 <p>The dataset contains four variables:</p>
 <ul>
@@ -574,8 +580,8 @@ f(y_i, \theta_i, \lambda) =
 <li><code>ghq12</code>: General Health Questionnare 12 (GHQ-12) score of psychological well being (numerical) {0 to 36}.</li>
 <li><code>attack</code>: Number of athmatic attack per year (count).</li>
 </ul>
-<section id="exploring-the-data" class="level3" data-number="28.4.1">
-<h3 data-number="28.4.1" class="anchored" data-anchor-id="exploring-the-data"><span class="header-section-number">28.4.1</span> Exploring the data</h3>
+<section id="exploring-the-data" class="level3" data-number="29.4.1">
+<h3 data-number="29.4.1" class="anchored" data-anchor-id="exploring-the-data"><span class="header-section-number">29.4.1</span> Exploring the data</h3>
 <p>Let’s begin by looking at the data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>asthma <span class="ot">&lt;-</span> </span>
@@ -608,8 +614,8 @@ dbl (2): ghq12, attack
 10 male   no         28      2</code></pre>
 </div>
 </div>
-<section id="structure-of-the-dataset" class="level4" data-number="28.4.1.1">
-<h4 data-number="28.4.1.1" class="anchored" data-anchor-id="structure-of-the-dataset"><span class="header-section-number">28.4.1.1</span> Structure of the dataset</h4>
+<section id="structure-of-the-dataset" class="level4" data-number="29.4.1.1">
+<h4 data-number="29.4.1.1" class="anchored" data-anchor-id="structure-of-the-dataset"><span class="header-section-number">29.4.1.1</span> Structure of the dataset</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(asthma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -629,8 +635,8 @@ dbl (2): ghq12, attack
 </div>
 </div>
 </section>
-<section id="summary" class="level4" data-number="28.4.1.2">
-<h4 data-number="28.4.1.2" class="anchored" data-anchor-id="summary"><span class="header-section-number">28.4.1.2</span> Summary</h4>
+<section id="summary" class="level4" data-number="29.4.1.2">
+<h4 data-number="29.4.1.2" class="anchored" data-anchor-id="summary"><span class="header-section-number">29.4.1.2</span> Summary</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(asthma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -784,36 +790,36 @@ dbl (2): ghq12, attack
 </div>
 </div>
 </section>
-<section id="descriptives" class="level4" data-number="28.4.1.3">
-<h4 data-number="28.4.1.3" class="anchored" data-anchor-id="descriptives"><span class="header-section-number">28.4.1.3</span> Descriptives</h4>
+<section id="descriptives" class="level4" data-number="29.4.1.3">
+<h4 data-number="29.4.1.3" class="anchored" data-anchor-id="descriptives"><span class="header-section-number">29.4.1.3</span> Descriptives</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>asthma <span class="sc">%&gt;%</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="tbl-table1" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-table1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;28.1: Asthma Data
+Table&nbsp;29.1: Asthma Data
 </figcaption>
 <div aria-describedby="tbl-table1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <div>
-<div id="wzillwkwxz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wzillwkwxz table {
+<div id="vkxjeloirn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vkxjeloirn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wzillwkwxz thead, #wzillwkwxz tbody, #wzillwkwxz tfoot, #wzillwkwxz tr, #wzillwkwxz td, #wzillwkwxz th {
+#vkxjeloirn thead, #vkxjeloirn tbody, #vkxjeloirn tfoot, #vkxjeloirn tr, #vkxjeloirn td, #vkxjeloirn th {
   border-style: none;
 }
 
-#wzillwkwxz p {
+#vkxjeloirn p {
   margin: 0;
   padding: 0;
 }
 
-#wzillwkwxz .gt_table {
+#vkxjeloirn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -839,12 +845,12 @@ Table&nbsp;28.1: Asthma Data
   border-left-color: #D3D3D3;
 }
 
-#wzillwkwxz .gt_caption {
+#vkxjeloirn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wzillwkwxz .gt_title {
+#vkxjeloirn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -856,7 +862,7 @@ Table&nbsp;28.1: Asthma Data
   border-bottom-width: 0;
 }
 
-#wzillwkwxz .gt_subtitle {
+#vkxjeloirn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -868,7 +874,7 @@ Table&nbsp;28.1: Asthma Data
   border-top-width: 0;
 }
 
-#wzillwkwxz .gt_heading {
+#vkxjeloirn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -880,13 +886,13 @@ Table&nbsp;28.1: Asthma Data
   border-right-color: #D3D3D3;
 }
 
-#wzillwkwxz .gt_bottom_border {
+#vkxjeloirn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wzillwkwxz .gt_col_headings {
+#vkxjeloirn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -901,7 +907,7 @@ Table&nbsp;28.1: Asthma Data
   border-right-color: #D3D3D3;
 }
 
-#wzillwkwxz .gt_col_heading {
+#vkxjeloirn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -921,7 +927,7 @@ Table&nbsp;28.1: Asthma Data
   overflow-x: hidden;
 }
 
-#wzillwkwxz .gt_column_spanner_outer {
+#vkxjeloirn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -933,15 +939,15 @@ Table&nbsp;28.1: Asthma Data
   padding-right: 4px;
 }
 
-#wzillwkwxz .gt_column_spanner_outer:first-child {
+#vkxjeloirn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wzillwkwxz .gt_column_spanner_outer:last-child {
+#vkxjeloirn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wzillwkwxz .gt_column_spanner {
+#vkxjeloirn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -953,11 +959,11 @@ Table&nbsp;28.1: Asthma Data
   width: 100%;
 }
 
-#wzillwkwxz .gt_spanner_row {
+#vkxjeloirn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wzillwkwxz .gt_group_heading {
+#vkxjeloirn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -983,7 +989,7 @@ Table&nbsp;28.1: Asthma Data
   text-align: left;
 }
 
-#wzillwkwxz .gt_empty_group_heading {
+#vkxjeloirn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -998,15 +1004,15 @@ Table&nbsp;28.1: Asthma Data
   vertical-align: middle;
 }
 
-#wzillwkwxz .gt_from_md > :first-child {
+#vkxjeloirn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wzillwkwxz .gt_from_md > :last-child {
+#vkxjeloirn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wzillwkwxz .gt_row {
+#vkxjeloirn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1025,7 +1031,7 @@ Table&nbsp;28.1: Asthma Data
   overflow-x: hidden;
 }
 
-#wzillwkwxz .gt_stub {
+#vkxjeloirn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1038,7 +1044,7 @@ Table&nbsp;28.1: Asthma Data
   padding-right: 5px;
 }
 
-#wzillwkwxz .gt_stub_row_group {
+#vkxjeloirn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1052,15 +1058,15 @@ Table&nbsp;28.1: Asthma Data
   vertical-align: top;
 }
 
-#wzillwkwxz .gt_row_group_first td {
+#vkxjeloirn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wzillwkwxz .gt_row_group_first th {
+#vkxjeloirn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wzillwkwxz .gt_summary_row {
+#vkxjeloirn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1070,16 +1076,16 @@ Table&nbsp;28.1: Asthma Data
   padding-right: 5px;
 }
 
-#wzillwkwxz .gt_first_summary_row {
+#vkxjeloirn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wzillwkwxz .gt_first_summary_row.thick {
+#vkxjeloirn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wzillwkwxz .gt_last_summary_row {
+#vkxjeloirn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1089,7 +1095,7 @@ Table&nbsp;28.1: Asthma Data
   border-bottom-color: #D3D3D3;
 }
 
-#wzillwkwxz .gt_grand_summary_row {
+#vkxjeloirn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1099,7 +1105,7 @@ Table&nbsp;28.1: Asthma Data
   padding-right: 5px;
 }
 
-#wzillwkwxz .gt_first_grand_summary_row {
+#vkxjeloirn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1109,7 +1115,7 @@ Table&nbsp;28.1: Asthma Data
   border-top-color: #D3D3D3;
 }
 
-#wzillwkwxz .gt_last_grand_summary_row_top {
+#vkxjeloirn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1119,11 +1125,11 @@ Table&nbsp;28.1: Asthma Data
   border-bottom-color: #D3D3D3;
 }
 
-#wzillwkwxz .gt_striped {
+#vkxjeloirn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wzillwkwxz .gt_table_body {
+#vkxjeloirn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1132,7 +1138,7 @@ Table&nbsp;28.1: Asthma Data
   border-bottom-color: #D3D3D3;
 }
 
-#wzillwkwxz .gt_footnotes {
+#vkxjeloirn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1146,7 +1152,7 @@ Table&nbsp;28.1: Asthma Data
   border-right-color: #D3D3D3;
 }
 
-#wzillwkwxz .gt_footnote {
+#vkxjeloirn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1155,7 +1161,7 @@ Table&nbsp;28.1: Asthma Data
   padding-right: 5px;
 }
 
-#wzillwkwxz .gt_sourcenotes {
+#vkxjeloirn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1169,7 +1175,7 @@ Table&nbsp;28.1: Asthma Data
   border-right-color: #D3D3D3;
 }
 
-#wzillwkwxz .gt_sourcenote {
+#vkxjeloirn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1177,63 +1183,63 @@ Table&nbsp;28.1: Asthma Data
   padding-right: 5px;
 }
 
-#wzillwkwxz .gt_left {
+#vkxjeloirn .gt_left {
   text-align: left;
 }
 
-#wzillwkwxz .gt_center {
+#vkxjeloirn .gt_center {
   text-align: center;
 }
 
-#wzillwkwxz .gt_right {
+#vkxjeloirn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wzillwkwxz .gt_font_normal {
+#vkxjeloirn .gt_font_normal {
   font-weight: normal;
 }
 
-#wzillwkwxz .gt_font_bold {
+#vkxjeloirn .gt_font_bold {
   font-weight: bold;
 }
 
-#wzillwkwxz .gt_font_italic {
+#vkxjeloirn .gt_font_italic {
   font-style: italic;
 }
 
-#wzillwkwxz .gt_super {
+#vkxjeloirn .gt_super {
   font-size: 65%;
 }
 
-#wzillwkwxz .gt_footnote_marks {
+#vkxjeloirn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wzillwkwxz .gt_asterisk {
+#vkxjeloirn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wzillwkwxz .gt_indent_1 {
+#vkxjeloirn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wzillwkwxz .gt_indent_2 {
+#vkxjeloirn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wzillwkwxz .gt_indent_3 {
+#vkxjeloirn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wzillwkwxz .gt_indent_4 {
+#vkxjeloirn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wzillwkwxz .gt_indent_5 {
+#vkxjeloirn .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1291,8 +1297,8 @@ Table&nbsp;28.1: Asthma Data
 </div>
 </div>
 </section>
-<section id="pairs" class="level4" data-number="28.4.1.4">
-<h4 data-number="28.4.1.4" class="anchored" data-anchor-id="pairs"><span class="header-section-number">28.4.1.4</span> Pairs</h4>
+<section id="pairs" class="level4" data-number="29.4.1.4">
+<h4 data-number="29.4.1.4" class="anchored" data-anchor-id="pairs"><span class="header-section-number">29.4.1.4</span> Pairs</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(asthma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1305,11 +1311,11 @@ Table&nbsp;28.1: Asthma Data
 </div>
 </section>
 </section>
-<section id="fitting-the-poisson-regression-model" class="level3" data-number="28.4.2">
-<h3 data-number="28.4.2" class="anchored" data-anchor-id="fitting-the-poisson-regression-model"><span class="header-section-number">28.4.2</span> Fitting the Poisson Regression Model</h3>
+<section id="fitting-the-poisson-regression-model" class="level3" data-number="29.4.2">
+<h3 data-number="29.4.2" class="anchored" data-anchor-id="fitting-the-poisson-regression-model"><span class="header-section-number">29.4.2</span> Fitting the Poisson Regression Model</h3>
 <p>Using the <code>glm()</code> function to fit a Poisson regression model. The model formula specified <code>attack</code> as the response variable and gender(<code>gender</code>), recurrent respiratory infection (<code>res_inf</code>) and, GHQ12 (<code>ghq12</code>) as predictor variables.</p>
-<section id="univariate-analysis" class="level4" data-number="28.4.2.1">
-<h4 data-number="28.4.2.1" class="anchored" data-anchor-id="univariate-analysis"><span class="header-section-number">28.4.2.1</span> Univariate Analysis</h4>
+<section id="univariate-analysis" class="level4" data-number="29.4.2.1">
+<h4 data-number="29.4.2.1" class="anchored" data-anchor-id="univariate-analysis"><span class="header-section-number">29.4.2.1</span> Univariate Analysis</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pois_attack1 <span class="ot">&lt;-</span>  <span class="fu">glm</span>(attack <span class="sc">~</span> gender, <span class="at">data =</span> asthma, <span class="at">family =</span> <span class="st">"poisson"</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pois_attack1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1384,8 +1390,8 @@ Number of Fisher Scoring iterations: 5</code></pre>
 </div>
 <p>From the outputs, all variables are important with p &lt; .05. These variables are the candidates for inclusion in the multivariable analysis. However, as a reminder, in the context of confirmatory research, the variables that we want to include must consider expert judgement.</p>
 </section>
-<section id="multivariate-analysis" class="level4" data-number="28.4.2.2">
-<h4 data-number="28.4.2.2" class="anchored" data-anchor-id="multivariate-analysis"><span class="header-section-number">28.4.2.2</span> Multivariate Analysis</h4>
+<section id="multivariate-analysis" class="level4" data-number="29.4.2.2">
+<h4 data-number="29.4.2.2" class="anchored" data-anchor-id="multivariate-analysis"><span class="header-section-number">29.4.2.2</span> Multivariate Analysis</h4>
 <p>For the multivariable analysis, we included all variables as predictors of attack. Here we use dot <code>.</code> as a shortcut for all variables when specifying the right-hand side of the formula of the <code>glm</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pois_attack_all <span class="ot">&lt;-</span> <span class="fu">glm</span>(attack <span class="sc">~</span> ., <span class="at">data =</span> asthma, <span class="at">family =</span> <span class="st">"poisson"</span>)</span>
@@ -1446,11 +1452,11 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <p>From the output, both variables are significant predictors of asthmatic attack (or more accurately the natural log of the count of asthmatic attack). This serves as our preliminary model.</p>
 </section>
 </section>
-<section id="model-fit-assessment" class="level3" data-number="28.4.3">
-<h3 data-number="28.4.3" class="anchored" data-anchor-id="model-fit-assessment"><span class="header-section-number">28.4.3</span> Model Fit Assessment</h3>
+<section id="model-fit-assessment" class="level3" data-number="29.4.3">
+<h3 data-number="29.4.3" class="anchored" data-anchor-id="model-fit-assessment"><span class="header-section-number">29.4.3</span> Model Fit Assessment</h3>
 <p>For Poisson regression, we assess the model fit by chi-square goodness-of-fit test, model-to-model AIC comparison and scaled Pearson chi-square statistic. We also assess the regression diagnostics using standardized residuals.</p>
-<section id="chi-square-goodness-of-fit" class="level4" data-number="28.4.3.1">
-<h4 data-number="28.4.3.1" class="anchored" data-anchor-id="chi-square-goodness-of-fit"><span class="header-section-number">28.4.3.1</span> Chi-square goodness-of-fit</h4>
+<section id="chi-square-goodness-of-fit" class="level4" data-number="29.4.3.1">
+<h4 data-number="29.4.3.1" class="anchored" data-anchor-id="chi-square-goodness-of-fit"><span class="header-section-number">29.4.3.1</span> Chi-square goodness-of-fit</h4>
 <p>Chi-square goodness-of-fit test can be performed using <code>poisgof()</code> function in <code>epiDisplay</code> package. Note that, instead of using Pearson chi-square statistic, it utilizes residual deviance with its respective degrees of freedom (df) (e.g.&nbsp;from the output of <code>summary(pois_attack_reduced)</code> above). A p-value &gt; 0.05 indicates good model fit.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">poisgof</span>(pois_attack_reduced)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1469,8 +1475,8 @@ $p.value
 </div>
 </div>
 </section>
-<section id="model-to-model-aic-comparison" class="level4" data-number="28.4.3.2">
-<h4 data-number="28.4.3.2" class="anchored" data-anchor-id="model-to-model-aic-comparison"><span class="header-section-number">28.4.3.2</span> Model-to-model AIC comparison</h4>
+<section id="model-to-model-aic-comparison" class="level4" data-number="29.4.3.2">
+<h4 data-number="29.4.3.2" class="anchored" data-anchor-id="model-to-model-aic-comparison"><span class="header-section-number">29.4.3.2</span> Model-to-model AIC comparison</h4>
 <p>We may also compare the models that we fit so far by Akaike information criterion (AIC). Recall that R uses <code>AIC</code> for stepwise automatic variable selection, which was explained in Linear Regression chapter.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(</span>
@@ -1489,8 +1495,8 @@ pois_attack_reduced  3 415.8649</code></pre>
 <p>The best model is the one with the lowest AIC, which is the model model with the multivariate analysis without gender.</p>
 </section>
 </section>
-<section id="interpreting-the-results" class="level3" data-number="28.4.4">
-<h3 data-number="28.4.4" class="anchored" data-anchor-id="interpreting-the-results"><span class="header-section-number">28.4.4</span> Interpreting the Results</h3>
+<section id="interpreting-the-results" class="level3" data-number="29.4.4">
+<h3 data-number="29.4.4" class="anchored" data-anchor-id="interpreting-the-results"><span class="header-section-number">29.4.4</span> Interpreting the Results</h3>
 <p>After all these assumption check points, we decide on the final model and rename the model for easier reference.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>pois_attack_final <span class="ot">&lt;-</span> pois_attack_reduced</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1500,23 +1506,23 @@ pois_attack_reduced  3 415.8649</code></pre>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(pois_attack_final, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="cqwwiownyd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cqwwiownyd table {
+<div id="utuoyjlvvi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#utuoyjlvvi table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cqwwiownyd thead, #cqwwiownyd tbody, #cqwwiownyd tfoot, #cqwwiownyd tr, #cqwwiownyd td, #cqwwiownyd th {
+#utuoyjlvvi thead, #utuoyjlvvi tbody, #utuoyjlvvi tfoot, #utuoyjlvvi tr, #utuoyjlvvi td, #utuoyjlvvi th {
   border-style: none;
 }
 
-#cqwwiownyd p {
+#utuoyjlvvi p {
   margin: 0;
   padding: 0;
 }
 
-#cqwwiownyd .gt_table {
+#utuoyjlvvi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1542,12 +1548,12 @@ pois_attack_reduced  3 415.8649</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#cqwwiownyd .gt_caption {
+#utuoyjlvvi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cqwwiownyd .gt_title {
+#utuoyjlvvi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1559,7 +1565,7 @@ pois_attack_reduced  3 415.8649</code></pre>
   border-bottom-width: 0;
 }
 
-#cqwwiownyd .gt_subtitle {
+#utuoyjlvvi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1571,7 +1577,7 @@ pois_attack_reduced  3 415.8649</code></pre>
   border-top-width: 0;
 }
 
-#cqwwiownyd .gt_heading {
+#utuoyjlvvi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1583,13 +1589,13 @@ pois_attack_reduced  3 415.8649</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#cqwwiownyd .gt_bottom_border {
+#utuoyjlvvi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cqwwiownyd .gt_col_headings {
+#utuoyjlvvi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1604,7 +1610,7 @@ pois_attack_reduced  3 415.8649</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#cqwwiownyd .gt_col_heading {
+#utuoyjlvvi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1624,7 +1630,7 @@ pois_attack_reduced  3 415.8649</code></pre>
   overflow-x: hidden;
 }
 
-#cqwwiownyd .gt_column_spanner_outer {
+#utuoyjlvvi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1636,15 +1642,15 @@ pois_attack_reduced  3 415.8649</code></pre>
   padding-right: 4px;
 }
 
-#cqwwiownyd .gt_column_spanner_outer:first-child {
+#utuoyjlvvi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cqwwiownyd .gt_column_spanner_outer:last-child {
+#utuoyjlvvi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cqwwiownyd .gt_column_spanner {
+#utuoyjlvvi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1656,11 +1662,11 @@ pois_attack_reduced  3 415.8649</code></pre>
   width: 100%;
 }
 
-#cqwwiownyd .gt_spanner_row {
+#utuoyjlvvi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cqwwiownyd .gt_group_heading {
+#utuoyjlvvi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1686,7 +1692,7 @@ pois_attack_reduced  3 415.8649</code></pre>
   text-align: left;
 }
 
-#cqwwiownyd .gt_empty_group_heading {
+#utuoyjlvvi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1701,15 +1707,15 @@ pois_attack_reduced  3 415.8649</code></pre>
   vertical-align: middle;
 }
 
-#cqwwiownyd .gt_from_md > :first-child {
+#utuoyjlvvi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cqwwiownyd .gt_from_md > :last-child {
+#utuoyjlvvi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cqwwiownyd .gt_row {
+#utuoyjlvvi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1728,7 +1734,7 @@ pois_attack_reduced  3 415.8649</code></pre>
   overflow-x: hidden;
 }
 
-#cqwwiownyd .gt_stub {
+#utuoyjlvvi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1741,7 +1747,7 @@ pois_attack_reduced  3 415.8649</code></pre>
   padding-right: 5px;
 }
 
-#cqwwiownyd .gt_stub_row_group {
+#utuoyjlvvi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1755,15 +1761,15 @@ pois_attack_reduced  3 415.8649</code></pre>
   vertical-align: top;
 }
 
-#cqwwiownyd .gt_row_group_first td {
+#utuoyjlvvi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cqwwiownyd .gt_row_group_first th {
+#utuoyjlvvi .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cqwwiownyd .gt_summary_row {
+#utuoyjlvvi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1773,16 +1779,16 @@ pois_attack_reduced  3 415.8649</code></pre>
   padding-right: 5px;
 }
 
-#cqwwiownyd .gt_first_summary_row {
+#utuoyjlvvi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cqwwiownyd .gt_first_summary_row.thick {
+#utuoyjlvvi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cqwwiownyd .gt_last_summary_row {
+#utuoyjlvvi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1792,7 +1798,7 @@ pois_attack_reduced  3 415.8649</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#cqwwiownyd .gt_grand_summary_row {
+#utuoyjlvvi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1802,7 +1808,7 @@ pois_attack_reduced  3 415.8649</code></pre>
   padding-right: 5px;
 }
 
-#cqwwiownyd .gt_first_grand_summary_row {
+#utuoyjlvvi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1812,7 +1818,7 @@ pois_attack_reduced  3 415.8649</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#cqwwiownyd .gt_last_grand_summary_row_top {
+#utuoyjlvvi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1822,11 +1828,11 @@ pois_attack_reduced  3 415.8649</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#cqwwiownyd .gt_striped {
+#utuoyjlvvi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cqwwiownyd .gt_table_body {
+#utuoyjlvvi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1835,7 +1841,7 @@ pois_attack_reduced  3 415.8649</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#cqwwiownyd .gt_footnotes {
+#utuoyjlvvi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1849,7 +1855,7 @@ pois_attack_reduced  3 415.8649</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#cqwwiownyd .gt_footnote {
+#utuoyjlvvi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1858,7 +1864,7 @@ pois_attack_reduced  3 415.8649</code></pre>
   padding-right: 5px;
 }
 
-#cqwwiownyd .gt_sourcenotes {
+#utuoyjlvvi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1872,7 +1878,7 @@ pois_attack_reduced  3 415.8649</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#cqwwiownyd .gt_sourcenote {
+#utuoyjlvvi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1880,63 +1886,63 @@ pois_attack_reduced  3 415.8649</code></pre>
   padding-right: 5px;
 }
 
-#cqwwiownyd .gt_left {
+#utuoyjlvvi .gt_left {
   text-align: left;
 }
 
-#cqwwiownyd .gt_center {
+#utuoyjlvvi .gt_center {
   text-align: center;
 }
 
-#cqwwiownyd .gt_right {
+#utuoyjlvvi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cqwwiownyd .gt_font_normal {
+#utuoyjlvvi .gt_font_normal {
   font-weight: normal;
 }
 
-#cqwwiownyd .gt_font_bold {
+#utuoyjlvvi .gt_font_bold {
   font-weight: bold;
 }
 
-#cqwwiownyd .gt_font_italic {
+#utuoyjlvvi .gt_font_italic {
   font-style: italic;
 }
 
-#cqwwiownyd .gt_super {
+#utuoyjlvvi .gt_super {
   font-size: 65%;
 }
 
-#cqwwiownyd .gt_footnote_marks {
+#utuoyjlvvi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cqwwiownyd .gt_asterisk {
+#utuoyjlvvi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cqwwiownyd .gt_indent_1 {
+#utuoyjlvvi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cqwwiownyd .gt_indent_2 {
+#utuoyjlvvi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cqwwiownyd .gt_indent_3 {
+#utuoyjlvvi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cqwwiownyd .gt_indent_4 {
+#utuoyjlvvi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cqwwiownyd .gt_indent_5 {
+#utuoyjlvvi .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2036,8 +2042,8 @@ ghq12           0.05       0.01    6.40     0.00</code></pre>
 <li><strong>ghq12:</strong> For each one unit increase in <code>ghq12</code> (holding <code>res_inf</code> constant), the expected count of the response variable is multiplied by <span class="math inline">\(\exp(0.05) \approx 1.05\)</span>. This indicates that each unit increase in <code>ghq12</code> is associated with a 5% increase in the expected count.</li>
 </ul>
 </section>
-<section id="prediction" class="level3" data-number="28.4.5">
-<h3 data-number="28.4.5" class="anchored" data-anchor-id="prediction"><span class="header-section-number">28.4.5</span> Prediction</h3>
+<section id="prediction" class="level3" data-number="29.4.5">
+<h3 data-number="29.4.5" class="anchored" data-anchor-id="prediction"><span class="header-section-number">29.4.5</span> Prediction</h3>
 <p>We can use the final model above for prediction. Relevant to our data set, we may want to know the expected number of asthmatic attacks per year for a patient with recurrent respiratory infection and GHQ-12 score of 8,</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(</span>
@@ -2119,8 +2125,8 @@ ghq12           0.05       0.01    6.40     0.00</code></pre>
 <p>A sick person has approximately 82% chance of experiencing 3 or more asthma attacks in the specified time interval.</p>
 </section>
 </section>
-<section id="summary-1" class="level2" data-number="28.5">
-<h2 data-number="28.5" class="anchored" data-anchor-id="summary-1"><span class="header-section-number">28.5</span> Summary</h2>
+<section id="summary-1" class="level2" data-number="29.5">
+<h2 data-number="29.5" class="anchored" data-anchor-id="summary-1"><span class="header-section-number">29.5</span> Summary</h2>
 <p>In this lecture, we went through the basics about Poisson regression for count data. We performed the analysis for each and learned how to assess the model fit for the regression models. We learned how to nicely present and interpret the results. In addition, we also learned how to utilize the model for prediction.</p>
 
 
@@ -2539,7 +2545,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../lessons_original/05_glm_ordinal_logistic.html" class="pagination-link" aria-label="Ordinal Logistic Regression">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

@@ -5,8 +5,8 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<meta name="dcterms.date" content="2024-07-08">
-<title>An R Cookbook for Public Health - 14&nbsp; Two sample \(t\)-test</title>
+<meta name="dcterms.date" content="2024-07-16">
+<title>An R Cookbook for Public Health - 15&nbsp; Two sample \(t\)-test</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -132,7 +132,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/03_two_sample_ttest.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/03_two_sample_ttest.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -243,20 +243,26 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_cochrans_q_paired_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -273,25 +279,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -308,55 +314,55 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_one_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_corr_cov.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -373,13 +379,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_poisson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
   </div>
 </li>
       </ul>
@@ -396,7 +402,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
   </div>
 </li>
       </ul>
@@ -413,7 +419,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -427,22 +433,22 @@ window.Quarto = {
    
   <ul>
 <li>
-<a href="#two-sample-t-test" id="toc-two-sample-t-test" class="nav-link active" data-scroll-target="#two-sample-t-test"><span class="header-section-number">14.1</span> Two sample <span class="math inline">\(t\)</span>-test</a>
+<a href="#two-sample-t-test" id="toc-two-sample-t-test" class="nav-link active" data-scroll-target="#two-sample-t-test"><span class="header-section-number">15.1</span> Two sample <span class="math inline">\(t\)</span>-test</a>
   <ul class="collapse">
-<li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">14.1.1</span> Assumptions</a></li>
-  <li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><span class="header-section-number">14.1.2</span> Hypotheses</a></li>
-  <li><a href="#statistical-hypotheses-formula" id="toc-statistical-hypotheses-formula" class="nav-link" data-scroll-target="#statistical-hypotheses-formula"><span class="header-section-number">14.1.3</span> Statistical hypotheses formula</a></li>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">14.1.4</span> Example</a></li>
+<li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">15.1.1</span> Assumptions</a></li>
+  <li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><span class="header-section-number">15.1.2</span> Hypotheses</a></li>
+  <li><a href="#statistical-hypotheses-formula" id="toc-statistical-hypotheses-formula" class="nav-link" data-scroll-target="#statistical-hypotheses-formula"><span class="header-section-number">15.1.3</span> Statistical hypotheses formula</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">15.1.4</span> Example</a></li>
   </ul>
 </li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">14.2</span> Conclusion</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">14.3</span> References</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">15.2</span> Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">15.3</span> References</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/03_two_sample_ttest.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/03_two_sample_ttest.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/03_two_sample_ttest.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span>
+<span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span>
 </h1>
 <p class="subtitle lead">Explaining the Two sample <span class="math inline">\(t\)</span>-test and how to run it in R</p>
 </div>
@@ -471,7 +477,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 8, 2024</p>
+      <p class="date">July 16, 2024</p>
     </div>
   </div>
   
@@ -480,21 +486,21 @@ window.Quarto = {
   
 
 
-</header><section id="two-sample-t-test" class="level2" data-number="14.1"><h2 data-number="14.1" class="anchored" data-anchor-id="two-sample-t-test">
-<span class="header-section-number">14.1</span> Two sample <span class="math inline">\(t\)</span>-test</h2>
+</header><section id="two-sample-t-test" class="level2" data-number="15.1"><h2 data-number="15.1" class="anchored" data-anchor-id="two-sample-t-test">
+<span class="header-section-number">15.1</span> Two sample <span class="math inline">\(t\)</span>-test</h2>
 <p>This is also called the independent sample t test. It is used to see whether the population means of two groups are equal or different. This test requires one variable which can be the exposure <em>x</em> and another variable which can be the outcome <em>y</em>. If there are more than two groups, Analysis of Variance <em>(ANOVA)</em> would be more suitable. If data is nonparametric then an alternative test to use would be the <em>Mann Whitney U test</em>. <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/bimj.4710280202">Cressie, N.A., 1986</a></p>
 <p>There are two types of independent t tests: the first is the <strong>Student’s t test,</strong> which assumes the variance of the two groups is equal, and the second being the <strong>Welch’s t test</strong> (default in R), which assumes the variance in the two groups is different.</p>
 <p>In this article we will be discussing the <strong>Student’s t test</strong>.</p>
-<section id="assumptions" class="level3" data-number="14.1.1"><h3 data-number="14.1.1" class="anchored" data-anchor-id="assumptions">
-<span class="header-section-number">14.1.1</span> Assumptions</h3>
+<section id="assumptions" class="level3" data-number="15.1.1"><h3 data-number="15.1.1" class="anchored" data-anchor-id="assumptions">
+<span class="header-section-number">15.1.1</span> Assumptions</h3>
 <ul>
 <li><p>Measurements for one observation do not affect measurements for any other observation (assumes independence).</p></li>
 <li><p>Data values in dependent variable are continuous.</p></li>
 <li><p>Data in each group are normally distributed.</p></li>
 <li><p>The variances for the two independent groups are equal in the <strong>Student’s t test</strong>.</p></li>
 <li><p>There should be no significant outliers.</p></li>
-</ul></section><section id="hypotheses" class="level3" data-number="14.1.2"><h3 data-number="14.1.2" class="anchored" data-anchor-id="hypotheses">
-<span class="header-section-number">14.1.2</span> Hypotheses</h3>
+</ul></section><section id="hypotheses" class="level3" data-number="15.1.2"><h3 data-number="15.1.2" class="anchored" data-anchor-id="hypotheses">
+<span class="header-section-number">15.1.2</span> Hypotheses</h3>
 <ol type="1">
 <li><p><span class="math inline">\((H_0)\)</span>: the mean of group A <span class="math inline">\((m_A)\)</span> is equal to the mean of group B <span class="math inline">\((m_B)\)</span>- two tailed test.</p></li>
 <li><p><span class="math inline">\((H_0)\)</span>: <span class="math inline">\((m_A)\ge (m_B)\)</span>- one tailed test.</p></li>
@@ -508,8 +514,8 @@ window.Quarto = {
 <span class="math inline">\((H_1)\)</span>: <span class="math inline">\((m_A)&lt;(m_B)\)</span>- one tailed test.</li>
 <li>
 <span class="math inline">\((H_1)\)</span>: <span class="math inline">\((m_A)&gt; (m_B)\)</span>- one tailed test.</li>
-</ol></section><section id="statistical-hypotheses-formula" class="level3" data-number="14.1.3"><h3 data-number="14.1.3" class="anchored" data-anchor-id="statistical-hypotheses-formula">
-<span class="header-section-number">14.1.3</span> Statistical hypotheses formula</h3>
+</ol></section><section id="statistical-hypotheses-formula" class="level3" data-number="15.1.3"><h3 data-number="15.1.3" class="anchored" data-anchor-id="statistical-hypotheses-formula">
+<span class="header-section-number">15.1.3</span> Statistical hypotheses formula</h3>
 <p>For the <strong>Student’s t test</strong> which assumes equal variance, here is an example of how the |t| statistic may be calculated using groups A and B:</p>
 <p><span class="math inline">\(t ={ {m_{A} - m_{B}} \over \sqrt{ {S^2 \over n_{A} } + {S^2 \over n_{B}}   }}\)</span></p>
 <p>This can be described as the sample mean difference divided by the sample standard deviation of the sample mean difference where:</p>
@@ -520,10 +526,10 @@ window.Quarto = {
 <p><span class="math inline">\(S^2 = { {\sum{ (x_A-m_{A})^2} + \sum{ (x_B-m_{B})^2}} \over {n_{A} + n_{B} - 2 }}\)</span></p>
 <p><strong>What if the data is not independent?</strong></p>
 <p>If the data is not independent such as paired data in the form of matched pairs which are correlated, we use the <em>paired t test</em>. This test checks whether the means of two paired groups are different from each other. It is usually applied in clinical trial studies with a “before and after” or case control studies with matched pairs. For this test we only assume the difference of each pair to be normally distributed (the paired groups are the ones important for analysis) unlike the <em>independent t test</em> which assumes that data from both samples are independent and variances are equal. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5579465/">Xu, M., 2017</a></p>
-<hr></section><section id="example" class="level3" data-number="14.1.4"><h3 data-number="14.1.4" class="anchored" data-anchor-id="example">
-<span class="header-section-number">14.1.4</span> Example</h3>
-<section id="prerequisites" class="level4" data-number="14.1.4.1"><h4 data-number="14.1.4.1" class="anchored" data-anchor-id="prerequisites">
-<span class="header-section-number">14.1.4.1</span> Prerequisites</h4>
+<hr></section><section id="example" class="level3" data-number="15.1.4"><h3 data-number="15.1.4" class="anchored" data-anchor-id="example">
+<span class="header-section-number">15.1.4</span> Example</h3>
+<section id="prerequisites" class="level4" data-number="15.1.4.1"><h4 data-number="15.1.4.1" class="anchored" data-anchor-id="prerequisites">
+<span class="header-section-number">15.1.4.1</span> Prerequisites</h4>
 <ol type="1">
 <li>
 <code>tidyverse</code>: data manipulation and visualization.</li>
@@ -538,8 +544,8 @@ window.Quarto = {
 <span><span class="co">#install.packages("rstatix")</span></span>
 <span><span class="co">#install.packages(tidyVerse)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="dataset" class="level4" data-number="14.1.4.2"><h4 data-number="14.1.4.2" class="anchored" data-anchor-id="dataset">
-<span class="header-section-number">14.1.4.2</span> Dataset</h4>
+</section><section id="dataset" class="level4" data-number="15.1.4.2"><h4 data-number="15.1.4.2" class="anchored" data-anchor-id="dataset">
+<span class="header-section-number">15.1.4.2</span> Dataset</h4>
 <p>This example dataset sourced from <a href="https://www.kaggle.com/datasets/uciml/student-alcohol-consumption/versions/2?resource=download">kaggle</a> was obtained from surveys of students in Math and Portuguese classes in secondary school. It contains demographic information on gender, social and study information.</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load relevant libraries</span></span>
@@ -825,8 +831,8 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#don't do this unless worried about the data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The p value is greater than 0.05 from both the test suggesting there is no difference between the variances of the two groups.</p>
-</section><section id="assessment" class="level4" data-number="14.1.4.3"><h4 data-number="14.1.4.3" class="anchored" data-anchor-id="assessment">
-<span class="header-section-number">14.1.4.3</span> Assessment</h4>
+</section><section id="assessment" class="level4" data-number="15.1.4.3"><h4 data-number="15.1.4.3" class="anchored" data-anchor-id="assessment">
+<span class="header-section-number">15.1.4.3</span> Assessment</h4>
 <ol type="1">
 <li><p>Data is continuous(G3)</p></li>
 <li><p>Data is independent (males and females are distinct and not the same individual)</p></li>
@@ -835,8 +841,8 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
 <li><p>There are equal variances.</p></li>
 </ol>
 <p>As the assumptions are met we go ahead to perform the <strong>Student’s</strong> <span class="math inline">\(t\)</span>-test.</p>
-</section><section id="performing-the-two-sample-t-test" class="level4" data-number="14.1.4.4"><h4 data-number="14.1.4.4" class="anchored" data-anchor-id="performing-the-two-sample-t-test">
-<span class="header-section-number">14.1.4.4</span> <strong>Performing the two-sample</strong> <span class="math inline">\(t\)</span>-test</h4>
+</section><section id="performing-the-two-sample-t-test" class="level4" data-number="15.1.4.4"><h4 data-number="15.1.4.4" class="anchored" data-anchor-id="performing-the-two-sample-t-test">
+<span class="header-section-number">15.1.4.4</span> <strong>Performing the two-sample</strong> <span class="math inline">\(t\)</span>-test</h4>
 <p>Since the default is the <strong>Welch t test</strong> we use the <span class="math inline">\(\color{blue}{\text{var.eqaul = TRUE }}\)</span> code to signify a <strong>Student’s t test</strong>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># perfoming the two sample t test</span></span>
@@ -881,23 +887,23 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_difference.html">add_difference</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="qshhvkoyup" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qshhvkoyup table {
+<div id="kpptibhige" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kpptibhige table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qshhvkoyup thead, #qshhvkoyup tbody, #qshhvkoyup tfoot, #qshhvkoyup tr, #qshhvkoyup td, #qshhvkoyup th {
+#kpptibhige thead, #kpptibhige tbody, #kpptibhige tfoot, #kpptibhige tr, #kpptibhige td, #kpptibhige th {
   border-style: none;
 }
 
-#qshhvkoyup p {
+#kpptibhige p {
   margin: 0;
   padding: 0;
 }
 
-#qshhvkoyup .gt_table {
+#kpptibhige .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -923,12 +929,12 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#qshhvkoyup .gt_caption {
+#kpptibhige .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qshhvkoyup .gt_title {
+#kpptibhige .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -940,7 +946,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-bottom-width: 0;
 }
 
-#qshhvkoyup .gt_subtitle {
+#kpptibhige .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -952,7 +958,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-top-width: 0;
 }
 
-#qshhvkoyup .gt_heading {
+#kpptibhige .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -964,13 +970,13 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#qshhvkoyup .gt_bottom_border {
+#kpptibhige .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qshhvkoyup .gt_col_headings {
+#kpptibhige .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -985,7 +991,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#qshhvkoyup .gt_col_heading {
+#kpptibhige .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1005,7 +1011,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   overflow-x: hidden;
 }
 
-#qshhvkoyup .gt_column_spanner_outer {
+#kpptibhige .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1017,15 +1023,15 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   padding-right: 4px;
 }
 
-#qshhvkoyup .gt_column_spanner_outer:first-child {
+#kpptibhige .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qshhvkoyup .gt_column_spanner_outer:last-child {
+#kpptibhige .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qshhvkoyup .gt_column_spanner {
+#kpptibhige .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1037,11 +1043,11 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   width: 100%;
 }
 
-#qshhvkoyup .gt_spanner_row {
+#kpptibhige .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qshhvkoyup .gt_group_heading {
+#kpptibhige .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1067,7 +1073,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   text-align: left;
 }
 
-#qshhvkoyup .gt_empty_group_heading {
+#kpptibhige .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1082,15 +1088,15 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   vertical-align: middle;
 }
 
-#qshhvkoyup .gt_from_md > :first-child {
+#kpptibhige .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qshhvkoyup .gt_from_md > :last-child {
+#kpptibhige .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qshhvkoyup .gt_row {
+#kpptibhige .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1109,7 +1115,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   overflow-x: hidden;
 }
 
-#qshhvkoyup .gt_stub {
+#kpptibhige .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1122,7 +1128,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   padding-right: 5px;
 }
 
-#qshhvkoyup .gt_stub_row_group {
+#kpptibhige .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1136,15 +1142,15 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   vertical-align: top;
 }
 
-#qshhvkoyup .gt_row_group_first td {
+#kpptibhige .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qshhvkoyup .gt_row_group_first th {
+#kpptibhige .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qshhvkoyup .gt_summary_row {
+#kpptibhige .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1154,16 +1160,16 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   padding-right: 5px;
 }
 
-#qshhvkoyup .gt_first_summary_row {
+#kpptibhige .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qshhvkoyup .gt_first_summary_row.thick {
+#kpptibhige .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qshhvkoyup .gt_last_summary_row {
+#kpptibhige .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1173,7 +1179,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#qshhvkoyup .gt_grand_summary_row {
+#kpptibhige .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1183,7 +1189,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   padding-right: 5px;
 }
 
-#qshhvkoyup .gt_first_grand_summary_row {
+#kpptibhige .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1193,7 +1199,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#qshhvkoyup .gt_last_grand_summary_row_top {
+#kpptibhige .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1203,11 +1209,11 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#qshhvkoyup .gt_striped {
+#kpptibhige .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qshhvkoyup .gt_table_body {
+#kpptibhige .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1216,7 +1222,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#qshhvkoyup .gt_footnotes {
+#kpptibhige .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1230,7 +1236,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#qshhvkoyup .gt_footnote {
+#kpptibhige .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1239,7 +1245,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   padding-right: 5px;
 }
 
-#qshhvkoyup .gt_sourcenotes {
+#kpptibhige .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1253,7 +1259,7 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#qshhvkoyup .gt_sourcenote {
+#kpptibhige .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1261,63 +1267,63 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
   padding-right: 5px;
 }
 
-#qshhvkoyup .gt_left {
+#kpptibhige .gt_left {
   text-align: left;
 }
 
-#qshhvkoyup .gt_center {
+#kpptibhige .gt_center {
   text-align: center;
 }
 
-#qshhvkoyup .gt_right {
+#kpptibhige .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qshhvkoyup .gt_font_normal {
+#kpptibhige .gt_font_normal {
   font-weight: normal;
 }
 
-#qshhvkoyup .gt_font_bold {
+#kpptibhige .gt_font_bold {
   font-weight: bold;
 }
 
-#qshhvkoyup .gt_font_italic {
+#kpptibhige .gt_font_italic {
   font-style: italic;
 }
 
-#qshhvkoyup .gt_super {
+#kpptibhige .gt_super {
   font-size: 65%;
 }
 
-#qshhvkoyup .gt_footnote_marks {
+#kpptibhige .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qshhvkoyup .gt_asterisk {
+#kpptibhige .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qshhvkoyup .gt_indent_1 {
+#kpptibhige .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qshhvkoyup .gt_indent_2 {
+#kpptibhige .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qshhvkoyup .gt_indent_3 {
+#kpptibhige .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qshhvkoyup .gt_indent_4 {
+#kpptibhige .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qshhvkoyup .gt_indent_5 {
+#kpptibhige .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1416,11 +1422,11 @@ Bartlett's K-squared = 0.12148, df = 1, p-value = 0.7274</code></pre>
 <p>Since, the p value is smaller than 0.05 (p=0.027), we reject the null hypothesis. We conclude that the final grades for females are significantly lesser than that for males.</p>
 <p><strong>What about running the paired sample t test?</strong></p>
 <p>We can simply add the syntax <span class="math inline">\(\color{blue}{\text{paired= TRUE}}\)</span> to the <code><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test()</a></code> function to run the analysis for matched pairs data.</p>
-</section></section></section><section id="conclusion" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="conclusion">
-<span class="header-section-number">14.2</span> Conclusion</h2>
+</section></section></section><section id="conclusion" class="level2" data-number="15.2"><h2 data-number="15.2" class="anchored" data-anchor-id="conclusion">
+<span class="header-section-number">15.2</span> Conclusion</h2>
 <p>This article covers the <strong>Student’s t test</strong> and how we run it in R. It also shows how we find the effect size and how we can conclude the results.</p>
-</section><section id="references" class="level2" data-number="14.3"><h2 data-number="14.3" class="anchored" data-anchor-id="references">
-<span class="header-section-number">14.3</span> References</h2>
+</section><section id="references" class="level2" data-number="15.3"><h2 data-number="15.3" class="anchored" data-anchor-id="references">
+<span class="header-section-number">15.3</span> References</h2>
 <ol type="1">
 <li>Cressie, N.A.C. and Whitford, H.J. (1986). How to Use the Two Sample t-Test. Biom. J., 28: 131-148. https://doi.org/10.1002/bimj.4710280202</li>
 <li>Xu, M., Fralick, D., Zheng, J. Z., Wang, B., Tu, X. M., &amp; Feng, C. (2017). The Differences and Similarities Between Two-Sample T-Test and Paired T-Test. Shanghai archives of psychiatry, 29(3), 184–188. https://doi.org/10.11919/j.issn.1002-0829.217070</li>
@@ -1842,7 +1848,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="../lessons/03_two_sample_mann_whitney.html" class="pagination-link" aria-label="Mann-Whitney-U Test Example">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

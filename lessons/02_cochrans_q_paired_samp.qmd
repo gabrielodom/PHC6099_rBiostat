@@ -1,0 +1,188 @@
+---
+title: "Cochran's Q Test"
+author:
+  - name: Gabriel Odom
+    affiliations:
+      - Florida International University
+      - Robert Stempel College of Public Health and Social Work
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+---
+
+```{r}
+#| label: load-packages
+#| message: false
+ 
+# install.packages("public.ctn0094extra")
+# install.packages("tidyverse")
+library(public.ctn0094data)
+library(public.ctn0094extra)
+library(CTNote)
+library(tidyverse)
+```
+
+
+
+## Introduction to the Cochran's $Q$ Test
+
+An extension of McNemar's Test (a non-parametric test used to analyze dichotomous data (in a 2 x 2) for **paired** samples) is Cochran's $Q$ Test, which is a non-parametric test to analyze dichotomous data in a repeated measures design. Whereas McNemar's Test would look at a binary outcome for the same individuals measured at only two time points, Cochran's $Q$ Test deals with binary outcomes for the same individuals at three or more time points. The test requires one nominal dependent variable with 2 categories, and one independent variable with 3 or more dependent, mutually exclusive, groups. Common data examples include presence/absence of a condition for a single individual at various time points in treatment, or positive/negative results for a single individual from various potentially-competing assessment instruments. It can also be used to evaluate "inter-observer variability" (where different judges of the same event/phenomenon measure success or failure) or "inter-instrument/concurrent validity" (where multiple instruments applied to the same subject measure success or failure).
+
+
+
+## Mathematical definition of Cochran's $Q$ Test
+
+Consider binary repeated measured data for $n$ observations; the observations come from **one group** under three or more conditions (e.g. "time period 1", "time period 2", "time period 3", or "instrument 1" vs. "instrument 2" vs. "instrument 3"), the samples are treated with some treatment within equally across each condition, and the outcome of interest is dichotomous (such as "success" or "failure", 1 vs. 0). The data then can be "wrangled" into a form that looks like this:
+
+```{r}
+eg_df <- tibble(
+  SubjectID = c("Bob", "Larry", "Junior", "Archibald", "Lunt"),
+  test1 = c(0L, 1L, 1L, 0L, 0L),
+  test2 = c(0L, 1L, 1L, 0L, 1L),
+  test3 = c(1L, 1L, 1L, 0L, 1L)
+)
+
+knitr::kable(eg_df)
+```
+
+This is a simple example, but notice the structure of the data:
+
+- There are $B = 5$ "blocks" (subjects, organisms, experimental units, etc.)
+- There are $K = 3$ "experiments" (treatments, assessments, time points, exams, interviews, instruments, etc.)
+- The outcome of each "experiment" for each "block" is only ever binary (True/False, success/failure, presence/absence, etc.)
+- This data is in a $B \times K$ matrix.
+
+Before we define the test statistic, we need some mathematical notation. Let $S(X_b)$ be the **row sum** for row $b \in 1, \ldots, B$ of the binary data matrix $X$. Similarly let $S(X_k)$ be the **column sum** for column $k \in 1, \ldots, K$ of the binary data matrix $X$. Finally, we define $N := S(X)$ be the sum of **all rows and columns**. Using this notation, the formula for the test statistic is as follows:
+
+$$
+\chi^{2}_{\text{Obs}} := k(k - 1) \times
+\frac{
+  \sum\limits_{k = 1}^K \left[ S(X_k) -N/k \right]^2
+}{
+  \sum\limits_{b = 1}^B S(X_b) \left( k - S(X_b) \right)
+},
+$$
+
+where
+If the assumptions are met, then Cochran's $Q$ Test follows a Chi-squared distribution with $k - 1$ degrees of freedom; that is, $\chi^{2}_{\text{Obs}} \sim \chi^{2}_{\nu = k - 1}$.
+
+
+
+## Data Description
+
+For this lesson, we will look at patients in treatment for opioid use disorder, We will measure abstinence within each month (4-week period) via weekly Urine Drug Screen (UDS). The abstinence measurements are in the `public.ctn0094extra::derived_weeklyOpioidPattern` data set. Our definition of abstinence will be "75% negative urine screens" from weeks 1-4 (start of treatment), weeks 5-8 (mid-treatment), and weeks 9-12 (end of treatment).
+
+
+### Cleaning UDS Data
+```{r}
+#| label: treatment-abstinence
+
+txSuccess_df <- 
+  public.ctn0094extra::derived_weeklyOpioidPattern %>% 
+  # Combine UDS across treatment phases
+  mutate(udsPattern = paste0(Phase_1, Phase_2)) %>% 
+  # The CTNote outcome builder functions are not vectorized, so we need to
+  #   use rowwise() to call them
+  rowwise() %>% 
+  # Count negative UDS in each phase of treatment
+  mutate(
+    nStartTxNeg = CTNote::count_matches(
+      udsPattern, match_is = "-", start = 1, end = 4
+    ),
+    nMidTxNeg = CTNote::count_matches(
+      udsPattern, match_is = "-", start = 5, end = 8
+    ),
+    nEndTxNeg = CTNote::count_matches(
+      udsPattern, match_is = "-", start = 9, end = 12
+    )
+  ) %>% 
+  # Check for abstinence during the start and end of treatment
+  mutate(
+    startAbs = nStartTxNeg >= 3,
+    midAbs = nMidTxNeg >= 3,
+    endAbs = nEndTxNeg >= 3
+  ) %>% 
+  select(who, udsPattern, startAbs, midAbs, endAbs) %>% 
+  ungroup()
+
+txSuccess_df
+```
+
+
+### Creating Comparison Table from this Dataset
+We now have a binary measure of success at three time points (start, middle, and end of treatment). Our first step is to pivot the data so that we have 3 columns: `who`, `when` (start, middle, end), and `value` ("treatment success" measured as abstinence or not). Note that we also need to save the `when` column as an ordered factor so that the levels aren't sorted alphabetically.
+```{r}
+#| label: pivot-data
+txSuccessLong_df <- 
+  txSuccess_df %>% 
+  select(-udsPattern) %>% 
+  pivot_longer(
+    cols = startAbs:endAbs,
+    names_to = "when",
+    values_to = "abstinent"
+  ) %>% 
+  mutate(
+    when = str_remove(when, pattern = "Abs")
+  ) %>% 
+  mutate(
+    when = factor(when, levels = c("start", "mid", "end"), ordered = TRUE)
+  )
+
+txSuccessLong_df
+```
+
+Now, we can create a 2 x 3 contingency table:
+```{r}
+#| label: create-analysis-data
+
+txAbs_tbl <- stats::xtabs(
+  ~abstinent + when, data = txSuccessLong_df
+)
+
+txAbs_tbl
+```
+
+
+
+## Assumptions of Cochran's $Q$ Test
+
+The assumptions of Cochran's $Q$ Test are as follows:
+
++ **Assumption 1**: You have one categorical dependent variable with *two categories* (i.e., a dichotomous variable) and one categorical independent variable with $K \ge 3$ *related groups*.
++ **Assumption 2**: The two groups of the dependent variable are *mutually exclusive*, which means that the groups do not overlap---a participant can only be in one of the two groups.
++ **Assumption 3**: The cases are a random sample from the population of interest.
++ **Assumption 4**: There are a sufficiently large number of independent subjects, $B$ (also called "blocks"); note that there is no definition of exactly how many samples are needed to be considered "large".
+
+
+
+## Checking the Assumptions of Cochran's $Q$ Test
+
+To check our assumptions, we will review and inspect the contingency table with the two variables of interest. The categorical dependent variable is abstinence of opioids in urine samples (e.g positive or negative for the substance); we see that the dependent variable at the start of treatment is related to the dependent variable in the middle and at the end of treatment because we are detecting opioids within the *same person*. The categorical independent variable is the three time periods (start, middle, and end of treatment). The two groups are mutually exclusive, as urine cannot be simultaneously positive and negative and the participant cannot simultaneously be at the start and end of treatment. Finally, we note that there are `r nrow(txSuccess_df)` samples, which counts as $B$ being "large".
+
+
+
+## Code to run Cochran's $Q$ Test
+
+Recall that we created a 2x3 contingency table with the `xtab()` function (from the `stats::` package) above. This table object is helpful for us to check assumptions, but it is not a required data structure for the `cochran_qtest()` function (from the `rstatix::` package). We can supply our pivoted "long" data to this function, but we have to use a creative `formula` object to define the experimental design. From the help documentation, this formula looks like `a ~ b | c`, where `a` is the outcome variable name (`abstinent` for us); `b` is the within-subjects factor variables (`when`); and `c` is the column name containing individuals/subjects identifier (`who`).
+```{r}
+#| label: cochran_q_test
+
+rstatix::cochran_qtest(
+  data = txSuccessLong_df,
+  formula = abstinent ~ when | who
+)
+```
+
+The output from the Cochran's $Q$ Test will show the Chi-Squared test statistic, degrees of freedom (expected to be $3 - 1 = 2$ as there are only 3 time points), and the $p$-value.
+
+
+
+## Brief Interpretation of the Output
+
+The resulting $p$-value in this case is below 0.05, which indicates that the marginal probabilities between `start`, `mid`, and `end` measures of abstinent are different. Going back to review `txAbs_tbl`, we see that the count for start of treatment abstinence is higher than the counts for middle and end of treatment abstinence. Note that there is no "post-hoc" test for Cochran's $Q$ test, so if you really need to know which groups are different, then you have to use $k(k - 1)$ pairwise McNemar tests (which is not a great idea).
+
+
+
+## Conclusion
+If you have **repeated paired** samples, and the variable of interest is **binary**, then use Cochran's $Q$ Test. The pairing could be within subject but across time or space, or it could represent different measures of success or failure on the same subject (of use in psychometrics). Regardless, it's often that you'd like to include some covariate or additional factor, which this technique does not allow. Also, you probably want to know which time points or which interventions are different. In those cases, you may want Survival analysis (an event may occur or not within a time interval) or some other more sophisticated technique.

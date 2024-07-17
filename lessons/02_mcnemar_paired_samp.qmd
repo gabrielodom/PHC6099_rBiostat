@@ -55,7 +55,7 @@ $\chi^{2}_{\text{Obs}} := \frac{(b - c)^2}{b + c};\ \chi^{2}_{\text{Obs}} \sim \
 
 
 ## Data Description
-For this lesson, we will look at patients in treatment for opioid use disorder, We will measure abstinence a the start and end of treatment via weekly Urine Drug Screen (UDS). The abstinence measurements are in the `public.ctn0094extra::derived_weeklyOpioidPattern` data set. Our definition of abstinence will be "3 consecutive negative urine screens" from weeks 2-4 (start of treatment) and weeks 10-12 (end of treatment).
+For this lesson, we will look at patients in treatment for opioid use disorder, We will measure abstinence at the start and end of treatment via weekly Urine Drug Screen (UDS). The abstinence measurements are in the `public.ctn0094extra::derived_weeklyOpioidPattern` data set. Our definition of abstinence will be "3 consecutive negative urine screens" from weeks 2-4 (start of treatment) and weeks 10-12 (end of treatment).
 
 ### Cleaning UDS Data
 ```{r}

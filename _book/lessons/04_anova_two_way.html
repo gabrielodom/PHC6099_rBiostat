@@ -5,8 +5,8 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<meta name="dcterms.date" content="2024-07-08">
-<title>An R Cookbook for Public Health - 19&nbsp; Two-Way ANOVA</title>
+<meta name="dcterms.date" content="2024-07-16">
+<title>An R Cookbook for Public Health - 20&nbsp; Two-Way ANOVA</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -132,7 +132,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons/04_anova_two_way.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons/04_anova_two_way.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -243,20 +243,26 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_cochrans_q_paired_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -273,25 +279,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -308,55 +314,55 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_one_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_two_way.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_corr_cov.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -373,13 +379,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_poisson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
   </div>
 </li>
       </ul>
@@ -396,7 +402,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
   </div>
 </li>
       </ul>
@@ -413,7 +419,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -426,38 +432,38 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">19.1</span> Introduction</a></li>
+<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">20.1</span> Introduction</a></li>
   <li>
-<a href="#how-does-a-two-way-anova-work" id="toc-how-does-a-two-way-anova-work" class="nav-link" data-scroll-target="#how-does-a-two-way-anova-work"><span class="header-section-number">19.2</span> How Does a Two-Way ANOVA Work?</a>
+<a href="#how-does-a-two-way-anova-work" id="toc-how-does-a-two-way-anova-work" class="nav-link" data-scroll-target="#how-does-a-two-way-anova-work"><span class="header-section-number">20.2</span> How Does a Two-Way ANOVA Work?</a>
   <ul class="collapse">
-<li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">19.2.1</span> Assumptions</a></li>
+<li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">20.2.1</span> Assumptions</a></li>
   </ul>
 </li>
-  <li><a href="#two-way-anova-table" id="toc-two-way-anova-table" class="nav-link" data-scroll-target="#two-way-anova-table"><span class="header-section-number">19.3</span> Two-Way ANOVA Table</a></li>
+  <li><a href="#two-way-anova-table" id="toc-two-way-anova-table" class="nav-link" data-scroll-target="#two-way-anova-table"><span class="header-section-number">20.3</span> Two-Way ANOVA Table</a></li>
   <li>
-<a href="#crop-yield-two-way-anova-example" id="toc-crop-yield-two-way-anova-example" class="nav-link" data-scroll-target="#crop-yield-two-way-anova-example"><span class="header-section-number">19.4</span> Crop Yield Two-Way ANOVA Example</a>
+<a href="#crop-yield-two-way-anova-example" id="toc-crop-yield-two-way-anova-example" class="nav-link" data-scroll-target="#crop-yield-two-way-anova-example"><span class="header-section-number">20.4</span> Crop Yield Two-Way ANOVA Example</a>
   <ul class="collapse">
-<li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><span class="header-section-number">19.4.1</span> Hypotheses</a></li>
-  <li><a href="#loading-libraries-and-data" id="toc-loading-libraries-and-data" class="nav-link" data-scroll-target="#loading-libraries-and-data"><span class="header-section-number">19.4.2</span> Loading Libraries and Data</a></li>
-  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration"><span class="header-section-number">19.4.3</span> Data Exploration</a></li>
-  <li><a href="#transform-treatment-factors-into-r-factors" id="toc-transform-treatment-factors-into-r-factors" class="nav-link" data-scroll-target="#transform-treatment-factors-into-r-factors"><span class="header-section-number">19.4.4</span> Transform Treatment Factors Into R Factors</a></li>
-  <li><a href="#performing-the-two-way-anova-with-interaction-and-blocking-variables" id="toc-performing-the-two-way-anova-with-interaction-and-blocking-variables" class="nav-link" data-scroll-target="#performing-the-two-way-anova-with-interaction-and-blocking-variables"><span class="header-section-number">19.4.5</span> Performing the Two-Way ANOVA with Interaction and Blocking Variables</a></li>
-  <li><a href="#checking-anova-assumptions" id="toc-checking-anova-assumptions" class="nav-link" data-scroll-target="#checking-anova-assumptions"><span class="header-section-number">19.4.6</span> Checking ANOVA Assumptions</a></li>
-  <li><a href="#two-way-anova---full-model-interpretation" id="toc-two-way-anova---full-model-interpretation" class="nav-link" data-scroll-target="#two-way-anova---full-model-interpretation"><span class="header-section-number">19.4.7</span> Two-Way ANOVA - Full Model Interpretation</a></li>
-  <li><a href="#two-way-anova---density-fertilizer-interaction" id="toc-two-way-anova---density-fertilizer-interaction" class="nav-link" data-scroll-target="#two-way-anova---density-fertilizer-interaction"><span class="header-section-number">19.4.8</span> Two-Way ANOVA - Density + Fertilizer + Interaction</a></li>
-  <li><a href="#two-way-anova---density-fertilizer" id="toc-two-way-anova---density-fertilizer" class="nav-link" data-scroll-target="#two-way-anova---density-fertilizer"><span class="header-section-number">19.4.9</span> Two-Way ANOVA - Density + Fertilizer</a></li>
+<li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><span class="header-section-number">20.4.1</span> Hypotheses</a></li>
+  <li><a href="#loading-libraries-and-data" id="toc-loading-libraries-and-data" class="nav-link" data-scroll-target="#loading-libraries-and-data"><span class="header-section-number">20.4.2</span> Loading Libraries and Data</a></li>
+  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration"><span class="header-section-number">20.4.3</span> Data Exploration</a></li>
+  <li><a href="#transform-treatment-factors-into-r-factors" id="toc-transform-treatment-factors-into-r-factors" class="nav-link" data-scroll-target="#transform-treatment-factors-into-r-factors"><span class="header-section-number">20.4.4</span> Transform Treatment Factors Into R Factors</a></li>
+  <li><a href="#performing-the-two-way-anova-with-interaction-and-blocking-variables" id="toc-performing-the-two-way-anova-with-interaction-and-blocking-variables" class="nav-link" data-scroll-target="#performing-the-two-way-anova-with-interaction-and-blocking-variables"><span class="header-section-number">20.4.5</span> Performing the Two-Way ANOVA with Interaction and Blocking Variables</a></li>
+  <li><a href="#checking-anova-assumptions" id="toc-checking-anova-assumptions" class="nav-link" data-scroll-target="#checking-anova-assumptions"><span class="header-section-number">20.4.6</span> Checking ANOVA Assumptions</a></li>
+  <li><a href="#two-way-anova---full-model-interpretation" id="toc-two-way-anova---full-model-interpretation" class="nav-link" data-scroll-target="#two-way-anova---full-model-interpretation"><span class="header-section-number">20.4.7</span> Two-Way ANOVA - Full Model Interpretation</a></li>
+  <li><a href="#two-way-anova---density-fertilizer-interaction" id="toc-two-way-anova---density-fertilizer-interaction" class="nav-link" data-scroll-target="#two-way-anova---density-fertilizer-interaction"><span class="header-section-number">20.4.8</span> Two-Way ANOVA - Density + Fertilizer + Interaction</a></li>
+  <li><a href="#two-way-anova---density-fertilizer" id="toc-two-way-anova---density-fertilizer" class="nav-link" data-scroll-target="#two-way-anova---density-fertilizer"><span class="header-section-number">20.4.9</span> Two-Way ANOVA - Density + Fertilizer</a></li>
   </ul>
 </li>
-  <li><a href="#determining-the-best-fitting-model-using-aic" id="toc-determining-the-best-fitting-model-using-aic" class="nav-link" data-scroll-target="#determining-the-best-fitting-model-using-aic"><span class="header-section-number">19.5</span> Determining the Best-Fitting Model Using AIC</a></li>
-  <li><a href="#post-hoc-testing-tukey-hsd" id="toc-post-hoc-testing-tukey-hsd" class="nav-link" data-scroll-target="#post-hoc-testing-tukey-hsd"><span class="header-section-number">19.6</span> Post-Hoc Testing (Tukey HSD)</a></li>
-  <li><a href="#anova-vs.-linear-regression" id="toc-anova-vs.-linear-regression" class="nav-link" data-scroll-target="#anova-vs.-linear-regression"><span class="header-section-number">19.7</span> ANOVA vs.&nbsp;Linear Regression</a></li>
-  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions"><span class="header-section-number">19.8</span> Conclusions</a></li>
+  <li><a href="#determining-the-best-fitting-model-using-aic" id="toc-determining-the-best-fitting-model-using-aic" class="nav-link" data-scroll-target="#determining-the-best-fitting-model-using-aic"><span class="header-section-number">20.5</span> Determining the Best-Fitting Model Using AIC</a></li>
+  <li><a href="#post-hoc-testing-tukey-hsd" id="toc-post-hoc-testing-tukey-hsd" class="nav-link" data-scroll-target="#post-hoc-testing-tukey-hsd"><span class="header-section-number">20.6</span> Post-Hoc Testing (Tukey HSD)</a></li>
+  <li><a href="#anova-vs.-linear-regression" id="toc-anova-vs.-linear-regression" class="nav-link" data-scroll-target="#anova-vs.-linear-regression"><span class="header-section-number">20.7</span> ANOVA vs.&nbsp;Linear Regression</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions"><span class="header-section-number">20.8</span> Conclusions</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/04_anova_two_way.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons/04_anova_two_way.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons/04_anova_two_way.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span>
+<span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span>
 </h1>
 </div>
 
@@ -475,7 +481,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 8, 2024</p>
+      <p class="date">July 16, 2024</p>
     </div>
   </div>
   
@@ -484,16 +490,16 @@ window.Quarto = {
   
 
 
-</header><section id="introduction" class="level2" data-number="19.1"><h2 data-number="19.1" class="anchored" data-anchor-id="introduction">
-<span class="header-section-number">19.1</span> Introduction</h2>
+</header><section id="introduction" class="level2" data-number="20.1"><h2 data-number="20.1" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">20.1</span> Introduction</h2>
 <p>The following two-way ANOVA lesson is based on <a href="https://www.scribbr.com/statistics/two-way-anova/">“Two-Way ANOVA | Examples &amp; When to Use It”</a>, a tutorial by Rebecca Bevans.</p>
 <p>A two-way ANOVA examines the influence of two or more independent categorical variables, also known as <strong>factors</strong>, on a continuous dependent variable. Each factor must have at least two <strong>levels</strong>, which are the groups within each factor being analyzed. In this lesson, we will see an example of how to test for these assumptions and how to conduct a type I two-way ANOVA once we know they have been met.</p>
 <p>An <strong>interaction</strong> occurs when the effect of one factor depends on the level of another factor. The two-way ANOVA method allows us to measure:</p>
 <ol type="1">
 <li><p><strong>Main Effects</strong> - the individual effect of one factor on the dependent variable, and</p></li>
 <li><p><strong>Interaction Effects</strong> - the extent to which the effects of one factor change across different levels of another factor.</p></li>
-</ol></section><section id="how-does-a-two-way-anova-work" class="level2" data-number="19.2"><h2 data-number="19.2" class="anchored" data-anchor-id="how-does-a-two-way-anova-work">
-<span class="header-section-number">19.2</span> How Does a Two-Way ANOVA Work?</h2>
+</ol></section><section id="how-does-a-two-way-anova-work" class="level2" data-number="20.2"><h2 data-number="20.2" class="anchored" data-anchor-id="how-does-a-two-way-anova-work">
+<span class="header-section-number">20.2</span> How Does a Two-Way ANOVA Work?</h2>
 <p>The F test, a group-wise comparison test, is used in an ANOVA to determine statistical significance. The outcome of an F test, the <em>F</em> statistic, measures how different a groups’ variances are to the overall variance of the dependent variable. When the variance is higher between groups than within the group, the <em>F</em> statistic will be greater. A large <em>F</em> statistic suggests there’s a low likelihood that the observed difference is due to chance, and thus, the factor likely has an effect on the outcome.</p>
 <p>For comparison, a critical value is calculated based on the desired alpha (α) and degrees of freedom of all groups. If the <em>F</em> statistic is greater than the <em>F</em> critical value, the results are considered statistically significant. For example, if the <em>F</em> statistic is greater than the <em>F</em> critical value at α = 0.05, then the p-value will be less than 0.05. For a model with two factors, we can generate three <em>F</em> statistics and three associated p values to test three possible hypotheses:</p>
 <div class="callout callout-style-simple callout-tip callout-titled">
@@ -536,15 +542,15 @@ Alternative Hypotheses
 </ul>
 </div>
 </div>
-<section id="assumptions" class="level3" data-number="19.2.1"><h3 data-number="19.2.1" class="anchored" data-anchor-id="assumptions">
-<span class="header-section-number">19.2.1</span> Assumptions</h3>
+<section id="assumptions" class="level3" data-number="20.2.1"><h3 data-number="20.2.1" class="anchored" data-anchor-id="assumptions">
+<span class="header-section-number">20.2.1</span> Assumptions</h3>
 <p>Three assumptions must be met before conducting a two-way ANOVA:</p>
 <ul>
 <li><p><em>Homogeneity of variance:</em> The variances for each group should be roughly equal. If the groups do not have equal variances, a non-parametric test, such as the Kruskal-Wallis test, may be used.</p></li>
 <li><p><em>Independence of observations:</em> The observations in each group are independent of each other and the observations within groups were obtained by a random sample. This can be assumed to be true so long as the experiment is properly designed. If observations are grouped in categories, this effect should be accounted for with the use of a blocking variable or a repeated-measures ANOVA.</p></li>
 <li><p><em>Normally distributed dependent variable:</em> The values of the dependent variable should follow a normal distribution.</p></li>
-</ul></section></section><section id="two-way-anova-table" class="level2" data-number="19.3"><h2 data-number="19.3" class="anchored" data-anchor-id="two-way-anova-table">
-<span class="header-section-number">19.3</span> Two-Way ANOVA Table</h2>
+</ul></section></section><section id="two-way-anova-table" class="level2" data-number="20.3"><h2 data-number="20.3" class="anchored" data-anchor-id="two-way-anova-table">
+<span class="header-section-number">20.3</span> Two-Way ANOVA Table</h2>
 <p>The following table includes the calculations used in a two-way ANOVA. For more detailed information on these calculations, please read <a href="https://www.itl.nist.gov/div898/handbook/prc/section4/prc438.htm">Models and Calculations for the Two-Way ANOVA</a>, a lesson by the National Institute of Standards and Technology.</p>
 <p>In the ANOVA table, the main effect A has <em>k</em> levels and the main effect B has <em>l</em> levels. N represents the total sample size.</p>
 <table class="table">
@@ -624,8 +630,8 @@ Alternative Hypotheses
 <li>
 <span class="math inline">\(SS_T\)</span>: Total sums of squares, df = <span class="math inline">\(N-1\)</span>
 </li>
-</ul></section><section id="crop-yield-two-way-anova-example" class="level2" data-number="19.4"><h2 data-number="19.4" class="anchored" data-anchor-id="crop-yield-two-way-anova-example">
-<span class="header-section-number">19.4</span> Crop Yield Two-Way ANOVA Example</h2>
+</ul></section><section id="crop-yield-two-way-anova-example" class="level2" data-number="20.4"><h2 data-number="20.4" class="anchored" data-anchor-id="crop-yield-two-way-anova-example">
+<span class="header-section-number">20.4</span> Crop Yield Two-Way ANOVA Example</h2>
 <p>We will use the agricultural crop yield dataset from the <a href="https://www.scribbr.com/statistics/two-way-anova/">Two-Way ANOVA lesson</a> lesson in our example, which can be directly downloaded <a href="https://www.scribbr.com/wp-content/uploads//2020/03/crop.data_.anova_.zip">here</a>.</p>
 <p>In this example, corn was planted in one of four blocks within a field, in either high or low density, and fertilized with one of three types of fertilizer. Their yield in bushels per acre was then measured. The three factors of this experiment with their associated levels are:</p>
 <ol type="1">
@@ -633,8 +639,8 @@ Alternative Hypotheses
 <li>Planting density (1 = low, 2 = high)</li>
 <li>Block number in the field (block 1, 2, 3, or 4)</li>
 </ol>
-<section id="hypotheses" class="level3" data-number="19.4.1"><h3 data-number="19.4.1" class="anchored" data-anchor-id="hypotheses">
-<span class="header-section-number">19.4.1</span> Hypotheses</h3>
+<section id="hypotheses" class="level3" data-number="20.4.1"><h3 data-number="20.4.1" class="anchored" data-anchor-id="hypotheses">
+<span class="header-section-number">20.4.1</span> Hypotheses</h3>
 <p>Suppose we want to use a two-way ANOVA to examine whether the type of fertilizer and planting density (factors) have an effect on the average crop yield (dependent variable). To answer this question, the following three hypotheses will be tested:</p>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -676,8 +682,8 @@ Alternative Hypotheses
 </ul>
 </div>
 </div>
-</section><section id="loading-libraries-and-data" class="level3" data-number="19.4.2"><h3 data-number="19.4.2" class="anchored" data-anchor-id="loading-libraries-and-data">
-<span class="header-section-number">19.4.2</span> Loading Libraries and Data</h3>
+</section><section id="loading-libraries-and-data" class="level3" data-number="20.4.2"><h3 data-number="20.4.2" class="anchored" data-anchor-id="loading-libraries-and-data">
+<span class="header-section-number">20.4.2</span> Loading Libraries and Data</h3>
 <p>First, we will load our required packages and read in the crop yield dataset. The <code>tidyverse</code> package will be used to transform the data. The <code>tidymodels</code> and <code>gt</code> packages are necessary for creating presentation-ready tables of results. Finally, the <code>AICcmodavg</code> package will be used to construct an AIC table with which to compare our models (more on this later).</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Uncomment the following code to install required packages</span></span>
@@ -702,8 +708,8 @@ Alternative Hypotheses
 <span><span class="co"># https://www.scribbr.com/wp-content/uploads//2020/03/crop.data_.anova_.zip</span></span>
 <span><span class="va">crop_data_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"../data/04_crop_data.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="data-exploration" class="level3" data-number="19.4.3"><h3 data-number="19.4.3" class="anchored" data-anchor-id="data-exploration">
-<span class="header-section-number">19.4.3</span> Data Exploration</h3>
+</section><section id="data-exploration" class="level3" data-number="20.4.3"><h3 data-number="20.4.3" class="anchored" data-anchor-id="data-exploration">
+<span class="header-section-number">20.4.3</span> Data Exploration</h3>
 <p>The first few datapoints of the crop yield dataset were inspected and summary statistics were performed on the entire dataset to examine the structure, center, and spread of the data.</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># show first six rows of the dataset</span></span>
@@ -730,8 +736,8 @@ Alternative Hypotheses
  Max.   :2.0   Max.   :4.00   Max.   :3    Max.   :179.1  </code></pre>
 </div>
 </div>
-</section><section id="transform-treatment-factors-into-r-factors" class="level3" data-number="19.4.4"><h3 data-number="19.4.4" class="anchored" data-anchor-id="transform-treatment-factors-into-r-factors">
-<span class="header-section-number">19.4.4</span> Transform Treatment Factors Into R Factors</h3>
+</section><section id="transform-treatment-factors-into-r-factors" class="level3" data-number="20.4.4"><h3 data-number="20.4.4" class="anchored" data-anchor-id="transform-treatment-factors-into-r-factors">
+<span class="header-section-number">20.4.4</span> Transform Treatment Factors Into R Factors</h3>
 <p>Note that the <code>fertilizer</code>, <code>density</code>, and <code>block</code> vectors are read in as <code>numeric</code> class objects, so we must convert them to the <code>factor</code> class. We will also specify the reference groups for each factor: fertilizer 1, low density, and block 1. If not specified, reference groups are automatically assigned in alphabetical order.</p>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># transform numeric vectors to factors and assign reference groups</span></span>
@@ -742,8 +748,8 @@ Alternative Hypotheses
 <span><span class="va">crop_data_df</span><span class="op">$</span><span class="va">block</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">crop_data_df</span><span class="op">$</span><span class="va">block</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/relevel.html">relevel</a></span><span class="op">(</span>ref <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="boxplots-of-factors" class="level4" data-number="19.4.4.1"><h4 data-number="19.4.4.1" class="anchored" data-anchor-id="boxplots-of-factors">
-<span class="header-section-number">19.4.4.1</span> Boxplots of Factors</h4>
+<section id="boxplots-of-factors" class="level4" data-number="20.4.4.1"><h4 data-number="20.4.4.1" class="anchored" data-anchor-id="boxplots-of-factors">
+<span class="header-section-number">20.4.4.1</span> Boxplots of Factors</h4>
 <p>Box plots for each factor were created to further examine the spread and center of the data using <code>ggplot2</code>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># create box plot of yield by fertilizer</span></span>
@@ -814,8 +820,8 @@ Alternative Hypotheses
 </div>
 </div>
 <p>The data for each level appear to be approximately normally distributed with roughly equal variance and few outliers.</p>
-</section><section id="combined-boxplot-of-crop-yield-by-fertilizer-and-density" class="level4" data-number="19.4.4.2"><h4 data-number="19.4.4.2" class="anchored" data-anchor-id="combined-boxplot-of-crop-yield-by-fertilizer-and-density">
-<span class="header-section-number">19.4.4.2</span> Combined Boxplot of Crop Yield by Fertilizer and Density</h4>
+</section><section id="combined-boxplot-of-crop-yield-by-fertilizer-and-density" class="level4" data-number="20.4.4.2"><h4 data-number="20.4.4.2" class="anchored" data-anchor-id="combined-boxplot-of-crop-yield-by-fertilizer-and-density">
+<span class="header-section-number">20.4.4.2</span> Combined Boxplot of Crop Yield by Fertilizer and Density</h4>
 <p>To help visualize the data, a combined box plot visualizing the effects of fertilizer and density on average crop yield was created. The y-axis indicates the average crop yield. The x-axis is divided by fertilizer type (labeled at the top of the graph) and indicates the planting density for each level of the fertilizer factor.</p>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">anova_plot</span> <span class="op">&lt;-</span> </span>
@@ -870,8 +876,8 @@ Alternative Hypotheses
 </div>
 </div>
 <p>The differing means for each level of fertilizer and density suggest that the factors have an effect on average yield. Before we can test whether these potential effects are statistically significant, we must first check that the data meet the ANOVA assumptions. To do this, we will generate a two-way ANOVA and run diagnostics on the model.</p>
-</section></section><section id="performing-the-two-way-anova-with-interaction-and-blocking-variables" class="level3" data-number="19.4.5"><h3 data-number="19.4.5" class="anchored" data-anchor-id="performing-the-two-way-anova-with-interaction-and-blocking-variables">
-<span class="header-section-number">19.4.5</span> Performing the Two-Way ANOVA with Interaction and Blocking Variables</h3>
+</section></section><section id="performing-the-two-way-anova-with-interaction-and-blocking-variables" class="level3" data-number="20.4.5"><h3 data-number="20.4.5" class="anchored" data-anchor-id="performing-the-two-way-anova-with-interaction-and-blocking-variables">
+<span class="header-section-number">20.4.5</span> Performing the Two-Way ANOVA with Interaction and Blocking Variables</h3>
 <p>Recall that the two-way ANOVA can actually account for more than two factors. The crops were planted across various <code>blocks</code> whose conditions may differ in terms sunlight, moisture, etc. This could possibly lead to confounding, so it is important to control for the possible effect of these differences by adding this third factor to our model.</p>
 <p>A two-way ANOVA was created to model the effects of fertilizer, density, the interaction between fertilizer and density, and the blocking factor. In the following code, the argument <code>fertilizer * density</code> is equivalent to <code>fertilizer + density + fertilizer : density</code>, where <code>fertilizer : density</code> represents the interaction term.</p>
 <div class="callout callout-style-simple callout-warning callout-titled">
@@ -894,8 +900,8 @@ Are your data balanced?
 <span><span class="co"># 'fertilizer * density' = fertilizer + density + fertilizer:density interaction</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">yield</span> <span class="op">~</span> <span class="va">fertilizer</span> <span class="op">*</span> <span class="va">density</span> <span class="op">+</span> <span class="va">block</span>, data <span class="op">=</span> <span class="va">crop_data_df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="checking-anova-assumptions" class="level3" data-number="19.4.6"><h3 data-number="19.4.6" class="anchored" data-anchor-id="checking-anova-assumptions">
-<span class="header-section-number">19.4.6</span> Checking ANOVA Assumptions</h3>
+</section><section id="checking-anova-assumptions" class="level3" data-number="20.4.6"><h3 data-number="20.4.6" class="anchored" data-anchor-id="checking-anova-assumptions">
+<span class="header-section-number">20.4.6</span> Checking ANOVA Assumptions</h3>
 <p>We will now create diagnostic plots, which include a <strong>residuals vs fitted plot, scale-location plot, Q-Q plot,</strong> and <strong>constant leverage plot</strong>, to evaluate the homoscedasticity of our data. Please read <a href="https://library.virginia.edu/data/articles/diagnostic-plots">Understanding Diagnostic Plots for Linear Regression Analysis</a> for more information on these plots.</p>
 <div class="cell">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># set plot parameter to display 2 x 2 plots in output</span></span>
@@ -914,8 +920,8 @@ Are your data balanced?
 <p>The <strong>residual vs fitted plot</strong> shows the data are randomly spread about the “0” line with no large outliers, so we can assume the factors have equal variances. Similarly, the <strong>scale-location plot</strong> shows an approximately horizontal line with randomly spread points, indicating equal variances. Thus, the homoscedasticity assumption is met.</p>
 <p>The points of the <strong>Q-Q residuals plot</strong> roughly follow the reference line, indicating the data are normally distributed. We can conclude the normality assumption is met.</p>
 <p>The <strong>constant leverage plot</strong> displays a horizontal “0” value line with points randomly spread around it, indicating the spread of the points are the same at different levels. No points lie outside of the critical value lines (not visible in the graph due to scale), indicating no outliers exist that could skew the data.</p>
-</section><section id="two-way-anova---full-model-interpretation" class="level3" data-number="19.4.7"><h3 data-number="19.4.7" class="anchored" data-anchor-id="two-way-anova---full-model-interpretation">
-<span class="header-section-number">19.4.7</span> Two-Way ANOVA - Full Model Interpretation</h3>
+</section><section id="two-way-anova---full-model-interpretation" class="level3" data-number="20.4.7"><h3 data-number="20.4.7" class="anchored" data-anchor-id="two-way-anova---full-model-interpretation">
+<span class="header-section-number">20.4.7</span> Two-Way ANOVA - Full Model Interpretation</h3>
 <p>Now that we have verified that the data satisfy the ANOVA assumptions, we may conduct the two-way ANOVA to test the hypotheses. Let’s interpret the results of the ANOVA of the full model:</p>
 <div class="cell">
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">table_full</span> <span class="op">&lt;-</span> <span class="va">full_model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -932,23 +938,23 @@ Are your data balanced?
 <span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="denymhkkce" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#denymhkkce table {
+<div id="ntkkhlowpu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ntkkhlowpu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#denymhkkce thead, #denymhkkce tbody, #denymhkkce tfoot, #denymhkkce tr, #denymhkkce td, #denymhkkce th {
+#ntkkhlowpu thead, #ntkkhlowpu tbody, #ntkkhlowpu tfoot, #ntkkhlowpu tr, #ntkkhlowpu td, #ntkkhlowpu th {
   border-style: none;
 }
 
-#denymhkkce p {
+#ntkkhlowpu p {
   margin: 0;
   padding: 0;
 }
 
-#denymhkkce .gt_table {
+#ntkkhlowpu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -974,12 +980,12 @@ Are your data balanced?
   border-left-color: #D3D3D3;
 }
 
-#denymhkkce .gt_caption {
+#ntkkhlowpu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#denymhkkce .gt_title {
+#ntkkhlowpu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -991,7 +997,7 @@ Are your data balanced?
   border-bottom-width: 0;
 }
 
-#denymhkkce .gt_subtitle {
+#ntkkhlowpu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1003,7 +1009,7 @@ Are your data balanced?
   border-top-width: 0;
 }
 
-#denymhkkce .gt_heading {
+#ntkkhlowpu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1015,13 +1021,13 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#denymhkkce .gt_bottom_border {
+#ntkkhlowpu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#denymhkkce .gt_col_headings {
+#ntkkhlowpu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1036,7 +1042,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#denymhkkce .gt_col_heading {
+#ntkkhlowpu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1056,7 +1062,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#denymhkkce .gt_column_spanner_outer {
+#ntkkhlowpu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1068,15 +1074,15 @@ Are your data balanced?
   padding-right: 4px;
 }
 
-#denymhkkce .gt_column_spanner_outer:first-child {
+#ntkkhlowpu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#denymhkkce .gt_column_spanner_outer:last-child {
+#ntkkhlowpu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#denymhkkce .gt_column_spanner {
+#ntkkhlowpu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1088,11 +1094,11 @@ Are your data balanced?
   width: 100%;
 }
 
-#denymhkkce .gt_spanner_row {
+#ntkkhlowpu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#denymhkkce .gt_group_heading {
+#ntkkhlowpu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1118,7 +1124,7 @@ Are your data balanced?
   text-align: left;
 }
 
-#denymhkkce .gt_empty_group_heading {
+#ntkkhlowpu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1133,15 +1139,15 @@ Are your data balanced?
   vertical-align: middle;
 }
 
-#denymhkkce .gt_from_md > :first-child {
+#ntkkhlowpu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#denymhkkce .gt_from_md > :last-child {
+#ntkkhlowpu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#denymhkkce .gt_row {
+#ntkkhlowpu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1160,7 +1166,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#denymhkkce .gt_stub {
+#ntkkhlowpu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1173,7 +1179,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#denymhkkce .gt_stub_row_group {
+#ntkkhlowpu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1187,15 +1193,15 @@ Are your data balanced?
   vertical-align: top;
 }
 
-#denymhkkce .gt_row_group_first td {
+#ntkkhlowpu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#denymhkkce .gt_row_group_first th {
+#ntkkhlowpu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#denymhkkce .gt_summary_row {
+#ntkkhlowpu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1205,16 +1211,16 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#denymhkkce .gt_first_summary_row {
+#ntkkhlowpu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#denymhkkce .gt_first_summary_row.thick {
+#ntkkhlowpu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#denymhkkce .gt_last_summary_row {
+#ntkkhlowpu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1224,7 +1230,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#denymhkkce .gt_grand_summary_row {
+#ntkkhlowpu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1234,7 +1240,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#denymhkkce .gt_first_grand_summary_row {
+#ntkkhlowpu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1244,7 +1250,7 @@ Are your data balanced?
   border-top-color: #D3D3D3;
 }
 
-#denymhkkce .gt_last_grand_summary_row_top {
+#ntkkhlowpu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1254,11 +1260,11 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#denymhkkce .gt_striped {
+#ntkkhlowpu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#denymhkkce .gt_table_body {
+#ntkkhlowpu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1267,7 +1273,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#denymhkkce .gt_footnotes {
+#ntkkhlowpu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1281,7 +1287,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#denymhkkce .gt_footnote {
+#ntkkhlowpu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1290,7 +1296,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#denymhkkce .gt_sourcenotes {
+#ntkkhlowpu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1304,7 +1310,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#denymhkkce .gt_sourcenote {
+#ntkkhlowpu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1312,63 +1318,63 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#denymhkkce .gt_left {
+#ntkkhlowpu .gt_left {
   text-align: left;
 }
 
-#denymhkkce .gt_center {
+#ntkkhlowpu .gt_center {
   text-align: center;
 }
 
-#denymhkkce .gt_right {
+#ntkkhlowpu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#denymhkkce .gt_font_normal {
+#ntkkhlowpu .gt_font_normal {
   font-weight: normal;
 }
 
-#denymhkkce .gt_font_bold {
+#ntkkhlowpu .gt_font_bold {
   font-weight: bold;
 }
 
-#denymhkkce .gt_font_italic {
+#ntkkhlowpu .gt_font_italic {
   font-style: italic;
 }
 
-#denymhkkce .gt_super {
+#ntkkhlowpu .gt_super {
   font-size: 65%;
 }
 
-#denymhkkce .gt_footnote_marks {
+#ntkkhlowpu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#denymhkkce .gt_asterisk {
+#ntkkhlowpu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#denymhkkce .gt_indent_1 {
+#ntkkhlowpu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#denymhkkce .gt_indent_2 {
+#ntkkhlowpu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#denymhkkce .gt_indent_3 {
+#ntkkhlowpu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#denymhkkce .gt_indent_4 {
+#ntkkhlowpu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#denymhkkce .gt_indent_5 {
+#ntkkhlowpu .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1437,8 +1443,8 @@ Are your data balanced?
 </div>
 </div>
 <p>The block variable’s p value of p = 0.49 and the interaction term’s p value of p = 0.53 are not significant at the α = 0.05 level. Hence, neither have a statistically significant effect on the crop yield. Because they do not add information to the model, They may be removed from the final model.</p>
-</section><section id="two-way-anova---density-fertilizer-interaction" class="level3" data-number="19.4.8"><h3 data-number="19.4.8" class="anchored" data-anchor-id="two-way-anova---density-fertilizer-interaction">
-<span class="header-section-number">19.4.8</span> Two-Way ANOVA - Density + Fertilizer + Interaction</h3>
+</section><section id="two-way-anova---density-fertilizer-interaction" class="level3" data-number="20.4.8"><h3 data-number="20.4.8" class="anchored" data-anchor-id="two-way-anova---density-fertilizer-interaction">
+<span class="header-section-number">20.4.8</span> Two-Way ANOVA - Density + Fertilizer + Interaction</h3>
 <p>We will now run a two-way ANOVA on a new model using the density, fertilizer, and interaction factors to investigate whether these terms are significant.</p>
 <div class="cell">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># performing the two-way ANOVA with interaction</span></span>
@@ -1460,23 +1466,23 @@ Are your data balanced?
 <span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="qlwzhvylhb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qlwzhvylhb table {
+<div id="sxqtjbckyi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sxqtjbckyi table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qlwzhvylhb thead, #qlwzhvylhb tbody, #qlwzhvylhb tfoot, #qlwzhvylhb tr, #qlwzhvylhb td, #qlwzhvylhb th {
+#sxqtjbckyi thead, #sxqtjbckyi tbody, #sxqtjbckyi tfoot, #sxqtjbckyi tr, #sxqtjbckyi td, #sxqtjbckyi th {
   border-style: none;
 }
 
-#qlwzhvylhb p {
+#sxqtjbckyi p {
   margin: 0;
   padding: 0;
 }
 
-#qlwzhvylhb .gt_table {
+#sxqtjbckyi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1502,12 +1508,12 @@ Are your data balanced?
   border-left-color: #D3D3D3;
 }
 
-#qlwzhvylhb .gt_caption {
+#sxqtjbckyi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qlwzhvylhb .gt_title {
+#sxqtjbckyi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1519,7 +1525,7 @@ Are your data balanced?
   border-bottom-width: 0;
 }
 
-#qlwzhvylhb .gt_subtitle {
+#sxqtjbckyi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1531,7 +1537,7 @@ Are your data balanced?
   border-top-width: 0;
 }
 
-#qlwzhvylhb .gt_heading {
+#sxqtjbckyi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1543,13 +1549,13 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#qlwzhvylhb .gt_bottom_border {
+#sxqtjbckyi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qlwzhvylhb .gt_col_headings {
+#sxqtjbckyi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1564,7 +1570,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#qlwzhvylhb .gt_col_heading {
+#sxqtjbckyi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1584,7 +1590,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#qlwzhvylhb .gt_column_spanner_outer {
+#sxqtjbckyi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1596,15 +1602,15 @@ Are your data balanced?
   padding-right: 4px;
 }
 
-#qlwzhvylhb .gt_column_spanner_outer:first-child {
+#sxqtjbckyi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qlwzhvylhb .gt_column_spanner_outer:last-child {
+#sxqtjbckyi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qlwzhvylhb .gt_column_spanner {
+#sxqtjbckyi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1616,11 +1622,11 @@ Are your data balanced?
   width: 100%;
 }
 
-#qlwzhvylhb .gt_spanner_row {
+#sxqtjbckyi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qlwzhvylhb .gt_group_heading {
+#sxqtjbckyi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1646,7 +1652,7 @@ Are your data balanced?
   text-align: left;
 }
 
-#qlwzhvylhb .gt_empty_group_heading {
+#sxqtjbckyi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1661,15 +1667,15 @@ Are your data balanced?
   vertical-align: middle;
 }
 
-#qlwzhvylhb .gt_from_md > :first-child {
+#sxqtjbckyi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qlwzhvylhb .gt_from_md > :last-child {
+#sxqtjbckyi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qlwzhvylhb .gt_row {
+#sxqtjbckyi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1688,7 +1694,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#qlwzhvylhb .gt_stub {
+#sxqtjbckyi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1701,7 +1707,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#qlwzhvylhb .gt_stub_row_group {
+#sxqtjbckyi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1715,15 +1721,15 @@ Are your data balanced?
   vertical-align: top;
 }
 
-#qlwzhvylhb .gt_row_group_first td {
+#sxqtjbckyi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qlwzhvylhb .gt_row_group_first th {
+#sxqtjbckyi .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qlwzhvylhb .gt_summary_row {
+#sxqtjbckyi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1733,16 +1739,16 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#qlwzhvylhb .gt_first_summary_row {
+#sxqtjbckyi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qlwzhvylhb .gt_first_summary_row.thick {
+#sxqtjbckyi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qlwzhvylhb .gt_last_summary_row {
+#sxqtjbckyi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1752,7 +1758,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#qlwzhvylhb .gt_grand_summary_row {
+#sxqtjbckyi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1762,7 +1768,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#qlwzhvylhb .gt_first_grand_summary_row {
+#sxqtjbckyi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1772,7 +1778,7 @@ Are your data balanced?
   border-top-color: #D3D3D3;
 }
 
-#qlwzhvylhb .gt_last_grand_summary_row_top {
+#sxqtjbckyi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1782,11 +1788,11 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#qlwzhvylhb .gt_striped {
+#sxqtjbckyi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qlwzhvylhb .gt_table_body {
+#sxqtjbckyi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1795,7 +1801,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#qlwzhvylhb .gt_footnotes {
+#sxqtjbckyi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1809,7 +1815,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#qlwzhvylhb .gt_footnote {
+#sxqtjbckyi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1818,7 +1824,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#qlwzhvylhb .gt_sourcenotes {
+#sxqtjbckyi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1832,7 +1838,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#qlwzhvylhb .gt_sourcenote {
+#sxqtjbckyi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1840,63 +1846,63 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#qlwzhvylhb .gt_left {
+#sxqtjbckyi .gt_left {
   text-align: left;
 }
 
-#qlwzhvylhb .gt_center {
+#sxqtjbckyi .gt_center {
   text-align: center;
 }
 
-#qlwzhvylhb .gt_right {
+#sxqtjbckyi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qlwzhvylhb .gt_font_normal {
+#sxqtjbckyi .gt_font_normal {
   font-weight: normal;
 }
 
-#qlwzhvylhb .gt_font_bold {
+#sxqtjbckyi .gt_font_bold {
   font-weight: bold;
 }
 
-#qlwzhvylhb .gt_font_italic {
+#sxqtjbckyi .gt_font_italic {
   font-style: italic;
 }
 
-#qlwzhvylhb .gt_super {
+#sxqtjbckyi .gt_super {
   font-size: 65%;
 }
 
-#qlwzhvylhb .gt_footnote_marks {
+#sxqtjbckyi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qlwzhvylhb .gt_asterisk {
+#sxqtjbckyi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qlwzhvylhb .gt_indent_1 {
+#sxqtjbckyi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qlwzhvylhb .gt_indent_2 {
+#sxqtjbckyi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qlwzhvylhb .gt_indent_3 {
+#sxqtjbckyi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qlwzhvylhb .gt_indent_4 {
+#sxqtjbckyi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qlwzhvylhb .gt_indent_5 {
+#sxqtjbckyi .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1957,8 +1963,8 @@ Are your data balanced?
 </div>
 </div>
 <p>The p value for the interaction term is greater than 0.05, hence we fail to reject the null hypothesis (H0<sub>3</sub>) and conclude that there is no statistically significant interaction effect between fertilizer type and crop density on average yield. The interaction term should also be removed from the model.</p>
-</section><section id="two-way-anova---density-fertilizer" class="level3" data-number="19.4.9"><h3 data-number="19.4.9" class="anchored" data-anchor-id="two-way-anova---density-fertilizer">
-<span class="header-section-number">19.4.9</span> Two-Way ANOVA - Density + Fertilizer</h3>
+</section><section id="two-way-anova---density-fertilizer" class="level3" data-number="20.4.9"><h3 data-number="20.4.9" class="anchored" data-anchor-id="two-way-anova---density-fertilizer">
+<span class="header-section-number">20.4.9</span> Two-Way ANOVA - Density + Fertilizer</h3>
 <p>Because the interaction term was not significant, we will remove it from our model and perform a two-way ANOVA on a model with only the density and fertilizer factors.</p>
 <div class="cell">
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># performing the two-way ANOVA without the interaction term</span></span>
@@ -1979,23 +1985,23 @@ Are your data balanced?
 <span>   <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="vjmkivdfre" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vjmkivdfre table {
+<div id="mgxlftzpps" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mgxlftzpps table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vjmkivdfre thead, #vjmkivdfre tbody, #vjmkivdfre tfoot, #vjmkivdfre tr, #vjmkivdfre td, #vjmkivdfre th {
+#mgxlftzpps thead, #mgxlftzpps tbody, #mgxlftzpps tfoot, #mgxlftzpps tr, #mgxlftzpps td, #mgxlftzpps th {
   border-style: none;
 }
 
-#vjmkivdfre p {
+#mgxlftzpps p {
   margin: 0;
   padding: 0;
 }
 
-#vjmkivdfre .gt_table {
+#mgxlftzpps .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2021,12 +2027,12 @@ Are your data balanced?
   border-left-color: #D3D3D3;
 }
 
-#vjmkivdfre .gt_caption {
+#mgxlftzpps .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vjmkivdfre .gt_title {
+#mgxlftzpps .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2038,7 +2044,7 @@ Are your data balanced?
   border-bottom-width: 0;
 }
 
-#vjmkivdfre .gt_subtitle {
+#mgxlftzpps .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2050,7 +2056,7 @@ Are your data balanced?
   border-top-width: 0;
 }
 
-#vjmkivdfre .gt_heading {
+#mgxlftzpps .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2062,13 +2068,13 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#vjmkivdfre .gt_bottom_border {
+#mgxlftzpps .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vjmkivdfre .gt_col_headings {
+#mgxlftzpps .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2083,7 +2089,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#vjmkivdfre .gt_col_heading {
+#mgxlftzpps .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2103,7 +2109,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#vjmkivdfre .gt_column_spanner_outer {
+#mgxlftzpps .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2115,15 +2121,15 @@ Are your data balanced?
   padding-right: 4px;
 }
 
-#vjmkivdfre .gt_column_spanner_outer:first-child {
+#mgxlftzpps .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vjmkivdfre .gt_column_spanner_outer:last-child {
+#mgxlftzpps .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vjmkivdfre .gt_column_spanner {
+#mgxlftzpps .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2135,11 +2141,11 @@ Are your data balanced?
   width: 100%;
 }
 
-#vjmkivdfre .gt_spanner_row {
+#mgxlftzpps .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vjmkivdfre .gt_group_heading {
+#mgxlftzpps .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2165,7 +2171,7 @@ Are your data balanced?
   text-align: left;
 }
 
-#vjmkivdfre .gt_empty_group_heading {
+#mgxlftzpps .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2180,15 +2186,15 @@ Are your data balanced?
   vertical-align: middle;
 }
 
-#vjmkivdfre .gt_from_md > :first-child {
+#mgxlftzpps .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vjmkivdfre .gt_from_md > :last-child {
+#mgxlftzpps .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vjmkivdfre .gt_row {
+#mgxlftzpps .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2207,7 +2213,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#vjmkivdfre .gt_stub {
+#mgxlftzpps .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2220,7 +2226,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#vjmkivdfre .gt_stub_row_group {
+#mgxlftzpps .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2234,15 +2240,15 @@ Are your data balanced?
   vertical-align: top;
 }
 
-#vjmkivdfre .gt_row_group_first td {
+#mgxlftzpps .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vjmkivdfre .gt_row_group_first th {
+#mgxlftzpps .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vjmkivdfre .gt_summary_row {
+#mgxlftzpps .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2252,16 +2258,16 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#vjmkivdfre .gt_first_summary_row {
+#mgxlftzpps .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vjmkivdfre .gt_first_summary_row.thick {
+#mgxlftzpps .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vjmkivdfre .gt_last_summary_row {
+#mgxlftzpps .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2271,7 +2277,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#vjmkivdfre .gt_grand_summary_row {
+#mgxlftzpps .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2281,7 +2287,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#vjmkivdfre .gt_first_grand_summary_row {
+#mgxlftzpps .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2291,7 +2297,7 @@ Are your data balanced?
   border-top-color: #D3D3D3;
 }
 
-#vjmkivdfre .gt_last_grand_summary_row_top {
+#mgxlftzpps .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2301,11 +2307,11 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#vjmkivdfre .gt_striped {
+#mgxlftzpps .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vjmkivdfre .gt_table_body {
+#mgxlftzpps .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2314,7 +2320,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#vjmkivdfre .gt_footnotes {
+#mgxlftzpps .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2328,7 +2334,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#vjmkivdfre .gt_footnote {
+#mgxlftzpps .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2337,7 +2343,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#vjmkivdfre .gt_sourcenotes {
+#mgxlftzpps .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2351,7 +2357,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#vjmkivdfre .gt_sourcenote {
+#mgxlftzpps .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2359,63 +2365,63 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#vjmkivdfre .gt_left {
+#mgxlftzpps .gt_left {
   text-align: left;
 }
 
-#vjmkivdfre .gt_center {
+#mgxlftzpps .gt_center {
   text-align: center;
 }
 
-#vjmkivdfre .gt_right {
+#mgxlftzpps .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vjmkivdfre .gt_font_normal {
+#mgxlftzpps .gt_font_normal {
   font-weight: normal;
 }
 
-#vjmkivdfre .gt_font_bold {
+#mgxlftzpps .gt_font_bold {
   font-weight: bold;
 }
 
-#vjmkivdfre .gt_font_italic {
+#mgxlftzpps .gt_font_italic {
   font-style: italic;
 }
 
-#vjmkivdfre .gt_super {
+#mgxlftzpps .gt_super {
   font-size: 65%;
 }
 
-#vjmkivdfre .gt_footnote_marks {
+#mgxlftzpps .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vjmkivdfre .gt_asterisk {
+#mgxlftzpps .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vjmkivdfre .gt_indent_1 {
+#mgxlftzpps .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vjmkivdfre .gt_indent_2 {
+#mgxlftzpps .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vjmkivdfre .gt_indent_3 {
+#mgxlftzpps .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vjmkivdfre .gt_indent_4 {
+#mgxlftzpps .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vjmkivdfre .gt_indent_5 {
+#mgxlftzpps .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2468,8 +2474,8 @@ Are your data balanced?
 </div>
 </div>
 <p>Without the interaction term, we see that the p values for both fertilizer type and planting density are significant at the α = 0.05 level. Thus, we reject null hypotheses H0<sub>1</sub> and H0<sub>2</sub> and conclude that both fertilizer and density have a statistically significant main effect on crop yield.</p>
-</section></section><section id="determining-the-best-fitting-model-using-aic" class="level2" data-number="19.5"><h2 data-number="19.5" class="anchored" data-anchor-id="determining-the-best-fitting-model-using-aic">
-<span class="header-section-number">19.5</span> Determining the Best-Fitting Model Using AIC</h2>
+</section></section><section id="determining-the-best-fitting-model-using-aic" class="level2" data-number="20.5"><h2 data-number="20.5" class="anchored" data-anchor-id="determining-the-best-fitting-model-using-aic">
+<span class="header-section-number">20.5</span> Determining the Best-Fitting Model Using AIC</h2>
 <p>The Akaike information criterion (AIC) is another method that can be used to determine the model that best fits the data. The model that explains the greatest amount of the variation in the data using the fewest possible independent variables is considered the best-fitting model. The lower the AIC value, the more variation is explained by the model.</p>
 <div class="cell">
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># creating a list of models to compare and their respective names</span></span>
@@ -2487,23 +2493,23 @@ Are your data balanced?
 <span><span class="va">gt_print</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="ioymyqrjol" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ioymyqrjol table {
+<div id="rdhbulakqf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rdhbulakqf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ioymyqrjol thead, #ioymyqrjol tbody, #ioymyqrjol tfoot, #ioymyqrjol tr, #ioymyqrjol td, #ioymyqrjol th {
+#rdhbulakqf thead, #rdhbulakqf tbody, #rdhbulakqf tfoot, #rdhbulakqf tr, #rdhbulakqf td, #rdhbulakqf th {
   border-style: none;
 }
 
-#ioymyqrjol p {
+#rdhbulakqf p {
   margin: 0;
   padding: 0;
 }
 
-#ioymyqrjol .gt_table {
+#rdhbulakqf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2529,12 +2535,12 @@ Are your data balanced?
   border-left-color: #D3D3D3;
 }
 
-#ioymyqrjol .gt_caption {
+#rdhbulakqf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ioymyqrjol .gt_title {
+#rdhbulakqf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2546,7 +2552,7 @@ Are your data balanced?
   border-bottom-width: 0;
 }
 
-#ioymyqrjol .gt_subtitle {
+#rdhbulakqf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2558,7 +2564,7 @@ Are your data balanced?
   border-top-width: 0;
 }
 
-#ioymyqrjol .gt_heading {
+#rdhbulakqf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2570,13 +2576,13 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#ioymyqrjol .gt_bottom_border {
+#rdhbulakqf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ioymyqrjol .gt_col_headings {
+#rdhbulakqf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2591,7 +2597,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#ioymyqrjol .gt_col_heading {
+#rdhbulakqf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2611,7 +2617,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#ioymyqrjol .gt_column_spanner_outer {
+#rdhbulakqf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2623,15 +2629,15 @@ Are your data balanced?
   padding-right: 4px;
 }
 
-#ioymyqrjol .gt_column_spanner_outer:first-child {
+#rdhbulakqf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ioymyqrjol .gt_column_spanner_outer:last-child {
+#rdhbulakqf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ioymyqrjol .gt_column_spanner {
+#rdhbulakqf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2643,11 +2649,11 @@ Are your data balanced?
   width: 100%;
 }
 
-#ioymyqrjol .gt_spanner_row {
+#rdhbulakqf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ioymyqrjol .gt_group_heading {
+#rdhbulakqf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2673,7 +2679,7 @@ Are your data balanced?
   text-align: left;
 }
 
-#ioymyqrjol .gt_empty_group_heading {
+#rdhbulakqf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2688,15 +2694,15 @@ Are your data balanced?
   vertical-align: middle;
 }
 
-#ioymyqrjol .gt_from_md > :first-child {
+#rdhbulakqf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ioymyqrjol .gt_from_md > :last-child {
+#rdhbulakqf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ioymyqrjol .gt_row {
+#rdhbulakqf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2715,7 +2721,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#ioymyqrjol .gt_stub {
+#rdhbulakqf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2728,7 +2734,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#ioymyqrjol .gt_stub_row_group {
+#rdhbulakqf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2742,15 +2748,15 @@ Are your data balanced?
   vertical-align: top;
 }
 
-#ioymyqrjol .gt_row_group_first td {
+#rdhbulakqf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ioymyqrjol .gt_row_group_first th {
+#rdhbulakqf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ioymyqrjol .gt_summary_row {
+#rdhbulakqf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2760,16 +2766,16 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#ioymyqrjol .gt_first_summary_row {
+#rdhbulakqf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ioymyqrjol .gt_first_summary_row.thick {
+#rdhbulakqf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ioymyqrjol .gt_last_summary_row {
+#rdhbulakqf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2779,7 +2785,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#ioymyqrjol .gt_grand_summary_row {
+#rdhbulakqf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2789,7 +2795,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#ioymyqrjol .gt_first_grand_summary_row {
+#rdhbulakqf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2799,7 +2805,7 @@ Are your data balanced?
   border-top-color: #D3D3D3;
 }
 
-#ioymyqrjol .gt_last_grand_summary_row_top {
+#rdhbulakqf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2809,11 +2815,11 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#ioymyqrjol .gt_striped {
+#rdhbulakqf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ioymyqrjol .gt_table_body {
+#rdhbulakqf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2822,7 +2828,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#ioymyqrjol .gt_footnotes {
+#rdhbulakqf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2836,7 +2842,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#ioymyqrjol .gt_footnote {
+#rdhbulakqf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2845,7 +2851,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#ioymyqrjol .gt_sourcenotes {
+#rdhbulakqf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2859,7 +2865,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#ioymyqrjol .gt_sourcenote {
+#rdhbulakqf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2867,63 +2873,63 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#ioymyqrjol .gt_left {
+#rdhbulakqf .gt_left {
   text-align: left;
 }
 
-#ioymyqrjol .gt_center {
+#rdhbulakqf .gt_center {
   text-align: center;
 }
 
-#ioymyqrjol .gt_right {
+#rdhbulakqf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ioymyqrjol .gt_font_normal {
+#rdhbulakqf .gt_font_normal {
   font-weight: normal;
 }
 
-#ioymyqrjol .gt_font_bold {
+#rdhbulakqf .gt_font_bold {
   font-weight: bold;
 }
 
-#ioymyqrjol .gt_font_italic {
+#rdhbulakqf .gt_font_italic {
   font-style: italic;
 }
 
-#ioymyqrjol .gt_super {
+#rdhbulakqf .gt_super {
   font-size: 65%;
 }
 
-#ioymyqrjol .gt_footnote_marks {
+#rdhbulakqf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ioymyqrjol .gt_asterisk {
+#rdhbulakqf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ioymyqrjol .gt_indent_1 {
+#rdhbulakqf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ioymyqrjol .gt_indent_2 {
+#rdhbulakqf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ioymyqrjol .gt_indent_3 {
+#rdhbulakqf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ioymyqrjol .gt_indent_4 {
+#rdhbulakqf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ioymyqrjol .gt_indent_5 {
+#rdhbulakqf .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2976,8 +2982,8 @@ Are your data balanced?
 </div>
 </div>
 <p>As shown in this table, the main_effects model, which only includes the fertilizer and density variables without their interaction term, has the lowest AIC and is therefore the best fit for our crop data analysis.</p>
-</section><section id="post-hoc-testing-tukey-hsd" class="level2" data-number="19.6"><h2 data-number="19.6" class="anchored" data-anchor-id="post-hoc-testing-tukey-hsd">
-<span class="header-section-number">19.6</span> Post-Hoc Testing (Tukey HSD)</h2>
+</section><section id="post-hoc-testing-tukey-hsd" class="level2" data-number="20.6"><h2 data-number="20.6" class="anchored" data-anchor-id="post-hoc-testing-tukey-hsd">
+<span class="header-section-number">20.6</span> Post-Hoc Testing (Tukey HSD)</h2>
 <p>We now know which parameters are significant, however, we are also interested in learning how the levels of the factors differ from each other. To quantify these differences, the <a href="https://en.wikipedia.org/wiki/Tukey%27s_range_test">Tukey’s Honestly-Significant-Difference</a> test can be used.</p>
 <div class="cell">
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Performing Tukey HSD on the final model (yield ~ fertilizer + density)</span></span>
@@ -2994,23 +3000,23 @@ Are your data balanced?
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="wyfqpvbcad" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wyfqpvbcad table {
+<div id="qzxghktzgr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qzxghktzgr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wyfqpvbcad thead, #wyfqpvbcad tbody, #wyfqpvbcad tfoot, #wyfqpvbcad tr, #wyfqpvbcad td, #wyfqpvbcad th {
+#qzxghktzgr thead, #qzxghktzgr tbody, #qzxghktzgr tfoot, #qzxghktzgr tr, #qzxghktzgr td, #qzxghktzgr th {
   border-style: none;
 }
 
-#wyfqpvbcad p {
+#qzxghktzgr p {
   margin: 0;
   padding: 0;
 }
 
-#wyfqpvbcad .gt_table {
+#qzxghktzgr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3036,12 +3042,12 @@ Are your data balanced?
   border-left-color: #D3D3D3;
 }
 
-#wyfqpvbcad .gt_caption {
+#qzxghktzgr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wyfqpvbcad .gt_title {
+#qzxghktzgr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3053,7 +3059,7 @@ Are your data balanced?
   border-bottom-width: 0;
 }
 
-#wyfqpvbcad .gt_subtitle {
+#qzxghktzgr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3065,7 +3071,7 @@ Are your data balanced?
   border-top-width: 0;
 }
 
-#wyfqpvbcad .gt_heading {
+#qzxghktzgr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3077,13 +3083,13 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#wyfqpvbcad .gt_bottom_border {
+#qzxghktzgr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wyfqpvbcad .gt_col_headings {
+#qzxghktzgr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3098,7 +3104,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#wyfqpvbcad .gt_col_heading {
+#qzxghktzgr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3118,7 +3124,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#wyfqpvbcad .gt_column_spanner_outer {
+#qzxghktzgr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3130,15 +3136,15 @@ Are your data balanced?
   padding-right: 4px;
 }
 
-#wyfqpvbcad .gt_column_spanner_outer:first-child {
+#qzxghktzgr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wyfqpvbcad .gt_column_spanner_outer:last-child {
+#qzxghktzgr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wyfqpvbcad .gt_column_spanner {
+#qzxghktzgr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3150,11 +3156,11 @@ Are your data balanced?
   width: 100%;
 }
 
-#wyfqpvbcad .gt_spanner_row {
+#qzxghktzgr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wyfqpvbcad .gt_group_heading {
+#qzxghktzgr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3180,7 +3186,7 @@ Are your data balanced?
   text-align: left;
 }
 
-#wyfqpvbcad .gt_empty_group_heading {
+#qzxghktzgr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3195,15 +3201,15 @@ Are your data balanced?
   vertical-align: middle;
 }
 
-#wyfqpvbcad .gt_from_md > :first-child {
+#qzxghktzgr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wyfqpvbcad .gt_from_md > :last-child {
+#qzxghktzgr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wyfqpvbcad .gt_row {
+#qzxghktzgr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3222,7 +3228,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#wyfqpvbcad .gt_stub {
+#qzxghktzgr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3235,7 +3241,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#wyfqpvbcad .gt_stub_row_group {
+#qzxghktzgr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3249,15 +3255,15 @@ Are your data balanced?
   vertical-align: top;
 }
 
-#wyfqpvbcad .gt_row_group_first td {
+#qzxghktzgr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wyfqpvbcad .gt_row_group_first th {
+#qzxghktzgr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wyfqpvbcad .gt_summary_row {
+#qzxghktzgr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3267,16 +3273,16 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#wyfqpvbcad .gt_first_summary_row {
+#qzxghktzgr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wyfqpvbcad .gt_first_summary_row.thick {
+#qzxghktzgr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wyfqpvbcad .gt_last_summary_row {
+#qzxghktzgr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3286,7 +3292,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#wyfqpvbcad .gt_grand_summary_row {
+#qzxghktzgr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3296,7 +3302,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#wyfqpvbcad .gt_first_grand_summary_row {
+#qzxghktzgr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3306,7 +3312,7 @@ Are your data balanced?
   border-top-color: #D3D3D3;
 }
 
-#wyfqpvbcad .gt_last_grand_summary_row_top {
+#qzxghktzgr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3316,11 +3322,11 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#wyfqpvbcad .gt_striped {
+#qzxghktzgr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wyfqpvbcad .gt_table_body {
+#qzxghktzgr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3329,7 +3335,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#wyfqpvbcad .gt_footnotes {
+#qzxghktzgr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3343,7 +3349,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#wyfqpvbcad .gt_footnote {
+#qzxghktzgr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3352,7 +3358,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#wyfqpvbcad .gt_sourcenotes {
+#qzxghktzgr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3366,7 +3372,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#wyfqpvbcad .gt_sourcenote {
+#qzxghktzgr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3374,63 +3380,63 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#wyfqpvbcad .gt_left {
+#qzxghktzgr .gt_left {
   text-align: left;
 }
 
-#wyfqpvbcad .gt_center {
+#qzxghktzgr .gt_center {
   text-align: center;
 }
 
-#wyfqpvbcad .gt_right {
+#qzxghktzgr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wyfqpvbcad .gt_font_normal {
+#qzxghktzgr .gt_font_normal {
   font-weight: normal;
 }
 
-#wyfqpvbcad .gt_font_bold {
+#qzxghktzgr .gt_font_bold {
   font-weight: bold;
 }
 
-#wyfqpvbcad .gt_font_italic {
+#qzxghktzgr .gt_font_italic {
   font-style: italic;
 }
 
-#wyfqpvbcad .gt_super {
+#qzxghktzgr .gt_super {
   font-size: 65%;
 }
 
-#wyfqpvbcad .gt_footnote_marks {
+#qzxghktzgr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wyfqpvbcad .gt_asterisk {
+#qzxghktzgr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wyfqpvbcad .gt_indent_1 {
+#qzxghktzgr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wyfqpvbcad .gt_indent_2 {
+#qzxghktzgr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wyfqpvbcad .gt_indent_3 {
+#qzxghktzgr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wyfqpvbcad .gt_indent_4 {
+#qzxghktzgr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wyfqpvbcad .gt_indent_5 {
+#qzxghktzgr .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3520,8 +3526,8 @@ Are your data balanced?
 </div>
 </div>
 <p>Note that the significant confidence intervals do not include zero. From this plot, we see that only the fertilizer comparison of type 1 and 2 confidence interval includes 0. Thus, there is no statistically significant difference in the average crop yield produced by fertilizer 1 vs fertilizer 2. 95% family-wise confidence intervals for all other comparisons are statistically significant at the α = 0.05 level.</p>
-</section><section id="anova-vs.-linear-regression" class="level2" data-number="19.7"><h2 data-number="19.7" class="anchored" data-anchor-id="anova-vs.-linear-regression">
-<span class="header-section-number">19.7</span> ANOVA vs.&nbsp;Linear Regression</h2>
+</section><section id="anova-vs.-linear-regression" class="level2" data-number="20.7"><h2 data-number="20.7" class="anchored" data-anchor-id="anova-vs.-linear-regression">
+<span class="header-section-number">20.7</span> ANOVA vs.&nbsp;Linear Regression</h2>
 <p>The model underlying the ANOVA we just performed is actually a linear regression. Let’s see what results we would get if we used linear regression to model the same relationships:</p>
 <div class="cell">
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># create linear regression model of yield ~ fertilizer + density</span></span>
@@ -3553,8 +3559,8 @@ F-statistic: 11.15 on 3 and 92 DF,  p-value: 2.601e-06</code></pre>
 </div>
 <p>The output from the linear regression model indicate a significant difference in average yield exists between crops fertilized with fertilizer 3 and 1 (p = 7.57 e-05) but not fertilizers 1 and 2 (p = 0.22). Furthermore, the average yield for high density acres is significantly different than low density acres (p &lt; 0.001). These findings are consistent with the results of the Tukey’s HSD tests.</p>
 <p>Recall that the two-way ANOVA compares the variance within all levels of a factor to the total variation of the model. Similarly, the linear regression quantifies the variation of each group (or “level”) from the mean using dummy variables. Both use the same computations and thus the sum of squares for the independent variables are the same in the outputs of both the two-way ANOVA and linear regression. Because the density variable consists of two groups, its p value (p = 0.00017) is also the same in both models. The p value(s) for fertilizer differs between the two, however, because the three fertilizer groups are split into three dummy variables in the linear regression and compared against the group mean individually. The two-way ANOVA, on the other hand, is only concerned with the total variance within the fertilizer factor. Read “<a href="https://lindeloev.github.io/tests-as-linear/">Common statistical tests are linear models</a>” to learn more about how ANOVAs and many other statistical tests are simply different flavors of linear regression.</p>
-</section><section id="conclusions" class="level2" data-number="19.8"><h2 data-number="19.8" class="anchored" data-anchor-id="conclusions">
-<span class="header-section-number">19.8</span> Conclusions</h2>
+</section><section id="conclusions" class="level2" data-number="20.8"><h2 data-number="20.8" class="anchored" data-anchor-id="conclusions">
+<span class="header-section-number">20.8</span> Conclusions</h2>
 <p>There is a statistically significant difference in average crop yield by both the fertilizer type and planting density variables with F values of 9.018 (p &lt; 0.001) and 15.316 (p &lt; 0.001) respectively. The interaction between these two terms was not significant.</p>
 <p>The Tukey post-hoc test showed significant pairwise differences in average yield between fertilizer types 1 and 3 and between type 2 and 3. It also depicted significant differences in average yield between low and high planting density. Therefore, corn fertilized with fertilizer type 3 produced significantly more bushels per acre than those with fertilizers type 1 and 2, and acres of corn planted at high density produced more bushels than those planted at low density.</p>
 
@@ -3969,12 +3975,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../lessons/04_anova_one_way.html" class="pagination-link" aria-label="One-Way ANOVA">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../lessons_original/04_anova_kruskal_wallis.html" class="pagination-link" aria-label="Non-Parametric ANOVA: The Kruskal-Wallis Test">
-        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

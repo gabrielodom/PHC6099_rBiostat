@@ -37,6 +37,7 @@ book:
         - lessons/02_z-test_one_prop.qmd
         - lessons/02_wilcoxon_one_samp.qmd
         - lessons/02_mcnemar_paired_samp.qmd
+        - lessons/02_cochrans_q_paired_samp.qmd
         - lessons/02_chiSq_GoF.qmd
         - lessons/02_transformations.qmd
         - lessons/02_fisher_exact_test.qmd
