@@ -47,7 +47,7 @@ book:
         - lessons/03_two_sample_ttest.qmd
         - lessons/03_two_sample_mann_whitney.qmd
         - lessons/03_two_sample_bootstrap_conf_int.qmd
-        - lessons_original/03_two_sample_chi_sq_independence.qmd
+        - lessons/03_two_sample_chi_sq_independence.qmd
 
     - part: 04_header_anova-and-regression.qmd
       chapters:
@@ -57,18 +57,20 @@ book:
         - lessons/04_anova_random_intercept.qmd
         - lessons/04_corr_cov.qmd
         - lessons_original/04_regression_ols.qmd
-        - lessons_original/04_regression_mls.qmd
+        - lessons/04_regression_mls.qmd
         - lessons/04_regression_polynomial.qmd
         - lessons_original/04_regression_random_intercept.qmd
 
     - part: 05_header_generalized-linear-models.qmd
       chapters:
-        - lessons_original/05_glm_ordinal_logistic.qmd
+        - lessons/05_glm_logistic.qmd
+#        - lessons/05_glm_ordinal_logistic.qmd
         - lessons/05_glm_poisson.qmd
 
-    - part: 06_header_special-topics.qmd
+    - part: 06_header_special-topics.qmd 
       chapters:
-        - lessons/06_lesson_template_spec_topc.qmd
+        - lessons/06_elastic_net_regression.qmd
+        - lessons/06_survival_analysis.qmd
 
     - part: 07_header_power.qmd
       chapters:

@@ -81,8 +81,8 @@
     <lastmod>2024-06-11T17:16:14.084Z</lastmod>
   </url>
   <url>
-    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/03_two_sample_chi_sq_independence.html</loc>
-    <lastmod>2024-05-21T14:17:36.620Z</lastmod>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons/03_two_sample_chi_sq_independence.html</loc>
+    <lastmod>2024-07-17T20:50:42.087Z</lastmod>
   </url>
   <url>
     <loc>https://gabrielodom.github.io/PHC6099_rBiostat/04_header_anova-and-regression.html</loc>
@@ -113,8 +113,8 @@
     <lastmod>2024-05-21T14:26:48.276Z</lastmod>
   </url>
   <url>
-    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/04_regression_mls.html</loc>
-    <lastmod>2024-05-21T14:25:45.769Z</lastmod>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons/04_regression_mls.html</loc>
+    <lastmod>2024-07-17T20:54:07.020Z</lastmod>
   </url>
   <url>
     <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons/04_regression_polynomial.html</loc>
@@ -129,8 +129,8 @@
     <lastmod>2024-05-21T00:13:24.880Z</lastmod>
   </url>
   <url>
-    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/05_glm_ordinal_logistic.html</loc>
-    <lastmod>2024-05-21T14:28:40.902Z</lastmod>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons/05_glm_logistic.html</loc>
+    <lastmod>2024-07-17T20:56:11.058Z</lastmod>
   </url>
   <url>
     <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons/05_glm_poisson.html</loc>
@@ -141,8 +141,12 @@
     <lastmod>2024-05-21T00:15:03.067Z</lastmod>
   </url>
   <url>
-    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons/06_lesson_template_spec_topc.html</loc>
-    <lastmod>2024-05-21T00:18:56.434Z</lastmod>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons/06_elastic_net_regression.html</loc>
+    <lastmod>2024-07-17T20:58:09.172Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons/06_survival_analysis.html</loc>
+    <lastmod>2024-07-17T20:59:44.370Z</lastmod>
   </url>
   <url>
     <loc>https://gabrielodom.github.io/PHC6099_rBiostat/07_header_power.html</loc>

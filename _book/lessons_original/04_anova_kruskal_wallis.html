@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Gabriel Odom">
-<meta name="dcterms.date" content="2024-07-16">
+<meta name="dcterms.date" content="2024-07-17">
 
 <title>An R Cookbook for Public Health - 21&nbsp; Non-Parametric ANOVA: The Kruskal-Wallis Test</title>
 <style>
@@ -314,8 +314,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+  <a href="../lessons/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -367,7 +367,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link">
+  <a href="../lessons/04_regression_mls.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
@@ -396,8 +396,8 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+  <a href="../lessons/05_glm_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -419,8 +419,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+  <a href="../lessons/06_elastic_net_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06_survival_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
   </div>
 </li>
       </ul>
@@ -437,7 +443,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -497,7 +503,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 16, 2024</p>
+      <p class="date">July 17, 2024</p>
     </div>
   </div>
   
@@ -794,23 +800,23 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
 <span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>table1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="sdwaczpjnf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#sdwaczpjnf table {
+<div id="eapimsfcoc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#eapimsfcoc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#sdwaczpjnf thead, #sdwaczpjnf tbody, #sdwaczpjnf tfoot, #sdwaczpjnf tr, #sdwaczpjnf td, #sdwaczpjnf th {
+#eapimsfcoc thead, #eapimsfcoc tbody, #eapimsfcoc tfoot, #eapimsfcoc tr, #eapimsfcoc td, #eapimsfcoc th {
   border-style: none;
 }
 
-#sdwaczpjnf p {
+#eapimsfcoc p {
   margin: 0;
   padding: 0;
 }
 
-#sdwaczpjnf .gt_table {
+#eapimsfcoc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -836,12 +842,12 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#sdwaczpjnf .gt_caption {
+#eapimsfcoc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#sdwaczpjnf .gt_title {
+#eapimsfcoc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -853,7 +859,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-bottom-width: 0;
 }
 
-#sdwaczpjnf .gt_subtitle {
+#eapimsfcoc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -865,7 +871,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-top-width: 0;
 }
 
-#sdwaczpjnf .gt_heading {
+#eapimsfcoc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -877,13 +883,13 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#sdwaczpjnf .gt_bottom_border {
+#eapimsfcoc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#sdwaczpjnf .gt_col_headings {
+#eapimsfcoc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -898,7 +904,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#sdwaczpjnf .gt_col_heading {
+#eapimsfcoc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -918,7 +924,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   overflow-x: hidden;
 }
 
-#sdwaczpjnf .gt_column_spanner_outer {
+#eapimsfcoc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -930,15 +936,15 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   padding-right: 4px;
 }
 
-#sdwaczpjnf .gt_column_spanner_outer:first-child {
+#eapimsfcoc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#sdwaczpjnf .gt_column_spanner_outer:last-child {
+#eapimsfcoc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#sdwaczpjnf .gt_column_spanner {
+#eapimsfcoc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -950,11 +956,11 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   width: 100%;
 }
 
-#sdwaczpjnf .gt_spanner_row {
+#eapimsfcoc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#sdwaczpjnf .gt_group_heading {
+#eapimsfcoc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -980,7 +986,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   text-align: left;
 }
 
-#sdwaczpjnf .gt_empty_group_heading {
+#eapimsfcoc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -995,15 +1001,15 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   vertical-align: middle;
 }
 
-#sdwaczpjnf .gt_from_md > :first-child {
+#eapimsfcoc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#sdwaczpjnf .gt_from_md > :last-child {
+#eapimsfcoc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#sdwaczpjnf .gt_row {
+#eapimsfcoc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1022,7 +1028,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   overflow-x: hidden;
 }
 
-#sdwaczpjnf .gt_stub {
+#eapimsfcoc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1035,7 +1041,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   padding-right: 5px;
 }
 
-#sdwaczpjnf .gt_stub_row_group {
+#eapimsfcoc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1049,15 +1055,15 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   vertical-align: top;
 }
 
-#sdwaczpjnf .gt_row_group_first td {
+#eapimsfcoc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#sdwaczpjnf .gt_row_group_first th {
+#eapimsfcoc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#sdwaczpjnf .gt_summary_row {
+#eapimsfcoc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1067,16 +1073,16 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   padding-right: 5px;
 }
 
-#sdwaczpjnf .gt_first_summary_row {
+#eapimsfcoc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#sdwaczpjnf .gt_first_summary_row.thick {
+#eapimsfcoc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#sdwaczpjnf .gt_last_summary_row {
+#eapimsfcoc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1086,7 +1092,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#sdwaczpjnf .gt_grand_summary_row {
+#eapimsfcoc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1096,7 +1102,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   padding-right: 5px;
 }
 
-#sdwaczpjnf .gt_first_grand_summary_row {
+#eapimsfcoc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1106,7 +1112,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#sdwaczpjnf .gt_last_grand_summary_row_top {
+#eapimsfcoc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1116,11 +1122,11 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#sdwaczpjnf .gt_striped {
+#eapimsfcoc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#sdwaczpjnf .gt_table_body {
+#eapimsfcoc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1129,7 +1135,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#sdwaczpjnf .gt_footnotes {
+#eapimsfcoc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1143,7 +1149,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#sdwaczpjnf .gt_footnote {
+#eapimsfcoc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1152,7 +1158,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   padding-right: 5px;
 }
 
-#sdwaczpjnf .gt_sourcenotes {
+#eapimsfcoc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1166,7 +1172,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#sdwaczpjnf .gt_sourcenote {
+#eapimsfcoc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1174,63 +1180,63 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   padding-right: 5px;
 }
 
-#sdwaczpjnf .gt_left {
+#eapimsfcoc .gt_left {
   text-align: left;
 }
 
-#sdwaczpjnf .gt_center {
+#eapimsfcoc .gt_center {
   text-align: center;
 }
 
-#sdwaczpjnf .gt_right {
+#eapimsfcoc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#sdwaczpjnf .gt_font_normal {
+#eapimsfcoc .gt_font_normal {
   font-weight: normal;
 }
 
-#sdwaczpjnf .gt_font_bold {
+#eapimsfcoc .gt_font_bold {
   font-weight: bold;
 }
 
-#sdwaczpjnf .gt_font_italic {
+#eapimsfcoc .gt_font_italic {
   font-style: italic;
 }
 
-#sdwaczpjnf .gt_super {
+#eapimsfcoc .gt_super {
   font-size: 65%;
 }
 
-#sdwaczpjnf .gt_footnote_marks {
+#eapimsfcoc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#sdwaczpjnf .gt_asterisk {
+#eapimsfcoc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#sdwaczpjnf .gt_indent_1 {
+#eapimsfcoc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#sdwaczpjnf .gt_indent_2 {
+#eapimsfcoc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#sdwaczpjnf .gt_indent_3 {
+#eapimsfcoc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#sdwaczpjnf .gt_indent_4 {
+#eapimsfcoc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#sdwaczpjnf .gt_indent_5 {
+#eapimsfcoc .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

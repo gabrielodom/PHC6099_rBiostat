@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Gabriel Odom">
-<meta name="dcterms.date" content="2024-07-16">
+<meta name="dcterms.date" content="2024-07-17">
 
 <title>An R Cookbook for Public Health - 27&nbsp; Random Intercept Regression</title>
 <style>
@@ -314,8 +314,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+  <a href="../lessons/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -367,7 +367,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link">
+  <a href="../lessons/04_regression_mls.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
@@ -396,8 +396,8 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+  <a href="../lessons/05_glm_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -419,8 +419,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+  <a href="../lessons/06_elastic_net_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06_survival_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
   </div>
 </li>
       </ul>
@@ -437,7 +443,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -515,7 +521,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 16, 2024</p>
+      <p class="date">July 17, 2024</p>
     </div>
   </div>
   
@@ -805,23 +811,23 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="gjwnocvwgi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gjwnocvwgi table {
+<div id="tnvzvprhxh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tnvzvprhxh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gjwnocvwgi thead, #gjwnocvwgi tbody, #gjwnocvwgi tfoot, #gjwnocvwgi tr, #gjwnocvwgi td, #gjwnocvwgi th {
+#tnvzvprhxh thead, #tnvzvprhxh tbody, #tnvzvprhxh tfoot, #tnvzvprhxh tr, #tnvzvprhxh td, #tnvzvprhxh th {
   border-style: none;
 }
 
-#gjwnocvwgi p {
+#tnvzvprhxh p {
   margin: 0;
   padding: 0;
 }
 
-#gjwnocvwgi .gt_table {
+#tnvzvprhxh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -847,12 +853,12 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#gjwnocvwgi .gt_caption {
+#tnvzvprhxh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gjwnocvwgi .gt_title {
+#tnvzvprhxh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -864,7 +870,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-bottom-width: 0;
 }
 
-#gjwnocvwgi .gt_subtitle {
+#tnvzvprhxh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -876,7 +882,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-top-width: 0;
 }
 
-#gjwnocvwgi .gt_heading {
+#tnvzvprhxh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -888,13 +894,13 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#gjwnocvwgi .gt_bottom_border {
+#tnvzvprhxh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gjwnocvwgi .gt_col_headings {
+#tnvzvprhxh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -909,7 +915,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#gjwnocvwgi .gt_col_heading {
+#tnvzvprhxh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -929,7 +935,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   overflow-x: hidden;
 }
 
-#gjwnocvwgi .gt_column_spanner_outer {
+#tnvzvprhxh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -941,15 +947,15 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   padding-right: 4px;
 }
 
-#gjwnocvwgi .gt_column_spanner_outer:first-child {
+#tnvzvprhxh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gjwnocvwgi .gt_column_spanner_outer:last-child {
+#tnvzvprhxh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gjwnocvwgi .gt_column_spanner {
+#tnvzvprhxh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -961,11 +967,11 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   width: 100%;
 }
 
-#gjwnocvwgi .gt_spanner_row {
+#tnvzvprhxh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gjwnocvwgi .gt_group_heading {
+#tnvzvprhxh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -991,7 +997,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   text-align: left;
 }
 
-#gjwnocvwgi .gt_empty_group_heading {
+#tnvzvprhxh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1006,15 +1012,15 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   vertical-align: middle;
 }
 
-#gjwnocvwgi .gt_from_md > :first-child {
+#tnvzvprhxh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gjwnocvwgi .gt_from_md > :last-child {
+#tnvzvprhxh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gjwnocvwgi .gt_row {
+#tnvzvprhxh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1033,7 +1039,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   overflow-x: hidden;
 }
 
-#gjwnocvwgi .gt_stub {
+#tnvzvprhxh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1046,7 +1052,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   padding-right: 5px;
 }
 
-#gjwnocvwgi .gt_stub_row_group {
+#tnvzvprhxh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1060,15 +1066,15 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   vertical-align: top;
 }
 
-#gjwnocvwgi .gt_row_group_first td {
+#tnvzvprhxh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gjwnocvwgi .gt_row_group_first th {
+#tnvzvprhxh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gjwnocvwgi .gt_summary_row {
+#tnvzvprhxh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1078,16 +1084,16 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   padding-right: 5px;
 }
 
-#gjwnocvwgi .gt_first_summary_row {
+#tnvzvprhxh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gjwnocvwgi .gt_first_summary_row.thick {
+#tnvzvprhxh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gjwnocvwgi .gt_last_summary_row {
+#tnvzvprhxh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1097,7 +1103,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#gjwnocvwgi .gt_grand_summary_row {
+#tnvzvprhxh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1107,7 +1113,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   padding-right: 5px;
 }
 
-#gjwnocvwgi .gt_first_grand_summary_row {
+#tnvzvprhxh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1117,7 +1123,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#gjwnocvwgi .gt_last_grand_summary_row_top {
+#tnvzvprhxh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1127,11 +1133,11 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#gjwnocvwgi .gt_striped {
+#tnvzvprhxh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gjwnocvwgi .gt_table_body {
+#tnvzvprhxh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1140,7 +1146,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#gjwnocvwgi .gt_footnotes {
+#tnvzvprhxh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1154,7 +1160,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#gjwnocvwgi .gt_footnote {
+#tnvzvprhxh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1163,7 +1169,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   padding-right: 5px;
 }
 
-#gjwnocvwgi .gt_sourcenotes {
+#tnvzvprhxh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1177,7 +1183,7 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#gjwnocvwgi .gt_sourcenote {
+#tnvzvprhxh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1185,63 +1191,63 @@ F-statistic:  65.4 on 1 and 212 DF,  p-value: 4.652e-14</code></pre>
   padding-right: 5px;
 }
 
-#gjwnocvwgi .gt_left {
+#tnvzvprhxh .gt_left {
   text-align: left;
 }
 
-#gjwnocvwgi .gt_center {
+#tnvzvprhxh .gt_center {
   text-align: center;
 }
 
-#gjwnocvwgi .gt_right {
+#tnvzvprhxh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gjwnocvwgi .gt_font_normal {
+#tnvzvprhxh .gt_font_normal {
   font-weight: normal;
 }
 
-#gjwnocvwgi .gt_font_bold {
+#tnvzvprhxh .gt_font_bold {
   font-weight: bold;
 }
 
-#gjwnocvwgi .gt_font_italic {
+#tnvzvprhxh .gt_font_italic {
   font-style: italic;
 }
 
-#gjwnocvwgi .gt_super {
+#tnvzvprhxh .gt_super {
   font-size: 65%;
 }
 
-#gjwnocvwgi .gt_footnote_marks {
+#tnvzvprhxh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gjwnocvwgi .gt_asterisk {
+#tnvzvprhxh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gjwnocvwgi .gt_indent_1 {
+#tnvzvprhxh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gjwnocvwgi .gt_indent_2 {
+#tnvzvprhxh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gjwnocvwgi .gt_indent_3 {
+#tnvzvprhxh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gjwnocvwgi .gt_indent_4 {
+#tnvzvprhxh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gjwnocvwgi .gt_indent_5 {
+#tnvzvprhxh .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

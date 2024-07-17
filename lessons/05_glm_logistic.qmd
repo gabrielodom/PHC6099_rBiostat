@@ -1,0 +1,196 @@
+---
+title: "Generalized Linear Models for Binary Response"
+author:
+  - name: Noel Singh Dias and Jingwei Gu
+    affiliations:
+      - Florida International University
+      - Robert Stempel College of Public Health and Social Work
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+---
+
+```{r}
+#| label: load-packages
+#| message: false
+
+# install.packages("dplyr")
+# install.packages("readr")
+# install.packages("ggplot2")
+# install.packages("pROC")
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(pROC)
+```
+
+
+
+## Generalized Liner models(binary) or Logistic Regression
+
+A type of Generalized Linear Model (GLM) used to model binary outcomes.
+
+- Dependent Variable: Binary (e.g., 0 or 1).
+
+- Independent Variables: One or more predictor variables that can be continuous or categorical.
+
+
+
+## Purpose: 
+
+This regression models the relationship between a set of predictor variables and a binary response variable. Commonly used for classification problems where the outcome is categorical with two possible values (e.g., yes/no, success/failure).
+
+
+
+## Understanding the function
+
+Logit Function: Links the linear combination of predictors to the probability of the outcome.
+The logit function is defined as:
+
+$$
+\text{logit}(p) := \log\left(\frac{p}{1 - p}\right).
+$$
+
+So our regression equation is thus written as:
+
+$$
+\log\left(\frac{p}{1 - p}\right) = 
+  \beta_0 + \beta_1X_1 + \ldots + \beta_pX_p.
+$$
+
+The probability of the outcome being 1 (success) is given by:
+
+$$
+p = \frac{1}{1 + \exp\left[-(\beta_0 + \beta_1X_1 + \ldots + \beta_pX_p)\right]}.
+$$
+
+ 
+### Interpret and Coefficients:
+**Intercept ($\beta_0$):** The log-odds of the outcome when all predictors are zero.
+
+**Coefficients ($\beta_i$):** The change in log-odds of the outcome for a one-unit increase in the predictor 
+
+
+### Odds and Odds Ratio:
+**Odds:** The ratio of the probability of the event occurring to the probability of it not occurring.
+
+**Odds Ratio:** The ratio of the odds of the outcome occurring for different values of a predictor.
+
+
+## Assumptions:
+
+Parameters are estimated using Maximum Likelihood Estimation (MLE). The goal is to find the values of the coefficients that maximize the likelihood of observing the given data. We assume that:
+
+1. **Observations are independent:** There is a linear relationship between the logit of the outcome and the predictors.
+2. **No multicollinearity among the predictors.** The sample size is sufficiently large.
+
+![](fig/05_glm_logistic_image4.jpg)
+
+
+
+## Data Analysis
+
+We will use the `train.csv` dataset from Kaggle's: Machine Learning from Disaster competition.^[link](https://www.kaggle.com/competitions/titanic/data)^
+
+```{r}
+# Load the Titanic train dataset
+titanic_train_data <- read_csv("../data/05_titanic_train.csv")
+
+# Display the first few rows of the dataset
+head(titanic_train_data)
+```
+
+```{r}
+# Handle missing values by removing rows with NA values in 'Age' and 'Embarked' columns
+titanic_train_data <- 
+  titanic_train_data %>%
+  filter(!is.na(Age) & !is.na(Embarked))
+
+# Convert necessary columns to factors
+titanic_train_data$Pclass <- factor(titanic_train_data$Pclass)
+titanic_train_data$Sex <- factor(titanic_train_data$Sex)
+titanic_train_data$Embarked <- factor(titanic_train_data$Embarked)
+titanic_train_data$Survived <- factor(titanic_train_data$Survived, levels = c(0, 1))
+
+```
+
+
+### Fit the Logistic Regression Model
+Fit a logistic regression model using `Survived` as the response variable and `Pclass`, `Age`, `Sex`, and `Embarked` as predictors.
+```{r}
+# Fit the logistic regression model
+model <- glm(
+  Survived ~ Pclass + Age + Sex + Embarked, 
+  data = titanic_train_data, 
+  family = binomial
+)
+
+# Display the summary of the model
+summary(model)
+```
+
+**Model Summary Interpretation**:
+
+**Intercept**: The estimated intercept is 4.036825 with a standard error of 0.430758. This represents the log-odds of survival for a baseline group (first-class female passengers embarked from port 'C' with age = 0).
+
+**Pclass2**: The coefficient is -1.144614 with a standard error of 0.290678. This indicates that being in the second class decreases the log-odds of survival by 1.144614 compared to being in the first class. The p-value (8.23e-05) is less than 0.05, indicating statistical significance.
+
+**Pclass3**: The coefficient is -2.409565 with a standard error of 0.291179. This indicates that being in the third class decreases the log-odds of survival by 2.409565 compared to being in the first class. The p-value (< 2e-16) is very small, indicating strong statistical significance.
+
+**Age**: The coefficient is -0.036082 with a standard error of 0.007715. This indicates that each additional year of age decreases the log-odds of survival by 0.036082. The p-value (2.92e-06) is less than 0.05, indicating statistical significance.
+
+**Sexmale**: The coefficient is -2.515793 with a standard error of 0.209293. This indicates that being male decreases the log-odds of survival by 2.515793 compared to being female. The p-value (< 2e-16) is very small, indicating strong statistical significance.
+
+**EmbarkedQ**: The coefficient is -0.814190 with a standard error of 0.567903. This indicates that embarking from port 'Q' decreases the log-odds of survival by 0.814190 compared to embarking from port 'C'. The p-value (0.1517) is greater than 0.05, indicating that this effect is not statistically significant.
+
+**EmbarkedS**: The coefficient is -0.493651 with a standard error of 0.266886. This indicates that embarking from port 'S' decreases the log-odds of survival by 0.493651 compared to embarking from port 'C'. The p-value (0.0644) is slightly greater than 0.05, indicating marginal significance.
+
+*`Pclass`, `Age`, and `Sex` are statistically significant in predicting survival.
+
+We perform the Paris Plot to shows the relationship between the predicted probabilities and the empirical probabilities.
+```{r}
+# Predict probabilities
+predicted_probs <- predict(model, type = "response")
+
+# Create the Paris plot
+empirical_probs <- ecdf(predicted_probs)
+sorted_probs <- sort(predicted_probs)
+plot(sorted_probs, empirical_probs(sorted_probs), type = "l", 
+     xlab = "Predicted probability", ylab = "Empirical probability", 
+     main = "Paris Plot for Logistic Regression")
+grid()
+```
+The Paris plot shows that the logistic regression model is generally effective in predicting survival on the **Titanic** dataset. The predicted probabilities closely follow the empirical probabilities, especially at the extremes (very low and very high predicted probabilities). <br>
+There may be some room for improvement in the middle range of predicted probabilities, where the line is not as steep. This could indicate that the model might benefit from additional predictors or different modeling techniques to improve accuracy.
+
+
+### Evaluate the model performance
+We can visualize the ROC curve and calculate the AUC to evaluate the model's performance.
+```{r}
+# Compute the ROC curve
+roc_curve <- roc(titanic_train_data$Survived, predict(model, type = "response"))
+
+# Plot the ROC curve
+plot(roc_curve, main = "ROC Curve for Logistic Regression Model")
+
+# Calculate AUC
+auc(roc_curve)
+
+```
+
+The ROC curve is well above the diagonal line and closer to the top-left corner, indicating that the model has good discriminatory power. This means the model is effective in distinguishing between survivors and non-survivors.
+
+An AUC of 0.8544 falls within the "excellent" range. This means this logistic regression model has a high ability to distinguish between survivors and non-survivors on the Titanic dataset.
+>AUC Value Range:
+
+>AUC value:
+>AUC ranges from 0.5 to 1.0. <br>
+>value of 0.5 indicating that the test is no better than chance at distinguishing between diseased and nondiseased individuals. <br>
+>A value of 1.0 indicates perfect discrimination. <br>
+>AUC values above 0.80 are generally consideredclinically useful. <br>
+>AUC values below 0.80 are considered of limited clinical utility. <br>
+>When interpreting AUC values, it is important to consider the 95% confidence interval. The confidence interval reflects the uncertainty around the AUC value.A narrow confidence interval indicates that the AUC value is likely accurate, while a wide confidence interval indicates that the AUC value is less reliable.^[Çorbacıoğlu ŞK,etc. 2023](https://pubmed.ncbi.nlm.nih.gov/38024184/)^
+
+
+

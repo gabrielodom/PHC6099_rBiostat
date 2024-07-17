@@ -1,0 +1,324 @@
+---
+title: "Elastic Net Regression Model"
+author:
+  - name: Md Ariful Hoque
+    affiliations:
+      - Florida International University
+      - Robert Stempel College of Public Health and Social Work
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+bibliography: bib/my-bib.bib
+---
+
+
+
+## Libraries for the lessons
+
+For this chapter, we will be using the following packages
+
+- `foreign`: for reading SPSS and STATA datasets
+- `skimr`: for summaries the datasets
+- `gtsummary`: for coming up with nice tables for results and plotting the graphs
+- `GGally`: for plotting the pairs graphs
+- `glmnet`: ridge regression model
+- `car`: for finding vif
+- `tidyverse`: a general and powerful package for data transformation
+
+These are loaded as follows using the function `library()`,
+```{r}
+#| label: load-packages
+#| message: false
+#| warning: false
+
+# Installing Required Packages
+# intsall.packages("foreign")
+# intsall.packages("skimr")
+# intsall.packages("gtsummary")
+# intsall.packages("GGally")
+# install.packages("glmnet")
+# install.packages("car")
+# intsall.packages(tidyverse)
+
+# Loading Required Packages
+library(foreign)
+library(skimr)
+library(gtsummary)
+library(GGally)
+library(glmnet)
+library(car)
+library(tidyverse)
+```
+
+
+
+## Introduction to Elastic Net Regression
+
+In multiple linear regression analysis, it is not uncommon for specific problems to arise during the analysis. One of them is the problem of multicollinearity. Multicollinearity is a condition that appears in multiple regression analysis when one independent variable is correlated with another independent variable. Multicollinearity can create inaccurate estimates of the regression coefficients, inflate the standard errors of the regression coefficients, deflate the partial t-tests for theregression coefficients, give false, nonsignificant, p-values, and degrade the predictability of the model. Multicollinearity is a serious problem, where in cases of high multicollinearity, it results in making inaccurate decisions or increasing the chance of accepting the wrong hypothesis. Therefore it is very important to find the most suitable method to deal with multicollinearity. There are several ways to detect the presence of multicollinearity including looking at the correlation between independent variables and using the Variance Inflation Factor (VIF).
+As for the method to overcome the problem of multicollinearity, one way is by shrinking the estimated coefficients. The shrinkage method is often referred to as the regularization method. The regularization method can shrink the parameters to near zero relative to the least squares estimate. The regularization methods that are often used are Regression Ridge, Least Absolute Shrinkage and Selection Operator (LASSO), and Elastic-Net. Ridge Regression(RR) is a technique to stabilize the value of the regression coefficient due to multicollinearity problems. By adding a degree of bias to the regression estimate, RR reduces the standard error and obtains a more accurate estimate of the regression coefficient than the OLS. Meanwhile, LASSO and Elastic-Net overcome the problem of multicollinearity by reducing the regression coefficients of the independent variables that have a high correlation close to zero or exactly zero.
+
+
+
+## Mathematical Formulation of the Model
+
+One method that can be used to estimate parameters is Ordinary Least Squares (OLS). This method requires the absence of multicollinearity between independent variables. If the independent variable has multicollinearity, the estimate of the regression coefficient may be imprecise. This method is used to estimate $\beta$ by minimizing the sum of squared errors. If the data consists of `n` observations $[{y_i, x_i}]^n_{i=1}$ and each observation `i` includes a scalar response $y_i$ and a vector of `p` predictors (regressors) $x_{ij}$ for `j = 1, …, m`, a multiple linear regression model can be written as `n` the matrix form the model as $Y = X \beta + \epsilon$ where $Y_{n \times 1}$ is the vector dependent variable, $X_{n \times m}$ represents the explanatory variables, $\beta_{m \times 1}$ is the regression coefficients to be estimated, and $\epsilon_{m \times 1}$ represents the errors or residuals. $\hat\beta_{OLS} = (X^T X)^{-1} X^T Y$ is estimated regression coefficients using OLS by minimizing the squared distances between the observed and the predicted dependent variable. To have unbiased OLS estimation of the model, some assumptions should be satisfied. Those assumptions are that the errors have an expected value of zero, that the independent variables are non-random, that the independent variables are linearly independent (non-multicollinearity), that the disturbance are homoscedastic and not autocorrelated. If the independent variables have multicollinearity the estimates of coefficient regression may be imprecise.
+
+
+### Ridge Regression
+
+Ridge regression introduced by @horel1962 is one method for deal with multicollinearity problems. The ridge regression technique is based on addition the ridge parameter ($\lambda$) to the diagonal of the $X^T X$ matrix forms a new matrix $(X^T X + \lambda I)$. is called ridge regression because diagonal one in the correlation matrix can be described as ridge @hoerl1970ridge. The ridge regression coefficients estimator is 
+$$
+\hat\beta_R = (X^T X + \lambda I)^{-1} X^T Y, \lambda \geq 0
+$$
+when $\lambda = 0$, the ridge estimator become as the OLS. If $\lambda > 0$ the ridge estimator will be biased against the $\hat\beta_{OLS}$ but tends to be more accurate than the least squares estimator. Ridge regression can also be written in Lagrangian form: 
+$$
+\hat\beta_{\text{RIDGE}} = \arg \min_{\beta}||y - X\beta||^2_2 + \lambda||\beta||^2_2
+$$
+where $||y - X\beta||^2_2 = \sum^n_{i=1}(y_i - x^T_i\beta)^2$ is norm loss function (i.e. residual sum of squares), $x^T_i$ is the i-th row of `X`, $||\beta||^2_2 = \sum^p_{j=1}\beta^2_j$ is the penalty on $\beta$, and $\lambda \geq 0$ is the tuning parameter which regulates the strength of the penalty by determining the relative importance of the data-dependet empirical error and penalty term. 
+Ridge regression has the ability to solve problems multicollinearity by limiting the estimated coefficients, hence, it reduces the estimator's variance but introduces some bias.
+
+
+### Least Absolute Shrinkage and Selection Operator
+
+Least Absolute Shrinkage and Selection Operator (LASSO) introduced by @tibshirani1996 is a method that aims to reduce the regression coefficients of independent variables that have a high correlation with errors to exactly zero or close to zero. LASSO regression can also be written in Lagrangian form: 
+$$
+\hat\beta_{\text{LASSO}} = \arg \min_{\beta}||y - X\beta||^2_2 + \lambda||\beta||_1
+$$
+where $||\beta||_1 = \sum^p_{j=1}|\beta_j|$ is the penalty on $\beta$.
+with the condition $||\beta||_1 \leq \lambda$, where $\lambda$ is a tuning parameter that controls the shrinkage of the LASSO coefficient with $\lambda \geq 0$. If $\lambda < \lambda_0$ with $\lambda_0 = ||\hat\beta_j||_1$ it will cause the shrinkage coefficient to approach zero or exactly zero, so LASSO helps as a variable selection. Like ridge, the absolute value penalty of the LASSO coefficient introduces shrinkage towards zero. However, on ridge regression, some of the coefficients are not shrinks to exactly zero.
+
+
+### Elastic Net
+
+According to @zou2005, the Elastic-Net method can shrink the regression coefficient exactly to zero, besides that this method can also perform variable selection simultaneously with Elastic-Net penalties which are written as follows:
+$$
+\sum^p_{j=1}[\alpha |\beta_j| + (1 - \alpha)\beta^2_j]
+$$
+with $\alpha = \frac{\lambda_1}{\lambda_1 + \lambda_2},0 \leq \alpha \leq 1$.
+The coefficient estimator on Elastic-Net can be written as follows: 
+$$
+\hat\beta_{\text{Elastic-net}} = \arg \min_{\beta}||y - X\beta||^2_2 + \lambda_2||\beta||^2_2 + \lambda_1||\beta||_1
+$$
+Elastic-Net can be used to solve problems from LASSO. Where the LASSO Regression has disadvantages include; when `p > n` then LASSO only chooses n variables included in the model, if there is a set of variables with high correlation, then LASSO only tends to choose one variable from the group and doesn't care which one is selected, and when `p < n`, LASSO performance is dominated by Ridge Regression. 
+Multicollinearity is the existence of a linear relationship between independent variables, where multicollinearity can occur in either some or all of the independent variables in the multiple linear regression model. One way to detect multicollinearity is to use the Variation Inflation Factor (VIF). VIF value can be calculated by the following formula:
+$$
+\text{VIF}_j = \frac{1}{1 - R^2_j} 
+$$
+if the VIF value > 10, it can be concluded significantly that there is multicollinearity between the independent variables and one way to overcome multicollinearity is using the Ridge Regression, LASSO and Elastic-Net.
+
+
+
+## Example
+
+To demostrate the Elastic net regression, we will use `coronary.dta` (<https://github.com/drkamarul/multivar_data_analysis/tree/main/data>) dataset in STATA format. The dataset contains the total cholesterol level, their individual characteristics and intervention groups in a hypothetical clinical trial. The dataset contains 200 observations for nine variables:
+
+- `id`: Subjects’ ID.
+- `cad`: Coronary artery disease status (categorical) {no cad, cad}.
+- `sbp` : Systolic blood pressure in mmHg (numerical).
+- `dbp` : Diastolic blood pressure in mmHg (numerical).
+- `chol`: Total cholesterol level in mmol/L (numerical).
+- `age`: Age in years (numerical).
+- `bmi`: Body mass index (numerical).
+- `race`: Race of the subjects (categorical) {malay, chinese, indian}.
+- `gender`: Gender of the subjects (categorical) {woman, man}.
+
+
+### Exploring the data
+
+The dataset is loaded as follows,
+
+```{r}
+#| label: loading data
+
+coronary <- foreign::read.dta("../data/06_coronary.dta")
+head(coronary, n = 10)
+```
+
+#### Structure of the dataset
+```{r}
+str(coronary)
+```
+
+#### Summary
+```{r}
+skim(coronary)
+```
+
+#### Descriptives
+```{r}
+#| label: tbl-table1
+#| tbl-cap: Coronary Data 
+coronary %>%
+  tbl_summary()
+```
+
+#### Pairs
+```{r}
+#| label: pairs-plot
+#| message: false
+#| warning: false
+
+coronary %>%
+  select(-id) %>% 
+  ggpairs()
+```
+
+#### Variance Inflation Factor (VIF)
+The most common way to detect multicollinearity is by using the variance inflation factor (VIF), which measures the correlation and strength of correlation between the predictor variables in a regression model.
+
+The value for VIF starts at 1 and has no upper limit. A general rule of thumb for interpreting VIFs is as follows:
+
+- A value of 1 indicates there is no correlation between a given predictor variable and any other predictor variables in the model.
+- A value between 1 and 5 indicates moderate correlation between a given predictor variable and other predictor variables in the model, but this is often not severe enough to require attention.
+- A value greater than 5 indicates potentially severe correlation between a given predictor variable and other predictor variables in the model. In this case, the coefficient estimates and p-values in the regression output are likely unreliable.
+
+```{r}
+model <- lm(chol ~ sbp + dbp + age + bmi, data = coronary)
+vif(model)
+```
+
+
+
+## Fitting the regression mode
+
+We are interested in knowing the relationship between blood pressure (SBP and DBP), age, and BMI as the predictors and the cholesterol level (outcome). 
+
+
+### Ridge regression model
+
+In R, we can use ridge regression using several packages, with `glmnet` being one of the most popular.
+
+```{r}
+#| message: false
+#| warning: false
+
+# X and y datasets
+X <- coronary %>%
+  select(-id, -cad, -chol, -race, -gender) %>%
+  as.matrix()
+X_train <- X[1:150,]
+X_test <- X[151:200,]
+
+y <- coronary %>%
+  select(chol) %>%
+  as.matrix()
+y_train <- y[1:150,]
+y_test <- y[151:200,]
+
+# Fit the model
+ridge_model <- glmnet(X_train, y_train, alpha = 0)
+
+# Cross-validation
+cv_ridge <- cv.glmnet(X_train, y_train, alpha = 0)
+
+# Optimal lambda
+ridge_best_lambda <- cv_ridge$lambda.min
+
+# Refit the model with the best lambda
+ridge_model_best <- glmnet(X_test, y_test, alpha = 0, lambda = ridge_best_lambda)
+
+# Coefficients
+coef(ridge_model_best)
+
+# Predict values using the fitted model
+ridge_pred <- predict(ridge_model_best, newx = X_test)
+
+# Calculate RMSE
+ridge_rmse <- sqrt(mean((ridge_pred - y_test)^2))
+print(ridge_rmse)
+
+# Manually predict values using the fitted model and RMSE
+ridge_pred_manual <- as.matrix(cbind(1, X_test)) %*% coef(ridge_model_best)
+sqrt(mean((y_test - ridge_pred_manual)^2))
+```
+
+
+### LASSO Regression
+
+```{r}
+# Fit the lasso regression model
+lasso_model <- glmnet(X_train, y_train, alpha = 1) # alpha = 1 for lasso regression
+
+# Cross-validation
+cv_lasso <- cv.glmnet(X_train, y_train, alpha = 1)
+
+# Optimal lambda
+lasso_best_lambda <- cv_lasso$lambda.min # Lambda value with miniumum cross-validated error
+
+# Refit the model with the best lambda
+lasso_model_best <- glmnet(X_test, y_test, alpha = 1, lambda = lasso_best_lambda)
+
+coef(lasso_model_best)
+
+# Predict using the best lambda
+lasso_pred <- predict(lasso_model_best, newx = X_test)
+
+# Calculate RMSE
+lasso_rmse <- sqrt(mean((lasso_pred - y_test)^2))
+print(lasso_rmse)
+
+# Manually predict values using the fitted model and RMSE
+lasso_pred_manual <- as.matrix(cbind(1, X_test)) %*% coef(lasso_model_best)
+sqrt(mean((y_test - lasso_pred_manual)^2))
+```
+
+
+### Elastic Net Regresssion
+
+```{r}
+# Fit the elastic net regression model
+elastic_net_model <- glmnet(X_train, y_train, alpha = 0.5) # alpha = 0.5 for elastic net
+
+cv_elastic <-  cv.glmnet(X_train, y_train, alpha = 0.5)
+
+elastic_best_lambda <-  cv_elastic$lambda.min
+
+elastic_model_best <- glmnet(X_test, y_test, alpha = 0.5, lambda = elastic_best_lambda)
+
+coef(elastic_model_best)
+
+# Predict using the best lambda
+elastic_pred <- predict(elastic_model_best, newx = X_test)
+
+# Calculate RMSE
+elastic_rmse <- sqrt(mean((elastic_pred - y_test)^2))
+print(elastic_rmse)
+
+# Manually predict values using the fitted model and RMSE
+elastic_pred_manual <- as.matrix(cbind(1, X_test)) %*% coef(elastic_model_best)
+sqrt(mean((y_test - elastic_pred_manual)^2))
+
+```
+
+
+
+## Results
+
+
+### Coefficients
+
+```{r}
+c1 <- coef(ridge_model_best) %>% as.matrix()
+c2 <- coef(lasso_model_best) %>% as.matrix()
+c3 <- coef(elastic_model_best) %>% as.matrix()
+
+coef <- cbind(c1, c2, c3)
+colnames(coef) <- c("Ridge", "LASSO", "Elastic Net")
+print(coef)
+```
+
+
+### RMSE
+
+```{r}
+rmse <- cbind("RMSE" = c(ridge_rmse, lasso_rmse, elastic_rmse)) 
+rownames(rmse) <- c("Ridge", "LASSO", "Elastic Net")
+print(rmse)
+```
+
+
+
+## Summary
+
+In this lecture, we went through the basic multicollinearity problem of liner regression model and trying yo solve it. We discussed different methods about this. We can solve the multicollinearity problem using ridge, LASSO and Elastic-net. We can also compare between them using both simulated data and real data based on different criteria. And, based on those we can say that which one can perform better than others.

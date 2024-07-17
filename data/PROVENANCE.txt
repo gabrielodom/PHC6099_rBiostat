@@ -61,3 +61,27 @@ Gabriel Odom
     - created: Unknown
     - curators: Unknown; found by Md. Ariful Hoque
     - method: downloaded from <https://github.com/drkamarul/multivar_data_analysis/tree/main/data>
+    
+11. Synthetic University Student Data
+    - file: 02_Sample_Dataset_2014.xlsx
+    - created: 2014
+    - curators: Kent State University, Statistical Consulting at University Libraries; found by Noel Singh Dias and Jingwei Gu
+    - method: downloaded from <https://libguides.library.kent.edu/SPSS/OneSampletTest>
+    
+12. Distribution of Household Chores Data
+    - file: 03_housetasks.txt
+    - created: Unknown
+    - curators: STHDA; found by Noel Singh Dias and Jingwei Gu
+    - method: downloaded from <http://www.sthda.com/english/wiki/chi-square-test-of-independence-in-r>
+    
+13. Training Data from Titanic Passengers
+    - file: 05_titanic_train.csv
+    - created: 2012
+    - curators: Will Cukierski for Kaggle; found by Noel Singh Dias and Jingwei Gu
+    - method: downloaded from <https://www.kaggle.com/competitions/titanic/data>
+    
+14. Medical Insurance Cost Data
+    - file: 04_insurance.csv
+    - created: 2020
+    - curators: Anirban Datta for Kaggle; found by Noel Singh Dias and Jingwei Gu
+    - method: downloaded from <https://www.kaggle.com/datasets/teertha/ushealthinsurancedataset>

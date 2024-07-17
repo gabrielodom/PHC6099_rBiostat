@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<meta name="dcterms.date" content="2024-07-16">
+<meta name="dcterms.date" content="2024-07-17">
 <title>An R Cookbook for Public Health - 20&nbsp; Two-Way ANOVA</title>
 <style>
 code{white-space: pre-wrap;}
@@ -296,8 +296,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Squared Independence</span></span></a>
+  <a href="../lessons/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -349,7 +349,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/04_regression_mls.html" class="sidebar-item-text sidebar-link">
+  <a href="../lessons/04_regression_mls.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
@@ -378,8 +378,8 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+  <a href="../lessons/05_glm_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -401,8 +401,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons/06_lesson_template_spec_topc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">The Method</span></span></a>
+  <a href="../lessons/06_elastic_net_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06_survival_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
   </div>
 </li>
       </ul>
@@ -419,7 +425,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -481,7 +487,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 16, 2024</p>
+      <p class="date">July 17, 2024</p>
     </div>
   </div>
   
@@ -938,23 +944,23 @@ Are your data balanced?
 <span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="ntkkhlowpu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ntkkhlowpu table {
+<div id="kheoknplvf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kheoknplvf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ntkkhlowpu thead, #ntkkhlowpu tbody, #ntkkhlowpu tfoot, #ntkkhlowpu tr, #ntkkhlowpu td, #ntkkhlowpu th {
+#kheoknplvf thead, #kheoknplvf tbody, #kheoknplvf tfoot, #kheoknplvf tr, #kheoknplvf td, #kheoknplvf th {
   border-style: none;
 }
 
-#ntkkhlowpu p {
+#kheoknplvf p {
   margin: 0;
   padding: 0;
 }
 
-#ntkkhlowpu .gt_table {
+#kheoknplvf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -980,12 +986,12 @@ Are your data balanced?
   border-left-color: #D3D3D3;
 }
 
-#ntkkhlowpu .gt_caption {
+#kheoknplvf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ntkkhlowpu .gt_title {
+#kheoknplvf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -997,7 +1003,7 @@ Are your data balanced?
   border-bottom-width: 0;
 }
 
-#ntkkhlowpu .gt_subtitle {
+#kheoknplvf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1009,7 +1015,7 @@ Are your data balanced?
   border-top-width: 0;
 }
 
-#ntkkhlowpu .gt_heading {
+#kheoknplvf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1021,13 +1027,13 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#ntkkhlowpu .gt_bottom_border {
+#kheoknplvf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ntkkhlowpu .gt_col_headings {
+#kheoknplvf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1042,7 +1048,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#ntkkhlowpu .gt_col_heading {
+#kheoknplvf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1062,7 +1068,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#ntkkhlowpu .gt_column_spanner_outer {
+#kheoknplvf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1074,15 +1080,15 @@ Are your data balanced?
   padding-right: 4px;
 }
 
-#ntkkhlowpu .gt_column_spanner_outer:first-child {
+#kheoknplvf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ntkkhlowpu .gt_column_spanner_outer:last-child {
+#kheoknplvf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ntkkhlowpu .gt_column_spanner {
+#kheoknplvf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1094,11 +1100,11 @@ Are your data balanced?
   width: 100%;
 }
 
-#ntkkhlowpu .gt_spanner_row {
+#kheoknplvf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ntkkhlowpu .gt_group_heading {
+#kheoknplvf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1124,7 +1130,7 @@ Are your data balanced?
   text-align: left;
 }
 
-#ntkkhlowpu .gt_empty_group_heading {
+#kheoknplvf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1139,15 +1145,15 @@ Are your data balanced?
   vertical-align: middle;
 }
 
-#ntkkhlowpu .gt_from_md > :first-child {
+#kheoknplvf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ntkkhlowpu .gt_from_md > :last-child {
+#kheoknplvf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ntkkhlowpu .gt_row {
+#kheoknplvf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1166,7 +1172,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#ntkkhlowpu .gt_stub {
+#kheoknplvf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1179,7 +1185,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#ntkkhlowpu .gt_stub_row_group {
+#kheoknplvf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1193,15 +1199,15 @@ Are your data balanced?
   vertical-align: top;
 }
 
-#ntkkhlowpu .gt_row_group_first td {
+#kheoknplvf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ntkkhlowpu .gt_row_group_first th {
+#kheoknplvf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ntkkhlowpu .gt_summary_row {
+#kheoknplvf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1211,16 +1217,16 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#ntkkhlowpu .gt_first_summary_row {
+#kheoknplvf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ntkkhlowpu .gt_first_summary_row.thick {
+#kheoknplvf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ntkkhlowpu .gt_last_summary_row {
+#kheoknplvf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1230,7 +1236,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#ntkkhlowpu .gt_grand_summary_row {
+#kheoknplvf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1240,7 +1246,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#ntkkhlowpu .gt_first_grand_summary_row {
+#kheoknplvf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1250,7 +1256,7 @@ Are your data balanced?
   border-top-color: #D3D3D3;
 }
 
-#ntkkhlowpu .gt_last_grand_summary_row_top {
+#kheoknplvf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1260,11 +1266,11 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#ntkkhlowpu .gt_striped {
+#kheoknplvf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ntkkhlowpu .gt_table_body {
+#kheoknplvf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1273,7 +1279,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#ntkkhlowpu .gt_footnotes {
+#kheoknplvf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1287,7 +1293,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#ntkkhlowpu .gt_footnote {
+#kheoknplvf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1296,7 +1302,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#ntkkhlowpu .gt_sourcenotes {
+#kheoknplvf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1310,7 +1316,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#ntkkhlowpu .gt_sourcenote {
+#kheoknplvf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1318,63 +1324,63 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#ntkkhlowpu .gt_left {
+#kheoknplvf .gt_left {
   text-align: left;
 }
 
-#ntkkhlowpu .gt_center {
+#kheoknplvf .gt_center {
   text-align: center;
 }
 
-#ntkkhlowpu .gt_right {
+#kheoknplvf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ntkkhlowpu .gt_font_normal {
+#kheoknplvf .gt_font_normal {
   font-weight: normal;
 }
 
-#ntkkhlowpu .gt_font_bold {
+#kheoknplvf .gt_font_bold {
   font-weight: bold;
 }
 
-#ntkkhlowpu .gt_font_italic {
+#kheoknplvf .gt_font_italic {
   font-style: italic;
 }
 
-#ntkkhlowpu .gt_super {
+#kheoknplvf .gt_super {
   font-size: 65%;
 }
 
-#ntkkhlowpu .gt_footnote_marks {
+#kheoknplvf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ntkkhlowpu .gt_asterisk {
+#kheoknplvf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ntkkhlowpu .gt_indent_1 {
+#kheoknplvf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ntkkhlowpu .gt_indent_2 {
+#kheoknplvf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ntkkhlowpu .gt_indent_3 {
+#kheoknplvf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ntkkhlowpu .gt_indent_4 {
+#kheoknplvf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ntkkhlowpu .gt_indent_5 {
+#kheoknplvf .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1466,23 +1472,23 @@ Are your data balanced?
 <span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="sxqtjbckyi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#sxqtjbckyi table {
+<div id="qjlittowom" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qjlittowom table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#sxqtjbckyi thead, #sxqtjbckyi tbody, #sxqtjbckyi tfoot, #sxqtjbckyi tr, #sxqtjbckyi td, #sxqtjbckyi th {
+#qjlittowom thead, #qjlittowom tbody, #qjlittowom tfoot, #qjlittowom tr, #qjlittowom td, #qjlittowom th {
   border-style: none;
 }
 
-#sxqtjbckyi p {
+#qjlittowom p {
   margin: 0;
   padding: 0;
 }
 
-#sxqtjbckyi .gt_table {
+#qjlittowom .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1508,12 +1514,12 @@ Are your data balanced?
   border-left-color: #D3D3D3;
 }
 
-#sxqtjbckyi .gt_caption {
+#qjlittowom .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#sxqtjbckyi .gt_title {
+#qjlittowom .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1525,7 +1531,7 @@ Are your data balanced?
   border-bottom-width: 0;
 }
 
-#sxqtjbckyi .gt_subtitle {
+#qjlittowom .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1537,7 +1543,7 @@ Are your data balanced?
   border-top-width: 0;
 }
 
-#sxqtjbckyi .gt_heading {
+#qjlittowom .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1549,13 +1555,13 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#sxqtjbckyi .gt_bottom_border {
+#qjlittowom .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#sxqtjbckyi .gt_col_headings {
+#qjlittowom .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1570,7 +1576,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#sxqtjbckyi .gt_col_heading {
+#qjlittowom .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1590,7 +1596,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#sxqtjbckyi .gt_column_spanner_outer {
+#qjlittowom .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1602,15 +1608,15 @@ Are your data balanced?
   padding-right: 4px;
 }
 
-#sxqtjbckyi .gt_column_spanner_outer:first-child {
+#qjlittowom .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#sxqtjbckyi .gt_column_spanner_outer:last-child {
+#qjlittowom .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#sxqtjbckyi .gt_column_spanner {
+#qjlittowom .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1622,11 +1628,11 @@ Are your data balanced?
   width: 100%;
 }
 
-#sxqtjbckyi .gt_spanner_row {
+#qjlittowom .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#sxqtjbckyi .gt_group_heading {
+#qjlittowom .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1652,7 +1658,7 @@ Are your data balanced?
   text-align: left;
 }
 
-#sxqtjbckyi .gt_empty_group_heading {
+#qjlittowom .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1667,15 +1673,15 @@ Are your data balanced?
   vertical-align: middle;
 }
 
-#sxqtjbckyi .gt_from_md > :first-child {
+#qjlittowom .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#sxqtjbckyi .gt_from_md > :last-child {
+#qjlittowom .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#sxqtjbckyi .gt_row {
+#qjlittowom .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1694,7 +1700,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#sxqtjbckyi .gt_stub {
+#qjlittowom .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1707,7 +1713,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#sxqtjbckyi .gt_stub_row_group {
+#qjlittowom .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1721,15 +1727,15 @@ Are your data balanced?
   vertical-align: top;
 }
 
-#sxqtjbckyi .gt_row_group_first td {
+#qjlittowom .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#sxqtjbckyi .gt_row_group_first th {
+#qjlittowom .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#sxqtjbckyi .gt_summary_row {
+#qjlittowom .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1739,16 +1745,16 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#sxqtjbckyi .gt_first_summary_row {
+#qjlittowom .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#sxqtjbckyi .gt_first_summary_row.thick {
+#qjlittowom .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#sxqtjbckyi .gt_last_summary_row {
+#qjlittowom .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1758,7 +1764,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#sxqtjbckyi .gt_grand_summary_row {
+#qjlittowom .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1768,7 +1774,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#sxqtjbckyi .gt_first_grand_summary_row {
+#qjlittowom .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1778,7 +1784,7 @@ Are your data balanced?
   border-top-color: #D3D3D3;
 }
 
-#sxqtjbckyi .gt_last_grand_summary_row_top {
+#qjlittowom .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1788,11 +1794,11 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#sxqtjbckyi .gt_striped {
+#qjlittowom .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#sxqtjbckyi .gt_table_body {
+#qjlittowom .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1801,7 +1807,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#sxqtjbckyi .gt_footnotes {
+#qjlittowom .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1815,7 +1821,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#sxqtjbckyi .gt_footnote {
+#qjlittowom .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1824,7 +1830,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#sxqtjbckyi .gt_sourcenotes {
+#qjlittowom .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1838,7 +1844,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#sxqtjbckyi .gt_sourcenote {
+#qjlittowom .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1846,63 +1852,63 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#sxqtjbckyi .gt_left {
+#qjlittowom .gt_left {
   text-align: left;
 }
 
-#sxqtjbckyi .gt_center {
+#qjlittowom .gt_center {
   text-align: center;
 }
 
-#sxqtjbckyi .gt_right {
+#qjlittowom .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#sxqtjbckyi .gt_font_normal {
+#qjlittowom .gt_font_normal {
   font-weight: normal;
 }
 
-#sxqtjbckyi .gt_font_bold {
+#qjlittowom .gt_font_bold {
   font-weight: bold;
 }
 
-#sxqtjbckyi .gt_font_italic {
+#qjlittowom .gt_font_italic {
   font-style: italic;
 }
 
-#sxqtjbckyi .gt_super {
+#qjlittowom .gt_super {
   font-size: 65%;
 }
 
-#sxqtjbckyi .gt_footnote_marks {
+#qjlittowom .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#sxqtjbckyi .gt_asterisk {
+#qjlittowom .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#sxqtjbckyi .gt_indent_1 {
+#qjlittowom .gt_indent_1 {
   text-indent: 5px;
 }
 
-#sxqtjbckyi .gt_indent_2 {
+#qjlittowom .gt_indent_2 {
   text-indent: 10px;
 }
 
-#sxqtjbckyi .gt_indent_3 {
+#qjlittowom .gt_indent_3 {
   text-indent: 15px;
 }
 
-#sxqtjbckyi .gt_indent_4 {
+#qjlittowom .gt_indent_4 {
   text-indent: 20px;
 }
 
-#sxqtjbckyi .gt_indent_5 {
+#qjlittowom .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1985,23 +1991,23 @@ Are your data balanced?
 <span>   <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="mgxlftzpps" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mgxlftzpps table {
+<div id="atdemhimmy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#atdemhimmy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mgxlftzpps thead, #mgxlftzpps tbody, #mgxlftzpps tfoot, #mgxlftzpps tr, #mgxlftzpps td, #mgxlftzpps th {
+#atdemhimmy thead, #atdemhimmy tbody, #atdemhimmy tfoot, #atdemhimmy tr, #atdemhimmy td, #atdemhimmy th {
   border-style: none;
 }
 
-#mgxlftzpps p {
+#atdemhimmy p {
   margin: 0;
   padding: 0;
 }
 
-#mgxlftzpps .gt_table {
+#atdemhimmy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2027,12 +2033,12 @@ Are your data balanced?
   border-left-color: #D3D3D3;
 }
 
-#mgxlftzpps .gt_caption {
+#atdemhimmy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mgxlftzpps .gt_title {
+#atdemhimmy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2044,7 +2050,7 @@ Are your data balanced?
   border-bottom-width: 0;
 }
 
-#mgxlftzpps .gt_subtitle {
+#atdemhimmy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2056,7 +2062,7 @@ Are your data balanced?
   border-top-width: 0;
 }
 
-#mgxlftzpps .gt_heading {
+#atdemhimmy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2068,13 +2074,13 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#mgxlftzpps .gt_bottom_border {
+#atdemhimmy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mgxlftzpps .gt_col_headings {
+#atdemhimmy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2089,7 +2095,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#mgxlftzpps .gt_col_heading {
+#atdemhimmy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2109,7 +2115,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#mgxlftzpps .gt_column_spanner_outer {
+#atdemhimmy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2121,15 +2127,15 @@ Are your data balanced?
   padding-right: 4px;
 }
 
-#mgxlftzpps .gt_column_spanner_outer:first-child {
+#atdemhimmy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mgxlftzpps .gt_column_spanner_outer:last-child {
+#atdemhimmy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mgxlftzpps .gt_column_spanner {
+#atdemhimmy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2141,11 +2147,11 @@ Are your data balanced?
   width: 100%;
 }
 
-#mgxlftzpps .gt_spanner_row {
+#atdemhimmy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mgxlftzpps .gt_group_heading {
+#atdemhimmy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2171,7 +2177,7 @@ Are your data balanced?
   text-align: left;
 }
 
-#mgxlftzpps .gt_empty_group_heading {
+#atdemhimmy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2186,15 +2192,15 @@ Are your data balanced?
   vertical-align: middle;
 }
 
-#mgxlftzpps .gt_from_md > :first-child {
+#atdemhimmy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mgxlftzpps .gt_from_md > :last-child {
+#atdemhimmy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mgxlftzpps .gt_row {
+#atdemhimmy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2213,7 +2219,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#mgxlftzpps .gt_stub {
+#atdemhimmy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2226,7 +2232,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#mgxlftzpps .gt_stub_row_group {
+#atdemhimmy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2240,15 +2246,15 @@ Are your data balanced?
   vertical-align: top;
 }
 
-#mgxlftzpps .gt_row_group_first td {
+#atdemhimmy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mgxlftzpps .gt_row_group_first th {
+#atdemhimmy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mgxlftzpps .gt_summary_row {
+#atdemhimmy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2258,16 +2264,16 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#mgxlftzpps .gt_first_summary_row {
+#atdemhimmy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mgxlftzpps .gt_first_summary_row.thick {
+#atdemhimmy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mgxlftzpps .gt_last_summary_row {
+#atdemhimmy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2277,7 +2283,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#mgxlftzpps .gt_grand_summary_row {
+#atdemhimmy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2287,7 +2293,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#mgxlftzpps .gt_first_grand_summary_row {
+#atdemhimmy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2297,7 +2303,7 @@ Are your data balanced?
   border-top-color: #D3D3D3;
 }
 
-#mgxlftzpps .gt_last_grand_summary_row_top {
+#atdemhimmy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2307,11 +2313,11 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#mgxlftzpps .gt_striped {
+#atdemhimmy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mgxlftzpps .gt_table_body {
+#atdemhimmy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2320,7 +2326,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#mgxlftzpps .gt_footnotes {
+#atdemhimmy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2334,7 +2340,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#mgxlftzpps .gt_footnote {
+#atdemhimmy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2343,7 +2349,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#mgxlftzpps .gt_sourcenotes {
+#atdemhimmy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2357,7 +2363,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#mgxlftzpps .gt_sourcenote {
+#atdemhimmy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2365,63 +2371,63 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#mgxlftzpps .gt_left {
+#atdemhimmy .gt_left {
   text-align: left;
 }
 
-#mgxlftzpps .gt_center {
+#atdemhimmy .gt_center {
   text-align: center;
 }
 
-#mgxlftzpps .gt_right {
+#atdemhimmy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mgxlftzpps .gt_font_normal {
+#atdemhimmy .gt_font_normal {
   font-weight: normal;
 }
 
-#mgxlftzpps .gt_font_bold {
+#atdemhimmy .gt_font_bold {
   font-weight: bold;
 }
 
-#mgxlftzpps .gt_font_italic {
+#atdemhimmy .gt_font_italic {
   font-style: italic;
 }
 
-#mgxlftzpps .gt_super {
+#atdemhimmy .gt_super {
   font-size: 65%;
 }
 
-#mgxlftzpps .gt_footnote_marks {
+#atdemhimmy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mgxlftzpps .gt_asterisk {
+#atdemhimmy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mgxlftzpps .gt_indent_1 {
+#atdemhimmy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mgxlftzpps .gt_indent_2 {
+#atdemhimmy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mgxlftzpps .gt_indent_3 {
+#atdemhimmy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mgxlftzpps .gt_indent_4 {
+#atdemhimmy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mgxlftzpps .gt_indent_5 {
+#atdemhimmy .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2493,23 +2499,23 @@ Are your data balanced?
 <span><span class="va">gt_print</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="rdhbulakqf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rdhbulakqf table {
+<div id="tmchsdbizf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tmchsdbizf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rdhbulakqf thead, #rdhbulakqf tbody, #rdhbulakqf tfoot, #rdhbulakqf tr, #rdhbulakqf td, #rdhbulakqf th {
+#tmchsdbizf thead, #tmchsdbizf tbody, #tmchsdbizf tfoot, #tmchsdbizf tr, #tmchsdbizf td, #tmchsdbizf th {
   border-style: none;
 }
 
-#rdhbulakqf p {
+#tmchsdbizf p {
   margin: 0;
   padding: 0;
 }
 
-#rdhbulakqf .gt_table {
+#tmchsdbizf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2535,12 +2541,12 @@ Are your data balanced?
   border-left-color: #D3D3D3;
 }
 
-#rdhbulakqf .gt_caption {
+#tmchsdbizf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rdhbulakqf .gt_title {
+#tmchsdbizf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2552,7 +2558,7 @@ Are your data balanced?
   border-bottom-width: 0;
 }
 
-#rdhbulakqf .gt_subtitle {
+#tmchsdbizf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2564,7 +2570,7 @@ Are your data balanced?
   border-top-width: 0;
 }
 
-#rdhbulakqf .gt_heading {
+#tmchsdbizf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2576,13 +2582,13 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#rdhbulakqf .gt_bottom_border {
+#tmchsdbizf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rdhbulakqf .gt_col_headings {
+#tmchsdbizf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2597,7 +2603,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#rdhbulakqf .gt_col_heading {
+#tmchsdbizf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2617,7 +2623,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#rdhbulakqf .gt_column_spanner_outer {
+#tmchsdbizf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2629,15 +2635,15 @@ Are your data balanced?
   padding-right: 4px;
 }
 
-#rdhbulakqf .gt_column_spanner_outer:first-child {
+#tmchsdbizf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rdhbulakqf .gt_column_spanner_outer:last-child {
+#tmchsdbizf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rdhbulakqf .gt_column_spanner {
+#tmchsdbizf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2649,11 +2655,11 @@ Are your data balanced?
   width: 100%;
 }
 
-#rdhbulakqf .gt_spanner_row {
+#tmchsdbizf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rdhbulakqf .gt_group_heading {
+#tmchsdbizf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2679,7 +2685,7 @@ Are your data balanced?
   text-align: left;
 }
 
-#rdhbulakqf .gt_empty_group_heading {
+#tmchsdbizf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2694,15 +2700,15 @@ Are your data balanced?
   vertical-align: middle;
 }
 
-#rdhbulakqf .gt_from_md > :first-child {
+#tmchsdbizf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rdhbulakqf .gt_from_md > :last-child {
+#tmchsdbizf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rdhbulakqf .gt_row {
+#tmchsdbizf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2721,7 +2727,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#rdhbulakqf .gt_stub {
+#tmchsdbizf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2734,7 +2740,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#rdhbulakqf .gt_stub_row_group {
+#tmchsdbizf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2748,15 +2754,15 @@ Are your data balanced?
   vertical-align: top;
 }
 
-#rdhbulakqf .gt_row_group_first td {
+#tmchsdbizf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rdhbulakqf .gt_row_group_first th {
+#tmchsdbizf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rdhbulakqf .gt_summary_row {
+#tmchsdbizf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2766,16 +2772,16 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#rdhbulakqf .gt_first_summary_row {
+#tmchsdbizf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rdhbulakqf .gt_first_summary_row.thick {
+#tmchsdbizf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rdhbulakqf .gt_last_summary_row {
+#tmchsdbizf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2785,7 +2791,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#rdhbulakqf .gt_grand_summary_row {
+#tmchsdbizf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2795,7 +2801,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#rdhbulakqf .gt_first_grand_summary_row {
+#tmchsdbizf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2805,7 +2811,7 @@ Are your data balanced?
   border-top-color: #D3D3D3;
 }
 
-#rdhbulakqf .gt_last_grand_summary_row_top {
+#tmchsdbizf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2815,11 +2821,11 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#rdhbulakqf .gt_striped {
+#tmchsdbizf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rdhbulakqf .gt_table_body {
+#tmchsdbizf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2828,7 +2834,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#rdhbulakqf .gt_footnotes {
+#tmchsdbizf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2842,7 +2848,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#rdhbulakqf .gt_footnote {
+#tmchsdbizf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2851,7 +2857,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#rdhbulakqf .gt_sourcenotes {
+#tmchsdbizf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2865,7 +2871,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#rdhbulakqf .gt_sourcenote {
+#tmchsdbizf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2873,63 +2879,63 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#rdhbulakqf .gt_left {
+#tmchsdbizf .gt_left {
   text-align: left;
 }
 
-#rdhbulakqf .gt_center {
+#tmchsdbizf .gt_center {
   text-align: center;
 }
 
-#rdhbulakqf .gt_right {
+#tmchsdbizf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rdhbulakqf .gt_font_normal {
+#tmchsdbizf .gt_font_normal {
   font-weight: normal;
 }
 
-#rdhbulakqf .gt_font_bold {
+#tmchsdbizf .gt_font_bold {
   font-weight: bold;
 }
 
-#rdhbulakqf .gt_font_italic {
+#tmchsdbizf .gt_font_italic {
   font-style: italic;
 }
 
-#rdhbulakqf .gt_super {
+#tmchsdbizf .gt_super {
   font-size: 65%;
 }
 
-#rdhbulakqf .gt_footnote_marks {
+#tmchsdbizf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rdhbulakqf .gt_asterisk {
+#tmchsdbizf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rdhbulakqf .gt_indent_1 {
+#tmchsdbizf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rdhbulakqf .gt_indent_2 {
+#tmchsdbizf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rdhbulakqf .gt_indent_3 {
+#tmchsdbizf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rdhbulakqf .gt_indent_4 {
+#tmchsdbizf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rdhbulakqf .gt_indent_5 {
+#tmchsdbizf .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3000,23 +3006,23 @@ Are your data balanced?
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="qzxghktzgr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qzxghktzgr table {
+<div id="ujsodpixni" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ujsodpixni table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qzxghktzgr thead, #qzxghktzgr tbody, #qzxghktzgr tfoot, #qzxghktzgr tr, #qzxghktzgr td, #qzxghktzgr th {
+#ujsodpixni thead, #ujsodpixni tbody, #ujsodpixni tfoot, #ujsodpixni tr, #ujsodpixni td, #ujsodpixni th {
   border-style: none;
 }
 
-#qzxghktzgr p {
+#ujsodpixni p {
   margin: 0;
   padding: 0;
 }
 
-#qzxghktzgr .gt_table {
+#ujsodpixni .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3042,12 +3048,12 @@ Are your data balanced?
   border-left-color: #D3D3D3;
 }
 
-#qzxghktzgr .gt_caption {
+#ujsodpixni .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qzxghktzgr .gt_title {
+#ujsodpixni .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3059,7 +3065,7 @@ Are your data balanced?
   border-bottom-width: 0;
 }
 
-#qzxghktzgr .gt_subtitle {
+#ujsodpixni .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3071,7 +3077,7 @@ Are your data balanced?
   border-top-width: 0;
 }
 
-#qzxghktzgr .gt_heading {
+#ujsodpixni .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3083,13 +3089,13 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#qzxghktzgr .gt_bottom_border {
+#ujsodpixni .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qzxghktzgr .gt_col_headings {
+#ujsodpixni .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3104,7 +3110,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#qzxghktzgr .gt_col_heading {
+#ujsodpixni .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3124,7 +3130,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#qzxghktzgr .gt_column_spanner_outer {
+#ujsodpixni .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3136,15 +3142,15 @@ Are your data balanced?
   padding-right: 4px;
 }
 
-#qzxghktzgr .gt_column_spanner_outer:first-child {
+#ujsodpixni .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qzxghktzgr .gt_column_spanner_outer:last-child {
+#ujsodpixni .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qzxghktzgr .gt_column_spanner {
+#ujsodpixni .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3156,11 +3162,11 @@ Are your data balanced?
   width: 100%;
 }
 
-#qzxghktzgr .gt_spanner_row {
+#ujsodpixni .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qzxghktzgr .gt_group_heading {
+#ujsodpixni .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3186,7 +3192,7 @@ Are your data balanced?
   text-align: left;
 }
 
-#qzxghktzgr .gt_empty_group_heading {
+#ujsodpixni .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3201,15 +3207,15 @@ Are your data balanced?
   vertical-align: middle;
 }
 
-#qzxghktzgr .gt_from_md > :first-child {
+#ujsodpixni .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qzxghktzgr .gt_from_md > :last-child {
+#ujsodpixni .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qzxghktzgr .gt_row {
+#ujsodpixni .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3228,7 +3234,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#qzxghktzgr .gt_stub {
+#ujsodpixni .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3241,7 +3247,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#qzxghktzgr .gt_stub_row_group {
+#ujsodpixni .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3255,15 +3261,15 @@ Are your data balanced?
   vertical-align: top;
 }
 
-#qzxghktzgr .gt_row_group_first td {
+#ujsodpixni .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qzxghktzgr .gt_row_group_first th {
+#ujsodpixni .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qzxghktzgr .gt_summary_row {
+#ujsodpixni .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3273,16 +3279,16 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#qzxghktzgr .gt_first_summary_row {
+#ujsodpixni .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qzxghktzgr .gt_first_summary_row.thick {
+#ujsodpixni .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qzxghktzgr .gt_last_summary_row {
+#ujsodpixni .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3292,7 +3298,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#qzxghktzgr .gt_grand_summary_row {
+#ujsodpixni .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3302,7 +3308,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#qzxghktzgr .gt_first_grand_summary_row {
+#ujsodpixni .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3312,7 +3318,7 @@ Are your data balanced?
   border-top-color: #D3D3D3;
 }
 
-#qzxghktzgr .gt_last_grand_summary_row_top {
+#ujsodpixni .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3322,11 +3328,11 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#qzxghktzgr .gt_striped {
+#ujsodpixni .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qzxghktzgr .gt_table_body {
+#ujsodpixni .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3335,7 +3341,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#qzxghktzgr .gt_footnotes {
+#ujsodpixni .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3349,7 +3355,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#qzxghktzgr .gt_footnote {
+#ujsodpixni .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3358,7 +3364,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#qzxghktzgr .gt_sourcenotes {
+#ujsodpixni .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3372,7 +3378,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#qzxghktzgr .gt_sourcenote {
+#ujsodpixni .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3380,63 +3386,63 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#qzxghktzgr .gt_left {
+#ujsodpixni .gt_left {
   text-align: left;
 }
 
-#qzxghktzgr .gt_center {
+#ujsodpixni .gt_center {
   text-align: center;
 }
 
-#qzxghktzgr .gt_right {
+#ujsodpixni .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qzxghktzgr .gt_font_normal {
+#ujsodpixni .gt_font_normal {
   font-weight: normal;
 }
 
-#qzxghktzgr .gt_font_bold {
+#ujsodpixni .gt_font_bold {
   font-weight: bold;
 }
 
-#qzxghktzgr .gt_font_italic {
+#ujsodpixni .gt_font_italic {
   font-style: italic;
 }
 
-#qzxghktzgr .gt_super {
+#ujsodpixni .gt_super {
   font-size: 65%;
 }
 
-#qzxghktzgr .gt_footnote_marks {
+#ujsodpixni .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qzxghktzgr .gt_asterisk {
+#ujsodpixni .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qzxghktzgr .gt_indent_1 {
+#ujsodpixni .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qzxghktzgr .gt_indent_2 {
+#ujsodpixni .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qzxghktzgr .gt_indent_3 {
+#ujsodpixni .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qzxghktzgr .gt_indent_4 {
+#ujsodpixni .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qzxghktzgr .gt_indent_5 {
+#ujsodpixni .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

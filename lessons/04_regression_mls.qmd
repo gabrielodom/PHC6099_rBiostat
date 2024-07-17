@@ -1,0 +1,193 @@
+---
+title: "Multiple Linear Regression"
+author:
+  - name: Noel Singh Dias and Jingwei Gu
+    affiliations:
+      - Florida International University
+      - Robert Stempel College of Public Health and Social Work
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+---
+
+```{r}
+#| label: load-packages
+#| message: false
+
+# install.packages("tidyverse")
+# install.packages("ggplot2")
+# install.packages("readr")
+library(tidyverse)
+library(ggplot2)
+library(readr)
+```
+
+
+
+## Multiple Linear Regression
+
+**Multiple Linear Regression (MLR)** is a statistical technique used to understand the relationship between one dependent variable and two or more independent variables. The relationship is explained by by modeling the observed relationship using a mathematical representation or approximation.
+
+
+### Key Components in MLR:
+1. **Dependent Variable (Y)**: The outcome variable or the variable that is potentially going to change due to influencing factors.
+
+2. **Independent Variables (X1, X2, ..., Xn)**: Predictor or influencing variables used to predict the dependent variable.
+
+3. **Regression Coefficients (β0, β1, ..., βn)**: Parameters that represent the relationship between each independent variable and the dependent variable where β0 is the intercept, β1 to βn are the slopes for each independent variable.
+
+4. **Error Term (ε)**: Represents the random variability in the dependent variable that might perhaps not be explained by the independent variables.
+
+
+### Model Equation:
+$$
+Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \ldots + \beta_pX_p + \varepsilon
+$$
+
+![](fig/04_regression_mls_image1.jpg)
+
+
+
+## Assumptions:
+
+1. **Linearity**: it is assumed that the relationship between the dependent and independent variables is linear.
+2. **Independence**: Observations are independent of each other.
+3. **Homoscedasticity**: The variance of the residuals (errors) is constant across all levels of the independent variables.
+4. **Normality**: Residuals are normally distributed.
+5. **No Multicollinearity**: Independent variables are not highly correlated with each other.
+
+
+
+## Purpose:
+
+To predict the value of the dependent variable based on the values of the independent variables and to understand the strength and type of relationships between the dependent variable and multiple independent variables.
+
+
+
+## Steps in Conducting MLR:
+
+1. **Data Collection**: Gather data for the dependent and independent variables.
+2. **Model Specification**: Define the model equation with the dependent variable and chosen independent variables.
+3. **Estimation of Coefficients**: Use statistical software to estimate the regression coefficients.
+4. **Model Evaluation**: Assess the model's goodness-of-fit using R-squared, adjusted R-squared, and other metrics.
+5. **Diagnostic Checking**: Check the assumptions of MLR (linearity, independence, homoscedasticity, normality, no multicollinearity).
+
+
+
+## Model Evaluation Metrics:
+
+1. **R-squared (R²)**: Measures the proportion of variance in the dependent variable explained by the independent variables.
+2. **Adjusted R-squared**: Adjusted version of R² that accounts for the number of predictors in the model.
+3. **F-statistic**: Tests the overall significance of the model.
+4. **p-values**: Test the significance of individual regression coefficients.
+
+
+
+## Demostration
+
+We perform a multiple linear regression analysis on a dataset of medical insurance costs. This dataset includes variables such as *`age`*, *`sex`*, *`BMI`*, *`number of children`*, *`smoker status`*, and *`region`*. Our goal is to understand the relationship between these variables and to predict insurance charges based on the other factors.
+
+The data of insurance could be found from Kaggle^[link](https://www.kaggle.com/datasets/teertha/ushealthinsurancedataset?resource=download)^
+
+```{r}
+# Load the data
+data <- read_csv("../data/04_insurance.csv")
+
+# Preview the data
+head(data)
+
+```
+
+
+### Summary Statistics
+We begin by examining the summary statistics of the dataset to understand its structure and the distribution of variables.
+
+```{r}
+summary(data)
+```
+
+we will first log-transform the charges variable. This is often done to stabilize variance and make the data more normally distributed, which can help improve the performance and interpretation of regression models.
+```{r}
+# Log-transform the charges variable
+data$log_charges <- log(data$charges)
+```
+
+Before fitting the model, we need to ensure that our categorical variables are correctly encoded.
+
+```{r}
+# Convert categorical variables to factors
+data$sex <- as.factor(data$sex)
+data$smoker <- as.factor(data$smoker)
+data$region <- as.factor(data$region)
+
+```
+
+>**Before converting to factors:** <br>
+>sex: Character values <br>
+  "female", "male". <br>
+>smoker: Character values <br>
+  "no", "yes". <br>
+>region: Character values <br> 
+  "northeast" "northwest" "southeast" "southwest". <br>
+>
+>**After converting to factors:** <br>
+>sex: <br>
+Factor with levels <br>
+  1 = "female", <br> 
+  2 = "male". <br>
+>smoker: <br> 
+Factor with levels <br>
+  1 = "no", <br>
+  2 = "yes". <br>
+>region:<br> 
+Factor with levels <br>
+  1 = "northeast", 
+  2 = "northwest", 
+  3 = "southeast", 
+  4 = "southwest".
+  
+
+### Model Fitting
+We fit a multiple linear regression model to predict insurance *`charges`* based on the other variables in the dataset.
+
+```{r}
+# Fit the multiple linear regression model
+model <- lm(log_charges ~ age + sex + bmi + children + smoker + region,
+  data = data)
+
+# Summary of the model
+summary(model)
+```
+
+**Coefficients and Interpretation**: <br><br>
+**Intercept**: The intercept of the model is 7.0305581, which represents the expected log of charges when all predictors are zero. This value is highly significant with a p-value less than 2e-16. <br>
+<br>
+**Age**: For each additional year of age, the log of charges increases by 0.0345816. This effect is highly significant with a p-value less than 2e-16. <br>
+<br>
+**Sex (male)**: Being male decreases the log of charges by 0.0754164 compared to being female. This effect is significant with a p-value of 0.002038. <br>
+<br>
+**BMI**: Each unit increase in BMI results in an increase in the log of charges by 0.0133748. This effect is highly significant with a p-value of 2.42e-10. <br>
+<br>
+**Number of children**: Each additional child increases the log of charges by 0.1018568. This effect is highly significant with a p-value less than 2e-16. <br>
+<br>
+**Smoking status (yes)**: Being a smoker increases the log of charges by 1.5543288. This effect is highly significant with a p-value less than 2e-16. <br>
+<br>
+**Region (northwest)**:Living in the northwest region decreases the log of charges by 0.0637876 compared to the baseline region. This effect is marginally significant with a p-value of 0.067860. <br>
+<br>
+**Region (southeast)**: Living in the southeast region decreases the log of charges by 0.1571967 compared to the baseline region. This effect is highly significant with a p-value of 8.08e-06. <br>
+<br>
+**Region (southwest)**: Living in the southwest region decreases the log of charges by 0.1289522 compared to the baseline region. This effect is significant with a p-value of 0.000241.<br>
+<br>
+The model explains approximately 76.79% of the variance in the log of charges, as indicated by the multiple R-squared value of 0.7679 and the adjusted R-squared value of 0.7666. <br>
+<br>
+The overall model is highly significant, as indicated by the F-statistic of 549.8 with a p-value less than 2.2e-16.
+
+
+
+## Conclusion
+
+Our multiple linear regression model suggests that `age`, `sex`, `BMI`, `number of children`, `smoking status`, and `region` are significant predictors of log-transformed insurance charges. <br>
+<br>
+Specifically, older age, higher BMI, more children, and being a smoker are associated with higher log-transformed insurance charges. In contrast, being male and residing in the northwest, southeast, or southwest regions tends to be associated with lower log-transformed insurance charges compared to their respective reference categories.
+
