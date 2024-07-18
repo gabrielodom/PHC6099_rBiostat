@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<title>An R Cookbook for Public Health - 13&nbsp; Transformations to Normality</title>
+<title>An R Cookbook for Public Health - 14&nbsp; Transformations to Normality</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,7 +131,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_transformations.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_transformations.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -230,38 +230,44 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_ttest_one_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">One-sample/paired t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons/02_wilcoxon_one_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_mcnemar_paired_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_cochrans_q_paired_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -278,25 +284,31 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_welch_ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Two sample Welchs test or Welchs t-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -313,55 +325,61 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_one_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_welch_two_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Welch’s Anova</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_corr_cov.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -378,13 +396,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_poisson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_negative_binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Generalized Linear Models: Negative Binomial</span></span></a>
   </div>
 </li>
       </ul>
@@ -401,13 +431,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_elastic_net_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_survival_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
   </div>
 </li>
       </ul>
@@ -424,7 +454,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -437,39 +467,39 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">13.1</span> Introduction</a></li>
-  <li><a href="#when-to-apply-transformations-to-normality" id="toc-when-to-apply-transformations-to-normality" class="nav-link" data-scroll-target="#when-to-apply-transformations-to-normality"><span class="header-section-number">13.2</span> When to Apply Transformations to Normality</a></li>
+<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">14.1</span> Introduction</a></li>
+  <li><a href="#when-to-apply-transformations-to-normality" id="toc-when-to-apply-transformations-to-normality" class="nav-link" data-scroll-target="#when-to-apply-transformations-to-normality"><span class="header-section-number">14.2</span> When to Apply Transformations to Normality</a></li>
   <li>
-<a href="#types-of-transformations-to-normality" id="toc-types-of-transformations-to-normality" class="nav-link" data-scroll-target="#types-of-transformations-to-normality"><span class="header-section-number">13.3</span> Types of Transformations to Normality</a>
+<a href="#types-of-transformations-to-normality" id="toc-types-of-transformations-to-normality" class="nav-link" data-scroll-target="#types-of-transformations-to-normality"><span class="header-section-number">14.3</span> Types of Transformations to Normality</a>
   <ul class="collapse">
-<li><a href="#logarithmic-transformation" id="toc-logarithmic-transformation" class="nav-link" data-scroll-target="#logarithmic-transformation"><span class="header-section-number">13.3.1</span> Logarithmic Transformation</a></li>
-  <li><a href="#square-root-transformation" id="toc-square-root-transformation" class="nav-link" data-scroll-target="#square-root-transformation"><span class="header-section-number">13.3.2</span> Square Root Transformation</a></li>
-  <li><a href="#arithmetic-reciprocal-transformation" id="toc-arithmetic-reciprocal-transformation" class="nav-link" data-scroll-target="#arithmetic-reciprocal-transformation"><span class="header-section-number">13.3.3</span> Arithmetic Reciprocal Transformation</a></li>
-  <li><a href="#geometric-reciprocal-transformation" id="toc-geometric-reciprocal-transformation" class="nav-link" data-scroll-target="#geometric-reciprocal-transformation"><span class="header-section-number">13.3.4</span> Geometric Reciprocal Transformation</a></li>
-  <li><a href="#box-cox-transformation" id="toc-box-cox-transformation" class="nav-link" data-scroll-target="#box-cox-transformation"><span class="header-section-number">13.3.5</span> Box-Cox Transformation</a></li>
+<li><a href="#logarithmic-transformation" id="toc-logarithmic-transformation" class="nav-link" data-scroll-target="#logarithmic-transformation"><span class="header-section-number">14.3.1</span> Logarithmic Transformation</a></li>
+  <li><a href="#square-root-transformation" id="toc-square-root-transformation" class="nav-link" data-scroll-target="#square-root-transformation"><span class="header-section-number">14.3.2</span> Square Root Transformation</a></li>
+  <li><a href="#arithmetic-reciprocal-transformation" id="toc-arithmetic-reciprocal-transformation" class="nav-link" data-scroll-target="#arithmetic-reciprocal-transformation"><span class="header-section-number">14.3.3</span> Arithmetic Reciprocal Transformation</a></li>
+  <li><a href="#geometric-reciprocal-transformation" id="toc-geometric-reciprocal-transformation" class="nav-link" data-scroll-target="#geometric-reciprocal-transformation"><span class="header-section-number">14.3.4</span> Geometric Reciprocal Transformation</a></li>
+  <li><a href="#box-cox-transformation" id="toc-box-cox-transformation" class="nav-link" data-scroll-target="#box-cox-transformation"><span class="header-section-number">14.3.5</span> Box-Cox Transformation</a></li>
   </ul>
 </li>
   <li>
-<a href="#examples-of-transformations-to-normality" id="toc-examples-of-transformations-to-normality" class="nav-link" data-scroll-target="#examples-of-transformations-to-normality"><span class="header-section-number">13.4</span> Examples of Transformations to Normality</a>
+<a href="#examples-of-transformations-to-normality" id="toc-examples-of-transformations-to-normality" class="nav-link" data-scroll-target="#examples-of-transformations-to-normality"><span class="header-section-number">14.4</span> Examples of Transformations to Normality</a>
   <ul class="collapse">
-<li><a href="#data-source-and-description" id="toc-data-source-and-description" class="nav-link" data-scroll-target="#data-source-and-description"><span class="header-section-number">13.4.1</span> Data Source and Description</a></li>
-  <li><a href="#loading-the-data" id="toc-loading-the-data" class="nav-link" data-scroll-target="#loading-the-data"><span class="header-section-number">13.4.2</span> Loading the Data</a></li>
-  <li><a href="#visualizations-of-cont-and-phys-variables" id="toc-visualizations-of-cont-and-phys-variables" class="nav-link" data-scroll-target="#visualizations-of-cont-and-phys-variables"><span class="header-section-number">13.4.3</span> Visualizations of <code>CONT</code> and <code>PHYS</code> Variables</a></li>
-  <li><a href="#summary-statistics-for-cont-and-phys-variables" id="toc-summary-statistics-for-cont-and-phys-variables" class="nav-link" data-scroll-target="#summary-statistics-for-cont-and-phys-variables"><span class="header-section-number">13.4.4</span> Summary Statistics for <code>CONT</code> and <code>PHYS</code> Variables</a></li>
-  <li><a href="#skewness-and-kurtosis-for-cont-and-phys-variables" id="toc-skewness-and-kurtosis-for-cont-and-phys-variables" class="nav-link" data-scroll-target="#skewness-and-kurtosis-for-cont-and-phys-variables"><span class="header-section-number">13.4.5</span> Skewness and Kurtosis for <code>CONT</code> and <code>PHYS</code> Variables</a></li>
-  <li><a href="#visualizations-of-transformed-cont-and-phys-variables" id="toc-visualizations-of-transformed-cont-and-phys-variables" class="nav-link" data-scroll-target="#visualizations-of-transformed-cont-and-phys-variables"><span class="header-section-number">13.4.6</span> Visualizations of Transformed <code>CONT</code> and <code>PHYS</code> Variables</a></li>
-  <li><a href="#skewness-and-kurtosis-for-transformed-cont-and-phys-variables" id="toc-skewness-and-kurtosis-for-transformed-cont-and-phys-variables" class="nav-link" data-scroll-target="#skewness-and-kurtosis-for-transformed-cont-and-phys-variables"><span class="header-section-number">13.4.7</span> Skewness and Kurtosis for Transformed <code>CONT</code> and <code>PHYS</code> Variables</a></li>
+<li><a href="#data-source-and-description" id="toc-data-source-and-description" class="nav-link" data-scroll-target="#data-source-and-description"><span class="header-section-number">14.4.1</span> Data Source and Description</a></li>
+  <li><a href="#loading-the-data" id="toc-loading-the-data" class="nav-link" data-scroll-target="#loading-the-data"><span class="header-section-number">14.4.2</span> Loading the Data</a></li>
+  <li><a href="#visualizations-of-cont-and-phys-variables" id="toc-visualizations-of-cont-and-phys-variables" class="nav-link" data-scroll-target="#visualizations-of-cont-and-phys-variables"><span class="header-section-number">14.4.3</span> Visualizations of <code>CONT</code> and <code>PHYS</code> Variables</a></li>
+  <li><a href="#summary-statistics-for-cont-and-phys-variables" id="toc-summary-statistics-for-cont-and-phys-variables" class="nav-link" data-scroll-target="#summary-statistics-for-cont-and-phys-variables"><span class="header-section-number">14.4.4</span> Summary Statistics for <code>CONT</code> and <code>PHYS</code> Variables</a></li>
+  <li><a href="#skewness-and-kurtosis-for-cont-and-phys-variables" id="toc-skewness-and-kurtosis-for-cont-and-phys-variables" class="nav-link" data-scroll-target="#skewness-and-kurtosis-for-cont-and-phys-variables"><span class="header-section-number">14.4.5</span> Skewness and Kurtosis for <code>CONT</code> and <code>PHYS</code> Variables</a></li>
+  <li><a href="#visualizations-of-transformed-cont-and-phys-variables" id="toc-visualizations-of-transformed-cont-and-phys-variables" class="nav-link" data-scroll-target="#visualizations-of-transformed-cont-and-phys-variables"><span class="header-section-number">14.4.6</span> Visualizations of Transformed <code>CONT</code> and <code>PHYS</code> Variables</a></li>
+  <li><a href="#skewness-and-kurtosis-for-transformed-cont-and-phys-variables" id="toc-skewness-and-kurtosis-for-transformed-cont-and-phys-variables" class="nav-link" data-scroll-target="#skewness-and-kurtosis-for-transformed-cont-and-phys-variables"><span class="header-section-number">14.4.7</span> Skewness and Kurtosis for Transformed <code>CONT</code> and <code>PHYS</code> Variables</a></li>
   </ul>
 </li>
-  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">13.5</span> Results</a></li>
-  <li><a href="#conclusion-and-discussion" id="toc-conclusion-and-discussion" class="nav-link" data-scroll-target="#conclusion-and-discussion"><span class="header-section-number">13.6</span> Conclusion and Discussion</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">13.7</span> References</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">14.5</span> Results</a></li>
+  <li><a href="#conclusion-and-discussion" id="toc-conclusion-and-discussion" class="nav-link" data-scroll-target="#conclusion-and-discussion"><span class="header-section-number">14.6</span> Conclusion and Discussion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">14.7</span> References</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/02_transformations.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_transformations.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_transformations.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Transformations to Normality</span>
+<span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Transformations to Normality</span>
 </h1>
 </div>
 
@@ -502,8 +532,8 @@ window.Quarto = {
   
 
 
-</header><section id="introduction" class="level2" data-number="13.1"><h2 data-number="13.1" class="anchored" data-anchor-id="introduction">
-<span class="header-section-number">13.1</span> Introduction</h2>
+</header><section id="introduction" class="level2" data-number="14.1"><h2 data-number="14.1" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">14.1</span> Introduction</h2>
 <p>The pattern of values obtained when a variable is measured in a large number of individuals is called a distribution. Distributions can be broadly classified as normal and non-normal. The normal distribution is also called ‘Gaussian distribution’ as it was first described by K.F. Gauss. This chapter outlines the process of transforming data to achieve a normal distribution in R. Parametric methods, such as t-tests and ANOVA, require that the dependent (outcome) variable is approximately normally distributed within each group being compared. When the normality assumption is not satisfied, transforming the data can correct the non-normal distributions. For t-tests and ANOVA, it is sufficient to transform the dependent variable. However, for linear regression, transformations may be applied to the independent variable, the dependent variable, or both to achieve a linear relationship between variables and ensure homoscedasticity.</p>
 <p>Here are the libraries we will use for this material:</p>
 <div class="cell">
@@ -514,16 +544,16 @@ window.Quarto = {
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="when-to-apply-transformations-to-normality" class="level2" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="when-to-apply-transformations-to-normality">
-<span class="header-section-number">13.2</span> When to Apply Transformations to Normality</h2>
+</section><section id="when-to-apply-transformations-to-normality" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="when-to-apply-transformations-to-normality">
+<span class="header-section-number">14.2</span> When to Apply Transformations to Normality</h2>
 <p>One of the critical assumptions of statistical hypothesis testing is that the data are samples from a normal distribution. Therefore, it is essential to identify whether distributions are skewed or normal. There are several straightforward methods to detect skewness. Firstly, if the mean is less than twice the standard deviation, the distribution is likely skewed. Additionally, in a normally distributed population, the mean and standard deviation of the samples are independent. This characteristic can be used to detect skewness; if the standard deviation increases as the mean increases across groups from a population, the distribution is skewed. Beyond these simple methods, normality can be verified using statistical tests such as the Shapiro-Wilk test, the Kolmogorov-Smirnov test, and the Anderson-Darling test. Additionally, the <code>moments</code> package in R can be used to calculate skewness quantitatively. The skewness is determined using the third standardized moment, providing a measure of the asymmetry of the data distribution. If skewness is identified, efforts should be made to transform the data to achieve a normal distribution. This transformation is crucial for applying robust parametric tests in the analysis.</p>
 <p>Transformations can also be employed to facilitate comparison and interpretation. A classical example of a variable commonly reported after logarithmic transformation is the hydrogen ion concentration (pH). Another instance where transformation aids in data comparison is the logarithmic transformation of a dose-response curve. When plotted, the dose-response relationship is curvilinear; however, plotting the response against the logarithm of the dose (log dose-response plot) results in an elongated S-shaped curve. The middle portion of this curve forms a straight line, making it easier to compare two straight lines by measuring their slopes than to compare two curves. Thus, transformation can significantly enhance data comparison.</p>
 <p>In summary, transformations can be applied to normalize data distribution or to simplify interpretation and comparison.</p>
-</section><section id="types-of-transformations-to-normality" class="level2" data-number="13.3"><h2 data-number="13.3" class="anchored" data-anchor-id="types-of-transformations-to-normality">
-<span class="header-section-number">13.3</span> Types of Transformations to Normality</h2>
+</section><section id="types-of-transformations-to-normality" class="level2" data-number="14.3"><h2 data-number="14.3" class="anchored" data-anchor-id="types-of-transformations-to-normality">
+<span class="header-section-number">14.3</span> Types of Transformations to Normality</h2>
 <p>Often, the transformation that normalizes the distribution also equalizes the variance. While there are several types of transformations available, such as logarithmic, square root, reciprocal, cube root, and Box-Cox, the first three are the most commonly used. Among the transformations discussed in this section, the logarithmic transformation is the most often used. The following guidelines can help in selecting the appropriate method of transformation:</p>
-<section id="logarithmic-transformation" class="level3" data-number="13.3.1"><h3 data-number="13.3.1" class="anchored" data-anchor-id="logarithmic-transformation">
-<span class="header-section-number">13.3.1</span> Logarithmic Transformation</h3>
+<section id="logarithmic-transformation" class="level3" data-number="14.3.1"><h3 data-number="14.3.1" class="anchored" data-anchor-id="logarithmic-transformation">
+<span class="header-section-number">14.3.1</span> Logarithmic Transformation</h3>
 <p>If the standard deviation is proportional to the mean, the distribution is positively skewed, making logarithmic transformation ideal. Note that when using a log transformation, a constant should be added to all values to ensure they are positive before transformation. The log tranformation is <span class="math display">\[
 y' = \log(y + c),
 \]</span> where <span class="math inline">\(y\)</span> is the original value and <span class="math inline">\(c\)</span> is a constant added to ensure all values are positive.</p>
@@ -537,8 +567,8 @@ y' = \log(y + c),
 </div>
 </div>
 </div>
-</section><section id="square-root-transformation" class="level3" data-number="13.3.2"><h3 data-number="13.3.2" class="anchored" data-anchor-id="square-root-transformation">
-<span class="header-section-number">13.3.2</span> Square Root Transformation</h3>
+</section><section id="square-root-transformation" class="level3" data-number="14.3.2"><h3 data-number="14.3.2" class="anchored" data-anchor-id="square-root-transformation">
+<span class="header-section-number">14.3.2</span> Square Root Transformation</h3>
 <p>When the variance is proportional to the mean, square root transformation is preferred. This is particularly applicable to variables measured as counts, such as the number of malignant cells in a microscopic field or the number of deaths from swine flu. The square root transformation is: <span class="math display">\[
 y' = \sqrt{y}.
 \]</span></p>
@@ -552,8 +582,8 @@ y' = \sqrt{y}.
 </div>
 </div>
 </div>
-</section><section id="arithmetic-reciprocal-transformation" class="level3" data-number="13.3.3"><h3 data-number="13.3.3" class="anchored" data-anchor-id="arithmetic-reciprocal-transformation">
-<span class="header-section-number">13.3.3</span> Arithmetic Reciprocal Transformation</h3>
+</section><section id="arithmetic-reciprocal-transformation" class="level3" data-number="14.3.3"><h3 data-number="14.3.3" class="anchored" data-anchor-id="arithmetic-reciprocal-transformation">
+<span class="header-section-number">14.3.3</span> Arithmetic Reciprocal Transformation</h3>
 <p>If the observations are truncated on the right (such as often the case for academic grade distributions), then one preliminary transformation is to “reverse” the values by subtracting each value from the maximum of all observed values (or from the maximum possible value for observations on a defined scale). This operation “flips” the data distribution from having a heavy left tail to having a heavy right tail, which allows us to perform a secondary transformation (such as a log or square root). This transformation is: <span class="math display">\[
 y' = \max(y) - y.
 \]</span></p>
@@ -566,8 +596,8 @@ y' = \max(y) - y.
 </div>
 </div>
 <p><strong>NOTE: now that the data are right-skewed, other transformations can be applied as usual.</strong></p>
-</section><section id="geometric-reciprocal-transformation" class="level3" data-number="13.3.4"><h3 data-number="13.3.4" class="anchored" data-anchor-id="geometric-reciprocal-transformation">
-<span class="header-section-number">13.3.4</span> Geometric Reciprocal Transformation</h3>
+</section><section id="geometric-reciprocal-transformation" class="level3" data-number="14.3.4"><h3 data-number="14.3.4" class="anchored" data-anchor-id="geometric-reciprocal-transformation">
+<span class="header-section-number">14.3.4</span> Geometric Reciprocal Transformation</h3>
 <p>If the standard deviation is proportional to the mean squared, a reciprocal transformation is appropriate. This is typically used for highly variable quantities, such as serum creatinine levels. Note that this transformation requires all values to be positive or all values to be negative before applying it. <span class="math display">\[
 y' = \frac{1}{y \pm c},
 \]</span> where <span class="math inline">\(y\)</span> is the original value and <span class="math inline">\(c\)</span> is a constant added (subtracted) to ensure all values are positive (negative).</p>
@@ -581,8 +611,8 @@ y' = \frac{1}{y \pm c},
 </div>
 </div>
 </div>
-</section><section id="box-cox-transformation" class="level3" data-number="13.3.5"><h3 data-number="13.3.5" class="anchored" data-anchor-id="box-cox-transformation">
-<span class="header-section-number">13.3.5</span> Box-Cox Transformation</h3>
+</section><section id="box-cox-transformation" class="level3" data-number="14.3.5"><h3 data-number="14.3.5" class="anchored" data-anchor-id="box-cox-transformation">
+<span class="header-section-number">14.3.5</span> Box-Cox Transformation</h3>
 <p>The Box-Cox transformation is a family of power transformations that can be used to stabilize variance and make the data more closely conform to a normal distribution, especially when the best power transformation (e.g., square root, logarithmic) is uncertain. By estimating an optimal parameter <span class="math inline">\(\lambda\)</span> from the data, the Box-Cox transformation tailors the transformation to the specific dataset’s needs. The transformation is defined as:</p>
 <p><span class="math display">\[
 y(\lambda) = \begin{cases}
@@ -606,13 +636,13 @@ y(\lambda) = \begin{cases}
 </div>
 </div>
 </div>
-</section></section><section id="examples-of-transformations-to-normality" class="level2" data-number="13.4"><h2 data-number="13.4" class="anchored" data-anchor-id="examples-of-transformations-to-normality">
-<span class="header-section-number">13.4</span> Examples of Transformations to Normality</h2>
-<section id="data-source-and-description" class="level3" data-number="13.4.1"><h3 data-number="13.4.1" class="anchored" data-anchor-id="data-source-and-description">
-<span class="header-section-number">13.4.1</span> Data Source and Description</h3>
+</section></section><section id="examples-of-transformations-to-normality" class="level2" data-number="14.4"><h2 data-number="14.4" class="anchored" data-anchor-id="examples-of-transformations-to-normality">
+<span class="header-section-number">14.4</span> Examples of Transformations to Normality</h2>
+<section id="data-source-and-description" class="level3" data-number="14.4.1"><h3 data-number="14.4.1" class="anchored" data-anchor-id="data-source-and-description">
+<span class="header-section-number">14.4.1</span> Data Source and Description</h3>
 <p>The <code>USJudgeRatings</code> dataset is a built-in dataset in R that contains ratings of 43 judges in the US Superior Court. The ratings are based on the evaluations from lawyers who have had cases before these judges. The dataset includes multiple variables that represent different aspects of the judges’ performance.</p>
-<section id="variables-in-the-dataset" class="level4" data-number="13.4.1.1"><h4 data-number="13.4.1.1" class="anchored" data-anchor-id="variables-in-the-dataset">
-<span class="header-section-number">13.4.1.1</span> Variables in the Dataset</h4>
+<section id="variables-in-the-dataset" class="level4" data-number="14.4.1.1"><h4 data-number="14.4.1.1" class="anchored" data-anchor-id="variables-in-the-dataset">
+<span class="header-section-number">14.4.1.1</span> Variables in the Dataset</h4>
 <ul>
 <li>
 <code>CONT</code>: Judicial “controlling” or authoritative nature.</li>
@@ -645,8 +675,8 @@ y(\lambda) = \begin{cases}
 <code>CONT</code>: Number of contacts of lawyer with judge. Positively skewed.</li>
 <li>
 <code>PHYS</code>: Physical ability. Negatively skewed</li>
-</ul></section></section><section id="loading-the-data" class="level3" data-number="13.4.2"><h3 data-number="13.4.2" class="anchored" data-anchor-id="loading-the-data">
-<span class="header-section-number">13.4.2</span> Loading the Data</h3>
+</ul></section></section><section id="loading-the-data" class="level3" data-number="14.4.2"><h3 data-number="14.4.2" class="anchored" data-anchor-id="loading-the-data">
+<span class="header-section-number">14.4.2</span> Loading the Data</h3>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Load the USJudgeRatings dataset</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USJudgeRatings"</span><span class="op">)</span></span>
@@ -664,8 +694,8 @@ BRACKEN,J.J.    7.3  6.4  4.3  6.5  6.0  6.2  5.7  5.7  5.1  5.3  5.5  4.8
 BURNS,E.B.      6.2  8.8  8.7  8.5  7.9  8.0  8.1  8.0  8.0  8.0  8.6  8.6</code></pre>
 </div>
 </div>
-</section><section id="visualizations-of-cont-and-phys-variables" class="level3" data-number="13.4.3"><h3 data-number="13.4.3" class="anchored" data-anchor-id="visualizations-of-cont-and-phys-variables">
-<span class="header-section-number">13.4.3</span> Visualizations of <code>CONT</code> and <code>PHYS</code> Variables</h3>
+</section><section id="visualizations-of-cont-and-phys-variables" class="level3" data-number="14.4.3"><h3 data-number="14.4.3" class="anchored" data-anchor-id="visualizations-of-cont-and-phys-variables">
+<span class="header-section-number">14.4.3</span> Visualizations of <code>CONT</code> and <code>PHYS</code> Variables</h3>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">CONT</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -684,7 +714,7 @@ BURNS,E.B.      6.2  8.8  8.7  8.5  7.9  8.0  8.1  8.0  8.0  8.0  8.6  8.6</code
 <img src="02_transformations_files/figure-html/fig-plot-cont-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-cont-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.1: Distribution of CONT Variable
+Figure&nbsp;14.1: Distribution of CONT Variable
 </figcaption></figure>
 </div>
 </div>
@@ -707,13 +737,13 @@ Figure&nbsp;13.1: Distribution of CONT Variable
 <img src="02_transformations_files/figure-html/fig-plot-phys-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-phys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.2: Distribution of PHYS Variable
+Figure&nbsp;14.2: Distribution of PHYS Variable
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section><section id="summary-statistics-for-cont-and-phys-variables" class="level3" data-number="13.4.4"><h3 data-number="13.4.4" class="anchored" data-anchor-id="summary-statistics-for-cont-and-phys-variables">
-<span class="header-section-number">13.4.4</span> Summary Statistics for <code>CONT</code> and <code>PHYS</code> Variables</h3>
+</section><section id="summary-statistics-for-cont-and-phys-variables" class="level3" data-number="14.4.4"><h3 data-number="14.4.4" class="anchored" data-anchor-id="summary-statistics-for-cont-and-phys-variables">
+<span class="header-section-number">14.4.4</span> Summary Statistics for <code>CONT</code> and <code>PHYS</code> Variables</h3>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Get the summary statistics for CONT and PHYS variables; note that the</span></span>
 <span><span class="co">#   summary() function returns a named numeric vector, so to preserve the names</span></span>
@@ -727,7 +757,7 @@ Figure&nbsp;13.2: Distribution of PHYS Variable
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">summary_df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="tbl-summary-stats" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summary-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;13.1: Summary Statistics for CONT and PHYS Variables
+Table&nbsp;14.1: Summary Statistics for CONT and PHYS Variables
 </figcaption><div aria-describedby="tbl-summary-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <table class="do-not-create-environment cell table table-sm table-striped small">
@@ -774,8 +804,8 @@ Table&nbsp;13.1: Summary Statistics for CONT and PHYS Variables
 </figure>
 </div>
 </div>
-</section><section id="skewness-and-kurtosis-for-cont-and-phys-variables" class="level3" data-number="13.4.5"><h3 data-number="13.4.5" class="anchored" data-anchor-id="skewness-and-kurtosis-for-cont-and-phys-variables">
-<span class="header-section-number">13.4.5</span> Skewness and Kurtosis for <code>CONT</code> and <code>PHYS</code> Variables</h3>
+</section><section id="skewness-and-kurtosis-for-cont-and-phys-variables" class="level3" data-number="14.4.5"><h3 data-number="14.4.5" class="anchored" data-anchor-id="skewness-and-kurtosis-for-cont-and-phys-variables">
+<span class="header-section-number">14.4.5</span> Skewness and Kurtosis for <code>CONT</code> and <code>PHYS</code> Variables</h3>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calculate skewness and kurtosis for CONT and PHYS variables with moments:: </span></span>
 <span><span class="va">skewness_vals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CONT"</span>, <span class="st">"PHYS"</span><span class="op">)</span><span class="op">]</span>, <span class="fu">moments</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">)</span></span>
@@ -791,7 +821,7 @@ Table&nbsp;13.1: Summary Statistics for CONT and PHYS Variables
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">skew_kurt_df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="tbl-skewness-kurtosis" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-skewness-kurtosis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;13.2: Skewness and Kurtosis for CONT and PHYS Variables
+Table&nbsp;14.2: Skewness and Kurtosis for CONT and PHYS Variables
 </figcaption><div aria-describedby="tbl-skewness-kurtosis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <table class="do-not-create-environment cell table table-sm table-striped small">
@@ -818,8 +848,8 @@ Table&nbsp;13.2: Skewness and Kurtosis for CONT and PHYS Variables
 </figure>
 </div>
 </div>
-</section><section id="visualizations-of-transformed-cont-and-phys-variables" class="level3" data-number="13.4.6"><h3 data-number="13.4.6" class="anchored" data-anchor-id="visualizations-of-transformed-cont-and-phys-variables">
-<span class="header-section-number">13.4.6</span> Visualizations of Transformed <code>CONT</code> and <code>PHYS</code> Variables</h3>
+</section><section id="visualizations-of-transformed-cont-and-phys-variables" class="level3" data-number="14.4.6"><h3 data-number="14.4.6" class="anchored" data-anchor-id="visualizations-of-transformed-cont-and-phys-variables">
+<span class="header-section-number">14.4.6</span> Visualizations of Transformed <code>CONT</code> and <code>PHYS</code> Variables</h3>
 <p>We will first apply a natural log transformation to the “controlling/authoritarian” variable.</p>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Apply log transformation to CONT variable</span></span>
@@ -846,7 +876,7 @@ Table&nbsp;13.2: Skewness and Kurtosis for CONT and PHYS Variables
 <img src="02_transformations_files/figure-html/fig-plot-transformed-cont-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-transformed-cont-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.3: Distribution of log transformed CONT Variable
+Figure&nbsp;14.3: Distribution of log transformed CONT Variable
 </figcaption></figure>
 </div>
 </div>
@@ -863,7 +893,7 @@ Figure&nbsp;13.3: Distribution of log transformed CONT Variable
 <img src="02_transformations_files/figure-html/fig-plot-boxcox-lambda-phys-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-boxcox-lambda-phys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.4: Distribution of optimal lambda determined by the <code>boxcox</code> function
+Figure&nbsp;14.4: Distribution of optimal lambda determined by the <code>boxcox</code> function
 </figcaption></figure>
 </div>
 </div>
@@ -890,13 +920,13 @@ Figure&nbsp;13.4: Distribution of optimal lambda determined by the <code>boxcox<
 <img src="02_transformations_files/figure-html/fig-plot-boxcox-phys-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-boxcox-phys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13.5: Distribution of Box-Cox transformed PHYS Variable
+Figure&nbsp;14.5: Distribution of Box-Cox transformed PHYS Variable
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section><section id="skewness-and-kurtosis-for-transformed-cont-and-phys-variables" class="level3" data-number="13.4.7"><h3 data-number="13.4.7" class="anchored" data-anchor-id="skewness-and-kurtosis-for-transformed-cont-and-phys-variables">
-<span class="header-section-number">13.4.7</span> Skewness and Kurtosis for Transformed <code>CONT</code> and <code>PHYS</code> Variables</h3>
+</section><section id="skewness-and-kurtosis-for-transformed-cont-and-phys-variables" class="level3" data-number="14.4.7"><h3 data-number="14.4.7" class="anchored" data-anchor-id="skewness-and-kurtosis-for-transformed-cont-and-phys-variables">
+<span class="header-section-number">14.4.7</span> Skewness and Kurtosis for Transformed <code>CONT</code> and <code>PHYS</code> Variables</h3>
 <div class="cell">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calculate skewness and kurtosis for transformed variables</span></span>
 <span><span class="va">skewness_vals_trans</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"LOG_CONT"</span>, <span class="st">"BOX_COX_PHYS"</span><span class="op">)</span><span class="op">]</span>, <span class="va">skewness</span><span class="op">)</span></span>
@@ -912,7 +942,7 @@ Figure&nbsp;13.5: Distribution of Box-Cox transformed PHYS Variable
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">skew_kurt_df_trans</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="tbl-skewness-kurtosis_transformed" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-skewness-kurtosis_transformed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;13.3: Skewness and Kurtosis for Transformed Variables (LOG_CONT and BOX_COX_PHYS)
+Table&nbsp;14.3: Skewness and Kurtosis for Transformed Variables (LOG_CONT and BOX_COX_PHYS)
 </figcaption><div aria-describedby="tbl-skewness-kurtosis_transformed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <table class="do-not-create-environment cell table table-sm table-striped small">
@@ -939,14 +969,14 @@ Table&nbsp;13.3: Skewness and Kurtosis for Transformed Variables (LOG_CONT and B
 </figure>
 </div>
 </div>
-</section></section><section id="results" class="level2" data-number="13.5"><h2 data-number="13.5" class="anchored" data-anchor-id="results">
-<span class="header-section-number">13.5</span> Results</h2>
+</section></section><section id="results" class="level2" data-number="14.5"><h2 data-number="14.5" class="anchored" data-anchor-id="results">
+<span class="header-section-number">14.5</span> Results</h2>
 <p>The application of log and Box-Cox transformations has effectively improved the normality of the <code>CONT</code> and <code>PHYS</code> variables, respectively. For the <code>CONT</code> variable, the original distribution exhibited a positive skewness of 1.086 and a kurtosis of 4.730, indicating a right-skewed distribution with heavy tails and a sharp peak. The log transformation reduced the skewness to 0.656 and the kurtosis to 3.758, demonstrating a significant move towards normality, though the distribution still retains some right-skewness and heavier tails compared to a normal distribution. The <code>PHYS</code> variable originally had a negative skewness of -1.558 and a kurtosis of 5.408, reflecting a left-skewed distribution with heavy tails and a pronounced peak. Following the Box-Cox transformation, the skewness was reduced to -0.381 and the kurtosis to 2.502. These results indicate that the transformed <code>PHYS</code> distribution is much closer to normality, with reduced skewness and lighter tails, achieving a more symmetric distribution. In summary, the transformations have substantially mitigated the skewness and kurtosis of both variables, enhancing their suitability for statistical analyses that assume normality. This adjustment ensures more reliable and valid results in subsequent analyses.</p>
-</section><section id="conclusion-and-discussion" class="level2" data-number="13.6"><h2 data-number="13.6" class="anchored" data-anchor-id="conclusion-and-discussion">
-<span class="header-section-number">13.6</span> Conclusion and Discussion</h2>
+</section><section id="conclusion-and-discussion" class="level2" data-number="14.6"><h2 data-number="14.6" class="anchored" data-anchor-id="conclusion-and-discussion">
+<span class="header-section-number">14.6</span> Conclusion and Discussion</h2>
 <p>The transformations applied to the CONT and PHYS variables demonstrate the effectiveness of data transformation techniques in improving the normality of distributions. By addressing skewness and kurtosis, transformations like the log and Box-Cox methods help in stabilizing variance and making data more symmetric. This enhancement is crucial for statistical analyses that rely on the assumption of normality, ensuring more accurate and reliable results. Overall, the use of appropriate transformations is a vital step in data preprocessing, significantly enhancing the suitability of data for various analytical procedures and improving the robustness of statistical inferences. However, caution is warranted in the interpretation of results after transformation. Transformed data can sometimes complicate the understanding of results and their real-world implications, as the transformed scale may not directly relate to the original measurements. It is essential to back-transform results when interpreting findings to ensure they are meaningful and relevant to the original context.</p>
-</section><section id="references" class="level2" data-number="13.7"><h2 data-number="13.7" class="anchored" data-anchor-id="references">
-<span class="header-section-number">13.7</span> References</h2>
+</section><section id="references" class="level2" data-number="14.7"><h2 data-number="14.7" class="anchored" data-anchor-id="references">
+<span class="header-section-number">14.7</span> References</h2>
 <ol type="1">
 <li>Manikandan S. (2010). Data transformation. <em>Journal of pharmacology &amp; pharmacotherapeutics</em>, <em>1</em>(2), 126–127. https://doi.org/10.4103/0976-500X.72373</li>
 <li>West R. M. (2022). Best practice in statistics: The use of log transformation. <em>Annals of clinical biochemistry</em>, <em>59</em>(3), 162–165. https://doi.org/10.1177/00045632211050531</li>
@@ -1364,12 +1394,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../lessons/02_chiSq_GoF.html" class="pagination-link" aria-label="The Chi Squared Goodness-of-Fit Test">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../lessons/02_fisher_exact_test.html" class="pagination-link" aria-label="Fisher's Exact Test">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

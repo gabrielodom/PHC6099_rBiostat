@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<title>An R Cookbook for Public Health - 17&nbsp; Bootstrap Tests</title>
+<title>An R Cookbook for Public Health - 19&nbsp; Bootstrap Tests</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,7 +131,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/03_two_sample_bootstrap_conf_int.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/03_two_sample_bootstrap_conf_int.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -230,38 +230,44 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_ttest_one_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">One-sample/paired t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons/02_wilcoxon_one_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_mcnemar_paired_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_cochrans_q_paired_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -278,25 +284,31 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_welch_ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Two sample Welchs test or Welchs t-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -313,55 +325,61 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_one_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_welch_two_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Welch’s Anova</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_corr_cov.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -378,13 +396,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_poisson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_negative_binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Generalized Linear Models: Negative Binomial</span></span></a>
   </div>
 </li>
       </ul>
@@ -401,13 +431,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_elastic_net_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_survival_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
   </div>
 </li>
       </ul>
@@ -424,7 +454,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -437,25 +467,25 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction-to-bootstrapping" id="toc-introduction-to-bootstrapping" class="nav-link active" data-scroll-target="#introduction-to-bootstrapping"><span class="header-section-number">17.1</span> Introduction to Bootstrapping</a></li>
-  <li><a href="#mathematical-definition" id="toc-mathematical-definition" class="nav-link" data-scroll-target="#mathematical-definition"><span class="header-section-number">17.2</span> Mathematical definition</a></li>
-  <li><a href="#penguins-data" id="toc-penguins-data" class="nav-link" data-scroll-target="#penguins-data"><span class="header-section-number">17.3</span> <code>penguins</code> Data</a></li>
-  <li><a href="#cleaning-the-data" id="toc-cleaning-the-data" class="nav-link" data-scroll-target="#cleaning-the-data"><span class="header-section-number">17.4</span> Cleaning the data</a></li>
-  <li><a href="#assumptions-of-bootstrap" id="toc-assumptions-of-bootstrap" class="nav-link" data-scroll-target="#assumptions-of-bootstrap"><span class="header-section-number">17.5</span> Assumptions of Bootstrap</a></li>
-  <li><a href="#checking-distribution" id="toc-checking-distribution" class="nav-link" data-scroll-target="#checking-distribution"><span class="header-section-number">17.6</span> Checking Distribution</a></li>
+<li><a href="#introduction-to-bootstrapping" id="toc-introduction-to-bootstrapping" class="nav-link active" data-scroll-target="#introduction-to-bootstrapping"><span class="header-section-number">19.1</span> Introduction to Bootstrapping</a></li>
+  <li><a href="#mathematical-definition" id="toc-mathematical-definition" class="nav-link" data-scroll-target="#mathematical-definition"><span class="header-section-number">19.2</span> Mathematical definition</a></li>
+  <li><a href="#penguins-data" id="toc-penguins-data" class="nav-link" data-scroll-target="#penguins-data"><span class="header-section-number">19.3</span> <code>penguins</code> Data</a></li>
+  <li><a href="#cleaning-the-data" id="toc-cleaning-the-data" class="nav-link" data-scroll-target="#cleaning-the-data"><span class="header-section-number">19.4</span> Cleaning the data</a></li>
+  <li><a href="#assumptions-of-bootstrap" id="toc-assumptions-of-bootstrap" class="nav-link" data-scroll-target="#assumptions-of-bootstrap"><span class="header-section-number">19.5</span> Assumptions of Bootstrap</a></li>
+  <li><a href="#checking-distribution" id="toc-checking-distribution" class="nav-link" data-scroll-target="#checking-distribution"><span class="header-section-number">19.6</span> Checking Distribution</a></li>
   <li>
-<a href="#code-to-run-bootstrap" id="toc-code-to-run-bootstrap" class="nav-link" data-scroll-target="#code-to-run-bootstrap"><span class="header-section-number">17.7</span> Code to run Bootstrap</a>
+<a href="#code-to-run-bootstrap" id="toc-code-to-run-bootstrap" class="nav-link" data-scroll-target="#code-to-run-bootstrap"><span class="header-section-number">19.7</span> Code to run Bootstrap</a>
   <ul class="collapse">
-<li><a href="#code-for-spearman-correlation" id="toc-code-for-spearman-correlation" class="nav-link" data-scroll-target="#code-for-spearman-correlation"><span class="header-section-number">17.7.1</span> Code for spearman correlation</a></li>
+<li><a href="#code-for-spearman-correlation" id="toc-code-for-spearman-correlation" class="nav-link" data-scroll-target="#code-for-spearman-correlation"><span class="header-section-number">19.7.1</span> Code for spearman correlation</a></li>
   </ul>
 </li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">17.8</span> Conclusion</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">19.8</span> Conclusion</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/03_two_sample_bootstrap_conf_int.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/03_two_sample_bootstrap_conf_int.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/03_two_sample_bootstrap_conf_int.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span>
+<span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span>
 </h1>
 </div>
 
@@ -491,21 +521,21 @@ window.Quarto = {
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">boot</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="introduction-to-bootstrapping" class="level2" data-number="17.1"><h2 data-number="17.1" class="anchored" data-anchor-id="introduction-to-bootstrapping">
-<span class="header-section-number">17.1</span> Introduction to Bootstrapping</h2>
+<section id="introduction-to-bootstrapping" class="level2" data-number="19.1"><h2 data-number="19.1" class="anchored" data-anchor-id="introduction-to-bootstrapping">
+<span class="header-section-number">19.1</span> Introduction to Bootstrapping</h2>
 <p>Bootstrapping, introduced by Brad Efron in 1979, is founded on a straightforward concept: when our data is a sample from a larger population, why not generate additional samples by resampling from our existing data? However, since we lack access to new data, we resort to repeatedly sampling from our dataset with replacement.</p>
 <p>The primary objective of bootstrapping is to augment the sample size for analysis, particularly in scenarios where the provided sample size is limited.</p>
-</section><section id="mathematical-definition" class="level2" data-number="17.2"><h2 data-number="17.2" class="anchored" data-anchor-id="mathematical-definition">
-<span class="header-section-number">17.2</span> Mathematical definition</h2>
+</section><section id="mathematical-definition" class="level2" data-number="19.2"><h2 data-number="19.2" class="anchored" data-anchor-id="mathematical-definition">
+<span class="header-section-number">19.2</span> Mathematical definition</h2>
 <p>Bootstrapping involves randomly selecting n observations from a sample with replacement to create a bootstrap sample. The process of sampling with replacement allows each observation in the original dataset to be selected multiple times or not at all in the bootstrap sample.</p>
 <p>Once a bootstrap sample is obtained, the statistic of interest (e.g., mean, median, standard deviation) is calculated from this sample. This process is repeated multiple times to generate a distribution of the statistic under the assumption that the original dataset is representative of the population.</p>
 <p>Bootstrapping can be used to construct confidence intervals for a population parameter (e.g., mean, median) by calculating the desired quantiles (e.g., percentiles) of the bootstrap distribution of the statistic.</p>
-</section><section id="penguins-data" class="level2" data-number="17.3"><h2 data-number="17.3" class="anchored" data-anchor-id="penguins-data">
-<span class="header-section-number">17.3</span> <code>penguins</code> Data</h2>
+</section><section id="penguins-data" class="level2" data-number="19.3"><h2 data-number="19.3" class="anchored" data-anchor-id="penguins-data">
+<span class="header-section-number">19.3</span> <code>penguins</code> Data</h2>
 <p>The <code>penguins</code> dataset contains measurements collected in the Palmer Archipelago of Antarctica, made available by Dr.&nbsp;Kristen Gorman and the Palmer Station Long Term Ecological Research (LTER) Program. This dataset, included in the <code>palmerpenguins</code> package, comprises observations on various attributes of penguins, including species, island of origin, physical measurements (such as flipper length, body mass, and bill dimensions), sex, and year of observation. In total, the dataset consists of 344 rows and 8 variables.</p>
 <p>In this tests we are going to obtain the 95% confidence interval for flipper length of the Adelie penguin from two different Islands.</p>
-</section><section id="cleaning-the-data" class="level2" data-number="17.4"><h2 data-number="17.4" class="anchored" data-anchor-id="cleaning-the-data">
-<span class="header-section-number">17.4</span> Cleaning the data</h2>
+</section><section id="cleaning-the-data" class="level2" data-number="19.4"><h2 data-number="19.4" class="anchored" data-anchor-id="cleaning-the-data">
+<span class="header-section-number">19.4</span> Cleaning the data</h2>
 <div class="cell">
 <details open="" class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">new_penguins_df</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="va">species</span> <span class="op">==</span> <span class="st">"Adelie"</span>, <span class="va">island</span> <span class="op">!=</span> <span class="st">"Dream"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -517,14 +547,14 @@ window.Quarto = {
 </details>
 </div>
 <p>The island of Dream penguin population was excluded because their population size was much larger compared to Torgersen and Biscoe populations.</p>
-</section><section id="assumptions-of-bootstrap" class="level2" data-number="17.5"><h2 data-number="17.5" class="anchored" data-anchor-id="assumptions-of-bootstrap">
-<span class="header-section-number">17.5</span> Assumptions of Bootstrap</h2>
+</section><section id="assumptions-of-bootstrap" class="level2" data-number="19.5"><h2 data-number="19.5" class="anchored" data-anchor-id="assumptions-of-bootstrap">
+<span class="header-section-number">19.5</span> Assumptions of Bootstrap</h2>
 <ul>
 <li>The dataset is a random sample drawn representative of the population of interest.</li>
 <li>Resampling with replacement accurately simulates the sampling process.</li>
 <li>Observations in the dataset are independent and identically distributed</li>
-</ul></section><section id="checking-distribution" class="level2" data-number="17.6"><h2 data-number="17.6" class="anchored" data-anchor-id="checking-distribution">
-<span class="header-section-number">17.6</span> Checking Distribution</h2>
+</ul></section><section id="checking-distribution" class="level2" data-number="19.6"><h2 data-number="19.6" class="anchored" data-anchor-id="checking-distribution">
+<span class="header-section-number">19.6</span> Checking Distribution</h2>
 <div class="cell">
 <details open="" class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># check the boxplot of the data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span></span>
@@ -552,8 +582,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</section><section id="code-to-run-bootstrap" class="level2" data-number="17.7"><h2 data-number="17.7" class="anchored" data-anchor-id="code-to-run-bootstrap">
-<span class="header-section-number">17.7</span> Code to run Bootstrap</h2>
+</section><section id="code-to-run-bootstrap" class="level2" data-number="19.7"><h2 data-number="19.7" class="anchored" data-anchor-id="code-to-run-bootstrap">
+<span class="header-section-number">19.7</span> Code to run Bootstrap</h2>
 <div class="cell">
 <details open="" class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># set a seed so that our random results can be replicated by other people:</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">20150516</span><span class="op">)</span></span>
@@ -629,8 +659,8 @@ window.Quarto = {
 188.7682 191.3684 </code></pre>
 </div>
 </div>
-<section id="code-for-spearman-correlation" class="level3" data-number="17.7.1"><h3 data-number="17.7.1" class="anchored" data-anchor-id="code-for-spearman-correlation">
-<span class="header-section-number">17.7.1</span> Code for spearman correlation</h3>
+<section id="code-for-spearman-correlation" class="level3" data-number="19.7.1"><h3 data-number="19.7.1" class="anchored" data-anchor-id="code-for-spearman-correlation">
+<span class="header-section-number">19.7.1</span> Code for spearman correlation</h3>
 <div class="cell">
 <details open="" class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Custom function to find correlation between the bill length and depth </span></span>
 <span><span class="va">corr.fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">idx</span><span class="op">)</span> <span class="op">{</span></span>
@@ -691,8 +721,8 @@ Calculations and Intervals on Original Scale</code></pre>
 </div>
 </div>
 <p>This code utilizes bootstrapping to estimate the sampling distribution and confidence interval of the Spearman correlation coefficient between bill length and depth in the iris dataset. The <code><a href="https://rdrr.io/pkg/boot/man/boot.html">boot()</a></code> function generates bootstrap samples, while the <code><a href="https://rdrr.io/pkg/boot/man/boot.ci.html">boot.ci()</a></code> function calculates the bootstrap confidence interval. Visualizations are provided to aid in understanding the sampling distribution.</p>
-</section></section><section id="conclusion" class="level2" data-number="17.8"><h2 data-number="17.8" class="anchored" data-anchor-id="conclusion">
-<span class="header-section-number">17.8</span> Conclusion</h2>
+</section></section><section id="conclusion" class="level2" data-number="19.8"><h2 data-number="19.8" class="anchored" data-anchor-id="conclusion">
+<span class="header-section-number">19.8</span> Conclusion</h2>
 <p>In conclusion, bootstrap testing emerges as a valuable tool, particularly when confronted with small sample sizes. By leveraging resampling techniques, it offers a robust method to estimate parameters, assess uncertainty, and make reliable inferences about population statistics.</p>
 
 
@@ -1106,12 +1136,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../lessons/03_two_sample_mann_whitney.html" class="pagination-link" aria-label="Mann-Whitney-U Test Example">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../lessons/03_two_sample_chi_sq_independence.html" class="pagination-link" aria-label="Chi-Square Test of Independence">
-        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

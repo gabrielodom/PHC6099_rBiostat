@@ -1,0 +1,2418 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Gabriel Odom">
+<meta name="dcterms.date" content="2024-07-18">
+<title>An R Cookbook for Public Health - 32&nbsp; Ordinal Logistic Regression</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../lessons/05_glm_poisson.html" rel="next">
+<link href="../lessons/05_glm_logistic.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../05_header_generalized-linear-models.html">Generalized Linear Models</a></li><li class="breadcrumb-item"><a href="../lessons/05_glm_ordinal_logistic.html"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">An R Cookbook for Public Health</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/gabrielodom/PHC6099_rBiostat" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Course Materials for PHC 6099: ‘R Computing for Health Sciences’</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">About this Book</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../01_header_EDA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exploratory Data Analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_mosaic_violin.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Mosaic &amp; Box/Violin Plots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_scatterplots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">How to Create a Scatterplot</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/01_skimr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Skimr Package</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_table1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Demographics Table With Table1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_gtsummary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Table by gtsummary</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../02_header_one-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">One-Sample Tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_z-test_one_prop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_ttest_one_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">One-sample/paired t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_wilcoxon_one_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_mcnemar_paired_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_cochrans_q_paired_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../03_header_two-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Two-Sample Tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_welch_ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Two sample Welchs test or Welchs t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../04_header_anova-and-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ANOVA and Regression</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_one_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_welch_two_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Welch’s Anova</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_corr_cov.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_regression_mls.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_regression_random_intercept.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../05_header_generalized-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generalized Linear Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_poisson.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_negative_binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Generalized Linear Models: Negative Binomial</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../06_header_special-topics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Special Topics in Statistical Modelling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06_elastic_net_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06_survival_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../07_header_power.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Power and Sample Size Determination</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">32.1</span> Introduction</a></li>
+  <li><a href="#mathematical-definition-of-method" id="toc-mathematical-definition-of-method" class="nav-link" data-scroll-target="#mathematical-definition-of-method"><span class="header-section-number">32.2</span> Mathematical Definition of Method</a></li>
+  <li><a href="#mathematical-formulation-of-an-ordinal-model" id="toc-mathematical-formulation-of-an-ordinal-model" class="nav-link" data-scroll-target="#mathematical-formulation-of-an-ordinal-model"><span class="header-section-number">32.3</span> Mathematical Formulation of an Ordinal Model</a></li>
+  <li><a href="#data-source-and-description" id="toc-data-source-and-description" class="nav-link" data-scroll-target="#data-source-and-description"><span class="header-section-number">32.4</span> Data Source and Description</a></li>
+  <li><a href="#cleaning-the-data-to-create-a-model-frame" id="toc-cleaning-the-data-to-create-a-model-frame" class="nav-link" data-scroll-target="#cleaning-the-data-to-create-a-model-frame"><span class="header-section-number">32.5</span> Cleaning the Data to Create a Model Frame</a></li>
+  <li><a href="#assumptions-of-the-method" id="toc-assumptions-of-the-method" class="nav-link" data-scroll-target="#assumptions-of-the-method"><span class="header-section-number">32.6</span> Assumptions of the Method</a></li>
+  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration"><span class="header-section-number">32.7</span> Data Exploration</a></li>
+  <li><a href="#plotting-outcome-variable" id="toc-plotting-outcome-variable" class="nav-link" data-scroll-target="#plotting-outcome-variable"><span class="header-section-number">32.8</span> Plotting Outcome Variable</a></li>
+  <li><a href="#fitting-the-model" id="toc-fitting-the-model" class="nav-link" data-scroll-target="#fitting-the-model"><span class="header-section-number">32.9</span> Fitting the Model</a></li>
+  <li><a href="#interpreting-the-regression-coefficients" id="toc-interpreting-the-regression-coefficients" class="nav-link" data-scroll-target="#interpreting-the-regression-coefficients"><span class="header-section-number">32.10</span> Interpreting the Regression Coefficients</a></li>
+  <li><a href="#generating-p-values" id="toc-generating-p-values" class="nav-link" data-scroll-target="#generating-p-values"><span class="header-section-number">32.11</span> Generating P Values</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">32.12</span> Conclusion</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/05_glm_ordinal_logistic.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../05_header_generalized-linear-models.html">Generalized Linear Models</a></li><li class="breadcrumb-item"><a href="../lessons/05_glm_ordinal_logistic.html"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Gemma Galvez </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 18, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header><div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Install required packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://conflicted.r-lib.org/">conflicted</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://conflicted.r-lib.org/reference/conflict_prefer.html">conflict_prefer</a></span><span class="op">(</span><span class="st">"filter"</span>, <span class="st">"dplyr"</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://conflicted.r-lib.org/reference/conflict_prefer.html">conflict_prefer</a></span><span class="op">(</span><span class="st">"lag"</span>, <span class="st">"dplyr"</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># suppress "`summarise()` has grouped output by " messages</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>dplyr.summarise.inform <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/benjaminrich/table1">table1</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/AnestisTouloumis/multgee">multgee</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/skimr/">skimr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rapporter.github.io/pander/">pander</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddsjoberg/gtsummary">gtsummary</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/">car</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ben519/mltools">mltools</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">pomcheckr</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://conflicted.r-lib.org/reference/conflict_prefer.html">conflict_prefer</a></span><span class="op">(</span><span class="st">"filter"</span>, <span class="st">"dplyr"</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://conflicted.r-lib.org/reference/conflict_prefer.html">conflict_prefer</a></span><span class="op">(</span><span class="st">"select"</span>, <span class="st">"dplyr"</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="introduction" class="level2" data-number="32.1"><h2 data-number="32.1" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">32.1</span> Introduction</h2>
+<p>So you’ve found yourself thinking about regression again, haven’t you? I can relate. At this point, you’re probably familiar with the fact that logistic regression means the logit (log odds) of a binary response is linearly related to the independent variable(s). Well, Proportional Odds Logistic Regression is an extension of Logistic Regression and that’s likely how you’ve found your way here – that, or you really, really enjoy the dark corners of the internet! Welcome, make yourself at home.</p>
+</section><section id="mathematical-definition-of-method" class="level2" data-number="32.2"><h2 data-number="32.2" class="anchored" data-anchor-id="mathematical-definition-of-method">
+<span class="header-section-number">32.2</span> Mathematical Definition of Method</h2>
+<p>Now, <a href="https://www.youtube.com/watch?v=TVcLIfSC4OE">let’s get down to business</a>. Proportional Odds Logistic Regression (POLR), which is also known as Ordinal Logistic Regression, is a method of statistical analysis which may be used to model the relationship between an ordinal response, and one or more independent (or explanatory) variables. These explanatory variables may be categorical or continuous.</p>
+<p>Let’s establish some context: Have you ever been filling out a survey and it’s asked you how much you agree with something, how often you do something, or how important something is to you? While this is not an extensive list, these Likert-type responses should give you a general idea of common ordinal responses you can expect to encounter when using POLR.</p>
+<p>Some more specific examples where Ordinal Logistic Regression can be applied are:</p>
+<ul>
+<li><p><strong>Level of agreement:</strong> In a survey the responses to the outcome variable is categorized in multiple levels such as, Strongly Disagree, Disagree, Agree, Strongly Agree.</p></li>
+<li><p><strong>Satisfaction level:</strong> Measuring satisfaction level of a service on a scale like, “very dissatisfied,” “dissatisfied,” “neutral,” “satisfied,” and “very satisfied.”</p></li>
+<li><p><strong>Pain Intensity:</strong> Patients participating in medical research may be asked to rate the intensity of their pain on a scale ranging from “no pain” to “mild pain,” “moderate pain,” and “severe pain.”</p></li>
+</ul></section><section id="mathematical-formulation-of-an-ordinal-model" class="level2" data-number="32.3"><h2 data-number="32.3" class="anchored" data-anchor-id="mathematical-formulation-of-an-ordinal-model">
+<span class="header-section-number">32.3</span> Mathematical Formulation of an Ordinal Model</h2>
+<p>Well, you’ve probably reached the point where you’re about to check out because we see formulas, lots of them. This is understandable, but be not afraid! <a href="https://stats.oarc.ucla.edu/r/dae/ordinal-logistic-regression/">UCLA’s Advanced Research Computing Center</a> is here to help in ways I cannot.</p>
+<p>To start… let’s establish some notation and review the concepts involved in ordinal logistic regression. Let 𝑌 be an ordinal outcome with 𝐽 categories. Then 𝑃(𝑌≤𝑗) is the cumulative probability of 𝑌 less than or equal to a specific category 𝑗= 1,⋯,𝐽−1. Note that 𝑃(𝑌≤𝐽)=1. The odds of being less than or equal a particular category can be defined as</p>
+<p><span class="math display">\[ \frac{P(Y \le j)}{P(Y&gt;j)} \]</span></p>
+<p>For 𝑗=1,⋯,𝐽−1 since 𝑃(𝑌&gt;𝐽)=0 and dividing by zero is undefined. Alternatively, you can write 𝑃(𝑌&gt;𝑗)=1–𝑃(𝑌≤𝑗). The log odds is also known as the logit, so that</p>
+<p><span class="math display">\[ log \frac{P(Y \le j)}{P(Y&gt;j)} = logit (P(Y \le j)) \]</span></p>
+<p>The proportional odds logistic regression model can be defined as</p>
+<p><span class="math display">\[logit (P(Y \le j)) = \beta_{j0} – \eta_{1}x_1 – \cdots – \eta_{p} x_p \]</span></p>
+<p>I think that’s enough formulas for now. Let’s keep the party going by actually putting the pedal to the metal, or should we say, <em>aPpLyiNg wHaT wE LeArNeD.</em></p>
+</section><section id="data-source-and-description" class="level2" data-number="32.4"><h2 data-number="32.4" class="anchored" data-anchor-id="data-source-and-description">
+<span class="header-section-number">32.4</span> Data Source and Description</h2>
+<p>The data we will be using is the Behavioral Risk Factor Surveillance System (BRFSS) data from the year <a href="https://www.kaggle.com/datasets/lplenka/brfss-data/data">2013</a>. Why are we using this dataset? I thought you’d never ask! The BRFSS is the actually nation’s premier system of health-related telephone surveys that collect state data about U.S. residents regarding their health-related risk behaviors, chronic health conditions, and use of preventive services. Established in 1984 with 15 states, BRFSS now collects data in all 50 states as well as the District of Columbia and three U.S. territories.</p>
+<p>BRFSS completes more than 400,000 adult interviews each year, making it the largest continuously conducted health survey system in the world. Impressive right? More information can be found <a href="https://www.cdc.gov/brfss/data_documentation/index.htm">here.</a> The codebook for the 2013 data can be found <a href="https://www.cdc.gov/brfss/annual_data/2013/pdf/CODEBOOK13_LLCP.pdf">here.</a></p>
+<p>In this data, there is a variable called <strong>“General Health,”</strong> which has posed the following questions to participants: <em>“Would you say that in general your health is…”</em> — 1) Excellent 2) Very good 3) Good 4) Fair or 5) Poor. This is a great example of Likert scale responses mentioned earlier.</p>
+</section><section id="cleaning-the-data-to-create-a-model-frame" class="level2" data-number="32.5"><h2 data-number="32.5" class="anchored" data-anchor-id="cleaning-the-data-to-create-a-model-frame">
+<span class="header-section-number">32.5</span> Cleaning the Data to Create a Model Frame</h2>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">BRFSS_df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"../data/05_brfss_subset.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>All things considered, the original is a somewhat large dataset, with 330 variables and having taken Microsoft Excel 2013 about three minutes to load the original csv. Patience is key!</p>
+<p>For this example, we are interested in the following variables:</p>
+<p><strong>Independent Variables:</strong></p>
+<ul>
+<li>Participant ID</li>
+<li>Sex</li>
+<li>Race</li>
+<li>Marital Status</li>
+<li>Highest Level of Schooling Completed</li>
+</ul>
+<p><strong>Dependent Variable:</strong></p>
+<ul>
+<li>General Health</li>
+</ul>
+<p>The research question is straightforward: we want to know to what extent certain sociodemographic characteristics are associated with better self-reported health.</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">BRFSS_df2</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="va">BRFSS_df1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">genhlth</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    Health <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">genhlth</span>, ordered <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    Sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span></span>
+<span>      <span class="va">sex</span>,</span>
+<span>      levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Male"</span>, <span class="st">"Female"</span><span class="op">)</span>,</span>
+<span>      labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Male"</span>, <span class="st">"Female"</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Race <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="va">X_racegr3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>MaritalStatus <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="va">marital</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    Education <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span></span>
+<span>      <span class="va">educa</span>,</span>
+<span>      levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>        <span class="st">"Never attended school or only kindergarten"</span>, </span>
+<span>        <span class="st">"Grades 1 through 8 (Elementary)"</span>, </span>
+<span>        <span class="st">"Grades 9 though 11 (Some high school)"</span>, </span>
+<span>        <span class="st">"Grade 12 or GED (High school graduate)"</span>, </span>
+<span>        <span class="st">"College 1 year to 3 years (Some college or technical school)"</span>,</span>
+<span>        <span class="st">"College 4 years or more (College graduate)"</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>      labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>        <span class="st">"Never attended school or only kindergarten"</span>, </span>
+<span>        <span class="st">"Grades 1 through 8 (Elementary)"</span>, </span>
+<span>        <span class="st">"Grades 9 through 11 (Some high school)"</span>, </span>
+<span>        <span class="st">"Grade 12 or GED (High school graduate)"</span>, </span>
+<span>        <span class="st">"College 1 year to 3 years (Some college or technical school)"</span>,</span>
+<span>        <span class="st">"College 4 years or more (College graduate)"</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>      ordered <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Employment <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="va">employ1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    Income <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span></span>
+<span>    <span class="va">income2</span>,</span>
+<span>    levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Less than $10,000"</span>,</span>
+<span>               <span class="st">"Less than $15,000"</span>,</span>
+<span>               <span class="st">"Less than $20,000"</span>, </span>
+<span>               <span class="st">"Less than $25,000"</span>, </span>
+<span>               <span class="st">"Less than $35,000"</span>, </span>
+<span>               <span class="st">"Less than $50,000"</span>,</span>
+<span>               <span class="st">"Less than $75,000"</span>,</span>
+<span>               <span class="st">"$75,000 or more"</span><span class="op">)</span>,</span>
+<span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Less than $10,000"</span>,</span>
+<span>               <span class="st">"Less than $15,000"</span>,</span>
+<span>               <span class="st">"Less than $20,000"</span>, </span>
+<span>               <span class="st">"Less than $25,000"</span>, </span>
+<span>               <span class="st">"Less than $35,000"</span>, </span>
+<span>               <span class="st">"Less than $50,000"</span>,</span>
+<span>               <span class="st">"Less than $75,000"</span>,</span>
+<span>               <span class="st">"$75,000 or more"</span><span class="op">)</span>,</span>
+<span>    ordered <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span></span>
+<span>    <span class="st">"Health"</span>,<span class="st">"Sex"</span>, <span class="st">"MaritalStatus"</span>, <span class="st">"Education"</span>, <span class="st">"Income"</span>, <span class="st">"Employment"</span>, <span class="st">"Race"</span></span>
+<span>  <span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="assumptions-of-the-method" class="level2" data-number="32.6"><h2 data-number="32.6" class="anchored" data-anchor-id="assumptions-of-the-method">
+<span class="header-section-number">32.6</span> Assumptions of the Method</h2>
+<p>The key assumptions of Ordinal logistic Regression which ensures the validity of the model are as follows:</p>
+<ul>
+<li>The outcome variable is ordered.</li>
+<li>The predictor variables are either continuous, categorical, or ordinal.</li>
+<li>There is no multicollinearity among the predictors.</li>
+<li>Proportional odds.</li>
+</ul>
+<p>In proportional odds logistic regression, the assumption is that the odds of being at or below any particular level of the ordinal dependent variable relative to being above that level is constant across levels of the independent variables. In other words, the relationship between the independent variables and the dependent variable is assumed to be proportional across all levels of the dependent variable. The model estimates coefficients for each independent variable, indicating how they influence the odds of being in a lower category versus a higher category of the <a href="https://stats.oarc.ucla.edu/r/dae/ordinal-logistic-regression/">ordinal dependent variable</a>. The interpretation of these coefficients is similar to that in binary logistic regression, but applies to each threshold between categories of the ordinal dependent variable.</p>
+<p>One of the assumptions underlying ordinal logistic (and ordinal probit) regression is that the relationship between each pair of outcome groups is the <a href="https://stats.oarc.ucla.edu/sas/dae/ordinal-logistic-regression/">same</a>. In other words, ordinal logistic regression assumes that the coefficients that describe the relationship between, say, the lowest versus all higher categories of the response variable are the same as those that describe the relationship between the next lowest category and all higher categories, etc. This is called the proportional odds assumption or the parallel regression assumption. Because the relationship between all pairs of groups is the same, there is only one set of coefficients.</p>
+</section><section id="data-exploration" class="level2" data-number="32.7"><h2 data-number="32.7" class="anchored" data-anchor-id="data-exploration">
+<span class="header-section-number">32.7</span> Data Exploration</h2>
+<p>Lets take a look at the data we are working with.</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Skim Data</span></span>
+<span><span class="fu"><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim</a></span><span class="op">(</span><span class="va">BRFSS_df2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">BRFSS_df2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">489790</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">factor</td>
+<td style="text-align: left;">7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 9%">
+<col style="width: 13%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 47%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: left;">ordered</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: left;">top_counts</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Health</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Ver: 159076, Goo: 150555, Exc: 85482, Fai: 66726</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sex</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Fem: 289319, Mal: 200469</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MaritalStatus</td>
+<td style="text-align: right;">3356</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Mar: 252510, Nev: 74828, Div: 70053, Wid: 65322</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Education</td>
+<td style="text-align: right;">2228</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Col: 169667, Gra: 142371, Col: 133740, Gra: 27905</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Income</td>
+<td style="text-align: right;">70870</td>
+<td style="text-align: right;">0.86</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">$75: 115659, Les: 65102, Les: 61319, Les: 48687</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Employment</td>
+<td style="text-align: right;">3337</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">Emp: 201700, Ret: 137566, Sel: 39693, Una: 37135</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Race</td>
+<td style="text-align: right;">8472</td>
+<td style="text-align: right;">0.98</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Whi: 374955, Bla: 39121, His: 36823, Oth: 21337</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">BRFSS_df2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="va">Health</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<div id="olgmymqxre" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#olgmymqxre table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#olgmymqxre thead, #olgmymqxre tbody, #olgmymqxre tfoot, #olgmymqxre tr, #olgmymqxre td, #olgmymqxre th {
+  border-style: none;
+}
+
+#olgmymqxre p {
+  margin: 0;
+  padding: 0;
+}
+
+#olgmymqxre .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#olgmymqxre .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#olgmymqxre .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#olgmymqxre .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#olgmymqxre .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#olgmymqxre .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#olgmymqxre .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#olgmymqxre .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#olgmymqxre .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#olgmymqxre .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#olgmymqxre .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#olgmymqxre .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#olgmymqxre .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#olgmymqxre .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#olgmymqxre .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#olgmymqxre .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#olgmymqxre .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#olgmymqxre .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#olgmymqxre .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#olgmymqxre .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#olgmymqxre .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#olgmymqxre .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#olgmymqxre .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#olgmymqxre .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#olgmymqxre .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#olgmymqxre .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#olgmymqxre .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#olgmymqxre .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#olgmymqxre .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#olgmymqxre .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#olgmymqxre .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#olgmymqxre .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#olgmymqxre .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#olgmymqxre .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#olgmymqxre .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#olgmymqxre .gt_left {
+  text-align: left;
+}
+
+#olgmymqxre .gt_center {
+  text-align: center;
+}
+
+#olgmymqxre .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#olgmymqxre .gt_font_normal {
+  font-weight: normal;
+}
+
+#olgmymqxre .gt_font_bold {
+  font-weight: bold;
+}
+
+#olgmymqxre .gt_font_italic {
+  font-style: italic;
+}
+
+#olgmymqxre .gt_super {
+  font-size: 65%;
+}
+
+#olgmymqxre .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#olgmymqxre .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#olgmymqxre .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#olgmymqxre .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#olgmymqxre .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#olgmymqxre .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#olgmymqxre .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead><tr class="header gt_col_headings">
+<th id="<strong>Characteristic</strong>" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="<strong>Excellent</strong>, N = 85,482<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>Excellent</strong>, N = 85,482<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span>
+</th>
+<th id="<strong>Fair</strong>, N = 66,726<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>Fair</strong>, N = 66,726<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span>
+</th>
+<th id="<strong>Good</strong>, N = 150,555<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>Good</strong>, N = 150,555<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span>
+</th>
+<th id="<strong>Poor</strong>, N = 27,951<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>Poor</strong>, N = 27,951<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span>
+</th>
+<th id="<strong>Very good</strong>, N = 159,076<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>Very good</strong>, N = 159,076<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span>
+</th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">Sex</td>
+<td class="gt_row gt_center" headers="stat_1"><br></td>
+<td class="gt_row gt_center" headers="stat_2"><br></td>
+<td class="gt_row gt_center" headers="stat_3"><br></td>
+<td class="gt_row gt_center" headers="stat_4"><br></td>
+<td class="gt_row gt_center" headers="stat_5"><br></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Male</td>
+<td class="gt_row gt_center" headers="stat_1">35,741 (42%)</td>
+<td class="gt_row gt_center" headers="stat_2">25,882 (39%)</td>
+<td class="gt_row gt_center" headers="stat_3">62,998 (42%)</td>
+<td class="gt_row gt_center" headers="stat_4">10,713 (38%)</td>
+<td class="gt_row gt_center" headers="stat_5">65,135 (41%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Female</td>
+<td class="gt_row gt_center" headers="stat_1">49,740 (58%)</td>
+<td class="gt_row gt_center" headers="stat_2">40,844 (61%)</td>
+<td class="gt_row gt_center" headers="stat_3">87,557 (58%)</td>
+<td class="gt_row gt_center" headers="stat_4">17,238 (62%)</td>
+<td class="gt_row gt_center" headers="stat_5">93,940 (59%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Unknown</td>
+<td class="gt_row gt_center" headers="stat_1">1</td>
+<td class="gt_row gt_center" headers="stat_2">0</td>
+<td class="gt_row gt_center" headers="stat_3">0</td>
+<td class="gt_row gt_center" headers="stat_4">0</td>
+<td class="gt_row gt_center" headers="stat_5">1</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">MaritalStatus</td>
+<td class="gt_row gt_center" headers="stat_1"><br></td>
+<td class="gt_row gt_center" headers="stat_2"><br></td>
+<td class="gt_row gt_center" headers="stat_3"><br></td>
+<td class="gt_row gt_center" headers="stat_4"><br></td>
+<td class="gt_row gt_center" headers="stat_5"><br></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Divorced</td>
+<td class="gt_row gt_center" headers="stat_1">10,049 (12%)</td>
+<td class="gt_row gt_center" headers="stat_2">12,402 (19%)</td>
+<td class="gt_row gt_center" headers="stat_3">21,736 (15%)</td>
+<td class="gt_row gt_center" headers="stat_4">6,528 (24%)</td>
+<td class="gt_row gt_center" headers="stat_5">19,338 (12%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Married</td>
+<td class="gt_row gt_center" headers="stat_1">49,682 (59%)</td>
+<td class="gt_row gt_center" headers="stat_2">27,645 (42%)</td>
+<td class="gt_row gt_center" headers="stat_3">74,911 (50%)</td>
+<td class="gt_row gt_center" headers="stat_4">10,098 (36%)</td>
+<td class="gt_row gt_center" headers="stat_5">90,174 (57%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Widowed</td>
+<td class="gt_row gt_center" headers="stat_1">7,007 (8.3%)</td>
+<td class="gt_row gt_center" headers="stat_2">12,744 (19%)</td>
+<td class="gt_row gt_center" headers="stat_3">21,933 (15%)</td>
+<td class="gt_row gt_center" headers="stat_4">6,148 (22%)</td>
+<td class="gt_row gt_center" headers="stat_5">17,490 (11%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Never married</td>
+<td class="gt_row gt_center" headers="stat_1">14,419 (17%)</td>
+<td class="gt_row gt_center" headers="stat_2">9,295 (14%)</td>
+<td class="gt_row gt_center" headers="stat_3">23,398 (16%)</td>
+<td class="gt_row gt_center" headers="stat_4">3,179 (11%)</td>
+<td class="gt_row gt_center" headers="stat_5">24,537 (16%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Separated</td>
+<td class="gt_row gt_center" headers="stat_1">1,221 (1.4%)</td>
+<td class="gt_row gt_center" headers="stat_2">2,438 (3.7%)</td>
+<td class="gt_row gt_center" headers="stat_3">3,366 (2.3%)</td>
+<td class="gt_row gt_center" headers="stat_4">1,287 (4.6%)</td>
+<td class="gt_row gt_center" headers="stat_5">2,280 (1.4%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;A member of an unmarried couple</td>
+<td class="gt_row gt_center" headers="stat_1">2,364 (2.8%)</td>
+<td class="gt_row gt_center" headers="stat_2">1,807 (2.7%)</td>
+<td class="gt_row gt_center" headers="stat_3">4,177 (2.8%)</td>
+<td class="gt_row gt_center" headers="stat_4">529 (1.9%)</td>
+<td class="gt_row gt_center" headers="stat_5">4,252 (2.7%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Unknown</td>
+<td class="gt_row gt_center" headers="stat_1">740</td>
+<td class="gt_row gt_center" headers="stat_2">395</td>
+<td class="gt_row gt_center" headers="stat_3">1,034</td>
+<td class="gt_row gt_center" headers="stat_4">182</td>
+<td class="gt_row gt_center" headers="stat_5">1,005</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">Education</td>
+<td class="gt_row gt_center" headers="stat_1"><br></td>
+<td class="gt_row gt_center" headers="stat_2"><br></td>
+<td class="gt_row gt_center" headers="stat_3"><br></td>
+<td class="gt_row gt_center" headers="stat_4"><br></td>
+<td class="gt_row gt_center" headers="stat_5"><br></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Never attended school or only kindergarten</td>
+<td class="gt_row gt_center" headers="stat_1">56 (&lt;0.1%)</td>
+<td class="gt_row gt_center" headers="stat_2">199 (0.3%)</td>
+<td class="gt_row gt_center" headers="stat_3">201 (0.1%)</td>
+<td class="gt_row gt_center" headers="stat_4">118 (0.4%)</td>
+<td class="gt_row gt_center" headers="stat_5">82 (&lt;0.1%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Grades 1 through 8 (Elementary)</td>
+<td class="gt_row gt_center" headers="stat_1">900 (1.1%)</td>
+<td class="gt_row gt_center" headers="stat_2">4,383 (6.6%)</td>
+<td class="gt_row gt_center" headers="stat_3">3,972 (2.7%)</td>
+<td class="gt_row gt_center" headers="stat_4">2,516 (9.1%)</td>
+<td class="gt_row gt_center" headers="stat_5">1,452 (0.9%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Grades 9 through 11 (Some high school)</td>
+<td class="gt_row gt_center" headers="stat_1">2,281 (2.7%)</td>
+<td class="gt_row gt_center" headers="stat_2">7,555 (11%)</td>
+<td class="gt_row gt_center" headers="stat_3">9,298 (6.2%)</td>
+<td class="gt_row gt_center" headers="stat_4">4,065 (15%)</td>
+<td class="gt_row gt_center" headers="stat_5">4,706 (3.0%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Grade 12 or GED (High school graduate)</td>
+<td class="gt_row gt_center" headers="stat_1">17,552 (21%)</td>
+<td class="gt_row gt_center" headers="stat_2">24,614 (37%)</td>
+<td class="gt_row gt_center" headers="stat_3">50,213 (34%)</td>
+<td class="gt_row gt_center" headers="stat_4">10,175 (37%)</td>
+<td class="gt_row gt_center" headers="stat_5">39,817 (25%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;College 1 year to 3 years (Some college or technical school)</td>
+<td class="gt_row gt_center" headers="stat_1">21,347 (25%)</td>
+<td class="gt_row gt_center" headers="stat_2">17,642 (27%)</td>
+<td class="gt_row gt_center" headers="stat_3">42,828 (29%)</td>
+<td class="gt_row gt_center" headers="stat_4">7,061 (25%)</td>
+<td class="gt_row gt_center" headers="stat_5">44,862 (28%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;College 4 years or more (College graduate)</td>
+<td class="gt_row gt_center" headers="stat_1">42,912 (50%)</td>
+<td class="gt_row gt_center" headers="stat_2">11,997 (18%)</td>
+<td class="gt_row gt_center" headers="stat_3">43,324 (29%)</td>
+<td class="gt_row gt_center" headers="stat_4">3,853 (14%)</td>
+<td class="gt_row gt_center" headers="stat_5">67,581 (43%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Unknown</td>
+<td class="gt_row gt_center" headers="stat_1">434</td>
+<td class="gt_row gt_center" headers="stat_2">336</td>
+<td class="gt_row gt_center" headers="stat_3">719</td>
+<td class="gt_row gt_center" headers="stat_4">163</td>
+<td class="gt_row gt_center" headers="stat_5">576</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">Income</td>
+<td class="gt_row gt_center" headers="stat_1"><br></td>
+<td class="gt_row gt_center" headers="stat_2"><br></td>
+<td class="gt_row gt_center" headers="stat_3"><br></td>
+<td class="gt_row gt_center" headers="stat_4"><br></td>
+<td class="gt_row gt_center" headers="stat_5"><br></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Less than $10,000</td>
+<td class="gt_row gt_center" headers="stat_1">2,319 (3.1%)</td>
+<td class="gt_row gt_center" headers="stat_2">6,929 (12%)</td>
+<td class="gt_row gt_center" headers="stat_3">7,515 (5.9%)</td>
+<td class="gt_row gt_center" headers="stat_4">4,513 (20%)</td>
+<td class="gt_row gt_center" headers="stat_5">3,976 (2.9%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Less than $15,000</td>
+<td class="gt_row gt_center" headers="stat_1">2,128 (2.9%)</td>
+<td class="gt_row gt_center" headers="stat_2">7,187 (13%)</td>
+<td class="gt_row gt_center" headers="stat_3">8,440 (6.6%)</td>
+<td class="gt_row gt_center" headers="stat_4">4,311 (19%)</td>
+<td class="gt_row gt_center" headers="stat_5">4,567 (3.3%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Less than $20,000</td>
+<td class="gt_row gt_center" headers="stat_1">3,551 (4.8%)</td>
+<td class="gt_row gt_center" headers="stat_2">8,053 (14%)</td>
+<td class="gt_row gt_center" headers="stat_3">11,948 (9.4%)</td>
+<td class="gt_row gt_center" headers="stat_4">3,674 (16%)</td>
+<td class="gt_row gt_center" headers="stat_5">7,479 (5.4%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Less than $25,000</td>
+<td class="gt_row gt_center" headers="stat_1">4,719 (6.4%)</td>
+<td class="gt_row gt_center" headers="stat_2">7,845 (14%)</td>
+<td class="gt_row gt_center" headers="stat_3">14,931 (12%)</td>
+<td class="gt_row gt_center" headers="stat_4">3,268 (14%)</td>
+<td class="gt_row gt_center" headers="stat_5">10,800 (7.8%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Less than $35,000</td>
+<td class="gt_row gt_center" headers="stat_1">6,521 (8.8%)</td>
+<td class="gt_row gt_center" headers="stat_2">7,564 (14%)</td>
+<td class="gt_row gt_center" headers="stat_3">17,287 (14%)</td>
+<td class="gt_row gt_center" headers="stat_4">2,575 (11%)</td>
+<td class="gt_row gt_center" headers="stat_5">14,740 (11%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Less than $50,000</td>
+<td class="gt_row gt_center" headers="stat_1">9,972 (13%)</td>
+<td class="gt_row gt_center" headers="stat_2">7,153 (13%)</td>
+<td class="gt_row gt_center" headers="stat_3">20,468 (16%)</td>
+<td class="gt_row gt_center" headers="stat_4">2,058 (8.9%)</td>
+<td class="gt_row gt_center" headers="stat_5">21,668 (16%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Less than $75,000</td>
+<td class="gt_row gt_center" headers="stat_1">12,701 (17%)</td>
+<td class="gt_row gt_center" headers="stat_2">5,226 (9.4%)</td>
+<td class="gt_row gt_center" headers="stat_3">19,710 (15%)</td>
+<td class="gt_row gt_center" headers="stat_4">1,421 (6.1%)</td>
+<td class="gt_row gt_center" headers="stat_5">26,044 (19%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;$75,000 or more</td>
+<td class="gt_row gt_center" headers="stat_1">32,343 (44%)</td>
+<td class="gt_row gt_center" headers="stat_2">5,645 (10%)</td>
+<td class="gt_row gt_center" headers="stat_3">27,402 (21%)</td>
+<td class="gt_row gt_center" headers="stat_4">1,296 (5.6%)</td>
+<td class="gt_row gt_center" headers="stat_5">48,973 (35%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Unknown</td>
+<td class="gt_row gt_center" headers="stat_1">11,228</td>
+<td class="gt_row gt_center" headers="stat_2">11,124</td>
+<td class="gt_row gt_center" headers="stat_3">22,854</td>
+<td class="gt_row gt_center" headers="stat_4">4,835</td>
+<td class="gt_row gt_center" headers="stat_5">20,829</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">Employment</td>
+<td class="gt_row gt_center" headers="stat_1"><br></td>
+<td class="gt_row gt_center" headers="stat_2"><br></td>
+<td class="gt_row gt_center" headers="stat_3"><br></td>
+<td class="gt_row gt_center" headers="stat_4"><br></td>
+<td class="gt_row gt_center" headers="stat_5"><br></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Retired</td>
+<td class="gt_row gt_center" headers="stat_1">17,110 (20%)</td>
+<td class="gt_row gt_center" headers="stat_2">23,602 (36%)</td>
+<td class="gt_row gt_center" headers="stat_3">46,701 (31%)</td>
+<td class="gt_row gt_center" headers="stat_4">8,937 (32%)</td>
+<td class="gt_row gt_center" headers="stat_5">41,216 (26%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Employed for wages</td>
+<td class="gt_row gt_center" headers="stat_1">43,990 (52%)</td>
+<td class="gt_row gt_center" headers="stat_2">15,825 (24%)</td>
+<td class="gt_row gt_center" headers="stat_3">60,875 (41%)</td>
+<td class="gt_row gt_center" headers="stat_4">2,476 (8.9%)</td>
+<td class="gt_row gt_center" headers="stat_5">78,534 (50%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;A homemaker</td>
+<td class="gt_row gt_center" headers="stat_1">5,663 (6.7%)</td>
+<td class="gt_row gt_center" headers="stat_2">4,811 (7.3%)</td>
+<td class="gt_row gt_center" headers="stat_3">9,937 (6.7%)</td>
+<td class="gt_row gt_center" headers="stat_4">1,318 (4.8%)</td>
+<td class="gt_row gt_center" headers="stat_5">9,786 (6.2%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Out of work for less than 1 year</td>
+<td class="gt_row gt_center" headers="stat_1">1,971 (2.3%)</td>
+<td class="gt_row gt_center" headers="stat_2">1,859 (2.8%)</td>
+<td class="gt_row gt_center" headers="stat_3">4,263 (2.9%)</td>
+<td class="gt_row gt_center" headers="stat_4">501 (1.8%)</td>
+<td class="gt_row gt_center" headers="stat_5">3,588 (2.3%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Unable to work</td>
+<td class="gt_row gt_center" headers="stat_1">955 (1.1%)</td>
+<td class="gt_row gt_center" headers="stat_2">13,050 (20%)</td>
+<td class="gt_row gt_center" headers="stat_3">8,090 (5.4%)</td>
+<td class="gt_row gt_center" headers="stat_4">12,510 (45%)</td>
+<td class="gt_row gt_center" headers="stat_5">2,530 (1.6%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Self-employed</td>
+<td class="gt_row gt_center" headers="stat_1">10,232 (12%)</td>
+<td class="gt_row gt_center" headers="stat_2">3,198 (4.8%)</td>
+<td class="gt_row gt_center" headers="stat_3">11,283 (7.6%)</td>
+<td class="gt_row gt_center" headers="stat_4">709 (2.6%)</td>
+<td class="gt_row gt_center" headers="stat_5">14,271 (9.0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Out of work for 1 year or more</td>
+<td class="gt_row gt_center" headers="stat_1">1,636 (1.9%)</td>
+<td class="gt_row gt_center" headers="stat_2">3,006 (4.5%)</td>
+<td class="gt_row gt_center" headers="stat_3">4,862 (3.3%)</td>
+<td class="gt_row gt_center" headers="stat_4">1,172 (4.2%)</td>
+<td class="gt_row gt_center" headers="stat_5">3,332 (2.1%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;A student</td>
+<td class="gt_row gt_center" headers="stat_1">3,291 (3.9%)</td>
+<td class="gt_row gt_center" headers="stat_2">861 (1.3%)</td>
+<td class="gt_row gt_center" headers="stat_3">3,400 (2.3%)</td>
+<td class="gt_row gt_center" headers="stat_4">124 (0.4%)</td>
+<td class="gt_row gt_center" headers="stat_5">4,978 (3.1%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Unknown</td>
+<td class="gt_row gt_center" headers="stat_1">634</td>
+<td class="gt_row gt_center" headers="stat_2">514</td>
+<td class="gt_row gt_center" headers="stat_3">1,144</td>
+<td class="gt_row gt_center" headers="stat_4">204</td>
+<td class="gt_row gt_center" headers="stat_5">841</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">Race</td>
+<td class="gt_row gt_center" headers="stat_1"><br></td>
+<td class="gt_row gt_center" headers="stat_2"><br></td>
+<td class="gt_row gt_center" headers="stat_3"><br></td>
+<td class="gt_row gt_center" headers="stat_4"><br></td>
+<td class="gt_row gt_center" headers="stat_5"><br></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Black only, Non-Hispanic</td>
+<td class="gt_row gt_center" headers="stat_1">5,089 (6.1%)</td>
+<td class="gt_row gt_center" headers="stat_2">7,830 (12%)</td>
+<td class="gt_row gt_center" headers="stat_3">13,843 (9.4%)</td>
+<td class="gt_row gt_center" headers="stat_4">2,865 (10%)</td>
+<td class="gt_row gt_center" headers="stat_5">9,494 (6.1%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;White only, Non-Hispanic</td>
+<td class="gt_row gt_center" headers="stat_1">68,211 (81%)</td>
+<td class="gt_row gt_center" headers="stat_2">44,948 (69%)</td>
+<td class="gt_row gt_center" headers="stat_3">110,669 (75%)</td>
+<td class="gt_row gt_center" headers="stat_4">19,972 (73%)</td>
+<td class="gt_row gt_center" headers="stat_5">131,155 (84%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Other race only, Non-Hispanic</td>
+<td class="gt_row gt_center" headers="stat_1">3,804 (4.5%)</td>
+<td class="gt_row gt_center" headers="stat_2">2,843 (4.3%)</td>
+<td class="gt_row gt_center" headers="stat_3">7,475 (5.1%)</td>
+<td class="gt_row gt_center" headers="stat_4">1,295 (4.7%)</td>
+<td class="gt_row gt_center" headers="stat_5">5,920 (3.8%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Hispanic</td>
+<td class="gt_row gt_center" headers="stat_1">5,496 (6.5%)</td>
+<td class="gt_row gt_center" headers="stat_2">8,377 (13%)</td>
+<td class="gt_row gt_center" headers="stat_3">12,778 (8.6%)</td>
+<td class="gt_row gt_center" headers="stat_4">2,407 (8.8%)</td>
+<td class="gt_row gt_center" headers="stat_5">7,765 (5.0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Multiracial, Non-Hispanic</td>
+<td class="gt_row gt_center" headers="stat_1">1,377 (1.6%)</td>
+<td class="gt_row gt_center" headers="stat_2">1,486 (2.3%)</td>
+<td class="gt_row gt_center" headers="stat_3">3,061 (2.1%)</td>
+<td class="gt_row gt_center" headers="stat_4">770 (2.8%)</td>
+<td class="gt_row gt_center" headers="stat_5">2,388 (1.5%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Unknown</td>
+<td class="gt_row gt_center" headers="stat_1">1,505</td>
+<td class="gt_row gt_center" headers="stat_2">1,242</td>
+<td class="gt_row gt_center" headers="stat_3">2,729</td>
+<td class="gt_row gt_center" headers="stat_4">642</td>
+<td class="gt_row gt_center" headers="stat_5">2,354</td>
+</tr>
+</tbody>
+<tfoot class="gt_footnotes"><tr class="even">
+<td colspan="6" class="gt_footnote">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> n (%)</td>
+</tr></tfoot>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section><section id="plotting-outcome-variable" class="level2" data-number="32.8"><h2 data-number="32.8" class="anchored" data-anchor-id="plotting-outcome-variable">
+<span class="header-section-number">32.8</span> Plotting Outcome Variable</h2>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">BRFSS_df2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">Health</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="va">n</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>Health <span class="op">=</span> <span class="va">Health</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Health</span>, y <span class="op">=</span> <span class="va">prop</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Self Reported Health"</span>, </span>
+<span>    y <span class="op">=</span> <span class="st">"Relative Frequencies (w Obs. Count)"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">n</span><span class="op">)</span>, vjust <span class="op">=</span> <span class="fl">1.5</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="05_glm_ordinal_logistic_files/figure-html/outcomeplot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Reorder due to outcome variable being ordered</span></span>
+<span><span class="va">BRFSS_df2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel</a></span><span class="op">(</span><span class="va">Health</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Poor"</span>, <span class="st">"Fair"</span>, <span class="st">"Good"</span>, <span class="st">"Very good"</span>, <span class="st">"Excellent"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Health"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="05_glm_ordinal_logistic_files/figure-html/outcomeplot-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># To plot this dataset, take a small sample (2000), due to it having a very large sample size</span></span>
+<span><span class="fu">GGally</span><span class="fu">::</span><span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">BRFSS_df2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">489790</span>, size <span class="op">=</span> <span class="fl">2000</span><span class="op">)</span>,<span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="05_glm_ordinal_logistic_files/figure-html/ggpairs-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">BRFSS_df3</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="va">BRFSS_df2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Income</span>, <span class="op">-</span><span class="va">Employment</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    EducationLevel <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span></span>
+<span>      <span class="va">Education</span> <span class="op">==</span> <span class="st">"Never attended school or only kindergarten"</span> <span class="op">~</span> <span class="fl">1</span>,</span>
+<span>      <span class="va">Education</span> <span class="op">==</span> <span class="st">"Grades 1 through 8 (Elementary)"</span> <span class="op">~</span> <span class="fl">1</span>,</span>
+<span>      <span class="va">Education</span> <span class="op">==</span> <span class="st">"Grades 9 through 11 (Some high school)"</span> <span class="op">~</span> <span class="fl">1</span>,</span>
+<span>      <span class="va">Education</span> <span class="op">==</span> <span class="st">"Grade 12 or GED (High school graduate)"</span> <span class="op">~</span> <span class="fl">2</span>,</span>
+<span>      <span class="va">Education</span> <span class="op">==</span> <span class="st">"College 1 year to 3 years (Some college or technical school)"</span> <span class="op">~</span> <span class="fl">3</span>,</span>
+<span>      <span class="va">Education</span> <span class="op">==</span> <span class="st">"College 4 years or more (College graduate)"</span> <span class="op">~</span> <span class="fl">4</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    EducationLevel <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span></span>
+<span>      <span class="va">EducationLevel</span>, </span>
+<span>      levels <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, </span>
+<span>      labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>        <span class="st">"Less than HS"</span>, <span class="st">"HS/GED"</span>, <span class="st">"Some College"</span>, <span class="st">"College Grad"</span></span>
+<span>      <span class="op">)</span>, </span>
+<span>      ordered <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Education</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>At this point, we ought to consider the relationship between education, income, and employment, and whether or not it is best to choose one of these variables as a predictor, as opposed to all three. Considering a majority of the literature highlights <a href="https://www.sciencedaily.com/releases/2018/04/180416103428.htm">education</a> as one of the most important <a href="https://archpublichealth.biomedcentral.com/articles/10.1186/s13690-020-00402-5">predictors</a> of health, we will move forward with education only (out of the three aforementioned variables).</p>
+</section><section id="fitting-the-model" class="level2" data-number="32.9"><h2 data-number="32.9" class="anchored" data-anchor-id="fitting-the-model">
+<span class="header-section-number">32.9</span> Fitting the Model</h2>
+<p>Using the polr function, we can fit the Proportional Odds Logistic Regression model to the data. By default, the Hess option is turned off, but you can turn it on if you’d like to be able to calculate the odds ratios later.</p>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">olr_fit</span> <span class="op">&lt;-</span> <span class="fu">MASS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MASS/man/polr.html">polr</a></span><span class="op">(</span><span class="va">Health</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">BRFSS_df3</span>, Hess <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The output is a bit messy, so it is wise to clean it up using the pander() function (from the pander:: and knitr:: packages).</p>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pander.html">pander</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">olr_fit</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p>Call: MASS::polr(formula = Health ~ ., data = BRFSS_df3, Hess = TRUE)</p>
+<table class="table table-sm table-striped small">
+<caption>Coeficients</caption>
+<colgroup>
+<col style="width: 45%">
+<col style="width: 16%">
+<col style="width: 18%">
+<col style="width: 13%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: center;">&nbsp;</th>
+<th style="text-align: center;">Value</th>
+<th style="text-align: center;">Std. Error</th>
+<th style="text-align: center;">t value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>SexFemale</strong></td>
+<td style="text-align: center;">0.01283</td>
+<td style="text-align: center;">0.005411</td>
+<td style="text-align: center;">2.372</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>MaritalStatusMarried</strong></td>
+<td style="text-align: center;">0.08766</td>
+<td style="text-align: center;">0.007668</td>
+<td style="text-align: center;">11.43</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>MaritalStatusWidowed</strong></td>
+<td style="text-align: center;">0.04205</td>
+<td style="text-align: center;">0.009621</td>
+<td style="text-align: center;">4.37</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>MaritalStatusNever married</strong></td>
+<td style="text-align: center;">0.04758</td>
+<td style="text-align: center;">0.009511</td>
+<td style="text-align: center;">5.003</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>MaritalStatusSeparated</strong></td>
+<td style="text-align: center;">-0.01979</td>
+<td style="text-align: center;">0.01806</td>
+<td style="text-align: center;">-1.096</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>MaritalStatusA member of an unmarried couple</strong></td>
+<td style="text-align: center;">0.07227</td>
+<td style="text-align: center;">0.01727</td>
+<td style="text-align: center;">4.186</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>RaceWhite only, Non-Hispanic</strong></td>
+<td style="text-align: center;">0.1817</td>
+<td style="text-align: center;">0.009417</td>
+<td style="text-align: center;">19.29</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>RaceOther race only, Non-Hispanic</strong></td>
+<td style="text-align: center;">0.01742</td>
+<td style="text-align: center;">0.01504</td>
+<td style="text-align: center;">1.158</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>RaceHispanic</strong></td>
+<td style="text-align: center;">-0.1347</td>
+<td style="text-align: center;">0.01267</td>
+<td style="text-align: center;">-10.63</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>RaceMultiracial, Non-Hispanic</strong></td>
+<td style="text-align: center;">0.03694</td>
+<td style="text-align: center;">0.02036</td>
+<td style="text-align: center;">1.814</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>EducationLevel.L</strong></td>
+<td style="text-align: center;">0.1511</td>
+<td style="text-align: center;">0.006744</td>
+<td style="text-align: center;">22.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>EducationLevel.Q</strong></td>
+<td style="text-align: center;">-0.09438</td>
+<td style="text-align: center;">0.005861</td>
+<td style="text-align: center;">-16.1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>EducationLevel.C</strong></td>
+<td style="text-align: center;">-0.005021</td>
+<td style="text-align: center;">0.005036</td>
+<td style="text-align: center;">-0.997</td>
+</tr>
+</tbody>
+</table>
+<table class="table table-sm table-striped small">
+<caption>Intercepts</caption>
+<colgroup>
+<col style="width: 29%">
+<col style="width: 13%">
+<col style="width: 18%">
+<col style="width: 13%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: center;">&nbsp;</th>
+<th style="text-align: center;">Value</th>
+<th style="text-align: center;">Std. Error</th>
+<th style="text-align: center;">t value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>Excellent|Fair</strong></td>
+<td style="text-align: center;">-1.338</td>
+<td style="text-align: center;">0.0116</td>
+<td style="text-align: center;">-115.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Fair|Good</strong></td>
+<td style="text-align: center;">-0.5809</td>
+<td style="text-align: center;">0.01139</td>
+<td style="text-align: center;">-51</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Good|Poor</strong></td>
+<td style="text-align: center;">0.7042</td>
+<td style="text-align: center;">0.01142</td>
+<td style="text-align: center;">61.66</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Poor|Very good</strong></td>
+<td style="text-align: center;">0.9546</td>
+<td style="text-align: center;">0.01147</td>
+<td style="text-align: center;">83.23</td>
+</tr>
+</tbody>
+</table>
+<p>Residual Deviance: 1397152.94</p>
+<p>AIC: 1397186.94</p>
+<p>(12464 observations deleted due to missingness)</p>
+</div>
+</div>
+</section><section id="interpreting-the-regression-coefficients" class="level2" data-number="32.10"><h2 data-number="32.10" class="anchored" data-anchor-id="interpreting-the-regression-coefficients">
+<span class="header-section-number">32.10</span> Interpreting the Regression Coefficients</h2>
+<p><strong>Sex:</strong> Females were more likely than males to report higher self-reported health compared to males.</p>
+<p><strong>Race:</strong> Those who reported being white were significantly more likely to report better health when compared to black participants. Hispanics were more likely to report worse levels of health than those who were black. Those who reported being multiracial did not have a statistically significant difference from black participants.</p>
+<p><strong>Marital Status:</strong> Compared to being divorced, those who reported being married and never having been married had greater levels of self-reported health. There was no statistical difference between those who reported being divorced and those who reported being separated.</p>
+<p><strong>Education:</strong> The most notable statistically significant positive effect for greater self-reported health was present in the category where there was a change between those who fell under the category of having less than a high school education and having completed high school. For every increase in this particular educational category/level, the log odds of reporting a higher level of self-reported health increase by .15.</p>
+</section><section id="generating-p-values" class="level2" data-number="32.11"><h2 data-number="32.11" class="anchored" data-anchor-id="generating-p-values">
+<span class="header-section-number">32.11</span> Generating P Values</h2>
+<p>Oftentimes, not having a p-value makes us itch with discomfort! One way to calculate a p-value here is by comparing the t-value against the standard normal distribution, like a z test. Note: this is only true with infinite degrees of freedom, but is reasonably approximated by large samples, becoming increasingly biased as sample size decreases.</p>
+<p>It is an easy and straightforward process: store the coefficient table, then calculate the p-values and combine back with the table.</p>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">ctable</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">olr_fit</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                                    Value  Std. Error
+SexFemale                                     0.012833165 0.005410530
+MaritalStatusMarried                          0.087662642 0.007667744
+MaritalStatusWidowed                          0.042046687 0.009621344
+MaritalStatusNever married                    0.047583341 0.009511314
+MaritalStatusSeparated                       -0.019790594 0.018055829
+MaritalStatusA member of an unmarried couple  0.072266730 0.017265077
+RaceWhite only, Non-Hispanic                  0.181677664 0.009416588
+RaceOther race only, Non-Hispanic             0.017416505 0.015044601
+RaceHispanic                                 -0.134730457 0.012668599
+RaceMultiracial, Non-Hispanic                 0.036936068 0.020360856
+EducationLevel.L                              0.151050979 0.006743830
+EducationLevel.Q                             -0.094380889 0.005861344
+EducationLevel.C                             -0.005021198 0.005036294
+Excellent|Fair                               -1.338156462 0.011597785
+Fair|Good                                    -0.580928226 0.011391590
+Good|Poor                                     0.704240760 0.011420730
+Poor|Very good                                0.954568453 0.011469520
+                                                  t value
+SexFemale                                       2.3718869
+MaritalStatusMarried                           11.4326505
+MaritalStatusWidowed                            4.3701469
+MaritalStatusNever married                      5.0028145
+MaritalStatusSeparated                         -1.0960778
+MaritalStatusA member of an unmarried couple    4.1857171
+RaceWhite only, Non-Hispanic                   19.2933651
+RaceOther race only, Non-Hispanic               1.1576581
+RaceHispanic                                  -10.6349929
+RaceMultiracial, Non-Hispanic                   1.8140725
+EducationLevel.L                               22.3983971
+EducationLevel.Q                              -16.1022602
+EducationLevel.C                               -0.9970026
+Excellent|Fair                               -115.3803424
+Fair|Good                                     -50.9962367
+Good|Poor                                      61.6633742
+Poor|Very good                                 83.2265402</code></pre>
+</div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">ctable</span><span class="op">[</span>, <span class="st">"t value"</span><span class="op">]</span><span class="op">)</span>, lower.tail <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">*</span> <span class="fl">2</span></span>
+<span><span class="va">eBeta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">ctable</span><span class="op">[</span>, <span class="st">"Value"</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Combine Table</span></span>
+<span><span class="va">ctable</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">ctable</span>, <span class="st">"expBeta"</span> <span class="op">=</span> <span class="va">eBeta</span><span class="op">)</span></span>
+<span><span class="op">(</span><span class="va">ctable</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">ctable</span>, <span class="st">"p value"</span> <span class="op">=</span> <span class="va">p</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                                    Value  Std. Error
+SexFemale                                     0.012833165 0.005410530
+MaritalStatusMarried                          0.087662642 0.007667744
+MaritalStatusWidowed                          0.042046687 0.009621344
+MaritalStatusNever married                    0.047583341 0.009511314
+MaritalStatusSeparated                       -0.019790594 0.018055829
+MaritalStatusA member of an unmarried couple  0.072266730 0.017265077
+RaceWhite only, Non-Hispanic                  0.181677664 0.009416588
+RaceOther race only, Non-Hispanic             0.017416505 0.015044601
+RaceHispanic                                 -0.134730457 0.012668599
+RaceMultiracial, Non-Hispanic                 0.036936068 0.020360856
+EducationLevel.L                              0.151050979 0.006743830
+EducationLevel.Q                             -0.094380889 0.005861344
+EducationLevel.C                             -0.005021198 0.005036294
+Excellent|Fair                               -1.338156462 0.011597785
+Fair|Good                                    -0.580928226 0.011391590
+Good|Poor                                     0.704240760 0.011420730
+Poor|Very good                                0.954568453 0.011469520
+                                                  t value   expBeta
+SexFemale                                       2.3718869 1.0129159
+MaritalStatusMarried                           11.4326505 1.0916198
+MaritalStatusWidowed                            4.3701469 1.0429432
+MaritalStatusNever married                      5.0028145 1.0487336
+MaritalStatusSeparated                         -1.0960778 0.9804040
+MaritalStatusA member of an unmarried couple    4.1857171 1.0749420
+RaceWhite only, Non-Hispanic                   19.2933651 1.1992276
+RaceOther race only, Non-Hispanic               1.1576581 1.0175691
+RaceHispanic                                  -10.6349929 0.8739514
+RaceMultiracial, Non-Hispanic                   1.8140725 1.0376267
+EducationLevel.L                               22.3983971 1.1630559
+EducationLevel.Q                              -16.1022602 0.9099361
+EducationLevel.C                               -0.9970026 0.9949914
+Excellent|Fair                               -115.3803424 0.2623288
+Fair|Good                                     -50.9962367 0.5593789
+Good|Poor                                      61.6633742 2.0223107
+Poor|Very good                                 83.2265402 2.5975494
+                                                   p value
+SexFemale                                     1.769751e-02
+MaritalStatusMarried                          2.872062e-30
+MaritalStatusWidowed                          1.241630e-05
+MaritalStatusNever married                    5.649930e-07
+MaritalStatusSeparated                        2.730447e-01
+MaritalStatusA member of an unmarried couple  2.842672e-05
+RaceWhite only, Non-Hispanic                  6.106620e-83
+RaceOther race only, Non-Hispanic             2.470036e-01
+RaceHispanic                                  2.048444e-26
+RaceMultiracial, Non-Hispanic                 6.966656e-02
+EducationLevel.L                             4.079955e-111
+EducationLevel.Q                              2.459537e-58
+EducationLevel.C                              3.187632e-01
+Excellent|Fair                                0.000000e+00
+Fair|Good                                     0.000000e+00
+Good|Poor                                     0.000000e+00
+Poor|Very good                                0.000000e+00</code></pre>
+</div>
+</div>
+</section><section id="conclusion" class="level2" data-number="32.12"><h2 data-number="32.12" class="anchored" data-anchor-id="conclusion">
+<span class="header-section-number">32.12</span> Conclusion</h2>
+<p>After running a statistical analysis consisting of an Ordinal Logistic Regression for a dataset including an ordered outcome variable of self-reported health, we are able to see that being female, white, and being married all indicated a greater likelihood of reporting higher levels of self-reported health. Additionally, certain changes in categories of education indicated greater odds of reporting greater self-reported health.</p>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/gabrielodom\.github\.io\/PHC6099_rBiostat\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../lessons/05_glm_logistic.html" class="pagination-link" aria-label="Generalized Linear Models for Binary Response">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../lessons/05_glm_poisson.html" class="pagination-link" aria-label="Poisson Regression Model">
+        <span class="nav-page-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/05_glm_ordinal_logistic.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+
+
+</body></html>

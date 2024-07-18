@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<title>An R Cookbook for Public Health - 9&nbsp; Wilcoxon Signed Rank Test for One Sample</title>
+<title>An R Cookbook for Public Health - 10&nbsp; Wilcoxon Signed Rank Test for One Sample</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -62,7 +62,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../lessons/02_mcnemar_paired_samp.html" rel="next">
-<link href="../lessons/02_z-test_one_prop.html" rel="prev">
+<link href="../lessons/02_ttest_one_samp.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -131,7 +131,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_wilcoxon_one_samp.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_wilcoxon_one_samp.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -230,38 +230,44 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_ttest_one_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">One-sample/paired t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons/02_wilcoxon_one_samp.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_mcnemar_paired_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_cochrans_q_paired_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -278,25 +284,31 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_welch_ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Two sample Welchs test or Welchs t-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -313,55 +325,61 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_one_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_welch_two_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Welch’s Anova</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_corr_cov.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -378,13 +396,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_poisson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_negative_binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Generalized Linear Models: Negative Binomial</span></span></a>
   </div>
 </li>
       </ul>
@@ -401,13 +431,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_elastic_net_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_survival_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
   </div>
 </li>
       </ul>
@@ -424,7 +454,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -437,26 +467,26 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction-to-wilcoxson-signed-rank-test" id="toc-introduction-to-wilcoxson-signed-rank-test" class="nav-link active" data-scroll-target="#introduction-to-wilcoxson-signed-rank-test"><span class="header-section-number">9.1</span> Introduction to Wilcoxson Signed Rank Test</a></li>
-  <li><a href="#mathematical-definition-of-the-wilcoxson-signed-rank-test" id="toc-mathematical-definition-of-the-wilcoxson-signed-rank-test" class="nav-link" data-scroll-target="#mathematical-definition-of-the-wilcoxson-signed-rank-test"><span class="header-section-number">9.2</span> Mathematical definition of the Wilcoxson Signed Rank Test</a></li>
-  <li><a href="#data-source-and-description" id="toc-data-source-and-description" class="nav-link" data-scroll-target="#data-source-and-description"><span class="header-section-number">9.3</span> Data source and description</a></li>
-  <li><a href="#cleaning-the-data-to-create-a-model-data-frame" id="toc-cleaning-the-data-to-create-a-model-data-frame" class="nav-link" data-scroll-target="#cleaning-the-data-to-create-a-model-data-frame"><span class="header-section-number">9.4</span> Cleaning the data to create a model data frame</a></li>
-  <li><a href="#assumptions-of-the-wilcoxson-signed-rank-test" id="toc-assumptions-of-the-wilcoxson-signed-rank-test" class="nav-link" data-scroll-target="#assumptions-of-the-wilcoxson-signed-rank-test"><span class="header-section-number">9.5</span> Assumptions of the Wilcoxson Signed Rank Test</a></li>
+<li><a href="#introduction-to-wilcoxson-signed-rank-test" id="toc-introduction-to-wilcoxson-signed-rank-test" class="nav-link active" data-scroll-target="#introduction-to-wilcoxson-signed-rank-test"><span class="header-section-number">10.1</span> Introduction to Wilcoxson Signed Rank Test</a></li>
+  <li><a href="#mathematical-definition-of-the-wilcoxson-signed-rank-test" id="toc-mathematical-definition-of-the-wilcoxson-signed-rank-test" class="nav-link" data-scroll-target="#mathematical-definition-of-the-wilcoxson-signed-rank-test"><span class="header-section-number">10.2</span> Mathematical definition of the Wilcoxson Signed Rank Test</a></li>
+  <li><a href="#data-source-and-description" id="toc-data-source-and-description" class="nav-link" data-scroll-target="#data-source-and-description"><span class="header-section-number">10.3</span> Data source and description</a></li>
+  <li><a href="#cleaning-the-data-to-create-a-model-data-frame" id="toc-cleaning-the-data-to-create-a-model-data-frame" class="nav-link" data-scroll-target="#cleaning-the-data-to-create-a-model-data-frame"><span class="header-section-number">10.4</span> Cleaning the data to create a model data frame</a></li>
+  <li><a href="#assumptions-of-the-wilcoxson-signed-rank-test" id="toc-assumptions-of-the-wilcoxson-signed-rank-test" class="nav-link" data-scroll-target="#assumptions-of-the-wilcoxson-signed-rank-test"><span class="header-section-number">10.5</span> Assumptions of the Wilcoxson Signed Rank Test</a></li>
   <li>
-<a href="#checking-the-assumptions" id="toc-checking-the-assumptions" class="nav-link" data-scroll-target="#checking-the-assumptions"><span class="header-section-number">9.6</span> Checking the assumptions</a>
+<a href="#checking-the-assumptions" id="toc-checking-the-assumptions" class="nav-link" data-scroll-target="#checking-the-assumptions"><span class="header-section-number">10.6</span> Checking the assumptions</a>
   <ul class="collapse">
-<li><a href="#independence-and-randomness" id="toc-independence-and-randomness" class="nav-link" data-scroll-target="#independence-and-randomness"><span class="header-section-number">9.6.1</span> Independence and Randomness</a></li>
-  <li><a href="#type-of-data" id="toc-type-of-data" class="nav-link" data-scroll-target="#type-of-data"><span class="header-section-number">9.6.2</span> Type of Data</a></li>
+<li><a href="#independence-and-randomness" id="toc-independence-and-randomness" class="nav-link" data-scroll-target="#independence-and-randomness"><span class="header-section-number">10.6.1</span> Independence and Randomness</a></li>
+  <li><a href="#type-of-data" id="toc-type-of-data" class="nav-link" data-scroll-target="#type-of-data"><span class="header-section-number">10.6.2</span> Type of Data</a></li>
   </ul>
 </li>
-  <li><a href="#code-to-run-a-wilcoxson-signed-rank-test" id="toc-code-to-run-a-wilcoxson-signed-rank-test" class="nav-link" data-scroll-target="#code-to-run-a-wilcoxson-signed-rank-test"><span class="header-section-number">9.7</span> Code to run a Wilcoxson Signed Rank Test</a></li>
-  <li><a href="#brief-interpretation-of-the-output" id="toc-brief-interpretation-of-the-output" class="nav-link" data-scroll-target="#brief-interpretation-of-the-output"><span class="header-section-number">9.8</span> Brief interpretation of the output</a></li>
+  <li><a href="#code-to-run-a-wilcoxson-signed-rank-test" id="toc-code-to-run-a-wilcoxson-signed-rank-test" class="nav-link" data-scroll-target="#code-to-run-a-wilcoxson-signed-rank-test"><span class="header-section-number">10.7</span> Code to run a Wilcoxson Signed Rank Test</a></li>
+  <li><a href="#brief-interpretation-of-the-output" id="toc-brief-interpretation-of-the-output" class="nav-link" data-scroll-target="#brief-interpretation-of-the-output"><span class="header-section-number">10.8</span> Brief interpretation of the output</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/02_wilcoxon_one_samp.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_wilcoxon_one_samp.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_wilcoxon_one_samp.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span>
+<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span>
 </h1>
 </div>
 
@@ -487,11 +517,11 @@ window.Quarto = {
   
 
 
-</header><section id="introduction-to-wilcoxson-signed-rank-test" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="introduction-to-wilcoxson-signed-rank-test">
-<span class="header-section-number">9.1</span> Introduction to Wilcoxson Signed Rank Test</h2>
+</header><section id="introduction-to-wilcoxson-signed-rank-test" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="introduction-to-wilcoxson-signed-rank-test">
+<span class="header-section-number">10.1</span> Introduction to Wilcoxson Signed Rank Test</h2>
 <p>The one-sample Wilcoxson Signed Rank Test is used to compare a sample proportion to a population proportion.</p>
-</section><section id="mathematical-definition-of-the-wilcoxson-signed-rank-test" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="mathematical-definition-of-the-wilcoxson-signed-rank-test">
-<span class="header-section-number">9.2</span> Mathematical definition of the Wilcoxson Signed Rank Test</h2>
+</section><section id="mathematical-definition-of-the-wilcoxson-signed-rank-test" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="mathematical-definition-of-the-wilcoxson-signed-rank-test">
+<span class="header-section-number">10.2</span> Mathematical definition of the Wilcoxson Signed Rank Test</h2>
 <p>Let’s assume that we have one sample of size <span class="math inline">\(n\)</span>, <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span>, which cannot be approximated by a normal distribution. Because of this, we are no longer comparing <span class="math inline">\(\bar{x}\)</span> to <span class="math inline">\(\mu\)</span>, but we are instead asking if the sample median is equal to a population median, <span class="math inline">\(M\)</span>. For more detail, see the maths here: <a href="https://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test" class="uri">https://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test</a>.</p>
 <p>Here are the steps to calculate this test statistic manually:</p>
 <ol type="1">
@@ -587,21 +617,21 @@ V = 108, p-value = 0.00672
 alternative hypothesis: true location is not equal to 2.9</code></pre>
 </div>
 </div>
-</section><section id="data-source-and-description" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="data-source-and-description">
-<span class="header-section-number">9.3</span> Data source and description</h2>
+</section><section id="data-source-and-description" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="data-source-and-description">
+<span class="header-section-number">10.3</span> Data source and description</h2>
 <p>Now that we have seen how the test works, we will apply it to a real data scenario. We will use gene-level <span class="math inline">\(p\)</span>-values from the Golub and Van Loan (1999) data set from the R package <code>multtest::</code> (<a href="https://rdrr.io/bioc/multtest/man/golub.html" class="uri">https://rdrr.io/bioc/multtest/man/golub.html</a>); the original is a data set of data set of gene expression values for leukemia, but we have gene-specific <span class="math inline">\(p\)</span>-values from a gene-level hypothesis test. We created these <span class="math inline">\(p\)</span>-values in the script <code>R/create_golub_data_20240523.R</code>, <em>but they do not represent any real analysis results</em>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="cleaning-the-data-to-create-a-model-data-frame" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="cleaning-the-data-to-create-a-model-data-frame">
-<span class="header-section-number">9.4</span> Cleaning the data to create a model data frame</h2>
+</section><section id="cleaning-the-data-to-create-a-model-data-frame" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="cleaning-the-data-to-create-a-model-data-frame">
+<span class="header-section-number">10.4</span> Cleaning the data to create a model data frame</h2>
 <p>Because our method requires only one sample, we have very little work to do. We import the data set of <span class="math inline">\(p\)</span>-values.</p>
 <div class="cell">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">golub_pVals_num</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"../data/02_golub_pVals_20240523.rds"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>There are 3051 <span class="math inline">\(p\)</span>-values. The null hypothesis would be that there is no statistically significant effects in the data, so the distribution of these <span class="math inline">\(p\)</span>-values should be a Uniform distribution. Our hypothesis is that the population mean is then 0.5 (the average value of a Uniform distribution).</p>
-</section><section id="assumptions-of-the-wilcoxson-signed-rank-test" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="assumptions-of-the-wilcoxson-signed-rank-test">
-<span class="header-section-number">9.5</span> Assumptions of the Wilcoxson Signed Rank Test</h2>
+</section><section id="assumptions-of-the-wilcoxson-signed-rank-test" class="level2" data-number="10.5"><h2 data-number="10.5" class="anchored" data-anchor-id="assumptions-of-the-wilcoxson-signed-rank-test">
+<span class="header-section-number">10.5</span> Assumptions of the Wilcoxson Signed Rank Test</h2>
 <p>To use a one-sample Wilcoxson Signed Rank Test, we make the following assumptions:</p>
 <ol type="1">
 <li>The data are from a random sample</li>
@@ -609,10 +639,10 @@ alternative hypothesis: true location is not equal to 2.9</code></pre>
 <li>The values can be “ranked” (this assumption gets fuzzy when you have discrete data, because it’s possible to get ties or values that are exactly 0 in those cases)</li>
 </ol>
 <p>If these assumptions hold, then the test statistic is asymptotically normal. If your data has lots of zeros or equal values (which would result in tied ranks), then use this method with caution.</p>
-</section><section id="checking-the-assumptions" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="checking-the-assumptions">
-<span class="header-section-number">9.6</span> Checking the assumptions</h2>
-<section id="independence-and-randomness" class="level3" data-number="9.6.1"><h3 data-number="9.6.1" class="anchored" data-anchor-id="independence-and-randomness">
-<span class="header-section-number">9.6.1</span> Independence and Randomness</h3>
+</section><section id="checking-the-assumptions" class="level2" data-number="10.6"><h2 data-number="10.6" class="anchored" data-anchor-id="checking-the-assumptions">
+<span class="header-section-number">10.6</span> Checking the assumptions</h2>
+<section id="independence-and-randomness" class="level3" data-number="10.6.1"><h3 data-number="10.6.1" class="anchored" data-anchor-id="independence-and-randomness">
+<span class="header-section-number">10.6.1</span> Independence and Randomness</h3>
 <p>These are gene-level <span class="math inline">\(p\)</span>-values, so we do not have “independence”. However, because this is a pedagogical example, we will take a random sample of these genes to test (and this random sample should be independent enough, but we have no guarantee of this).</p>
 <div class="cell">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Create random sample of genes to test</span></span>
@@ -634,11 +664,11 @@ alternative hypothesis: true location is not equal to 2.9</code></pre>
 </div>
 </div>
 <p>Remember, this is a “fake” analysis (all 38 samples in this data are leukemia cases, and I tested one half against the other—there should absolutely NOT be any real biological signal in this data).</p>
-</section><section id="type-of-data" class="level3" data-number="9.6.2"><h3 data-number="9.6.2" class="anchored" data-anchor-id="type-of-data">
-<span class="header-section-number">9.6.2</span> Type of Data</h3>
+</section><section id="type-of-data" class="level3" data-number="10.6.2"><h3 data-number="10.6.2" class="anchored" data-anchor-id="type-of-data">
+<span class="header-section-number">10.6.2</span> Type of Data</h3>
 <p>These values are <span class="math inline">\(p\)</span>-values, so they can be ranked.</p>
-</section></section><section id="code-to-run-a-wilcoxson-signed-rank-test" class="level2" data-number="9.7"><h2 data-number="9.7" class="anchored" data-anchor-id="code-to-run-a-wilcoxson-signed-rank-test">
-<span class="header-section-number">9.7</span> Code to run a Wilcoxson Signed Rank Test</h2>
+</section></section><section id="code-to-run-a-wilcoxson-signed-rank-test" class="level2" data-number="10.7"><h2 data-number="10.7" class="anchored" data-anchor-id="code-to-run-a-wilcoxson-signed-rank-test">
+<span class="header-section-number">10.7</span> Code to run a Wilcoxson Signed Rank Test</h2>
 <p>Now that we have checked our assumptions, we can perform the Wilcoxson Signed Rank Test on random samples of the genes to test if they have an average value of 0.5.</p>
 <div class="cell">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span></span>
@@ -655,8 +685,8 @@ V = 5859, p-value = 1.584e-07
 alternative hypothesis: true location is less than 0.5</code></pre>
 </div>
 </div>
-</section><section id="brief-interpretation-of-the-output" class="level2" data-number="9.8"><h2 data-number="9.8" class="anchored" data-anchor-id="brief-interpretation-of-the-output">
-<span class="header-section-number">9.8</span> Brief interpretation of the output</h2>
+</section><section id="brief-interpretation-of-the-output" class="level2" data-number="10.8"><h2 data-number="10.8" class="anchored" data-anchor-id="brief-interpretation-of-the-output">
+<span class="header-section-number">10.8</span> Brief interpretation of the output</h2>
 <p>The <span class="math inline">\(p\)</span>-value for this test is less than 0.05, so we reject the hypothesis that the average gene-specific <span class="math inline">\(p\)</span>-value for this set of results is greater than or equal to 0.5 (the theoretical average of <span class="math inline">\(p\)</span>-values under the null hypothesis).</p>
 
 
@@ -1069,13 +1099,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../lessons/02_z-test_one_prop.html" class="pagination-link" aria-label="Z-Test for One Proportion">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span></span>
+      <a href="../lessons/02_ttest_one_samp.html" class="pagination-link" aria-label="One-sample/paired t-test">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">One-sample/paired t-test</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../lessons/02_mcnemar_paired_samp.html" class="pagination-link" aria-label="McNemar's Test">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

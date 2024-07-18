@@ -35,6 +35,7 @@ book:
     - part: 02_header_one-sample.qmd
       chapters:
         - lessons/02_z-test_one_prop.qmd
+        - lessons/02_ttest_one_samp.qmd
         - lessons/02_wilcoxon_one_samp.qmd
         - lessons/02_mcnemar_paired_samp.qmd
         - lessons/02_cochrans_q_paired_samp.qmd
@@ -45,6 +46,7 @@ book:
     - part: 03_header_two-sample.qmd
       chapters:
         - lessons/03_two_sample_ttest.qmd
+        - lessons/03_two_sample_welch_ttest.qmd
         - lessons/03_two_sample_mann_whitney.qmd
         - lessons/03_two_sample_bootstrap_conf_int.qmd
         - lessons/03_two_sample_chi_sq_independence.qmd
@@ -53,6 +55,7 @@ book:
       chapters:
         - lessons/04_anova_one_way.qmd
         - lessons/04_anova_two_way.qmd
+        - lessons/04_anova_welch_two_way.qmd
         - lessons_original/04_anova_kruskal_wallis.qmd
         - lessons/04_anova_random_intercept.qmd
         - lessons/04_corr_cov.qmd
@@ -64,8 +67,9 @@ book:
     - part: 05_header_generalized-linear-models.qmd
       chapters:
         - lessons/05_glm_logistic.qmd
-#        - lessons/05_glm_ordinal_logistic.qmd
+        - lessons/05_glm_ordinal_logistic.qmd
         - lessons/05_glm_poisson.qmd
+        - lessons/05_glm_negative_binomial.qmd
 
     - part: 06_header_special-topics.qmd 
       chapters:

@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<title>An R Cookbook for Public Health - 31&nbsp; Survival Analysis in R</title>
+<title>An R Cookbook for Public Health - 36&nbsp; Survival Analysis in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,7 +131,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../06_header_special-topics.html">Special Topics in Statistical Modelling</a></li><li class="breadcrumb-item"><a href="../lessons/06_survival_analysis.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../06_header_special-topics.html">Special Topics in Statistical Modelling</a></li><li class="breadcrumb-item"><a href="../lessons/06_survival_analysis.html"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -230,38 +230,44 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_ttest_one_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">One-sample/paired t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons/02_wilcoxon_one_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_mcnemar_paired_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_cochrans_q_paired_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -278,25 +284,31 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_welch_ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Two sample Welchs test or Welchs t-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -313,55 +325,61 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_one_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_welch_two_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Welch’s Anova</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_corr_cov.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -378,13 +396,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_poisson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_negative_binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Generalized Linear Models: Negative Binomial</span></span></a>
   </div>
 </li>
       </ul>
@@ -401,13 +431,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_elastic_net_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_survival_analysis.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
   </div>
 </li>
       </ul>
@@ -424,7 +454,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -437,30 +467,30 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#what-is-survival-analysis" id="toc-what-is-survival-analysis" class="nav-link active" data-scroll-target="#what-is-survival-analysis"><span class="header-section-number">31.1</span> What is survival analysis</a></li>
-  <li><a href="#general-features-of-survival-data-structure" id="toc-general-features-of-survival-data-structure" class="nav-link" data-scroll-target="#general-features-of-survival-data-structure"><span class="header-section-number">31.2</span> General features of survival data structure</a></li>
-  <li><a href="#statistical-methods-used-in-survival-analysis" id="toc-statistical-methods-used-in-survival-analysis" class="nav-link" data-scroll-target="#statistical-methods-used-in-survival-analysis"><span class="header-section-number">31.3</span> Statistical methods used in survival analysis</a></li>
-  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">31.4</span> Packages</a></li>
-  <li><a href="#load-the-data" id="toc-load-the-data" class="nav-link" data-scroll-target="#load-the-data"><span class="header-section-number">31.5</span> Load the data</a></li>
-  <li><a href="#checking-the-veteran-data" id="toc-checking-the-veteran-data" class="nav-link" data-scroll-target="#checking-the-veteran-data"><span class="header-section-number">31.6</span> Checking the veteran data</a></li>
-  <li><a href="#kaplan-meier-analysis" id="toc-kaplan-meier-analysis" class="nav-link" data-scroll-target="#kaplan-meier-analysis"><span class="header-section-number">31.7</span> Kaplan Meier Analysis</a></li>
-  <li><a href="#survival-curves-by-treatment" id="toc-survival-curves-by-treatment" class="nav-link" data-scroll-target="#survival-curves-by-treatment"><span class="header-section-number">31.8</span> Survival curves by treatment</a></li>
-  <li><a href="#conducting-log-rank-test" id="toc-conducting-log-rank-test" class="nav-link" data-scroll-target="#conducting-log-rank-test"><span class="header-section-number">31.9</span> Conducting log-rank test</a></li>
-  <li><a href="#cox-proportional-hazard-models" id="toc-cox-proportional-hazard-models" class="nav-link" data-scroll-target="#cox-proportional-hazard-models"><span class="header-section-number">31.10</span> Cox Proportional Hazard Models</a></li>
-  <li><a href="#plot-the-cox-model" id="toc-plot-the-cox-model" class="nav-link" data-scroll-target="#plot-the-cox-model"><span class="header-section-number">31.11</span> Plot the Cox model</a></li>
+<li><a href="#what-is-survival-analysis" id="toc-what-is-survival-analysis" class="nav-link active" data-scroll-target="#what-is-survival-analysis"><span class="header-section-number">36.1</span> What is survival analysis</a></li>
+  <li><a href="#general-features-of-survival-data-structure" id="toc-general-features-of-survival-data-structure" class="nav-link" data-scroll-target="#general-features-of-survival-data-structure"><span class="header-section-number">36.2</span> General features of survival data structure</a></li>
+  <li><a href="#statistical-methods-used-in-survival-analysis" id="toc-statistical-methods-used-in-survival-analysis" class="nav-link" data-scroll-target="#statistical-methods-used-in-survival-analysis"><span class="header-section-number">36.3</span> Statistical methods used in survival analysis</a></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">36.4</span> Packages</a></li>
+  <li><a href="#load-the-data" id="toc-load-the-data" class="nav-link" data-scroll-target="#load-the-data"><span class="header-section-number">36.5</span> Load the data</a></li>
+  <li><a href="#checking-the-veteran-data" id="toc-checking-the-veteran-data" class="nav-link" data-scroll-target="#checking-the-veteran-data"><span class="header-section-number">36.6</span> Checking the veteran data</a></li>
+  <li><a href="#kaplan-meier-analysis" id="toc-kaplan-meier-analysis" class="nav-link" data-scroll-target="#kaplan-meier-analysis"><span class="header-section-number">36.7</span> Kaplan Meier Analysis</a></li>
+  <li><a href="#survival-curves-by-treatment" id="toc-survival-curves-by-treatment" class="nav-link" data-scroll-target="#survival-curves-by-treatment"><span class="header-section-number">36.8</span> Survival curves by treatment</a></li>
+  <li><a href="#conducting-log-rank-test" id="toc-conducting-log-rank-test" class="nav-link" data-scroll-target="#conducting-log-rank-test"><span class="header-section-number">36.9</span> Conducting log-rank test</a></li>
+  <li><a href="#cox-proportional-hazard-models" id="toc-cox-proportional-hazard-models" class="nav-link" data-scroll-target="#cox-proportional-hazard-models"><span class="header-section-number">36.10</span> Cox Proportional Hazard Models</a></li>
+  <li><a href="#plot-the-cox-model" id="toc-plot-the-cox-model" class="nav-link" data-scroll-target="#plot-the-cox-model"><span class="header-section-number">36.11</span> Plot the Cox model</a></li>
   <li>
-<a href="#plot-the-aalens-addictive-regression-model" id="toc-plot-the-aalens-addictive-regression-model" class="nav-link" data-scroll-target="#plot-the-aalens-addictive-regression-model"><span class="header-section-number">31.12</span> Plot the Aalen’s Addictive Regression model</a>
+<a href="#plot-the-aalens-addictive-regression-model" id="toc-plot-the-aalens-addictive-regression-model" class="nav-link" data-scroll-target="#plot-the-aalens-addictive-regression-model"><span class="header-section-number">36.12</span> Plot the Aalen’s Addictive Regression model</a>
   <ul class="collapse">
-<li><a href="#interpretation-of-aa-model-graph" id="toc-interpretation-of-aa-model-graph" class="nav-link" data-scroll-target="#interpretation-of-aa-model-graph"><span class="header-section-number">31.12.1</span> Interpretation of AA model graph</a></li>
+<li><a href="#interpretation-of-aa-model-graph" id="toc-interpretation-of-aa-model-graph" class="nav-link" data-scroll-target="#interpretation-of-aa-model-graph"><span class="header-section-number">36.12.1</span> Interpretation of AA model graph</a></li>
   </ul>
 </li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">31.13</span> References</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">36.13</span> References</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/06_survival_analysis.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../06_header_special-topics.html">Special Topics in Statistical Modelling</a></li><li class="breadcrumb-item"><a href="../lessons/06_survival_analysis.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../06_header_special-topics.html">Special Topics in Statistical Modelling</a></li><li class="breadcrumb-item"><a href="../lessons/06_survival_analysis.html"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span>
+<span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span>
 </h1>
 </div>
 
@@ -491,12 +521,12 @@ window.Quarto = {
   
 
 
-</header><section id="what-is-survival-analysis" class="level2" data-number="31.1"><h2 data-number="31.1" class="anchored" data-anchor-id="what-is-survival-analysis">
-<span class="header-section-number">31.1</span> What is survival analysis</h2>
+</header><section id="what-is-survival-analysis" class="level2" data-number="36.1"><h2 data-number="36.1" class="anchored" data-anchor-id="what-is-survival-analysis">
+<span class="header-section-number">36.1</span> What is survival analysis</h2>
 <p>Survival analysis is a statistical method for analyzing survival data (longitudinal time to event data). Now, before discussing the statistical terms, lets think about what survives, and what does it mean by survival. The answer that comes to our mind is, it’s the living being that survives, and the survival time means life span such that time between ones’s birth to death. That’s true, survival analysis was originally used solely for investigations of mortality and morbidity on vital registration statistics. Xian Lui (2012) noted the history of arithmetic analysis of survival process can be traced back to the 17th century when English statistician John Graunt first published the life table in 1662. Since the outcome occurs over the course of time, the data should be longitudinal data.Since then the survival analysis was widely used in clinical trials.</p>
 <p>Over the past 50 years, the literature notes the expanded applicability of survival analysis to the diverse fields like domain of biological science, biomedical science, engineering, and public health. Survival time therefore does not necessarily mean life span of living organisms, it can be start of drug to the first remission of the disease, diagnosis of the disease to the incidence of comorbidities, construction of a building to the collapse of the building, marriage to divorce, unemployment to the start of addiction drugs, occupational careers etc. In survival analysis the latter outcome is called an event, and the outcome of interest is the time to event.</p>
-</section><section id="general-features-of-survival-data-structure" class="level2" data-number="31.2"><h2 data-number="31.2" class="anchored" data-anchor-id="general-features-of-survival-data-structure">
-<span class="header-section-number">31.2</span> General features of survival data structure</h2>
+</section><section id="general-features-of-survival-data-structure" class="level2" data-number="36.2"><h2 data-number="36.2" class="anchored" data-anchor-id="general-features-of-survival-data-structure">
+<span class="header-section-number">36.2</span> General features of survival data structure</h2>
 <p><strong>1.Survival process:</strong> The primary feature of the survival data is the description of a change in status from specified original status as the underlying outcome measure. For example, start of cancer drug to remission of the cancer. The survival probability is the probability that an individual survives from the time origin (e.g., diagnosis of diabetes) to a specified future time t.</p>
 <p><strong>2.Time to event:</strong> It is calculated subtracting the specified starting time of the original status from the time of the occurrence of a particular event. It varies for different observations.</p>
 <p><strong>3.Censoring:</strong> Censoring is defined as assigning an specific value to any observation whose information on specified event/outcome is missing. Any study has a specified time or survival data generally are collected for a particular interval in which the occurrence of a particular event is observed. Researchers therefore can only observe those events that occur within a surveillance window between two-time limits. Many observations may not encounter the event in the given time frame, or some observations may get lost before the specified time. Such observations whose information on specified event are missing are censored which indicates that event did not occur for those observations in the given time. Censoring may occur for various reasons. In clinical trials, patients may be lost to follow-up due to migration or health problems, in longitudinal survey, some baseline respondents may lose interest in participating etc. Since censoring frequently occurs, most of the survival analysis literally deals with incomplete survival data, and accordingly scientists have found ways to use such limited information for correctly analyzing the incomplete survival data based on some restrictive assumptions on the distribution of censored survival times. Given the importance of handling censoring in survival analysis, a variety of censoring types are possible as below:</p>
@@ -505,8 +535,8 @@ window.Quarto = {
 <p><strong><em>c)Interval censoring</em></strong></p>
 <p><img src="fig/06_survival_analysis_censoring_eg1.png" class="img-fluid" width="395"></p>
 <p><img src="fig/06_survival_analysis_censoring_eg2.png" class="img-fluid" width="395"></p>
-</section><section id="statistical-methods-used-in-survival-analysis" class="level2" data-number="31.3"><h2 data-number="31.3" class="anchored" data-anchor-id="statistical-methods-used-in-survival-analysis">
-<span class="header-section-number">31.3</span> Statistical methods used in survival analysis</h2>
+</section><section id="statistical-methods-used-in-survival-analysis" class="level2" data-number="36.3"><h2 data-number="36.3" class="anchored" data-anchor-id="statistical-methods-used-in-survival-analysis">
+<span class="header-section-number">36.3</span> Statistical methods used in survival analysis</h2>
 <p><strong>1) Kaplan-Meier (product limit)</strong></p>
 <p>The Kaplan–Meier (KM) method explores the survival of a population under investigation and/or tests differences in the crude cumulative survival between exposure groups, with a graphical representation of the endpoint occurrence as a function of time. It is a survival probability estimation method for non-parametric data. As events are assumed to occur independently of one another, the probabilities of surviving from one interval to the next may be multiplied together to give the cumulative survival probability. The KM survival curve, a plot of the KM survival probability against time, provides a useful summary of the data that can be used to estimate measures such as median survival time. The large skew encountered in the distribution of most survival data is the reason that the mean is not often used. It is called product limit approach because it estimates the survival probability each time an event occurs. (meaning it does not consider time as an interval/range (e.g., 5-10 years of age) but as a specific time (e.g., 5 years, 6 years, etc).</p>
 <p><strong>Important limitations of the KM method are</strong></p>
@@ -551,13 +581,13 @@ H(t) = H_0(t)\exp[B_1X_1 + B_2X_2 + ....B_kX_k]
 <p><span class="math inline">\(H(t)\)</span> = Increased hazard as a result of exposure.</p>
 <p><span class="math inline">\(H_0\)</span> = Baseline hazard in non-exposed</p>
 <p><img src="fig/06_survival_analysis_prop_hazards.png" class="img-fluid" width="395"></p>
-</section><section id="packages" class="level2" data-number="31.4"><h2 data-number="31.4" class="anchored" data-anchor-id="packages">
-<span class="header-section-number">31.4</span> Packages</h2>
+</section><section id="packages" class="level2" data-number="36.4"><h2 data-number="36.4" class="anchored" data-anchor-id="packages">
+<span class="header-section-number">36.4</span> Packages</h2>
 <p>The packages required for conducting survival analysis can be installed automatically using the <a href="https://rviews.rstudio.com/2017/09/25/survival-analysis-with-r/">ctv</a> packages. Following are the packages that will be functioning in this survival analysis project</p>
 <p><span style="color: red;">survival</span> The survival package is the cornerstone of the entire R survival analysis. Not only is the package itself rich in features, but the object created by the <span style="color: red;">Surv()</span> function, which contains failure time and censoring information, is the basic survival analysis data structure in R.</p>
 <p><span style="color: red;">ggfortify</span> ggfortify enables producing handsome, one-line survival plots with <span style="color: red;">ggplot2::autoplot</span></p>
-</section><section id="load-the-data" class="level2" data-number="31.5"><h2 data-number="31.5" class="anchored" data-anchor-id="load-the-data">
-<span class="header-section-number">31.5</span> Load the data</h2>
+</section><section id="load-the-data" class="level2" data-number="36.5"><h2 data-number="36.5" class="anchored" data-anchor-id="load-the-data">
+<span class="header-section-number">36.5</span> Load the data</h2>
 <p>This project uses the veterans dataset contained in the survival package. Veteran dataset contains data from a two-treatment, randomized trial for lung cancer. We load the data with required packages into our library as follows:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival">survival</a></span><span class="op">)</span></span>
@@ -579,8 +609,8 @@ Attaching package: 'dplyr'</code></pre>
 </div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sinhrks/ggfortify">ggfortify</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="checking-the-veteran-data" class="level2" data-number="31.6"><h2 data-number="31.6" class="anchored" data-anchor-id="checking-the-veteran-data">
-<span class="header-section-number">31.6</span> Checking the veteran data</h2>
+</section><section id="checking-the-veteran-data" class="level2" data-number="36.6"><h2 data-number="36.6" class="anchored" data-anchor-id="checking-the-veteran-data">
+<span class="header-section-number">36.6</span> Checking the veteran data</h2>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">veteran</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -606,8 +636,8 @@ Attaching package: 'dplyr'</code></pre>
 <p><strong>diagtime:</strong> months from diagnosis to randomization</p>
 <p><strong>age:</strong> in years</p>
 <p><strong>prior:</strong> prior therapy 0 = no, 1 = yes</p>
-</section><section id="kaplan-meier-analysis" class="level2" data-number="31.7"><h2 data-number="31.7" class="anchored" data-anchor-id="kaplan-meier-analysis">
-<span class="header-section-number">31.7</span> Kaplan Meier Analysis</h2>
+</section><section id="kaplan-meier-analysis" class="level2" data-number="36.7"><h2 data-number="36.7" class="anchored" data-anchor-id="kaplan-meier-analysis">
+<span class="header-section-number">36.7</span> Kaplan Meier Analysis</h2>
 <p>We first need to use <span style="color: red;">Surv()</span> to build the standard survival object. <strong>Note:</strong> a “+” after the time in the print out of the output indicates censored observation.</p>
 <div class="cell">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Kaplan Meier Survival curve</span></span>
@@ -654,8 +684,8 @@ Attaching package: 'dplyr'</code></pre>
 </div>
 </div>
 </div>
-</section><section id="survival-curves-by-treatment" class="level2" data-number="31.8"><h2 data-number="31.8" class="anchored" data-anchor-id="survival-curves-by-treatment">
-<span class="header-section-number">31.8</span> Survival curves by treatment</h2>
+</section><section id="survival-curves-by-treatment" class="level2" data-number="36.8"><h2 data-number="36.8" class="anchored" data-anchor-id="survival-curves-by-treatment">
+<span class="header-section-number">36.8</span> Survival curves by treatment</h2>
 <div class="cell">
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">km_trt_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="va">trt</span>, data<span class="op">=</span><span class="va">veteran</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">km_trt_fit</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -686,8 +716,8 @@ Attaching package: 'dplyr'</code></pre>
 </div>
 </div>
 <p>Although the two curves appear to overlap in the first fifty days, younger patients clearly have a better chance of surviving more than a year.</p>
-</section><section id="conducting-log-rank-test" class="level2" data-number="31.9"><h2 data-number="31.9" class="anchored" data-anchor-id="conducting-log-rank-test">
-<span class="header-section-number">31.9</span> Conducting log-rank test</h2>
+</section><section id="conducting-log-rank-test" class="level2" data-number="36.9"><h2 data-number="36.9" class="anchored" data-anchor-id="conducting-log-rank-test">
+<span class="header-section-number">36.9</span> Conducting log-rank test</h2>
 <div class="cell">
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/therneau/survival">"survival"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://rpkgs.datanovia.com/survminer/index.html">"survminer"</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -768,8 +798,8 @@ trt=2 68       64     63.5   0.00394   0.00823
 </div>
 <p>The Chi-Squared test statistic is 0 with 1 degree of freedom and the corresponding p-value is 0.9. Since this p-value is greater than 0.05, we cannot reject the null hypothesis.</p>
 <p>In other words, we do not have sufficient evidence to say that there is a statistically significant difference in survival between the two treatment groups.</p>
-</section><section id="cox-proportional-hazard-models" class="level2" data-number="31.10"><h2 data-number="31.10" class="anchored" data-anchor-id="cox-proportional-hazard-models">
-<span class="header-section-number">31.10</span> Cox Proportional Hazard Models</h2>
+</section><section id="cox-proportional-hazard-models" class="level2" data-number="36.10"><h2 data-number="36.10" class="anchored" data-anchor-id="cox-proportional-hazard-models">
+<span class="header-section-number">36.10</span> Cox Proportional Hazard Models</h2>
 <p>Now we will fit a <a href="https://en.wikipedia.org/wiki/Proportional_hazards_model">Cox Proportional Hazards model</a> that makes use of all of the covariates in the data set.</p>
 <div class="cell">
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Fit the Cox Model</span></span>
@@ -813,8 +843,8 @@ Wald test            = 62.37  on 8 df,   p=2e-10
 Score (logrank) test = 66.74  on 8 df,   p=2e-11</code></pre>
 </div>
 </div>
-</section><section id="plot-the-cox-model" class="level2" data-number="31.11"><h2 data-number="31.11" class="anchored" data-anchor-id="plot-the-cox-model">
-<span class="header-section-number">31.11</span> Plot the Cox model</h2>
+</section><section id="plot-the-cox-model" class="level2" data-number="36.11"><h2 data-number="36.11" class="anchored" data-anchor-id="plot-the-cox-model">
+<span class="header-section-number">36.11</span> Plot the Cox model</h2>
 <div class="cell">
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cox_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html">survfit</a></span><span class="op">(</span><span class="va">cox</span><span class="op">)</span></span>
 <span><span class="co">#plot(cox_fit, main = "cph model", xlab="Days")</span></span>
@@ -860,8 +890,8 @@ priorYes           0.003300  1.54e-03 2.86e-03  0.539 5.90e-01
 Chisq=41.62 on 8 df, p=1.6e-06; test weights=aalen</code></pre>
 </div>
 </div>
-</section><section id="plot-the-aalens-addictive-regression-model" class="level2" data-number="31.12"><h2 data-number="31.12" class="anchored" data-anchor-id="plot-the-aalens-addictive-regression-model">
-<span class="header-section-number">31.12</span> Plot the Aalen’s Addictive Regression model</h2>
+</section><section id="plot-the-aalens-addictive-regression-model" class="level2" data-number="36.12"><h2 data-number="36.12" class="anchored" data-anchor-id="plot-the-aalens-addictive-regression-model">
+<span class="header-section-number">36.12</span> Plot the Aalen’s Addictive Regression model</h2>
 <div class="cell">
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#summary(aa_fit)  # provides a more complete summary of results</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">aa_fit</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -872,11 +902,11 @@ Chisq=41.62 on 8 df, p=1.6e-06; test weights=aalen</code></pre>
 </div>
 </div>
 </div>
-<section id="interpretation-of-aa-model-graph" class="level3" data-number="31.12.1"><h3 data-number="31.12.1" class="anchored" data-anchor-id="interpretation-of-aa-model-graph">
-<span class="header-section-number">31.12.1</span> Interpretation of AA model graph</h3>
+<section id="interpretation-of-aa-model-graph" class="level3" data-number="36.12.1"><h3 data-number="36.12.1" class="anchored" data-anchor-id="interpretation-of-aa-model-graph">
+<span class="header-section-number">36.12.1</span> Interpretation of AA model graph</h3>
 <p>Looking at this plot we can see that only karno is the time dependent variable because the graph is steeply below 0. Now with this knowledge, we can re-fit our model.</p>
-</section></section><section id="references" class="level2" data-number="31.13"><h2 data-number="31.13" class="anchored" data-anchor-id="references">
-<span class="header-section-number">31.13</span> References</h2>
+</section></section><section id="references" class="level2" data-number="36.13"><h2 data-number="36.13" class="anchored" data-anchor-id="references">
+<span class="header-section-number">36.13</span> References</h2>
 <p><a href="https://fiu-flvc.primo.exlibrisgroup.com/discovery/fulldisplay?docid=alma991002743961506571&amp;context=L&amp;vid=01FALSC_FIU:FIU&amp;lang=en&amp;search_scope=MyInst_and_CI&amp;adaptor=Local%20Search%20Engine&amp;tab=All40&amp;query=any,contains,survival%20analysis">Liu, X. (Xian X. ). (2012). Survival analysis models and applications. Wiley/Higher Education Press.</a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8651375/#:~:text=The%20Cox%20regression%20model%20is%20based%20on%20the%20hazard%20function,b%20k%20x%20k%20.">Abd ElHafeez, S., D’Arrigo, G., Leonardis, D., Fusaro, M., Tripepi, G., &amp; Roumeliotis, S. (2021). Methods to Analyze Time-to-Event Data: The Cox Regression Analysis. Oxidative medicine and cellular longevity, 2021, 1302811. https://doi.org/10.1155/2021/1302811</a></p>
 <p><a href="https://www.nature.com/articles/6605062">Azzato, E., Greenberg, D., Shah, M. et al.&nbsp;Prevalent cases in observational studies of cancer survival: do they bias hazard ratio estimates?. Br J Cancer 100, 1806–1811 (2009). https://doi.org/10.1038/sj.bjc.6605062</a></p>
@@ -1292,7 +1322,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../lessons/06_elastic_net_regression.html" class="pagination-link" aria-label="Elastic Net Regression Model">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

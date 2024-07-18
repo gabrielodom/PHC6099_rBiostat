@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<title>An R Cookbook for Public Health - 11&nbsp; Cochran’s Q Test</title>
+<title>An R Cookbook for Public Health - 12&nbsp; Cochran’s Q Test</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,7 +131,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_cochrans_q_paired_samp.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_cochrans_q_paired_samp.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -230,38 +230,44 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_ttest_one_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">One-sample/paired t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons/02_wilcoxon_one_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_mcnemar_paired_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_cochrans_q_paired_samp.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -278,25 +284,31 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_welch_ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Two sample Welchs test or Welchs t-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -313,55 +325,61 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_one_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_welch_two_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Welch’s Anova</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_corr_cov.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -378,13 +396,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_poisson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_negative_binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Generalized Linear Models: Negative Binomial</span></span></a>
   </div>
 </li>
       </ul>
@@ -401,13 +431,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_elastic_net_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_survival_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
   </div>
 </li>
       </ul>
@@ -424,7 +454,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -437,26 +467,26 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction-to-the-cochrans-q-test" id="toc-introduction-to-the-cochrans-q-test" class="nav-link active" data-scroll-target="#introduction-to-the-cochrans-q-test"><span class="header-section-number">11.1</span> Introduction to the Cochran’s <span class="math inline">\(Q\)</span> Test</a></li>
-  <li><a href="#mathematical-definition-of-cochrans-q-test" id="toc-mathematical-definition-of-cochrans-q-test" class="nav-link" data-scroll-target="#mathematical-definition-of-cochrans-q-test"><span class="header-section-number">11.2</span> Mathematical definition of Cochran’s <span class="math inline">\(Q\)</span> Test</a></li>
+<li><a href="#introduction-to-the-cochrans-q-test" id="toc-introduction-to-the-cochrans-q-test" class="nav-link active" data-scroll-target="#introduction-to-the-cochrans-q-test"><span class="header-section-number">12.1</span> Introduction to the Cochran’s <span class="math inline">\(Q\)</span> Test</a></li>
+  <li><a href="#mathematical-definition-of-cochrans-q-test" id="toc-mathematical-definition-of-cochrans-q-test" class="nav-link" data-scroll-target="#mathematical-definition-of-cochrans-q-test"><span class="header-section-number">12.2</span> Mathematical definition of Cochran’s <span class="math inline">\(Q\)</span> Test</a></li>
   <li>
-<a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description"><span class="header-section-number">11.3</span> Data Description</a>
+<a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description"><span class="header-section-number">12.3</span> Data Description</a>
   <ul class="collapse">
-<li><a href="#cleaning-uds-data" id="toc-cleaning-uds-data" class="nav-link" data-scroll-target="#cleaning-uds-data"><span class="header-section-number">11.3.1</span> Cleaning UDS Data</a></li>
-  <li><a href="#creating-comparison-table-from-this-dataset" id="toc-creating-comparison-table-from-this-dataset" class="nav-link" data-scroll-target="#creating-comparison-table-from-this-dataset"><span class="header-section-number">11.3.2</span> Creating Comparison Table from this Dataset</a></li>
+<li><a href="#cleaning-uds-data" id="toc-cleaning-uds-data" class="nav-link" data-scroll-target="#cleaning-uds-data"><span class="header-section-number">12.3.1</span> Cleaning UDS Data</a></li>
+  <li><a href="#creating-comparison-table-from-this-dataset" id="toc-creating-comparison-table-from-this-dataset" class="nav-link" data-scroll-target="#creating-comparison-table-from-this-dataset"><span class="header-section-number">12.3.2</span> Creating Comparison Table from this Dataset</a></li>
   </ul>
 </li>
-  <li><a href="#assumptions-of-cochrans-q-test" id="toc-assumptions-of-cochrans-q-test" class="nav-link" data-scroll-target="#assumptions-of-cochrans-q-test"><span class="header-section-number">11.4</span> Assumptions of Cochran’s <span class="math inline">\(Q\)</span> Test</a></li>
-  <li><a href="#checking-the-assumptions-of-cochrans-q-test" id="toc-checking-the-assumptions-of-cochrans-q-test" class="nav-link" data-scroll-target="#checking-the-assumptions-of-cochrans-q-test"><span class="header-section-number">11.5</span> Checking the Assumptions of Cochran’s <span class="math inline">\(Q\)</span> Test</a></li>
-  <li><a href="#code-to-run-cochrans-q-test" id="toc-code-to-run-cochrans-q-test" class="nav-link" data-scroll-target="#code-to-run-cochrans-q-test"><span class="header-section-number">11.6</span> Code to run Cochran’s <span class="math inline">\(Q\)</span> Test</a></li>
-  <li><a href="#brief-interpretation-of-the-output" id="toc-brief-interpretation-of-the-output" class="nav-link" data-scroll-target="#brief-interpretation-of-the-output"><span class="header-section-number">11.7</span> Brief Interpretation of the Output</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">11.8</span> Conclusion</a></li>
+  <li><a href="#assumptions-of-cochrans-q-test" id="toc-assumptions-of-cochrans-q-test" class="nav-link" data-scroll-target="#assumptions-of-cochrans-q-test"><span class="header-section-number">12.4</span> Assumptions of Cochran’s <span class="math inline">\(Q\)</span> Test</a></li>
+  <li><a href="#checking-the-assumptions-of-cochrans-q-test" id="toc-checking-the-assumptions-of-cochrans-q-test" class="nav-link" data-scroll-target="#checking-the-assumptions-of-cochrans-q-test"><span class="header-section-number">12.5</span> Checking the Assumptions of Cochran’s <span class="math inline">\(Q\)</span> Test</a></li>
+  <li><a href="#code-to-run-cochrans-q-test" id="toc-code-to-run-cochrans-q-test" class="nav-link" data-scroll-target="#code-to-run-cochrans-q-test"><span class="header-section-number">12.6</span> Code to run Cochran’s <span class="math inline">\(Q\)</span> Test</a></li>
+  <li><a href="#brief-interpretation-of-the-output" id="toc-brief-interpretation-of-the-output" class="nav-link" data-scroll-target="#brief-interpretation-of-the-output"><span class="header-section-number">12.7</span> Brief Interpretation of the Output</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">12.8</span> Conclusion</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/02_cochrans_q_paired_samp.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_cochrans_q_paired_samp.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_cochrans_q_paired_samp.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span>
+<span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span>
 </h1>
 </div>
 
@@ -495,11 +525,11 @@ window.Quarto = {
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ctn-0094.github.io/CTNote/">CTNote</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="introduction-to-the-cochrans-q-test" class="level2" data-number="11.1"><h2 data-number="11.1" class="anchored" data-anchor-id="introduction-to-the-cochrans-q-test">
-<span class="header-section-number">11.1</span> Introduction to the Cochran’s <span class="math inline">\(Q\)</span> Test</h2>
+<section id="introduction-to-the-cochrans-q-test" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="introduction-to-the-cochrans-q-test">
+<span class="header-section-number">12.1</span> Introduction to the Cochran’s <span class="math inline">\(Q\)</span> Test</h2>
 <p>An extension of McNemar’s Test (a non-parametric test used to analyze dichotomous data (in a 2 x 2) for <strong>paired</strong> samples) is Cochran’s <span class="math inline">\(Q\)</span> Test, which is a non-parametric test to analyze dichotomous data in a repeated measures design. Whereas McNemar’s Test would look at a binary outcome for the same individuals measured at only two time points, Cochran’s <span class="math inline">\(Q\)</span> Test deals with binary outcomes for the same individuals at three or more time points. The test requires one nominal dependent variable with 2 categories, and one independent variable with 3 or more dependent, mutually exclusive, groups. Common data examples include presence/absence of a condition for a single individual at various time points in treatment, or positive/negative results for a single individual from various potentially-competing assessment instruments. It can also be used to evaluate “inter-observer variability” (where different judges of the same event/phenomenon measure success or failure) or “inter-instrument/concurrent validity” (where multiple instruments applied to the same subject measure success or failure).</p>
-</section><section id="mathematical-definition-of-cochrans-q-test" class="level2" data-number="11.2"><h2 data-number="11.2" class="anchored" data-anchor-id="mathematical-definition-of-cochrans-q-test">
-<span class="header-section-number">11.2</span> Mathematical definition of Cochran’s <span class="math inline">\(Q\)</span> Test</h2>
+</section><section id="mathematical-definition-of-cochrans-q-test" class="level2" data-number="12.2"><h2 data-number="12.2" class="anchored" data-anchor-id="mathematical-definition-of-cochrans-q-test">
+<span class="header-section-number">12.2</span> Mathematical definition of Cochran’s <span class="math inline">\(Q\)</span> Test</h2>
 <p>Consider binary repeated measured data for <span class="math inline">\(n\)</span> observations; the observations come from <strong>one group</strong> under three or more conditions (e.g.&nbsp;“time period 1”, “time period 2”, “time period 3”, or “instrument 1” vs.&nbsp;“instrument 2” vs.&nbsp;“instrument 3”), the samples are treated with some treatment within equally across each condition, and the outcome of interest is dichotomous (such as “success” or “failure”, 1 vs.&nbsp;0). The data then can be “wrangled” into a form that looks like this:</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eg_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
@@ -570,11 +600,11 @@ window.Quarto = {
 },
 \]</span></p>
 <p>where If the assumptions are met, then Cochran’s <span class="math inline">\(Q\)</span> Test follows a Chi-squared distribution with <span class="math inline">\(k - 1\)</span> degrees of freedom; that is, <span class="math inline">\(\chi^{2}_{\text{Obs}} \sim \chi^{2}_{\nu = k - 1}\)</span>.</p>
-</section><section id="data-description" class="level2" data-number="11.3"><h2 data-number="11.3" class="anchored" data-anchor-id="data-description">
-<span class="header-section-number">11.3</span> Data Description</h2>
+</section><section id="data-description" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="data-description">
+<span class="header-section-number">12.3</span> Data Description</h2>
 <p>For this lesson, we will look at patients in treatment for opioid use disorder, We will measure abstinence within each month (4-week period) via weekly Urine Drug Screen (UDS). The abstinence measurements are in the <code><a href="https://ctn-0094.github.io/public.ctn0094extra/reference/derived_weeklyOpioidPattern.html">public.ctn0094extra::derived_weeklyOpioidPattern</a></code> data set. Our definition of abstinence will be “75% negative urine screens” from weeks 1-4 (start of treatment), weeks 5-8 (mid-treatment), and weeks 9-12 (end of treatment).</p>
-<section id="cleaning-uds-data" class="level3" data-number="11.3.1"><h3 data-number="11.3.1" class="anchored" data-anchor-id="cleaning-uds-data">
-<span class="header-section-number">11.3.1</span> Cleaning UDS Data</h3>
+<section id="cleaning-uds-data" class="level3" data-number="12.3.1"><h3 data-number="12.3.1" class="anchored" data-anchor-id="cleaning-uds-data">
+<span class="header-section-number">12.3.1</span> Cleaning UDS Data</h3>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">txSuccess_df</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu">public.ctn0094extra</span><span class="fu">::</span><span class="va"><a href="https://ctn-0094.github.io/public.ctn0094extra/reference/derived_weeklyOpioidPattern.html">derived_weeklyOpioidPattern</a></span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -622,8 +652,8 @@ window.Quarto = {
 # ℹ 3,550 more rows</code></pre>
 </div>
 </div>
-</section><section id="creating-comparison-table-from-this-dataset" class="level3" data-number="11.3.2"><h3 data-number="11.3.2" class="anchored" data-anchor-id="creating-comparison-table-from-this-dataset">
-<span class="header-section-number">11.3.2</span> Creating Comparison Table from this Dataset</h3>
+</section><section id="creating-comparison-table-from-this-dataset" class="level3" data-number="12.3.2"><h3 data-number="12.3.2" class="anchored" data-anchor-id="creating-comparison-table-from-this-dataset">
+<span class="header-section-number">12.3.2</span> Creating Comparison Table from this Dataset</h3>
 <p>We now have a binary measure of success at three time points (start, middle, and end of treatment). Our first step is to pivot the data so that we have 3 columns: <code>who</code>, <code>when</code> (start, middle, end), and <code>value</code> (“treatment success” measured as abstinence or not). Note that we also need to save the <code>when</code> column as an ordered factor so that the levels aren’t sorted alphabetically.</p>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">txSuccessLong_df</span> <span class="op">&lt;-</span> </span>
@@ -673,8 +703,8 @@ abstinent start  mid  end
     TRUE    961  735  795</code></pre>
 </div>
 </div>
-</section></section><section id="assumptions-of-cochrans-q-test" class="level2" data-number="11.4"><h2 data-number="11.4" class="anchored" data-anchor-id="assumptions-of-cochrans-q-test">
-<span class="header-section-number">11.4</span> Assumptions of Cochran’s <span class="math inline">\(Q\)</span> Test</h2>
+</section></section><section id="assumptions-of-cochrans-q-test" class="level2" data-number="12.4"><h2 data-number="12.4" class="anchored" data-anchor-id="assumptions-of-cochrans-q-test">
+<span class="header-section-number">12.4</span> Assumptions of Cochran’s <span class="math inline">\(Q\)</span> Test</h2>
 <p>The assumptions of Cochran’s <span class="math inline">\(Q\)</span> Test are as follows:</p>
 <ul>
 <li>
@@ -685,11 +715,11 @@ abstinent start  mid  end
 <strong>Assumption 3</strong>: The cases are a random sample from the population of interest.</li>
 <li>
 <strong>Assumption 4</strong>: There are a sufficiently large number of independent subjects, <span class="math inline">\(B\)</span> (also called “blocks”); note that there is no definition of exactly how many samples are needed to be considered “large”.</li>
-</ul></section><section id="checking-the-assumptions-of-cochrans-q-test" class="level2" data-number="11.5"><h2 data-number="11.5" class="anchored" data-anchor-id="checking-the-assumptions-of-cochrans-q-test">
-<span class="header-section-number">11.5</span> Checking the Assumptions of Cochran’s <span class="math inline">\(Q\)</span> Test</h2>
+</ul></section><section id="checking-the-assumptions-of-cochrans-q-test" class="level2" data-number="12.5"><h2 data-number="12.5" class="anchored" data-anchor-id="checking-the-assumptions-of-cochrans-q-test">
+<span class="header-section-number">12.5</span> Checking the Assumptions of Cochran’s <span class="math inline">\(Q\)</span> Test</h2>
 <p>To check our assumptions, we will review and inspect the contingency table with the two variables of interest. The categorical dependent variable is abstinence of opioids in urine samples (e.g positive or negative for the substance); we see that the dependent variable at the start of treatment is related to the dependent variable in the middle and at the end of treatment because we are detecting opioids within the <em>same person</em>. The categorical independent variable is the three time periods (start, middle, and end of treatment). The two groups are mutually exclusive, as urine cannot be simultaneously positive and negative and the participant cannot simultaneously be at the start and end of treatment. Finally, we note that there are 3560 samples, which counts as <span class="math inline">\(B\)</span> being “large”.</p>
-</section><section id="code-to-run-cochrans-q-test" class="level2" data-number="11.6"><h2 data-number="11.6" class="anchored" data-anchor-id="code-to-run-cochrans-q-test">
-<span class="header-section-number">11.6</span> Code to run Cochran’s <span class="math inline">\(Q\)</span> Test</h2>
+</section><section id="code-to-run-cochrans-q-test" class="level2" data-number="12.6"><h2 data-number="12.6" class="anchored" data-anchor-id="code-to-run-cochrans-q-test">
+<span class="header-section-number">12.6</span> Code to run Cochran’s <span class="math inline">\(Q\)</span> Test</h2>
 <p>Recall that we created a 2x3 contingency table with the <code>xtab()</code> function (from the <code>stats::</code> package) above. This table object is helpful for us to check assumptions, but it is not a required data structure for the <code>cochran_qtest()</code> function (from the <code>rstatix::</code> package). We can supply our pivoted “long” data to this function, but we have to use a creative <code>formula</code> object to define the experimental design. From the help documentation, this formula looks like <code>a ~ b | c</code>, where <code>a</code> is the outcome variable name (<code>abstinent</code> for us); <code>b</code> is the within-subjects factor variables (<code>when</code>); and <code>c</code> is the column name containing individuals/subjects identifier (<code>who</code>).</p>
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rstatix</span><span class="fu">::</span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cochran_qtest.html">cochran_qtest</a></span><span class="op">(</span></span>
@@ -704,11 +734,11 @@ abstinent start  mid  end
 </div>
 </div>
 <p>The output from the Cochran’s <span class="math inline">\(Q\)</span> Test will show the Chi-Squared test statistic, degrees of freedom (expected to be <span class="math inline">\(3 - 1 = 2\)</span> as there are only 3 time points), and the <span class="math inline">\(p\)</span>-value.</p>
-</section><section id="brief-interpretation-of-the-output" class="level2" data-number="11.7"><h2 data-number="11.7" class="anchored" data-anchor-id="brief-interpretation-of-the-output">
-<span class="header-section-number">11.7</span> Brief Interpretation of the Output</h2>
+</section><section id="brief-interpretation-of-the-output" class="level2" data-number="12.7"><h2 data-number="12.7" class="anchored" data-anchor-id="brief-interpretation-of-the-output">
+<span class="header-section-number">12.7</span> Brief Interpretation of the Output</h2>
 <p>The resulting <span class="math inline">\(p\)</span>-value in this case is below 0.05, which indicates that the marginal probabilities between <code>start</code>, <code>mid</code>, and <code>end</code> measures of abstinent are different. Going back to review <code>txAbs_tbl</code>, we see that the count for start of treatment abstinence is higher than the counts for middle and end of treatment abstinence. Note that there is no “post-hoc” test for Cochran’s <span class="math inline">\(Q\)</span> test, so if you really need to know which groups are different, then you have to use <span class="math inline">\(k(k - 1)\)</span> pairwise McNemar tests (which is not a great idea).</p>
-</section><section id="conclusion" class="level2" data-number="11.8"><h2 data-number="11.8" class="anchored" data-anchor-id="conclusion">
-<span class="header-section-number">11.8</span> Conclusion</h2>
+</section><section id="conclusion" class="level2" data-number="12.8"><h2 data-number="12.8" class="anchored" data-anchor-id="conclusion">
+<span class="header-section-number">12.8</span> Conclusion</h2>
 <p>If you have <strong>repeated paired</strong> samples, and the variable of interest is <strong>binary</strong>, then use Cochran’s <span class="math inline">\(Q\)</span> Test. The pairing could be within subject but across time or space, or it could represent different measures of success or failure on the same subject (of use in psychometrics). Regardless, it’s often that you’d like to include some covariate or additional factor, which this technique does not allow. Also, you probably want to know which time points or which interventions are different. In those cases, you may want Survival analysis (an event may occur or not within a time interval) or some other more sophisticated technique.</p>
 
 
@@ -1122,12 +1152,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../lessons/02_mcnemar_paired_samp.html" class="pagination-link" aria-label="McNemar's Test">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../lessons/02_chiSq_GoF.html" class="pagination-link" aria-label="The Chi Squared Goodness-of-Fit Test">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

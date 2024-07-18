@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<title>An R Cookbook for Public Health - 18&nbsp; Chi-Square Test of Independence</title>
+<title>An R Cookbook for Public Health - 20&nbsp; Chi-Square Test of Independence</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,7 +131,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/03_two_sample_chi_sq_independence.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/03_two_sample_chi_sq_independence.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -230,38 +230,44 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_ttest_one_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">One-sample/paired t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons/02_wilcoxon_one_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_mcnemar_paired_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_cochrans_q_paired_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -278,25 +284,31 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_welch_ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Two sample Welchs test or Welchs t-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -313,55 +325,61 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_one_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_welch_two_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Welch’s Anova</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_corr_cov.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -378,13 +396,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_poisson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_negative_binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Generalized Linear Models: Negative Binomial</span></span></a>
   </div>
 </li>
       </ul>
@@ -401,13 +431,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_elastic_net_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_survival_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
   </div>
 </li>
       </ul>
@@ -424,7 +454,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -437,23 +467,23 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#what-is-a-chi-square-test-of-independence" id="toc-what-is-a-chi-square-test-of-independence" class="nav-link active" data-scroll-target="#what-is-a-chi-square-test-of-independence"><span class="header-section-number">18.1</span> What is a Chi-Square Test of Independence?</a></li>
-  <li><a href="#statistic-for-chi-square-test" id="toc-statistic-for-chi-square-test" class="nav-link" data-scroll-target="#statistic-for-chi-square-test"><span class="header-section-number">18.2</span> Statistic for Chi-Square test</a></li>
-  <li><a href="#conducting-the-test" id="toc-conducting-the-test" class="nav-link" data-scroll-target="#conducting-the-test"><span class="header-section-number">18.3</span> Conducting the test</a></li>
-  <li><a href="#data-format-contingency-tables" id="toc-data-format-contingency-tables" class="nav-link" data-scroll-target="#data-format-contingency-tables"><span class="header-section-number">18.4</span> Data format: Contingency tables</a></li>
-  <li><a href="#graphical-display-of-contengency-tables" id="toc-graphical-display-of-contengency-tables" class="nav-link" data-scroll-target="#graphical-display-of-contengency-tables"><span class="header-section-number">18.5</span> Graphical display of contengency tables</a></li>
+<li><a href="#what-is-a-chi-square-test-of-independence" id="toc-what-is-a-chi-square-test-of-independence" class="nav-link active" data-scroll-target="#what-is-a-chi-square-test-of-independence"><span class="header-section-number">20.1</span> What is a Chi-Square Test of Independence?</a></li>
+  <li><a href="#statistic-for-chi-square-test" id="toc-statistic-for-chi-square-test" class="nav-link" data-scroll-target="#statistic-for-chi-square-test"><span class="header-section-number">20.2</span> Statistic for Chi-Square test</a></li>
+  <li><a href="#conducting-the-test" id="toc-conducting-the-test" class="nav-link" data-scroll-target="#conducting-the-test"><span class="header-section-number">20.3</span> Conducting the test</a></li>
+  <li><a href="#data-format-contingency-tables" id="toc-data-format-contingency-tables" class="nav-link" data-scroll-target="#data-format-contingency-tables"><span class="header-section-number">20.4</span> Data format: Contingency tables</a></li>
+  <li><a href="#graphical-display-of-contengency-tables" id="toc-graphical-display-of-contengency-tables" class="nav-link" data-scroll-target="#graphical-display-of-contengency-tables"><span class="header-section-number">20.5</span> Graphical display of contengency tables</a></li>
   <li>
-<a href="#compute-chi-square-test-in-r" id="toc-compute-chi-square-test-in-r" class="nav-link" data-scroll-target="#compute-chi-square-test-in-r"><span class="header-section-number">18.6</span> Compute chi-square test in R</a>
+<a href="#compute-chi-square-test-in-r" id="toc-compute-chi-square-test-in-r" class="nav-link" data-scroll-target="#compute-chi-square-test-in-r"><span class="header-section-number">20.6</span> Compute chi-square test in R</a>
   <ul class="collapse">
-<li><a href="#nature-of-the-dependence-between-the-row-and-the-column-variables" id="toc-nature-of-the-dependence-between-the-row-and-the-column-variables" class="nav-link" data-scroll-target="#nature-of-the-dependence-between-the-row-and-the-column-variables"><span class="header-section-number">18.6.1</span> Nature of the dependence between the row and the column variables</a></li>
+<li><a href="#nature-of-the-dependence-between-the-row-and-the-column-variables" id="toc-nature-of-the-dependence-between-the-row-and-the-column-variables" class="nav-link" data-scroll-target="#nature-of-the-dependence-between-the-row-and-the-column-variables"><span class="header-section-number">20.6.1</span> Nature of the dependence between the row and the column variables</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/03_two_sample_chi_sq_independence.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/03_two_sample_chi_sq_independence.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/03_two_sample_chi_sq_independence.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span>
+<span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span>
 </h1>
 </div>
 
@@ -494,8 +524,8 @@ window.Quarto = {
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">graphics</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/taiyun/corrplot">corrplot</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="what-is-a-chi-square-test-of-independence" class="level2" data-number="18.1"><h2 data-number="18.1" class="anchored" data-anchor-id="what-is-a-chi-square-test-of-independence">
-<span class="header-section-number">18.1</span> What is a Chi-Square Test of Independence?</h2>
+<section id="what-is-a-chi-square-test-of-independence" class="level2" data-number="20.1"><h2 data-number="20.1" class="anchored" data-anchor-id="what-is-a-chi-square-test-of-independence">
+<span class="header-section-number">20.1</span> What is a Chi-Square Test of Independence?</h2>
 <p>The Chi-Square Test of Independence is used to determine if there is a significant association between two categorical variables.</p>
 <p><strong>Purpose:</strong> The test assesses whether the observed frequencies in a contingency table differ from the frequencies expected under the assumption of independence.</p>
 <p>What Does This Mean!?!?</p>
@@ -539,8 +569,8 @@ E_{ij} = \frac{\text{RowTotal} * \text{ColumnTotal}}{\text{GrandTotal}}
 <p><strong>Assumption of Independence:</strong> Under the assumption of independence, the occurrence of one variable does not affect the occurrence of the other variable.</p>
 <p>Example: Gender has no influence on product preference, meaning the distribution of preferences should be the same for both males and females.</p>
 <p><strong>Comparing Observed and Expected Frequencies:</strong> The Chi-Square test compares the observed frequencies with the expected frequencies. If the observed frequencies match the expected frequencies closely, it suggests that there is independence between the variables. Significant differences between observed and expected frequencies suggest an association between the variables.</p>
-</section><section id="statistic-for-chi-square-test" class="level2" data-number="18.2"><h2 data-number="18.2" class="anchored" data-anchor-id="statistic-for-chi-square-test">
-<span class="header-section-number">18.2</span> Statistic for Chi-Square test</h2>
+</section><section id="statistic-for-chi-square-test" class="level2" data-number="20.2"><h2 data-number="20.2" class="anchored" data-anchor-id="statistic-for-chi-square-test">
+<span class="header-section-number">20.2</span> Statistic for Chi-Square test</h2>
 <table class="table">
 <thead><tr class="header">
 <th></th>
@@ -580,8 +610,8 @@ x^2 = \sum\frac{(O_{ij} - E_{ij})^2}{E_{ij}}
 <p><strong>3. Find the Critical Value and Compare:</strong></p>
 <p>Using the degrees of freedom and the significance level (e.g., 0.05), find the critical value from the Chi-Square distribution table.</p>
 <p>Compare the calculated <span class="math inline">\(x^2\)</span> to the critical value to determine whether to reject the null hypothesis.</p>
-</section><section id="conducting-the-test" class="level2" data-number="18.3"><h2 data-number="18.3" class="anchored" data-anchor-id="conducting-the-test">
-<span class="header-section-number">18.3</span> Conducting the test</h2>
+</section><section id="conducting-the-test" class="level2" data-number="20.3"><h2 data-number="20.3" class="anchored" data-anchor-id="conducting-the-test">
+<span class="header-section-number">20.3</span> Conducting the test</h2>
 <p><strong>Research Question and Hypotheses</strong> The general question for a Chi-Square Test of Independence is: Is there a statistically significant association between two categorical variables?</p>
 <p>Example questions include:</p>
 <ol type="1">
@@ -595,8 +625,8 @@ x^2 = \sum\frac{(O_{ij} - E_{ij})^2}{E_{ij}}
 <p><strong>Categorical Data:</strong> Both variables should be categorical.</p>
 <p><strong>Independence of Observations:</strong> Each observation should contribute to only one cell in the contingency table.</p>
 <p><strong>Expected Frequency:</strong> Expected frequency in each cell should be at least 5 for the test to be valid.</p>
-</section><section id="data-format-contingency-tables" class="level2" data-number="18.4"><h2 data-number="18.4" class="anchored" data-anchor-id="data-format-contingency-tables">
-<span class="header-section-number">18.4</span> Data format: Contingency tables</h2>
+</section><section id="data-format-contingency-tables" class="level2" data-number="20.4"><h2 data-number="20.4" class="anchored" data-anchor-id="data-format-contingency-tables">
+<span class="header-section-number">20.4</span> Data format: Contingency tables</h2>
 <p>We’ll use <em>housetasks</em> data sets from STHDA:http://www.sthda.com/sthda/RDoc/data/housetasks.txt. <sup><a href="http://www.sthda.com/sthda/RDoc/data/housetasks.txt.">link</a></sup></p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Import the data</span></span>
@@ -616,8 +646,8 @@ Dishes         32          24       4      53</code></pre>
 </div>
 </div>
 <p>The data is a contingency table containing 13 house tasks and their distribution in the couple: <br> 1. by the wife only <br> 2. alternatively <br> 3. by the husband only <br> 4. jointly <br></p>
-</section><section id="graphical-display-of-contengency-tables" class="level2" data-number="18.5"><h2 data-number="18.5" class="anchored" data-anchor-id="graphical-display-of-contengency-tables">
-<span class="header-section-number">18.5</span> Graphical display of contengency tables</h2>
+</section><section id="graphical-display-of-contengency-tables" class="level2" data-number="20.5"><h2 data-number="20.5" class="anchored" data-anchor-id="graphical-display-of-contengency-tables">
+<span class="header-section-number">20.5</span> Graphical display of contengency tables</h2>
 <p>Contingency table can be visualized using the function <em><strong>balloonplot()</strong></em> [in gplots package]. This function draws a graphical matrix where each cell contains a dot whose size reflects the relative magnitude of the corresponding component.</p>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Convert the data as a table</span></span>
@@ -647,8 +677,8 @@ Dishes         32          24       4      53</code></pre>
 <blockquote class="blockquote">
 <p>Row and column sums are printed by default in the bottom and right margins, respectively. These values can be hidden using the argument <em>show.margins = FALSE</em>.</p>
 </blockquote>
-</section><section id="compute-chi-square-test-in-r" class="level2" data-number="18.6"><h2 data-number="18.6" class="anchored" data-anchor-id="compute-chi-square-test-in-r">
-<span class="header-section-number">18.6</span> Compute chi-square test in R</h2>
+</section><section id="compute-chi-square-test-in-r" class="level2" data-number="20.6"><h2 data-number="20.6" class="anchored" data-anchor-id="compute-chi-square-test-in-r">
+<span class="header-section-number">20.6</span> Compute chi-square test in R</h2>
 <p>Chi-square statistic can be easily computed using the function <em><strong>chisq.test()</strong></em> as follow:</p>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">chisq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">housetasks</span><span class="op">)</span></span>
@@ -664,8 +694,8 @@ X-squared = 1944.5, df = 36, p-value &lt; 2.2e-16</code></pre>
 <blockquote class="blockquote">
 <p>As the results shown above, p-value &lt; 2.2e-16, which means we can reject the null hypothesis, and saying that the row and the column variables are statistically significantly associated.</p>
 </blockquote>
-<section id="nature-of-the-dependence-between-the-row-and-the-column-variables" class="level3" data-number="18.6.1"><h3 data-number="18.6.1" class="anchored" data-anchor-id="nature-of-the-dependence-between-the-row-and-the-column-variables">
-<span class="header-section-number">18.6.1</span> Nature of the dependence between the row and the column variables</h3>
+<section id="nature-of-the-dependence-between-the-row-and-the-column-variables" class="level3" data-number="20.6.1"><h3 data-number="20.6.1" class="anchored" data-anchor-id="nature-of-the-dependence-between-the-row-and-the-column-variables">
+<span class="header-section-number">20.6.1</span> Nature of the dependence between the row and the column variables</h3>
 <p>If you want to know the most contributing cells to the total Chi-square score, you just have to calculate the Pearson residuals (r) for each cell (or standardized residuals).Pearson residuals can be easily extracted from the output of the function <em><strong>chisq.test()</strong></em>:</p>
 <blockquote class="blockquote">
 <p>Cells with the highest absolute standardized residuals contribute the most to the total Chi-square score.</p>
@@ -1104,7 +1134,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="pagination-link" aria-label="Bootstrap Tests">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

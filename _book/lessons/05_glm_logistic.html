@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<title>An R Cookbook for Public Health - 28&nbsp; Generalized Linear Models for Binary Response</title>
+<title>An R Cookbook for Public Health - 31&nbsp; Generalized Linear Models for Binary Response</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../lessons/05_glm_poisson.html" rel="next">
+<link href="../lessons/05_glm_ordinal_logistic.html" rel="next">
 <link href="../05_header_generalized-linear-models.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -131,7 +131,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../05_header_generalized-linear-models.html">Generalized Linear Models</a></li><li class="breadcrumb-item"><a href="../lessons/05_glm_logistic.html"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../05_header_generalized-linear-models.html">Generalized Linear Models</a></li><li class="breadcrumb-item"><a href="../lessons/05_glm_logistic.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -230,38 +230,44 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_ttest_one_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">One-sample/paired t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons/02_wilcoxon_one_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_mcnemar_paired_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_cochrans_q_paired_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -278,25 +284,31 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_welch_ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Two sample Welchs test or Welchs t-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -313,55 +325,61 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_one_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_welch_two_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Welch’s Anova</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_corr_cov.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -378,13 +396,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_logistic.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_poisson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_negative_binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Generalized Linear Models: Negative Binomial</span></span></a>
   </div>
 </li>
       </ul>
@@ -401,13 +431,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_elastic_net_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_survival_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
   </div>
 </li>
       </ul>
@@ -424,7 +454,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -437,29 +467,29 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#generalized-liner-modelsbinary-or-logistic-regression" id="toc-generalized-liner-modelsbinary-or-logistic-regression" class="nav-link active" data-scroll-target="#generalized-liner-modelsbinary-or-logistic-regression"><span class="header-section-number">28.1</span> Generalized Liner models(binary) or Logistic Regression</a></li>
-  <li><a href="#purpose" id="toc-purpose" class="nav-link" data-scroll-target="#purpose"><span class="header-section-number">28.2</span> Purpose:</a></li>
+<li><a href="#generalized-liner-modelsbinary-or-logistic-regression" id="toc-generalized-liner-modelsbinary-or-logistic-regression" class="nav-link active" data-scroll-target="#generalized-liner-modelsbinary-or-logistic-regression"><span class="header-section-number">31.1</span> Generalized Liner models(binary) or Logistic Regression</a></li>
+  <li><a href="#purpose" id="toc-purpose" class="nav-link" data-scroll-target="#purpose"><span class="header-section-number">31.2</span> Purpose:</a></li>
   <li>
-<a href="#understanding-the-function" id="toc-understanding-the-function" class="nav-link" data-scroll-target="#understanding-the-function"><span class="header-section-number">28.3</span> Understanding the function</a>
+<a href="#understanding-the-function" id="toc-understanding-the-function" class="nav-link" data-scroll-target="#understanding-the-function"><span class="header-section-number">31.3</span> Understanding the function</a>
   <ul class="collapse">
-<li><a href="#interpret-and-coefficients" id="toc-interpret-and-coefficients" class="nav-link" data-scroll-target="#interpret-and-coefficients"><span class="header-section-number">28.3.1</span> Interpret and Coefficients:</a></li>
-  <li><a href="#odds-and-odds-ratio" id="toc-odds-and-odds-ratio" class="nav-link" data-scroll-target="#odds-and-odds-ratio"><span class="header-section-number">28.3.2</span> Odds and Odds Ratio:</a></li>
+<li><a href="#interpret-and-coefficients" id="toc-interpret-and-coefficients" class="nav-link" data-scroll-target="#interpret-and-coefficients"><span class="header-section-number">31.3.1</span> Interpret and Coefficients:</a></li>
+  <li><a href="#odds-and-odds-ratio" id="toc-odds-and-odds-ratio" class="nav-link" data-scroll-target="#odds-and-odds-ratio"><span class="header-section-number">31.3.2</span> Odds and Odds Ratio:</a></li>
   </ul>
 </li>
-  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">28.4</span> Assumptions:</a></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">31.4</span> Assumptions:</a></li>
   <li>
-<a href="#data-analysis" id="toc-data-analysis" class="nav-link" data-scroll-target="#data-analysis"><span class="header-section-number">28.5</span> Data Analysis</a>
+<a href="#data-analysis" id="toc-data-analysis" class="nav-link" data-scroll-target="#data-analysis"><span class="header-section-number">31.5</span> Data Analysis</a>
   <ul class="collapse">
-<li><a href="#fit-the-logistic-regression-model" id="toc-fit-the-logistic-regression-model" class="nav-link" data-scroll-target="#fit-the-logistic-regression-model"><span class="header-section-number">28.5.1</span> Fit the Logistic Regression Model</a></li>
-  <li><a href="#evaluate-the-model-performance" id="toc-evaluate-the-model-performance" class="nav-link" data-scroll-target="#evaluate-the-model-performance"><span class="header-section-number">28.5.2</span> Evaluate the model performance</a></li>
+<li><a href="#fit-the-logistic-regression-model" id="toc-fit-the-logistic-regression-model" class="nav-link" data-scroll-target="#fit-the-logistic-regression-model"><span class="header-section-number">31.5.1</span> Fit the Logistic Regression Model</a></li>
+  <li><a href="#evaluate-the-model-performance" id="toc-evaluate-the-model-performance" class="nav-link" data-scroll-target="#evaluate-the-model-performance"><span class="header-section-number">31.5.2</span> Evaluate the model performance</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/05_glm_logistic.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../05_header_generalized-linear-models.html">Generalized Linear Models</a></li><li class="breadcrumb-item"><a href="../lessons/05_glm_logistic.html"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../05_header_generalized-linear-models.html">Generalized Linear Models</a></li><li class="breadcrumb-item"><a href="../lessons/05_glm_logistic.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span>
+<span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span>
 </h1>
 </div>
 
@@ -500,17 +530,17 @@ window.Quarto = {
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://xrobin.github.io/pROC/">pROC</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="generalized-liner-modelsbinary-or-logistic-regression" class="level2" data-number="28.1"><h2 data-number="28.1" class="anchored" data-anchor-id="generalized-liner-modelsbinary-or-logistic-regression">
-<span class="header-section-number">28.1</span> Generalized Liner models(binary) or Logistic Regression</h2>
+<section id="generalized-liner-modelsbinary-or-logistic-regression" class="level2" data-number="31.1"><h2 data-number="31.1" class="anchored" data-anchor-id="generalized-liner-modelsbinary-or-logistic-regression">
+<span class="header-section-number">31.1</span> Generalized Liner models(binary) or Logistic Regression</h2>
 <p>A type of Generalized Linear Model (GLM) used to model binary outcomes.</p>
 <ul>
 <li><p>Dependent Variable: Binary (e.g., 0 or 1).</p></li>
 <li><p>Independent Variables: One or more predictor variables that can be continuous or categorical.</p></li>
-</ul></section><section id="purpose" class="level2" data-number="28.2"><h2 data-number="28.2" class="anchored" data-anchor-id="purpose">
-<span class="header-section-number">28.2</span> Purpose:</h2>
+</ul></section><section id="purpose" class="level2" data-number="31.2"><h2 data-number="31.2" class="anchored" data-anchor-id="purpose">
+<span class="header-section-number">31.2</span> Purpose:</h2>
 <p>This regression models the relationship between a set of predictor variables and a binary response variable. Commonly used for classification problems where the outcome is categorical with two possible values (e.g., yes/no, success/failure).</p>
-</section><section id="understanding-the-function" class="level2" data-number="28.3"><h2 data-number="28.3" class="anchored" data-anchor-id="understanding-the-function">
-<span class="header-section-number">28.3</span> Understanding the function</h2>
+</section><section id="understanding-the-function" class="level2" data-number="31.3"><h2 data-number="31.3" class="anchored" data-anchor-id="understanding-the-function">
+<span class="header-section-number">31.3</span> Understanding the function</h2>
 <p>Logit Function: Links the linear combination of predictors to the probability of the outcome. The logit function is defined as:</p>
 <p><span class="math display">\[
 \text{logit}(p) := \log\left(\frac{p}{1 - p}\right).
@@ -524,16 +554,16 @@ window.Quarto = {
 <p><span class="math display">\[
 p = \frac{1}{1 + \exp\left[-(\beta_0 + \beta_1X_1 + \ldots + \beta_pX_p)\right]}.
 \]</span></p>
-<section id="interpret-and-coefficients" class="level3" data-number="28.3.1"><h3 data-number="28.3.1" class="anchored" data-anchor-id="interpret-and-coefficients">
-<span class="header-section-number">28.3.1</span> Interpret and Coefficients:</h3>
+<section id="interpret-and-coefficients" class="level3" data-number="31.3.1"><h3 data-number="31.3.1" class="anchored" data-anchor-id="interpret-and-coefficients">
+<span class="header-section-number">31.3.1</span> Interpret and Coefficients:</h3>
 <p><strong>Intercept (<span class="math inline">\(\beta_0\)</span>):</strong> The log-odds of the outcome when all predictors are zero.</p>
 <p><strong>Coefficients (<span class="math inline">\(\beta_i\)</span>):</strong> The change in log-odds of the outcome for a one-unit increase in the predictor</p>
-</section><section id="odds-and-odds-ratio" class="level3" data-number="28.3.2"><h3 data-number="28.3.2" class="anchored" data-anchor-id="odds-and-odds-ratio">
-<span class="header-section-number">28.3.2</span> Odds and Odds Ratio:</h3>
+</section><section id="odds-and-odds-ratio" class="level3" data-number="31.3.2"><h3 data-number="31.3.2" class="anchored" data-anchor-id="odds-and-odds-ratio">
+<span class="header-section-number">31.3.2</span> Odds and Odds Ratio:</h3>
 <p><strong>Odds:</strong> The ratio of the probability of the event occurring to the probability of it not occurring.</p>
 <p><strong>Odds Ratio:</strong> The ratio of the odds of the outcome occurring for different values of a predictor.</p>
-</section></section><section id="assumptions" class="level2" data-number="28.4"><h2 data-number="28.4" class="anchored" data-anchor-id="assumptions">
-<span class="header-section-number">28.4</span> Assumptions:</h2>
+</section></section><section id="assumptions" class="level2" data-number="31.4"><h2 data-number="31.4" class="anchored" data-anchor-id="assumptions">
+<span class="header-section-number">31.4</span> Assumptions:</h2>
 <p>Parameters are estimated using Maximum Likelihood Estimation (MLE). The goal is to find the values of the coefficients that maximize the likelihood of observing the given data. We assume that:</p>
 <ol type="1">
 <li>
@@ -542,8 +572,8 @@ p = \frac{1}{1 + \exp\left[-(\beta_0 + \beta_1X_1 + \ldots + \beta_pX_p)\right]}
 <strong>No multicollinearity among the predictors.</strong> The sample size is sufficiently large.</li>
 </ol>
 <p><img src="fig/05_glm_logistic_image4.jpg" class="img-fluid"></p>
-</section><section id="data-analysis" class="level2" data-number="28.5"><h2 data-number="28.5" class="anchored" data-anchor-id="data-analysis">
-<span class="header-section-number">28.5</span> Data Analysis</h2>
+</section><section id="data-analysis" class="level2" data-number="31.5"><h2 data-number="31.5" class="anchored" data-anchor-id="data-analysis">
+<span class="header-section-number">31.5</span> Data Analysis</h2>
 <p>We will use the <code>train.csv</code> dataset from Kaggle’s: Machine Learning from Disaster competition.<sup><a href="https://www.kaggle.com/competitions/titanic/data">link</a></sup></p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Load the Titanic train dataset</span></span>
@@ -585,8 +615,8 @@ dbl (7): PassengerId, Survived, Pclass, Age, SibSp, Parch, Fare
 <span><span class="va">titanic_train_data</span><span class="op">$</span><span class="va">Embarked</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">titanic_train_data</span><span class="op">$</span><span class="va">Embarked</span><span class="op">)</span></span>
 <span><span class="va">titanic_train_data</span><span class="op">$</span><span class="va">Survived</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">titanic_train_data</span><span class="op">$</span><span class="va">Survived</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="fit-the-logistic-regression-model" class="level3" data-number="28.5.1"><h3 data-number="28.5.1" class="anchored" data-anchor-id="fit-the-logistic-regression-model">
-<span class="header-section-number">28.5.1</span> Fit the Logistic Regression Model</h3>
+<section id="fit-the-logistic-regression-model" class="level3" data-number="31.5.1"><h3 data-number="31.5.1" class="anchored" data-anchor-id="fit-the-logistic-regression-model">
+<span class="header-section-number">31.5.1</span> Fit the Logistic Regression Model</h3>
 <p>Fit a logistic regression model using <code>Survived</code> as the response variable and <code>Pclass</code>, <code>Age</code>, <code>Sex</code>, and <code>Embarked</code> as predictors.</p>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Fit the logistic regression model</span></span>
@@ -654,8 +684,8 @@ Number of Fisher Scoring iterations: 5</code></pre>
 </div>
 </div>
 <p>The Paris plot shows that the logistic regression model is generally effective in predicting survival on the <strong>Titanic</strong> dataset. The predicted probabilities closely follow the empirical probabilities, especially at the extremes (very low and very high predicted probabilities). <br> There may be some room for improvement in the middle range of predicted probabilities, where the line is not as steep. This could indicate that the model might benefit from additional predictors or different modeling techniques to improve accuracy.</p>
-</section><section id="evaluate-the-model-performance" class="level3" data-number="28.5.2"><h3 data-number="28.5.2" class="anchored" data-anchor-id="evaluate-the-model-performance">
-<span class="header-section-number">28.5.2</span> Evaluate the model performance</h3>
+</section><section id="evaluate-the-model-performance" class="level3" data-number="31.5.2"><h3 data-number="31.5.2" class="anchored" data-anchor-id="evaluate-the-model-performance">
+<span class="header-section-number">31.5.2</span> Evaluate the model performance</h3>
 <p>We can visualize the ROC curve and calculate the AUC to evaluate the model’s performance.</p>
 <div class="cell">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Compute the ROC curve</span></span>
@@ -1101,8 +1131,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../lessons/05_glm_poisson.html" class="pagination-link" aria-label="Poisson Regression Model">
-        <span class="nav-page-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lessons/05_glm_ordinal_logistic.html" class="pagination-link" aria-label="Ordinal Logistic Regression">
+        <span class="nav-page-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -8,8 +8,8 @@ author:
       - Florida International University
       - Robert Stempel College of Public Health and Social Work
 toc: true
-number-sections: true
 format: html
+number-sections: true
 embed-resources: false
 ---
 

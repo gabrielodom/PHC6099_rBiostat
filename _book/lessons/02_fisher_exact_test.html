@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<title>An R Cookbook for Public Health - 14&nbsp; Fisher’s Exact Test</title>
+<title>An R Cookbook for Public Health - 15&nbsp; Fisher’s Exact Test</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,7 +131,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_fisher_exact_test.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_fisher_exact_test.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -230,38 +230,44 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_ttest_one_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">One-sample/paired t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons/02_wilcoxon_one_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_mcnemar_paired_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_cochrans_q_paired_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -278,25 +284,31 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_welch_ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Two sample Welchs test or Welchs t-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -313,55 +325,61 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_one_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_welch_two_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Welch’s Anova</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_corr_cov.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -378,13 +396,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_poisson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_negative_binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Generalized Linear Models: Negative Binomial</span></span></a>
   </div>
 </li>
       </ul>
@@ -401,13 +431,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_elastic_net_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_survival_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
   </div>
 </li>
       </ul>
@@ -424,7 +454,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -437,42 +467,42 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction-to-fishers-exact-test" id="toc-introduction-to-fishers-exact-test" class="nav-link active" data-scroll-target="#introduction-to-fishers-exact-test"><span class="header-section-number">14.1</span> Introduction to Fisher’s Exact test</a></li>
-  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">14.2</span> Assumptions</a></li>
-  <li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><span class="header-section-number">14.3</span> Hypotheses</a></li>
-  <li><a href="#mathematical-definition-of-fishers-exact-test" id="toc-mathematical-definition-of-fishers-exact-test" class="nav-link" data-scroll-target="#mathematical-definition-of-fishers-exact-test"><span class="header-section-number">14.4</span> Mathematical definition of Fisher’s Exact test</a></li>
-  <li><a href="#intalling-required-packages" id="toc-intalling-required-packages" class="nav-link" data-scroll-target="#intalling-required-packages"><span class="header-section-number">14.5</span> Intalling required packages</a></li>
+<li><a href="#introduction-to-fishers-exact-test" id="toc-introduction-to-fishers-exact-test" class="nav-link active" data-scroll-target="#introduction-to-fishers-exact-test"><span class="header-section-number">15.1</span> Introduction to Fisher’s Exact test</a></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">15.2</span> Assumptions</a></li>
+  <li><a href="#hypotheses" id="toc-hypotheses" class="nav-link" data-scroll-target="#hypotheses"><span class="header-section-number">15.3</span> Hypotheses</a></li>
+  <li><a href="#mathematical-definition-of-fishers-exact-test" id="toc-mathematical-definition-of-fishers-exact-test" class="nav-link" data-scroll-target="#mathematical-definition-of-fishers-exact-test"><span class="header-section-number">15.4</span> Mathematical definition of Fisher’s Exact test</a></li>
+  <li><a href="#intalling-required-packages" id="toc-intalling-required-packages" class="nav-link" data-scroll-target="#intalling-required-packages"><span class="header-section-number">15.5</span> Intalling required packages</a></li>
   <li>
-<a href="#data-source-and-description" id="toc-data-source-and-description" class="nav-link" data-scroll-target="#data-source-and-description"><span class="header-section-number">14.6</span> Data source and description</a>
+<a href="#data-source-and-description" id="toc-data-source-and-description" class="nav-link" data-scroll-target="#data-source-and-description"><span class="header-section-number">15.6</span> Data source and description</a>
   <ul class="collapse">
-<li><a href="#create-a-model-data-frame" id="toc-create-a-model-data-frame" class="nav-link" data-scroll-target="#create-a-model-data-frame"><span class="header-section-number">14.6.1</span> Create a model data frame</a></li>
-  <li><a href="#participants-characteristics-summary-table" id="toc-participants-characteristics-summary-table" class="nav-link" data-scroll-target="#participants-characteristics-summary-table"><span class="header-section-number">14.6.2</span> Participants characteristics Summary table</a></li>
-  <li><a href="#recode-to-indicate-variable-factor-levels" id="toc-recode-to-indicate-variable-factor-levels" class="nav-link" data-scroll-target="#recode-to-indicate-variable-factor-levels"><span class="header-section-number">14.6.3</span> Recode to indicate variable factor levels</a></li>
+<li><a href="#create-a-model-data-frame" id="toc-create-a-model-data-frame" class="nav-link" data-scroll-target="#create-a-model-data-frame"><span class="header-section-number">15.6.1</span> Create a model data frame</a></li>
+  <li><a href="#participants-characteristics-summary-table" id="toc-participants-characteristics-summary-table" class="nav-link" data-scroll-target="#participants-characteristics-summary-table"><span class="header-section-number">15.6.2</span> Participants characteristics Summary table</a></li>
+  <li><a href="#recode-to-indicate-variable-factor-levels" id="toc-recode-to-indicate-variable-factor-levels" class="nav-link" data-scroll-target="#recode-to-indicate-variable-factor-levels"><span class="header-section-number">15.6.3</span> Recode to indicate variable factor levels</a></li>
   </ul>
 </li>
-  <li><a href="#contingency-table-with-tbl_summary-function" id="toc-contingency-table-with-tbl_summary-function" class="nav-link" data-scroll-target="#contingency-table-with-tbl_summary-function"><span class="header-section-number">14.7</span> Contingency Table with <code>tbl_summary</code> Function</a></li>
-  <li><a href="#performing-the-fishers-exact-test-using-the-function-fisher.test" id="toc-performing-the-fishers-exact-test-using-the-function-fisher.test" class="nav-link" data-scroll-target="#performing-the-fishers-exact-test-using-the-function-fisher.test"><span class="header-section-number">14.8</span> Performing the Fisher’s exact test using the function fisher.test()</a></li>
+  <li><a href="#contingency-table-with-tbl_summary-function" id="toc-contingency-table-with-tbl_summary-function" class="nav-link" data-scroll-target="#contingency-table-with-tbl_summary-function"><span class="header-section-number">15.7</span> Contingency Table with <code>tbl_summary</code> Function</a></li>
+  <li><a href="#performing-the-fishers-exact-test-using-the-function-fisher.test" id="toc-performing-the-fishers-exact-test-using-the-function-fisher.test" class="nav-link" data-scroll-target="#performing-the-fishers-exact-test-using-the-function-fisher.test"><span class="header-section-number">15.8</span> Performing the Fisher’s exact test using the function fisher.test()</a></li>
   <li>
-<a href="#interpretation-of-results" id="toc-interpretation-of-results" class="nav-link" data-scroll-target="#interpretation-of-results"><span class="header-section-number">14.9</span> Interpretation of results</a>
+<a href="#interpretation-of-results" id="toc-interpretation-of-results" class="nav-link" data-scroll-target="#interpretation-of-results"><span class="header-section-number">15.9</span> Interpretation of results</a>
   <ul class="collapse">
-<li><a href="#one-tailed-test" id="toc-one-tailed-test" class="nav-link" data-scroll-target="#one-tailed-test"><span class="header-section-number">14.9.1</span> One-Tailed test</a></li>
-  <li><a href="#two-tailed-analysis" id="toc-two-tailed-analysis" class="nav-link" data-scroll-target="#two-tailed-analysis"><span class="header-section-number">14.9.2</span> Two-tailed analysis</a></li>
+<li><a href="#one-tailed-test" id="toc-one-tailed-test" class="nav-link" data-scroll-target="#one-tailed-test"><span class="header-section-number">15.9.1</span> One-Tailed test</a></li>
+  <li><a href="#two-tailed-analysis" id="toc-two-tailed-analysis" class="nav-link" data-scroll-target="#two-tailed-analysis"><span class="header-section-number">15.9.2</span> Two-tailed analysis</a></li>
   </ul>
 </li>
   <li>
-<a href="#visualization-of-the-statistical-test-output" id="toc-visualization-of-the-statistical-test-output" class="nav-link" data-scroll-target="#visualization-of-the-statistical-test-output"><span class="header-section-number">14.10</span> Visualization of the statistical test output</a>
+<a href="#visualization-of-the-statistical-test-output" id="toc-visualization-of-the-statistical-test-output" class="nav-link" data-scroll-target="#visualization-of-the-statistical-test-output"><span class="header-section-number">15.10</span> Visualization of the statistical test output</a>
   <ul class="collapse">
-<li><a href="#barplots" id="toc-barplots" class="nav-link" data-scroll-target="#barplots"><span class="header-section-number">14.10.1</span> Barplots</a></li>
-  <li><a href="#mosaic-plots" id="toc-mosaic-plots" class="nav-link" data-scroll-target="#mosaic-plots"><span class="header-section-number">14.10.2</span> Mosaic plots</a></li>
+<li><a href="#barplots" id="toc-barplots" class="nav-link" data-scroll-target="#barplots"><span class="header-section-number">15.10.1</span> Barplots</a></li>
+  <li><a href="#mosaic-plots" id="toc-mosaic-plots" class="nav-link" data-scroll-target="#mosaic-plots"><span class="header-section-number">15.10.2</span> Mosaic plots</a></li>
   </ul>
 </li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">14.11</span> References</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">15.11</span> References</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/02_fisher_exact_test.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_fisher_exact_test.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02_header_one-sample.html">One-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/02_fisher_exact_test.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span>
+<span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span>
 </h1>
 </div>
 
@@ -503,35 +533,35 @@ window.Quarto = {
   
 
 
-</header><section id="introduction-to-fishers-exact-test" class="level2" data-number="14.1"><h2 data-number="14.1" class="anchored" data-anchor-id="introduction-to-fishers-exact-test">
-<span class="header-section-number">14.1</span> Introduction to Fisher’s Exact test</h2>
+</header><section id="introduction-to-fishers-exact-test" class="level2" data-number="15.1"><h2 data-number="15.1" class="anchored" data-anchor-id="introduction-to-fishers-exact-test">
+<span class="header-section-number">15.1</span> Introduction to Fisher’s Exact test</h2>
 <ul>
 <li>Fisher’s exact test is a non-parametric statistical test used to test an association between categorical variables.</li>
 <li>It is analogous to Chi-square test, but Fisher’s exact test is conducted when rule of Chi-square test cannot be applied, such as when the sample size in small and more than 20% of cells have expected frequency count of &lt;5 in a contingency table (Bower 2003).</li>
 <li>Used to assess whether the proportions of categories in two group variables significantly differ from each other.</li>
 <li>Uses (hypergeometric) marginal distribution to compute exact p-values which are not approximated, which are also somewhat conservative.</li>
 <li>This particular test is used to obtain the probability of observing the combination of frequencies that we can actually see.</li>
-</ul></section><section id="assumptions" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="assumptions">
-<span class="header-section-number">14.2</span> Assumptions</h2>
+</ul></section><section id="assumptions" class="level2" data-number="15.2"><h2 data-number="15.2" class="anchored" data-anchor-id="assumptions">
+<span class="header-section-number">15.2</span> Assumptions</h2>
 <ol type="1">
 <li>Assumes that the individual observations are independent - variable are not paired or related.</li>
 <li>Assumes that the row and column totals are fixed or conditioned.</li>
 <li>The variables are categorical and randomly sampled.</li>
 <li>Observations are count data.</li>
-</ol></section><section id="hypotheses" class="level2" data-number="14.3"><h2 data-number="14.3" class="anchored" data-anchor-id="hypotheses">
-<span class="header-section-number">14.3</span> Hypotheses</h2>
+</ol></section><section id="hypotheses" class="level2" data-number="15.3"><h2 data-number="15.3" class="anchored" data-anchor-id="hypotheses">
+<span class="header-section-number">15.3</span> Hypotheses</h2>
 <p>The hypotheses of Fisher’s exact test are similar to Chi-square test:</p>
 <ul>
 <li>Null hypothesis:<span class="math inline">\((H_0)\)</span> There is no significant relationship between the categorical variables (variables are independent).</li>
 <li>Alternative hypothesis: <span class="math inline">\((H_1)\)</span> There is a significant relationship between the categorical variables (variables are dependent).</li>
-</ul></section><section id="mathematical-definition-of-fishers-exact-test" class="level2" data-number="14.4"><h2 data-number="14.4" class="anchored" data-anchor-id="mathematical-definition-of-fishers-exact-test">
-<span class="header-section-number">14.4</span> Mathematical definition of Fisher’s Exact test</h2>
+</ul></section><section id="mathematical-definition-of-fishers-exact-test" class="level2" data-number="15.4"><h2 data-number="15.4" class="anchored" data-anchor-id="mathematical-definition-of-fishers-exact-test">
+<span class="header-section-number">15.4</span> Mathematical definition of Fisher’s Exact test</h2>
 <p>This test is usually used as a one-tailed test. It can also be used as a two tailed test. Fisher’s exact test for a one-tailed <span class="math inline">\(p\)</span>-value is calculated using the following formula:</p>
 <p><span class="math display">\[
 p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
 \]</span> where <span class="math inline">\(a\)</span>,<span class="math inline">\(b\)</span>,<span class="math inline">\(c\)</span>, and <span class="math inline">\(d\)</span> are the individual frequencies on the 2x2 contingency table and <span class="math inline">\(n\)</span> is the population size (total frequency).</p>
-</section><section id="intalling-required-packages" class="level2" data-number="14.5"><h2 data-number="14.5" class="anchored" data-anchor-id="intalling-required-packages">
-<span class="header-section-number">14.5</span> Intalling required packages</h2>
+</section><section id="intalling-required-packages" class="level2" data-number="15.5"><h2 data-number="15.5" class="anchored" data-anchor-id="intalling-required-packages">
+<span class="header-section-number">15.5</span> Intalling required packages</h2>
 <p>First, we installed and loaded the packages needed for this presentation.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#Installing Required Packages</span></span>
@@ -549,8 +579,8 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/haleyjeppson/ggmosaic">ggmosaic</a></span><span class="op">)</span> </span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="data-source-and-description" class="level2" data-number="14.6"><h2 data-number="14.6" class="anchored" data-anchor-id="data-source-and-description">
-<span class="header-section-number">14.6</span> Data source and description</h2>
+</section><section id="data-source-and-description" class="level2" data-number="15.6"><h2 data-number="15.6" class="anchored" data-anchor-id="data-source-and-description">
+<span class="header-section-number">15.6</span> Data source and description</h2>
 <p>For this demonstration of the Fisher’s Exact test , we utilized the <code>demographics</code>, and <code>psychiatric</code> data sets from the <a href="https://ctn-0094.github.io/public.ctn0094data/">public.ctn0094data</a> package the <code>public.ctn0094data</code> package. The public.ctn0094data package contains de-identified and harmonized datasets from the Clinical Trials Network (CTN) protocol number 0094. This project, funded by the US National Institute on Drug Abuse (NIDA), focuses on opioid use disorder (OUD) and includes data from three clinical trials: CTN-0027, CTN-0030, and CTN-0051.The data describe the experiences of patients seeking care for opoid use disorder (OUD).</p>
 <p>The <code>demographics</code> dataset contains the demographic variables such as age, sex, race, living condition, marital status etc. The <code>psychiatric</code> dataset contains data on different mental health issues and susbstance use, including bipolar, depression, schizophrenia, cocaine use etc.</p>
 <div class="cell">
@@ -575,8 +605,8 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
 [16] "has_sedatives_dx"   </code></pre>
 </div>
 </div>
-<section id="create-a-model-data-frame" class="level3" data-number="14.6.1"><h3 data-number="14.6.1" class="anchored" data-anchor-id="create-a-model-data-frame">
-<span class="header-section-number">14.6.1</span> Create a model data frame</h3>
+<section id="create-a-model-data-frame" class="level3" data-number="15.6.1"><h3 data-number="15.6.1" class="anchored" data-anchor-id="create-a-model-data-frame">
+<span class="header-section-number">15.6.1</span> Create a model data frame</h3>
 <p>We joined the <code>demographics</code> and <code>psychiatric</code> data sets within the <a href="https://ctn-0094.github.io/public.ctn0094data/">public.ctn0094data</a> package by participants ID (<code>who</code> variable) to create new data frame.</p>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Joining data sets: </span></span>
@@ -588,8 +618,8 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
 <span>    <span class="va">age</span>, <span class="va">race</span>, <span class="va">education</span>, <span class="va">is_male</span>, <span class="va">marital</span>, <span class="va">is_living_stable</span>, <span class="va">has_schizophrenia</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="participants-characteristics-summary-table" class="level3" data-number="14.6.2"><h3 data-number="14.6.2" class="anchored" data-anchor-id="participants-characteristics-summary-table">
-<span class="header-section-number">14.6.2</span> Participants characteristics Summary table</h3>
+</section><section id="participants-characteristics-summary-table" class="level3" data-number="15.6.2"><h3 data-number="15.6.2" class="anchored" data-anchor-id="participants-characteristics-summary-table">
+<span class="header-section-number">15.6.2</span> Participants characteristics Summary table</h3>
 <p>Here, we want to view the frequency of the variables in our dataset using the table summary function <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary ()</a></code>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Create Table 1, change the Label using the label function and also view the missing values</span></span>
@@ -608,23 +638,23 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="kzzwgzqser" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kzzwgzqser table {
+<div id="kevnyuwcfw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kevnyuwcfw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kzzwgzqser thead, #kzzwgzqser tbody, #kzzwgzqser tfoot, #kzzwgzqser tr, #kzzwgzqser td, #kzzwgzqser th {
+#kevnyuwcfw thead, #kevnyuwcfw tbody, #kevnyuwcfw tfoot, #kevnyuwcfw tr, #kevnyuwcfw td, #kevnyuwcfw th {
   border-style: none;
 }
 
-#kzzwgzqser p {
+#kevnyuwcfw p {
   margin: 0;
   padding: 0;
 }
 
-#kzzwgzqser .gt_table {
+#kevnyuwcfw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -650,12 +680,12 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-left-color: #D3D3D3;
 }
 
-#kzzwgzqser .gt_caption {
+#kevnyuwcfw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kzzwgzqser .gt_title {
+#kevnyuwcfw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -667,7 +697,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-bottom-width: 0;
 }
 
-#kzzwgzqser .gt_subtitle {
+#kevnyuwcfw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -679,7 +709,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-top-width: 0;
 }
 
-#kzzwgzqser .gt_heading {
+#kevnyuwcfw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -691,13 +721,13 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-right-color: #D3D3D3;
 }
 
-#kzzwgzqser .gt_bottom_border {
+#kevnyuwcfw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kzzwgzqser .gt_col_headings {
+#kevnyuwcfw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -712,7 +742,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-right-color: #D3D3D3;
 }
 
-#kzzwgzqser .gt_col_heading {
+#kevnyuwcfw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -732,7 +762,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   overflow-x: hidden;
 }
 
-#kzzwgzqser .gt_column_spanner_outer {
+#kevnyuwcfw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -744,15 +774,15 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 4px;
 }
 
-#kzzwgzqser .gt_column_spanner_outer:first-child {
+#kevnyuwcfw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kzzwgzqser .gt_column_spanner_outer:last-child {
+#kevnyuwcfw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kzzwgzqser .gt_column_spanner {
+#kevnyuwcfw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -764,11 +794,11 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   width: 100%;
 }
 
-#kzzwgzqser .gt_spanner_row {
+#kevnyuwcfw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kzzwgzqser .gt_group_heading {
+#kevnyuwcfw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -794,7 +824,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   text-align: left;
 }
 
-#kzzwgzqser .gt_empty_group_heading {
+#kevnyuwcfw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -809,15 +839,15 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   vertical-align: middle;
 }
 
-#kzzwgzqser .gt_from_md > :first-child {
+#kevnyuwcfw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kzzwgzqser .gt_from_md > :last-child {
+#kevnyuwcfw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kzzwgzqser .gt_row {
+#kevnyuwcfw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -836,7 +866,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   overflow-x: hidden;
 }
 
-#kzzwgzqser .gt_stub {
+#kevnyuwcfw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -849,7 +879,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 5px;
 }
 
-#kzzwgzqser .gt_stub_row_group {
+#kevnyuwcfw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -863,15 +893,15 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   vertical-align: top;
 }
 
-#kzzwgzqser .gt_row_group_first td {
+#kevnyuwcfw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kzzwgzqser .gt_row_group_first th {
+#kevnyuwcfw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kzzwgzqser .gt_summary_row {
+#kevnyuwcfw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -881,16 +911,16 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 5px;
 }
 
-#kzzwgzqser .gt_first_summary_row {
+#kevnyuwcfw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kzzwgzqser .gt_first_summary_row.thick {
+#kevnyuwcfw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kzzwgzqser .gt_last_summary_row {
+#kevnyuwcfw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -900,7 +930,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-bottom-color: #D3D3D3;
 }
 
-#kzzwgzqser .gt_grand_summary_row {
+#kevnyuwcfw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -910,7 +940,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 5px;
 }
 
-#kzzwgzqser .gt_first_grand_summary_row {
+#kevnyuwcfw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -920,7 +950,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-top-color: #D3D3D3;
 }
 
-#kzzwgzqser .gt_last_grand_summary_row_top {
+#kevnyuwcfw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -930,11 +960,11 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-bottom-color: #D3D3D3;
 }
 
-#kzzwgzqser .gt_striped {
+#kevnyuwcfw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kzzwgzqser .gt_table_body {
+#kevnyuwcfw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -943,7 +973,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-bottom-color: #D3D3D3;
 }
 
-#kzzwgzqser .gt_footnotes {
+#kevnyuwcfw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -957,7 +987,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-right-color: #D3D3D3;
 }
 
-#kzzwgzqser .gt_footnote {
+#kevnyuwcfw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -966,7 +996,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 5px;
 }
 
-#kzzwgzqser .gt_sourcenotes {
+#kevnyuwcfw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -980,7 +1010,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-right-color: #D3D3D3;
 }
 
-#kzzwgzqser .gt_sourcenote {
+#kevnyuwcfw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -988,63 +1018,63 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 5px;
 }
 
-#kzzwgzqser .gt_left {
+#kevnyuwcfw .gt_left {
   text-align: left;
 }
 
-#kzzwgzqser .gt_center {
+#kevnyuwcfw .gt_center {
   text-align: center;
 }
 
-#kzzwgzqser .gt_right {
+#kevnyuwcfw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kzzwgzqser .gt_font_normal {
+#kevnyuwcfw .gt_font_normal {
   font-weight: normal;
 }
 
-#kzzwgzqser .gt_font_bold {
+#kevnyuwcfw .gt_font_bold {
   font-weight: bold;
 }
 
-#kzzwgzqser .gt_font_italic {
+#kevnyuwcfw .gt_font_italic {
   font-style: italic;
 }
 
-#kzzwgzqser .gt_super {
+#kevnyuwcfw .gt_super {
   font-size: 65%;
 }
 
-#kzzwgzqser .gt_footnote_marks {
+#kevnyuwcfw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kzzwgzqser .gt_asterisk {
+#kevnyuwcfw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kzzwgzqser .gt_indent_1 {
+#kevnyuwcfw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kzzwgzqser .gt_indent_2 {
+#kevnyuwcfw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kzzwgzqser .gt_indent_3 {
+#kevnyuwcfw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kzzwgzqser .gt_indent_4 {
+#kevnyuwcfw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kzzwgzqser .gt_indent_5 {
+#kevnyuwcfw .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1162,8 +1192,8 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
 </div>
 </div>
 </div>
-</section><section id="recode-to-indicate-variable-factor-levels" class="level3" data-number="14.6.3"><h3 data-number="14.6.3" class="anchored" data-anchor-id="recode-to-indicate-variable-factor-levels">
-<span class="header-section-number">14.6.3</span> Recode to indicate variable factor levels</h3>
+</section><section id="recode-to-indicate-variable-factor-levels" class="level3" data-number="15.6.3"><h3 data-number="15.6.3" class="anchored" data-anchor-id="recode-to-indicate-variable-factor-levels">
+<span class="header-section-number">15.6.3</span> Recode to indicate variable factor levels</h3>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Recoding `is_living_stable` and has_schizophrenia`converting all NA to 99</span></span>
 <span><span class="va">model_df</span> <span class="op">&lt;-</span> </span>
@@ -1200,8 +1230,8 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
 # ℹ 2 more variables: Living_stable &lt;fct&gt;, schizophrenia &lt;fct&gt;</code></pre>
 </div>
 </div>
-</section></section><section id="contingency-table-with-tbl_summary-function" class="level2" data-number="14.7"><h2 data-number="14.7" class="anchored" data-anchor-id="contingency-table-with-tbl_summary-function">
-<span class="header-section-number">14.7</span> Contingency Table with <code>tbl_summary</code> Function</h2>
+</section></section><section id="contingency-table-with-tbl_summary-function" class="level2" data-number="15.7"><h2 data-number="15.7" class="anchored" data-anchor-id="contingency-table-with-tbl_summary-function">
+<span class="header-section-number">15.7</span> Contingency Table with <code>tbl_summary</code> Function</h2>
 <ul>
 <li>This is a table that shows the distribution of a variable in the rows and columns. Sometimes referred to as a 2x2 table. They are useful in summarizing categorical variables.</li>
 <li>We want to create a contingency table of the demographic variable by <code>living_stable</code> to Check the distribution of the frequency count of variables (<code>is_living_stable</code>, <code>Yes</code> = <code>stable</code> and <code>No</code> = <code>unstable</code> <code>has_schizophrenia</code>, <code>Yes</code> = schizophrenia diagnosed and <code>No</code> = no schizophrenia).</li>
@@ -1221,23 +1251,23 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/modify.html">modify_spanning_header</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stat_1"</span>, <span class="st">"stat_2"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"**Living_stable**"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="txxguaekqv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#txxguaekqv table {
+<div id="tsjbmwvruc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tsjbmwvruc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#txxguaekqv thead, #txxguaekqv tbody, #txxguaekqv tfoot, #txxguaekqv tr, #txxguaekqv td, #txxguaekqv th {
+#tsjbmwvruc thead, #tsjbmwvruc tbody, #tsjbmwvruc tfoot, #tsjbmwvruc tr, #tsjbmwvruc td, #tsjbmwvruc th {
   border-style: none;
 }
 
-#txxguaekqv p {
+#tsjbmwvruc p {
   margin: 0;
   padding: 0;
 }
 
-#txxguaekqv .gt_table {
+#tsjbmwvruc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1263,12 +1293,12 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-left-color: #D3D3D3;
 }
 
-#txxguaekqv .gt_caption {
+#tsjbmwvruc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#txxguaekqv .gt_title {
+#tsjbmwvruc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1280,7 +1310,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-bottom-width: 0;
 }
 
-#txxguaekqv .gt_subtitle {
+#tsjbmwvruc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1292,7 +1322,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-top-width: 0;
 }
 
-#txxguaekqv .gt_heading {
+#tsjbmwvruc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1304,13 +1334,13 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-right-color: #D3D3D3;
 }
 
-#txxguaekqv .gt_bottom_border {
+#tsjbmwvruc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#txxguaekqv .gt_col_headings {
+#tsjbmwvruc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1325,7 +1355,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-right-color: #D3D3D3;
 }
 
-#txxguaekqv .gt_col_heading {
+#tsjbmwvruc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1345,7 +1375,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   overflow-x: hidden;
 }
 
-#txxguaekqv .gt_column_spanner_outer {
+#tsjbmwvruc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1357,15 +1387,15 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 4px;
 }
 
-#txxguaekqv .gt_column_spanner_outer:first-child {
+#tsjbmwvruc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#txxguaekqv .gt_column_spanner_outer:last-child {
+#tsjbmwvruc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#txxguaekqv .gt_column_spanner {
+#tsjbmwvruc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1377,11 +1407,11 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   width: 100%;
 }
 
-#txxguaekqv .gt_spanner_row {
+#tsjbmwvruc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#txxguaekqv .gt_group_heading {
+#tsjbmwvruc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1407,7 +1437,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   text-align: left;
 }
 
-#txxguaekqv .gt_empty_group_heading {
+#tsjbmwvruc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1422,15 +1452,15 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   vertical-align: middle;
 }
 
-#txxguaekqv .gt_from_md > :first-child {
+#tsjbmwvruc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#txxguaekqv .gt_from_md > :last-child {
+#tsjbmwvruc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#txxguaekqv .gt_row {
+#tsjbmwvruc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1449,7 +1479,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   overflow-x: hidden;
 }
 
-#txxguaekqv .gt_stub {
+#tsjbmwvruc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1462,7 +1492,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 5px;
 }
 
-#txxguaekqv .gt_stub_row_group {
+#tsjbmwvruc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1476,15 +1506,15 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   vertical-align: top;
 }
 
-#txxguaekqv .gt_row_group_first td {
+#tsjbmwvruc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#txxguaekqv .gt_row_group_first th {
+#tsjbmwvruc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#txxguaekqv .gt_summary_row {
+#tsjbmwvruc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1494,16 +1524,16 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 5px;
 }
 
-#txxguaekqv .gt_first_summary_row {
+#tsjbmwvruc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#txxguaekqv .gt_first_summary_row.thick {
+#tsjbmwvruc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#txxguaekqv .gt_last_summary_row {
+#tsjbmwvruc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1513,7 +1543,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-bottom-color: #D3D3D3;
 }
 
-#txxguaekqv .gt_grand_summary_row {
+#tsjbmwvruc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1523,7 +1553,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 5px;
 }
 
-#txxguaekqv .gt_first_grand_summary_row {
+#tsjbmwvruc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1533,7 +1563,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-top-color: #D3D3D3;
 }
 
-#txxguaekqv .gt_last_grand_summary_row_top {
+#tsjbmwvruc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1543,11 +1573,11 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-bottom-color: #D3D3D3;
 }
 
-#txxguaekqv .gt_striped {
+#tsjbmwvruc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#txxguaekqv .gt_table_body {
+#tsjbmwvruc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1556,7 +1586,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-bottom-color: #D3D3D3;
 }
 
-#txxguaekqv .gt_footnotes {
+#tsjbmwvruc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1570,7 +1600,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-right-color: #D3D3D3;
 }
 
-#txxguaekqv .gt_footnote {
+#tsjbmwvruc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1579,7 +1609,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 5px;
 }
 
-#txxguaekqv .gt_sourcenotes {
+#tsjbmwvruc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1593,7 +1623,7 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   border-right-color: #D3D3D3;
 }
 
-#txxguaekqv .gt_sourcenote {
+#tsjbmwvruc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1601,63 +1631,63 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
   padding-right: 5px;
 }
 
-#txxguaekqv .gt_left {
+#tsjbmwvruc .gt_left {
   text-align: left;
 }
 
-#txxguaekqv .gt_center {
+#tsjbmwvruc .gt_center {
   text-align: center;
 }
 
-#txxguaekqv .gt_right {
+#tsjbmwvruc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#txxguaekqv .gt_font_normal {
+#tsjbmwvruc .gt_font_normal {
   font-weight: normal;
 }
 
-#txxguaekqv .gt_font_bold {
+#tsjbmwvruc .gt_font_bold {
   font-weight: bold;
 }
 
-#txxguaekqv .gt_font_italic {
+#tsjbmwvruc .gt_font_italic {
   font-style: italic;
 }
 
-#txxguaekqv .gt_super {
+#tsjbmwvruc .gt_super {
   font-size: 65%;
 }
 
-#txxguaekqv .gt_footnote_marks {
+#tsjbmwvruc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#txxguaekqv .gt_asterisk {
+#tsjbmwvruc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#txxguaekqv .gt_indent_1 {
+#tsjbmwvruc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#txxguaekqv .gt_indent_2 {
+#tsjbmwvruc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#txxguaekqv .gt_indent_3 {
+#tsjbmwvruc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#txxguaekqv .gt_indent_4 {
+#tsjbmwvruc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#txxguaekqv .gt_indent_5 {
+#tsjbmwvruc .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1729,8 +1759,8 @@ p = {(a+b)!(c+d)!(a+c)!(b+d)! \over a! b! c! d! n!},
 </div>
 </div>
 <p>From the table, it seems like the patients who were homeless (answered <code>no</code> to <code>living_stable</code>) were less likely to be diagnosed with schizophrenia. However, this is not conclusive as we cannot tell if this relationship was a true correlation or it was due to random sampling error. So we will perform the Fisher’s Exact test to confirm the relationship.</p>
-</section><section id="performing-the-fishers-exact-test-using-the-function-fisher.test" class="level2" data-number="14.8"><h2 data-number="14.8" class="anchored" data-anchor-id="performing-the-fishers-exact-test-using-the-function-fisher.test">
-<span class="header-section-number">14.8</span> Performing the Fisher’s exact test using the function fisher.test()</h2>
+</section><section id="performing-the-fishers-exact-test-using-the-function-fisher.test" class="level2" data-number="15.8"><h2 data-number="15.8" class="anchored" data-anchor-id="performing-the-fishers-exact-test-using-the-function-fisher.test">
+<span class="header-section-number">15.8</span> Performing the Fisher’s exact test using the function fisher.test()</h2>
 <ul>
 <li>A priori, we hypothesized that people who are diagnosed as being schizophrenic are more likely to homeless (unstable living). So we conducted a one-tailed Fisher’s Exact test and specify the direction of the test as “greater”.</li>
 <li>For a two-tailed test, the <code>alternative</code> argument has a default value of <code>"two.sided"</code>.</li>
@@ -1775,27 +1805,27 @@ odds ratio
  0.4175209 </code></pre>
 </div>
 </div>
-</section><section id="interpretation-of-results" class="level2" data-number="14.9"><h2 data-number="14.9" class="anchored" data-anchor-id="interpretation-of-results">
-<span class="header-section-number">14.9</span> Interpretation of results</h2>
-<section id="one-tailed-test" class="level3" data-number="14.9.1"><h3 data-number="14.9.1" class="anchored" data-anchor-id="one-tailed-test">
-<span class="header-section-number">14.9.1</span> One-Tailed test</h3>
+</section><section id="interpretation-of-results" class="level2" data-number="15.9"><h2 data-number="15.9" class="anchored" data-anchor-id="interpretation-of-results">
+<span class="header-section-number">15.9</span> Interpretation of results</h2>
+<section id="one-tailed-test" class="level3" data-number="15.9.1"><h3 data-number="15.9.1" class="anchored" data-anchor-id="one-tailed-test">
+<span class="header-section-number">15.9.1</span> One-Tailed test</h3>
 <ul>
 <li>Null Hypothesis, <span class="math inline">\(H_0\)</span>: people who reported unstable living (homeless) are not more often diagnosed with schizophrenia.</li>
 <li>Alternative Hypothesis, <span class="math inline">\(H_A\)</span>: people who reported unstable living(homeless) are more often diagnosed with schizophrenia.</li>
 </ul>
 <p>The <span class="math inline">\(p\)</span> value is greater than 0.05 (<span class="math inline">\(p\)</span> = 0.9429), so we fail to reject the null hypothesis. We conclude that people who reported unstable living are not significantly more likely to be diagnosed with schizophrenia than those who reported stable living.</p>
-</section><section id="two-tailed-analysis" class="level3" data-number="14.9.2"><h3 data-number="14.9.2" class="anchored" data-anchor-id="two-tailed-analysis">
-<span class="header-section-number">14.9.2</span> Two-tailed analysis</h3>
+</section><section id="two-tailed-analysis" class="level3" data-number="15.9.2"><h3 data-number="15.9.2" class="anchored" data-anchor-id="two-tailed-analysis">
+<span class="header-section-number">15.9.2</span> Two-tailed analysis</h3>
 <ul>
 <li>Null Hypothesis, <span class="math inline">\(H_0\)</span>: There is no association between living-stable and schizophrenia diagnosis variable</li>
 <li>Alternative Hypothesis, <span class="math inline">\(H_A\)</span>: There is an association between living condition and schizophrenia diagnosis.</li>
 </ul>
 <p>Our <span class="math inline">\(p\)</span>-value = 0.2246, so we fail to reject the null hypothesis, indicating that there is no statistically significant association between living condition and schizophrenia diagnosis.</p>
-</section></section><section id="visualization-of-the-statistical-test-output" class="level2" data-number="14.10"><h2 data-number="14.10" class="anchored" data-anchor-id="visualization-of-the-statistical-test-output">
-<span class="header-section-number">14.10</span> Visualization of the statistical test output</h2>
+</section></section><section id="visualization-of-the-statistical-test-output" class="level2" data-number="15.10"><h2 data-number="15.10" class="anchored" data-anchor-id="visualization-of-the-statistical-test-output">
+<span class="header-section-number">15.10</span> Visualization of the statistical test output</h2>
 <p>We would like to have a visual representation of the distribution of the categories of our analysis. As shown in the Fisher’s Exact test, there was no statistical significant association between living-stability and schizophrenia diagnosis. Hence, the interpretation of the plots below is based on description of the charts.</p>
-<section id="barplots" class="level3" data-number="14.10.1"><h3 data-number="14.10.1" class="anchored" data-anchor-id="barplots">
-<span class="header-section-number">14.10.1</span> Barplots</h3>
+<section id="barplots" class="level3" data-number="15.10.1"><h3 data-number="15.10.1" class="anchored" data-anchor-id="barplots">
+<span class="header-section-number">15.10.1</span> Barplots</h3>
 <p>We will first construct a barplot using <code>ggstatsplot::</code> (for statistical details).</p>
 <div class="cell">
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">displayP_char</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span></span>
@@ -1820,8 +1850,8 @@ odds ratio
 </div>
 </div>
 <p>Patients who indicated living_stable (not homeless) had the highest proportion of not having being diagnosed with schizophrenia. Patients who indicated not having stable living (homeless) had the highest proportion of being diagnosed with schizophrenia.</p>
-</section><section id="mosaic-plots" class="level3" data-number="14.10.2"><h3 data-number="14.10.2" class="anchored" data-anchor-id="mosaic-plots">
-<span class="header-section-number">14.10.2</span> Mosaic plots</h3>
+</section><section id="mosaic-plots" class="level3" data-number="15.10.2"><h3 data-number="15.10.2" class="anchored" data-anchor-id="mosaic-plots">
+<span class="header-section-number">15.10.2</span> Mosaic plots</h3>
 <div class="cell">
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Basic Mosaic Plot</span></span>
 <span><span class="va">mosaic_basic</span> <span class="op">&lt;-</span> <span class="va">finalModel_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -1852,8 +1882,8 @@ odds ratio
 </div>
 </div>
 <p>Compared to those who are not homeless, those who are homeless had the highest proportion of being diagnosed with schizophrenia.</p>
-</section></section><section id="references" class="level2" data-number="14.11"><h2 data-number="14.11" class="anchored" data-anchor-id="references">
-<span class="header-section-number">14.11</span> References</h2>
+</section></section><section id="references" class="level2" data-number="15.11"><h2 data-number="15.11" class="anchored" data-anchor-id="references">
+<span class="header-section-number">15.11</span> References</h2>
 <ol type="1">
 <li>Bower, Keith M. 2003. “When to Use Fisher’s Exact Test.” In <em>American Society for Quality, Six Sigma Forum Magazine</em>, 2:35–37. 4.</li>
 <li>McCrum-Gardner, Evie. 2008. “Which Is the Correct Statistical Test to Use?” <em>British Journal of Oral and Maxillofacial Surgery</em> 46 (1): 38–41.</li>
@@ -2274,7 +2304,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../lessons/02_transformations.html" class="pagination-link" aria-label="Transformations to Normality">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

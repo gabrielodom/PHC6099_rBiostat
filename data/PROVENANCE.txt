@@ -85,3 +85,11 @@ Gabriel Odom
     - created: 2020
     - curators: Anirban Datta for Kaggle; found by Noel Singh Dias and Jingwei Gu
     - method: downloaded from <https://www.kaggle.com/datasets/teertha/ushealthinsurancedataset>
+    
+15. (Subset of) Behavioral Risk Factor Surveillance System Data
+    - file: 05_brfss_subset.csv
+    - created: 2013
+    - curators: CDC, hosted by Kaggle; found and subset by Gemma Galvez
+    - method: downloaded from <https://www.kaggle.com/datasets/lplenka/brfss-data>; subset in R/subset_BRFSS_20240712.R
+    
+

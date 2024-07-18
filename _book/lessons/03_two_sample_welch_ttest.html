@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Gabriel Odom">
+<title>An R Cookbook for Public Health - 17&nbsp; Two sample Welchs test or Welchs t-test</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../lessons/03_two_sample_mann_whitney.html" rel="next">
+<link href="../lessons/03_two_sample_ttest.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/03_two_sample_welch_ttest.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Two sample Welchs test or Welchs t-test</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">An R Cookbook for Public Health</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/gabrielodom/PHC6099_rBiostat" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Course Materials for PHC 6099: ‘R Computing for Health Sciences’</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">About this Book</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../01_header_EDA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exploratory Data Analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_mosaic_violin.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Mosaic &amp; Box/Violin Plots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_scatterplots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">How to Create a Scatterplot</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/01_skimr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Skimr Package</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_table1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Demographics Table With Table1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_gtsummary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Table by gtsummary</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../02_header_one-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">One-Sample Tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_z-test_one_prop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_ttest_one_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">One-sample/paired t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_wilcoxon_one_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_mcnemar_paired_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_cochrans_q_paired_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../03_header_two-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Two-Sample Tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_welch_ttest.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Two sample Welchs test or Welchs t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../04_header_anova-and-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ANOVA and Regression</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_one_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_welch_two_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Welch’s Anova</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_corr_cov.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_regression_mls.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_regression_random_intercept.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../05_header_generalized-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generalized Linear Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_poisson.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_negative_binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Generalized Linear Models: Negative Binomial</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../06_header_special-topics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Special Topics in Statistical Modelling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06_elastic_net_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06_survival_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../07_header_power.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Power and Sample Size Determination</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#packages-for-this-lesson" id="toc-packages-for-this-lesson" class="nav-link active" data-scroll-target="#packages-for-this-lesson"><span class="header-section-number">17.1</span> Packages for this lesson</a></li>
+  <li>
+<a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">17.2</span> Introduction</a>
+  <ul class="collapse">
+<li><a href="#when-to-use-welchs-t-test" id="toc-when-to-use-welchs-t-test" class="nav-link" data-scroll-target="#when-to-use-welchs-t-test"><span class="header-section-number">17.2.1</span> When to use Welch´s t-test</a></li>
+  </ul>
+</li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">17.3</span> Assumptions</a></li>
+  <li><a href="#welchs-t-test-vs.-students-t-test" id="toc-welchs-t-test-vs.-students-t-test" class="nav-link" data-scroll-target="#welchs-t-test-vs.-students-t-test"><span class="header-section-number">17.4</span> Welch’s t-Test vs.&nbsp;Student’s t-Test</a></li>
+  <li>
+<a href="#the-reliability-of-the-welchs-t-test" id="toc-the-reliability-of-the-welchs-t-test" class="nav-link" data-scroll-target="#the-reliability-of-the-welchs-t-test"><span class="header-section-number">17.5</span> The reliability of the Welch’s t-test</a>
+  <ul class="collapse">
+<li><a href="#minimum-sample-sizes" id="toc-minimum-sample-sizes" class="nav-link" data-scroll-target="#minimum-sample-sizes"><span class="header-section-number">17.5.1</span> Minimum Sample Sizes</a></li>
+  <li><a href="#power-and-effect-size" id="toc-power-and-effect-size" class="nav-link" data-scroll-target="#power-and-effect-size"><span class="header-section-number">17.5.2</span> Power and Effect Size</a></li>
+  <li><a href="#factors-affecting-sample-size-requirements" id="toc-factors-affecting-sample-size-requirements" class="nav-link" data-scroll-target="#factors-affecting-sample-size-requirements"><span class="header-section-number">17.5.3</span> Factors Affecting Sample Size Requirements</a></li>
+  <li><a href="#lets-remember" id="toc-lets-remember" class="nav-link" data-scroll-target="#lets-remember"><span class="header-section-number">17.5.4</span> Let´s remember</a></li>
+  <li><a href="#suspecting-different-variances" id="toc-suspecting-different-variances" class="nav-link" data-scroll-target="#suspecting-different-variances"><span class="header-section-number">17.5.5</span> Suspecting Different Variances:</a></li>
+  <li><a href="#assessing-normality" id="toc-assessing-normality" class="nav-link" data-scroll-target="#assessing-normality"><span class="header-section-number">17.5.6</span> Assessing normality:</a></li>
+  </ul>
+</li>
+  <li><a href="#defyning-the-question-and-hypotheses" id="toc-defyning-the-question-and-hypotheses" class="nav-link" data-scroll-target="#defyning-the-question-and-hypotheses"><span class="header-section-number">17.6</span> Defyning the question and hypotheses</a></li>
+  <li><a href="#dataset-visualization" id="toc-dataset-visualization" class="nav-link" data-scroll-target="#dataset-visualization"><span class="header-section-number">17.7</span> Dataset visualization</a></li>
+  <li>
+<a href="#plotting-mtcars-data" id="toc-plotting-mtcars-data" class="nav-link" data-scroll-target="#plotting-mtcars-data"><span class="header-section-number">17.8</span> Plotting Mtcars data</a>
+  <ul class="collapse">
+<li><a href="#assessing-the-distribution" id="toc-assessing-the-distribution" class="nav-link" data-scroll-target="#assessing-the-distribution"><span class="header-section-number">17.8.1</span> Assessing the distribution</a></li>
+  <li><a href="#assessing-skewness-and-kurtosis" id="toc-assessing-skewness-and-kurtosis" class="nav-link" data-scroll-target="#assessing-skewness-and-kurtosis"><span class="header-section-number">17.8.2</span> Assessing skewness and kurtosis</a></li>
+  <li><a href="#normality-test" id="toc-normality-test" class="nav-link" data-scroll-target="#normality-test"><span class="header-section-number">17.8.3</span> Normality test</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#performing-the-welchs-t-test" id="toc-performing-the-welchs-t-test" class="nav-link" data-scroll-target="#performing-the-welchs-t-test"><span class="header-section-number">17.9</span> Performing the Welchs t-test</a>
+  <ul class="collapse">
+<li><a href="#welchs-test-results" id="toc-welchs-test-results" class="nav-link" data-scroll-target="#welchs-test-results"><span class="header-section-number">17.9.1</span> Welchs test results</a></li>
+  <li><a href="#interpretation-or-results" id="toc-interpretation-or-results" class="nav-link" data-scroll-target="#interpretation-or-results"><span class="header-section-number">17.9.2</span> Interpretation or results:</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#satterthwaite-degrees-of-freedom" id="toc-satterthwaite-degrees-of-freedom" class="nav-link" data-scroll-target="#satterthwaite-degrees-of-freedom"><span class="header-section-number">17.10</span> Satterthwaite Degrees of Freedom</a>
+  <ul class="collapse">
+<li><a href="#degrees-of-freedom-dof-explanation" id="toc-degrees-of-freedom-dof-explanation" class="nav-link" data-scroll-target="#degrees-of-freedom-dof-explanation"><span class="header-section-number">17.10.1</span> Degrees of Freedom (DoF) explanation:</a></li>
+  <li><a href="#important-concepts-about-the-degrees-of-freedom" id="toc-important-concepts-about-the-degrees-of-freedom" class="nav-link" data-scroll-target="#important-concepts-about-the-degrees-of-freedom"><span class="header-section-number">17.10.2</span> Important concepts about the degrees of Freedom</a></li>
+  </ul>
+</li>
+  <li><a href="#summary-and-conclusion" id="toc-summary-and-conclusion" class="nav-link" data-scroll-target="#summary-and-conclusion"><span class="header-section-number">17.11</span> Summary and Conclusion</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/03_two_sample_welch_ttest.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03_header_two-sample.html">Two-Sample Tests</a></li><li class="breadcrumb-item"><a href="../lessons/03_two_sample_welch_ttest.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Two sample Welchs test or Welchs t-test</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Two sample Welchs test or Welchs t-test</span>
+</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliations</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Guillermo Andres Rodriguez Rondón </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Florida International University
+          </p>
+        <p class="affiliation">
+            Robert Stempel School of Public Health
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+
+</header><section id="packages-for-this-lesson" class="level2" data-number="17.1"><h2 data-number="17.1" class="anchored" data-anchor-id="packages-for-this-lesson">
+<span class="header-section-number">17.1</span> Packages for this lesson</h2>
+<p>We will need to load tidyverse (which contains <code>ggplot2</code> and <code>dplyr</code>) and e1071. We are going to use the <code>mtcars</code> dataset included in r studio.</p>
+</section><section id="introduction" class="level2" data-number="17.2"><h2 data-number="17.2" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">17.2</span> Introduction</h2>
+<p>Welch’s t-test, also known as Welch’s unequal variances t-test, is a statistical test used to determine if there is a significant difference between the means of two independent samples. It is an adaptation of Student’s t-test and is more reliable under the next conditions:</p>
+<section id="when-to-use-welchs-t-test" class="level3" data-number="17.2.1"><h3 data-number="17.2.1" class="anchored" data-anchor-id="when-to-use-welchs-t-test">
+<span class="header-section-number">17.2.1</span> When to use Welch´s t-test</h3>
+<p>Welch’s t-test is particularly useful in the following scenarios:</p>
+<ol type="1">
+<li>
+<strong>The two samples have unequal variances (heteroscedasticity)</strong>.</li>
+<li>
+<strong>The two samples have unequal sample sizes</strong>.</li>
+</ol>
+<p>In contrast, Student’s t-test assumes that the two samples have equal variances (homoscedasticity). If this assumption is violated, Welch’s t-test provides a more accurate p-value <span class="citation" data-cites="moore2016introduction">(<a href="#ref-moore2016introduction" role="doc-biblioref">Moore, McCabe, &amp; Craig, 2016</a>)</span>.</p>
+</section></section><section id="assumptions" class="level2" data-number="17.3"><h2 data-number="17.3" class="anchored" data-anchor-id="assumptions">
+<span class="header-section-number">17.3</span> Assumptions</h2>
+<ol type="1">
+<li>
+<strong>Independence</strong>: the observations in each sample should be independent of each other.</li>
+<li>
+<strong>Normality</strong>: the data in each group should be approximately normally distributed. Welch’s t-test is fairly robust to deviations from normality, especially with larger sample sizes &gt;30.</li>
+<li>
+<strong>Unequal Variances</strong>: Unlike Student’s t-test, Welch’s t-test does not assume equal variances between the two groups <span class="citation" data-cites="newbold2012statistics">(<a href="#ref-newbold2012statistics" role="doc-biblioref">Newbold, Carlson, &amp; Thorne, 2012</a>)</span>.</li>
+</ol>
+<p>The formula for the two-sample Welch’s t-test is given by <span class="citation" data-cites="agresti2017statistics">(<a href="#ref-agresti2017statistics" role="doc-biblioref">Agresti &amp; Franklin, 2017</a>)</span>:</p>
+<p><span class="math display">\[
+t = \frac{\bar{X}_1 - \bar{X}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
+\]</span></p>
+<p>Where: <span class="math display">\[\begin{align*}
+\bar{X}_1 &amp; \text{ is the sample mean of the first group (4-cylinder cars)} \\
+\bar{X}_2 &amp; \text{ is the sample mean of the second group (6-cylinder cars)} \\
+s_1^2 &amp; \text{ is the sample variance of the first group} \\
+s_2^2 &amp; \text{ is the sample variance of the second group} \\
+n_1 &amp; \text{ is the sample size of the first group} \\
+n_2 &amp; \text{ is the sample size of the second group}
+\end{align*}\]</span></p>
+<p>The degrees of freedom (DoF) for the Welch’s t-test are calculated using the Satterthwaite approximation <span class="citation" data-cites="khanacademy_statistics">(<a href="#ref-khanacademy_statistics" role="doc-biblioref">Khan Academy, n.d.</a>)</span>:</p>
+<p><span class="math display">\[
+\text{DoF} \approx \frac{\left( \frac{s_1^2}{n_1} + \frac{s_2^2}{n_2} \right)^2}{\frac{\left( \frac{s_1^2}{n_1} \right)^2}{n_1 - 1} + \frac{\left( \frac{s_2^2}{n_2} \right)^2}{n_2 - 1}}
+\]</span></p>
+</section><section id="welchs-t-test-vs.-students-t-test" class="level2" data-number="17.4"><h2 data-number="17.4" class="anchored" data-anchor-id="welchs-t-test-vs.-students-t-test">
+<span class="header-section-number">17.4</span> Welch’s t-Test vs.&nbsp;Student’s t-Test</h2>
+<ul>
+<li>
+<strong>Equal Variances (Student’s t-Test)</strong>: Use when you have equal variances and possibly equal sample sizes.</li>
+<li>
+<strong>Unequal Variances (Welch’s t-Test)</strong>: Use when the variances and/or sample sizes are unequal.</li>
+</ul></section><section id="the-reliability-of-the-welchs-t-test" class="level2" data-number="17.5"><h2 data-number="17.5" class="anchored" data-anchor-id="the-reliability-of-the-welchs-t-test">
+<span class="header-section-number">17.5</span> The reliability of the Welch’s t-test</h2>
+<p>Like other statistical tests, can be influenced by the sample size. However, the Welch’s t-test is designed to be more robust than the traditional Student’s t-test, particularly when the sample sizes are unequal and the variances of the two groups are different. Here are some general guidelines to consider <span class="citation" data-cites="wikipedia_welchs_t_test">(<a href="#ref-wikipedia_welchs_t_test" role="doc-biblioref">Wikipedia contributors, n.d.</a>)</span>:</p>
+<section id="minimum-sample-sizes" class="level3" data-number="17.5.1"><h3 data-number="17.5.1" class="anchored" data-anchor-id="minimum-sample-sizes">
+<span class="header-section-number">17.5.1</span> Minimum Sample Sizes</h3>
+<p>Small Sample Sizes: The Welch’s t-test can be used with small sample sizes, but very small sample sizes (e.g., fewer than 5 per group) can limit the power of the test and make it more difficult to detect significant differences.</p>
+<p>Recommended Minimum: a common recommendation is to have at least 10-15 observations per group to ensure a reasonable level of reliability and power. This isn’t a hard rule, but a guideline to aim for <span class="citation" data-cites="glen2022welchs">(<a href="#ref-glen2022welchs" role="doc-biblioref">Glen, 2022</a>)</span>.</p>
+</section><section id="power-and-effect-size" class="level3" data-number="17.5.2"><h3 data-number="17.5.2" class="anchored" data-anchor-id="power-and-effect-size">
+<span class="header-section-number">17.5.2</span> Power and Effect Size</h3>
+<p>Power Analysis: To determine the appropriate sample size for your specific context, you can perform a power analysis. This involves specifying the expected effect size, the desired power (commonly 0.80), and the significance level (commonly 0.05). The power analysis will help you estimate the necessary sample size to detect a significant difference if one exists <span class="citation" data-cites="Ahad2014-vw">(<a href="#ref-Ahad2014-vw" role="doc-biblioref">Ahad &amp; Yahaya, 2014</a>)</span>, <span class="citation" data-cites="Zhou2023-yv">(<a href="#ref-Zhou2023-yv" role="doc-biblioref">Zhou, Ren, &amp; Brooks, 2023</a>)</span>.</p>
+</section><section id="factors-affecting-sample-size-requirements" class="level3" data-number="17.5.3"><h3 data-number="17.5.3" class="anchored" data-anchor-id="factors-affecting-sample-size-requirements">
+<span class="header-section-number">17.5.3</span> Factors Affecting Sample Size Requirements</h3>
+<p>Effect Size: larger effect sizes (i.e., larger differences between group means) can be detected with smaller sample sizes. Smaller effect sizes require larger sample sizes to be detected, in others worlds if you want to detect an smaller difference or effect you need more power, and the way to increase it is enlarging the sample, but this is not always feasible in real life due to logistical and cost considerations <span class="citation" data-cites="Haas2012-sv">(<a href="#ref-Haas2012-sv" role="doc-biblioref">Haas, 2012</a>)</span>.</p>
+<p>Variance: if the variances of the two groups are very different, larger sample sizes may be needed to ensure the robustness of the test.</p>
+<p>Significance Level and Power: lowering the significance level (e.g., to 0.01) or increasing the desired power (e.g., to 0.90) typically requires larger sample sizes <span class="citation" data-cites="Haas2012-sv">(<a href="#ref-Haas2012-sv" role="doc-biblioref">Haas, 2012</a>)</span>.</p>
+<p>Non normality: it is moderately robust to non-normality, especially as sample sizes increase. For larger samples, the Central Limit Theorem (CLT) helps ensure that the sampling distribution of the test statistic approaches normality, making the test more reliable. For small sample sizes, the reliability of Welch’s t-test can be compromised if the data are significantly non-normal. In such cases, the test may not perform well, and the results might be less trustworthy, in these cases consider using non-parametric alternatives like the Mann-Whitney U test, which does not assume normality. Also consider data transformation and Bootstrap methods, if you want to keep with parametric methods, considering that non-parametric methods have less power.</p>
+<p>If sample sizes are reasonably large (generally n &gt; 30 per group), Welch’s t-test tends to be reliable even when the data are not perfectly normal <span class="citation" data-cites="laerd_welchs_t_test">(<a href="#ref-laerd_welchs_t_test" role="doc-biblioref">Lund Research Ltd, n.d.</a>)</span>.</p>
+</section><section id="lets-remember" class="level3" data-number="17.5.4"><h3 data-number="17.5.4" class="anchored" data-anchor-id="lets-remember">
+<span class="header-section-number">17.5.4</span> Let´s remember</h3>
+<p><strong>The significance level</strong>, denoted as α, is a threshold in hypothesis testing that determines whether to reject the null hypothesis. <strong>It is the probability of making a Type I error</strong>, which occurs when the null hypothesis is true but incorrectly rejected. Common values for α are 0.05, 0.01, and 0.10 <span class="citation" data-cites="Labovitz2017-yp">(<a href="#ref-Labovitz2017-yp" role="doc-biblioref">Labovitz, 2017</a>)</span>.</p>
+<p>For α = 0.05, there is a 5% chance of rejecting the null hypothesis when it is true. If the p-value from a statistical test is less than or equal to α, we reject the null hypothesis; if it is greater, we do not reject the null hypothesis.</p>
+<p><strong>The Central Limit Theorem (CLT)</strong> states that the distribution of the sample mean will approximate a normal distribution as the sample size becomes large, regardless of the population’s distribution, provided the samples are independent and identically distributed <span class="citation" data-cites="Kwak2017-vr">(<a href="#ref-Kwak2017-vr" role="doc-biblioref">Kwak &amp; Kim, 2017</a>)</span>.</p>
+<p>In the context of Welch’s test, the CLT implies that as the sample size increases, the distribution of the test statistic approaches normality, reducing the impact of non-normality in the original data. Thus, Welch’s test becomes more reliable with larger samples because the sampling distribution of the mean difference tends to be normal.</p>
+<p><strong>If the samples are not identically distributed, meaning they come from populations with different distributions, the assumptions underlying the Central Limit Theorem (CLT) and many statistical tests, including Welch’s t-test, may be violated. This can have several consequences</strong>:</p>
+<p>Reduced Accuracy: The approximation to the normal distribution for the sample mean may not hold, leading to inaccurate p-values and confidence intervals.</p>
+<p>Increased Type I and Type II Errors: There may be an increased risk of Type I errors (incorrectly rejecting a true null hypothesis) and Type II errors (failing to reject a false null hypothesis).</p>
+<p>Biased Results: The test results may be biased, reflecting the differences in the underlying distributions rather than the true differences between the population means <span class="citation" data-cites="ruxton2006unequal">(<a href="#ref-ruxton2006unequal" role="doc-biblioref">Ruxton, 2006</a>)</span>.</p>
+</section><section id="suspecting-different-variances" class="level3" data-number="17.5.5"><h3 data-number="17.5.5" class="anchored" data-anchor-id="suspecting-different-variances">
+<span class="header-section-number">17.5.5</span> Suspecting Different Variances:</h3>
+<p>You might suspect different variances when comparing two groups (samples) and their spread appears noticeably different. For example, if one group’s data points are more dispersed than the other, it could indicate unequal variances.The welch´s test dont need equal variances to perform well but you can asses variances with graphical methods and using the Levene´s test.</p>
+</section><section id="assessing-normality" class="level3" data-number="17.5.6"><h3 data-number="17.5.6" class="anchored" data-anchor-id="assessing-normality">
+<span class="header-section-number">17.5.6</span> Assessing normality:</h3>
+<p><strong>Shapiro-Wilk Test</strong>: Purpose: Determines if a sample comes from a normally distributed population. Suitability for Small Samples: Good power even with small sample sizes (&lt; 50). How It Works: Compares the sample data to a normal distribution. Interpretation: If p-value &lt; chosen alpha level, data is not normally distributed. Advantages: Sensitive to deviations in both location and shape. Limitations: May detect trivial deviations due to large sample size1 <span class="citation" data-cites="Razali2011-aq">(<a href="#ref-Razali2011-aq" role="doc-biblioref">Razali &amp; Wah, 2011</a>)</span>.</p>
+<p><strong>Kolmogorov-Smirnov (K-S) Test</strong>: Purpose: Compares two samples or tests if a sample matches a reference distribution. Suitability for Small Samples: Useful for small to large sample sizes. How It Works: Quantifies the distance between empirical and reference cumulative distribution functions. Interpretation: Compares observed data to expected distribution. Advantages: Sensitive to differences in both location and shape. Limitations: May not be better than Shapiro-Wilk for small samples <span class="citation" data-cites="Razali2011-aq">(<a href="#ref-Razali2011-aq" role="doc-biblioref">Razali &amp; Wah, 2011</a>)</span>.</p>
+<p><strong>Anderson-Darling Test</strong>: Purpose: Tests if a sample comes from a specific distribution (e.g., normal). Suitability for Small Samples: Similar to Shapiro-Wilk. How It Works: Compares observed data to expected distribution. Interpretation: Reject null hypothesis if p-value &lt; chosen alpha level. Advantages: Generalizes well for various distributions. Limitations: Adjust for parameter estimation if needed <span class="citation" data-cites="Razali2011-aq">(<a href="#ref-Razali2011-aq" role="doc-biblioref">Razali &amp; Wah, 2011</a>)</span>.</p>
+<p><strong>Graphical Inspection</strong>: Plot histograms or box plots for each group. Look for differences in spread!!</p>
+</section></section><section id="defyning-the-question-and-hypotheses" class="level2" data-number="17.6"><h2 data-number="17.6" class="anchored" data-anchor-id="defyning-the-question-and-hypotheses">
+<span class="header-section-number">17.6</span> Defyning the question and hypotheses</h2>
+<p>Null hypothesis (H0): 4 cylinder cars and 6 cylinder cars have equal miles per galon (mpg) mean. Alternative hypothesis (HA): 4 cylinder cars and 6 cylinder cars have not equal miles per galon (mpg) mean.</p>
+</section><section id="dataset-visualization" class="level2" data-number="17.7"><h2 data-number="17.7" class="anchored" data-anchor-id="dataset-visualization">
+<span class="header-section-number">17.7</span> Dataset visualization</h2>
+<p>We will use the <code>mtcars</code> dataset in R for this demonstration. This dataset contains various attributes of different car models and at priori we are not sure if the assumptions are meet, so we have to assess the data first:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   32 obs. of  11 variables:
+ $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+ $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
+ $ disp: num  160 160 108 258 360 ...
+ $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
+ $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+ $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
+ $ qsec: num  16.5 17 18.6 19.4 17 ...
+ $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...
+ $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
+ $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
+ $ carb: num  4 4 1 1 2 1 4 2 2 4 ...</code></pre>
+</div>
+</div>
+<p>As we can see, we have a data set with the information about different types of cars, with 11 different variables including miles per gallon (mpg), cylinder (cyl), horse power (hp), etc., and there are 32 observations for each variable.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>      mpg             cyl             disp             hp       
+ Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  
+ 1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  
+ Median :19.20   Median :6.000   Median :196.3   Median :123.0  
+ Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  
+ 3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  
+ Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  
+      drat             wt             qsec             vs        
+ Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :0.0000  
+ 1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000  
+ Median :3.695   Median :3.325   Median :17.71   Median :0.0000  
+ Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :0.4375  
+ 3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000  
+ Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :1.0000  
+       am              gear            carb      
+ Min.   :0.0000   Min.   :3.000   Min.   :1.000  
+ 1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  
+ Median :0.0000   Median :4.000   Median :2.000  
+ Mean   :0.4062   Mean   :3.688   Mean   :2.812  
+ 3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  
+ Max.   :1.0000   Max.   :5.000   Max.   :8.000  </code></pre>
+</div>
+</div>
+</section><section id="plotting-mtcars-data" class="level2" data-number="17.8"><h2 data-number="17.8" class="anchored" data-anchor-id="plotting-mtcars-data">
+<span class="header-section-number">17.8</span> Plotting Mtcars data</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03_two_sample_welch_ttest_files/figure-html/plot-counts-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Cars by gears and cylinders</figcaption></figure>
+</div>
+</div>
+</div>
+<p>On this bar graph we observe the count of cars by number of cylinders and gears.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03_two_sample_welch_ttest_files/figure-html/plot-mtcars-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>mpg v.s hp</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Just to give us an idea of the data set, on this plot we observed the relation between horse power and cylinders. The cars with more cylinders have more hp and probably do less miles per gallon.</p>
+<section id="assessing-the-distribution" class="level3" data-number="17.8.1"><h3 data-number="17.8.1" class="anchored" data-anchor-id="assessing-the-distribution">
+<span class="header-section-number">17.8.1</span> Assessing the distribution</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03_two_sample_welch_ttest_files/figure-html/histograms-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Histogram 4-cylinder vs 6-cylinder</figcaption></figure>
+</div>
+</div>
+</div>
+<p>This histogram shows there is a difference distribution on the miles per gallon (MPG) variable between 4 and 6 cylinder cars. 6 cylinder cars appear to have a normal distribution but 4 cylinder cars not.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03_two_sample_welch_ttest_files/figure-html/boxplot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Boxplot 4-cylinder vs 6 cylinder</figcaption></figure>
+</div>
+</div>
+</div>
+<p>This boxplot also shows the difference between the two groups. 4 cylinder cars have a bigger variance on the mpg variable.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03_two_sample_welch_ttest_files/figure-html/q-q plot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Q-Q Plot 4-cylinder vs 6 cylinder</figcaption></figure>
+</div>
+</div>
+</div>
+<p>This Q-Q plots shows a red line and a blue line, if both diverge it means the two groups have different distributions.</p>
+</section><section id="assessing-skewness-and-kurtosis" class="level3" data-number="17.8.2"><h3 data-number="17.8.2" class="anchored" data-anchor-id="assessing-skewness-and-kurtosis">
+<span class="header-section-number">17.8.2</span> Assessing skewness and kurtosis</h3>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calculate skewness and kurtosis for mpg_4_cyl</span></span>
+<span><span class="va">skewness_4_cyl</span> <span class="op">&lt;-</span> <span class="fu">skewness</span><span class="op">(</span><span class="va">mpg_4_cyl</span><span class="op">)</span></span>
+<span><span class="va">kurtosis_4_cyl</span> <span class="op">&lt;-</span> <span class="fu">kurtosis</span><span class="op">(</span><span class="va">mpg_4_cyl</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Calculate skewness and kurtosis for mpg_6_cyl</span></span>
+<span><span class="va">skewness_6_cyl</span> <span class="op">&lt;-</span> <span class="fu">skewness</span><span class="op">(</span><span class="va">mpg_6_cyl</span><span class="op">)</span></span>
+<span><span class="va">kurtosis_6_cyl</span> <span class="op">&lt;-</span> <span class="fu">kurtosis</span><span class="op">(</span><span class="va">mpg_6_cyl</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print the results</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Skewness for mpg_4_cyl:"</span>, <span class="va">skewness_4_cyl</span>, <span class="st">"\n"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Skewness for mpg_4_cyl: 0.2591965 </code></pre>
+</div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Kurtosis for mpg_4_cyl:"</span>, <span class="va">kurtosis_4_cyl</span>, <span class="st">"\n"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Kurtosis for mpg_4_cyl: -1.645012 </code></pre>
+</div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Skewness for mpg_6_cyl:"</span>, <span class="va">skewness_6_cyl</span>, <span class="st">"\n"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Skewness for mpg_6_cyl: -0.1583137 </code></pre>
+</div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Kurtosis for mpg_6_cyl:"</span>, <span class="va">kurtosis_6_cyl</span>, <span class="st">"\n"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Kurtosis for mpg_6_cyl: -1.906971 </code></pre>
+</div>
+</div>
+<p><strong>Skewness</strong>: Skewness measures the asymmetry of the distribution of a variable. A normal distribution has a skewness value of zero, indicating symmetry. Positive skewness means the right tail is longer (values cluster to the left of the mean), while negative skewness means the left tail is longer. If skewness is substantial (e.g., greater than 2.1), it suggests departure from normality. It is not the case here!!</p>
+<p><strong>Kurtosis</strong>: Kurtosis measures the peakedness of a distribution. The original kurtosis value is sometimes called “kurtosis (proper).” A normal distribution has kurtosis (proper) equal to 3. Excess kurtosis (obtained by subtracting 3 from the proper kurtosis) is often used. Substantial departure from normality occurs when excess kurtosis is greater than 7.1</p>
+</section><section id="normality-test" class="level3" data-number="17.8.3"><h3 data-number="17.8.3" class="anchored" data-anchor-id="normality-test">
+<span class="header-section-number">17.8.3</span> Normality test</h3>
+<p><strong>Shapiro-Wilk Test</strong>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Perform Shapiro-Wilk normality test</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">mpg_4_cyl</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  mpg_4_cyl
+W = 0.91244, p-value = 0.2606</code></pre>
+</div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">mpg_6_cyl</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  mpg_6_cyl
+W = 0.89903, p-value = 0.3252</code></pre>
+</div>
+</div>
+<p>For <strong>mpg_4_cyl</strong>: the test statistic (W = 0.91244) indicates that the data is relatively close to a normal distribution. The p-value (0.2606) is not statistically significant (above the typical threshold of 0.05). Interpretation: The data for mpg_4_cyl is not significantly different from a normal distribution. However, with small sample sizes, the test may have limited power to detect departures from normality.</p>
+<p>For <strong>mpg_6_cyl</strong>: the test statistic (W = 0.89903) is slightly lower than for mpg_4_cyl but still indicates a relatively normal distribution. The p-value (0.3252) is not statistically significant (above 0.05). Interpretation: The data for mpg_6_cyl is also not significantly different from a normal distribution based on the Shapiro-Wilk test.</p>
+<p>Again, note that with small sample sizes, the ability to detect deviations from normality may be limited. Small sample sizes can limit the power of statistical tests to detect departures from normality, and it’s important to consider the context and potential limitations when interpreting such results.</p>
+</section></section><section id="performing-the-welchs-t-test" class="level2" data-number="17.9"><h2 data-number="17.9" class="anchored" data-anchor-id="performing-the-welchs-t-test">
+<span class="header-section-number">17.9</span> Performing the Welchs t-test</h2>
+<p>We will perform a Welch’s t-test to compare the mean miles per gallon (mpg) between cars with 4 cylinders and cars with 6 cylinders.</p>
+<p>Hypotheses Null Hypothesis (H0): The mean mpg of cars with 4 cylinders is equal to the mean mpg of cars with 6 cylinders. Alternative Hypothesis (H1): The mean mpg of cars with 4 cylinders is not equal to the mean mpg of cars with 6 cylinders.</p>
+<section id="welchs-test-results" class="level3" data-number="17.9.1"><h3 data-number="17.9.1" class="anchored" data-anchor-id="welchs-test-results">
+<span class="header-section-number">17.9.1</span> Welchs test results</h3>
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Extract the mpg values for cars with 4 and 6 cylinders</span></span>
+<span><span class="va">mpg_4_cyl</span> <span class="op">&lt;-</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span><span class="op">[</span><span class="va">mtcars</span><span class="op">$</span><span class="va">cyl</span> <span class="op">==</span> <span class="fl">4</span><span class="op">]</span></span>
+<span><span class="va">mpg_6_cyl</span> <span class="op">&lt;-</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span><span class="op">[</span><span class="va">mtcars</span><span class="op">$</span><span class="va">cyl</span> <span class="op">==</span> <span class="fl">6</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co">## Perform Welch's t-test</span></span>
+<span><span class="va">t_test_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">mpg_4_cyl</span>, <span class="va">mpg_6_cyl</span>, var.equal <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">t_test_result</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  mpg_4_cyl and mpg_6_cyl
+t = 4.7191, df = 12.956, p-value = 0.0004048
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+  3.751376 10.090182
+sample estimates:
+mean of x mean of y 
+ 26.66364  19.74286 </code></pre>
+</div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Extract confidence interval</span></span>
+<span><span class="va">conf_interval</span> <span class="op">&lt;-</span> <span class="va">t_test_result</span><span class="op">$</span><span class="va">conf.int</span></span>
+<span><span class="va">conf_interval</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  3.751376 10.090182
+attr(,"conf.level")
+[1] 0.95</code></pre>
+</div>
+</div>
+</section><section id="interpretation-or-results" class="level3" data-number="17.9.2"><h3 data-number="17.9.2" class="anchored" data-anchor-id="interpretation-or-results">
+<span class="header-section-number">17.9.2</span> Interpretation or results:</h3>
+<p>Let’s break down the interpretation of the Welch Two Sample t-test results for this data:</p>
+<p>Data: The test was performed on two samples, mpg_4_cyl and mpg_6_cyl.</p>
+<p>t-value: the t-test statistic is 4.7191.</p>
+<p>Degrees of Freedom (df): the degrees of freedom associated with the t-test statistic is approximately 12.956.</p>
+<p>p-value: the p-value is 0.0004048. This small p-value suggests strong evidence against the null hypothesis.</p>
+<p>Alternative Hypothesis: the alternative hypothesis states that the true difference in means between the two groups is not equal to zero.</p>
+<p>95% Confidence Interval: The confidence interval for the true difference in means lies between 3.751376 and 10.090182. (Always have in mind the repeated sample paradigm)</p>
+<p>Sample Estimates: The sample mean of mpg_4_cyl is 26.66364, and the sample mean of mpg_6_cyl is 19.74286.</p>
+<p>In summary, based on the p-value, we reject the null hypothesis and conclude that there is a significant difference in means between the two groups. The confidence interval provides a range for this difference. If the interval does not include zero, it supports the alternative hypothesis.</p>
+</section></section><section id="satterthwaite-degrees-of-freedom" class="level2" data-number="17.10"><h2 data-number="17.10" class="anchored" data-anchor-id="satterthwaite-degrees-of-freedom">
+<span class="header-section-number">17.10</span> Satterthwaite Degrees of Freedom</h2>
+<p>In the context of Welch’s t-test, the Satterthwaite approximation is used to calculate an approximation of the degrees of freedom. This method provides a more accurate estimation compared to the standard t-test when the variances of the two samples are not equal.</p>
+<p>The formula for the Satterthwaite degrees of freedom is: <span class="math display">\[
+\nu \approx \frac{\left( \frac{s_1^2}{n_1} + \frac{s_2^2}{n_2} \right)^2}{\frac{\left( \frac{s_1^2}{n_1} \right)^2}{n_1 - 1} + \frac{\left( \frac{s_2^2}{n_2} \right)^2}{n_2 - 1}}
+\]</span></p>
+<p>Where: <span class="math display">\[ s_1^2 \]</span> is the sample variance of the first sample (4-cylinder cars), <span class="math display">\[ s_2^2 \]</span> is the sample variance of the second sample (6-cylinder cars), <span class="math display">\[ n_1 \]</span> is the sample size of the first sample (4-cylinder cars) and <span class="math display">\[ n_2 \]</span> is the sample size of the second sample (6-cylinder cars).</p>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Sample sizes</span></span>
+<span><span class="va">n1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">mpg_4_cyl</span><span class="op">)</span></span>
+<span><span class="va">n2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">mpg_6_cyl</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Sample variances</span></span>
+<span></span>
+<span><span class="va">s1_sq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">mpg_4_cyl</span><span class="op">)</span></span>
+<span><span class="va">s2_sq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">mpg_6_cyl</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Satterthwaite degrees of freedom</span></span>
+<span><span class="va">numerator</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">s1_sq</span> <span class="op">/</span> <span class="va">n1</span> <span class="op">+</span> <span class="va">s2_sq</span> <span class="op">/</span> <span class="va">n2</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span>
+<span><span class="va">denominator</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="op">(</span><span class="va">s1_sq</span> <span class="op">/</span> <span class="va">n1</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="op">(</span><span class="va">n1</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="op">(</span><span class="va">s2_sq</span> <span class="op">/</span> <span class="va">n2</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="op">(</span><span class="va">n2</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">numerator</span> <span class="op">/</span> <span class="va">denominator</span></span>
+<span></span>
+<span><span class="co"># Print the result</span></span>
+<span><span class="va">df</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12.95598</code></pre>
+</div>
+</div>
+<section id="degrees-of-freedom-dof-explanation" class="level3" data-number="17.10.1"><h3 data-number="17.10.1" class="anchored" data-anchor-id="degrees-of-freedom-dof-explanation">
+<span class="header-section-number">17.10.1</span> Degrees of Freedom (DoF) explanation:</h3>
+<p>The <strong>degrees of freedom</strong> indicate the number of independent values or quantities which can vary in the analysis without breaking any constraints. In this context, the degrees of freedom are adjusted to better reflect the reliability of the variance estimates from the two samples <span class="citation" data-cites="Huang2016-dp">(<a href="#ref-Huang2016-dp" role="doc-biblioref">Huang, 2016</a>)</span>.</p>
+<p><strong>Satterthwaite Approximation:</strong> this method provides an adjusted degrees of freedom value that accounts for differences in variances between the two samples. The formula combines the sample variances and sizes to compute a more accurate degrees of freedom for the Welch’s t-test.</p>
+<p><strong>Implications:</strong> using the Satterthwaite approximation leads to a more robust test when comparing means from two samples with unequal variances. The resulting degrees of freedom are used to determine the critical value from the t-distribution, which is crucial for calculating the p-value and making statistical inferences <span class="citation" data-cites="Derrick2016-wq">(<a href="#ref-Derrick2016-wq" role="doc-biblioref">Derrick, Toher, &amp; White, 2016</a>)</span>.</p>
+<p><strong>Degrees of Freedom Calculation for the two sample t-test:</strong> can be calculated as follows:</p>
+<p><span class="math display">\[
+\text{DoF} = (n_1 - 1) + (n_2 - 1) = (n_1 + n_2 - 2)
+\]</span></p>
+<p>Where: <span class="math display">\[ n_1 \]</span> is the number of observations in the first group. <span class="math display">\[ n_2 \]</span> is the number of observations in the second group.</p>
+<p><strong>Why Subtract the Number of Groups?:</strong></p>
+<p>We subtract 2 because we are estimating one parameter (the mean) for each of the two groups. Each estimation reduces the degrees of freedom by 1. Thus, for two groups, we subtract 2 from the total number of observations to account for the two estimated means.</p>
+<p><strong>Satterthwaite vs t-test degrees of freedom:</strong></p>
+<p>Calculated Degrees of Freedom using the Satterthwaite method: approximately 12.956</p>
+<p>Traditional t-test Degrees of Freedom: n1+n2-2=11+7-2=16</p>
+<p>The Satterthwaite degrees of freedom (12.956) are lower than the traditional degrees of freedom (16). This adjustment accounts for the unequal variances between the two samples (4-cylinder and 6-cylinder cars) and provides a more accurate measure for the t-distribution used in the Welch’s t-test.</p>
+</section><section id="important-concepts-about-the-degrees-of-freedom" class="level3" data-number="17.10.2"><h3 data-number="17.10.2" class="anchored" data-anchor-id="important-concepts-about-the-degrees-of-freedom">
+<span class="header-section-number">17.10.2</span> Important concepts about the degrees of Freedom</h3>
+<div class="note">
+<h3 class="anchored">
+Degrees of Freedom (DoF)
+</h3>
+<p>
+Represent the number of independent values that can vary without breaking constraints.
+</p>
+<h3 class="anchored">
+Traditional t-Test
+</h3>
+<p>
+For two groups, the DoF is the total number of observations minus 2 because each group’s mean estimation uses one degree of freedom.
+</p>
+<h3 class="anchored">
+Satterthwaite Approximation
+</h3>
+<p>
+Adjusts the DoF for unequal variances, usually resulting in a lower and non-integer value, providing a more accurate basis for hypothesis testing.
+</p>
+</div>
+<style>
+.note {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 2px solid green; /* Green border around all sides */
+  max-width: 400px; /* Limit the width of the box */
+  margin: 20px 0; /* Space around the box */
+  animation: moveBox 2s linear infinite; /* Continuous animation */
+  position: relative;
+}
+
+/* Keyframes for continuous animation */
+@keyframes moveBox {
+  0% { left: 0; }
+  50% { left: 20px; }
+  100% { left: 0; }
+}
+</style></section></section><section id="summary-and-conclusion" class="level2" data-number="17.11"><h2 data-number="17.11" class="anchored" data-anchor-id="summary-and-conclusion">
+<span class="header-section-number">17.11</span> Summary and Conclusion</h2>
+<p>Welch’s t-test, useful for comparing means of two independent samples with unequal variances and sizes, was applied to the mtcars dataset to compare 4-cylinder and 6-cylinder cars’ MPG. The test revealed a significant difference in means, with a p-value of 0.0004048, rejecting the null hypothesis. The Satterthwaite approximation, yielding degrees of freedom at 12.956, provided a more accurate assessment than the traditional t-test (DoF = 16), ensuring robust statistical inference under unequal variances. This method enhances reliability, especially with large samples, where normality is approached due to the Central Limit Theorem.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-agresti2017statistics" class="csl-entry" role="listitem">
+Agresti, A., &amp; Franklin, C. (2017). <em>Statistics: The art and science of learning from data</em> (4th ed.). Pearson.
+</div>
+<div id="ref-Ahad2014-vw" class="csl-entry" role="listitem">
+Ahad, N. A., &amp; Yahaya, S. S. S. (2014). Sensitivity analysis of welch’st-test. In <em><span>AIP</span> conference proceedings</em> (Vol. 1605, pp. 888–893). American Institute of Physics.
+</div>
+<div id="ref-Derrick2016-wq" class="csl-entry" role="listitem">
+Derrick, B., Toher, D., &amp; White, P. (2016). Why welch’s test is type <span>I</span> error robust. The quantitative methods for. <em>Psychology</em>, <em>12</em>(1), 30–38.
+</div>
+<div id="ref-glen2022welchs" class="csl-entry" role="listitem">
+Glen, S. (2022). <em>Welch’s t-test: Definition, formula and example</em>.
+</div>
+<div id="ref-Haas2012-sv" class="csl-entry" role="listitem">
+Haas, J. P. (2012). Sample size and power. <em>Am. J. Infect. Control</em>, <em>40</em>(8), 766–767.
+</div>
+<div id="ref-Huang2016-dp" class="csl-entry" role="listitem">
+Huang, H. (2016). On the <span>Welch-Satterthwaite</span> formula for uncertainty estimation: A paradox and its resolution. <em>Cal Lab the International Journal of Metrology</em>, <em>23</em>(4), 20–28.
+</div>
+<div id="ref-khanacademy_statistics" class="csl-entry" role="listitem">
+Khan Academy. (n.d.). <em>Statistics and probability</em>.
+</div>
+<div id="ref-Kwak2017-vr" class="csl-entry" role="listitem">
+Kwak, S. G., &amp; Kim, J. H. (2017). Central limit theorem: The cornerstone of modern statistics. <em>Korean J. Anesthesiol.</em>, <em>70</em>(2), 144–156.
+</div>
+<div id="ref-Labovitz2017-yp" class="csl-entry" role="listitem">
+Labovitz, S. (2017). Criteria for selecting a significance level:: A note on the sacredness of. 05. In <em>The significance test controversy</em> (pp. 166–171).
+</div>
+<div id="ref-laerd_welchs_t_test" class="csl-entry" role="listitem">
+Lund Research Ltd. (n.d.). <em>Welch’s t-test</em>.
+</div>
+<div id="ref-moore2016introduction" class="csl-entry" role="listitem">
+Moore, D. S., McCabe, G. P., &amp; Craig, B. A. (2016). <em>Introduction to the practice of statistics</em> (9th ed.). W. H. Freeman; Company.
+</div>
+<div id="ref-newbold2012statistics" class="csl-entry" role="listitem">
+Newbold, P., Carlson, W. L., &amp; Thorne, B. (2012). <em>Statistics for business and economics</em> (8th ed.). Pearson.
+</div>
+<div id="ref-Razali2011-aq" class="csl-entry" role="listitem">
+Razali, N. M., &amp; Wah, Y. B. (2011). Power comparisons of shapiro-wilk, kolmogorov-smirnov, lilliefors and anderson-darling tests. <em>Journal of Statistical Modeling and Analytics</em>, <em>2</em>(1), 21–33.
+</div>
+<div id="ref-ruxton2006unequal" class="csl-entry" role="listitem">
+Ruxton, G. D. (2006). The unequal variance t-test is an underused alternative to student’s t-test and the mann–whitney u test. <em>Behavioral Ecology</em>, <em>17</em>(4), 688–690. <a href="https://doi.org/10.1093/beheco/ark016">https://doi.org/10.1093/beheco/ark016</a>
+</div>
+<div id="ref-wikipedia_welchs_t_test" class="csl-entry" role="listitem">
+Wikipedia contributors. (n.d.). <em>Welch’s t-test</em>.
+</div>
+<div id="ref-Zhou2023-yv" class="csl-entry" role="listitem">
+Zhou, Y., Ren, X., &amp; Brooks, G. (2023). Which effect size calculation is the best to estimate the population effect size in the welch <span>T</span> test? <em>J. Mod. Appl. Stat. Methods</em>, <em>22</em>.
+</div>
+</div>
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/gabrielodom\.github\.io\/PHC6099_rBiostat\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../lessons/03_two_sample_ttest.html" class="pagination-link" aria-label="Two sample $t$-test">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../lessons/03_two_sample_mann_whitney.html" class="pagination-link" aria-label="Mann-Whitney-U Test Example">
+        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/03_two_sample_welch_ttest.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+
+
+</body></html>

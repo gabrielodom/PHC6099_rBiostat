@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<title>An R Cookbook for Public Health - 23&nbsp; Correlation and Covariance Matrices</title>
+<title>An R Cookbook for Public Health - 26&nbsp; Correlation and Covariance Matrices</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,7 +131,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons/04_corr_cov.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons/04_corr_cov.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -230,38 +230,44 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_ttest_one_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">One-sample/paired t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons/02_wilcoxon_one_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_mcnemar_paired_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_cochrans_q_paired_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -278,25 +284,31 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_welch_ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Two sample Welchs test or Welchs t-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -313,55 +325,61 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_one_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_welch_two_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Welch’s Anova</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_corr_cov.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -378,13 +396,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_poisson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_negative_binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Generalized Linear Models: Negative Binomial</span></span></a>
   </div>
 </li>
       </ul>
@@ -401,13 +431,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_elastic_net_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_survival_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
   </div>
 </li>
       </ul>
@@ -424,7 +454,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -437,53 +467,53 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction-to-correlation-and-covariance-matrices" id="toc-introduction-to-correlation-and-covariance-matrices" class="nav-link active" data-scroll-target="#introduction-to-correlation-and-covariance-matrices"><span class="header-section-number">23.1</span> Introduction to Correlation and Covariance Matrices</a></li>
+<li><a href="#introduction-to-correlation-and-covariance-matrices" id="toc-introduction-to-correlation-and-covariance-matrices" class="nav-link active" data-scroll-target="#introduction-to-correlation-and-covariance-matrices"><span class="header-section-number">26.1</span> Introduction to Correlation and Covariance Matrices</a></li>
   <li>
-<a href="#mathematical-definition" id="toc-mathematical-definition" class="nav-link" data-scroll-target="#mathematical-definition"><span class="header-section-number">23.2</span> Mathematical Definition</a>
+<a href="#mathematical-definition" id="toc-mathematical-definition" class="nav-link" data-scroll-target="#mathematical-definition"><span class="header-section-number">26.2</span> Mathematical Definition</a>
   <ul class="collapse">
-<li><a href="#variance" id="toc-variance" class="nav-link" data-scroll-target="#variance"><span class="header-section-number">23.2.1</span> Variance</a></li>
-  <li><a href="#covariance" id="toc-covariance" class="nav-link" data-scroll-target="#covariance"><span class="header-section-number">23.2.2</span> Covariance</a></li>
-  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="header-section-number">23.2.3</span> Correlation</a></li>
+<li><a href="#variance" id="toc-variance" class="nav-link" data-scroll-target="#variance"><span class="header-section-number">26.2.1</span> Variance</a></li>
+  <li><a href="#covariance" id="toc-covariance" class="nav-link" data-scroll-target="#covariance"><span class="header-section-number">26.2.2</span> Covariance</a></li>
+  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="header-section-number">26.2.3</span> Correlation</a></li>
   </ul>
 </li>
-  <li><a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description"><span class="header-section-number">23.3</span> Data Description</a></li>
+  <li><a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description"><span class="header-section-number">26.3</span> Data Description</a></li>
   <li>
-<a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">23.4</span> Assumptions</a>
+<a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">26.4</span> Assumptions</a>
   <ul class="collapse">
-<li><a href="#covariance-assumptions" id="toc-covariance-assumptions" class="nav-link" data-scroll-target="#covariance-assumptions"><span class="header-section-number">23.4.1</span> Covariance Assumptions</a></li>
-  <li><a href="#correlation-assumptions" id="toc-correlation-assumptions" class="nav-link" data-scroll-target="#correlation-assumptions"><span class="header-section-number">23.4.2</span> Correlation Assumptions</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#checking-the-assumptions" id="toc-checking-the-assumptions" class="nav-link" data-scroll-target="#checking-the-assumptions"><span class="header-section-number">23.5</span> Checking the Assumptions</a>
-  <ul class="collapse">
-<li><a href="#linearity" id="toc-linearity" class="nav-link" data-scroll-target="#linearity"><span class="header-section-number">23.5.1</span> Linearity</a></li>
-  <li><a href="#scale" id="toc-scale" class="nav-link" data-scroll-target="#scale"><span class="header-section-number">23.5.2</span> Scale</a></li>
-  <li><a href="#outliers" id="toc-outliers" class="nav-link" data-scroll-target="#outliers"><span class="header-section-number">23.5.3</span> Outliers</a></li>
-  <li><a href="#homoscedasticity" id="toc-homoscedasticity" class="nav-link" data-scroll-target="#homoscedasticity"><span class="header-section-number">23.5.4</span> Homoscedasticity</a></li>
-  <li><a href="#normality" id="toc-normality" class="nav-link" data-scroll-target="#normality"><span class="header-section-number">23.5.5</span> Normality</a></li>
+<li><a href="#covariance-assumptions" id="toc-covariance-assumptions" class="nav-link" data-scroll-target="#covariance-assumptions"><span class="header-section-number">26.4.1</span> Covariance Assumptions</a></li>
+  <li><a href="#correlation-assumptions" id="toc-correlation-assumptions" class="nav-link" data-scroll-target="#correlation-assumptions"><span class="header-section-number">26.4.2</span> Correlation Assumptions</a></li>
   </ul>
 </li>
   <li>
-<a href="#code-to-run" id="toc-code-to-run" class="nav-link" data-scroll-target="#code-to-run"><span class="header-section-number">23.6</span> Code to Run</a>
+<a href="#checking-the-assumptions" id="toc-checking-the-assumptions" class="nav-link" data-scroll-target="#checking-the-assumptions"><span class="header-section-number">26.5</span> Checking the Assumptions</a>
   <ul class="collapse">
-<li><a href="#covariance-1" id="toc-covariance-1" class="nav-link" data-scroll-target="#covariance-1"><span class="header-section-number">23.6.1</span> Covariance</a></li>
-  <li><a href="#correlation-1" id="toc-correlation-1" class="nav-link" data-scroll-target="#correlation-1"><span class="header-section-number">23.6.2</span> Correlation</a></li>
+<li><a href="#linearity" id="toc-linearity" class="nav-link" data-scroll-target="#linearity"><span class="header-section-number">26.5.1</span> Linearity</a></li>
+  <li><a href="#scale" id="toc-scale" class="nav-link" data-scroll-target="#scale"><span class="header-section-number">26.5.2</span> Scale</a></li>
+  <li><a href="#outliers" id="toc-outliers" class="nav-link" data-scroll-target="#outliers"><span class="header-section-number">26.5.3</span> Outliers</a></li>
+  <li><a href="#homoscedasticity" id="toc-homoscedasticity" class="nav-link" data-scroll-target="#homoscedasticity"><span class="header-section-number">26.5.4</span> Homoscedasticity</a></li>
+  <li><a href="#normality" id="toc-normality" class="nav-link" data-scroll-target="#normality"><span class="header-section-number">26.5.5</span> Normality</a></li>
   </ul>
 </li>
   <li>
-<a href="#brief-interpretation-of-the-output" id="toc-brief-interpretation-of-the-output" class="nav-link" data-scroll-target="#brief-interpretation-of-the-output"><span class="header-section-number">23.7</span> Brief Interpretation of the Output</a>
+<a href="#code-to-run" id="toc-code-to-run" class="nav-link" data-scroll-target="#code-to-run"><span class="header-section-number">26.6</span> Code to Run</a>
   <ul class="collapse">
-<li><a href="#interpreting-the-covariance" id="toc-interpreting-the-covariance" class="nav-link" data-scroll-target="#interpreting-the-covariance"><span class="header-section-number">23.7.1</span> Interpreting the Covariance</a></li>
-  <li><a href="#interpreting-correlation-coefficients" id="toc-interpreting-correlation-coefficients" class="nav-link" data-scroll-target="#interpreting-correlation-coefficients"><span class="header-section-number">23.7.2</span> Interpreting Correlation Coefficients</a></li>
+<li><a href="#covariance-1" id="toc-covariance-1" class="nav-link" data-scroll-target="#covariance-1"><span class="header-section-number">26.6.1</span> Covariance</a></li>
+  <li><a href="#correlation-1" id="toc-correlation-1" class="nav-link" data-scroll-target="#correlation-1"><span class="header-section-number">26.6.2</span> Correlation</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#brief-interpretation-of-the-output" id="toc-brief-interpretation-of-the-output" class="nav-link" data-scroll-target="#brief-interpretation-of-the-output"><span class="header-section-number">26.7</span> Brief Interpretation of the Output</a>
+  <ul class="collapse">
+<li><a href="#interpreting-the-covariance" id="toc-interpreting-the-covariance" class="nav-link" data-scroll-target="#interpreting-the-covariance"><span class="header-section-number">26.7.1</span> Interpreting the Covariance</a></li>
+  <li><a href="#interpreting-correlation-coefficients" id="toc-interpreting-correlation-coefficients" class="nav-link" data-scroll-target="#interpreting-correlation-coefficients"><span class="header-section-number">26.7.2</span> Interpreting Correlation Coefficients</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/04_corr_cov.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons/04_corr_cov.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04_header_anova-and-regression.html">ANOVA and Regression</a></li><li class="breadcrumb-item"><a href="../lessons/04_corr_cov.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span>
+<span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span>
 </h1>
 </div>
 
@@ -525,8 +555,8 @@ window.Quarto = {
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="introduction-to-correlation-and-covariance-matrices" class="level2" data-number="23.1"><h2 data-number="23.1" class="anchored" data-anchor-id="introduction-to-correlation-and-covariance-matrices">
-<span class="header-section-number">23.1</span> Introduction to Correlation and Covariance Matrices</h2>
+<section id="introduction-to-correlation-and-covariance-matrices" class="level2" data-number="26.1"><h2 data-number="26.1" class="anchored" data-anchor-id="introduction-to-correlation-and-covariance-matrices">
+<span class="header-section-number">26.1</span> Introduction to Correlation and Covariance Matrices</h2>
 <p>A prominent theme in statistical analysis is evaluating whether or not a relationship exists between two or more variables, and the degree to which that relationship exists.</p>
 <ul>
 <li>
@@ -561,15 +591,15 @@ window.Quarto = {
 </ul>
 </li>
 <li>A <strong>Correlation matrix</strong> allows for the exploration of the correlation among the multiple variables in a data set simultaneously. It provides this information through a table listing the correlation coefficients (<span class="math inline">\(r\)</span>) for each pair of variables in the data set.</li>
-</ul></section><section id="mathematical-definition" class="level2" data-number="23.2"><h2 data-number="23.2" class="anchored" data-anchor-id="mathematical-definition">
-<span class="header-section-number">23.2</span> Mathematical Definition</h2>
-<section id="variance" class="level3" data-number="23.2.1"><h3 data-number="23.2.1" class="anchored" data-anchor-id="variance">
-<span class="header-section-number">23.2.1</span> Variance</h3>
+</ul></section><section id="mathematical-definition" class="level2" data-number="26.2"><h2 data-number="26.2" class="anchored" data-anchor-id="mathematical-definition">
+<span class="header-section-number">26.2</span> Mathematical Definition</h2>
+<section id="variance" class="level3" data-number="26.2.1"><h3 data-number="26.2.1" class="anchored" data-anchor-id="variance">
+<span class="header-section-number">26.2.1</span> Variance</h3>
 <p>The equation for the variance of a single variable is as follows: <span class="math display">\[
 var(x) = \frac{1}{n-1}{\sum_{i = 1}^{n}{(x_i - \bar{x})^2}}
 \]</span></p>
-</section><section id="covariance" class="level3" data-number="23.2.2"><h3 data-number="23.2.2" class="anchored" data-anchor-id="covariance">
-<span class="header-section-number">23.2.2</span> Covariance</h3>
+</section><section id="covariance" class="level3" data-number="26.2.2"><h3 data-number="26.2.2" class="anchored" data-anchor-id="covariance">
+<span class="header-section-number">26.2.2</span> Covariance</h3>
 <p>For a sample of <span class="math inline">\(n\)</span> data points, the sample covariance is calculated as: <span class="math display">\[
 Cov(x,y) = \frac{1}{n-1}{\sum_{i = 1}^{n}{(x_i - \bar{x})(y_i-\bar{y})}}
 \]</span> Where,</p>
@@ -585,8 +615,8 @@ Cov(x,y) = \frac{1}{n-1}{\sum_{i = 1}^{n}{(x_i - \bar{x})(y_i-\bar{y})}}
 <li>
 <span class="math inline">\(n\)</span> denotes the sample size.</li>
 </ul>
-<section id="covariance-matrix" class="level4" data-number="23.2.2.1"><h4 data-number="23.2.2.1" class="anchored" data-anchor-id="covariance-matrix">
-<span class="header-section-number">23.2.2.1</span> Covariance Matrix</h4>
+<section id="covariance-matrix" class="level4" data-number="26.2.2.1"><h4 data-number="26.2.2.1" class="anchored" data-anchor-id="covariance-matrix">
+<span class="header-section-number">26.2.2.1</span> Covariance Matrix</h4>
 <p>The covariance matrix, <span class="math inline">\(\sum\)</span>, can be represented as: <span class="math display">\[
 \sum = \begin{bmatrix} Var(x_{1}) &amp; ... &amp; Cov(x_{1},x_{n})\\ : &amp;: &amp; :\\ :&amp; :&amp; :\\ Cov(x_{n},x_{1}) &amp; ... &amp; Var(x_{n}) \end{bmatrix}.
 \]</span> Where,</p>
@@ -594,14 +624,14 @@ Cov(x,y) = \frac{1}{n-1}{\sum_{i = 1}^{n}{(x_i - \bar{x})(y_i-\bar{y})}}
 <li>
 <span class="math inline">\(x_1\)</span> is the first variable of interest in the data set.</li>
 <li>Up to the last variable of interest in the data set, <span class="math inline">\(x_n\)</span>.</li>
-</ul></section></section><section id="correlation" class="level3" data-number="23.2.3"><h3 data-number="23.2.3" class="anchored" data-anchor-id="correlation">
-<span class="header-section-number">23.2.3</span> Correlation</h3>
+</ul></section></section><section id="correlation" class="level3" data-number="26.2.3"><h3 data-number="26.2.3" class="anchored" data-anchor-id="correlation">
+<span class="header-section-number">26.2.3</span> Correlation</h3>
 <p>Here is a simplified equation for the Pearson Correlation Coefficient, <span class="math inline">\(r\)</span> that allows us to see the relationship between correlation and covariance: <span class="math display">\[
 r = \frac {Cov(x,y)}{(\sqrt{var(x)})(\sqrt{var(y)})}
 \]</span> This video explains the standardization and mathematical properties of <span class="math inline">\(r\)</span>:</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/2bcmklvrXTQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<section id="correlation-matrix" class="level4" data-number="23.2.3.1"><h4 data-number="23.2.3.1" class="anchored" data-anchor-id="correlation-matrix">
-<span class="header-section-number">23.2.3.1</span> Correlation Matrix</h4>
+<section id="correlation-matrix" class="level4" data-number="26.2.3.1"><h4 data-number="26.2.3.1" class="anchored" data-anchor-id="correlation-matrix">
+<span class="header-section-number">26.2.3.1</span> Correlation Matrix</h4>
 <p>Here is an example of a correlation matrix:</p>
 <table class="table">
 <thead><tr class="header">
@@ -647,8 +677,8 @@ r = \frac {Cov(x,y)}{(\sqrt{var(x)})(\sqrt{var(y)})}
 <li>The diagonal elements are always 1, because it represents the correlation of each variable with itself.</li>
 <li>The off-diagonal elements represent the correlation coefficients between pairs of variables. For example <span class="math inline">\(r_{12}\)</span> represents the correlation between Variable 1 and Variable 2.</li>
 <li>The correlation is symmetric, meaning that the correlation between Variable 1 and Variable 2 is the same as the correlation between Variable 2 and Variable 1.</li>
-</ul></section></section></section><section id="data-description" class="level2" data-number="23.3"><h2 data-number="23.3" class="anchored" data-anchor-id="data-description">
-<span class="header-section-number">23.3</span> Data Description</h2>
+</ul></section></section></section><section id="data-description" class="level2" data-number="26.3"><h2 data-number="26.3" class="anchored" data-anchor-id="data-description">
+<span class="header-section-number">26.3</span> Data Description</h2>
 <p>We utilized the R data set <code>mtcars</code> to provide examples for developing a <strong>Covariance Matrix</strong> and checking the assumptions for/development of a <strong>Correlation Matrix</strong> using the pearson correlation coefficient.</p>
 <p><code>mtcars</code> is a data set that belongs to base <code>R</code> that contains data about the various models of cars. It contains measurement from 32 different automobiles (1,973,074 models). The variable in the <code>mtcars</code> data set are:</p>
 <ul>
@@ -805,10 +835,10 @@ r = \frac {Cov(x,y)}{(\sqrt{var(x)})(\sqrt{var(y)})}
 </table>
 </div>
 </div>
-</section><section id="assumptions" class="level2" data-number="23.4"><h2 data-number="23.4" class="anchored" data-anchor-id="assumptions">
-<span class="header-section-number">23.4</span> Assumptions</h2>
-<section id="covariance-assumptions" class="level3" data-number="23.4.1"><h3 data-number="23.4.1" class="anchored" data-anchor-id="covariance-assumptions">
-<span class="header-section-number">23.4.1</span> Covariance Assumptions</h3>
+</section><section id="assumptions" class="level2" data-number="26.4"><h2 data-number="26.4" class="anchored" data-anchor-id="assumptions">
+<span class="header-section-number">26.4</span> Assumptions</h2>
+<section id="covariance-assumptions" class="level3" data-number="26.4.1"><h3 data-number="26.4.1" class="anchored" data-anchor-id="covariance-assumptions">
+<span class="header-section-number">26.4.1</span> Covariance Assumptions</h3>
 <p>Because the covariance measures the degree to which two variables change together, the following assumptions should be met:</p>
 <ul>
 <li>
@@ -824,8 +854,8 @@ r = \frac {Cov(x,y)}{(\sqrt{var(x)})(\sqrt{var(y)})}
 <strong>Mean centered data</strong>: Covariance is based on deviations from the mean, so for accurate calculations the data should be mean centered.</li>
 <li>
 <strong>Outliers</strong>: There should be no outliers, or outliers should be handled prior to interpreting results.</li>
-</ul></section><section id="correlation-assumptions" class="level3" data-number="23.4.2"><h3 data-number="23.4.2" class="anchored" data-anchor-id="correlation-assumptions">
-<span class="header-section-number">23.4.2</span> Correlation Assumptions</h3>
+</ul></section><section id="correlation-assumptions" class="level3" data-number="26.4.2"><h3 data-number="26.4.2" class="anchored" data-anchor-id="correlation-assumptions">
+<span class="header-section-number">26.4.2</span> Correlation Assumptions</h3>
 <p>Correlation examines the strength and direction of a <em>linear</em> relationship between 2 variables. As such, the following assumptions should be met:</p>
 <ul>
 <li>
@@ -848,10 +878,10 @@ r = \frac {Cov(x,y)}{(\sqrt{var(x)})(\sqrt{var(y)})}
 <strong>Independence</strong>: Each pair of observations/variables should be independent of other pairs (e.g., you should not have repeated measures, clustered data, or time series data).</li>
 <li>
 <strong>Outliers</strong>: There should be no outliers, or outliers should be handled prior to interpreting results.</li>
-</ul></section></section><section id="checking-the-assumptions" class="level2" data-number="23.5"><h2 data-number="23.5" class="anchored" data-anchor-id="checking-the-assumptions">
-<span class="header-section-number">23.5</span> Checking the Assumptions</h2>
-<section id="linearity" class="level3" data-number="23.5.1"><h3 data-number="23.5.1" class="anchored" data-anchor-id="linearity">
-<span class="header-section-number">23.5.1</span> Linearity</h3>
+</ul></section></section><section id="checking-the-assumptions" class="level2" data-number="26.5"><h2 data-number="26.5" class="anchored" data-anchor-id="checking-the-assumptions">
+<span class="header-section-number">26.5</span> Checking the Assumptions</h2>
+<section id="linearity" class="level3" data-number="26.5.1"><h3 data-number="26.5.1" class="anchored" data-anchor-id="linearity">
+<span class="header-section-number">26.5.1</span> Linearity</h3>
 <p>We can check this assumption with scatterplots of the continuous data.</p>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># The pairs function creates a scatterplot matrix for all continuous variables</span></span>
@@ -869,8 +899,8 @@ r = \frac {Cov(x,y)}{(\sqrt{var(x)})(\sqrt{var(y)})}
 </div>
 </div>
 <p>From this visualization, it appears that the continuous variables have a linear relationship (whether negative or positive).</p>
-</section><section id="scale" class="level3" data-number="23.5.2"><h3 data-number="23.5.2" class="anchored" data-anchor-id="scale">
-<span class="header-section-number">23.5.2</span> Scale</h3>
+</section><section id="scale" class="level3" data-number="26.5.2"><h3 data-number="26.5.2" class="anchored" data-anchor-id="scale">
+<span class="header-section-number">26.5.2</span> Scale</h3>
 <p>Using the <a href="https://docs.ropensci.org/skimr/">skimr</a> package along with the help (<code>?</code>) function, we can quickly get information about all of the variables in <code>mtcars</code> to understand what kind of scale the variables are on.</p>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1091,8 +1121,8 @@ r = \frac {Cov(x,y)}{(\sqrt{var(x)})(\sqrt{var(y)})}
 <span><span class="co"># ?mtcars</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As we mentioned previously in the description of the data, only 6 variables (<code>mpg</code>, <code>disp</code>, <code>hp</code>, <code>drat</code>, <code>wt</code>, and <code>qsec</code>) are interval or ratio values.</p>
-</section><section id="outliers" class="level3" data-number="23.5.3"><h3 data-number="23.5.3" class="anchored" data-anchor-id="outliers">
-<span class="header-section-number">23.5.3</span> Outliers</h3>
+</section><section id="outliers" class="level3" data-number="26.5.3"><h3 data-number="26.5.3" class="anchored" data-anchor-id="outliers">
+<span class="header-section-number">26.5.3</span> Outliers</h3>
 <p>To check for outliers in our variables of interest, we can use a box plot to visually examine the data.</p>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">box_mpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span> <span class="op">+</span></span>
@@ -1127,17 +1157,17 @@ r = \frac {Cov(x,y)}{(\sqrt{var(x)})(\sqrt{var(y)})}
 <img src="04_corr_cov_files/figure-html/fig-outlier-boxplot-1.png" id="fig-outlier-boxplot" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-outlier-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;23.1
+Figure&nbsp;26.1
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p><code>mpg</code>, <code>hp</code>, <code>wt</code>, and <code>qsec</code> all appear to have some outliers.</p>
-</section><section id="homoscedasticity" class="level3" data-number="23.5.4"><h3 data-number="23.5.4" class="anchored" data-anchor-id="homoscedasticity">
-<span class="header-section-number">23.5.4</span> Homoscedasticity</h3>
-<p>To check the homoscedasticity (or homogeneity of variance) assumption for correlations, we can examine resdiual plots from linear models after conducting hypothesis testing. We can also look back at the box plots (<a href="#fig-outlier-boxplot" class="quarto-xref">Figure&nbsp;<span>23.1</span></a>) to check if the interquartile range of the variables looks approximately the same. All of the variables of interest, except for <code>disp</code> appear to have similar variances.</p>
-</section><section id="normality" class="level3" data-number="23.5.5"><h3 data-number="23.5.5" class="anchored" data-anchor-id="normality">
-<span class="header-section-number">23.5.5</span> Normality</h3>
+</section><section id="homoscedasticity" class="level3" data-number="26.5.4"><h3 data-number="26.5.4" class="anchored" data-anchor-id="homoscedasticity">
+<span class="header-section-number">26.5.4</span> Homoscedasticity</h3>
+<p>To check the homoscedasticity (or homogeneity of variance) assumption for correlations, we can examine resdiual plots from linear models after conducting hypothesis testing. We can also look back at the box plots (<a href="#fig-outlier-boxplot" class="quarto-xref">Figure&nbsp;<span>26.1</span></a>) to check if the interquartile range of the variables looks approximately the same. All of the variables of interest, except for <code>disp</code> appear to have similar variances.</p>
+</section><section id="normality" class="level3" data-number="26.5.5"><h3 data-number="26.5.5" class="anchored" data-anchor-id="normality">
+<span class="header-section-number">26.5.5</span> Normality</h3>
 <p>To check this assumption, we can examine if the data are approximately normally distributed using the Q-Q plot or histograms or with the Shapiro-Wilk test.</p>
 <p>First, we will look at the Q-Q plot:</p>
 <div class="cell">
@@ -1186,7 +1216,7 @@ Figure&nbsp;23.1
 <img src="04_corr_cov_files/figure-html/fig-normality-qq-1.png" id="fig-normality-qq" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-normality-qq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;23.2
+Figure&nbsp;26.2
 </figcaption></figure>
 </div>
 </div>
@@ -1227,7 +1257,7 @@ Figure&nbsp;23.2
 <img src="04_corr_cov_files/figure-html/fig-normality-histograms-1.png" id="fig-normality-histograms" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-normality-histograms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;23.3
+Figure&nbsp;26.3
 </figcaption></figure>
 </div>
 </div>
@@ -1314,10 +1344,10 @@ Figure&nbsp;23.3
 </div>
 </div>
 </div>
-</section></section><section id="code-to-run" class="level2" data-number="23.6"><h2 data-number="23.6" class="anchored" data-anchor-id="code-to-run">
-<span class="header-section-number">23.6</span> Code to Run</h2>
-<section id="covariance-1" class="level3" data-number="23.6.1"><h3 data-number="23.6.1" class="anchored" data-anchor-id="covariance-1">
-<span class="header-section-number">23.6.1</span> Covariance</h3>
+</section></section><section id="code-to-run" class="level2" data-number="26.6"><h2 data-number="26.6" class="anchored" data-anchor-id="code-to-run">
+<span class="header-section-number">26.6</span> Code to Run</h2>
+<section id="covariance-1" class="level3" data-number="26.6.1"><h3 data-number="26.6.1" class="anchored" data-anchor-id="covariance-1">
+<span class="header-section-number">26.6.1</span> Covariance</h3>
 <p>As with correlation, we can use the <code><a href="https://rdrr.io/r/stats/cor.html">cov()</a></code> to calculate covariance, where the three same methods are available dependent on the validity of assumptions.</p>
 <div class="cell">
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># cov(dataName$variable1, dataName$variable2)</span></span>
@@ -1364,8 +1394,8 @@ qsec  0.4186840 -0.4336979 -0.7082234  0.09120476 -0.1747159  1.00000000</code><
 </div>
 </div>
 <p>This defaults to Pearson Correlation so should be interpreted with caution in the case of variables that do not meet the proper assumptions.</p>
-</section><section id="correlation-1" class="level3" data-number="23.6.2"><h3 data-number="23.6.2" class="anchored" data-anchor-id="correlation-1">
-<span class="header-section-number">23.6.2</span> Correlation</h3>
+</section><section id="correlation-1" class="level3" data-number="26.6.2"><h3 data-number="26.6.2" class="anchored" data-anchor-id="correlation-1">
+<span class="header-section-number">26.6.2</span> Correlation</h3>
 <p>Correlation can be calculated using: <code><a href="https://rdrr.io/r/stats/cor.html">cor()</a></code>, which calculates the correlation coefficient or <code><a href="https://rdrr.io/r/stats/cor.test.html">cor.test()</a></code>, which tests for the association (or correlation) between paired samples.</p>
 <p>Three different methods are available when using <code><a href="https://rdrr.io/r/stats/cor.html">cor()</a></code>, either <code>pearson</code> (which is default if none is specified), <code>kendall</code>, or <code>spearman</code>. Let’s run <code><a href="https://rdrr.io/r/stats/cor.html">cor()</a></code> on the variables that satisfied our assumptions: <code>mpg</code>, <code>drat</code>, <code>wt</code>, and <code>qsec</code>.</p>
 <div class="cell">
@@ -1452,13 +1482,13 @@ sample estimates:
 </div>
 </div>
 <p>Similar to both outputs above, the output from Spearman’s rank method displays the type of correlation test, the variables being tested, alternative hypothesis, as well as the <code>S</code> test statistic and associated p-value (6.37e-13). The <code>sample estimate</code> also provides us with the Spearman’s correlation coefficient (also known as <strong>rho</strong>): -0.9088824.</p>
-</section></section><section id="brief-interpretation-of-the-output" class="level2" data-number="23.7"><h2 data-number="23.7" class="anchored" data-anchor-id="brief-interpretation-of-the-output">
-<span class="header-section-number">23.7</span> Brief Interpretation of the Output</h2>
-<section id="interpreting-the-covariance" class="level3" data-number="23.7.1"><h3 data-number="23.7.1" class="anchored" data-anchor-id="interpreting-the-covariance">
-<span class="header-section-number">23.7.1</span> Interpreting the Covariance</h3>
+</section></section><section id="brief-interpretation-of-the-output" class="level2" data-number="26.7"><h2 data-number="26.7" class="anchored" data-anchor-id="brief-interpretation-of-the-output">
+<span class="header-section-number">26.7</span> Brief Interpretation of the Output</h2>
+<section id="interpreting-the-covariance" class="level3" data-number="26.7.1"><h3 data-number="26.7.1" class="anchored" data-anchor-id="interpreting-the-covariance">
+<span class="header-section-number">26.7.1</span> Interpreting the Covariance</h3>
 <p>From our Covariance Matrix, the covariance between <code>mpg</code> and <code>drat</code> is 2.195064. A positive covariance indicates that when <code>mpg</code> is high, <code>drat</code> also tends to be high. The covariance between <code>mpg</code> and <code>disp</code> is -633.097208. A negative covariance indicates that when <code>mpg</code> is high, <code>disp</code> tends to be low (vice versa).</p>
-</section><section id="interpreting-correlation-coefficients" class="level3" data-number="23.7.2"><h3 data-number="23.7.2" class="anchored" data-anchor-id="interpreting-correlation-coefficients">
-<span class="header-section-number">23.7.2</span> Interpreting Correlation Coefficients</h3>
+</section><section id="interpreting-correlation-coefficients" class="level3" data-number="26.7.2"><h3 data-number="26.7.2" class="anchored" data-anchor-id="interpreting-correlation-coefficients">
+<span class="header-section-number">26.7.2</span> Interpreting Correlation Coefficients</h3>
 <div class="callout callout-style-simple callout-tip">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -1888,12 +1918,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../lessons/04_anova_random_intercept.html" class="pagination-link" aria-label="Repeated Measures ANOVA">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../lessons_original/04_regression_ols.html" class="pagination-link" aria-label="Ordinary Least Squares Regression">
-        <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

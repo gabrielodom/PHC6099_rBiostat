@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<title>An R Cookbook for Public Health - 30&nbsp; Elastic Net Regression Model</title>
+<title>An R Cookbook for Public Health - 35&nbsp; Elastic Net Regression Model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -151,7 +151,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../06_header_special-topics.html">Special Topics in Statistical Modelling</a></li><li class="breadcrumb-item"><a href="../lessons/06_elastic_net_regression.html"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../06_header_special-topics.html">Special Topics in Statistical Modelling</a></li><li class="breadcrumb-item"><a href="../lessons/06_elastic_net_regression.html"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -250,38 +250,44 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lessons/02_ttest_one_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">One-sample/paired t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lessons/02_wilcoxon_one_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_mcnemar_paired_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_cochrans_q_paired_samp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
   </div>
 </li>
       </ul>
@@ -298,25 +304,31 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_welch_ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Two sample Welchs test or Welchs t-test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
   </div>
 </li>
       </ul>
@@ -333,55 +345,61 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_one_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_welch_two_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Welch’s Anova</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_corr_cov.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_mls.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/04_regression_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -398,13 +416,25 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_logistic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/05_glm_poisson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_negative_binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Generalized Linear Models: Negative Binomial</span></span></a>
   </div>
 </li>
       </ul>
@@ -421,13 +451,13 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_elastic_net_regression.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons/06_survival_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
   </div>
 </li>
       </ul>
@@ -444,7 +474,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -457,44 +487,44 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#libraries-for-the-lessons" id="toc-libraries-for-the-lessons" class="nav-link active" data-scroll-target="#libraries-for-the-lessons"><span class="header-section-number">30.1</span> Libraries for the lessons</a></li>
-  <li><a href="#introduction-to-elastic-net-regression" id="toc-introduction-to-elastic-net-regression" class="nav-link" data-scroll-target="#introduction-to-elastic-net-regression"><span class="header-section-number">30.2</span> Introduction to Elastic Net Regression</a></li>
+<li><a href="#libraries-for-the-lessons" id="toc-libraries-for-the-lessons" class="nav-link active" data-scroll-target="#libraries-for-the-lessons"><span class="header-section-number">35.1</span> Libraries for the lessons</a></li>
+  <li><a href="#introduction-to-elastic-net-regression" id="toc-introduction-to-elastic-net-regression" class="nav-link" data-scroll-target="#introduction-to-elastic-net-regression"><span class="header-section-number">35.2</span> Introduction to Elastic Net Regression</a></li>
   <li>
-<a href="#mathematical-formulation-of-the-model" id="toc-mathematical-formulation-of-the-model" class="nav-link" data-scroll-target="#mathematical-formulation-of-the-model"><span class="header-section-number">30.3</span> Mathematical Formulation of the Model</a>
+<a href="#mathematical-formulation-of-the-model" id="toc-mathematical-formulation-of-the-model" class="nav-link" data-scroll-target="#mathematical-formulation-of-the-model"><span class="header-section-number">35.3</span> Mathematical Formulation of the Model</a>
   <ul class="collapse">
-<li><a href="#ridge-regression" id="toc-ridge-regression" class="nav-link" data-scroll-target="#ridge-regression"><span class="header-section-number">30.3.1</span> Ridge Regression</a></li>
-  <li><a href="#least-absolute-shrinkage-and-selection-operator" id="toc-least-absolute-shrinkage-and-selection-operator" class="nav-link" data-scroll-target="#least-absolute-shrinkage-and-selection-operator"><span class="header-section-number">30.3.2</span> Least Absolute Shrinkage and Selection Operator</a></li>
-  <li><a href="#elastic-net" id="toc-elastic-net" class="nav-link" data-scroll-target="#elastic-net"><span class="header-section-number">30.3.3</span> Elastic Net</a></li>
+<li><a href="#ridge-regression" id="toc-ridge-regression" class="nav-link" data-scroll-target="#ridge-regression"><span class="header-section-number">35.3.1</span> Ridge Regression</a></li>
+  <li><a href="#least-absolute-shrinkage-and-selection-operator" id="toc-least-absolute-shrinkage-and-selection-operator" class="nav-link" data-scroll-target="#least-absolute-shrinkage-and-selection-operator"><span class="header-section-number">35.3.2</span> Least Absolute Shrinkage and Selection Operator</a></li>
+  <li><a href="#elastic-net" id="toc-elastic-net" class="nav-link" data-scroll-target="#elastic-net"><span class="header-section-number">35.3.3</span> Elastic Net</a></li>
   </ul>
 </li>
   <li>
-<a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">30.4</span> Example</a>
+<a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">35.4</span> Example</a>
   <ul class="collapse">
-<li><a href="#exploring-the-data" id="toc-exploring-the-data" class="nav-link" data-scroll-target="#exploring-the-data"><span class="header-section-number">30.4.1</span> Exploring the data</a></li>
+<li><a href="#exploring-the-data" id="toc-exploring-the-data" class="nav-link" data-scroll-target="#exploring-the-data"><span class="header-section-number">35.4.1</span> Exploring the data</a></li>
   </ul>
 </li>
   <li>
-<a href="#fitting-the-regression-mode" id="toc-fitting-the-regression-mode" class="nav-link" data-scroll-target="#fitting-the-regression-mode"><span class="header-section-number">30.5</span> Fitting the regression mode</a>
+<a href="#fitting-the-regression-mode" id="toc-fitting-the-regression-mode" class="nav-link" data-scroll-target="#fitting-the-regression-mode"><span class="header-section-number">35.5</span> Fitting the regression mode</a>
   <ul class="collapse">
-<li><a href="#ridge-regression-model" id="toc-ridge-regression-model" class="nav-link" data-scroll-target="#ridge-regression-model"><span class="header-section-number">30.5.1</span> Ridge regression model</a></li>
-  <li><a href="#lasso-regression" id="toc-lasso-regression" class="nav-link" data-scroll-target="#lasso-regression"><span class="header-section-number">30.5.2</span> LASSO Regression</a></li>
-  <li><a href="#elastic-net-regresssion" id="toc-elastic-net-regresssion" class="nav-link" data-scroll-target="#elastic-net-regresssion"><span class="header-section-number">30.5.3</span> Elastic Net Regresssion</a></li>
+<li><a href="#ridge-regression-model" id="toc-ridge-regression-model" class="nav-link" data-scroll-target="#ridge-regression-model"><span class="header-section-number">35.5.1</span> Ridge regression model</a></li>
+  <li><a href="#lasso-regression" id="toc-lasso-regression" class="nav-link" data-scroll-target="#lasso-regression"><span class="header-section-number">35.5.2</span> LASSO Regression</a></li>
+  <li><a href="#elastic-net-regresssion" id="toc-elastic-net-regresssion" class="nav-link" data-scroll-target="#elastic-net-regresssion"><span class="header-section-number">35.5.3</span> Elastic Net Regresssion</a></li>
   </ul>
 </li>
   <li>
-<a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">30.6</span> Results</a>
+<a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">35.6</span> Results</a>
   <ul class="collapse">
-<li><a href="#coefficients" id="toc-coefficients" class="nav-link" data-scroll-target="#coefficients"><span class="header-section-number">30.6.1</span> Coefficients</a></li>
-  <li><a href="#rmse" id="toc-rmse" class="nav-link" data-scroll-target="#rmse"><span class="header-section-number">30.6.2</span> RMSE</a></li>
+<li><a href="#coefficients" id="toc-coefficients" class="nav-link" data-scroll-target="#coefficients"><span class="header-section-number">35.6.1</span> Coefficients</a></li>
+  <li><a href="#rmse" id="toc-rmse" class="nav-link" data-scroll-target="#rmse"><span class="header-section-number">35.6.2</span> RMSE</a></li>
   </ul>
 </li>
-  <li><a href="#summary-1" id="toc-summary-1" class="nav-link" data-scroll-target="#summary-1"><span class="header-section-number">30.7</span> Summary</a></li>
+  <li><a href="#summary-1" id="toc-summary-1" class="nav-link" data-scroll-target="#summary-1"><span class="header-section-number">35.7</span> Summary</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/06_elastic_net_regression.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../06_header_special-topics.html">Special Topics in Statistical Modelling</a></li><li class="breadcrumb-item"><a href="../lessons/06_elastic_net_regression.html"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../06_header_special-topics.html">Special Topics in Statistical Modelling</a></li><li class="breadcrumb-item"><a href="../lessons/06_elastic_net_regression.html"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span>
+<span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span>
 </h1>
 </div>
 
@@ -525,8 +555,8 @@ window.Quarto = {
   
 
 
-</header><section id="libraries-for-the-lessons" class="level2" data-number="30.1"><h2 data-number="30.1" class="anchored" data-anchor-id="libraries-for-the-lessons">
-<span class="header-section-number">30.1</span> Libraries for the lessons</h2>
+</header><section id="libraries-for-the-lessons" class="level2" data-number="35.1"><h2 data-number="35.1" class="anchored" data-anchor-id="libraries-for-the-lessons">
+<span class="header-section-number">35.1</span> Libraries for the lessons</h2>
 <p>For this chapter, we will be using the following packages</p>
 <ul>
 <li>
@@ -564,26 +594,26 @@ window.Quarto = {
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/">car</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="introduction-to-elastic-net-regression" class="level2" data-number="30.2"><h2 data-number="30.2" class="anchored" data-anchor-id="introduction-to-elastic-net-regression">
-<span class="header-section-number">30.2</span> Introduction to Elastic Net Regression</h2>
+</section><section id="introduction-to-elastic-net-regression" class="level2" data-number="35.2"><h2 data-number="35.2" class="anchored" data-anchor-id="introduction-to-elastic-net-regression">
+<span class="header-section-number">35.2</span> Introduction to Elastic Net Regression</h2>
 <p>In multiple linear regression analysis, it is not uncommon for specific problems to arise during the analysis. One of them is the problem of multicollinearity. Multicollinearity is a condition that appears in multiple regression analysis when one independent variable is correlated with another independent variable. Multicollinearity can create inaccurate estimates of the regression coefficients, inflate the standard errors of the regression coefficients, deflate the partial t-tests for theregression coefficients, give false, nonsignificant, p-values, and degrade the predictability of the model. Multicollinearity is a serious problem, where in cases of high multicollinearity, it results in making inaccurate decisions or increasing the chance of accepting the wrong hypothesis. Therefore it is very important to find the most suitable method to deal with multicollinearity. There are several ways to detect the presence of multicollinearity including looking at the correlation between independent variables and using the Variance Inflation Factor (VIF). As for the method to overcome the problem of multicollinearity, one way is by shrinking the estimated coefficients. The shrinkage method is often referred to as the regularization method. The regularization method can shrink the parameters to near zero relative to the least squares estimate. The regularization methods that are often used are Regression Ridge, Least Absolute Shrinkage and Selection Operator (LASSO), and Elastic-Net. Ridge Regression(RR) is a technique to stabilize the value of the regression coefficient due to multicollinearity problems. By adding a degree of bias to the regression estimate, RR reduces the standard error and obtains a more accurate estimate of the regression coefficient than the OLS. Meanwhile, LASSO and Elastic-Net overcome the problem of multicollinearity by reducing the regression coefficients of the independent variables that have a high correlation close to zero or exactly zero.</p>
-</section><section id="mathematical-formulation-of-the-model" class="level2" data-number="30.3"><h2 data-number="30.3" class="anchored" data-anchor-id="mathematical-formulation-of-the-model">
-<span class="header-section-number">30.3</span> Mathematical Formulation of the Model</h2>
+</section><section id="mathematical-formulation-of-the-model" class="level2" data-number="35.3"><h2 data-number="35.3" class="anchored" data-anchor-id="mathematical-formulation-of-the-model">
+<span class="header-section-number">35.3</span> Mathematical Formulation of the Model</h2>
 <p>One method that can be used to estimate parameters is Ordinary Least Squares (OLS). This method requires the absence of multicollinearity between independent variables. If the independent variable has multicollinearity, the estimate of the regression coefficient may be imprecise. This method is used to estimate <span class="math inline">\(\beta\)</span> by minimizing the sum of squared errors. If the data consists of <code>n</code> observations <span class="math inline">\([{y_i, x_i}]^n_{i=1}\)</span> and each observation <code>i</code> includes a scalar response <span class="math inline">\(y_i\)</span> and a vector of <code>p</code> predictors (regressors) <span class="math inline">\(x_{ij}\)</span> for <code>j = 1, …, m</code>, a multiple linear regression model can be written as <code>n</code> the matrix form the model as <span class="math inline">\(Y = X \beta + \epsilon\)</span> where <span class="math inline">\(Y_{n \times 1}\)</span> is the vector dependent variable, <span class="math inline">\(X_{n \times m}\)</span> represents the explanatory variables, <span class="math inline">\(\beta_{m \times 1}\)</span> is the regression coefficients to be estimated, and <span class="math inline">\(\epsilon_{m \times 1}\)</span> represents the errors or residuals. <span class="math inline">\(\hat\beta_{OLS} = (X^T X)^{-1} X^T Y\)</span> is estimated regression coefficients using OLS by minimizing the squared distances between the observed and the predicted dependent variable. To have unbiased OLS estimation of the model, some assumptions should be satisfied. Those assumptions are that the errors have an expected value of zero, that the independent variables are non-random, that the independent variables are linearly independent (non-multicollinearity), that the disturbance are homoscedastic and not autocorrelated. If the independent variables have multicollinearity the estimates of coefficient regression may be imprecise.</p>
-<section id="ridge-regression" class="level3" data-number="30.3.1"><h3 data-number="30.3.1" class="anchored" data-anchor-id="ridge-regression">
-<span class="header-section-number">30.3.1</span> Ridge Regression</h3>
+<section id="ridge-regression" class="level3" data-number="35.3.1"><h3 data-number="35.3.1" class="anchored" data-anchor-id="ridge-regression">
+<span class="header-section-number">35.3.1</span> Ridge Regression</h3>
 <p>Ridge regression introduced by <span class="citation" data-cites="horel1962">Horel (<a href="#ref-horel1962" role="doc-biblioref">1962</a>)</span> is one method for deal with multicollinearity problems. The ridge regression technique is based on addition the ridge parameter (<span class="math inline">\(\lambda\)</span>) to the diagonal of the <span class="math inline">\(X^T X\)</span> matrix forms a new matrix <span class="math inline">\((X^T X + \lambda I)\)</span>. is called ridge regression because diagonal one in the correlation matrix can be described as ridge <span class="citation" data-cites="hoerl1970ridge">Hoerl and Kennard (<a href="#ref-hoerl1970ridge" role="doc-biblioref">1970</a>)</span>. The ridge regression coefficients estimator is <span class="math display">\[
 \hat\beta_R = (X^T X + \lambda I)^{-1} X^T Y, \lambda \geq 0
 \]</span> when <span class="math inline">\(\lambda = 0\)</span>, the ridge estimator become as the OLS. If <span class="math inline">\(\lambda &gt; 0\)</span> the ridge estimator will be biased against the <span class="math inline">\(\hat\beta_{OLS}\)</span> but tends to be more accurate than the least squares estimator. Ridge regression can also be written in Lagrangian form: <span class="math display">\[
 \hat\beta_{\text{RIDGE}} = \arg \min_{\beta}||y - X\beta||^2_2 + \lambda||\beta||^2_2
 \]</span> where <span class="math inline">\(||y - X\beta||^2_2 = \sum^n_{i=1}(y_i - x^T_i\beta)^2\)</span> is norm loss function (i.e.&nbsp;residual sum of squares), <span class="math inline">\(x^T_i\)</span> is the i-th row of <code>X</code>, <span class="math inline">\(||\beta||^2_2 = \sum^p_{j=1}\beta^2_j\)</span> is the penalty on <span class="math inline">\(\beta\)</span>, and <span class="math inline">\(\lambda \geq 0\)</span> is the tuning parameter which regulates the strength of the penalty by determining the relative importance of the data-dependet empirical error and penalty term. Ridge regression has the ability to solve problems multicollinearity by limiting the estimated coefficients, hence, it reduces the estimator’s variance but introduces some bias.</p>
-</section><section id="least-absolute-shrinkage-and-selection-operator" class="level3" data-number="30.3.2"><h3 data-number="30.3.2" class="anchored" data-anchor-id="least-absolute-shrinkage-and-selection-operator">
-<span class="header-section-number">30.3.2</span> Least Absolute Shrinkage and Selection Operator</h3>
+</section><section id="least-absolute-shrinkage-and-selection-operator" class="level3" data-number="35.3.2"><h3 data-number="35.3.2" class="anchored" data-anchor-id="least-absolute-shrinkage-and-selection-operator">
+<span class="header-section-number">35.3.2</span> Least Absolute Shrinkage and Selection Operator</h3>
 <p>Least Absolute Shrinkage and Selection Operator (LASSO) introduced by <span class="citation" data-cites="tibshirani1996">Tibshirani (<a href="#ref-tibshirani1996" role="doc-biblioref">1996</a>)</span> is a method that aims to reduce the regression coefficients of independent variables that have a high correlation with errors to exactly zero or close to zero. LASSO regression can also be written in Lagrangian form: <span class="math display">\[
 \hat\beta_{\text{LASSO}} = \arg \min_{\beta}||y - X\beta||^2_2 + \lambda||\beta||_1
 \]</span> where <span class="math inline">\(||\beta||_1 = \sum^p_{j=1}|\beta_j|\)</span> is the penalty on <span class="math inline">\(\beta\)</span>. with the condition <span class="math inline">\(||\beta||_1 \leq \lambda\)</span>, where <span class="math inline">\(\lambda\)</span> is a tuning parameter that controls the shrinkage of the LASSO coefficient with <span class="math inline">\(\lambda \geq 0\)</span>. If <span class="math inline">\(\lambda &lt; \lambda_0\)</span> with <span class="math inline">\(\lambda_0 = ||\hat\beta_j||_1\)</span> it will cause the shrinkage coefficient to approach zero or exactly zero, so LASSO helps as a variable selection. Like ridge, the absolute value penalty of the LASSO coefficient introduces shrinkage towards zero. However, on ridge regression, some of the coefficients are not shrinks to exactly zero.</p>
-</section><section id="elastic-net" class="level3" data-number="30.3.3"><h3 data-number="30.3.3" class="anchored" data-anchor-id="elastic-net">
-<span class="header-section-number">30.3.3</span> Elastic Net</h3>
+</section><section id="elastic-net" class="level3" data-number="35.3.3"><h3 data-number="35.3.3" class="anchored" data-anchor-id="elastic-net">
+<span class="header-section-number">35.3.3</span> Elastic Net</h3>
 <p>According to <span class="citation" data-cites="zou2005">Zou and Hastie (<a href="#ref-zou2005" role="doc-biblioref">2005</a>)</span>, the Elastic-Net method can shrink the regression coefficient exactly to zero, besides that this method can also perform variable selection simultaneously with Elastic-Net penalties which are written as follows: <span class="math display">\[
 \sum^p_{j=1}[\alpha |\beta_j| + (1 - \alpha)\beta^2_j]
 \]</span> with <span class="math inline">\(\alpha = \frac{\lambda_1}{\lambda_1 + \lambda_2},0 \leq \alpha \leq 1\)</span>. The coefficient estimator on Elastic-Net can be written as follows: <span class="math display">\[
@@ -591,8 +621,8 @@ window.Quarto = {
 \]</span> Elastic-Net can be used to solve problems from LASSO. Where the LASSO Regression has disadvantages include; when <code>p &gt; n</code> then LASSO only chooses n variables included in the model, if there is a set of variables with high correlation, then LASSO only tends to choose one variable from the group and doesn’t care which one is selected, and when <code>p &lt; n</code>, LASSO performance is dominated by Ridge Regression. Multicollinearity is the existence of a linear relationship between independent variables, where multicollinearity can occur in either some or all of the independent variables in the multiple linear regression model. One way to detect multicollinearity is to use the Variation Inflation Factor (VIF). VIF value can be calculated by the following formula: <span class="math display">\[
 \text{VIF}_j = \frac{1}{1 - R^2_j}
 \]</span> if the VIF value &gt; 10, it can be concluded significantly that there is multicollinearity between the independent variables and one way to overcome multicollinearity is using the Ridge Regression, LASSO and Elastic-Net.</p>
-</section></section><section id="example" class="level2" data-number="30.4"><h2 data-number="30.4" class="anchored" data-anchor-id="example">
-<span class="header-section-number">30.4</span> Example</h2>
+</section></section><section id="example" class="level2" data-number="35.4"><h2 data-number="35.4" class="anchored" data-anchor-id="example">
+<span class="header-section-number">35.4</span> Example</h2>
 <p>To demostrate the Elastic net regression, we will use <code>coronary.dta</code> (<a href="https://github.com/drkamarul/multivar_data_analysis/tree/main/data" class="uri">https://github.com/drkamarul/multivar_data_analysis/tree/main/data</a>) dataset in STATA format. The dataset contains the total cholesterol level, their individual characteristics and intervention groups in a hypothetical clinical trial. The dataset contains 200 observations for nine variables:</p>
 <ul>
 <li>
@@ -614,8 +644,8 @@ window.Quarto = {
 <li>
 <code>gender</code>: Gender of the subjects (categorical) {woman, man}.</li>
 </ul>
-<section id="exploring-the-data" class="level3" data-number="30.4.1"><h3 data-number="30.4.1" class="anchored" data-anchor-id="exploring-the-data">
-<span class="header-section-number">30.4.1</span> Exploring the data</h3>
+<section id="exploring-the-data" class="level3" data-number="35.4.1"><h3 data-number="35.4.1" class="anchored" data-anchor-id="exploring-the-data">
+<span class="header-section-number">35.4.1</span> Exploring the data</h3>
 <p>The dataset is loaded as follows,</p>
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">coronary</span> <span class="op">&lt;-</span> <span class="fu">foreign</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/foreign/man/read.dta.html">read.dta</a></span><span class="op">(</span><span class="st">"../data/06_coronary.dta"</span><span class="op">)</span></span>
@@ -634,8 +664,8 @@ window.Quarto = {
 10 134 no cad 104  70 6.4350  48 41.00000 chinese    man</code></pre>
 </div>
 </div>
-<section id="structure-of-the-dataset" class="level4" data-number="30.4.1.1"><h4 data-number="30.4.1.1" class="anchored" data-anchor-id="structure-of-the-dataset">
-<span class="header-section-number">30.4.1.1</span> Structure of the dataset</h4>
+<section id="structure-of-the-dataset" class="level4" data-number="35.4.1.1"><h4 data-number="35.4.1.1" class="anchored" data-anchor-id="structure-of-the-dataset">
+<span class="header-section-number">35.4.1.1</span> Structure of the dataset</h4>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">coronary</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -665,8 +695,8 @@ window.Quarto = {
   .. ..- attr(*, "names")= chr [1:2] "woman" "man"</code></pre>
 </div>
 </div>
-</section><section id="summary" class="level4" data-number="30.4.1.2"><h4 data-number="30.4.1.2" class="anchored" data-anchor-id="summary">
-<span class="header-section-number">30.4.1.2</span> Summary</h4>
+</section><section id="summary" class="level4" data-number="35.4.1.2"><h4 data-number="35.4.1.2" class="anchored" data-anchor-id="summary">
+<span class="header-section-number">35.4.1.2</span> Summary</h4>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim</a></span><span class="op">(</span><span class="va">coronary</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -867,34 +897,34 @@ window.Quarto = {
 </table>
 </div>
 </div>
-</section><section id="descriptives" class="level4" data-number="30.4.1.3"><h4 data-number="30.4.1.3" class="anchored" data-anchor-id="descriptives">
-<span class="header-section-number">30.4.1.3</span> Descriptives</h4>
+</section><section id="descriptives" class="level4" data-number="35.4.1.3"><h4 data-number="35.4.1.3" class="anchored" data-anchor-id="descriptives">
+<span class="header-section-number">35.4.1.3</span> Descriptives</h4>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">coronary</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="tbl-table1" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-table1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;30.1: Coronary Data
+Table&nbsp;35.1: Coronary Data
 </figcaption><div aria-describedby="tbl-table1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <div>
-<div id="gcerkqvqwa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gcerkqvqwa table {
+<div id="oovwxiwufq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#oovwxiwufq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gcerkqvqwa thead, #gcerkqvqwa tbody, #gcerkqvqwa tfoot, #gcerkqvqwa tr, #gcerkqvqwa td, #gcerkqvqwa th {
+#oovwxiwufq thead, #oovwxiwufq tbody, #oovwxiwufq tfoot, #oovwxiwufq tr, #oovwxiwufq td, #oovwxiwufq th {
   border-style: none;
 }
 
-#gcerkqvqwa p {
+#oovwxiwufq p {
   margin: 0;
   padding: 0;
 }
 
-#gcerkqvqwa .gt_table {
+#oovwxiwufq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -920,12 +950,12 @@ Table&nbsp;30.1: Coronary Data
   border-left-color: #D3D3D3;
 }
 
-#gcerkqvqwa .gt_caption {
+#oovwxiwufq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gcerkqvqwa .gt_title {
+#oovwxiwufq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -937,7 +967,7 @@ Table&nbsp;30.1: Coronary Data
   border-bottom-width: 0;
 }
 
-#gcerkqvqwa .gt_subtitle {
+#oovwxiwufq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -949,7 +979,7 @@ Table&nbsp;30.1: Coronary Data
   border-top-width: 0;
 }
 
-#gcerkqvqwa .gt_heading {
+#oovwxiwufq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -961,13 +991,13 @@ Table&nbsp;30.1: Coronary Data
   border-right-color: #D3D3D3;
 }
 
-#gcerkqvqwa .gt_bottom_border {
+#oovwxiwufq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gcerkqvqwa .gt_col_headings {
+#oovwxiwufq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -982,7 +1012,7 @@ Table&nbsp;30.1: Coronary Data
   border-right-color: #D3D3D3;
 }
 
-#gcerkqvqwa .gt_col_heading {
+#oovwxiwufq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1002,7 +1032,7 @@ Table&nbsp;30.1: Coronary Data
   overflow-x: hidden;
 }
 
-#gcerkqvqwa .gt_column_spanner_outer {
+#oovwxiwufq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1014,15 +1044,15 @@ Table&nbsp;30.1: Coronary Data
   padding-right: 4px;
 }
 
-#gcerkqvqwa .gt_column_spanner_outer:first-child {
+#oovwxiwufq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gcerkqvqwa .gt_column_spanner_outer:last-child {
+#oovwxiwufq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gcerkqvqwa .gt_column_spanner {
+#oovwxiwufq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1034,11 +1064,11 @@ Table&nbsp;30.1: Coronary Data
   width: 100%;
 }
 
-#gcerkqvqwa .gt_spanner_row {
+#oovwxiwufq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gcerkqvqwa .gt_group_heading {
+#oovwxiwufq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1064,7 +1094,7 @@ Table&nbsp;30.1: Coronary Data
   text-align: left;
 }
 
-#gcerkqvqwa .gt_empty_group_heading {
+#oovwxiwufq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1079,15 +1109,15 @@ Table&nbsp;30.1: Coronary Data
   vertical-align: middle;
 }
 
-#gcerkqvqwa .gt_from_md > :first-child {
+#oovwxiwufq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gcerkqvqwa .gt_from_md > :last-child {
+#oovwxiwufq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gcerkqvqwa .gt_row {
+#oovwxiwufq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1106,7 +1136,7 @@ Table&nbsp;30.1: Coronary Data
   overflow-x: hidden;
 }
 
-#gcerkqvqwa .gt_stub {
+#oovwxiwufq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1119,7 +1149,7 @@ Table&nbsp;30.1: Coronary Data
   padding-right: 5px;
 }
 
-#gcerkqvqwa .gt_stub_row_group {
+#oovwxiwufq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1133,15 +1163,15 @@ Table&nbsp;30.1: Coronary Data
   vertical-align: top;
 }
 
-#gcerkqvqwa .gt_row_group_first td {
+#oovwxiwufq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gcerkqvqwa .gt_row_group_first th {
+#oovwxiwufq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gcerkqvqwa .gt_summary_row {
+#oovwxiwufq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1151,16 +1181,16 @@ Table&nbsp;30.1: Coronary Data
   padding-right: 5px;
 }
 
-#gcerkqvqwa .gt_first_summary_row {
+#oovwxiwufq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gcerkqvqwa .gt_first_summary_row.thick {
+#oovwxiwufq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gcerkqvqwa .gt_last_summary_row {
+#oovwxiwufq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1170,7 +1200,7 @@ Table&nbsp;30.1: Coronary Data
   border-bottom-color: #D3D3D3;
 }
 
-#gcerkqvqwa .gt_grand_summary_row {
+#oovwxiwufq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1180,7 +1210,7 @@ Table&nbsp;30.1: Coronary Data
   padding-right: 5px;
 }
 
-#gcerkqvqwa .gt_first_grand_summary_row {
+#oovwxiwufq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1190,7 +1220,7 @@ Table&nbsp;30.1: Coronary Data
   border-top-color: #D3D3D3;
 }
 
-#gcerkqvqwa .gt_last_grand_summary_row_top {
+#oovwxiwufq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1200,11 +1230,11 @@ Table&nbsp;30.1: Coronary Data
   border-bottom-color: #D3D3D3;
 }
 
-#gcerkqvqwa .gt_striped {
+#oovwxiwufq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gcerkqvqwa .gt_table_body {
+#oovwxiwufq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1213,7 +1243,7 @@ Table&nbsp;30.1: Coronary Data
   border-bottom-color: #D3D3D3;
 }
 
-#gcerkqvqwa .gt_footnotes {
+#oovwxiwufq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1227,7 +1257,7 @@ Table&nbsp;30.1: Coronary Data
   border-right-color: #D3D3D3;
 }
 
-#gcerkqvqwa .gt_footnote {
+#oovwxiwufq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1236,7 +1266,7 @@ Table&nbsp;30.1: Coronary Data
   padding-right: 5px;
 }
 
-#gcerkqvqwa .gt_sourcenotes {
+#oovwxiwufq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1250,7 +1280,7 @@ Table&nbsp;30.1: Coronary Data
   border-right-color: #D3D3D3;
 }
 
-#gcerkqvqwa .gt_sourcenote {
+#oovwxiwufq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1258,63 +1288,63 @@ Table&nbsp;30.1: Coronary Data
   padding-right: 5px;
 }
 
-#gcerkqvqwa .gt_left {
+#oovwxiwufq .gt_left {
   text-align: left;
 }
 
-#gcerkqvqwa .gt_center {
+#oovwxiwufq .gt_center {
   text-align: center;
 }
 
-#gcerkqvqwa .gt_right {
+#oovwxiwufq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gcerkqvqwa .gt_font_normal {
+#oovwxiwufq .gt_font_normal {
   font-weight: normal;
 }
 
-#gcerkqvqwa .gt_font_bold {
+#oovwxiwufq .gt_font_bold {
   font-weight: bold;
 }
 
-#gcerkqvqwa .gt_font_italic {
+#oovwxiwufq .gt_font_italic {
   font-style: italic;
 }
 
-#gcerkqvqwa .gt_super {
+#oovwxiwufq .gt_super {
   font-size: 65%;
 }
 
-#gcerkqvqwa .gt_footnote_marks {
+#oovwxiwufq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gcerkqvqwa .gt_asterisk {
+#oovwxiwufq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gcerkqvqwa .gt_indent_1 {
+#oovwxiwufq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gcerkqvqwa .gt_indent_2 {
+#oovwxiwufq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gcerkqvqwa .gt_indent_3 {
+#oovwxiwufq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gcerkqvqwa .gt_indent_4 {
+#oovwxiwufq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gcerkqvqwa .gt_indent_5 {
+#oovwxiwufq .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1407,8 +1437,8 @@ Table&nbsp;30.1: Coronary Data
 </figure>
 </div>
 </div>
-</section><section id="pairs" class="level4" data-number="30.4.1.4"><h4 data-number="30.4.1.4" class="anchored" data-anchor-id="pairs">
-<span class="header-section-number">30.4.1.4</span> Pairs</h4>
+</section><section id="pairs" class="level4" data-number="35.4.1.4"><h4 data-number="35.4.1.4" class="anchored" data-anchor-id="pairs">
+<span class="header-section-number">35.4.1.4</span> Pairs</h4>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">coronary</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -1420,8 +1450,8 @@ Table&nbsp;30.1: Coronary Data
 </div>
 </div>
 </div>
-</section><section id="variance-inflation-factor-vif" class="level4" data-number="30.4.1.5"><h4 data-number="30.4.1.5" class="anchored" data-anchor-id="variance-inflation-factor-vif">
-<span class="header-section-number">30.4.1.5</span> Variance Inflation Factor (VIF)</h4>
+</section><section id="variance-inflation-factor-vif" class="level4" data-number="35.4.1.5"><h4 data-number="35.4.1.5" class="anchored" data-anchor-id="variance-inflation-factor-vif">
+<span class="header-section-number">35.4.1.5</span> Variance Inflation Factor (VIF)</h4>
 <p>The most common way to detect multicollinearity is by using the variance inflation factor (VIF), which measures the correlation and strength of correlation between the predictor variables in a regression model.</p>
 <p>The value for VIF starts at 1 and has no upper limit. A general rule of thumb for interpreting VIFs is as follows:</p>
 <ul>
@@ -1437,11 +1467,11 @@ Table&nbsp;30.1: Coronary Data
 3.395821 3.222173 1.215033 1.036817 </code></pre>
 </div>
 </div>
-</section></section></section><section id="fitting-the-regression-mode" class="level2" data-number="30.5"><h2 data-number="30.5" class="anchored" data-anchor-id="fitting-the-regression-mode">
-<span class="header-section-number">30.5</span> Fitting the regression mode</h2>
+</section></section></section><section id="fitting-the-regression-mode" class="level2" data-number="35.5"><h2 data-number="35.5" class="anchored" data-anchor-id="fitting-the-regression-mode">
+<span class="header-section-number">35.5</span> Fitting the regression mode</h2>
 <p>We are interested in knowing the relationship between blood pressure (SBP and DBP), age, and BMI as the predictors and the cholesterol level (outcome).</p>
-<section id="ridge-regression-model" class="level3" data-number="30.5.1"><h3 data-number="30.5.1" class="anchored" data-anchor-id="ridge-regression-model">
-<span class="header-section-number">30.5.1</span> Ridge regression model</h3>
+<section id="ridge-regression-model" class="level3" data-number="35.5.1"><h3 data-number="35.5.1" class="anchored" data-anchor-id="ridge-regression-model">
+<span class="header-section-number">35.5.1</span> Ridge regression model</h3>
 <p>In R, we can use ridge regression using several packages, with <code>glmnet</code> being one of the most popular.</p>
 <div class="cell">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># X and y datasets</span></span>
@@ -1474,11 +1504,11 @@ Table&nbsp;30.1: Coronary Data
 <div class="cell-output cell-output-stdout">
 <pre><code>5 x 1 sparse Matrix of class "dgCMatrix"
                       s0
-(Intercept)  4.843393672
-sbp          0.015787232
-dbp          0.010245924
-age         -0.001719317
-bmi         -0.042688888</code></pre>
+(Intercept)  4.791855198
+sbp          0.020080496
+dbp          0.008783703
+age         -0.008358056
+bmi         -0.045144636</code></pre>
 </div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Predict values using the fitted model</span></span>
 <span><span class="va">ridge_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">ridge_model_best</span>, newx <span class="op">=</span> <span class="va">X_test</span><span class="op">)</span></span>
@@ -1487,17 +1517,17 @@ bmi         -0.042688888</code></pre>
 <span><span class="va">ridge_rmse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">ridge_pred</span> <span class="op">-</span> <span class="va">y_test</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ridge_rmse</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.002847</code></pre>
+<pre><code>[1] 0.9994869</code></pre>
 </div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Manually predict values using the fitted model and RMSE</span></span>
 <span><span class="va">ridge_pred_manual</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">X_test</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">ridge_model_best</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">y_test</span> <span class="op">-</span> <span class="va">ridge_pred_manual</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.002847</code></pre>
+<pre><code>[1] 0.9994869</code></pre>
 </div>
 </div>
-</section><section id="lasso-regression" class="level3" data-number="30.5.2"><h3 data-number="30.5.2" class="anchored" data-anchor-id="lasso-regression">
-<span class="header-section-number">30.5.2</span> LASSO Regression</h3>
+</section><section id="lasso-regression" class="level3" data-number="35.5.2"><h3 data-number="35.5.2" class="anchored" data-anchor-id="lasso-regression">
+<span class="header-section-number">35.5.2</span> LASSO Regression</h3>
 <div class="cell">
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Fit the lasso regression model</span></span>
 <span><span class="va">lasso_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://glmnet.stanford.edu/reference/glmnet.html">glmnet</a></span><span class="op">(</span><span class="va">X_train</span>, <span class="va">y_train</span>, alpha <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="co"># alpha = 1 for lasso regression</span></span>
@@ -1537,8 +1567,8 @@ bmi         -0.039151781</code></pre>
 <pre><code>[1] 1.001118</code></pre>
 </div>
 </div>
-</section><section id="elastic-net-regresssion" class="level3" data-number="30.5.3"><h3 data-number="30.5.3" class="anchored" data-anchor-id="elastic-net-regresssion">
-<span class="header-section-number">30.5.3</span> Elastic Net Regresssion</h3>
+</section><section id="elastic-net-regresssion" class="level3" data-number="35.5.3"><h3 data-number="35.5.3" class="anchored" data-anchor-id="elastic-net-regresssion">
+<span class="header-section-number">35.5.3</span> Elastic Net Regresssion</h3>
 <div class="cell">
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Fit the elastic net regression model</span></span>
 <span><span class="va">elastic_net_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://glmnet.stanford.edu/reference/glmnet.html">glmnet</a></span><span class="op">(</span><span class="va">X_train</span>, <span class="va">y_train</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="co"># alpha = 0.5 for elastic net</span></span>
@@ -1575,10 +1605,10 @@ bmi         -0.039544432</code></pre>
 <pre><code>[1] 1.001303</code></pre>
 </div>
 </div>
-</section></section><section id="results" class="level2" data-number="30.6"><h2 data-number="30.6" class="anchored" data-anchor-id="results">
-<span class="header-section-number">30.6</span> Results</h2>
-<section id="coefficients" class="level3" data-number="30.6.1"><h3 data-number="30.6.1" class="anchored" data-anchor-id="coefficients">
-<span class="header-section-number">30.6.1</span> Coefficients</h3>
+</section></section><section id="results" class="level2" data-number="35.6"><h2 data-number="35.6" class="anchored" data-anchor-id="results">
+<span class="header-section-number">35.6</span> Results</h2>
+<section id="coefficients" class="level3" data-number="35.6.1"><h3 data-number="35.6.1" class="anchored" data-anchor-id="coefficients">
+<span class="header-section-number">35.6.1</span> Coefficients</h3>
 <div class="cell">
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">c1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">ridge_model_best</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">c2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">lasso_model_best</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -1589,28 +1619,28 @@ bmi         -0.039544432</code></pre>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">coef</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   Ridge        LASSO  Elastic Net
-(Intercept)  4.843393672  4.541831089  4.575575172
-sbp          0.015787232  0.019700866  0.018992980
-dbp          0.010245924  0.005918034  0.006653255
-age         -0.001719317 -0.001589662 -0.001276755
-bmi         -0.042688888 -0.039151781 -0.039544432</code></pre>
+(Intercept)  4.791855198  4.541831089  4.575575172
+sbp          0.020080496  0.019700866  0.018992980
+dbp          0.008783703  0.005918034  0.006653255
+age         -0.008358056 -0.001589662 -0.001276755
+bmi         -0.045144636 -0.039151781 -0.039544432</code></pre>
 </div>
 </div>
-</section><section id="rmse" class="level3" data-number="30.6.2"><h3 data-number="30.6.2" class="anchored" data-anchor-id="rmse">
-<span class="header-section-number">30.6.2</span> RMSE</h3>
+</section><section id="rmse" class="level3" data-number="35.6.2"><h3 data-number="35.6.2" class="anchored" data-anchor-id="rmse">
+<span class="header-section-number">35.6.2</span> RMSE</h3>
 <div class="cell">
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rmse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="st">"RMSE"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ridge_rmse</span>, <span class="va">lasso_rmse</span>, <span class="va">elastic_rmse</span><span class="op">)</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">rmse</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Ridge"</span>, <span class="st">"LASSO"</span>, <span class="st">"Elastic Net"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">rmse</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                RMSE
-Ridge       1.002847
-LASSO       1.001118
-Elastic Net 1.001303</code></pre>
+<pre><code>                 RMSE
+Ridge       0.9994869
+LASSO       1.0011182
+Elastic Net 1.0013034</code></pre>
 </div>
 </div>
-</section></section><section id="summary-1" class="level2" data-number="30.7"><h2 data-number="30.7" class="anchored" data-anchor-id="summary-1">
-<span class="header-section-number">30.7</span> Summary</h2>
+</section></section><section id="summary-1" class="level2" data-number="35.7"><h2 data-number="35.7" class="anchored" data-anchor-id="summary-1">
+<span class="header-section-number">35.7</span> Summary</h2>
 <p>In this lecture, we went through the basic multicollinearity problem of liner regression model and trying yo solve it. We discussed different methods about this. We can solve the multicollinearity problem using ridge, LASSO and Elastic-net. We can also compare between them using both simulated data and real data based on different criteria. And, based on those we can say that which one can perform better than others.</p>
 
 
@@ -2043,7 +2073,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="../lessons/06_survival_analysis.html" class="pagination-link" aria-label="Survival Analysis in R">
-        <span class="nav-page-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

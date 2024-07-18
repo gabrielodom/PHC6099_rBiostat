@@ -39,15 +39,10 @@ The `public.ctn0094data` package provides harmonized and normalized data sets fr
 In this lesson, I used the `demographics`, and `fagerstrom` data sets from the `{public.ctn0094data}` package to demonstrate the `gtsummary` function. The `demographics` part contains the demographic variables such as age, sex, race, marital status etc. The `fagerstrom` part contains data on smoking habit (smoker/non-smoker, Fagerstrom Test for Nicotine Dependence Score (ranging from 0 to 10) ~ FTND, Number of cigarettes smoked per day.). The FTND is a questionnaire that assesses the physical dependence of adults on nicotine. The test uses yes/no questions scored from 0 to 1 and multiple-choice questions scored from 0 to 3, and the total score ranges from 0 to 10. The higher the score, the more intense the patient's nicotine dependence is. The score categories are: 8+: High dependence, 7–5: Moderate dependence, 4–3: Low to moderate dependence and 0–2: Low dependence. 
 ```{r}
 #| label: data-searching
-#| message: false
+#| eval: false
 
 # Searching suitable data sets: You can skip 
 data(package = "public.ctn0094data")
-#data(demographics, package = "public.ctn0094data")
-#names(demographics)
-#data(fagerstrom, package = "public.ctn0094data")
-#names(fagerstrom)
-#table(fagerstrom$ftnd)
 ```
 
 

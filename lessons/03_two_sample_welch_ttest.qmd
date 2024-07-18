@@ -1,0 +1,536 @@
+---
+title: "Two sample Welchs test or Welchs t-test"
+author: 
+  - name: "Guillermo Andres Rodriguez Rondón"
+    affiliations: 
+      - "Florida International University"
+      - "Robert Stempel School of Public Health"
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+bibliography: bib/03_welch_citations.bib
+bibliographystyle: apa
+link-bibliography: true
+link-citations: true
+csl: bib/apa_6ed.csl
+---
+
+
+
+## Packages for this lesson
+
+
+We will need to load tidyverse (which contains `ggplot2` and `dplyr`) and e1071. We are going to use the `mtcars` dataset included in r studio.
+
+```{r}
+#| label: load-packages
+#| message: false
+#| warning: false
+#| echo: false
+# options(repos = c(CRAN = "https://cran.rstudio.com/"))
+
+# Suppress messages and warnings
+suppressMessages(suppressWarnings({
+  # capture.output(install.packages("e1071", quiet = TRUE))
+  library(tidyverse)
+  library(e1071)
+}))
+```
+
+
+## Introduction
+
+
+Welch's t-test, also known as Welch's unequal variances t-test, is a statistical test used to determine if there is a significant difference between the means of two independent samples. It is an adaptation of Student's t-test and is more reliable under the next conditions:
+
+### When to use Welch´s t-test
+
+Welch's t-test is particularly useful in the following scenarios:
+
+1. **The two samples have unequal variances (heteroscedasticity)**.
+2. **The two samples have unequal sample sizes**.
+
+In contrast, Student's t-test assumes that the two samples have equal variances (homoscedasticity). If this assumption is violated, Welch's t-test provides a more accurate p-value [@moore2016introduction].
+
+
+## Assumptions 
+
+
+1. **Independence**: the observations in each sample should be independent of each other.
+2. **Normality**: the data in each group should be approximately normally distributed. Welch's t-test is fairly robust to deviations from normality, especially with larger sample sizes >30.
+3. **Unequal Variances**: Unlike Student's t-test, Welch's t-test does not assume equal variances between the two groups [@newbold2012statistics].
+
+The formula for the two-sample Welch's t-test is given by [@agresti2017statistics]:
+
+$$
+t = \frac{\bar{X}_1 - \bar{X}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
+$$
+
+Where:
+\begin{align*}
+\bar{X}_1 & \text{ is the sample mean of the first group (4-cylinder cars)} \\
+\bar{X}_2 & \text{ is the sample mean of the second group (6-cylinder cars)} \\
+s_1^2 & \text{ is the sample variance of the first group} \\
+s_2^2 & \text{ is the sample variance of the second group} \\
+n_1 & \text{ is the sample size of the first group} \\
+n_2 & \text{ is the sample size of the second group}
+\end{align*}
+
+The degrees of freedom (DoF) for the Welch's t-test are calculated using the Satterthwaite approximation [@khanacademy_statistics]:
+
+$$
+\text{DoF} \approx \frac{\left( \frac{s_1^2}{n_1} + \frac{s_2^2}{n_2} \right)^2}{\frac{\left( \frac{s_1^2}{n_1} \right)^2}{n_1 - 1} + \frac{\left( \frac{s_2^2}{n_2} \right)^2}{n_2 - 1}}
+$$
+
+
+## Welch's t-Test vs. Student's t-Test
+
+
+- **Equal Variances (Student's t-Test)**: Use when you have equal variances and possibly equal sample sizes.
+- **Unequal Variances (Welch's t-Test)**: Use when the variances and/or sample sizes are unequal.
+
+
+## The reliability of the Welch's t-test
+
+
+Like other statistical tests, can be influenced by the sample size. However, the Welch's t-test is designed to be more robust than the traditional Student's t-test, particularly when the sample sizes are unequal and the variances of the two groups are different. Here are some general guidelines to consider [@wikipedia_welchs_t_test]:
+
+### Minimum Sample Sizes
+
+Small Sample Sizes: The Welch's t-test can be used with small sample sizes, but very small sample sizes (e.g., fewer than 5 per group) can limit the power of the test and make it more difficult to detect significant differences.
+
+Recommended Minimum: a common recommendation is to have at least 10-15 observations per group to ensure a reasonable level of reliability and power. This isn't a hard rule, but a guideline to aim for [@glen2022welchs].
+
+### Power and Effect Size
+
+Power Analysis: To determine the appropriate sample size for your specific context, you can perform a power analysis. This involves specifying the expected effect size, the desired power (commonly 0.80), and the significance level (commonly 0.05). The power analysis will help you estimate the necessary sample size to detect a significant difference if one exists [@Ahad2014-vw], [@Zhou2023-yv].
+
+### Factors Affecting Sample Size Requirements
+
+Effect Size: larger effect sizes (i.e., larger differences between group means) can be detected with smaller sample sizes. Smaller effect sizes require larger sample sizes to be detected, in others worlds if you want to detect an smaller difference or effect you need more power, and the way to increase it is enlarging the sample, but this is not always feasible in real life due to logistical and cost considerations [@Haas2012-sv].
+
+Variance: if the variances of the two groups are very different, larger sample sizes may be needed to ensure the robustness of the test.
+
+Significance Level and Power: lowering the significance level (e.g., to 0.01) or increasing the desired power (e.g., to 0.90) typically requires larger sample sizes [@Haas2012-sv].
+
+Non normality: it is moderately robust to non-normality, especially as sample sizes increase. For larger samples, the Central Limit Theorem (CLT) helps ensure that the sampling distribution of the test statistic approaches normality, making the test more reliable. For small sample sizes, the reliability of Welch's t-test can be compromised if the data are significantly non-normal. In such cases, the test may not perform well, and the results might be less trustworthy, in these cases consider using non-parametric alternatives like the Mann-Whitney U test, which does not assume normality. Also consider data transformation and Bootstrap methods, if you want to keep with parametric methods, considering that non-parametric methods have less power.
+
+If sample sizes are reasonably large (generally n > 30 per group), Welch's t-test tends to be reliable even when the data are not perfectly normal [@laerd_welchs_t_test]. 
+
+### Let´s remember
+
+**The significance level**, denoted as α, is a threshold in hypothesis testing that determines whether to reject the null hypothesis. **It is the probability of making a Type I error**, which occurs when the null hypothesis is true but incorrectly rejected. Common values for α are 0.05, 0.01, and 0.10 [@Labovitz2017-yp].
+
+For α = 0.05, there is a 5% chance of rejecting the null hypothesis when it is true. If the p-value from a statistical test is less than or equal to α, we reject the null hypothesis; if it is greater, we do not reject the null hypothesis.
+
+**The Central Limit Theorem (CLT)** states that the distribution of the sample mean will approximate a normal distribution as the sample size becomes large, regardless of the population's distribution, provided the samples are independent and identically distributed [@Kwak2017-vr].
+
+In the context of Welch's test, the CLT implies that as the sample size increases, the distribution of the test statistic approaches normality, reducing the impact of non-normality in the original data. Thus, Welch's test becomes more reliable with larger samples because the sampling distribution of the mean difference tends to be normal.
+
+**If the samples are not identically distributed, meaning they come from populations with different distributions, the assumptions underlying the Central Limit Theorem (CLT) and many statistical tests, including Welch's t-test, may be violated. This can have several consequences**:
+
+Reduced Accuracy: The approximation to the normal distribution for the sample mean may not hold, leading to inaccurate p-values and confidence intervals.
+
+Increased Type I and Type II Errors: There may be an increased risk of Type I errors (incorrectly rejecting a true null hypothesis) and Type II errors (failing to reject a false null hypothesis).
+
+Biased Results: The test results may be biased, reflecting the differences in the underlying distributions rather than the true differences between the population means [@ruxton2006unequal].
+
+### Suspecting Different Variances:
+
+You might suspect different variances when comparing two groups (samples) and their spread appears noticeably different. For example, if one group’s data points are more dispersed than the other, it could indicate unequal variances.The welch´s test dont need equal variances to perform well but you can asses variances with graphical methods and using the Levene´s test.
+
+### Assessing normality:
+
+**Shapiro-Wilk Test**:
+Purpose: Determines if a sample comes from a normally distributed population.
+Suitability for Small Samples: Good power even with small sample sizes (< 50).
+How It Works: Compares the sample data to a normal distribution.
+Interpretation: If p-value < chosen alpha level, data is not normally distributed.
+Advantages: Sensitive to deviations in both location and shape.
+Limitations: May detect trivial deviations due to large sample size1 [@Razali2011-aq].
+
+**Kolmogorov-Smirnov (K-S) Test**:
+Purpose: Compares two samples or tests if a sample matches a reference distribution.
+Suitability for Small Samples: Useful for small to large sample sizes.
+How It Works: Quantifies the distance between empirical and reference cumulative distribution functions.
+Interpretation: Compares observed data to expected distribution.
+Advantages: Sensitive to differences in both location and shape.
+Limitations: May not be better than Shapiro-Wilk for small samples [@Razali2011-aq].
+
+**Anderson-Darling Test**:
+Purpose: Tests if a sample comes from a specific distribution (e.g., normal).
+Suitability for Small Samples: Similar to Shapiro-Wilk.
+How It Works: Compares observed data to expected distribution.
+Interpretation: Reject null hypothesis if p-value < chosen alpha level.
+Advantages: Generalizes well for various distributions.
+Limitations: Adjust for parameter estimation if needed [@Razali2011-aq].
+
+**Graphical Inspection**:
+Plot histograms or box plots for each group.
+Look for differences in spread!!
+
+
+## Defyning the question and hypotheses
+
+
+Null hypothesis (H0): 4 cylinder cars and 6 cylinder cars have equal miles per galon (mpg) mean.
+Alternative hypothesis (HA): 4 cylinder cars and 6 cylinder cars have not equal miles per galon (mpg) mean.
+
+
+## Dataset visualization
+
+
+We will use the `mtcars` dataset in R for this demonstration. This dataset contains various attributes of different car models and at priori we are not sure if the assumptions are meet, so we have to assess the data first:
+
+
+```{r}
+#| label: data-preparation
+#| echo: false
+#| message: false
+# View the structure of the cars dataset
+str(mtcars)
+
+```
+As we can see, we have a data set with the information about different types of cars, with 11 different variables including miles per gallon (mpg), cylinder (cyl), horse power (hp), etc., and there are 32 observations for each variable.
+
+
+```{r}
+#| label: summary
+#| echo: false
+#| message: false
+# Summarize each variable in the dataset
+summary(mtcars)
+```
+
+
+## Plotting Mtcars data
+
+
+```{r}
+#| label: plot-counts
+#| echo: false
+#| message: false
+#| fig-cap: "Cars by gears and cylinders"
+# Create a bar plot to visualize the count of cars with different numbers of 
+# cylinders
+ggplot(mtcars, aes(x = factor(cyl), fill = factor(gear))) +
+  geom_bar(position = "dodge") +
+  geom_text(stat = "count", aes(label = after_stat(count)), vjust = -0.5, position = position_dodge(0.9)) +
+  labs(
+    title = "Count of Cars by Number of Cylinders and Gears",
+    x = "Number of Cylinders",
+    y = "Count of Cars",
+    fill = "Number of Gears"
+  ) +
+  theme_minimal()
+```
+
+On this bar graph we observe the count of cars by number of cylinders and gears.
+
+```{r}
+#| label: plot-mtcars
+#| echo: false
+#| message: false
+#| fig-cap: "mpg v.s hp"
+# Create a scatter plot of mpg vs. hp, colored by the number of cylinders
+ggplot(mtcars, aes(x = hp, y = mpg, color = factor(cyl))) +
+  geom_point(size = 3) +
+  labs(
+    title = "Miles Per Gallon vs. Horsepower",
+    x = "Horsepower",
+    y = "Miles Per Gallon",
+    color = "Number of Cylinders"
+  ) +
+  theme_minimal()
+
+# On this graph the x contains the horse power, y the miles per galon and 
+# the color is the number of cilinders
+```
+
+Just to give us an idea of the data set, on this plot we observed the relation between horse power and cylinders. The cars with more cylinders have more hp and probably do less miles per gallon.
+
+### Assessing the distribution
+
+```{r}
+#| label: histograms
+#| echo: false
+#| message: false
+#| fig-cap: "Histogram 4-cylinder vs 6-cylinder"
+
+# Extract the mpg values for cars with 4 and 6 cylinders
+mpg_4_cyl <- mtcars$mpg[mtcars$cyl == 4]
+mpg_6_cyl <- mtcars$mpg[mtcars$cyl == 6]
+
+# Histograms
+hist(mpg_4_cyl, main = "MPG for 4-Cylinder Cars", xlim = range(c(mpg_4_cyl, mpg_6_cyl)), col = rgb(1, 0, 0, 0.5), xlab = "MPG")
+hist(mpg_6_cyl, main = "MPG for 6-Cylinder Cars", xlim = range(c(mpg_4_cyl, mpg_6_cyl)), col = rgb(0, 0, 1, 0.5), add = TRUE)
+legend("topright", legend = c("4 Cylinders", "6 Cylinders"), fill = c(rgb(1, 0, 0, 0.5), rgb(0, 0, 1, 0.5)))
+```
+
+This histogram shows there is a difference distribution on the miles per gallon (MPG) variable between 4 and 6 cylinder cars. 6 cylinder cars appear to have a normal distribution but 4 cylinder cars not.
+
+```{r}
+#| label: boxplot
+#| echo: false
+#| message: false
+#| fig-cap: "Boxplot 4-cylinder vs 6 cylinder"
+
+# Boxplot
+boxplot(mpg_4_cyl, mpg_6_cyl, names = c("4 Cylinders", "6 Cylinders"), main = "Boxplot MPG Comparison", ylab = "MPG")
+```
+
+This boxplot also shows the difference between the two groups. 4 cylinder cars have a bigger variance on the mpg variable.
+
+```{r}
+#| label: q-q plot
+#| echo: false
+#| message: false
+#| fig-cap: "Q-Q Plot 4-cylinder vs 6 cylinder"
+
+
+# Create quantiles
+qq_data <- data.frame(
+  sample1 = quantile(mpg_4_cyl, probs = seq(0, 1, length.out = min(length(mpg_4_cyl), length(mpg_6_cyl)))),
+  sample2 = quantile(mpg_6_cyl, probs = seq(0, 1, length.out = min(length(mpg_4_cyl), length(mpg_6_cyl))))
+)
+
+# Calculate limits for the plot based on the data
+plot_limits <- range(c(qq_data$sample1, qq_data$sample2))
+
+
+# Generate the Q-Q plot using ggplot2
+ggplot(qq_data, aes(sample1, sample2)) +
+  geom_point(color = "blue", size = 2) +
+  geom_abline(slope = 1, intercept = 0, color = "red", linetype = "dashed") +
+  labs(
+    title = "Q-Q Plot: 4-Cylinder vs 6-Cylinder MPG",
+    x = "4-Cylinder MPG Quantiles",
+    y = "6-Cylinder MPG Quantiles"
+  ) +
+  coord_fixed(ratio = 1, xlim = plot_limits, ylim = plot_limits) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+    axis.title = element_text(size = 14),
+    axis.text = element_text(size = 12)
+  )
+```
+
+This Q-Q plots shows a red line and a blue line, if both diverge it means the two groups have different distributions. 
+
+### Assessing skewness and kurtosis
+
+```{r}
+#| label: skewness and kurtosis
+#| echo: true
+#| message: false
+# Calculate skewness and kurtosis for mpg_4_cyl
+skewness_4_cyl <- skewness(mpg_4_cyl)
+kurtosis_4_cyl <- kurtosis(mpg_4_cyl)
+
+# Calculate skewness and kurtosis for mpg_6_cyl
+skewness_6_cyl <- skewness(mpg_6_cyl)
+kurtosis_6_cyl <- kurtosis(mpg_6_cyl)
+
+# Print the results
+cat("Skewness for mpg_4_cyl:", skewness_4_cyl, "\n")
+cat("Kurtosis for mpg_4_cyl:", kurtosis_4_cyl, "\n")
+cat("Skewness for mpg_6_cyl:", skewness_6_cyl, "\n")
+cat("Kurtosis for mpg_6_cyl:", kurtosis_6_cyl, "\n")
+```
+
+**Skewness**:
+Skewness measures the asymmetry of the distribution of a variable.
+A normal distribution has a skewness value of zero, indicating symmetry.
+Positive skewness means the right tail is longer (values cluster to the left of the mean), while negative skewness means the left tail is longer.
+If skewness is substantial (e.g., greater than 2.1), it suggests departure from normality. It is not the case here!!
+
+**Kurtosis**:
+Kurtosis measures the peakedness of a distribution.
+The original kurtosis value is sometimes called “kurtosis (proper).”
+A normal distribution has kurtosis (proper) equal to 3.
+Excess kurtosis (obtained by subtracting 3 from the proper kurtosis) is often used.
+Substantial departure from normality occurs when excess kurtosis is greater than 7.1
+
+### Normality test
+
+**Shapiro-Wilk Test**:
+```{r}
+#| label: shapiro wilk
+#| echo: true
+#| message: false
+# Perform Shapiro-Wilk normality test
+shapiro.test(mpg_4_cyl)
+shapiro.test(mpg_6_cyl)
+```
+
+For **mpg_4_cyl**: the test statistic (W = 0.91244) indicates that the data is relatively close to a normal distribution.
+The p-value (0.2606) is not statistically significant (above the typical threshold of 0.05). 
+Interpretation: The data for mpg_4_cyl is not significantly different from a normal distribution. However, with small sample sizes, the test may have limited power to detect departures from normality.
+
+For **mpg_6_cyl**: the test statistic (W = 0.89903) is slightly lower than for mpg_4_cyl but still indicates a relatively normal distribution.
+The p-value (0.3252) is not statistically significant (above 0.05).
+Interpretation: The data for mpg_6_cyl is also not significantly different from a normal distribution based on the Shapiro-Wilk test. 
+
+Again, note that with small sample sizes, the ability to detect deviations from normality may be limited. Small sample sizes can limit the power of statistical tests to detect departures from normality, and it's important to consider the context and potential limitations when interpreting such results.
+
+
+## Performing the Welchs t-test
+
+
+We will perform a Welch's t-test to compare the mean miles per gallon (mpg) between cars with 4 cylinders and cars with 6 cylinders.
+
+Hypotheses
+Null Hypothesis (H0): The mean mpg of cars with 4 cylinders is equal to the mean mpg of cars with 6 cylinders.
+Alternative Hypothesis (H1): The mean mpg of cars with 4 cylinders is not equal to the mean mpg of cars with 6 cylinders.
+
+### Welchs test results
+
+```{r}
+#| label: welchs test
+#| echo: true
+#| message: false
+## Extract the mpg values for cars with 4 and 6 cylinders
+mpg_4_cyl <- mtcars$mpg[mtcars$cyl == 4]
+mpg_6_cyl <- mtcars$mpg[mtcars$cyl == 6]
+
+## Perform Welch's t-test
+t_test_result <- t.test(mpg_4_cyl, mpg_6_cyl, var.equal = FALSE)
+t_test_result
+
+## Extract confidence interval
+conf_interval <- t_test_result$conf.int
+conf_interval
+
+```
+
+### Interpretation or results:
+
+Let’s break down the interpretation of the Welch Two Sample t-test results for this data:
+
+Data: The test was performed on two samples, mpg_4_cyl and mpg_6_cyl.
+
+t-value: the t-test statistic is 4.7191.
+
+Degrees of Freedom (df): the degrees of freedom associated with the t-test statistic is approximately 12.956.
+
+p-value: the p-value is 0.0004048. This small p-value suggests strong evidence against the null hypothesis.
+
+Alternative Hypothesis: the alternative hypothesis states that the true difference in means between the two groups is not equal to zero.
+
+95% Confidence Interval: The confidence interval for the true difference in means lies between 3.751376 and 10.090182. (Always have in mind the repeated sample paradigm)
+
+Sample Estimates: The sample mean of mpg_4_cyl is 26.66364, and the sample mean of mpg_6_cyl is 19.74286.
+
+In summary, based on the p-value, we reject the null hypothesis and conclude that there is a significant difference in means between the two groups. The confidence interval provides a range for this difference. If the interval does not include zero, it supports the alternative hypothesis.
+
+
+## Satterthwaite Degrees of Freedom
+
+
+In the context of Welch's t-test, the Satterthwaite approximation is used to calculate an approximation of the degrees of freedom. This method provides a more accurate estimation compared to the standard t-test when the variances of the two samples are not equal.
+
+The formula for the Satterthwaite degrees of freedom is:
+$$
+\nu \approx \frac{\left( \frac{s_1^2}{n_1} + \frac{s_2^2}{n_2} \right)^2}{\frac{\left( \frac{s_1^2}{n_1} \right)^2}{n_1 - 1} + \frac{\left( \frac{s_2^2}{n_2} \right)^2}{n_2 - 1}}
+$$
+
+Where: $$ s_1^2 $$ is the sample variance of the first sample (4-cylinder cars), $$ s_2^2 $$ is the sample variance of the second sample (6-cylinder cars), $$ n_1 $$ is the sample size of the first sample (4-cylinder cars) and $$ n_2 $$ is the sample size of the second sample (6-cylinder cars).
+
+```{r}
+#| label: satterthwaite-dof
+#| echo: true
+#| message: false
+#| warning: false
+
+# Sample sizes
+n1 <- length(mpg_4_cyl)
+n2 <- length(mpg_6_cyl)
+
+# Sample variances
+
+s1_sq <- var(mpg_4_cyl)
+s2_sq <- var(mpg_6_cyl)
+
+# Satterthwaite degrees of freedom
+numerator <- (s1_sq / n1 + s2_sq / n2)^2
+denominator <- ((s1_sq / n1)^2 / (n1 - 1)) + ((s2_sq / n2)^2 / (n2 - 1))
+df <- numerator / denominator
+
+# Print the result
+df
+```
+
+### Degrees of Freedom (DoF) explanation:
+
+The **degrees of freedom** indicate the number of independent values or quantities which can vary in the analysis without breaking any constraints.
+In this context, the degrees of freedom are adjusted to better reflect the reliability of the variance estimates from the two samples [@Huang2016-dp].
+
+**Satterthwaite Approximation:** this method provides an adjusted degrees of freedom value that accounts for differences in variances between the two samples.
+The formula combines the sample variances and sizes to compute a more accurate degrees of freedom for the Welch's t-test.
+
+**Implications:** using the Satterthwaite approximation leads to a more robust test when comparing means from two samples with unequal variances.
+The resulting degrees of freedom are used to determine the critical value from the t-distribution, which is crucial for calculating the p-value and making statistical inferences [@Derrick2016-wq].
+
+**Degrees of Freedom Calculation for the two sample t-test:** can be calculated as follows:
+
+$$
+\text{DoF} = (n_1 - 1) + (n_2 - 1) = (n_1 + n_2 - 2)
+$$
+
+Where:
+$$ n_1 $$ is the number of observations in the first group.
+$$ n_2 $$ is the number of observations in the second group.
+
+**Why Subtract the Number of Groups?:** 
+
+We subtract 2 because we are estimating one parameter (the mean) for each of the two groups. Each estimation reduces the degrees of freedom by 1. Thus, for two groups, we subtract 2 from the total number of observations to account for the two estimated means.
+
+**Satterthwaite vs t-test degrees of freedom:**
+
+Calculated Degrees of Freedom using the Satterthwaite method: approximately 12.956
+
+Traditional t-test Degrees of Freedom: n1+n2-2=11+7-2=16
+
+The Satterthwaite degrees of freedom (12.956) are lower than the traditional degrees of freedom (16). This adjustment accounts for the unequal variances between the two samples (4-cylinder and 6-cylinder cars) and provides a more accurate measure for the t-distribution used in the Welch's t-test.
+
+### Important concepts about the degrees of Freedom
+
+<div class="note">
+<h3>Degrees of Freedom (DoF)</h3>
+<p>Represent the number of independent values that can vary without breaking constraints.</p>
+
+<h3>Traditional t-Test</h3>
+<p>For two groups, the DoF is the total number of observations minus 2 because each group's mean estimation uses one degree of freedom.</p>
+
+<h3>Satterthwaite Approximation</h3>
+<p>Adjusts the DoF for unequal variances, usually resulting in a lower and non-integer value, providing a more accurate basis for hypothesis testing.</p>
+</div>
+
+<style>
+.note {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 2px solid green; /* Green border around all sides */
+  max-width: 400px; /* Limit the width of the box */
+  margin: 20px 0; /* Space around the box */
+  animation: moveBox 2s linear infinite; /* Continuous animation */
+  position: relative;
+}
+
+/* Keyframes for continuous animation */
+@keyframes moveBox {
+  0% { left: 0; }
+  50% { left: 20px; }
+  100% { left: 0; }
+}
+</style>
+
+
+## Summary and Conclusion
+
+
+Welch’s t-test, useful for comparing means of two independent samples with unequal variances and sizes, was applied to the mtcars dataset to compare 4-cylinder and 6-cylinder cars' MPG. The test revealed a significant difference in means, with a p-value of 0.0004048, rejecting the null hypothesis. The Satterthwaite approximation, yielding degrees of freedom at 12.956, provided a more accurate assessment than the traditional t-test (DoF = 16), ensuring robust statistical inference under unequal variances. This method enhances reliability, especially with large samples, where normality is approached due to the Central Limit Theorem.
+
+

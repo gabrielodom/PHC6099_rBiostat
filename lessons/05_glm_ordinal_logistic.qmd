@@ -1,0 +1,404 @@
+---
+title: "Ordinal Logistic Regression"
+author: "Gemma Galvez"
+date: "`r Sys.Date()`"
+toc: true
+number-sections: true
+format: html
+embed-resources: false
+echo: true
+warning: false
+message: false
+---
+
+```{r}
+#| label: tidyverse
+#| echo: true
+
+# Install required packages
+library(conflicted)
+conflict_prefer("filter", "dplyr", quiet = TRUE)
+conflict_prefer("lag", "dplyr", quiet = TRUE)
+
+suppressPackageStartupMessages(library(tidyverse))
+
+# suppress "`summarise()` has grouped output by " messages
+options(dplyr.summarise.inform = FALSE)
+```
+
+```{r}
+#| label: packages
+#| echo: true
+
+library(table1)
+library(multgee)
+library(skimr)
+library(pander)
+library(gtsummary)
+library(car)
+library(mltools)
+library(MASS)
+library(pomcheckr)
+
+conflict_prefer("filter", "dplyr", quiet = TRUE)
+conflict_prefer("select", "dplyr", quiet = TRUE)
+library(tidyverse)
+
+```
+
+## Introduction
+
+So you’ve found yourself thinking about regression again, haven’t you? I can 
+relate. At this point, you’re probably familiar with the fact that logistic 
+regression means the logit (log odds) of a binary response is linearly related 
+to the independent variable(s). Well, Proportional Odds Logistic Regression is 
+an extension of Logistic Regression and that’s likely how you’ve found your way 
+here – that, or you really, really enjoy the dark corners of the internet! 
+Welcome, make yourself at home.
+
+## Mathematical Definition of Method
+
+Now, [let’s get down to business](https://www.youtube.com/watch?v=TVcLIfSC4OE). Proportional Odds Logistic Regression (POLR), which 
+is also known as Ordinal Logistic Regression, is a method of statistical analysis 
+which may be used to model the relationship between an ordinal response, and one 
+or more independent (or explanatory) variables. These explanatory variables may 
+be categorical or continuous. 
+
+Let’s establish some context: Have you ever been filling out a survey and it’s 
+asked you how much you agree with something, how often you do something, or how 
+important something is to you? While this is not an extensive list, these 
+Likert-type responses should give you a general idea of common ordinal responses 
+you can expect to encounter when using POLR.   
+
+Some more specific examples where Ordinal Logistic Regression can be applied are: 
+
+* **Level of agreement:** In a survey the responses to the outcome variable is 
+categorized in multiple levels such as, Strongly Disagree, Disagree, Agree, 
+Strongly Agree.
+
+* **Satisfaction level:** Measuring satisfaction level of a service on a scale 
+like, “very dissatisfied,” “dissatisfied,” “neutral,” “satisfied,” and “very 
+satisfied.”
+
+* **Pain Intensity:** Patients participating in medical research may be asked to 
+rate the intensity of their pain on a scale ranging from “no pain” to “mild pain,” 
+“moderate pain,” and “severe pain.”
+
+## Mathematical Formulation of an Ordinal Model
+
+Well, you’ve probably reached the point where you’re about to check out because 
+we see formulas, lots of them. This is understandable, but be not afraid! 
+[UCLA’s Advanced Research Computing Center](https://stats.oarc.ucla.edu/r/dae/ordinal-logistic-regression/) is here to help in ways I cannot. 
+
+To start… let’s establish some notation and review the concepts involved in 
+ordinal logistic regression. Let 𝑌 be an ordinal outcome with 𝐽 categories. 
+Then 𝑃(𝑌≤𝑗) is the cumulative probability of 𝑌 less than or equal to a 
+specific category 𝑗= 1,⋯,𝐽−1. Note that 𝑃(𝑌≤𝐽)=1. The odds of being less 
+than or equal a particular category can be defined as
+
+$$ \frac{P(Y \le j)}{P(Y>j)} $$
+
+For 𝑗=1,⋯,𝐽−1 since 𝑃(𝑌>𝐽)=0 and dividing by zero is undefined. 
+Alternatively, you can write 𝑃(𝑌>𝑗)=1–𝑃(𝑌≤𝑗). The log odds is also known 
+as the logit, so that
+
+$$ log \frac{P(Y \le j)}{P(Y>j)} = logit (P(Y \le j)) $$
+
+The proportional odds logistic regression model can be defined as
+
+$$logit (P(Y \le j)) = \beta_{j0} – \eta_{1}x_1 – \cdots – \eta_{p} x_p $$
+
+I think that’s enough formulas for now. Let’s keep the party going by actually 
+putting the pedal to the metal, or should we say, *aPpLyiNg wHaT wE LeArNeD.* 
+
+## Data Source and Description
+
+The data we will be using is the Behavioral Risk Factor Surveillance System 
+(BRFSS) data from the year [2013](https://www.kaggle.com/datasets/lplenka/brfss-data/data). Why are we using this dataset? I thought you’d never ask! The BRFSS is the actually nation’s premier system of health-related telephone surveys that collect state data about U.S. residents regarding their health-related risk behaviors, chronic health conditions, and use of preventive services. Established in 1984 with 15 states, BRFSS now collects data in all 50 states as well as the District of Columbia and three U.S. territories. 
+
+BRFSS completes more than 400,000 adult interviews each year, making it the 
+largest continuously conducted health survey system in the world. Impressive right? More information can be found [here.](https://www.cdc.gov/brfss/data_documentation/index.htm) 
+The codebook for the 2013 data can be found [here.](https://www.cdc.gov/brfss/annual_data/2013/pdf/CODEBOOK13_LLCP.pdf)
+
+In this data, there is a variable called **“General Health,”** which has posed the 
+following questions to participants: *“Would you say that in general your health 
+is…”* — 1) Excellent 2) Very good 3) Good 4) Fair or 5) Poor. This is a great example of Likert scale responses mentioned earlier. 
+
+
+## Cleaning the Data to Create a Model Frame 
+
+```{r}
+#| label: dataset
+#| echo: true
+BRFSS_df1 <- read_csv("../data/05_brfss_subset.csv")
+```
+
+All things considered, the original is a somewhat large dataset, with 330 variables and 
+having taken Microsoft Excel 2013 about three minutes to load the original csv. 
+Patience is key! 
+
+For this example, we are interested in the following variables:
+
+**Independent Variables:**
+
+*	Participant ID 
+*	Sex 
+*	Race 
+*	Marital Status 
+*	Highest Level of Schooling Completed 
+
+**Dependent Variable:**
+
+*	General Health  
+
+The research question is straightforward: we want to know to what extent certain sociodemographic characteristics are associated with better self-reported health. 
+
+```{r}
+#| label: mutate
+#| echo: true
+BRFSS_df2 <- 
+  BRFSS_df1 %>%
+  as_tibble() %>% 
+  drop_na(genhlth) %>% 
+  mutate(
+    Health = factor(genhlth, ordered = TRUE),
+    Sex = factor(
+      sex,
+      levels = c("Male", "Female"),
+      labels = c("Male", "Female")
+    )
+  ) %>%
+  mutate(Race = as_factor(X_racegr3)) %>% 
+  mutate(MaritalStatus = as_factor(marital)) %>% 
+  mutate(
+    Education = factor(
+      educa,
+      levels = c(
+        "Never attended school or only kindergarten", 
+        "Grades 1 through 8 (Elementary)", 
+        "Grades 9 though 11 (Some high school)", 
+        "Grade 12 or GED (High school graduate)", 
+        "College 1 year to 3 years (Some college or technical school)",
+        "College 4 years or more (College graduate)"
+      ),
+      labels = c(
+        "Never attended school or only kindergarten", 
+        "Grades 1 through 8 (Elementary)", 
+        "Grades 9 through 11 (Some high school)", 
+        "Grade 12 or GED (High school graduate)", 
+        "College 1 year to 3 years (Some college or technical school)",
+        "College 4 years or more (College graduate)"
+      ),
+      ordered = TRUE
+    )
+  ) %>% 
+  mutate(Employment = as_factor(employ1)) %>% 
+  mutate(
+    Income = factor(
+    income2,
+    levels = c("Less than $10,000",
+               "Less than $15,000",
+               "Less than $20,000", 
+               "Less than $25,000", 
+               "Less than $35,000", 
+               "Less than $50,000",
+               "Less than $75,000",
+               "$75,000 or more"),
+    labels = c("Less than $10,000",
+               "Less than $15,000",
+               "Less than $20,000", 
+               "Less than $25,000", 
+               "Less than $35,000", 
+               "Less than $50,000",
+               "Less than $75,000",
+               "$75,000 or more"),
+    ordered = TRUE
+    )
+  ) %>%
+  select(
+    "Health","Sex", "MaritalStatus", "Education", "Income", "Employment", "Race"
+  ) 
+  
+```
+
+## Assumptions of the Method
+
+The key assumptions of Ordinal logistic Regression which ensures the validity of 
+the model are as follows: 
+
+* The outcome variable is ordered.
+* The predictor variables are either continuous, categorical, or ordinal.
+* There is no multicollinearity among the predictors.
+* Proportional odds.
+
+In proportional odds logistic regression, the assumption is that the odds of 
+being at or below any particular level of the ordinal dependent variable relative 
+to being above that level is constant across levels of the independent variables. 
+In other words, the relationship between the independent variables and the 
+dependent variable is assumed to be proportional across all levels of the 
+dependent variable. The model estimates coefficients for each independent 
+variable, indicating how they influence the odds of being in a lower category 
+versus a higher category of the [ordinal dependent variable](https://stats.oarc.ucla.edu/r/dae/ordinal-logistic-regression/). The interpretation 
+of these coefficients is similar to that in binary logistic regression, but 
+applies to each threshold between categories of the ordinal dependent variable.
+
+One of the assumptions underlying ordinal logistic (and ordinal probit) 
+regression is that the relationship between each pair of outcome groups is the 
+[same](https://stats.oarc.ucla.edu/sas/dae/ordinal-logistic-regression/). In other words, ordinal logistic regression assumes that the coefficients 
+that describe the relationship between, say, the lowest versus all higher 
+categories of the response variable are the same as those that describe the 
+relationship between the next lowest category and all higher categories, etc. 
+This is called the proportional odds assumption or the parallel regression 
+assumption. Because the relationship between all pairs of groups is the same, 
+there is only one set of coefficients.
+
+## Data Exploration
+
+Lets take a look at the data we are working with. 
+
+```{r}
+#| label: dataskim
+#| echo: true
+# Skim Data
+skim(BRFSS_df2)
+
+BRFSS_df2 %>% 
+  tbl_summary(by = Health) 
+```
+
+## Plotting Outcome Variable
+
+```{r}
+#| label: outcomeplot
+#| echo: true
+BRFSS_df2 %>% 
+  count(Health) %>% 
+  mutate(prop = n / sum(n)) %>% 
+  rename(Health = Health) %>% 
+  ggplot() + 
+  aes(x = Health, y = prop) +
+  labs(
+    x = "Self Reported Health", 
+    y = "Relative Frequencies (w Obs. Count)"
+  ) +
+  scale_y_continuous(labels = scales::percent) +
+  geom_col() +
+  geom_text(aes(label = n), vjust = 1.5, color = "white")
+
+# Reorder due to outcome variable being ordered
+BRFSS_df2 %>%
+  ggplot(aes(x = fct_relevel(Health, c("Poor", "Fair", "Good", "Very good", "Excellent"))))+
+  geom_bar() +
+  labs(x = "Health")
+```
+
+```{r}
+#| label: ggpairs
+#| echo: true
+# To plot this dataset, take a small sample (2000), due to it having a very large sample size
+GGally::ggpairs(BRFSS_df2[sample(1:489790, size = 2000),])
+
+```
+
+```{r}
+#| label: edulevel
+#| echo: true
+BRFSS_df3 <- 
+  BRFSS_df2 %>% 
+  select(-Income, -Employment) %>% 
+  mutate(
+    EducationLevel = case_when(
+      Education == "Never attended school or only kindergarten" ~ 1,
+      Education == "Grades 1 through 8 (Elementary)" ~ 1,
+      Education == "Grades 9 through 11 (Some high school)" ~ 1,
+      Education == "Grade 12 or GED (High school graduate)" ~ 2,
+      Education == "College 1 year to 3 years (Some college or technical school)" ~ 3,
+      Education == "College 4 years or more (College graduate)" ~ 4
+    )
+  ) %>% 
+  mutate(
+    EducationLevel = factor(
+      EducationLevel, 
+      levels = 1:4, 
+      labels = c(
+        "Less than HS", "HS/GED", "Some College", "College Grad"
+      ), 
+      ordered = TRUE
+    )
+  ) %>% 
+  select(-Education)
+```
+
+
+At this point, we ought to consider the relationship between education, income, 
+and employment, and whether or not it is best to choose one of these variables
+as a predictor, as opposed to all three. Considering a majority of the literature 
+highlights [education](https://www.sciencedaily.com/releases/2018/04/180416103428.htm) as one of the most important [predictors](https://archpublichealth.biomedcentral.com/articles/10.1186/s13690-020-00402-5) of health, we will
+move forward with education only (out of the three aforementioned variables).
+
+## Fitting the Model
+
+Using the polr function, we can fit the Proportional Odds Logistic Regression 
+model to the data. By default, the Hess option is turned off, but you can turn it on 
+if you'd like to be able to calculate the odds ratios later.
+
+```{r}
+#| label: OLRFit
+#| echo: true
+olr_fit <- MASS::polr(Health ~ ., data = BRFSS_df3, Hess = TRUE)
+```
+
+The output is a bit messy, so it is wise to clean it up using the pander() 
+function (from the pander:: and knitr:: packages).
+
+```{r}
+#| label: summaryOLRFit
+#| echo: true
+pander(summary(olr_fit))
+```
+
+## Interpreting the Regression Coefficients
+
+**Sex:** Females were more likely than males to report higher self-reported health compared to males.
+  
+**Race:** Those who reported being white were significantly more likely to report better health when compared to black participants. Hispanics were more likely to report worse levels of health than those who were black. Those who reported being multiracial did not have a statistically significant difference from black participants. 
+  
+**Marital Status:** Compared to being divorced, those who reported being married and never having been married had greater levels of self-reported health. There was no statistical difference between those who reported being divorced and those who reported being separated. 
+  
+**Education:** The most notable statistically significant positive effect for greater self-reported health was present in the category where there was a change between those who fell under the category of having less than a high school education and having completed high school. For every increase in this particular educational category/level, the log odds of reporting a higher level of self-reported health increase by .15. 
+
+
+## Generating P Values
+
+Oftentimes, not having a p-value makes us itch with discomfort! One way to 
+calculate a p-value here is by comparing the t-value against the standard normal 
+distribution, like a z test. Note: this is only true with infinite degrees of 
+freedom, but is reasonably approximated by large samples, becoming increasingly 
+biased as sample size decreases. 
+
+It is an easy and straightforward process: store the coefficient table, then 
+calculate the p-values and combine back with the table.
+
+
+```{r}
+#| label: pvalues
+#| echo: true
+
+(ctable <- coef(summary(olr_fit)))
+
+p <- pnorm(abs(ctable[, "t value"]), lower.tail = FALSE) * 2
+eBeta <- exp(ctable[, "Value"])
+
+# Combine Table
+ctable <- cbind(ctable, "expBeta" = eBeta)
+(ctable <- cbind(ctable, "p value" = p))
+```
+
+## Conclusion
+
+After running a statistical analysis consisting of an Ordinal Logistic Regression
+for a dataset including an ordered outcome variable of self-reported health, we 
+are able to see that being female, white, and being married all indicated a greater
+likelihood of reporting higher levels of self-reported health. Additionally, certain 
+changes in categories of education indicated greater odds of reporting greater
+self-reported health. 

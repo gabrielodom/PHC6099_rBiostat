@@ -11,3 +11,4 @@ README.html
 # internal data
 data/02_dataset-gmss-2017-subset1_original.csv
 data/ICPSR_36578/*
+extdata/*
