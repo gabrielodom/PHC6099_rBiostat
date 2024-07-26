@@ -75,6 +75,7 @@ book:
       chapters:
         - lessons/06_elastic_net_regression.qmd
         - lessons/06_survival_analysis.qmd
+        - lessons/06_structural_equation_models.qmd
 
     - part: 07_header_power.qmd
       chapters:

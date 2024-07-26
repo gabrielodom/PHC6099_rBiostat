@@ -16,14 +16,15 @@ embed-resources: false
 
 # Installing Required Packages
 # install.packages("public.ctn0094data")
+# install.packages("parameters")
 # install.packages("tidyverse")
 # install.packages("gtsummary")
 
 # Loading Required Packages
 library(public.ctn0094data)
+library(parameters)
 library(tidyverse)
 library(gtsummary)
-library(dplyr) # for re-coding
 ```
 
 
