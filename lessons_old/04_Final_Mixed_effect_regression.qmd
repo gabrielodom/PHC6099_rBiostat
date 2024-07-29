@@ -1,0 +1,483 @@
+---
+title: "Mixed Effect Regression"
+subtitle: "Learning how to use Mixed Effect Models in R"
+date: "`r Sys.Date()`"
+author:
+  - name: Tarana Ferdous, Ana Bravo & Tendai Gwanzura
+    affiliations:
+      - Florida International University
+      - Robert Stempel College of Public Health and Social Work
+toc: true
+number-sections: true
+format: html
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+## Terminology:
+
+Other terms that are used for Mixed Effect Models include: 
+
+- Hierarchical Leaner Model (HLM)
+- Multi-level model (MLM)
+- Linear mixed-effect model (LMM)
+- Mixed model 
+- Repeated measures linear regression 
+- Random effects model 
+- Varying coefficients model
+
+<u> Focus on what the model is trying to do instead of what the model is called.</u>
+
+## What is Mixed Effect Model? 
+
+A method for analyzing data that are non-independent, multilevel/hierarchical, 
+longitudinal, repeated or correlated. It allows both **fixed** and **random** effects, 
+and are particularly used when there is non independence in the data, 
+such as arises from a hierarchical structure. For example, students sampled
+from within schools, or patients from within hospitals.
+
+**Example**
+First figure shows a positive correlation: the proportion of survival 
+increases as the the severity of symptom increases. 
+
+![](Images_to_upload/sev_vs_survive.png)
+
+However, in real, if we color-code these data, we can see that three different 
+clusters of hospitals data are shown.
+
+![](Images_to_upload/sev_vs_survive_cluster.png)
+
+In mixed effect models, they fit a separate regression line for each and every
+cluster. Then it estimates an average slope between `Y (Proportion of survival)` 
+and **X (severity of symptoms)** across **all clusters (all hospitals)**.  
+
+![](Images_to_upload/Average_sev_surv.png)
+
+Here, the black line is the fixed effects and the colored lines are the random 
+effects. So, all the participants across the three hospitals cannot be treated 
+as independent data. Every cluster has its own regression line.    
+
+
+## Mathematical Formulation of the Model
+
+**Fixed effects** represent the systematic or population-level effects. These are 
+parameters that apply to the *entire population*. 
+
+In mathematical notation, we denote fixed effects as $\beta$ and the fixed effects 
+part of the model can be expressed as: 
+
+$$ Y = X\beta+e$$
+Where, 
+
+- $Y$ is response variable 
+
+- $X$ is predictor variable  
+
+- $e$ represents the random error.
+
+
+**Random effects** account for variability due to *specific groups or clusters within the data*.
+These effects are specific to certain levels of a grouping variable (e.g., subjects, schools, or regions).
+
+In mathematical notation, we denote random effects as 
+
+$$Za$$, 
+
+where,
+
+- $Z$ is a fixed matrix 
+
+- $a$ is an unobserved random effect vector
+
+The full model incorporating both fixed and random effects is:
+
+$$ Y = X\beta+ Za+ e$$
+**For example**: to study the effect of different *doses* (predictor variable) 
+of an anti-hypertensive drug on *blood pressure* (response variable) across 
+multiple subjects, the model might look like this:
+
+
+$$ Y_{ij} = \overbrace{\beta_0 + \beta_1Dose_{ij}}^{\text{fixed part}} + \underbrace{a_i + e_{ij}}_{\text{random part}}$$
+
+Where, 
+
+- $Y_{ij}$ is blood pressure for subject $i$ at dose level $j$ 
+
+- $\beta_0$ is fixed effect parameter (intercept), represents baseline blood pressure when the dose was zero.
+
+- $beta_1$ is another fixed effect parameter, represents effect of the dose levels on the blood pressure 
+
+- $Dose_{ij}$ is dose level for subject $i$ at level $j$ 
+
+- $a_i$ is random effect for subject $i$, that captures subject-specific variability not explained by fixed effects.
+These random effects account for individual differences.
+
+- $e_{ij}$ is random error term, represents unexplained variability or noise in the model.
+
+
+![](Images_to_upload/Dose_SBP.jpg)
+
+##  Regression Models used in analysis 
+
+-   **Fixed effects model** (when all model effects are fixed effects)
+      Same intercept and same slope 
+
+-   **Mixed effects model** (when both fixed effect(s) and random effect(s) are present)
+      Different intercepts same slope OR same intercept different slopes
+    
+-   **Random effects model** (when all model effects are random effects)
+      Different intercepts different slopes
+
+
+Depending on the data type and research question, we can use different
+types of models with random effects.
+
+![](Images_to_upload/mixed_effect_models.png)
+**Example**: temperature/time (3 different unit of AC), sugar level/hour 
+(3 different diabetic-drug), weight/week (3 different diet)
+
+## How to decide which variable should be considered as fixed, mixed, or random?
+
+3 strategies:
+
+**Strategy 1: Look into the data set**
+
+- Example: Math dataset: Math achievement data for different schools (clusters)
+
+- Variables: School, Minority Status, Sex, Socio-Economic Status (SES), 
+Math achievement and mean SES, 
+
+
+![](Images_to_upload/Step1_dataset.png)
+
+- Decision: If all the values in a variable **(MEANSES)** does not vary within 
+a cluster variable **(School)**, it cannot be fitted as random effect.
+This is because there is no slope as the **MEANSES** variable doesn't vary within the **SCHOOL** cluster.). 
+
+**Strategy 2: Use theoretical knowledge to guide you** 
+
+Ask yourself or an expert to know more about the relation between two variables, 
+if that relation changes within the cluster or not. For example, according to 
+historic nutrition models, if we control the *age*, the relationship between 
+*calory consumption* and *weight loss* is exactly same for all individuals. 
+However, in many cases using theory to decide if the slope will be fixed or 
+random may not be possible.
+
+**Strategy 3: Model comparison** 
+
+To explicitly test whether those effects should be fixed or random, we can compare 
+the models with and without using the specific variable of interest as full model 
+and reduced model. For example, here in full model, SES varies by school (random effect) 
+but in reduced model SES did not vary by school (fixed effect).
+
+![](Images_to_upload/Comparison.png)
+- Decision 1: P>0.05, No difference between full and reduce models, so we can go for reduced model.  
+- Decision 2: Bayes factor >10 for reduced model, so we can go for reduced model. 
+- Decision 3: AIC/BIC, reduced model has lower BIC but not AIC, however, can choose reduced model. 
+
+**Note**: I added the references of some YouTube videos which I found helpful and funny.
+Most of my contents here are from those videos, courtesy to the **Quant Psych** channel.
+If you find the above discussion difficult, I highly recommend you to go watch those videos.
+
+## How to do the analysis?
+
+Let's use the examples and codes from the lesson *random intercept regression* 
+by Ana Bravo & Tendai Gwanzura. However, I did some modifications. 
+
+### Packages for the following Lesson
+
+```{r}
+#| message: false
+# install.packages("Matrix")
+# install.packages("MASS") 
+library(gt)        # to make table outputs presentation/publication ready. 
+library(broom)     # clean output.
+library(knitr)     # to make tables. 
+library(gtsummary) # extension to gt
+library(lattice)   # It is a powerful data visualization for multivariate data
+library(lme4)      # Fit linear and generalized linear mixed-effects models
+library(arm)       # Data Analysis Using Regression and Multilevel models
+library(tidyverse) # for cleaning wrangling data
+
+```
+
+### Data Source and Description
+
+Let's do the analysis using the **Planktonic larval duration (PLD)** example! 
+This example is from [O'Connor et al (2007).](https://www.jstor.org/stable/25426272) 
+A brief intro on this study, temperature is important for the development of organisms.
+In marine species, temperature is very important and linked to growth. 
+We want to see the association between time of survival (duration/PLD) and the temperature. 
+
+```{r}
+#| message: false
+
+PLD <- read_table("../data/04_PLD.txt")
+
+```
+
+Let's check the structure of this data and how it briefly looks.
+
+```{r}
+#| message: false
+
+#strcuture 
+str(PLD)
+
+# just the top - seeing how it looks
+head(PLD)
+
+# brief summary
+summary(PLD)
+
+```
+
+Let's check how this would look if we plot the variable `pld`
+or planktonic larvae duration and the temperature. So we can see
+how the temperature is associated with their survival
+duration.
+
+```{r}
+#| message: false
+
+# how to plot in base R 
+plot(pld ~ temp, data = PLD,
+     xlab = "Temperature (C)",
+     ylab = "PLD survival (Days)",
+     pch = 16)
+# add lm line in base R
+abline(lm(pld ~ temp, data = PLD))
+
+```
+
+### Fit first model: Linear model
+
+Let's first fit a linear model and check any assumptions. Why are we
+fitting a linear model first? It might be important to check the
+standard error of this model and compare to the next model, that might
+be a better fit later on.
+
+```{r}
+#| message: false
+
+# fitting linear model first 
+
+LinearModel_1 <- lm(pld ~ temp, data = PLD)
+
+summary(LinearModel_1)
+```
+
+We can fit this output in a `gtsummary` to make it nicer looking:
+
+```{r}
+#| message: false
+
+LinearModel_1 |> 
+  tbl_regression()
+  
+```
+
+We are interested in checking out visually, the equal variance
+(homoscedasticity) of residuals. So, we plot a base residual graph:
+
+```{r}
+#| message: false
+
+# better to do a scatter plot 
+LinearModel_res <- resid(LinearModel_1)
+
+# plot residual 
+plot(PLD$temp, LinearModel_res,
+     ylab = "Residuals",
+     xlab = "Temperature (C)",
+     main = "Residual graph"
+     )
+abline(0,0)
+
+
+```
+
+Just upon visual observation, it seems like this assumption may be
+violated, so we think it might be important to do some transformations.
+
+### Log transformation
+
+```{r}
+#| message: false
+
+LinearMode_2Log <- lm(log(pld) ~ log(temp), data= PLD)
+
+summary(LinearMode_2Log)
+
+```
+
+### Residual of new log transformed graph
+
+```{r}
+#| message: false
+
+# better to do a scatter plot 
+LinearModel2_res <- resid(LinearMode_2Log)
+
+# plot residual 
+plot(PLD$temp, LinearModel2_res,
+     ylab = "residuals(log)",
+     xlab = "temp(log)",
+     main = "Residual graph (log transformation)"
+     )
+abline(0,0)
+
+
+```
+
+A bit better! Now we want to see the original plot we plotted with
+PLD and temperature:
+
+```{r}
+#| message: false
+
+plot(log(pld) ~ log(temp), data = PLD,
+     xlab = "Temperature in C",
+     ylab = "PLD in days")
+abline(LinearMode_2Log)
+
+```
+
+
+### Check distribution by `phylum` 
+
+in ggplot you can use the `facet_wrap()` function to separate by phylum:
+
+```{r}
+#| message: false
+
+ggplot(data = PLD) +
+  aes(x = log(temp), y = log(pld)) +
+  geom_point() +
+  stat_smooth(method = "lm") +
+  facet_wrap(~phylum) +
+  theme_classic()
+```
+
+### Build linear model with the phylum clusters
+```{r}
+#| message: false
+
+ggplot(data = PLD) +
+  aes(x = log(temp), y = log(pld)) +
+  geom_point() +
+  labs(x = "Log(temperature, C)",
+       y = "Log(PLD)") + 
+  stat_smooth(method = "lm", formula = "y ~ x", se = FALSE, fullrange = TRUE) +
+  theme_classic() +
+  facet_wrap(~ phylum)
+
+```
+**Note**: Here I did the modification, as instead of selecting only Mollusca, 
+I am using the whole data set and whole phylum clusters)
+
+### Fitting the mixed model
+
+We can use the library `lme4` to fit a log-transformed linear regression model
+with  **random intercepts and fixed slop**
+
+```{r}
+#| message: false
+
+# creating log -transformed variables 
+PLD$log_pld <- log(PLD$pld)
+PLD$log_temp <- log(PLD$temp)
+
+# mixed model with random intercepts and fixed slope
+MixEfcModel <- lmer(log_pld ~ log_temp + (1 | phylum), data = PLD)
+
+summary(MixEfcModel)
+
+```
+
+**Interpretation:**  For one unit increase in the degrees of temperature, there 
+is a 0.83 decrease in Planktonic larval duration. (or, as the temperature increase, 
+the plankton duration is lower.)
+
+
+### Check the coefficients for random intercepts and fixed slop of phylum cluster
+
+```{r}
+coef(MixEfcModel)$phylum
+```
+
+### Create a new data frame with these random intercepts and fixed slope
+
+To check the random intercepts and fixed slope, we created a new data frame `modelCoef_df`
+```{r}
+modelCoef_df <- 
+  coef(MixEfcModel)$phylum %>% 
+  rownames_to_column(var = "phylum") %>% # to convert row names between an explicit column
+  rename(intercept = `(Intercept)`, slope = log_temp)
+
+modelCoef_df
+```
+
+### Creating prediction model df by adding the `modelCoef_df` with the prediction model
+
+Now we add the predicted values.
+```{r}
+pld_predicted_df <- 
+  PLD %>% 
+  left_join(y = modelCoef_df, by = "phylum") %>% 
+  mutate(
+    log_pld_pred = intercept + log_temp * slope
+  )
+```
+
+
+### Plotting the prediction models 
+
+```{r}
+ggplot(data = pld_predicted_df) +
+  theme_classic() +
+  aes(x = log_temp) +
+  labs(
+    x = "Log(temperature, C)",
+    y = "Log(PLD)"
+  ) + 
+  geom_point(aes(y = log_pld)) +
+  geom_line(aes(y = log_pld_pred), color = "blue") +
+  facet_wrap(~ phylum)
+```
+
+## Interpretation
+
+We can see in the predicted model, all slopes for within all phylum clusters are 
+in the same line, showing it has fixed effect and random intercepts. You can 
+compare it with the linear model figure and can see the differences of the slopes.
+
+## Conclusion
+
+In this lecture you learned about the definition and types of mixed effect model, 
+when it is appropriate to use a random, fixed or mixed effect model, 
+the difference between an ordinary single-level model, and a mixed effect model,
+the assumptions of the random intercept model, hypothesis testing for the variation, 
+testing coefficient, fitting prediction model and finally, how to interpret results 
+from the fixed part and the random part of a random intercept model.
+
+## References
+
+1. Harrison XA, Donaldson L, Correa-Cano ME, Evans J, Fisher DN, Goodwin CED, Robinson BS, Hodgson DJ, Inger R. A brief introduction to mixed effects modelling and multi-model inference in ecology. PeerJ. 2018 May 23;6:e4794. doi: 10.7717/peerj.4794. PMID: 29844961; PMCID: PMC5970551.
+
+2. https://m-clark.github.io/mixed-models-with-R/random_intercepts.html
+
+3. https://medium.com/@marc.jacobs012/introduction-to-mixed-models-in-r-9c017fd83a63
+
+4. https://www.youtube.com/watch?v=c_tYZxQLoDA&list=PL8F480DgtpW9_IT7xN1XeRF_dglZmK0nM
+
+5. https://www.youtube.com/watch?v=eVuQlGDZxHs&list=PL8F480DgtpW9_IT7xN1XeRF_dglZmK0nM&index=2
+
+6.  supplementary material for Tom Snijders and Roel Bosker textbook - Shjders, T Bosker R, 1999. *Multilevel analysis: an introduction to basic and advanced mltilevel modeling,* London, Sage, including updates and corrections data set examples <http://stat.gamma.rug.nl/multilevel.htm>
+
+7.  University of Bristol, Random Intercept model, (2018). <http://www.bristol.ac.uk/cmm/learning/videos/random-intercepts.html>
+
+8. Midway, S. (2019). "Data Analysis in R." <https://bookdown.org/steve_midway/DAR/random-effects.html>
+
+

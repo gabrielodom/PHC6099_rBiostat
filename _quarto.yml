@@ -62,7 +62,7 @@ book:
         - lessons_original/04_regression_ols.qmd
         - lessons/04_regression_mls.qmd
         - lessons/04_regression_polynomial.qmd
-        - lessons_original/04_regression_random_intercept.qmd
+        - lessons/04_regression_mixed_effects.qmd
 
     - part: 05_header_generalized-linear-models.qmd
       chapters:
@@ -76,6 +76,7 @@ book:
         - lessons/06_elastic_net_regression.qmd
         - lessons/06_survival_analysis.qmd
         - lessons/06_structural_equation_models.qmd
+        - lessons/06_pca.qmd
 
     - part: 07_header_power.qmd
       chapters:

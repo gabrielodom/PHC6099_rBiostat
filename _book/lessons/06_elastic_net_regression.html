@@ -398,8 +398,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/04_regression_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
+  <a href="../lessons/04_regression_mixed_effects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Mixed Effect Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -460,6 +460,18 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06_structural_equation_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Introduction to Structural Equation Modeling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06_pca.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Linear Dimensionality Reduction</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -474,7 +486,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -908,23 +920,23 @@ Table&nbsp;35.1: Coronary Data
 </figcaption><div aria-describedby="tbl-table1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <div>
-<div id="oovwxiwufq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#oovwxiwufq table {
+<div id="nvqtrubojc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nvqtrubojc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#oovwxiwufq thead, #oovwxiwufq tbody, #oovwxiwufq tfoot, #oovwxiwufq tr, #oovwxiwufq td, #oovwxiwufq th {
+#nvqtrubojc thead, #nvqtrubojc tbody, #nvqtrubojc tfoot, #nvqtrubojc tr, #nvqtrubojc td, #nvqtrubojc th {
   border-style: none;
 }
 
-#oovwxiwufq p {
+#nvqtrubojc p {
   margin: 0;
   padding: 0;
 }
 
-#oovwxiwufq .gt_table {
+#nvqtrubojc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -950,12 +962,12 @@ Table&nbsp;35.1: Coronary Data
   border-left-color: #D3D3D3;
 }
 
-#oovwxiwufq .gt_caption {
+#nvqtrubojc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#oovwxiwufq .gt_title {
+#nvqtrubojc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -967,7 +979,7 @@ Table&nbsp;35.1: Coronary Data
   border-bottom-width: 0;
 }
 
-#oovwxiwufq .gt_subtitle {
+#nvqtrubojc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -979,7 +991,7 @@ Table&nbsp;35.1: Coronary Data
   border-top-width: 0;
 }
 
-#oovwxiwufq .gt_heading {
+#nvqtrubojc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -991,13 +1003,13 @@ Table&nbsp;35.1: Coronary Data
   border-right-color: #D3D3D3;
 }
 
-#oovwxiwufq .gt_bottom_border {
+#nvqtrubojc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#oovwxiwufq .gt_col_headings {
+#nvqtrubojc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1012,7 +1024,7 @@ Table&nbsp;35.1: Coronary Data
   border-right-color: #D3D3D3;
 }
 
-#oovwxiwufq .gt_col_heading {
+#nvqtrubojc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1032,7 +1044,7 @@ Table&nbsp;35.1: Coronary Data
   overflow-x: hidden;
 }
 
-#oovwxiwufq .gt_column_spanner_outer {
+#nvqtrubojc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1044,15 +1056,15 @@ Table&nbsp;35.1: Coronary Data
   padding-right: 4px;
 }
 
-#oovwxiwufq .gt_column_spanner_outer:first-child {
+#nvqtrubojc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#oovwxiwufq .gt_column_spanner_outer:last-child {
+#nvqtrubojc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#oovwxiwufq .gt_column_spanner {
+#nvqtrubojc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1064,11 +1076,11 @@ Table&nbsp;35.1: Coronary Data
   width: 100%;
 }
 
-#oovwxiwufq .gt_spanner_row {
+#nvqtrubojc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#oovwxiwufq .gt_group_heading {
+#nvqtrubojc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1094,7 +1106,7 @@ Table&nbsp;35.1: Coronary Data
   text-align: left;
 }
 
-#oovwxiwufq .gt_empty_group_heading {
+#nvqtrubojc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1109,15 +1121,15 @@ Table&nbsp;35.1: Coronary Data
   vertical-align: middle;
 }
 
-#oovwxiwufq .gt_from_md > :first-child {
+#nvqtrubojc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#oovwxiwufq .gt_from_md > :last-child {
+#nvqtrubojc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#oovwxiwufq .gt_row {
+#nvqtrubojc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1136,7 +1148,7 @@ Table&nbsp;35.1: Coronary Data
   overflow-x: hidden;
 }
 
-#oovwxiwufq .gt_stub {
+#nvqtrubojc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1149,7 +1161,7 @@ Table&nbsp;35.1: Coronary Data
   padding-right: 5px;
 }
 
-#oovwxiwufq .gt_stub_row_group {
+#nvqtrubojc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1163,15 +1175,15 @@ Table&nbsp;35.1: Coronary Data
   vertical-align: top;
 }
 
-#oovwxiwufq .gt_row_group_first td {
+#nvqtrubojc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#oovwxiwufq .gt_row_group_first th {
+#nvqtrubojc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#oovwxiwufq .gt_summary_row {
+#nvqtrubojc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1181,16 +1193,16 @@ Table&nbsp;35.1: Coronary Data
   padding-right: 5px;
 }
 
-#oovwxiwufq .gt_first_summary_row {
+#nvqtrubojc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#oovwxiwufq .gt_first_summary_row.thick {
+#nvqtrubojc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#oovwxiwufq .gt_last_summary_row {
+#nvqtrubojc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1200,7 +1212,7 @@ Table&nbsp;35.1: Coronary Data
   border-bottom-color: #D3D3D3;
 }
 
-#oovwxiwufq .gt_grand_summary_row {
+#nvqtrubojc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1210,7 +1222,7 @@ Table&nbsp;35.1: Coronary Data
   padding-right: 5px;
 }
 
-#oovwxiwufq .gt_first_grand_summary_row {
+#nvqtrubojc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1220,7 +1232,7 @@ Table&nbsp;35.1: Coronary Data
   border-top-color: #D3D3D3;
 }
 
-#oovwxiwufq .gt_last_grand_summary_row_top {
+#nvqtrubojc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1230,11 +1242,11 @@ Table&nbsp;35.1: Coronary Data
   border-bottom-color: #D3D3D3;
 }
 
-#oovwxiwufq .gt_striped {
+#nvqtrubojc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#oovwxiwufq .gt_table_body {
+#nvqtrubojc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1243,7 +1255,7 @@ Table&nbsp;35.1: Coronary Data
   border-bottom-color: #D3D3D3;
 }
 
-#oovwxiwufq .gt_footnotes {
+#nvqtrubojc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1257,7 +1269,7 @@ Table&nbsp;35.1: Coronary Data
   border-right-color: #D3D3D3;
 }
 
-#oovwxiwufq .gt_footnote {
+#nvqtrubojc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1266,7 +1278,7 @@ Table&nbsp;35.1: Coronary Data
   padding-right: 5px;
 }
 
-#oovwxiwufq .gt_sourcenotes {
+#nvqtrubojc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1280,7 +1292,7 @@ Table&nbsp;35.1: Coronary Data
   border-right-color: #D3D3D3;
 }
 
-#oovwxiwufq .gt_sourcenote {
+#nvqtrubojc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1288,63 +1300,63 @@ Table&nbsp;35.1: Coronary Data
   padding-right: 5px;
 }
 
-#oovwxiwufq .gt_left {
+#nvqtrubojc .gt_left {
   text-align: left;
 }
 
-#oovwxiwufq .gt_center {
+#nvqtrubojc .gt_center {
   text-align: center;
 }
 
-#oovwxiwufq .gt_right {
+#nvqtrubojc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#oovwxiwufq .gt_font_normal {
+#nvqtrubojc .gt_font_normal {
   font-weight: normal;
 }
 
-#oovwxiwufq .gt_font_bold {
+#nvqtrubojc .gt_font_bold {
   font-weight: bold;
 }
 
-#oovwxiwufq .gt_font_italic {
+#nvqtrubojc .gt_font_italic {
   font-style: italic;
 }
 
-#oovwxiwufq .gt_super {
+#nvqtrubojc .gt_super {
   font-size: 65%;
 }
 
-#oovwxiwufq .gt_footnote_marks {
+#nvqtrubojc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#oovwxiwufq .gt_asterisk {
+#nvqtrubojc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#oovwxiwufq .gt_indent_1 {
+#nvqtrubojc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#oovwxiwufq .gt_indent_2 {
+#nvqtrubojc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#oovwxiwufq .gt_indent_3 {
+#nvqtrubojc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#oovwxiwufq .gt_indent_4 {
+#nvqtrubojc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#oovwxiwufq .gt_indent_5 {
+#nvqtrubojc .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1504,11 +1516,11 @@ Table&nbsp;35.1: Coronary Data
 <div class="cell-output cell-output-stdout">
 <pre><code>5 x 1 sparse Matrix of class "dgCMatrix"
                       s0
-(Intercept)  4.791855198
-sbp          0.020080496
-dbp          0.008783703
-age         -0.008358056
-bmi         -0.045144636</code></pre>
+(Intercept)  4.833796427
+sbp          0.016509767
+dbp          0.010086680
+age         -0.002821509
+bmi         -0.043286358</code></pre>
 </div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Predict values using the fitted model</span></span>
 <span><span class="va">ridge_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">ridge_model_best</span>, newx <span class="op">=</span> <span class="va">X_test</span><span class="op">)</span></span>
@@ -1517,13 +1529,13 @@ bmi         -0.045144636</code></pre>
 <span><span class="va">ridge_rmse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">ridge_pred</span> <span class="op">-</span> <span class="va">y_test</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ridge_rmse</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9994869</code></pre>
+<pre><code>[1] 1.00202</code></pre>
 </div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Manually predict values using the fitted model and RMSE</span></span>
 <span><span class="va">ridge_pred_manual</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">X_test</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">ridge_model_best</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">y_test</span> <span class="op">-</span> <span class="va">ridge_pred_manual</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9994869</code></pre>
+<pre><code>[1] 1.00202</code></pre>
 </div>
 </div>
 </section><section id="lasso-regression" class="level3" data-number="35.5.2"><h3 data-number="35.5.2" class="anchored" data-anchor-id="lasso-regression">
@@ -1545,11 +1557,11 @@ bmi         -0.045144636</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>5 x 1 sparse Matrix of class "dgCMatrix"
                       s0
-(Intercept)  4.541831089
-sbp          0.019700866
-dbp          0.005918034
-age         -0.001589662
-bmi         -0.039151781</code></pre>
+(Intercept)  4.451313138
+sbp          0.019033872
+dbp          0.005244015
+age          .          
+bmi         -0.034847216</code></pre>
 </div>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Predict using the best lambda</span></span>
 <span><span class="va">lasso_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">lasso_model_best</span>, newx <span class="op">=</span> <span class="va">X_test</span><span class="op">)</span></span>
@@ -1558,13 +1570,13 @@ bmi         -0.039151781</code></pre>
 <span><span class="va">lasso_rmse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">lasso_pred</span> <span class="op">-</span> <span class="va">y_test</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">lasso_rmse</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.001118</code></pre>
+<pre><code>[1] 1.002444</code></pre>
 </div>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Manually predict values using the fitted model and RMSE</span></span>
 <span><span class="va">lasso_pred_manual</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">X_test</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">lasso_model_best</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">y_test</span> <span class="op">-</span> <span class="va">lasso_pred_manual</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.001118</code></pre>
+<pre><code>[1] 1.002444</code></pre>
 </div>
 </div>
 </section><section id="elastic-net-regresssion" class="level3" data-number="35.5.3"><h3 data-number="35.5.3" class="anchored" data-anchor-id="elastic-net-regresssion">
@@ -1582,12 +1594,12 @@ bmi         -0.039151781</code></pre>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">elastic_model_best</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>5 x 1 sparse Matrix of class "dgCMatrix"
-                      s0
-(Intercept)  4.575575172
-sbp          0.018992980
-dbp          0.006653255
-age         -0.001276755
-bmi         -0.039544432</code></pre>
+                       s0
+(Intercept)  4.5572244811
+sbp          0.0186750459
+dbp          0.0065594280
+age         -0.0002822666
+bmi         -0.0389448093</code></pre>
 </div>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Predict using the best lambda</span></span>
 <span><span class="va">elastic_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">elastic_model_best</span>, newx <span class="op">=</span> <span class="va">X_test</span><span class="op">)</span></span>
@@ -1596,13 +1608,13 @@ bmi         -0.039544432</code></pre>
 <span><span class="va">elastic_rmse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">elastic_pred</span> <span class="op">-</span> <span class="va">y_test</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">elastic_rmse</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.001303</code></pre>
+<pre><code>[1] 1.001745</code></pre>
 </div>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Manually predict values using the fitted model and RMSE</span></span>
 <span><span class="va">elastic_pred_manual</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">X_test</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">elastic_model_best</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">y_test</span> <span class="op">-</span> <span class="va">elastic_pred_manual</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.001303</code></pre>
+<pre><code>[1] 1.001745</code></pre>
 </div>
 </div>
 </section></section><section id="results" class="level2" data-number="35.6"><h2 data-number="35.6" class="anchored" data-anchor-id="results">
@@ -1618,12 +1630,12 @@ bmi         -0.039544432</code></pre>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">coef</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Ridge"</span>, <span class="st">"LASSO"</span>, <span class="st">"Elastic Net"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">coef</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                   Ridge        LASSO  Elastic Net
-(Intercept)  4.791855198  4.541831089  4.575575172
-sbp          0.020080496  0.019700866  0.018992980
-dbp          0.008783703  0.005918034  0.006653255
-age         -0.008358056 -0.001589662 -0.001276755
-bmi         -0.045144636 -0.039151781 -0.039544432</code></pre>
+<pre><code>                   Ridge        LASSO   Elastic Net
+(Intercept)  4.833796427  4.451313138  4.5572244811
+sbp          0.016509767  0.019033872  0.0186750459
+dbp          0.010086680  0.005244015  0.0065594280
+age         -0.002821509  0.000000000 -0.0002822666
+bmi         -0.043286358 -0.034847216 -0.0389448093</code></pre>
 </div>
 </div>
 </section><section id="rmse" class="level3" data-number="35.6.2"><h3 data-number="35.6.2" class="anchored" data-anchor-id="rmse">
@@ -1633,10 +1645,10 @@ bmi         -0.045144636 -0.039151781 -0.039544432</code></pre>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">rmse</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Ridge"</span>, <span class="st">"LASSO"</span>, <span class="st">"Elastic Net"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">rmse</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                 RMSE
-Ridge       0.9994869
-LASSO       1.0011182
-Elastic Net 1.0013034</code></pre>
+<pre><code>                RMSE
+Ridge       1.002020
+LASSO       1.002444
+Elastic Net 1.001745</code></pre>
 </div>
 </div>
 </section></section><section id="summary-1" class="level2" data-number="35.7"><h2 data-number="35.7" class="anchored" data-anchor-id="summary-1">

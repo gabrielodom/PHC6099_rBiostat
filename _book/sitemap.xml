@@ -42,7 +42,7 @@
   </url>
   <url>
     <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons/02_ttest_one_samp.html</loc>
-    <lastmod>2024-07-18T17:15:51.062Z</lastmod>
+    <lastmod>2024-07-29T22:03:48.642Z</lastmod>
   </url>
   <url>
     <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons/02_wilcoxon_one_samp.html</loc>
@@ -133,8 +133,8 @@
     <lastmod>2024-07-08T17:44:02.966Z</lastmod>
   </url>
   <url>
-    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/04_regression_random_intercept.html</loc>
-    <lastmod>2024-07-08T17:16:30.704Z</lastmod>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons/04_regression_mixed_effects.html</loc>
+    <lastmod>2024-07-29T20:29:24.251Z</lastmod>
   </url>
   <url>
     <loc>https://gabrielodom.github.io/PHC6099_rBiostat/05_header_generalized-linear-models.html</loc>
@@ -169,15 +169,19 @@
     <lastmod>2024-07-17T20:59:44.370Z</lastmod>
   </url>
   <url>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons/06_structural_equation_models.html</loc>
+    <lastmod>2024-07-26T18:18:32.423Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons/06_pca.html</loc>
+    <lastmod>2024-07-29T21:54:25.041Z</lastmod>
+  </url>
+  <url>
     <loc>https://gabrielodom.github.io/PHC6099_rBiostat/07_header_power.html</loc>
     <lastmod>2024-05-21T00:16:35.823Z</lastmod>
   </url>
   <url>
     <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons_original/07_power_ols.html</loc>
     <lastmod>2024-05-21T14:29:55.702Z</lastmod>
-  </url>
-  <url>
-    <loc>https://gabrielodom.github.io/PHC6099_rBiostat/lessons/06_structural_equation_models.html</loc>
-    <lastmod>2024-07-26T18:18:32.423Z</lastmod>
   </url>
 </urlset>

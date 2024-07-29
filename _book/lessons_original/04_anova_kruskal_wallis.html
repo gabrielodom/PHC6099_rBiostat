@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Gabriel Odom">
-<meta name="dcterms.date" content="2024-07-18">
+<meta name="dcterms.date" content="2024-07-29">
 
 <title>An R Cookbook for Public Health - 24&nbsp; Non-Parametric ANOVA: The Kruskal-Wallis Test</title>
 <style>
@@ -397,8 +397,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lessons_original/04_regression_random_intercept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Random Intercept Regression</span></span></a>
+  <a href="../lessons/04_regression_mixed_effects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Mixed Effect Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -459,6 +459,18 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06_structural_equation_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Introduction to Structural Equation Modeling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06_pca.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Linear Dimensionality Reduction</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -473,7 +485,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
   </div>
 </li>
       </ul>
@@ -533,7 +545,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 18, 2024</p>
+      <p class="date">July 29, 2024</p>
     </div>
   </div>
   
@@ -830,23 +842,23 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
 <span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>table1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="ulfxcnhypr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ulfxcnhypr table {
+<div id="uozqvsenda" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#uozqvsenda table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ulfxcnhypr thead, #ulfxcnhypr tbody, #ulfxcnhypr tfoot, #ulfxcnhypr tr, #ulfxcnhypr td, #ulfxcnhypr th {
+#uozqvsenda thead, #uozqvsenda tbody, #uozqvsenda tfoot, #uozqvsenda tr, #uozqvsenda td, #uozqvsenda th {
   border-style: none;
 }
 
-#ulfxcnhypr p {
+#uozqvsenda p {
   margin: 0;
   padding: 0;
 }
 
-#ulfxcnhypr .gt_table {
+#uozqvsenda .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -872,12 +884,12 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#ulfxcnhypr .gt_caption {
+#uozqvsenda .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ulfxcnhypr .gt_title {
+#uozqvsenda .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -889,7 +901,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-bottom-width: 0;
 }
 
-#ulfxcnhypr .gt_subtitle {
+#uozqvsenda .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -901,7 +913,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-top-width: 0;
 }
 
-#ulfxcnhypr .gt_heading {
+#uozqvsenda .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -913,13 +925,13 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ulfxcnhypr .gt_bottom_border {
+#uozqvsenda .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ulfxcnhypr .gt_col_headings {
+#uozqvsenda .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -934,7 +946,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ulfxcnhypr .gt_col_heading {
+#uozqvsenda .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -954,7 +966,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   overflow-x: hidden;
 }
 
-#ulfxcnhypr .gt_column_spanner_outer {
+#uozqvsenda .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -966,15 +978,15 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   padding-right: 4px;
 }
 
-#ulfxcnhypr .gt_column_spanner_outer:first-child {
+#uozqvsenda .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ulfxcnhypr .gt_column_spanner_outer:last-child {
+#uozqvsenda .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ulfxcnhypr .gt_column_spanner {
+#uozqvsenda .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -986,11 +998,11 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   width: 100%;
 }
 
-#ulfxcnhypr .gt_spanner_row {
+#uozqvsenda .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ulfxcnhypr .gt_group_heading {
+#uozqvsenda .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1016,7 +1028,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   text-align: left;
 }
 
-#ulfxcnhypr .gt_empty_group_heading {
+#uozqvsenda .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1031,15 +1043,15 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   vertical-align: middle;
 }
 
-#ulfxcnhypr .gt_from_md > :first-child {
+#uozqvsenda .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ulfxcnhypr .gt_from_md > :last-child {
+#uozqvsenda .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ulfxcnhypr .gt_row {
+#uozqvsenda .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1058,7 +1070,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   overflow-x: hidden;
 }
 
-#ulfxcnhypr .gt_stub {
+#uozqvsenda .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1071,7 +1083,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   padding-right: 5px;
 }
 
-#ulfxcnhypr .gt_stub_row_group {
+#uozqvsenda .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1085,15 +1097,15 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   vertical-align: top;
 }
 
-#ulfxcnhypr .gt_row_group_first td {
+#uozqvsenda .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ulfxcnhypr .gt_row_group_first th {
+#uozqvsenda .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ulfxcnhypr .gt_summary_row {
+#uozqvsenda .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1103,16 +1115,16 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   padding-right: 5px;
 }
 
-#ulfxcnhypr .gt_first_summary_row {
+#uozqvsenda .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ulfxcnhypr .gt_first_summary_row.thick {
+#uozqvsenda .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ulfxcnhypr .gt_last_summary_row {
+#uozqvsenda .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1122,7 +1134,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ulfxcnhypr .gt_grand_summary_row {
+#uozqvsenda .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1132,7 +1144,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   padding-right: 5px;
 }
 
-#ulfxcnhypr .gt_first_grand_summary_row {
+#uozqvsenda .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1142,7 +1154,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#ulfxcnhypr .gt_last_grand_summary_row_top {
+#uozqvsenda .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1152,11 +1164,11 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ulfxcnhypr .gt_striped {
+#uozqvsenda .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ulfxcnhypr .gt_table_body {
+#uozqvsenda .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1165,7 +1177,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ulfxcnhypr .gt_footnotes {
+#uozqvsenda .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1179,7 +1191,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ulfxcnhypr .gt_footnote {
+#uozqvsenda .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1188,7 +1200,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   padding-right: 5px;
 }
 
-#ulfxcnhypr .gt_sourcenotes {
+#uozqvsenda .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1202,7 +1214,7 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ulfxcnhypr .gt_sourcenote {
+#uozqvsenda .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1210,63 +1222,63 @@ Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601</code></pre>
   padding-right: 5px;
 }
 
-#ulfxcnhypr .gt_left {
+#uozqvsenda .gt_left {
   text-align: left;
 }
 
-#ulfxcnhypr .gt_center {
+#uozqvsenda .gt_center {
   text-align: center;
 }
 
-#ulfxcnhypr .gt_right {
+#uozqvsenda .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ulfxcnhypr .gt_font_normal {
+#uozqvsenda .gt_font_normal {
   font-weight: normal;
 }
 
-#ulfxcnhypr .gt_font_bold {
+#uozqvsenda .gt_font_bold {
   font-weight: bold;
 }
 
-#ulfxcnhypr .gt_font_italic {
+#uozqvsenda .gt_font_italic {
   font-style: italic;
 }
 
-#ulfxcnhypr .gt_super {
+#uozqvsenda .gt_super {
   font-size: 65%;
 }
 
-#ulfxcnhypr .gt_footnote_marks {
+#uozqvsenda .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ulfxcnhypr .gt_asterisk {
+#uozqvsenda .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ulfxcnhypr .gt_indent_1 {
+#uozqvsenda .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ulfxcnhypr .gt_indent_2 {
+#uozqvsenda .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ulfxcnhypr .gt_indent_3 {
+#uozqvsenda .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ulfxcnhypr .gt_indent_4 {
+#uozqvsenda .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ulfxcnhypr .gt_indent_5 {
+#uozqvsenda .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Gabriel Odom">
+<title>An R Cookbook for Public Health - 38&nbsp; Linear Dimensionality Reduction</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../07_header_power.html" rel="next">
+<link href="../lessons/06_structural_equation_models.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="../site_libs/kePrint-0.0.1/kePrint.js"></script><link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../06_header_special-topics.html">Special Topics in Statistical Modelling</a></li><li class="breadcrumb-item"><a href="../lessons/06_pca.html"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Linear Dimensionality Reduction</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">An R Cookbook for Public Health</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/gabrielodom/PHC6099_rBiostat" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Course Materials for PHC 6099: ‘R Computing for Health Sciences’</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">About this Book</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../01_header_EDA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exploratory Data Analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_mosaic_violin.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Mosaic &amp; Box/Violin Plots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_scatterplots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">How to Create a Scatterplot</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/01_skimr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Skimr Package</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_table1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Demographics Table With Table1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01_gtsummary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Table by gtsummary</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../02_header_one-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">One-Sample Tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_z-test_one_prop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Z-Test for One Proportion</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_ttest_one_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">One-sample/paired t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_wilcoxon_one_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Wilcoxon Signed Rank Test for One Sample</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_mcnemar_paired_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">McNemar’s Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_cochrans_q_paired_samp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Cochran’s Q Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_chiSq_GoF.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">The Chi Squared Goodness-of-Fit Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_transformations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Transformations to Normality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02_fisher_exact_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Fisher’s Exact Test</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../03_header_two-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Two-Sample Tests</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Two sample <span class="math inline">\(t\)</span>-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_welch_ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Two sample Welchs test or Welchs t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_mann_whitney.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Mann-Whitney-U Test Example</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_bootstrap_conf_int.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Bootstrap Tests</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03_two_sample_chi_sq_independence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Chi-Square Test of Independence</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../04_header_anova-and-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ANOVA and Regression</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_one_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_two_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Two-Way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_welch_two_way.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Welch’s Anova</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_anova_kruskal_wallis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Non-Parametric ANOVA: The Kruskal-Wallis Test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_anova_random_intercept.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Repeated Measures ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_corr_cov.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Correlation and Covariance Matrices</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/04_regression_ols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Ordinary Least Squares Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_regression_mls.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_regression_polynomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Introduction to Polynomial Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04_regression_mixed_effects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Mixed Effect Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../05_header_generalized-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Generalized Linear Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Generalized Linear Models for Binary Response</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_ordinal_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Ordinal Logistic Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_poisson.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Poisson Regression Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05_glm_negative_binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Generalized Linear Models: Negative Binomial</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../06_header_special-topics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Special Topics in Statistical Modelling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06_elastic_net_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Elastic Net Regression Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06_survival_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Survival Analysis in R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06_structural_equation_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Introduction to Structural Equation Modeling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06_pca.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Linear Dimensionality Reduction</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../07_header_power.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Power and Sample Size Determination</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons_original/07_power_ols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Power Analysis for OLS Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">38.1</span> Introduction</a></li>
+  <li><a href="#principle-of-feature-dimensionality-reduction" id="toc-principle-of-feature-dimensionality-reduction" class="nav-link" data-scroll-target="#principle-of-feature-dimensionality-reduction"><span class="header-section-number">38.2</span> Principle of Feature Dimensionality Reduction</a></li>
+  <li><a href="#linear-transformations" id="toc-linear-transformations" class="nav-link" data-scroll-target="#linear-transformations"><span class="header-section-number">38.3</span> Linear Transformations</a></li>
+  <li><a href="#principal-component-analysis-pca" id="toc-principal-component-analysis-pca" class="nav-link" data-scroll-target="#principal-component-analysis-pca"><span class="header-section-number">38.4</span> Principal Component Analysis (PCA)</a></li>
+  <li>
+<a href="#pca-example" id="toc-pca-example" class="nav-link" data-scroll-target="#pca-example"><span class="header-section-number">38.5</span> PCA Example</a>
+  <ul class="collapse">
+<li><a href="#data-source-and-description" id="toc-data-source-and-description" class="nav-link" data-scroll-target="#data-source-and-description"><span class="header-section-number">38.5.1</span> Data Source and Description</a></li>
+  <li><a href="#loading-the-dataset" id="toc-loading-the-dataset" class="nav-link" data-scroll-target="#loading-the-dataset"><span class="header-section-number">38.5.2</span> Loading the Dataset</a></li>
+  <li><a href="#preprocess-the-data" id="toc-preprocess-the-data" class="nav-link" data-scroll-target="#preprocess-the-data"><span class="header-section-number">38.5.3</span> Preprocess the data:</a></li>
+  <li><a href="#perform-dimensionality-reduction" id="toc-perform-dimensionality-reduction" class="nav-link" data-scroll-target="#perform-dimensionality-reduction"><span class="header-section-number">38.5.4</span> Perform Dimensionality Reduction</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#analyze-the-results" id="toc-analyze-the-results" class="nav-link" data-scroll-target="#analyze-the-results"><span class="header-section-number">38.6</span> Analyze the Results</a>
+  <ul class="collapse">
+<li><a href="#original-550-metabolites" id="toc-original-550-metabolites" class="nav-link" data-scroll-target="#original-550-metabolites"><span class="header-section-number">38.6.1</span> Original 550 Metabolites</a></li>
+  <li><a href="#first-35-principal-components" id="toc-first-35-principal-components" class="nav-link" data-scroll-target="#first-35-principal-components"><span class="header-section-number">38.6.2</span> First 35 Principal Components</a></li>
+  <li><a href="#post-hoc-tests" id="toc-post-hoc-tests" class="nav-link" data-scroll-target="#post-hoc-tests"><span class="header-section-number">38.6.3</span> Post-Hoc Tests</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#interpret-the-findings" id="toc-interpret-the-findings" class="nav-link" data-scroll-target="#interpret-the-findings"><span class="header-section-number">38.7</span> Interpret the Findings</a>
+  <ul class="collapse">
+<li><a href="#pca-biplot-figure-4" id="toc-pca-biplot-figure-4" class="nav-link" data-scroll-target="#pca-biplot-figure-4"><span class="header-section-number">38.7.1</span> PCA Biplot (Figure 4)</a></li>
+  <li><a href="#scree-plot-figure-5" id="toc-scree-plot-figure-5" class="nav-link" data-scroll-target="#scree-plot-figure-5"><span class="header-section-number">38.7.2</span> Scree Plot (Figure 5)</a></li>
+  <li><a href="#pca-variance-plot-figure-6" id="toc-pca-variance-plot-figure-6" class="nav-link" data-scroll-target="#pca-variance-plot-figure-6"><span class="header-section-number">38.7.3</span> PCA Variance Plot (Figure 6)</a></li>
+  </ul>
+</li>
+  <li><a href="#conclusion-and-discussion" id="toc-conclusion-and-discussion" class="nav-link" data-scroll-target="#conclusion-and-discussion"><span class="header-section-number">38.8</span> Conclusion and Discussion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">38.9</span> References</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/06_pca.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../06_header_special-topics.html">Special Topics in Statistical Modelling</a></li><li class="breadcrumb-item"><a href="../lessons/06_pca.html"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Linear Dimensionality Reduction</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Linear Dimensionality Reduction</span>
+</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Freeman Lewis, MPH and Gabriel Odom, PhD, ThD </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Florida International University Robert Stempel College of Public Health and Social Work
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+
+</header><section id="introduction" class="level2" data-number="38.1"><h2 data-number="38.1" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">38.1</span> Introduction</h2>
+<p>In research, datasets with many features are called high-dimensional datasets. The growth and update speed of datasets are accelerating, and data is developing in a high-dimensional and unstructured direction. Big complex data contains a lot of useful information, but it also increases the difficulty of identifying this information, also known as the “curse of dimensionality” (Jia et al., 2022). Additionally, a significant amount of computing time and storage space is spent on processing the data making efficient robust information retrival resource a priority. We know effective information is submerged in complex data, making it difficult to discover the essential characteristics of the data. It takes considerable time and manpower to process the data, which also negatively impacts the accuracy of recognition (Jia et al., 2022).</p>
+<p>In the figure below, Jia et al., illustrate the performance of a classifier (Jia et al., 2022). As demonstrated, when the data dimension increases, the performance of the classifier improves; however, when the data dimension continues to increase, the performance of the classifier deteriorates. Analyzing the vast amount of information and extracting useful information features from high-dimensional data, as well as eliminating the influence of related or repetitive factors, are problems that can be mitigated through dimension reduction. In short, <strong>the basic principle of feature dimensionality reduction is to map a data sample from a high-dimensional space to a relatively low-dimensional space. The primary objective is to find the mapping and obtain an effective low-dimensional structure hidden in high-dimensional observable data.</strong></p>
+<div id="fig-classif-performance-decay" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-classif-performance-decay-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig/06_classifier_performance.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-classif-performance-decay-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;38.1: Performance of the classifier as a function of data dimension
+</figcaption></figure>
+</div>
+</section><section id="principle-of-feature-dimensionality-reduction" class="level2" data-number="38.2"><h2 data-number="38.2" class="anchored" data-anchor-id="principle-of-feature-dimensionality-reduction">
+<span class="header-section-number">38.2</span> Principle of Feature Dimensionality Reduction</h2>
+<p>Datasets with many characteristics are called high-dimensional data. There are often lots of redundant information in it, including related or duplicated factors. Dimensionality reduction aims to eliminate these interferences. Feature dimensionality reduction uses existing feature parameters to form a low-dimensional feature space and overcomes the effects of redundant or irrelevant information, mapping the effective information contained in the original features to fewer features (Jia et al., 2022).</p>
+<p>In mathematical notation, suppose there is an <span class="math inline">\(n\)</span>-dimensional vector:</p>
+<p><span class="math display">\[
+\mathbf{X} = [x_1, x_2, \ldots, x_n]^T,
+\]</span> Note: <span class="math inline">\(T\)</span> indicates that the vector <span class="math inline">\([x_1, x_2, \ldots, x_n]\)</span> is being transposed from a row vector to a column vector.</p>
+<p>These features are mapped to an <span class="math inline">\(m\)</span>-dimensional vector <span class="math inline">\(Y\)</span> through a map <span class="math inline">\(f\)</span>, where:</p>
+<p><span class="math display">\[
+\mathbf{Y} = [y_1, y_2, \ldots, y_m]^T,
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+m \ll n.
+\]</span></p>
+<p>The vector <span class="math inline">\(Y\)</span> should contain the main features of vector <span class="math inline">\(X\)</span>. Mathematically, the mapping function can be expressed as:</p>
+<p><span class="math display">\[
+\mathbf{Y} = f(\mathbf{X}).
+\]</span></p>
+<p>This is the process of feature extraction and selection. It can also be called the “low loss reduction dimension” process of the original data. A low-dimensional vector resulting from dimension reduction can be applied to fields such as pattern recognition, data mining, and machine learning.</p>
+<p>This mapping <span class="math inline">\(f\)</span> is the algorithm we want to find for feature reduction. The choice of mapping <span class="math inline">\(f\)</span> differs depending on the dataset and question being addressed.</p>
+</section><section id="linear-transformations" class="level2" data-number="38.3"><h2 data-number="38.3" class="anchored" data-anchor-id="linear-transformations">
+<span class="header-section-number">38.3</span> Linear Transformations</h2>
+<p>A specific way to achieve dimensionality reduction is through linear transformations (Worley et al., 2013). The goal of multivariate dimensionality reduction through linear transformations is to find a <span class="math inline">\(K\)</span> x <span class="math inline">\(P\)</span> matrix <span class="math inline">\(A\)</span> that optimally transforms the data matrix <span class="math inline">\(X\)</span> into a new matrix of <span class="math inline">\(P\)</span>-dimensional scores given by <span class="math inline">\(T\)</span>:</p>
+<p><span class="math display">\[
+\mathbf{T} = \mathbf{X}\mathbf{A},
+\]</span></p>
+<p>Thus, each row of <span class="math inline">\(T\)</span> is a transformation of the corresponding row of <span class="math inline">\(X\)</span>. Alternately, expressing the <span class="math inline">\(i\)</span>-th row of <span class="math inline">\(X\)</span> as a column vector <span class="math inline">\(x_i\)</span> and the corresponding row of <span class="math inline">\(T\)</span> as a column vector <span class="math inline">\(t_i\)</span> shows that the so-called ‘weights’ matrix <span class="math inline">\(A^T\)</span> defines a linear transformation from the input data space occupied by <span class="math inline">\(X\)</span> to the output space of <span class="math inline">\(T\)</span>, termed the ‘scores’ space:</p>
+<p><span class="math display">\[
+\mathbf{t}_i = \mathbf{A}^T \mathbf{x}_i.
+\]</span></p>
+<p>Another key characteristic of high-dimensional datasets is having more observed variables <span class="math inline">\(K\)</span> than the number of observations <span class="math inline">\(N\)</span>, which is known as the ‘large <span class="math inline">\(K\)</span>, small <span class="math inline">\(N\)</span>’ problem in statistics (Worley et al., 2013). This issue makes traditional linear regression methods unworkable because <span class="math inline">\(X\)</span> becomes non-invertible (i.e., singular) and no unique least-squares solution can be found. Therefore, multivariate analysis methods that can handle significant collinearity in <span class="math inline">\(X\)</span> are needed. When <span class="math inline">\(P\)</span> is less than <span class="math inline">\(K\)</span>, the dimensionality of the scores space will be reduced compared to the input data space, achieving dimensionality reduction. This is an essential feature of multivariate analysis across various fields. By combining feature dimensionality reduction principles with linear transformations, we can effectively reduce the dimensionality of high-dimensional data while preserving its essential features, leading to more efficient and accurate analysis (Worley et al., 2013).</p>
+</section><section id="principal-component-analysis-pca" class="level2" data-number="38.4"><h2 data-number="38.4" class="anchored" data-anchor-id="principal-component-analysis-pca">
+<span class="header-section-number">38.4</span> Principal Component Analysis (PCA)</h2>
+<p>Principal Component Analysis (PCA) is a widely used method in multivariate analysis. The main goal of PCA is to find a linear transformation that captures as much of the variance in the original data as possible in the lower-dimensional output data (Worley et al., 2013). The transformation matrix <span class="math inline">\(A\)</span> that achieves this is composed of the first <span class="math inline">\(P\)</span> eigenvectors of the sample covariance matrix <span class="math inline">\(S\)</span>:</p>
+<p><span class="math display">\[
+\mathbf{S} = \frac{1}{N-1} \mathbf{X}^T \mathbf{H} \mathbf{X} = \mathbf{Q} \mathbf{\Lambda} \mathbf{Q}^{-1}
+\]</span></p>
+<p>Here, <span class="math inline">\(H\)</span> is the <span class="math inline">\(N\)</span>x<span class="math inline">\(N\)</span> centering matrix used to center each variable around its sample mean. The second equality represents the eigendecomposition of <span class="math inline">\(S\)</span>, where <span class="math inline">\(Q\)</span> is the matrix of eigenvectors and <span class="math inline">\(\mathbf{\Lambda}\)</span> is a diagonal matrix of the corresponding eigenvalues. If <span class="math inline">\(X\)</span> is left unscaled, the eigenvalues in <span class="math inline">\(\mathbf{\Lambda}\)</span> equal the variances of the transformed data in <span class="math inline">\(T\)</span>, allowing the calculation of the ratio of variance preserved during the transformation relative to the original variance:</p>
+<p><span class="math display">\[
+R^2_i = \frac{\Lambda_{ii}}{\sum_{j=1}^N S_{jj}}
+\]</span></p>
+<p>where <span class="math inline">\(R^2_i\)</span> represents the amount of variance in <span class="math inline">\(X\)</span> preserved in the <span class="math inline">\(i\)</span>-th principal component. Since <span class="math inline">\(\mathbf{\Lambda_{ii}}\)</span> decreases monotonically with <span class="math inline">\(i\)</span>, each subsequent principal component preserves progressively less of the original data’s variance.</p>
+<p>The following exercise will demonstrate PCA utilizing the following material:</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/statistikat/VIM">VIM</a></span><span class="op">)</span> <span class="co"># For KNN imputation</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/topepo/caret/">caret</a></span><span class="op">)</span> <span class="co"># For preProcess function</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.sthda.com/english/rpkgs/factoextra">factoextra</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://sjmgarnier.github.io/viridis/">viridis</a></span><span class="op">)</span> <span class="co"># Load viridis for color palette</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vegandevs/vegan">vegan</a></span><span class="op">)</span> <span class="co"># Load vegan for PERMANOVA</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span> <span class="co"># For creating tables</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/">kableExtra</a></span><span class="op">)</span> <span class="co"># For enhancing tables</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="pca-example" class="level2" data-number="38.5"><h2 data-number="38.5" class="anchored" data-anchor-id="pca-example">
+<span class="header-section-number">38.5</span> PCA Example</h2>
+<p>We will use the following steps:</p>
+<ol type="1">
+<li>
+<strong>Load the dataset</strong>:
+<ul>
+<li>Import the data file.</li>
+<li>Check for missing values.</li>
+</ul>
+</li>
+<li>
+<strong>Preprocess the data</strong>:
+<ul>
+<li>Handle missing values.</li>
+<li>Normalize the data.</li>
+</ul>
+</li>
+<li>
+<strong>Perform dimensionality reduction</strong>:
+<ul>
+<li>Apply PCA.</li>
+<li>Visualize the principal components.</li>
+</ul>
+</li>
+<li>
+<strong>Analyze the results</strong>:
+<ul>
+<li>Interpret the loadings.</li>
+<li>Assess the variance explained.</li>
+</ul>
+</li>
+<li>
+<strong>Interpret the findings</strong>:
+<ul>
+<li>Relate the findings to biological significance.</li>
+<li>Discuss potential applications.</li>
+</ul>
+</li>
+</ol>
+<section id="data-source-and-description" class="level3" data-number="38.5.1"><h3 data-number="38.5.1" class="anchored" data-anchor-id="data-source-and-description">
+<span class="header-section-number">38.5.1</span> Data Source and Description</h3>
+<p>For this exercise we will use a metabolomics dataset because metabolomic datasets are inherently high-dimensional, requiring dimensionality reduction. Metabolomics is described as the quantitative measurement of the complex metabolic response of living systems to various stimuli or genetic changes. This means that metabolomic studies provide insights in the field of systems biology, capturing the molecular-level responses of an organism’s genome, transcriptome, and proteome to specific changes or stimuli. Metabolites, which are the final products of cellular processes, directly reflect enzymatic and protein activity. Therefore, they are more closely related to an organism’s phenotype or disease state than genetic or proteomic data alone. This is because a change in a gene or protein expression does not always correspond directly to a change in protein activity, whereas changes in metabolites are directly linked to such variations. As a result, metabolomics is widely used to identify disease biomarkers, support drug discovery, and study a variety of areas including plants, bacteria, nutrition, and the environment, among many other applications.</p>
+<p>The variables in the dataset are:</p>
+<ul>
+<li><strong>Sample</strong></li>
+<li><strong>Group</strong></li>
+<li><strong>Metabolite Concentrations (1-550)</strong></li>
+</ul></section><section id="loading-the-dataset" class="level3" data-number="38.5.2"><h3 data-number="38.5.2" class="anchored" data-anchor-id="loading-the-dataset">
+<span class="header-section-number">38.5.2</span> Loading the Dataset</h3>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Read the data</span></span>
+<span><span class="va">pca_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span></span>
+<span>  <span class="st">"../data/06_pca_eg_metabolomics.csv"</span>,</span>
+<span>  show_col_types <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Show the first 6 rows and the first 4 columns of the data set</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">pca_data</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, <span class="fl">6</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  Sample  Group Metabolite1 Metabolite2
+  &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+1 Blood_1 A        1432047.     292764.
+2 Blood_2 A        1346463.      10518.
+3 Blood_3 A        1648569.     403325.
+4 Blood_4 A        3697730.    1478574.
+5 Blood_5 A        1124143.     598174.
+6 Blood_6 A        3694154.     421392.</code></pre>
+</div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Check for missing values</span></span>
+<span><span class="va">missing_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">pca_data</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Number of missing values: "</span>, <span class="va">missing_values</span>, <span class="st">"\n"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of missing values:  2 </code></pre>
+</div>
+</div>
+</section><section id="preprocess-the-data" class="level3" data-number="38.5.3"><h3 data-number="38.5.3" class="anchored" data-anchor-id="preprocess-the-data">
+<span class="header-section-number">38.5.3</span> Preprocess the data:</h3>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># KNN imputation for missing values</span></span>
+<span><span class="co"># Convert data frame to matrix for KNN imputation</span></span>
+<span><span class="va">data_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">pca_data</span><span class="op">[</span> , <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">pca_data</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="co"># Exclude Sample and Group columns</span></span>
+<span><span class="va">data_matrix_imputed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/VIM/man/kNN.html">kNN</a></span><span class="op">(</span><span class="va">data_matrix</span>, k <span class="op">=</span> <span class="fl">5</span>, imp_var <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Convert back to data frame and add the Sample and Group columns</span></span>
+<span><span class="va">pca_data_imputed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">data_matrix_imputed</span><span class="op">)</span></span>
+<span><span class="va">pca_data_imputed</span><span class="op">$</span><span class="va">Sample</span> <span class="op">&lt;-</span> <span class="va">pca_data</span><span class="op">$</span><span class="va">Sample</span></span>
+<span><span class="va">pca_data_imputed</span><span class="op">$</span><span class="va">Group</span> <span class="op">&lt;-</span> <span class="va">pca_data</span><span class="op">$</span><span class="va">Group</span></span>
+<span></span>
+<span><span class="co"># Pivot longer for ggplot</span></span>
+<span><span class="va">pca_data_long</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">pca_data_imputed</span>,</span>
+<span>  cols <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">Sample</span>, <span class="va">Group</span><span class="op">)</span>,</span>
+<span>  names_to <span class="op">=</span> <span class="st">"Metabolite"</span>,</span>
+<span>  values_to <span class="op">=</span> <span class="st">"Concentration"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Ensure Concentration column is numeric</span></span>
+<span><span class="va">pca_data_long</span><span class="op">$</span><span class="va">Concentration</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">pca_data_long</span><span class="op">$</span><span class="va">Concentration</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Set the maximum x-axis limit</span></span>
+<span><span class="va">max_x_limit</span> <span class="op">&lt;-</span> <span class="fl">2e6</span>  <span class="co"># Adjust this value as needed</span></span>
+<span></span>
+<span><span class="co"># Create the histogram with a continuous scale and limited x-axis</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">pca_data_long</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Concentration</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">100</span>, fill <span class="op">=</span> <span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html">viridis</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">max_x_limit</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Histogram of Metabolite Concentrations"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Frequency"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Concentration"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-plot-original" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-plot-original-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="06_pca_files/figure-html/fig-plot-original-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-original-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;38.2: Histogram of Metabolite Concentrations (Log Scale on X-Axis)
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Now we will apply Log base 10 Transformation</p>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Log base 10 transform the Concentration column</span></span>
+<span><span class="va">pca_data_long</span> <span class="op">&lt;-</span> <span class="va">pca_data_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co"># Adding 1 to avoid log(0)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Log_Concentration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span><span class="op">(</span><span class="va">Concentration</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Plot histogram for the overall distribution of metabolite concentrations after log transformation</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">pca_data_long</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Log_Concentration</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">30</span>, fill <span class="op">=</span> <span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html">viridis</a></span><span class="op">(</span><span class="fl">30</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Histogram of Metabolite Concentrations (After Log Transformation)"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Frequency"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Log10(Concentration)"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-plot-Log" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-plot-Log-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="06_pca_files/figure-html/fig-plot-Log-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-Log-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;38.3: Histogram of Metabolite Concentrations (After Log Transformation)
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>Now we will apply Autoscaling</p>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Autoscaling (standardization)</span></span>
+<span><span class="va">preProcValues</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/preProcess.html">preProcess</a></span><span class="op">(</span></span>
+<span>  <span class="va">pca_data_long</span><span class="op">[</span>, <span class="st">"Log_Concentration"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>,</span>
+<span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"center"</span>, <span class="st">"scale"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">scaled_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span></span>
+<span>  <span class="va">preProcValues</span>,</span>
+<span>  <span class="va">pca_data_long</span><span class="op">[</span>, <span class="st">"Log_Concentration"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Convert the scaled values from tibble to numeric vector</span></span>
+<span><span class="va">pca_data_long</span><span class="op">$</span><span class="va">Scaled_Log_Concentration</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">scaled_values</span><span class="op">$</span><span class="va">Log_Concentration</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Plot histogram for the overall distribution of metabolite concentrations</span></span>
+<span><span class="co">#   after autoscaling</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">pca_data_long</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Scaled_Log_Concentration</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">30</span>, fill <span class="op">=</span> <span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html">viridis</a></span><span class="op">(</span><span class="fl">30</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Histogram of Metabolite Concentrations (After Autoscaling)"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Frequency"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Scaled Log10(Concentration)"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-plot-Standardized" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-plot-Standardized-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="06_pca_files/figure-html/fig-plot-Standardized-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-Standardized-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;38.4: Histogram of Metabolite Concentrations (After Autoscaling)
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="perform-dimensionality-reduction" class="level3" data-number="38.5.4"><h3 data-number="38.5.4" class="anchored" data-anchor-id="perform-dimensionality-reduction">
+<span class="header-section-number">38.5.4</span> Perform Dimensionality Reduction</h3>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Pivot the data to wide format for PCA</span></span>
+<span><span class="va">pca_data_wide</span> <span class="op">&lt;-</span> <span class="va">pca_data_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Sample</span>, <span class="va">Group</span>, <span class="va">Metabolite</span>, <span class="va">Scaled_Log_Concentration</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">Metabolite</span>, values_from <span class="op">=</span> <span class="va">Scaled_Log_Concentration</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Perform PCA on the scaled log concentration data</span></span>
+<span><span class="va">pca_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span></span>
+<span>  <span class="va">pca_data_wide</span><span class="op">[</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">]</span>,</span>
+<span>  center <span class="op">=</span> <span class="cn">TRUE</span>, scale. <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="co"># To return the metabolite data rotated into the PC vector space; this is the</span></span>
+<span>  <span class="co">#   matrix we will use to reduce the dimension</span></span>
+<span>  retx <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Calculate the percentage of variance explained by each principal component</span></span>
+<span><span class="va">percent_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">100</span> <span class="op">*</span> <span class="va">pca_result</span><span class="op">$</span><span class="va">sdev</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pca_result</span><span class="op">$</span><span class="va">sdev</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">pc1_label</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"PC1 ("</span>, <span class="va">percent_var</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">"%)"</span><span class="op">)</span></span>
+<span><span class="va">pc2_label</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"PC2 ("</span>, <span class="va">percent_var</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="st">"%)"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Plot PCA biplot after preprocessing with ellipses (only individuals)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/fviz_pca.html">fviz_pca_ind</a></span><span class="op">(</span></span>
+<span>  <span class="va">pca_result</span>, </span>
+<span>  <span class="co"># Show points only (not text)</span></span>
+<span>  geom.ind <span class="op">=</span> <span class="st">"point"</span>,      </span>
+<span>  <span class="co"># Color by group</span></span>
+<span>  col.ind <span class="op">=</span> <span class="va">pca_data_wide</span><span class="op">$</span><span class="va">Group</span>, </span>
+<span>  <span class="co"># Use viridis color palette</span></span>
+<span>  palette <span class="op">=</span> <span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html">viridis</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">pca_data_wide</span><span class="op">$</span><span class="va">Group</span><span class="op">)</span><span class="op">)</span> <span class="op">)</span>, </span>
+<span>  <span class="co"># Add concentration ellipses</span></span>
+<span>  addEllipses <span class="op">=</span> <span class="cn">TRUE</span>,      </span>
+<span>  legend.title <span class="op">=</span> <span class="st">"Groups"</span>,</span>
+<span>  <span class="co"># Increase point size</span></span>
+<span>  pointsize <span class="op">=</span> <span class="fl">4</span></span>
+<span><span class="op">)</span> <span class="op">+</span>         </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"PCA Biplot"</span>, x <span class="op">=</span> <span class="va">pc1_label</span>, y <span class="op">=</span> <span class="va">pc2_label</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-plot-PCA" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-plot-PCA-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="06_pca_files/figure-html/fig-plot-PCA-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-PCA-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;38.5: PCA Biplot
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p><strong>Description</strong>: This plot shows the distribution of samples across the first two principal components (PC1 and PC2), which explain 11.4% and 9.6% of the variance, respectively. Different groups (A, B, C, D) are represented by distinct shapes and colors.</p>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Scree Plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/eigenvalue.html">fviz_eig</a></span><span class="op">(</span></span>
+<span>  <span class="va">pca_result</span>,</span>
+<span>  addlabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span><span class="op">)</span>,</span>
+<span>  barfill <span class="op">=</span> <span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html">viridis</a></span><span class="op">(</span><span class="fl">1</span>, begin <span class="op">=</span> <span class="fl">0.7</span>, end <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Scree Plot"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Principal Components"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Percentage of Variance Explained"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://sjmgarnier.github.io/viridis/reference/scale_viridis.html">scale_color_viridis</a></span><span class="op">(</span>discrete <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-plot-Scree" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-plot-Scree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="06_pca_files/figure-html/fig-plot-Scree-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-Scree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;38.6: Scree Plot
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p><strong>Description</strong>: The scree plot shows the percentage of variance explained by each of the principal components.</p>
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">pca_result</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/eigenvalue.html">get_eig</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"dimension"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>q <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html">str_remove</a></span><span class="op">(</span><span class="va">dimension</span>, pattern <span class="op">=</span> <span class="st">"Dim."</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">q</span>, y <span class="op">=</span> <span class="va">cumulative.variance.percent</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Cumulative Variance Explained"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Percent Variance"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"First q Principal Components"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span>, by <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span>intercept <span class="op">=</span> <span class="fl">80</span>, slope <span class="op">=</span> <span class="fl">0</span>, colour <span class="op">=</span> <span class="st">"darkgreen"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-cuml-var" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-cuml-var-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="06_pca_files/figure-html/fig-cuml-var-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cuml-var-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;38.7: Cumulative Variance Explained by PCs
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p><strong>Description</strong>: This plot shows that we need the first 35 principal components to explain 80% of the information in the original 550 metabolites.</p>
+<div class="cell">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calculate contributions of variables</span></span>
+<span><span class="va">var_contrib</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/get_pca.html">get_pca_var</a></span><span class="op">(</span><span class="va">pca_result</span><span class="op">)</span><span class="op">$</span><span class="va">contrib</span></span>
+<span></span>
+<span><span class="co"># Find the top contributing variables</span></span>
+<span><span class="va">top_contributors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">var_contrib</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># PCA Variance Plot focusing on top contributors</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/fviz_pca.html">fviz_pca_var</a></span><span class="op">(</span></span>
+<span>  <span class="va">pca_result</span>, </span>
+<span>  <span class="co"># Select top 20 contributing variables</span></span>
+<span>  select.var <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>contrib <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>, </span>
+<span>  <span class="co"># Color by contributions to the PCs</span></span>
+<span>  col.var <span class="op">=</span> <span class="st">"contrib"</span>, </span>
+<span>  <span class="co"># Color gradient</span></span>
+<span>  gradient.cols <span class="op">=</span> <span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html">viridis</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>, </span>
+<span>  legend.title <span class="op">=</span> <span class="st">"Contributions"</span>,</span>
+<span>  <span class="co"># Use repel to avoid text overlap</span></span>
+<span>  repel <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"PCA Variance Plot (Top 20 Contributors)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="co"># Adjust text size</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">12</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-plot-VariancePlot" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-plot-VariancePlot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="06_pca_files/figure-html/fig-plot-VariancePlot-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-VariancePlot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;38.8: PCA Variance Plot (Top 20 Contributors)
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p><strong>Description</strong>: This plot shows the top 20 metabolites contributing to the variance in the first two principal components (Dim1 and Dim2).</p>
+</section></section><section id="analyze-the-results" class="level2" data-number="38.6"><h2 data-number="38.6" class="anchored" data-anchor-id="analyze-the-results">
+<span class="header-section-number">38.6</span> Analyze the Results</h2>
+<section id="original-550-metabolites" class="level3" data-number="38.6.1"><h3 data-number="38.6.1" class="anchored" data-anchor-id="original-550-metabolites">
+<span class="header-section-number">38.6.1</span> Original 550 Metabolites</h3>
+<p>We first analyze the data without dimension reduction.</p>
+<div class="cell">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Prepare data for PERMANOVA</span></span>
+<span><span class="co"># Use the scaled log concentrations and group information; make sure it's a</span></span>
+<span><span class="co">#   data frame</span></span>
+<span><span class="va">scaled_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">pca_data_wide</span><span class="op">[</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">groups</span> <span class="op">&lt;-</span> <span class="va">pca_data_wide</span><span class="op">$</span><span class="va">Group</span></span>
+<span></span>
+<span><span class="co"># Calculate distance matrix</span></span>
+<span><span class="va">dist_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="va">scaled_data</span>, method <span class="op">=</span> <span class="st">"euclidean"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Perform PERMANOVA</span></span>
+<span><span class="va">permanova_result</span> <span class="op">&lt;-</span> <span class="fu">vegan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/adonis.html">adonis2</a></span><span class="op">(</span></span>
+<span>  <span class="va">dist_matrix</span> <span class="op">~</span> <span class="va">groups</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">pca_data_wide</span>,</span>
+<span>  permutations <span class="op">=</span> <span class="fl">999</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print PERMANOVA results in a table format</span></span>
+<span><span class="va">permanova_table</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="va">permanova_result</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="st">"Term"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span></span>
+<span>    `Sum of Squares` <span class="op">=</span> <span class="va">`SumOfSqs`</span>,</span>
+<span>    `R-Squared` <span class="op">=</span> <span class="va">`R2`</span>,</span>
+<span>    `F-Value` <span class="op">=</span> <span class="va">`F`</span>,</span>
+<span>    `P-Value` <span class="op">=</span> <span class="va">`Pr(&gt;F)`</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">permanova_table</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>format <span class="op">=</span> <span class="st">"html"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span></span>
+<span>    bootstrap_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-permanova-results-full" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-permanova-results-full-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;38.1: PERMANOVA results before PCA
+</figcaption><div aria-describedby="tbl-permanova-results-full-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div>
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed do-not-create-environment cell table-sm small" data-quarto-postprocess="true">
+<thead><tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Df</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Sum of Squares</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">R-Squared</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">F-Value</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">P-Value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">groups</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">913.0741</td>
+<td style="text-align: right;">0.1418102</td>
+<td style="text-align: right;">5.122546</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residual</td>
+<td style="text-align: right;">93</td>
+<td style="text-align: right;">5525.6309</td>
+<td style="text-align: right;">0.8581898</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total</td>
+<td style="text-align: right;">96</td>
+<td style="text-align: right;">6438.7050</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><strong>Description</strong>: The PERMANOVA results provide statistical evidence of significant differences between the groups consistent with the PCA findings. However, the explained variance by the groups is relatively low.</p>
+</section><section id="first-35-principal-components" class="level3" data-number="38.6.2"><h3 data-number="38.6.2" class="anchored" data-anchor-id="first-35-principal-components">
+<span class="header-section-number">38.6.2</span> First 35 Principal Components</h3>
+<p>Now we use this same method to analyse the differences between groups using only the first 35 principal components of the metabolite data. We use the data after it has been rotated into the new Principal Component vector space (the matrix <code>x</code> returned by the <code><a href="https://rdrr.io/r/stats/prcomp.html">prcomp()</a></code> function).</p>
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Prepare data for PERMANOVA</span></span>
+<span><span class="va">reduced_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">pca_result</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">35</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Calculate distance matrix</span></span>
+<span><span class="va">dist_matrix_reduced</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="va">reduced_data</span>, method <span class="op">=</span> <span class="st">"euclidean"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Perform PERMANOVA</span></span>
+<span><span class="va">permanova_result_pca</span> <span class="op">&lt;-</span> <span class="fu">vegan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/adonis.html">adonis2</a></span><span class="op">(</span></span>
+<span>  <span class="va">dist_matrix_reduced</span> <span class="op">~</span> <span class="va">pca_data_wide</span><span class="op">$</span><span class="va">Group</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">reduced_data</span>,</span>
+<span>  permutations <span class="op">=</span> <span class="fl">999</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print PERMANOVA results for PCA in a table format</span></span>
+<span><span class="va">permanova_table_pca</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="va">permanova_result_pca</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="st">"Term"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span></span>
+<span>    `Sum of Squares` <span class="op">=</span> <span class="va">`SumOfSqs`</span>,</span>
+<span>    `R-Squared` <span class="op">=</span> <span class="va">`R2`</span>,</span>
+<span>    `F-Value` <span class="op">=</span> <span class="va">`F`</span>,</span>
+<span>    `P-Value` <span class="op">=</span> <span class="va">`Pr(&gt;F)`</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">permanova_table_pca</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>format <span class="op">=</span> <span class="st">"html"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span></span>
+<span>    bootstrap_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-permanova-results-reduced" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-permanova-results-reduced-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;38.2: PERMANOVA results for PCA
+</figcaption><div aria-describedby="tbl-permanova-results-reduced-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div>
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed do-not-create-environment cell table-sm small" data-quarto-postprocess="true">
+<thead><tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Df</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Sum of Squares</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">R-Squared</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">F-Value</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">P-Value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">pca_data_wide$Group</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5594.861</td>
+<td style="text-align: right;">0.1323235</td>
+<td style="text-align: right;">4.7276</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residual</td>
+<td style="text-align: right;">93</td>
+<td style="text-align: right;">36686.843</td>
+<td style="text-align: right;">0.8676765</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total</td>
+<td style="text-align: right;">96</td>
+<td style="text-align: right;">42281.704</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><strong>Description</strong>: The PERMANOVA results provide nearly the same statistical evidence of significant differences between the groups consistent as above.</p>
+</section><section id="post-hoc-tests" class="level3" data-number="38.6.3"><h3 data-number="38.6.3" class="anchored" data-anchor-id="post-hoc-tests">
+<span class="header-section-number">38.6.3</span> Post-Hoc Tests</h3>
+<p>Notice that our two PERMANOVA models had practically the same results. However, post-hoc analysis is tractable for the PCA-based solution: we have to test 35 independent PCs instead of 550 correlated metabolites.</p>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span></span>
+<span>  .x <span class="op">=</span> <span class="va">reduced_data</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">35</span><span class="op">]</span>,</span>
+<span>  .f <span class="op">=</span> <span class="op">~</span><span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">.x</span> <span class="op">~</span> <span class="va">pca_data_wide</span><span class="op">$</span><span class="va">Group</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>      <span class="co"># It's a list of length 1 for some stupid reason</span></span>
+<span>      <span class="fu">`[[`</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>      <span class="co"># Get the first row of the p-value column</span></span>
+<span>      <span class="fu">`[`</span><span class="op">(</span><span class="fl">1</span>, <span class="st">"Pr(&gt;F)"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"fdr"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         PC2          PC3          PC4         PC15          PC1         PC10 
+4.584910e-07 8.323208e-06 3.188619e-03 3.188619e-03 6.032935e-03 2.521421e-02 
+         PC9         PC11         PC23          PC6         PC26         PC13 
+4.818898e-02 4.818898e-02 1.859289e-01 1.887834e-01 2.584835e-01 3.167604e-01 
+         PC8         PC17         PC20         PC25         PC34          PC5 
+4.973156e-01 4.973156e-01 4.973156e-01 4.973156e-01 4.973156e-01 5.163382e-01 
+        PC12         PC22         PC16         PC18         PC29         PC21 
+5.585821e-01 5.585821e-01 5.665549e-01 5.665549e-01 5.665549e-01 6.308594e-01 
+         PC7         PC30         PC19         PC24         PC27         PC28 
+6.451604e-01 7.902657e-01 9.850381e-01 9.850381e-01 9.850381e-01 9.850381e-01 
+        PC31         PC32         PC33         PC35         PC14 
+9.850381e-01 9.850381e-01 9.850381e-01 9.850381e-01 9.997223e-01 </code></pre>
+</div>
+</div>
+<p>What is interesting here is that the first principal component isn’t as strongly related to the group as second and third PC. Many times, we are often worried that the first PC (and potentially even the second) are driven by lab effects or batch effects. There is a modification to PCA, called <a href="https://www.niehs.nih.gov/research/resources/software/biostatistics/pvca">principal variance component analysis</a> which may help here, but that’s beyond the scope of this lesson. At this point though, we’d probably need to re-estimate which metabolites are loading the most onto these top most significant principal components.</p>
+</section></section><section id="interpret-the-findings" class="level2" data-number="38.7"><h2 data-number="38.7" class="anchored" data-anchor-id="interpret-the-findings">
+<span class="header-section-number">38.7</span> Interpret the Findings</h2>
+<section id="pca-biplot-figure-4" class="level3" data-number="38.7.1"><h3 data-number="38.7.1" class="anchored" data-anchor-id="pca-biplot-figure-4">
+<span class="header-section-number">38.7.1</span> PCA Biplot (Figure 4)</h3>
+<ul>
+<li>
+<strong>Interpretation</strong>: The separation of different groups in the PCA biplot indicates distinct metabolic profiles among these groups. For example, Group A (circles) and Group C (squares) show some overlap but are generally distinct from Group B (triangles) and Group D (crosses).</li>
+<li>
+<strong>Biological Significance</strong>: This suggests that the metabolic pathways or the concentration of metabolites differ among these groups. These differences could be due to varying biological conditions such as health status, environmental factors, or treatment effects.</li>
+</ul></section><section id="scree-plot-figure-5" class="level3" data-number="38.7.2"><h3 data-number="38.7.2" class="anchored" data-anchor-id="scree-plot-figure-5">
+<span class="header-section-number">38.7.2</span> Scree Plot (Figure 5)</h3>
+<ul>
+<li>
+<strong>Interpretation</strong>: The first few components explain a substantial amount of variance (e.g., PC1 = 11.4%, PC2 = 9.6%), and the explained variance decreases significantly after the first few components.</li>
+<li>
+<strong>Biological Significance</strong>: This indicates that the first few principal components capture the most critical metabolic variations in the data, suggesting that focusing on these components can provide valuable insights into the primary sources of variation in the metabolomic data.</li>
+</ul></section><section id="pca-variance-plot-figure-6" class="level3" data-number="38.7.3"><h3 data-number="38.7.3" class="anchored" data-anchor-id="pca-variance-plot-figure-6">
+<span class="header-section-number">38.7.3</span> PCA Variance Plot (Figure 6)</h3>
+<ul>
+<li>
+<strong>Interpretation</strong>: Metabolites like Metabolite55, Metabolite310, and Metabolite76 contribute significantly to the variance in Dim1, while others contribute to Dim2.</li>
+<li>
+<strong>Biological Significance</strong>: Identifying these key metabolites can help pinpoint specific biochemical pathways that are most influential in differentiating the sample groups. These metabolites could be biomarkers for certain conditions or targets for therapeutic intervention.</li>
+</ul></section></section><section id="conclusion-and-discussion" class="level2" data-number="38.8"><h2 data-number="38.8" class="anchored" data-anchor-id="conclusion-and-discussion">
+<span class="header-section-number">38.8</span> Conclusion and Discussion</h2>
+<p>The combination of PCA and PERMANOVA in this study demonstrated the utility of dimensionality reduction techniques in metabolomics. PCA facilitated the visualization and interpretation of complex metabolic data, revealing significant group differences and identifying key metabolites. The PERMANOVA results reinforced these findings by statistically validating the observed group differences.</p>
+<p>Overall, dimensionality reduction techniques like PCA are invaluable tools in bioinformatics and systems biology. They enable researchers to distill complex data into actionable insights, paving the way for advances in diagnostics, therapeutics, and personalized medicine. By continuing to leverage these techniques, we can further our understanding of intricate biological systems and improve health outcomes.</p>
+</section><section id="references" class="level2" data-number="38.9"><h2 data-number="38.9" class="anchored" data-anchor-id="references">
+<span class="header-section-number">38.9</span> References</h2>
+<ol type="1">
+<li>Jia, W., Sun, M., Lian, J., &amp; Hou, S. (2022). Feature dimensionality reduction: a review. Complex &amp; Intelligent Systems, 8(3), 2663-2693.</li>
+<li>Worley, B., &amp; Powers, R. (2013). Multivariate Analysis in Metabolomics. Current Metabolomics, 1(1), 92–107. https://doi.org/10.2174/2213235X11301010092</li>
+<li><strong>Chi, J., Shu, J., Li, M., Mudappathi, R., Jin, Y., Lewis, F., … &amp; Gu, H. (2024). Artificial Intelligence in Metabolomics: A Current Review. TrAC Trends in Analytical Chemistry, 117852.</strong></li>
+</ol>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/gabrielodom\.github\.io\/PHC6099_rBiostat\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../lessons/06_structural_equation_models.html" class="pagination-link" aria-label="Introduction to Structural Equation Modeling">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Introduction to Structural Equation Modeling</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../07_header_power.html" class="pagination-link" aria-label="Statistical Power and Sample Size Determination">
+        <span class="nav-page-text">Statistical Power and Sample Size Determination</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/edit/main/lessons/06_pca.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gabrielodom/PHC6099_rBiostat/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+
+
+</body></html>

@@ -92,4 +92,8 @@ Gabriel Odom
     - curators: CDC, hosted by Kaggle; found and subset by Gemma Galvez
     - method: downloaded from <https://www.kaggle.com/datasets/lplenka/brfss-data>; subset in R/subset_BRFSS_20240712.R
     
-
+16. Example Metabolomics Data
+    - file: 06_pca_eg_metabolomics.csv
+    - created: 2024
+    - curators: Freeman Lewis (FIU Lucchini Lab), emailed on 2024-07-25
+    - method: sample processing machine unknown, preprocessing steps unknown, names of metabolites removed
