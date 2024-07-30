@@ -1008,23 +1008,23 @@ Table&nbsp;38.1: PERMANOVA results before PCA
 <tr class="odd">
 <td style="text-align: left;">groups</td>
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">913.0741</td>
-<td style="text-align: right;">0.1418102</td>
-<td style="text-align: right;">5.122546</td>
+<td style="text-align: right;">913.0529</td>
+<td style="text-align: right;">0.1418038</td>
+<td style="text-align: right;">5.122275</td>
 <td style="text-align: right;">0.001</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Residual</td>
 <td style="text-align: right;">93</td>
-<td style="text-align: right;">5525.6309</td>
-<td style="text-align: right;">0.8581898</td>
+<td style="text-align: right;">5525.7948</td>
+<td style="text-align: right;">0.8581962</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Total</td>
 <td style="text-align: right;">96</td>
-<td style="text-align: right;">6438.7050</td>
+<td style="text-align: right;">6438.8478</td>
 <td style="text-align: right;">1.0000000</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
@@ -1095,23 +1095,23 @@ Table&nbsp;38.2: PERMANOVA results for PCA
 <tr class="odd">
 <td style="text-align: left;">pca_data_wide$Group</td>
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">5594.861</td>
-<td style="text-align: right;">0.1323235</td>
-<td style="text-align: right;">4.7276</td>
+<td style="text-align: right;">5591.838</td>
+<td style="text-align: right;">0.1322579</td>
+<td style="text-align: right;">4.7249</td>
 <td style="text-align: right;">0.001</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Residual</td>
 <td style="text-align: right;">93</td>
-<td style="text-align: right;">36686.843</td>
-<td style="text-align: right;">0.8676765</td>
+<td style="text-align: right;">36687.972</td>
+<td style="text-align: right;">0.8677421</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Total</td>
 <td style="text-align: right;">96</td>
-<td style="text-align: right;">42281.704</td>
+<td style="text-align: right;">42279.811</td>
 <td style="text-align: right;">1.0000000</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
@@ -1147,17 +1147,17 @@ Table&nbsp;38.2: PERMANOVA results for PCA
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         PC2          PC3          PC4         PC15          PC1         PC10 
-4.584910e-07 8.323208e-06 3.188619e-03 3.188619e-03 6.032935e-03 2.521421e-02 
-         PC9         PC11         PC23          PC6         PC26         PC13 
-4.818898e-02 4.818898e-02 1.859289e-01 1.887834e-01 2.584835e-01 3.167604e-01 
-         PC8         PC17         PC20         PC25         PC34          PC5 
-4.973156e-01 4.973156e-01 4.973156e-01 4.973156e-01 4.973156e-01 5.163382e-01 
-        PC12         PC22         PC16         PC18         PC29         PC21 
-5.585821e-01 5.585821e-01 5.665549e-01 5.665549e-01 5.665549e-01 6.308594e-01 
-         PC7         PC30         PC19         PC24         PC27         PC28 
-6.451604e-01 7.902657e-01 9.850381e-01 9.850381e-01 9.850381e-01 9.850381e-01 
+4.580717e-07 8.427141e-06 3.202219e-03 3.202219e-03 6.129708e-03 2.587854e-02 
+         PC9         PC11          PC6         PC23         PC26         PC13 
+4.873088e-02 4.873088e-02 1.889783e-01 1.889783e-01 2.520792e-01 3.196502e-01 
+         PC8         PC20         PC25         PC34         PC17          PC5 
+4.995746e-01 4.995746e-01 4.995746e-01 4.995746e-01 5.138153e-01 5.169234e-01 
+        PC12         PC22         PC16         PC18         PC29          PC7 
+5.582736e-01 5.582736e-01 5.604406e-01 5.604406e-01 5.604406e-01 6.441355e-01 
+        PC21         PC30         PC19         PC24         PC27         PC28 
+6.441355e-01 7.876523e-01 9.761812e-01 9.761812e-01 9.761812e-01 9.761812e-01 
         PC31         PC32         PC33         PC35         PC14 
-9.850381e-01 9.850381e-01 9.850381e-01 9.850381e-01 9.997223e-01 </code></pre>
+9.761812e-01 9.761812e-01 9.761812e-01 9.761812e-01 9.996913e-01 </code></pre>
 </div>
 </div>
 <p>What is interesting here is that the first principal component isn’t as strongly related to the group as second and third PC. Many times, we are often worried that the first PC (and potentially even the second) are driven by lab effects or batch effects. There is a modification to PCA, called <a href="https://www.niehs.nih.gov/research/resources/software/biostatistics/pvca">principal variance component analysis</a> which may help here, but that’s beyond the scope of this lesson. At this point though, we’d probably need to re-estimate which metabolites are loading the most onto these top most significant principal components.</p>

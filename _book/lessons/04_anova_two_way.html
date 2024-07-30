@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.4.553">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Gabriel Odom">
-<meta name="dcterms.date" content="2024-07-29">
+<meta name="dcterms.date" content="2024-07-30">
 <title>An R Cookbook for Public Health - 22&nbsp; Two-Way ANOVA</title>
 <style>
 code{white-space: pre-wrap;}
@@ -529,7 +529,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 29, 2024</p>
+      <p class="date">July 30, 2024</p>
     </div>
   </div>
   
@@ -986,23 +986,23 @@ Are your data balanced?
 <span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="ashxwwmfls" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ashxwwmfls table {
+<div id="bbqorstelk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bbqorstelk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ashxwwmfls thead, #ashxwwmfls tbody, #ashxwwmfls tfoot, #ashxwwmfls tr, #ashxwwmfls td, #ashxwwmfls th {
+#bbqorstelk thead, #bbqorstelk tbody, #bbqorstelk tfoot, #bbqorstelk tr, #bbqorstelk td, #bbqorstelk th {
   border-style: none;
 }
 
-#ashxwwmfls p {
+#bbqorstelk p {
   margin: 0;
   padding: 0;
 }
 
-#ashxwwmfls .gt_table {
+#bbqorstelk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1028,12 +1028,12 @@ Are your data balanced?
   border-left-color: #D3D3D3;
 }
 
-#ashxwwmfls .gt_caption {
+#bbqorstelk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ashxwwmfls .gt_title {
+#bbqorstelk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1045,7 +1045,7 @@ Are your data balanced?
   border-bottom-width: 0;
 }
 
-#ashxwwmfls .gt_subtitle {
+#bbqorstelk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1057,7 +1057,7 @@ Are your data balanced?
   border-top-width: 0;
 }
 
-#ashxwwmfls .gt_heading {
+#bbqorstelk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1069,13 +1069,13 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#ashxwwmfls .gt_bottom_border {
+#bbqorstelk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ashxwwmfls .gt_col_headings {
+#bbqorstelk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1090,7 +1090,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#ashxwwmfls .gt_col_heading {
+#bbqorstelk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1110,7 +1110,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#ashxwwmfls .gt_column_spanner_outer {
+#bbqorstelk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1122,15 +1122,15 @@ Are your data balanced?
   padding-right: 4px;
 }
 
-#ashxwwmfls .gt_column_spanner_outer:first-child {
+#bbqorstelk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ashxwwmfls .gt_column_spanner_outer:last-child {
+#bbqorstelk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ashxwwmfls .gt_column_spanner {
+#bbqorstelk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1142,11 +1142,11 @@ Are your data balanced?
   width: 100%;
 }
 
-#ashxwwmfls .gt_spanner_row {
+#bbqorstelk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ashxwwmfls .gt_group_heading {
+#bbqorstelk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1172,7 +1172,7 @@ Are your data balanced?
   text-align: left;
 }
 
-#ashxwwmfls .gt_empty_group_heading {
+#bbqorstelk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1187,15 +1187,15 @@ Are your data balanced?
   vertical-align: middle;
 }
 
-#ashxwwmfls .gt_from_md > :first-child {
+#bbqorstelk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ashxwwmfls .gt_from_md > :last-child {
+#bbqorstelk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ashxwwmfls .gt_row {
+#bbqorstelk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1214,7 +1214,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#ashxwwmfls .gt_stub {
+#bbqorstelk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1227,7 +1227,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#ashxwwmfls .gt_stub_row_group {
+#bbqorstelk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1241,15 +1241,15 @@ Are your data balanced?
   vertical-align: top;
 }
 
-#ashxwwmfls .gt_row_group_first td {
+#bbqorstelk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ashxwwmfls .gt_row_group_first th {
+#bbqorstelk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ashxwwmfls .gt_summary_row {
+#bbqorstelk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1259,16 +1259,16 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#ashxwwmfls .gt_first_summary_row {
+#bbqorstelk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ashxwwmfls .gt_first_summary_row.thick {
+#bbqorstelk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ashxwwmfls .gt_last_summary_row {
+#bbqorstelk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1278,7 +1278,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#ashxwwmfls .gt_grand_summary_row {
+#bbqorstelk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1288,7 +1288,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#ashxwwmfls .gt_first_grand_summary_row {
+#bbqorstelk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1298,7 +1298,7 @@ Are your data balanced?
   border-top-color: #D3D3D3;
 }
 
-#ashxwwmfls .gt_last_grand_summary_row_top {
+#bbqorstelk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1308,11 +1308,11 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#ashxwwmfls .gt_striped {
+#bbqorstelk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ashxwwmfls .gt_table_body {
+#bbqorstelk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1321,7 +1321,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#ashxwwmfls .gt_footnotes {
+#bbqorstelk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1335,7 +1335,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#ashxwwmfls .gt_footnote {
+#bbqorstelk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1344,7 +1344,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#ashxwwmfls .gt_sourcenotes {
+#bbqorstelk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1358,7 +1358,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#ashxwwmfls .gt_sourcenote {
+#bbqorstelk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1366,63 +1366,63 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#ashxwwmfls .gt_left {
+#bbqorstelk .gt_left {
   text-align: left;
 }
 
-#ashxwwmfls .gt_center {
+#bbqorstelk .gt_center {
   text-align: center;
 }
 
-#ashxwwmfls .gt_right {
+#bbqorstelk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ashxwwmfls .gt_font_normal {
+#bbqorstelk .gt_font_normal {
   font-weight: normal;
 }
 
-#ashxwwmfls .gt_font_bold {
+#bbqorstelk .gt_font_bold {
   font-weight: bold;
 }
 
-#ashxwwmfls .gt_font_italic {
+#bbqorstelk .gt_font_italic {
   font-style: italic;
 }
 
-#ashxwwmfls .gt_super {
+#bbqorstelk .gt_super {
   font-size: 65%;
 }
 
-#ashxwwmfls .gt_footnote_marks {
+#bbqorstelk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ashxwwmfls .gt_asterisk {
+#bbqorstelk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ashxwwmfls .gt_indent_1 {
+#bbqorstelk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ashxwwmfls .gt_indent_2 {
+#bbqorstelk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ashxwwmfls .gt_indent_3 {
+#bbqorstelk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ashxwwmfls .gt_indent_4 {
+#bbqorstelk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ashxwwmfls .gt_indent_5 {
+#bbqorstelk .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1514,23 +1514,23 @@ Are your data balanced?
 <span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="bvzryuawnn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bvzryuawnn table {
+<div id="drpaisxenp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#drpaisxenp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bvzryuawnn thead, #bvzryuawnn tbody, #bvzryuawnn tfoot, #bvzryuawnn tr, #bvzryuawnn td, #bvzryuawnn th {
+#drpaisxenp thead, #drpaisxenp tbody, #drpaisxenp tfoot, #drpaisxenp tr, #drpaisxenp td, #drpaisxenp th {
   border-style: none;
 }
 
-#bvzryuawnn p {
+#drpaisxenp p {
   margin: 0;
   padding: 0;
 }
 
-#bvzryuawnn .gt_table {
+#drpaisxenp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1556,12 +1556,12 @@ Are your data balanced?
   border-left-color: #D3D3D3;
 }
 
-#bvzryuawnn .gt_caption {
+#drpaisxenp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bvzryuawnn .gt_title {
+#drpaisxenp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1573,7 +1573,7 @@ Are your data balanced?
   border-bottom-width: 0;
 }
 
-#bvzryuawnn .gt_subtitle {
+#drpaisxenp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1585,7 +1585,7 @@ Are your data balanced?
   border-top-width: 0;
 }
 
-#bvzryuawnn .gt_heading {
+#drpaisxenp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1597,13 +1597,13 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#bvzryuawnn .gt_bottom_border {
+#drpaisxenp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bvzryuawnn .gt_col_headings {
+#drpaisxenp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1618,7 +1618,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#bvzryuawnn .gt_col_heading {
+#drpaisxenp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1638,7 +1638,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#bvzryuawnn .gt_column_spanner_outer {
+#drpaisxenp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1650,15 +1650,15 @@ Are your data balanced?
   padding-right: 4px;
 }
 
-#bvzryuawnn .gt_column_spanner_outer:first-child {
+#drpaisxenp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bvzryuawnn .gt_column_spanner_outer:last-child {
+#drpaisxenp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bvzryuawnn .gt_column_spanner {
+#drpaisxenp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1670,11 +1670,11 @@ Are your data balanced?
   width: 100%;
 }
 
-#bvzryuawnn .gt_spanner_row {
+#drpaisxenp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bvzryuawnn .gt_group_heading {
+#drpaisxenp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1700,7 +1700,7 @@ Are your data balanced?
   text-align: left;
 }
 
-#bvzryuawnn .gt_empty_group_heading {
+#drpaisxenp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1715,15 +1715,15 @@ Are your data balanced?
   vertical-align: middle;
 }
 
-#bvzryuawnn .gt_from_md > :first-child {
+#drpaisxenp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bvzryuawnn .gt_from_md > :last-child {
+#drpaisxenp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bvzryuawnn .gt_row {
+#drpaisxenp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1742,7 +1742,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#bvzryuawnn .gt_stub {
+#drpaisxenp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1755,7 +1755,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#bvzryuawnn .gt_stub_row_group {
+#drpaisxenp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1769,15 +1769,15 @@ Are your data balanced?
   vertical-align: top;
 }
 
-#bvzryuawnn .gt_row_group_first td {
+#drpaisxenp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bvzryuawnn .gt_row_group_first th {
+#drpaisxenp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bvzryuawnn .gt_summary_row {
+#drpaisxenp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1787,16 +1787,16 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#bvzryuawnn .gt_first_summary_row {
+#drpaisxenp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bvzryuawnn .gt_first_summary_row.thick {
+#drpaisxenp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bvzryuawnn .gt_last_summary_row {
+#drpaisxenp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1806,7 +1806,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#bvzryuawnn .gt_grand_summary_row {
+#drpaisxenp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1816,7 +1816,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#bvzryuawnn .gt_first_grand_summary_row {
+#drpaisxenp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1826,7 +1826,7 @@ Are your data balanced?
   border-top-color: #D3D3D3;
 }
 
-#bvzryuawnn .gt_last_grand_summary_row_top {
+#drpaisxenp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1836,11 +1836,11 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#bvzryuawnn .gt_striped {
+#drpaisxenp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bvzryuawnn .gt_table_body {
+#drpaisxenp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1849,7 +1849,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#bvzryuawnn .gt_footnotes {
+#drpaisxenp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1863,7 +1863,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#bvzryuawnn .gt_footnote {
+#drpaisxenp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1872,7 +1872,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#bvzryuawnn .gt_sourcenotes {
+#drpaisxenp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1886,7 +1886,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#bvzryuawnn .gt_sourcenote {
+#drpaisxenp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1894,63 +1894,63 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#bvzryuawnn .gt_left {
+#drpaisxenp .gt_left {
   text-align: left;
 }
 
-#bvzryuawnn .gt_center {
+#drpaisxenp .gt_center {
   text-align: center;
 }
 
-#bvzryuawnn .gt_right {
+#drpaisxenp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bvzryuawnn .gt_font_normal {
+#drpaisxenp .gt_font_normal {
   font-weight: normal;
 }
 
-#bvzryuawnn .gt_font_bold {
+#drpaisxenp .gt_font_bold {
   font-weight: bold;
 }
 
-#bvzryuawnn .gt_font_italic {
+#drpaisxenp .gt_font_italic {
   font-style: italic;
 }
 
-#bvzryuawnn .gt_super {
+#drpaisxenp .gt_super {
   font-size: 65%;
 }
 
-#bvzryuawnn .gt_footnote_marks {
+#drpaisxenp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bvzryuawnn .gt_asterisk {
+#drpaisxenp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bvzryuawnn .gt_indent_1 {
+#drpaisxenp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bvzryuawnn .gt_indent_2 {
+#drpaisxenp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bvzryuawnn .gt_indent_3 {
+#drpaisxenp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bvzryuawnn .gt_indent_4 {
+#drpaisxenp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bvzryuawnn .gt_indent_5 {
+#drpaisxenp .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2033,23 +2033,23 @@ Are your data balanced?
 <span>   <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="xrveytlrxv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xrveytlrxv table {
+<div id="xxmlehxfnc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xxmlehxfnc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xrveytlrxv thead, #xrveytlrxv tbody, #xrveytlrxv tfoot, #xrveytlrxv tr, #xrveytlrxv td, #xrveytlrxv th {
+#xxmlehxfnc thead, #xxmlehxfnc tbody, #xxmlehxfnc tfoot, #xxmlehxfnc tr, #xxmlehxfnc td, #xxmlehxfnc th {
   border-style: none;
 }
 
-#xrveytlrxv p {
+#xxmlehxfnc p {
   margin: 0;
   padding: 0;
 }
 
-#xrveytlrxv .gt_table {
+#xxmlehxfnc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2075,12 +2075,12 @@ Are your data balanced?
   border-left-color: #D3D3D3;
 }
 
-#xrveytlrxv .gt_caption {
+#xxmlehxfnc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xrveytlrxv .gt_title {
+#xxmlehxfnc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2092,7 +2092,7 @@ Are your data balanced?
   border-bottom-width: 0;
 }
 
-#xrveytlrxv .gt_subtitle {
+#xxmlehxfnc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2104,7 +2104,7 @@ Are your data balanced?
   border-top-width: 0;
 }
 
-#xrveytlrxv .gt_heading {
+#xxmlehxfnc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2116,13 +2116,13 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#xrveytlrxv .gt_bottom_border {
+#xxmlehxfnc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xrveytlrxv .gt_col_headings {
+#xxmlehxfnc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2137,7 +2137,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#xrveytlrxv .gt_col_heading {
+#xxmlehxfnc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2157,7 +2157,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#xrveytlrxv .gt_column_spanner_outer {
+#xxmlehxfnc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2169,15 +2169,15 @@ Are your data balanced?
   padding-right: 4px;
 }
 
-#xrveytlrxv .gt_column_spanner_outer:first-child {
+#xxmlehxfnc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xrveytlrxv .gt_column_spanner_outer:last-child {
+#xxmlehxfnc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xrveytlrxv .gt_column_spanner {
+#xxmlehxfnc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2189,11 +2189,11 @@ Are your data balanced?
   width: 100%;
 }
 
-#xrveytlrxv .gt_spanner_row {
+#xxmlehxfnc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xrveytlrxv .gt_group_heading {
+#xxmlehxfnc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2219,7 +2219,7 @@ Are your data balanced?
   text-align: left;
 }
 
-#xrveytlrxv .gt_empty_group_heading {
+#xxmlehxfnc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2234,15 +2234,15 @@ Are your data balanced?
   vertical-align: middle;
 }
 
-#xrveytlrxv .gt_from_md > :first-child {
+#xxmlehxfnc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xrveytlrxv .gt_from_md > :last-child {
+#xxmlehxfnc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xrveytlrxv .gt_row {
+#xxmlehxfnc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2261,7 +2261,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#xrveytlrxv .gt_stub {
+#xxmlehxfnc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2274,7 +2274,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#xrveytlrxv .gt_stub_row_group {
+#xxmlehxfnc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2288,15 +2288,15 @@ Are your data balanced?
   vertical-align: top;
 }
 
-#xrveytlrxv .gt_row_group_first td {
+#xxmlehxfnc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xrveytlrxv .gt_row_group_first th {
+#xxmlehxfnc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xrveytlrxv .gt_summary_row {
+#xxmlehxfnc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2306,16 +2306,16 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#xrveytlrxv .gt_first_summary_row {
+#xxmlehxfnc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xrveytlrxv .gt_first_summary_row.thick {
+#xxmlehxfnc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xrveytlrxv .gt_last_summary_row {
+#xxmlehxfnc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2325,7 +2325,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#xrveytlrxv .gt_grand_summary_row {
+#xxmlehxfnc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2335,7 +2335,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#xrveytlrxv .gt_first_grand_summary_row {
+#xxmlehxfnc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2345,7 +2345,7 @@ Are your data balanced?
   border-top-color: #D3D3D3;
 }
 
-#xrveytlrxv .gt_last_grand_summary_row_top {
+#xxmlehxfnc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2355,11 +2355,11 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#xrveytlrxv .gt_striped {
+#xxmlehxfnc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xrveytlrxv .gt_table_body {
+#xxmlehxfnc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2368,7 +2368,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#xrveytlrxv .gt_footnotes {
+#xxmlehxfnc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2382,7 +2382,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#xrveytlrxv .gt_footnote {
+#xxmlehxfnc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2391,7 +2391,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#xrveytlrxv .gt_sourcenotes {
+#xxmlehxfnc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2405,7 +2405,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#xrveytlrxv .gt_sourcenote {
+#xxmlehxfnc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2413,63 +2413,63 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#xrveytlrxv .gt_left {
+#xxmlehxfnc .gt_left {
   text-align: left;
 }
 
-#xrveytlrxv .gt_center {
+#xxmlehxfnc .gt_center {
   text-align: center;
 }
 
-#xrveytlrxv .gt_right {
+#xxmlehxfnc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xrveytlrxv .gt_font_normal {
+#xxmlehxfnc .gt_font_normal {
   font-weight: normal;
 }
 
-#xrveytlrxv .gt_font_bold {
+#xxmlehxfnc .gt_font_bold {
   font-weight: bold;
 }
 
-#xrveytlrxv .gt_font_italic {
+#xxmlehxfnc .gt_font_italic {
   font-style: italic;
 }
 
-#xrveytlrxv .gt_super {
+#xxmlehxfnc .gt_super {
   font-size: 65%;
 }
 
-#xrveytlrxv .gt_footnote_marks {
+#xxmlehxfnc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xrveytlrxv .gt_asterisk {
+#xxmlehxfnc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xrveytlrxv .gt_indent_1 {
+#xxmlehxfnc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xrveytlrxv .gt_indent_2 {
+#xxmlehxfnc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xrveytlrxv .gt_indent_3 {
+#xxmlehxfnc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xrveytlrxv .gt_indent_4 {
+#xxmlehxfnc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xrveytlrxv .gt_indent_5 {
+#xxmlehxfnc .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2541,23 +2541,23 @@ Are your data balanced?
 <span><span class="va">gt_print</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="plltvovhsd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#plltvovhsd table {
+<div id="cizjhoykmr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cizjhoykmr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#plltvovhsd thead, #plltvovhsd tbody, #plltvovhsd tfoot, #plltvovhsd tr, #plltvovhsd td, #plltvovhsd th {
+#cizjhoykmr thead, #cizjhoykmr tbody, #cizjhoykmr tfoot, #cizjhoykmr tr, #cizjhoykmr td, #cizjhoykmr th {
   border-style: none;
 }
 
-#plltvovhsd p {
+#cizjhoykmr p {
   margin: 0;
   padding: 0;
 }
 
-#plltvovhsd .gt_table {
+#cizjhoykmr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2583,12 +2583,12 @@ Are your data balanced?
   border-left-color: #D3D3D3;
 }
 
-#plltvovhsd .gt_caption {
+#cizjhoykmr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#plltvovhsd .gt_title {
+#cizjhoykmr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2600,7 +2600,7 @@ Are your data balanced?
   border-bottom-width: 0;
 }
 
-#plltvovhsd .gt_subtitle {
+#cizjhoykmr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2612,7 +2612,7 @@ Are your data balanced?
   border-top-width: 0;
 }
 
-#plltvovhsd .gt_heading {
+#cizjhoykmr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2624,13 +2624,13 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#plltvovhsd .gt_bottom_border {
+#cizjhoykmr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#plltvovhsd .gt_col_headings {
+#cizjhoykmr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2645,7 +2645,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#plltvovhsd .gt_col_heading {
+#cizjhoykmr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2665,7 +2665,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#plltvovhsd .gt_column_spanner_outer {
+#cizjhoykmr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2677,15 +2677,15 @@ Are your data balanced?
   padding-right: 4px;
 }
 
-#plltvovhsd .gt_column_spanner_outer:first-child {
+#cizjhoykmr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#plltvovhsd .gt_column_spanner_outer:last-child {
+#cizjhoykmr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#plltvovhsd .gt_column_spanner {
+#cizjhoykmr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2697,11 +2697,11 @@ Are your data balanced?
   width: 100%;
 }
 
-#plltvovhsd .gt_spanner_row {
+#cizjhoykmr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#plltvovhsd .gt_group_heading {
+#cizjhoykmr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2727,7 +2727,7 @@ Are your data balanced?
   text-align: left;
 }
 
-#plltvovhsd .gt_empty_group_heading {
+#cizjhoykmr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2742,15 +2742,15 @@ Are your data balanced?
   vertical-align: middle;
 }
 
-#plltvovhsd .gt_from_md > :first-child {
+#cizjhoykmr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#plltvovhsd .gt_from_md > :last-child {
+#cizjhoykmr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#plltvovhsd .gt_row {
+#cizjhoykmr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2769,7 +2769,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#plltvovhsd .gt_stub {
+#cizjhoykmr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2782,7 +2782,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#plltvovhsd .gt_stub_row_group {
+#cizjhoykmr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2796,15 +2796,15 @@ Are your data balanced?
   vertical-align: top;
 }
 
-#plltvovhsd .gt_row_group_first td {
+#cizjhoykmr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#plltvovhsd .gt_row_group_first th {
+#cizjhoykmr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#plltvovhsd .gt_summary_row {
+#cizjhoykmr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2814,16 +2814,16 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#plltvovhsd .gt_first_summary_row {
+#cizjhoykmr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#plltvovhsd .gt_first_summary_row.thick {
+#cizjhoykmr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#plltvovhsd .gt_last_summary_row {
+#cizjhoykmr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2833,7 +2833,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#plltvovhsd .gt_grand_summary_row {
+#cizjhoykmr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2843,7 +2843,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#plltvovhsd .gt_first_grand_summary_row {
+#cizjhoykmr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2853,7 +2853,7 @@ Are your data balanced?
   border-top-color: #D3D3D3;
 }
 
-#plltvovhsd .gt_last_grand_summary_row_top {
+#cizjhoykmr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2863,11 +2863,11 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#plltvovhsd .gt_striped {
+#cizjhoykmr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#plltvovhsd .gt_table_body {
+#cizjhoykmr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2876,7 +2876,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#plltvovhsd .gt_footnotes {
+#cizjhoykmr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2890,7 +2890,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#plltvovhsd .gt_footnote {
+#cizjhoykmr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2899,7 +2899,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#plltvovhsd .gt_sourcenotes {
+#cizjhoykmr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2913,7 +2913,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#plltvovhsd .gt_sourcenote {
+#cizjhoykmr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2921,63 +2921,63 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#plltvovhsd .gt_left {
+#cizjhoykmr .gt_left {
   text-align: left;
 }
 
-#plltvovhsd .gt_center {
+#cizjhoykmr .gt_center {
   text-align: center;
 }
 
-#plltvovhsd .gt_right {
+#cizjhoykmr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#plltvovhsd .gt_font_normal {
+#cizjhoykmr .gt_font_normal {
   font-weight: normal;
 }
 
-#plltvovhsd .gt_font_bold {
+#cizjhoykmr .gt_font_bold {
   font-weight: bold;
 }
 
-#plltvovhsd .gt_font_italic {
+#cizjhoykmr .gt_font_italic {
   font-style: italic;
 }
 
-#plltvovhsd .gt_super {
+#cizjhoykmr .gt_super {
   font-size: 65%;
 }
 
-#plltvovhsd .gt_footnote_marks {
+#cizjhoykmr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#plltvovhsd .gt_asterisk {
+#cizjhoykmr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#plltvovhsd .gt_indent_1 {
+#cizjhoykmr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#plltvovhsd .gt_indent_2 {
+#cizjhoykmr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#plltvovhsd .gt_indent_3 {
+#cizjhoykmr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#plltvovhsd .gt_indent_4 {
+#cizjhoykmr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#plltvovhsd .gt_indent_5 {
+#cizjhoykmr .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3048,23 +3048,23 @@ Are your data balanced?
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="rsqfqllrxj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rsqfqllrxj table {
+<div id="xlgrnjcpub" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xlgrnjcpub table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rsqfqllrxj thead, #rsqfqllrxj tbody, #rsqfqllrxj tfoot, #rsqfqllrxj tr, #rsqfqllrxj td, #rsqfqllrxj th {
+#xlgrnjcpub thead, #xlgrnjcpub tbody, #xlgrnjcpub tfoot, #xlgrnjcpub tr, #xlgrnjcpub td, #xlgrnjcpub th {
   border-style: none;
 }
 
-#rsqfqllrxj p {
+#xlgrnjcpub p {
   margin: 0;
   padding: 0;
 }
 
-#rsqfqllrxj .gt_table {
+#xlgrnjcpub .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3090,12 +3090,12 @@ Are your data balanced?
   border-left-color: #D3D3D3;
 }
 
-#rsqfqllrxj .gt_caption {
+#xlgrnjcpub .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rsqfqllrxj .gt_title {
+#xlgrnjcpub .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3107,7 +3107,7 @@ Are your data balanced?
   border-bottom-width: 0;
 }
 
-#rsqfqllrxj .gt_subtitle {
+#xlgrnjcpub .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3119,7 +3119,7 @@ Are your data balanced?
   border-top-width: 0;
 }
 
-#rsqfqllrxj .gt_heading {
+#xlgrnjcpub .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3131,13 +3131,13 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#rsqfqllrxj .gt_bottom_border {
+#xlgrnjcpub .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rsqfqllrxj .gt_col_headings {
+#xlgrnjcpub .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3152,7 +3152,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#rsqfqllrxj .gt_col_heading {
+#xlgrnjcpub .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3172,7 +3172,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#rsqfqllrxj .gt_column_spanner_outer {
+#xlgrnjcpub .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3184,15 +3184,15 @@ Are your data balanced?
   padding-right: 4px;
 }
 
-#rsqfqllrxj .gt_column_spanner_outer:first-child {
+#xlgrnjcpub .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rsqfqllrxj .gt_column_spanner_outer:last-child {
+#xlgrnjcpub .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rsqfqllrxj .gt_column_spanner {
+#xlgrnjcpub .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3204,11 +3204,11 @@ Are your data balanced?
   width: 100%;
 }
 
-#rsqfqllrxj .gt_spanner_row {
+#xlgrnjcpub .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rsqfqllrxj .gt_group_heading {
+#xlgrnjcpub .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3234,7 +3234,7 @@ Are your data balanced?
   text-align: left;
 }
 
-#rsqfqllrxj .gt_empty_group_heading {
+#xlgrnjcpub .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3249,15 +3249,15 @@ Are your data balanced?
   vertical-align: middle;
 }
 
-#rsqfqllrxj .gt_from_md > :first-child {
+#xlgrnjcpub .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rsqfqllrxj .gt_from_md > :last-child {
+#xlgrnjcpub .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rsqfqllrxj .gt_row {
+#xlgrnjcpub .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3276,7 +3276,7 @@ Are your data balanced?
   overflow-x: hidden;
 }
 
-#rsqfqllrxj .gt_stub {
+#xlgrnjcpub .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3289,7 +3289,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#rsqfqllrxj .gt_stub_row_group {
+#xlgrnjcpub .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3303,15 +3303,15 @@ Are your data balanced?
   vertical-align: top;
 }
 
-#rsqfqllrxj .gt_row_group_first td {
+#xlgrnjcpub .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rsqfqllrxj .gt_row_group_first th {
+#xlgrnjcpub .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rsqfqllrxj .gt_summary_row {
+#xlgrnjcpub .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3321,16 +3321,16 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#rsqfqllrxj .gt_first_summary_row {
+#xlgrnjcpub .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rsqfqllrxj .gt_first_summary_row.thick {
+#xlgrnjcpub .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rsqfqllrxj .gt_last_summary_row {
+#xlgrnjcpub .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3340,7 +3340,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#rsqfqllrxj .gt_grand_summary_row {
+#xlgrnjcpub .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3350,7 +3350,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#rsqfqllrxj .gt_first_grand_summary_row {
+#xlgrnjcpub .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3360,7 +3360,7 @@ Are your data balanced?
   border-top-color: #D3D3D3;
 }
 
-#rsqfqllrxj .gt_last_grand_summary_row_top {
+#xlgrnjcpub .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3370,11 +3370,11 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#rsqfqllrxj .gt_striped {
+#xlgrnjcpub .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rsqfqllrxj .gt_table_body {
+#xlgrnjcpub .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3383,7 +3383,7 @@ Are your data balanced?
   border-bottom-color: #D3D3D3;
 }
 
-#rsqfqllrxj .gt_footnotes {
+#xlgrnjcpub .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3397,7 +3397,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#rsqfqllrxj .gt_footnote {
+#xlgrnjcpub .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3406,7 +3406,7 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#rsqfqllrxj .gt_sourcenotes {
+#xlgrnjcpub .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3420,7 +3420,7 @@ Are your data balanced?
   border-right-color: #D3D3D3;
 }
 
-#rsqfqllrxj .gt_sourcenote {
+#xlgrnjcpub .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3428,63 +3428,63 @@ Are your data balanced?
   padding-right: 5px;
 }
 
-#rsqfqllrxj .gt_left {
+#xlgrnjcpub .gt_left {
   text-align: left;
 }
 
-#rsqfqllrxj .gt_center {
+#xlgrnjcpub .gt_center {
   text-align: center;
 }
 
-#rsqfqllrxj .gt_right {
+#xlgrnjcpub .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rsqfqllrxj .gt_font_normal {
+#xlgrnjcpub .gt_font_normal {
   font-weight: normal;
 }
 
-#rsqfqllrxj .gt_font_bold {
+#xlgrnjcpub .gt_font_bold {
   font-weight: bold;
 }
 
-#rsqfqllrxj .gt_font_italic {
+#xlgrnjcpub .gt_font_italic {
   font-style: italic;
 }
 
-#rsqfqllrxj .gt_super {
+#xlgrnjcpub .gt_super {
   font-size: 65%;
 }
 
-#rsqfqllrxj .gt_footnote_marks {
+#xlgrnjcpub .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rsqfqllrxj .gt_asterisk {
+#xlgrnjcpub .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rsqfqllrxj .gt_indent_1 {
+#xlgrnjcpub .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rsqfqllrxj .gt_indent_2 {
+#xlgrnjcpub .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rsqfqllrxj .gt_indent_3 {
+#xlgrnjcpub .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rsqfqllrxj .gt_indent_4 {
+#xlgrnjcpub .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rsqfqllrxj .gt_indent_5 {
+#xlgrnjcpub .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

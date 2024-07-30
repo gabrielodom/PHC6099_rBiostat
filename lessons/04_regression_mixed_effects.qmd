@@ -51,8 +51,8 @@ However, in real, if we color-code these data, we can see that three different c
 
 In mixed effect models, they fit a separate regression line for each and every cluster. Then it estimates an average slope between `Y (Proportion of survival)` and **X (severity of symptoms)** across **all clusters (all hospitals)**.  
 
-![](fig/04_mixed_effects_dose_SBP.jpg)
-<!-- ![](Images_to_upload/Average_sev_surv.png) -->
+<!-- ![](fig/04_mixed_effects_dose_SBP.jpg) -->
+![Association between average symptom severity and survival for three hospitals.](fig/04_mixed_effects_ave_sev_surv.png){fig-ave-sev-and-surv}
 
 Here, the black line is the fixed effects and the colored lines are the random effects. So, all the participants across the three hospitals cannot be treated as independent data. Every cluster has its own regression line.    
 
